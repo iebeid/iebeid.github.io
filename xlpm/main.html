@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--
+/* 
+    Author : Islam Akef Ebeid / Mihir Jaiswal
+    Affiliations : University of Arkansas at Little Rock - Emerging Analytics Center
+*/
+-->
+<html>
+    <head>
+        <title>VisInt-X</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" /> 
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/Three49custom.js"></script>
+        <script src="js/GLmol.js"></script>
+        <script src="js/3Dmol.js"></script>
+        <script src="js/d3.v3.min.js"></script>
+        <script src="js/taffy.js"></script>
+        <script src="js/xlpm.js"></script>
+        <script src="js/inputs.js"></script>
+        <script src="js/snap.svg.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/layout.js"></script>
+        <script src="js/color-legend.js"></script>
+        <style>@import url(css/apple.css);</style>
+        <style>@import url(css/styles.css);</style>
+    </head>
+    <body>
+
+        <header>
+            <div class="module" id="cssmenu">
+                <ul>
+   <li class='active'><a href='#'>Home</a></li>
+   <li><a href='#'>Main</a></li>
+   <li><a href='#'>Downloads</a></li>
+   <li><a href='#'>About</a></li>
+</ul>
+            </div>
+        </header>
+        <header>
+            <div class="module">VisInt-X</div>
+        </header>
+        <nav>
+            <div class="module" id="mainNav">
+                <div id="fasta">
+                    Please choose a SEQUENCE file to parse (FASTA format only)<br/>
+                    <input type="file" id="fastafile"/>
+                </div>
+                <div id="data">
+                    Please choose a XLPM DATA file to parse (TXT format only)<br/>
+                    <input type="file" id="datafile"/>
+                </div>
+                <div id="choose">
+                    <form>
+                        <input type="radio" name="pref" id="local" value="local">Upload PDB files
+                        <input type="radio" name="pref" id="server" value="server">Enter PDB Id
+                        <input type="radio" name="pref" id="nod" value="nod">No 3D Model
+                    </form> 
+                </div>
+                <div id="serverDiv">
+                    Please enter first PDB ID <input type="text" id="firstseq"/><br/> 
+                    Please enter second PDB ID <input type="text" id="secondseq"/> 
+                </div>
+                <div id="localDiv">
+                    Upload the first PDB File <input type="file" id="viewMol1"/><br/>
+                    Upload the second PDB File <input type="file" id="viewMol2"/>
+                </div>
+                <br/>
+                <br/>
+                <div id="viewViz">
+                    <button id="mainButton" type="button" onclick="main(fastaText, dataText)">Visualize</button>
+                    <button id="clearButton" type="button" onclick="clearSVG()">Clear</button>
+                    <button id="secLevelButton" type="button" onclick="clearSecondLevelData()">Clear Second Level Data</button>
+                </div>
+            </div>
+                    <div id="glmol01">
+                    </div>
+        </nav>
+
+        <section>
+            <div id="vis" class="module">
+            </div>
+        </section>
+
+        <footer>
+            <div class="module">
+                Copyright © 2016 Mihir Jaiswal & Islam Akef Ebeid
+            </div>
+        </footer>
+    </body>
+</html>

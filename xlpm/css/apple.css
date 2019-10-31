@@ -1,0 +1,75 @@
+/* 
+    Author     : Islam Akef Ebeid
+*/
+body {
+    margin: 5px;
+    padding: 0;
+    border: 0;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    font-family: Helvetica;
+    overflow:auto;
+    height: 100%;
+}
+
+header {
+    
+    text-align:center;
+    font-size: 56px;
+    font-weight: 300;
+    letter-spacing: -2px;
+}
+
+section{
+    
+}
+
+
+footer {
+    
+    text-align:center;
+    font-size: small;
+    clear: both;
+}
+
+.module {
+    border: 2px solid #fff;
+    background: #fff;
+    padding: 5px;
+    margin: 5px;
+    
+}
+
+#glmol01 {
+    background-color: white; 
+    position: relative;
+    
+    height: 400px;
+        padding: 10px;
+    margin: 10px;
+}
+#mainNav{
+    height: 130px;
+    text-align:center;
+    font-size: large;
+    clear: both;
+}
+
+button {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #a9a9a9;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+button:hover {
+  background: #000;
+  text-decoration: none;
+}
