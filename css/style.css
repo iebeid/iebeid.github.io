@@ -3,41 +3,43 @@
 */
 
 body{
-    margin: 5px;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
-    font-size: 0.7em;
+    margin: 100px;
+    font-family: Linux Libertine, Georgia, Times New Roman, 
+        Verdana, Helvetica, Arial, sans-serif;
+    font-size: 1.2em;
+    color: black;
     overflow:auto;
     height: 100%;
 }
 
 header{
-    width:1000px;
+    width: auto;
     height: auto;
-    text-align:center;
+    text-align: center;
     font-size: 24px;
-    font-weight: 1000;
+    color: black;
     letter-spacing: 0px;
     margin:0 auto;
     clear: both;
-    overflow: hidden;
+    overflow: auto;
 }
 
 section{
-    width:1000px; 
+    width: 1000px; 
     margin:0 auto;
     clear: both;
 }
 
 footer{
-    text-align:center;
+    text-align: center;
     font-size: small;
     clear: both;
 }
 
 #logo{
-    width:400px;
-    margin:0 auto;
-    height:80px;
+    width: 400px;
+    margin: 0 auto;
+    height: 80px;
 }
 
 #content{
@@ -53,50 +55,50 @@ footer{
 }
 
 .divTable{
-	display: table;
-	width: 100%;
-        
+    display: table;
+    width: 100%;
+
 }
 
 .divTableRow {
-	display: table-row;
-       
+    display: table-row;
+
 }
 
 .divTableHeading {
-	background-color: #EEE;
-	display: table-header-group;
-        
+    background-color: #EEE;
+    display: table-header-group;
+
 }
 
 .divTableCell, .divTableHead {
-	border: 1px solid #999999;
-	display: table-cell;
-	padding: 0px 0px;
-        border: 0;
+    border: 1px solid #999999;
+    display: table-cell;
+    padding: 0px 0px;
+    border: 0;
 }
 
 .divTableHeading {
-	background-color: #EEE;
-	display: table-header-group;
-	font-weight: bold;
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
 }
 
 .divTableFoot {
-	background-color: #EEE;
-	display: table-footer-group;
-	font-weight: bold;
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
 }
 
 .divTableBody {
-	display: table-row-group;
+    display: table-row-group;
 }
 
 button{
     -webkit-border-radius: 5;
     -moz-border-radius: 5;
     border-radius: 2px;
-    font-family: Verdana, Helvetica, Arial, sans-serif;
+    font-family: Linux Libertine, Georgia, Verdana, Helvetica, Arial, sans-serif;
     font-size: 9px;
     color: #ffffff;
     background: #a9a9a9;
