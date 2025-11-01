@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="images/favicon.ico" />
+        <script src="js/three.js"></script>
+        <script src="js/Detector.js"></script>
+        <script src="js/OrbitControls.js"></script>
+        <script src="js/jquery-2.1.4.min.js"></script>
+        <style>
+            body {
+                background-color: #fff;
+                margin: 0px;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="exp">
+            Expression
+            <input type="text"/>
+            <input type="button" value="Add" onclick="addExpression() "/> 
+            <input type="button" value="View"/>
+        </div>
+        <div id="exp">
+            Expression
+            <input type="text"/>
+            <input type="button" value="Add" onclick="addExpression() "/> 
+            <input type="button" value="View"/>
+        </div>
+        <div id="exp">
+            Expression
+            <input type="text"/>
+            <input type="button" value="Add" onclick="addExpression() "/> 
+            <input type="button" value="View"/>
+        </div>
+        <div id="exp">
+            Expression
+            <input type="text"/>
+            <input type="button" value="Add" onclick="addExpression() "/> 
+            <input type="button" value="View"/>
+        </div>
+        <div id="main">
+            <script>
+                if (!Detector.webgl)
+                    Detector.addGetWebGLMessage();
+                var SCREEN_WIDTH = window.innerWidth;
+                var SCREEN_HEIGHT = window.innerHeight;
+                var container, camera, scene, renderer;
+                var characters = [];
+                var nCharacters = 0;
+                var cameraControls;
+                var controls = {
+                    moveForward: false,
+                    moveBackward: false,
+                    moveLeft: false,
+                    moveRight: false
+                };
+                var clock = new THREE.Clock();
+                init();
+                animate();
+                function init() {
+                    container = document.createElement('div');
+                    document.body.appendChild(container);
+                    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 4000);
+                    camera.position.set(0, 150, 1300);
+                    scene = new THREE.Scene();
+                    scene.fog = new THREE.Fog(0xffffff, 1000, 4000);
+                    scene.add(camera);
+                    scene.add(new THREE.AmbientLight(0x222222));
+                    var map = THREE.ImageUtils.loadTexture("images/grasslight-big-nm.jpg");
+                    map.wrapS = map.wrapT = THREE.RepeatWrapping;
+                    map.anisotropy = 16;
+                    var material = new THREE.MeshLambertMaterial( { map: map, side: THREE.DoubleSide } );
+                    var cylinder = new THREE.Mesh( new THREE.CylinderGeometry( 50, 50, 500, 32, 30, false, 0, 8 ), material );
+                    object = new THREE.Mesh( new THREE.SphereGeometry( 75, 20, 10 ), material );
+                    object.position.set( -400, 400, 200 );
+                    cylinder.position.set( -400, 100, 200 );
+                    scene.add(object);
+                    scene.add(cylinder);
+                    var light = new THREE.DirectionalLight(0xffffff, 2.25);
+                    light.position.set(200, 450, 500);
+                    light.castShadow = true;
+                    light.shadowMapWidth = 1024;
+                    light.shadowMapHeight = 1024;
+                    light.shadowMapDarkness = 0.95;
+                    light.shadowCameraNear = 100;
+                    light.shadowCameraFar = 1200;
+                    light.shadowCameraTop = 350;
+                    light.shadowCameraBottom = -350;
+                    light.shadowCameraRight = 1000;
+                    light.shadowCameraLeft = -1000;
+                    scene.add(light);
+                    var gt = THREE.ImageUtils.loadTexture("images/grasslight-big.jpg");
+                    var gg = new THREE.PlaneBufferGeometry(16000, 16000);
+                    var gm = new THREE.MeshPhongMaterial({color: 0xffffff, map: gt});
+                    var ground = new THREE.Mesh(gg, gm);
+                    ground.rotation.x = -Math.PI / 2;
+                    ground.material.map.repeat.set(64, 64);
+                    ground.material.map.wrapS = THREE.RepeatWrapping;
+                    ground.material.map.wrapT = THREE.RepeatWrapping;
+                    ground.receiveShadow = true;
+                    scene.add(ground);
+                    renderer = new THREE.WebGLRenderer({antialias: true});
+                    renderer.setClearColor(scene.fog.color);
+                    renderer.setPixelRatio(window.devicePixelRatio);
+                    renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+                    container.appendChild(renderer.domElement);
+                    renderer.gammaInput = true;
+                    renderer.gammaOutput = true;
+                    renderer.shadowMap.enabled = true;
+                    window.addEventListener('resize', onWindowResize, false);
+                    cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
+                    cameraControls.target.set(0, 50, 0);
+                    function onWindowResize(event) {
+                        SCREEN_WIDTH = window.innerWidth;
+                        SCREEN_HEIGHT = window.innerHeight;
+                        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+                        camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
+                        camera.updateProjectionMatrix();
+                    }
+                }
+                function animate() {
+                    requestAnimationFrame(animate);
+                    render();
+                }
+                function render() {
+                    var delta = clock.getDelta();
+                    cameraControls.update(delta);
+                    renderer.render(scene, camera);
+                }
+                function crop(){
+                    
+                }
+                function addExpression(){
+                    
+                }
+            </script>
+        </div>
+    </body>
+</html>
