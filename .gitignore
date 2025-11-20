@@ -1,1 +1,15 @@
-/HTML5Application/nbproject/private/
+# PyCharm
+.idea/
+
+# Virtual Environment
+venv/
+
+# Python
+src/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.so
+.Python
+build/
+dist/
