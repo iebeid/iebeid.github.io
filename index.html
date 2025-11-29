@@ -1,247 +1,340 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Islam Akef Ebeid</title>
-        <style>
-            table,
-            th,
-            td {
-                border: 1px solid black;
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islam Akef Ebeid - Professional Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Georgia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f8fafc; /* light grey background */
+            color: #1f2937; /* dark grey text */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        }
+        .tag {
+            @apply inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full;
+        }
+        /* Style for the sticky nav on scroll */
+        .scrolled {
+            @apply bg-white/90 backdrop-blur-sm shadow-lg;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="#home" class="text-xl font-bold text-gray-800">Islam Akef Ebeid <img src="images/arabic-name.png" alt="Arabic Name" class="inline-block h-8 ml-2"></a>
+                </div>
+                <nav class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="index3.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                    <a href="education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
+                    <a href="research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
+                    <a href="business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
+                    <a href="hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="opensource.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Open Source</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-sky-600 focus:outline-none">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-md">
+            <a href="index3.html" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Home</a>
+            <a href="education.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Education</a>
+            <a href="research.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Research</a>
+            <a href="teaching.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Teaching</a>
+            <a href="service.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Service</a>
+            <a href="business.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Business</a>
+            <a href="hobbies.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Hobbies</a>
+            <a href="media.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Media</a>
+            <a href="opensource.html" target="_blank" class="block py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Open Source</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section id="home" class="pt-24 md:pt-32 pb-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <!-- Text Content -->
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <p class="mt-2 text-xl text-sky-600 font-semibold">Assistant Professor of Computer Science | Principal Investigator of AI in Biomedicine</p>
+                        <p class="mt-4 max-w-2xl text-lg text-gray-600">
+                            Computer and information scientist specializing in Data Engineering and Artificial Intelligence in the Sciences, especially Biomedicine.
+                        </p>
+                        <div class="mt-8 flex justify-center md:justify-start gap-4">
+                            <a href="https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en" target="_blank" class="inline-block bg-gray-200 text-gray-800 font-semibold px-6 py-3 rounded-lg hover:bg-gray-300 transition">
+                                Google Scholar
+                            </a>
+                             <a href="lab.html" target="_blank" class="inline-block bg-gray-200 text-gray-800 font-semibold px-6 py-3 rounded-lg hover:bg-gray-300 transition">
+                                Lab Page
+                            </a>
+                            <a href="docs/CV_Ebeid_Main.pdf" target="_blank" class="inline-block bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg shadow-md hover:bg-sky-700 transition">
+                                <i class="fas fa-file-pdf mr-2"></i>View CV
+                            </a>
+                            <a href="#contact" class="inline-block bg-gray-200 text-gray-800 font-semibold px-6 py-3 rounded-lg hover:bg-gray-300 transition">
+                                <i class="fas fa-envelope mr-2"></i>Get In Touch
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Image -->
+                    <div class="md:w-1/3 flex justify-center">
+                        <img src="images/image1.jpg" alt="Islam Akef Ebeid" class="rounded-full shadow-2xl w-64 h-64 md:w-80 md:h-80 object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: About Me -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">About Me</h2>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-12">
+                    <div class="md:col-span-3 text-lg text-gray-700 space-y-4">
+                        <p>
+                            I am an assistant professor at Texas Woman's University and a Principal Investigator on an active $600K collaborative National Science Foundation (NSF, CISE/CCF) grant. My graduate academic studies spanned 8 years at the University of Arkansas at Little Rock (UA Little Rock) and the University of Texas at Austin (UT Austin), where I graduated in 2022 with a Ph.D. in Computer and Information Science.
+                        </p>
+                        <p>
+                           My research interests and experience are centered on the roles of data quality, curation, and engineering in artificial intelligence (AI), as well as their applications in life sciences. I develop methods and frameworks rooted in graph theory, network science, natural language processing, computer vision, machine learning, and deep learning.
+                        </p>
+                         <p> My vision is to aid and automate the process of scientific discovery in life sciences by developing human-centered, ethical, and artificially intelligent systems that can efficiently integrate, clean, organize, and mine scientific data. My mission is to educate and mentor students to become independent researchers through a guild-based, rigorous, hands-on approach. In addition, I aim to empower underrepresented groups in computational, data, and information sciences.</p>
+                    </div>
+                    <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Core Skills</h3>
+                        <div class="flex flex-wrap gap-2">
+                             <span class="tag">Python</span><span class="tag">C/C++</span><span class="tag">Unix</span><span class="tag">Java</span><span class="tag">SQL</span><span class="tag">Graph Theory</span><span class="tag">Linear Algebra</span><span class="tag">Natural Language Processing</span><span class="tag">Deep Learning</span><span class="tag">Machine Learning</span><span class="tag">TensorFlow</span><span class="tag">Scikit Learn</span><span class="tag">HPC</span><span class="tag">OpenCV</span><span class="tag">OpenGL</span><span class="tag">WebGL</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mt-6 mb-4">News</h3>
+                        <div class="text-gray-700 space-y-2">
+                            <p><span class="font-semibold">October 2023:</span> Currently teaching Foundations of Data Science and Fundamentals of Informatics.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2.5: Current Projects -->
+        <section id="current-projects" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Current Projects</h2>
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">ProtGram-DirectGCN</h3>
+                        <p class="text-gray-600">A novel method for protein-protein interaction prediction using graph convolutional neural networks. This work leverages the primary structure of proteins to infer global dense residue transition graphs, enabling more accurate predictions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Professional & Academic Experience -->
+        <section id="experience" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title">Experience</h2>
+                <div class="relative border-l-2 border-sky-200 pl-8">
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2023 - Current</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Assistant Professor of Computer Science</h3>
+                        <p class="text-md font-medium text-gray-700">Texas Woman’s University, Denton, TX</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2023</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Assistant Professor of Computer Science</h3>
+                        <p class="text-md font-medium text-gray-700">Southern Arkansas University, Magnolia, AR</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2022 - 2023</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Postdoctoral Research Associate</h3>
+                        <p class="text-md font-medium text-gray-700">University of North Texas, Denton, TX</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2021 - 2022</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Research Assistant</h3>
+                        <p class="text-md font-medium text-gray-700">University of Arkansas at Little Rock, Little Rock, AR</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2019 - 2020</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Teaching Assistant</h3>
+                        <p class="text-md font-medium text-gray-700">The University of Texas at Austin, Austin, TX</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2018 - 2019</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Research Assistant</h3>
+                        <p class="text-md font-medium text-gray-700">The University of Texas at Austin, Austin, TX</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2018</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Research Assistant</h3>
+                        <p class="text-md font-medium text-gray-700">Texas Advanced Computing Center, The University of Texas at Austin, Austin, TX</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2017 - 2018</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Research Fellow</h3>
+                        <p class="text-md font-medium text-gray-700">The University of Texas at Austin, Austin, TX</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2014 - 2017</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Research Assistant</h3>
+                        <p class="text-md font-medium text-gray-700">University of Arkansas at Little Rock, Little Rock, AR</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                        <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">2011 - 2013</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Graduate Assistant</h3>
+                        <p class="text-md font-medium text-gray-700">Arkansas Tech University, Russellville, AR</p>
+                    </div>
+                    <!-- Timeline Item -->
+                    <div class="mb-12">
+                         <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
+                        <p class="text-sm text-gray-500">Previous Professional Roles</p>
+                        <h3 class="text-xl font-semibold text-gray-900">Software Engineering & Consulting</h3>
+                        <p class="text-md font-medium text-gray-700">AbbVie, Intel, Arkansas.gov, WeDo Technologies, Orange Telecom, Xpress Integration, Giza Systems, Vodafone</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Publications -->
+        <section id="publications" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <h2 class="section-title">Publications</h2>
+                 <div class="max-w-4xl mx-auto">
+                    <p class="text-center mb-8">For a complete list, please visit my profiles on <a href="https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en" target="_blank" class="text-sky-600 font-semibold hover:underline">Google Scholar</a> and <a href="https://www.researchgate.net/profile/Islam-Ebeid" target="_blank" class="text-sky-600 font-semibold hover:underline">ResearchGate</a>.</p>
+                     <div class="space-y-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Journal Articles</h3>
+                        <!-- Publication Item -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="font-semibold text-gray-800">Inferred global dense residue transition graphs from primary structure sequences enable protein interaction prediction via directed graph convolutional neural networks</p>
+                            <p class="text-sm text-gray-600">Ebeid IA, Tang H, and Gu P (2025). Front. Bioinform. 5:1651623.</p>
+                            <a href="https://doi.org/10.3389/fbinf.2025.1651623" target="_blank" class="text-sm text-sky-600 hover:underline">View Paper <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                        <!-- Publication Item -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="font-semibold text-gray-800">MedGraph: A semantic biomedical information retrieval framework using knowledge graph embedding for PubMed</p>
+                            <p class="text-sm text-gray-600">Ebeid, I. A. (2022). Frontiers in Big Data, 5.</p>
+                            <a href="https://www.frontiersin.org/articles/10.3389/fdata.2022.1028994/full" target="_blank" class="text-sm text-sky-600 hover:underline">View Paper <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Conference Papers</h3>
+                        <!-- Publication Item -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="font-semibold text-gray-800">Adapting a Segmentation Foundation Model for Medical Image Classification</p>
+                            <p class="text-sm text-gray-600">Gu, P., Tang, H., Ebeid, I. A., et al. (2025). IEEE CBMS 2025.</p>
+                        </div>
+                        <!-- Publication Item -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <p class="font-semibold text-gray-800">Graph-based hierarchical record clustering for unsupervised entity resolution</p>
+                            <p class="text-sm text-gray-600">Ebeid, I. A., Talburt, J. R., & Siddique, M. A. S. (2022). ITNG 2022.</p>
+                            <a href="https://link.springer.com/chapter/10.1007/978-3-030-98974-5_8" target="_blank" class="text-sm text-sky-600 hover:underline">View Paper <i class="fas fa-external-link-alt ml-1"></i></a>
+                        </div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Contact -->
+        <section id="contact" class="py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <h2 class="section-title">Get In Touch</h2>
+                 <div class="max-w-lg mx-auto text-center">
+                     <p class="text-lg text-gray-700">I'm always open to discussing new research, projects, and collaboration opportunities. Feel free to reach out.</p>
+                     <div class="mt-8">
+                        <a href="mailto:iebeid@twu.edu" class="text-2xl font-semibold text-sky-600 hover:text-sky-800 transition">iebeid@twu.edu</a><br>
+                        <a href="mailto:iaebeid@utexas.edu" class="text-xl font-semibold text-sky-600 hover:text-sky-800 transition">iaebeid@utexas.edu</a><br>
+                        <a href="mailto:iaebeid@gmail.com" class="text-xl font-semibold text-sky-600 hover:text-sky-800 transition">iaebeid@gmail.com</a>
+                     </div>
+                     <div class="mt-4 text-lg text-gray-700">
+                        <p>C: 512 921 1311 | O: 940 898 2165</p>
+                        <p>Texas Woman’s University | MCL 412 | Denton, TX 76204</p>
+                     </div>
+                     <div class="mt-8 flex justify-center gap-6 text-2xl text-gray-600">
+                        <a href="https://github.com/iebeid" target="_blank" class="hover:text-sky-600 transition"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/islam-akef-ebeid-5b0427340/" target="_blank" class="hover:text-sky-600 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com/i3akef" target="_blank" class="hover:text-sky-600 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en" target="_blank" class="hover:text-sky-600 transition"><i class="fas fa-graduation-cap"></i></a>
+                        <a href="https://www.researchgate.net/profile/Islam-Ebeid" target="_blank" class="hover:text-sky-600 transition"><i class="fab fa-researchgate"></i></a>
+                        <a href="https://www.webofscience.com/wos/author/record/GLQ-8040-2022" target="_blank" class="hover:text-sky-600 transition"><i class="fas fa-flask"></i></a>
+                        <a href="https://dl.acm.org/profile/99659275617" target="_blank" class="hover:text-sky-600 transition"><i class="fas fa-book"></i></a>
+                        <a href="https://dblp.org/pid/182/4444.html" target="_blank" class="hover:text-sky-600 transition"><i class="fas fa-database"></i></a>
+                     </div>
+                 </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.onscroll = function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
             }
-        </style>
-    </head>
-    <body>
-        <p>
-            <b style="font-size: 40px;">Islam Akef Ebeid</b>
-        </p>
-        <p>
-            <img alt="Name" src="images/arabic-name.png" height=44 width=183>
-        </p>
-        <p>Assistant Professor of Computer Science at Texas Woman's University</p>
-        <p>writer, researcher, educator, AI enthusiast</p>
-        <p>
-            <img alt="A person in a suit and tie Description automatically generated" src="images/image1.jpg" height=300 width=450>
-            </p>
-<table>
-    <tr>
-        <td colspan="1" rowspan="1">
-            <p>
-                <a href="_" target="blank">Home</a>
-            </p>
-        </td>
-        <td colspan="1" rowspan="1">
-            <p>
-                <a href="contact.html" target="blank">Contact</a>
-            </p>
-        </td>
-        <td colspan="1" rowspan="1">
-            <p>
-                <a href="education.html target=" blank ">Education</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" research.html " target=" blank ">Research</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" teaching.html " target=" blank ">Teaching</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" _ " target=" blank ">Service</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" professional.html " target=" blank ">Business</a>
-            </p>
-        </td>
-															          <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" hobbies.html " target=" blank ">Hobbies</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" _ " target=" blank ">Media</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" _ " target=" blank ">Downloads</a>
-            </p>
-        </td>
-    </tr>
-    <tr>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>I recently graduated from the University of Arkansas at Little Rock with a Ph.D. in Computer and Information Science, focusing on Data and Information Science. I worked under the guidance and mentorship of John Talburt and Elizabeth Pierce. Prior to that, I was a Ph.D. student at the University of Texas at Austin, where I worked with Ying Ding.
-Other mentors I worked with in the past years: Serdar Bozdag, Mariofanna Milanova, Ningnig Wu, Yan Zhang, Jacek Gwizdka, Abhra Sarkar, Mohammed Yassine Belkhouche, Carolina Cruz Neira, Dirk Reiners, Roger Fang, Jerry Wood, Larry Morell.</p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-            <p>iebeid@twu.edu, iaebeid@utexas.edu, iaebeid@gmail.com</p>
-            <p>C: 512 921 1311, O: 940 898 2165</p>
-            <p>Texas Woman’s University</p>
-            <p>MCL 412</p>
-            <p>Denton, TX 76204</p>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>University of North Texas, Denton, Texas (2022): Postdoctoral Training in Computer Science</p>
-            <p>University of Arkansas at Little Rock, Little Rock, Arkansas (2014-2022): MSc, Ph.D. in Computer & Information Science</p>
-            <p>The University of Texas at Austin, Austin, Texas (2017-2020): Graduate work at the Ph.D. program in Information Science</p>
-            <p>Arkansas Tech University, Russellville, Arkansas (2011-2013): Professional MSc in Computer & Information Science</p>
-            <p>Ain Shams University, Cairo, Egypt (2003-2008): BSc in Electrical & Computer Engineering</p>
-            <p>The English School in Cairo (El Nasr School), Cairo, Egypt (2000-2003): General Secondary Diploma in Mathematics</p>
-            <p>Certifications: FE, ITIL</p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href="lab.html" target=" blank ">Data2AI4Science Laboratory @ TWU</a>
-            </p>
-			<p>
-                <a href=" _ " target=" blank ">The Advacned Computing Center (ACC) @ TWU</a>
-            </p>
-            <p>
-                <a href=" _ " target=" blank ">Center for Refugee Interdisciplinary Studies and Education (RISE) @ TWU</a>
-            </p>
-            <p>
-                <a href=" projects.html " target=" blank ">Recent Projects</a>
-            </p>
-            <p>
-                <a href=" publications.html " target=" blank ">Recent Publications</a>
-            </p>
-            <p>
-                <a href=" tinkering.html " target=" blank ">Old Projects</a>
-            </p>
-            <p>
-                <a href=" https://github.com/iebeid/ " target=" blank ">Code</a>
-            </p>
-            <p>
-                <a href=" _ " target=" blank ">Datasets</a>
-            </p>
-            <p>
-                <a href=" https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en " target=" blank ">Googel Scholar</a>
-            </p>
-            <p>
-                <a href=" https://www.researchgate.net/profile/Islam-Ebeid " target=" blank ">ResearchGate</a>
-            </p>
-            <p>
-                <a href=" https://www.webofscience.com/wos/author/record/GLQ-8040-2022 " target=" blank ">Web of Science</a>
-            </p>
-            <p>
-                <a href=" https://dl.acm.org/profile/99659275617 " target=" blank ">ACM</a>
-            </p>
-            <p>
-                <a href=" https://dblp.org/pid/182/4444.html " target=" blank ">DBLP</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-		<ul>
-		<li>Foundations of Data Science</li></a>
-		<li>Fundamentals of Informatics</li></a>
-		<li>Computer Science II</li></a>
-		<li>Statistical Programming</li></a>
-		<li>Programming for Informatics</li></a>
-		<li>Database Management Systems</li></a>
-		<li>Data Warehousing</li></a>
-		<li>The Unix Operating Systems</li></a>
-		</ul></a>
-		</td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" _ " target=" blank ">Institutional</a>
-            </p>
-            <p>
-                <a href=" _ " target=" blank ">Professional</a>
-											  <ul>
-		<li>            <p>
-                <a href=" software.html " target=" blank ">Open Source</a>
-            </p></li></a>
+        };
 
-		</ul>
-            </p>
-
-            <p>
-                <a href=" _ " target=" blank ">Community & Activism</a>
-											  <ul>
-		<li></li></a>
-
-		</ul>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 "><ul>
-		<li>Engineering Consulatancy</li></a>
-		<li>The Dallas Muslim News</li></a>
-
-		</ul></td>
-		<td colspan=" 1 " rowspan=" 1 ">		<ul>
-		<li>Hiking & Photography</li></a>
-		<li>Writing</li></a>
-
-		</ul></td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" https://ebeid.medium.com/ " target=" blank ">Blog</a>
-            </p>
-        </td>
-        <td colspan=" 1 " rowspan=" 1 ">
-            <p>
-                <a href=" docs/CV_Ebeid_Main.pdf " target=" blank ">CV</a>
-            </p>
-        </td>
-    </tr>
-</table>
-<div>
-    <p><b>Mission</b></p>
-    <p> My primary goal is to contribute to advancing scientific discovery by fostering a more accessible, ethical, and artificially intelligent (AI) data and information ecosystem. I am passionate about driving the automatic integration and harmonization of all scientific information, ensuring efficient organization, cleaning, archival, and practical mining for new insights. I believe in the transformative power of interdisciplinary collaboration, particularly between data science, artificial intelligence, and the core scientific disciplines. I am committed to advancing responsible and sustainable scientific computing and AI practices, minimizing their environmental impact, and ensuring ethical considerations are paramount in all research endeavors. Finally, I am dedicated to empowering underrepresented groups in computational, information, and data sciences, including women, refugees, and financially challenged populations, by creating inclusive and equitable opportunities for all.
-      More </p>
-    <p><b>Vision</b> </p>
-    <p>My research interests and experiences are centered around the role of data quality, curation, and engineering in artificial intelligence and their applications in the sciences. I develop and adapt methods and frameworks rooted in graph theory, natural language processing, machine learning, and deep learning. I apply the developed methods in information retrieval (computer science), data mining of digital libraries and information networks (information science), biomedical informatics (biology), non-profit studies (social sciences), and human-computer interaction (psychology). My vision is to aid and automate the process of scientific discovery and inquiry by developing ethical and artificially intelligent systems capable of integrating, cleaning, organizing, and mining scientific information automatically and efficiently.    </p>
-    <p> <b>Current Research Interests</b> </p>
-    <p>Data Quality in AI: I investigate the critical role of data quality in training artificial intelligence<br>
-      models, particularly in scientific domains where data integrity is essential.<br>
-      Biomedical Data Integration: I develop efficient techniques for integrating large biomedical<br>
-      datasets extracted from digital libraries with omics datasets using the Knowledge Graph data<br>
-      model.<br>
-      Graph-Based Representation Learning: I develop scalable graph-based representation<br>
-      learning techniques to leverage the power of integrated datasets for applications in information<br>
-    retrieval, search engines, and entity matching.</p>
-  <p>
-  <b>Main Research Experience:</b></p>
-  <ol>
-    <li>Entity resolution and matching with graph theory and natural language processing</li>
-    <li>Biomedical information retrieval with graph representation learning</li>
-  </ol>
-  <p>
-  <b>Secondary Research Experience:</b></p>
-  <ol>
-    <li>Human factors in computing and information seeking with eye tracking</li>
-    <li>Scientific visualization of biological data</li>
-  </ol>
-  <p>
-  <b>Current Skillset (Python, C\C++, Unix):</b></p>
-  <ol>
-    <li>Graph theory and network mining algorithms</li>
-    <li>Applied linear algebra algorithms</li>
-    <li>Natural language processing algorithms</li>
-    <li>Machine learning and deep learning models and experimentation with TensorFlow</li>
-    <li>Setting up high-performance computing environments and data management systems</li>
-  </ol>
-  <p>
-  <b>Older Skillset (C\C++, Java, SQL):</b></p>
-  <ol>
-    <li>Experimental design and statistical analysis in eye-tracking studies</li>
-    <li>Image processing with OpenCV, mainly for filtering, localization, and mapping</li>
-    <li>Computer graphics with OpenGL and WebGL for creating scientific visualizations</li>
-    <li>Software engineering, especially web applications and services based on the MVC design pattern and backend ETL operations</li>
-</ol>
-</p>
-</p>
-</div>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileMenuLinks) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+    </script>
 </body>
 </html>

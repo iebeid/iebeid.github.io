@@ -1,16 +1,65 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching - Islam Akef Ebeid</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Georgia -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Custom styles to complement Tailwind */
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #f8fafc; /* light grey background */
+            color: #1f2937; /* dark grey text */
+        }
+        .section-title {
+            @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index3.html" class="text-xl font-bold text-gray-800">Islam Akef Ebeid <img src="images/arabic-name.png" alt="Arabic Name" class="inline-block h-8 ml-2"></a>
+                </div>
+                <nav class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="index3.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                    <a href="education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
+                    <a href="research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
+                    <a href="business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
+                    <a href="hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="opensource.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Open Source</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="section-title">Teaching</h1>
+        <p class="text-center text-lg text-gray-700">This page is under construction. It will soon feature a full listing of courses and their syllabi I taught.</p>
+        <div class="text-center mt-8">
+            <a href="index3.html" class="text-sky-600 font-semibold hover:underline">Go back to the main page</a>
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
 </html>
