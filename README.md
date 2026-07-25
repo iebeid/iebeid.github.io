@@ -1,3 +1,9 @@
 # iebeid.github.io
 
-Personal website
+I am a Computer, Data, and Information Scientist and Educator, currently serving as an Assistant Professor at Texas Woman's University (TWU) and the Principal Investigator on an active $600K collaborative National Science Foundation (NSF) grant. My academic foundation was built through extensive research at the University of Texas at Austin (UT Austin) and the University of Arkansas at Little Rock (UA Little Rock), where I earned my Ph.D. in Computer and Information Science. My expertise is further anchored by professional positions at global organizations, including Intel and AbbVie.
+
+My vision is to accelerate scientific discovery in the life sciences through the development of human-centered, sustainable, and ethical AI systems. My research group investigates data quality within foundation models, specifically as it applies to proteomics, drug discovery, and biomedical knowledge discovery. Our multimodal neuro-symbolic methodology integrates classical statistical rigor (Bayesian, Markovian) with modern architectures like Graph Neural Networks and Transformers to ensure both performance and interpretability.
+
+My mission is to mentor the next generation of independent researchers through a collaborative, guild-based approach that prioritizes technical excellence and inclusive representation. I am dedicated to empowering underrepresented voices in computational sciences as a core component of my academic leadership.
+
+My career is anchored in service and integrity. Beyond the laboratory, I contribute to community building activities and public discourse on topics related to national, internatoinal and cyber security. In addition I provide technical consulting on end-to-end data science lifecycles. I find balance through civic, social and spiritual engagement; whether through volunteer work, Islamic scholarship, hiking, writing, or visiting museums.
