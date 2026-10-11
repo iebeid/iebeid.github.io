@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Research in computational biology, Graph Neural Networks, protein interaction prediction, CAVE virtual reality, and healthcare data governance.">
+    <meta property="og:title" content="Research & Publications - Dr. Islam Akef Ebeid">
+    <meta property="og:description" content="Research in computational biology, Graph Neural Networks, protein interaction prediction, CAVE virtual reality, and healthcare data governance.">
+    <meta property="og:type" content="website">
     <title>Research - Islam Akef Ebeid</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,14 +17,16 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Custom styles to complement Tailwind */
         body {
             font-family: 'Georgia', serif;
-            background-color: #f8fafc; /* light grey background */
-            color: #1f2937; /* dark grey text */
+            background-color: #f8fafc;
+            color: #1f2937;
         }
         .section-title {
             @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        }
+        .tag {
+            @apply inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full;
         }
     </style>
 </head>
@@ -33,315 +39,539 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
-                    <a href="../education/education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
-                    <a href="research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
-                    <a href="../teaching/teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
-                    <a href="../service/service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
-                    <a href="../business/business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
-                    <a href="../hobbies/hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
-                    <a href="../media/media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
-                    <a href="../downloads/downloads.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
+                    <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
+                    <a href="research.html" class="text-sky-600 font-semibold transition">Research</a>
+                    <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
+                    <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
+                    <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="../downloads/downloads.html" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
                 </nav>
+            </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
+                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
+                <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
+                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
+                <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
+                <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
+                <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
+                <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
+                <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
+                <a href="../downloads/downloads.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Downloads</a>
             </div>
         </div>
     </header>
+
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Research</h1>
-        <div class="max-w-4xl mx-auto">
-            <div class="space-y-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">VisInt-X</h3>
-                    <p class="text-gray-600">A WebGL/D3 based interactive visualization of data coming out of the XLPM algorithm on 2 protein structures. The paper has been presented at Electronic Imaging 2016, The no figures paper has been accepted as an article in the Journal of Imaging Science and Technology 2016, unfortunetly the co-authors have agreed to withdraw to reiterate the work and resubmit this summer of 2017.</p>
-                    <div class="mt-4">
-                        <a href="../files/documents/Writing/XLPM%20Map.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Submitted Abstract</a>
-                        <a href="../files/documents/Writing/xlpm-nofigures-final.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Final Journal Article</a>
-                        <a href="docs/Writing/XLPM-SPIE-IST-submission.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Accepted Conference Paper</a>
-                        <a href="docs/Posters/IAE_VISINTX.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Poster 1</a>
-                        <a href="docs/Posters/visintx_presentation.pdf" target="_blank" class="text-sky-600 hover:underline">Poster 2</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Global Big Data Management & Governance in Health Care Information Systems</h3>
-                    <p class="text-gray-600">A paper submitted as part of the Data Governance course and presented at the UALR Research Expo.</p>
-                    <div class="mt-4">
-                        <a href="docs/Writing/Ebeid_Final_Paper.pdf" target="_blank" class="text-sky-600 hover:underline">Paper Submitted</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Latent Drichelet Allocation Topic Modelling</h3>
-                    <p class="text-gray-600">A study to compare the results of two packages (Mallet and Gensim) to Topic Model the 20 Newsgroup dataset. As part of the Machine Learning Class</p>
-                    <div class="mt-4">
-                        <a href="docs/Writing/FinalReportInfoSci.pdf" target="_blank" class="text-sky-600 hover:underline">Final Project Report</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Cave Object Scanner</h3>
-                    <p class="text-gray-600">I am proposing real time application inside the CAVE environment that would allow scanning small objects on a custom made turntable using a Real Sense camera that would capture the objects information creating a mesh file (OBJ) that would be rendered instantly inside the CAVE allowing the user to manipulate the object using a Leap Motion Sensor.</p>
-                    <div class="mt-4">
-                        <a href="docs/Writing/Real.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Project Progress Report</a>
-                        <a href="docs/Writing/vr-project-proposal.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Project Proposal</a>
-                        <a href="docs/Writing/vr-project-final-paper.pdf" target="_blank" class="text-sky-600 hover:underline">Project Final Paper</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Information Systems Security Final Paper</h3>
-                    <p class="text-gray-600">A design for security policies for a National Visualization Lab, presented at UALR Research Expo.</p>
-                    <div class="mt-4">
-                        <a href="docs/Writing/The-National-Visualization-Lab.pdf" target="_blank" class="text-sky-600 hover:underline">Final Paper</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">RealSense Visual SLAM GPU Implementation</h3>
-                    <p class="text-gray-600">My task while interning at Intel during the summer of 2016 was to implement the visual SLAM using Intel's GPU technology</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/RealSense_CM_VIVE_SLAM.git" target="_blank" class="text-sky-600 hover:underline">GitHub</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">XLPMOL: An OpenGL Visualization of 2 Protein Models simultaneously based on PDF files</h3>
-                    <p class="text-gray-600">An OpenGL Visualization of 2 Protein Models at the same time based on Protein Data Bank Data files.</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/xlpmol.git" target="_blank" class="text-sky-600 hover:underline mr-4">GitHub</a>
-                        <a href="https://youtu.be/YdO3IQsTDq4" target="_blank" class="text-sky-600 hover:underline mr-4">Video</a>
-                        <a href="../files/documents/XLPMol3DViewer.pdf" target="_blank" class="text-sky-600 hover:underline">Paper</a>
-                    </div>
-                </div>
+        <h1 class="section-title text-center">Research & Projects</h1>
+        
+        <!-- Lab Banner -->
+        <div class="max-w-5xl mx-auto mb-10 bg-gradient-to-r from-sky-900 to-indigo-900 text-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+                <span class="inline-block bg-sky-400/20 text-sky-200 border border-sky-400/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-2">Research Laboratory</span>
+                <h2 class="text-2xl font-bold">The Data2AI4LifeSciences Laboratory</h2>
+                <p class="text-sky-100 text-sm mt-1 max-w-2xl">
+                    Dedicated to AI for Life Sciences, grounded in foundational theoretical computer science and applied data science. Research pillars: Data Quality in AI, AI in Life Sciences, and Human Factors.
+                </p>
+            </div>
+            <div class="flex-shrink-0">
+                <a href="lab.html" target="_blank" class="inline-flex items-center bg-white text-sky-900 hover:bg-sky-50 font-semibold px-5 py-2.5 rounded-lg shadow transition">
+                    <i class="fas fa-flask mr-2"></i> Visit Lab Page
+                </a>
             </div>
         </div>
 
-        <section>
-            <div>
-                <div id="content" class="module">
-                    <fieldset style='border: 0;'>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>VisInt-X</b></div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                A WebGL/D3 based interactive visualization of data coming
-                                out of the XLPM algorithm on 2 protein structures.
-                                The paper has been presented at Electronic Imaging 2016, The no figures paper has been accepted as an article in the Journal of Imaging Science
-                                and Technology 2016, unfortunetly the co-authors have agreed to withdraw to reiterate the work and resubmit this summer of 2017.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="../files/documents/Writing/XLPM%20Map.pdf" target="_blank" title="Mii Card">Submitted Abstract</a>
-                                <a href="../files/documents/Writing/xlpm-nofigures-final.pdf" target="_blank">Final Journal Article</a>
-                                <a href="docs/Writing/XLPM-SPIE-IST-submission.pdf" target="_blank">Accepted Conference Paper</a>
-                                <a href="docs/Posters/IAE_VISINTX.pdf" target="_blank">Poster 1</a>
-                                <a href="docs/Posters/visintx_presentation.pdf" target="_blank">Poster 2</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Masters Project</b></div>
-                            <div style='width: 680px;  height: 50px; float: right;'>
-                                The main goal of this system is to provide a graphical
-                                representation of these changes in two ways:  displaying the behavior, of an existing algorithm and
-                                moving graphical objects around the screen to simulate an algorithm and the system automatically generates the code.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="../files/documents/Writing/Genesis%20Development%20Environment%20Design%20Document.pdf" target="_blank">Final Design Document</a>
-                                <a href="../files/documents/Writing/ThesisParagraph.pdf" target="_blank">Thesis Abstract</a>
-                                <a href="docs/Writing/ThesisProposal.pdf" target="_blank">Thesis Proposal</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Bachelors Project</b></div>
-                            <div style='width: 680px;  height: 60px; float: right;'>
-                                Intersection Collision Avoidance System (ICAS) is an
-                                applications development for a series of technologies
-                                directly linking road vehicles to their physical
-                                surroundings in order to improve road safety.
-                                A Java based server client application + hardware implementation (GPS-Microcontrollers),
-                                based upon that vehicles can be connected to servers on the streets to be able to control traffic.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="docs/Writing/The VII propject-V3.pdf" target="_blank">Thesis</a>
-                                <a href="docs/Writing/Graduation_Project_Presentation.pdf" target="_blank">Thesis Slides</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Global Big Data Management & Governance in Health Care Information Systems</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                A paper submitted as part of the Data Governance course and presented at the UALR Research Expo.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="docs/Writing/Ebeid_Final_Paper.pdf" target="_blank">Paper Submitted</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Latent Drichelet Allocation Topic Modelling</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                A study to compare the results of two packages (Mallet and Gensim)
-                                to Topic Model the 20 Newsgroup dataset. As part of the Machine Learning Class
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="docs/Writing/FinalReportInfoSci.pdf" target="_blank">Final Project Report</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>IT Policies</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                I was requested to write a new set of User Acceptance Policies for the Information Systems Department.
-                                To be published on the Univeristy of Arkansas at Little Rock website.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="../files/documents/Writing/IT%20Policies.pdf" target="_blank">Final Policies Document</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Cave Object Scanner</b></div>
-                            <div style='width: 680px;  height: 60px; float: right;'>
-                                I am proposing real time application inside the CAVE environment
-                                that would allow scanning small objects on a custom made turntable using a Real Sense camera that would capture
-                                the objects information creating a mesh file (OBJ) that would be rendered instantly inside the CAVE allowing the
-                                user to manipulate the object using a Leap Motion Sensor.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="docs/Writing/Real.pdf" target="_blank">Project Progress Report</a>
-                                <a href="docs/Writing/vr-project-proposal.pdf" target="_blank">Project Proposal</a>
-                                <a href="docs/Writing/vr-project-final-paper.pdf" target="_blank">Project Final Paper</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>English Language Institute</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                I was asked to write the curriculum for the English Language
-                                Institute for the English Program for international students, It was published on the website.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="../files/documents/Writing/English%20Language%20Institute.pdf" target="_blank">Project Proposal</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Paper Submission Application</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                A simple Web-based system for the review of conference papers.
-                                Developed as part of the Web Development Class at Arkansas Tech University.
-                                Tools: Php, MySql, HTML
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="../files/documents/Writing/design-document.pdf" target="_blank">Design Document</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>Information Systems Security Final Paper</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                A design for security policies for a National Visualization Lab, presented at UALR Research Expo.
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="docs/Writing/The-National-Visualization-Lab.pdf" target="_blank">Final Paper</a>
-                            </div>
-                        </div>
-                        <div style='width: 800px; height: 100px;'>
-                            <div style='width: 680px;  height: 20px; float: right;'><b>SigGraph best talk abstract</b></div>
-                            <div style='width: 680px;  height: 40px; float: right;'>
-                                SIGRAPH best talk abstract presented at the EAC colliquim meeting at UALR after returning from SIGGRAPH 2015
-                            </div>
-                            <div style='width: 680px;  height: 70px; float: right;'>
-                                <a href="../files/documents/Writing/siggraph.pdf" target="_blank">Abstract</a>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-        </section>
+        <div class="max-w-5xl mx-auto space-y-12">
 
-        <section>
-            <div class="divTable"><br/><br/><br/><br/>
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell"><fieldset style="border: 0;"><legend><b>Educational tools I use</b></legend>
-                            <p>
-                                <a href="https://prezi.com/user/mmtnrbrwtz9t/" target="_blank">Prezi</a><br/>
-                                <a href="https://www.mendeley.com/profiles/islam-ebeid/" target="_blank">Mendeley</a><br/>
-                                <a href="https://www.khanacademy.org/profile/kaid_868273694547433415805526/" target="_blank">Khan Academy</a><br/>
-                                <a href="https://www.duolingo.com/IslamAkefE" target="_blank">Duolingo</a><br/>
-                                <a href="https://nvidia.qwiklab.com/dashboard" target="_blank">Qwiklab</a><br/>
-                                <a href="https://courses.edx.org/" target="_blank">Edx</a><br/>
-                                <a href="https://www.coursera.org/user/i/8b0d8962eafa196a205036ddfa7539b4" target="_blank">Coursera</a><br/>
+            <!-- Section 1: Life Sciences & Biomedical AI -->
+            <section>
+                <div class="flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-dna text-sky-600 mr-3"></i> AI for Life Sciences, Proteomics & Biomedical Imaging
+                    </h2>
+                    <span class="text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-1 rounded-full">Current & Recent</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- ProtGram-DirectGCN -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">ProtGram-DirectGCN</h3>
+                                <span class="tag">Frontiers 2025</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                A novel method for protein-protein interaction prediction using directed graph convolutional neural networks. This work infers global dense residue transition graphs directly from primary amino acid sequences, enabling accurate interaction screening without requiring physical 3D crystallographic coordinates.
                             </p>
-                        </fieldset>
                         </div>
-                        <div class="divTableCell"><fieldset style="border: 0;"><legend><b>Developer forums I contribute to</b></legend>
-                            <p>
-                                <a href="http://stackoverflow.com/users/5012284/akef?tab=profile" target="_blank" title="Stackoverflow"><img width="50px" height="50px" src="../files/images/social/1481094411_stackoverflow.png" alt="Stack Overflow"/></a>
-                                <a href="https://www.codeproject.com/" target="_blank" title="Code Project"><img width="50px" height="50px" src="../files/images/social/codeproject.png" alt="Codeproject"/></a>
-                                <a href="https://software.intel.com/partner/app/dashboard?locale=en-us" target="_blank" title="Intel"><img width="50px" height="50px" src="../files/images/social/intel.png" alt="Intel"/></a>
-                                <a href="https://developer.nvidia.com/" target="_blank" title="Nvidia"><img width="50px" height="50px" src="../files/images/social/nvidia.png" alt="Nvidia"/></a>
-                                <a href="https://msdn.microsoft.com/en-us" target="_blank" title="Microsoft"><img width="50px" height="50px" src="../files/images/social/vs.png" alt="Microsoft"/></a>
-                            </p>
-                        </fieldset>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-2 text-sm">
+                            <a href="https://doi.org/10.3389/fbinf.2025.1651623" target="_blank" class="text-sky-600 hover:underline font-medium"><i class="fas fa-external-link-alt mr-1"></i> Paper (Front. Bioinform.)</a>
                         </div>
                     </div>
-                    <div class="divTableRow">
-                        <div class="divTableCell"><fieldset style="border: 0;"><legend><b>Organizations I am a member at</b></legend>
-                            <p>
-                                <a href="https://myacm.acm.org/dashboard.cfm?svc=curr" target="_blank">ACM</a><br/>
-                                <a href="http://www.ieee.org/index.html" target="_blank">IEEE</a><br/>
-                                <a href="https://www.computer.org/" target="_blank">IEEE - Computer Society</a><br/>
-                                <a href="http://www.imaging.org/site/ist/" target="_blank">Society of Imaging Science and Technologies</a><br/>
-                                <a href="https://nsf.gov/" target="_blank">National Science Foundation</a><br/>
+
+                    <!-- NSF Grant Medical Segmentation -->
+                    <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">Multimodal Medical Segmentation</h3>
+                                <span class="tag bg-amber-100 text-amber-800">NSF Award #2523786</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Collaborative Research: CISE-MSI project ($600K total / $210K Lead PI) developing auto-prompt textual annotations with domain knowledge for medical image segmentation foundation models. Introduces Spatially Localized Channel Attention (SLCA) validated across clinical imaging benchmarks.
                             </p>
-                        </fieldset>
                         </div>
-                        <div class="divTableCell"><fieldset style="border: 0;"><legend><b>Conferences and Journals I participated in</b></legend>
-                            <p>
-                                <a href="http://www.imaging.org/site/IST/Conferences/EI_2017/IST/Conferences/EI_2017/Symposium_Overview.aspx" target="_blank">Electronic Imaging 2016</a><br/>
-                                <a href="https://mcbios.org/2015-mcbios-annual-conference" target="_blank">MCBIOS 2015 - MCBIOS 2016</a><br/>
-                                <a href="http://s2015.siggraph.org/" target="_blank">SIGGRAPH 2015</a><br/>
-                                <a href="https://www.imaging.org/site/IST/Publications/JIST/IST/Publications/Journal_of_Imaging_Science_and_Technology.aspx?hkey=7563ebfc-9a10-4e6e-8f31-268b49aec1a0" target="_blank">Journal of Imaging Science and Technologies</a><br/>
-                                <a href="http://sc16.supercomputing.org/" target="_blank">Super Computing 2016</a><br/>
-                            </p>
-                        </fieldset>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-2 text-sm">
+                            <span class="text-gray-500 font-medium"><i class="fas fa-award mr-1 text-amber-500"></i> NSF CISE/CCF</span>
+                            <span class="text-gray-400">•</span>
+                            <span class="text-gray-500">IEEE CBMS 2025</span>
                         </div>
                     </div>
+
+                    <!-- VisInt-X -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">VisInt-X: Visualizing Cross-Linked Proteins</h3>
+                                <span class="tag">Electronic Imaging</span>
+                            </div>
+                            <div class="mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-2">
+                                <img src="../../images/protein.png" alt="Protein Cross-linking Visualization" class="h-28 object-contain">
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                A WebGL and D3-based interactive visualization of data coming out of the XLPM algorithm on 2 protein structures. Presented at Electronic Imaging (EI 2016) and Journal of Imaging Science & Technology.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/XLPM Map.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Abstract</a>
+                            <a href="../../documents/xlpm-nofigures-final.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Final Article</a>
+                            <a href="../../documents/XLPM-SPIE-IST-submission.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Conference Paper</a>
+                            <a href="../../documents/IAE_VISINTX.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Poster 1</a>
+                            <a href="../../documents/visintx_presentation.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Poster 2</a>
+                            <a href="https://github.com/iebeid/VisInt-X.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                            <a href="https://www.youtube.com/watch?v=yVLHPw4s47k" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-youtube mr-1"></i> Video</a>
+                        </div>
+                    </div>
+
+                    <!-- XLPMOL -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">XLPMOL: OpenGL Protein Model Viewer</h3>
+                                <span class="tag">OpenGL / PDB</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                An OpenGL visualization of 2 Protein Models simultaneously based on Protein Data Bank (PDB) data files, allowing comparative structural inspection of protein interactions.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/xlpmol.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                            <a href="https://youtu.be/YdO3IQsTDq4" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-youtube mr-1"></i> Video</a>
+                            <a href="../../documents/XLPMol3DViewer.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Paper</a>
+                        </div>
+                    </div>
+
+                    <!-- PubMed KG & MedGraph -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">PubMed Knowledge Graph & MedGraph</h3>
+                                <span class="tag">Nature Sci Data</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Construction of a comprehensive PubMed Knowledge Graph with fine-tuned BERT entity extraction, author disambiguation, and NIH grant linkage. MedGraph uses graph representation embeddings (TransE, RotatE) for semantic biomedical search.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://doi.org/10.1038/s41597-020-0583-0" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i> Scientific Data (Nature)</a>
+                            <a href="https://doi.org/10.3389/fdata.2022.1028994" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i> Frontiers in Big Data</a>
+                        </div>
+                    </div>
+
+                    <!-- ModER Entity Resolution -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">ModER: Unsupervised Entity Resolution</h3>
+                                <span class="tag">Graph ER</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Graph-based unsupervised entity resolution using Composite Modularity Optimization and Locality-Sensitive Hashing (LSH) for resolving ambiguous records in large-scale knowledge graphs.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://doi.org/10.14569/IJACSA.2022.0130901" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i> IJACSA 2022</a>
+                            <a href="https://link.springer.com/chapter/10.1007/978-3-030-98974-5_8" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-external-link-alt mr-1"></i> ITNG 2022 (Springer)</a>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            <br/>
-            <hr/>
-            <div id="content" class="module"><h1>Highlights</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/200Kparticles.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>RealSense Visual SLAM GPU Implementation</b></div><div style='width: 680px;  height: 70px; float: right;'>My task while interning at Intel during the summer of 2016  was to implement the visual SLAM using Intel's GPU technology</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/RealSense_CM_VIVE_SLAM.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/protein.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>XLPMOL: An OpenGL Visualization of 2 Protein Models simultaneously based on PDF files</b></div><div style='width: 680px;  height: 70px; float: right;'>An OpenGL Visualization of 2 Protein Models at the same time based on Protein Data Bank Data files.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/xlpmol.git'>github</a>  <a target='_blank' href='https://youtu.be/YdO3IQsTDq4'>video</a>  <a target='_blank' href='../files/documents/XLPMol3DViewer.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/screenshot3.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>VisInt-X: Visualizing interactions in Cross Linked proteins</b></div><div style='width: 680px;  height: 70px; float: right;'>A WebGL/D3 based interactive visualization of data coming out of the XLPM algorithm on 2 protein structures.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/VisInt-X.git'>github</a>  <a target='_blank' href='https://www.youtube.com/watch?v=yVLHPw4s47k'>video</a>  <a target='_blank' href='http://ist.publisher.ingentaconnect.com/contentone/ist/ei/2016/00002016/00000019/art00017'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/caveobj.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Real-time object scanning and manipulation in the CAVE</b></div><div style='width: 680px;  height: 70px; float: right;'>I am proposing real time application inside the CAVE environment that would allow scanning small objects on a custom made turntable using a Real Sense camera that would capture the objects information creating a mesh file (OBJ) that would be rendered instantly inside the CAVE allowing the user to manipulate the object using a Leap Motion Sensor.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/realtime-cave-scanner.git'>github</a>  <a target='_blank' href='../files/documents/vr-project-final-paper.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/cluster.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Synchronized rendering using WebGL</b></div><div style='width: 680px;  height: 70px; float: right;'>An attempt to synchronize the rendering with several divs in HTML</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cluster-webgl.git'>github</a>  <a target='_blank' href='https://youtu.be/TkIpVOf5Kmc'>video</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/hqdefault.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>A visualization of CUDA particles in OpenGL</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple visualization of particles calcualted using CUDA</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cuda-particles.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/thesis2.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Masters Project: Visual programming and algorithm animation for genesis programming langauge</b></div><div style='width: 680px;  height: 70px; float: right;'>The main goal of this system is to provide a graphical representation of these changes in two ways:  displaying the behavior, of an existing algorithm and moving graphical objects around the screen to simulate an algorithm and the system automatically generates the code.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/genesis-visual-programming.git'>github</a>  <a target='_blank' href='../files/documents/ThesisProposal.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/icas.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Intersection Collision Avoidance System</b></div><div style='width: 680px;  height: 70px; float: right;'>Intersection Collision Avoidance System (ICAS) is an
-                    applications development for a series of technologies
-                    directly linking road vehicles to their physical
-                    surroundings in order to improve road safety.
+            </section>
 
-                    A Java based server client application + hardware implementation (GPS-Microcontrollers), based upon that vehicles can be connected to servers on the streets to be able to control traffic</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='../files/documents/The-VII-propject-V3.pdf'>paper</a></div></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Intel</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/200Kparticles.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>RealSense Visual SLAM GPU Implementation</b></div><div style='width: 680px;  height: 70px; float: right;'>My task while interning at Intel during the summer of 2016  was to implement the visual SLAM using Intel's GPU technology</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/RealSense_CM_VIVE_SLAM.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>University of Arkansas at Little Rock</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/protein.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>XLPMOL: An OpenGL Visualization of 2 Protein Models simultaneously based on PDF files</b></div><div style='width: 680px;  height: 70px; float: right;'>An OpenGL Visualization of 2 Protein Models at the same time based on Protein Data Bank Data files.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/xlpmol.git'>github</a>  <a target='_blank' href='https://youtu.be/YdO3IQsTDq4'>video</a>  <a target='_blank' href='../files/documents/XLPMol3DViewer.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/screenshot3.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>VisInt-X: Visualizing interactions in Cross Linked proteins</b></div><div style='width: 680px;  height: 70px; float: right;'>A WebGL/D3 based interactive visualization of data coming out of the XLPM algorithm on 2 protein structures.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/VisInt-X.git'>github</a>  <a target='_blank' href='https://www.youtube.com/watch?v=yVLHPw4s47k'>video</a>  <a target='_blank' href='http://ist.publisher.ingentaconnect.com/contentone/ist/ei/2016/00002016/00000019/art00017'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/graph.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Information Visualization in virtual environments using Unity </b></div><div style='width: 680px;  height: 70px; float: right;'>An attempt to create basic graph elements in Unity game engine and visualize it on mobiles and HMDs</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/info-viz-unity.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/spine.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Extracting an Isosurface from DICOM Volume Images</b></div><div style='width: 680px;  height: 70px; float: right;'>Evaluating various ways to render an iso surface from volume data sets</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/dicom-to-isosurface.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/ir.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Intel RealSense Tracker</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple VRPN tracker for reflective marker ball configuration that can be set on glasses for prespective trakcing</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/realsense-tracking.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/raymarcher.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>RaymarcherVR</b></div><div style='width: 680px;  height: 70px; float: right;'>The idea of raymarching shaders hightened by ShaderToy website took my thoughts to porting ShaderToy to the desktop</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/RaymarcherVR.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/quad.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Exploring quad buffered stereo on Nvidia Quadro 6000</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple OpenGL render to explore how Quad Buffered Stereo cards like Nvidia's Quadro 6000 work</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/quad-buffered-stereo.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/caveobj.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Real-time object scanning and manipulation in the CAVE</b></div><div style='width: 680px;  height: 70px; float: right;'>I am proposing real time application inside the CAVE environment that would allow scanning small objects on a custom made turntable using a Real Sense camera that would capture the objects information creating a mesh file (OBJ) that would be rendered instantly inside the CAVE allowing the user to manipulate the object using a Leap Motion Sensor.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/realtime-cave-scanner.git'>github</a>  <a target='_blank' href='../files/documents/vr-project-final-paper.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/cluster.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Synchronized rendering using WebGL</b></div><div style='width: 680px;  height: 70px; float: right;'>An attempt to synchronize the rendering with several divs in HTML</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cluster-webgl.git'>github</a>  <a target='_blank' href='https://youtu.be/TkIpVOf5Kmc'>video</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/photosphere-topic.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>PhotosphereCave</b></div><div style='width: 680px;  height: 70px; float: right;'>Rendering panorama images to Photospheres in the CAVE</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/Photo-sphere-CAVE-Viewer.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/topic.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Evaluating multiple Latent Dirichlet Allocation topic modelling software packages</b></div><div style='width: 680px;  height: 70px; float: right;'>A study to compare the results of two packages (Mallet and Gensim) to Topic Model the 20 Newsgroup dataset</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/gensim-topic-modelling.git'>github</a>  <a target='_blank' href='../files/documents/FinalReportInfoSci.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/hqdefault.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>A visualization of CUDA particles in OpenGL</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple visualization of particles calcualted using CUDA</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cuda-particles.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/bunny-scanalyze-sh.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>GLStage: OpenGL mesh viewer</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple trackball camera based mesh viewer</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/gl-stage.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/cave.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>VRJuggler Interactivity</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple VRJuggler application to demonstrate interactivity with cubes in a CAVE environment</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cave-vrjuggler-interactivity.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/bunny_points.PNG'/></div><div style='width: 680px;  height: 20px; float: right;'><b>VRJuggler PointCloud</b></div><div style='width: 680px;  height: 70px; float: right;'>A point cloud renderer for the CAVE </div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cave-vrjuggler-pointcloud-viewer.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/leap.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Leap motion in the CAVE</b></div><div style='width: 680px;  height: 70px; float: right;'>An attempt to integrate Leap Motion in the CAVE environment</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cave-leapmotion.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/cloudword.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Global Big Data Management & Governance in Health Care Information Systems</b></div><div style='width: 680px;  height: 70px; float: right;'>A study of Data Governance in Healthcare information systems. This paper examines the different topics that should be talked about when discussing the
-                    management and governance of Big Data in hospitals especially with anticipated changes and
-                    developments in technologies and the amount of data stored in the future.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/data-governance.git'>github</a>  <a target='_blank' href='../files/documents/Ebeid_Final_Paper.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/datasecurity1.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>A study for data security in National Labs</b></div><div style='width: 680px;  height: 70px; float: right;'>The objective of this article is to define and describe the responsibilities and required practices for all members of the Laboratory with respect to information security and the protection of the Laboratory information assets</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/data-security.git'>github</a>  <a target='_blank' href='../files/documents/The-National-Visualization-Lab.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/leap.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Using Leap Motion as Pointing device for presentation</b></div><div style='width: 680px;  height: 70px; float: right;'>A Javascript based demonstration of how to use Leap Motion for controlling slides while presenting</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/leap-motion-presentations.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/kinect.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Exploring Kinect</b></div><div style='width: 680px;  height: 70px; float: right;'>An OpenCV based Kinect Calibration, PCL integration and Point Cloud generation and rendering using OpenGL</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/kinect-explore.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/datavis.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Visualization of NYC Open data tree locations</b></div><div style='width: 680px;  height: 70px; float: right;'>A simple visualization of tree locations on google maps</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/rooftop-project.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/exit.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Exit Sign Detector</b></div><div style='width: 680px;  height: 70px; float: right;'>Detecting Exit Signs using RGB camera</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/exit-sign-detector.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/emotiv_epoc.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Emotiv in Unity</b></div><div style='width: 680px;  height: 70px; float: right;'>Connecting Emotiv eeg realtime data to unity</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/emotiv-unity.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/crops.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Evolution Trees</b></div><div style='width: 680px;  height: 70px; float: right;'>Javascipt based of vegetation of trees using expression</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/evolution-crops.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/earth-data.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Google Earth Data visualization</b></div><div style='width: 680px;  height: 70px; float: right;'>A KML based visualization of male to female ratio per county in USA</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/google-earth-visualization.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/earth-data.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Google Earth in the CAVE</b></div><div style='width: 680px;  height: 70px; float: right;'>Inspired by the Liquid galaxy</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cave-google-earth.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"> <h1>Masters - Arkansas Tech University</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/db1.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Designing a relational database for a video rental shop</b></div><div style='width: 680px;  height: 70px; float: right;'>Given the data I was assigned to design a relational database for a video rental store given the data columns in Excel.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/video-rental-data-model.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/1.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>A suggested website for the Department of Computer and Information Science at Arkansas Tech University</b></div><div style='width: 680px;  height: 70px; float: right;'>An attempt to design a new website for the Department of Computer and Information Science at Arkansas Tech University.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/atu-cis-website.git'>github</a>  <a target='_blank' href='../files/documents/department_website.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/db2.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Computer and Information Science Database Manipulation Scripts</b></div><div style='width: 680px;  height: 70px; float: right;'>An example SQL Server database manipulation scripts, examples including views and triggers all in T-SQL</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/cisdatabase.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/dept.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Graduate Assistants Timesheet Application</b></div><div style='width: 680px;  height: 70px; float: right;'>An interactive web application based on the database architecture to manage Graduate Assistants timesheets for the department of Computer and Information Science at Arkansas Tech University.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/graduate-assistants-timesheet-managment.git'>github</a>  <a target='_blank' href='../files/documents/GA_timesheets.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/thesis2.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Masters Project: Visual programming and algorithm animation for genesis programming langauge</b></div><div style='width: 680px;  height: 70px; float: right;'>The main goal of this system is to provide a graphical representation of these changes in two ways:  displaying the behavior, of an existing algorithm and moving graphical objects around the screen to simulate an algorithm and the system automatically generates the code.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/genesis-visual-programming.git'>github</a>  <a target='_blank' href='../files/documents/ThesisProposal.pdf'>paper</a></div></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/petstore.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Dataware House for a Pet Store</b></div><div style='width: 680px;  height: 70px; float: right;'>A complete data-ware house project with queries using Microsoft Business Intelligence Studio</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/petstore-dataware-house.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/paper-submission.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Paper submission web application</b></div><div style='width: 680px;  height: 70px; float: right;'>Provide a simple Web-based system for the review of conference papers</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/paper-submission-application.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/python.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Python Teaching Assistant</b></div><div style='width: 680px;  height: 70px; float: right;'>Python Teaching Assistant</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/hauntedhouse-python-game.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Undergraduate - Ain Shams University</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/icas.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Intersection Collision Avoidance System</b></div><div style='width: 680px;  height: 70px; float: right;'>Intersection Collision Avoidance System (ICAS) is an
-                    applications development for a series of technologies
-                    directly linking road vehicles to their physical
-                    surroundings in order to improve road safety.
+            <!-- Section 2: Virtual Reality, CAVE & Computer Graphics -->
+            <section>
+                <div class="flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-vr-cardboard text-sky-600 mr-3"></i> CAVE Virtual Reality, 3D Scanning & Graphics
+                    </h2>
+                    <span class="text-xs bg-gray-200 text-gray-700 font-semibold px-2.5 py-1 rounded-full">Emerging Analytics Center</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                    A Java based server client application + hardware implementation (GPS-Microcontrollers), based upon that vehicles can be connected to servers on the streets to be able to control traffic</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='../files/documents/The-VII-propject-V3.pdf'>paper</a></div></div></fieldset>            </div>
-        </section>
+                    <!-- CAVE Object Scanner -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">CAVE Real-Time Object Scanner</h3>
+                                <span class="tag">VR-Juggler / RealSense</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <img src="../../images/cave.jpg" alt="CAVE Virtual Reality Facility" class="h-28 w-full object-cover rounded border">
+                                <img src="../../images/realsense.png" alt="Intel RealSense 3D Scanner" class="h-28 w-full object-contain rounded border bg-slate-50 p-1">
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Real-time application inside the CAVE environment allowing scanning small objects on a custom-made turntable using a RealSense camera to capture mesh data (OBJ), rendered instantly inside the CAVE with Leap Motion manipulation.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/Real.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Progress Report</a>
+                            <a href="../../documents/vr-project-proposal.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Proposal</a>
+                            <a href="../../documents/vr-project-final-paper.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Final Paper</a>
+                            <a href="https://github.com/iebeid/realtime-cave-scanner.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
 
+                    <!-- Unity VR Info Viz -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Info-Viz in Virtual Environments (Unity)</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Creating basic graph elements in Unity game engine to visualize complex relational networks in immersive mobile and head-mounted display (HMD) environments.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/info-viz-unity.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- DICOM Isosurface -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Isosurface Extraction from DICOM Volumes</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Evaluating algorithms to extract and render isosurfaces from volumetric medical imaging datasets (DICOM) for interactive 3D inspection.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/dicom-to-isosurface.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- RaymarcherVR -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">RaymarcherVR</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Porting raymarching shader techniques inspired by ShaderToy to desktop VR environments for procedural 3D visual exploration.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/RaymarcherVR.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Quad Buffered Stereo -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Quad Buffered Stereo on Nvidia Quadro</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                An OpenGL renderer to explore hardware-accelerated quad-buffered stereo rendering on Nvidia Quadro 6000 for immersive stereoscopic displays.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/quad-buffered-stereo.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Photosphere & Google Earth in CAVE -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Photosphere & Google Earth in the CAVE</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Rendering panoramic images to photospheres and adapting Liquid Galaxy Google Earth KML data visualization within the immersive CAVE environment.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/Photo-sphere-CAVE-Viewer.git" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fab fa-github mr-1"></i> Photosphere GitHub</a>
+                            <a href="https://github.com/iebeid/cave-google-earth.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> Google Earth GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- VRJuggler Interactivity & PointCloud -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">VRJuggler CAVE Interactivity & Point Cloud</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Applications demonstrating VRJuggler interactivity with objects and large point cloud rendering inside the CAVE facility.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/cave-vrjuggler-interactivity.git" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fab fa-github mr-1"></i> VRJuggler GitHub</a>
+                            <a href="https://github.com/iebeid/cave-vrjuggler-pointcloud-viewer.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> PointCloud GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- CUDA Particles in OpenGL -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">CUDA Particles in OpenGL</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                A high-performance simulation and visualization of massive particle systems calculated via CUDA and rendered in real time using OpenGL.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/cuda-particles.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Synchronized WebGL Rendering -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Synchronized Multi-View WebGL Rendering</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Synchronizing 3D graphics rendering across several HTML document divs for multi-panel interactive scientific visualization.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/cluster-webgl.git" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fab fa-github mr-1"></i> GitHub</a>
+                            <a href="https://youtu.be/TkIpVOf5Kmc" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-youtube mr-1"></i> Video</a>
+                        </div>
+                    </div>
+
+                    <!-- Leap Motion & Kinect -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Sensor Tracking: Leap Motion & Kinect</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Integrating Leap Motion gesture control for CAVE manipulation and presentations, alongside OpenCV-based Kinect calibration and point-cloud generation.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/cave-leapmotion.git" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fab fa-github mr-1"></i> Leap Motion CAVE</a>
+                            <a href="https://github.com/iebeid/leap-motion-presentations.git" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fab fa-github mr-1"></i> Slide Control</a>
+                            <a href="https://github.com/iebeid/kinect-explore.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> Kinect GitHub</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 3: Machine Learning, Data Governance & Industry Systems -->
+            <section>
+                <div class="flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                        <i class="fas fa-database text-sky-600 mr-3"></i> Data Science, Governance & Industry Engineering
+                    </h2>
+                    <span class="text-xs bg-gray-200 text-gray-700 font-semibold px-2.5 py-1 rounded-full">Systems & Analytics</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Intel Visual SLAM -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">Intel RealSense Visual SLAM GPU</h3>
+                                <span class="tag">Intel R&D</span>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Implemented GPU-accelerated visual Simultaneous Localization and Mapping (vSLAM) using Intel's graphics architecture during my software engineering internship at Intel.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="https://github.com/iebeid/RealSense_CM_VIVE_SLAM.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Topic Modeling -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">LDA Topic Modeling: Mallet vs. Gensim</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Comparative evaluation of Latent Dirichlet Allocation (LDA) topic modeling packages on the 20 Newsgroups benchmark dataset.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/FinalReportInfoSci.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Final Report</a>
+                            <a href="https://github.com/iebeid/gensim-topic-modelling.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Big Data Governance -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Data Governance in Healthcare Information Systems</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Big Data governance strategies in hospital environments, presented at UALR Research Expo. Analyzes policy, lifecycle management, and privacy requirements.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/Ebeid_Final_Paper.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Final Paper</a>
+                            <a href="https://github.com/iebeid/data-governance.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Security Policies National Lab -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Information Security Policies for National Labs</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Designed comprehensive security and access policies for the National Visualization Laboratory to safeguard scientific information assets.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/The-National-Visualization-Lab.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Final Paper</a>
+                            <a href="https://github.com/iebeid/data-security.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Master's Thesis GDE -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">Genesis Development Environment (GDE)</h3>
+                                <span class="tag">MSc Project</span>
+                            </div>
+                            <div class="mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1">
+                                <img src="../../images/thesis1.png" alt="Genesis Development Environment UI" class="h-28 object-contain">
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                A graphical environment for algorithm animation and visual programming in the Genesis language, displaying dynamic data structures and generating executable code.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/Genesis Development Environment Design Document.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Design Document</a>
+                            <a href="../../documents/ThesisParagraph.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Abstract</a>
+                            <a href="../../documents/ThesisProposal.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Proposal</a>
+                            <a href="https://github.com/iebeid/genesis-visual-programming.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Bachelor's Thesis ICAS -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">Intersection Collision Avoidance System (ICAS)</h3>
+                                <span class="tag">Ain Shams Capstone</span>
+                            </div>
+                            <div class="mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1">
+                                <img src="../../images/icas.png" alt="Intersection Collision Avoidance Architecture" class="h-28 object-contain">
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Vehicle Infrastructure Integration (VII) client-server application combining Java, GPS, and microcontrollers to link road vehicles to infrastructure and automate collision avoidance.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/The-VII-propject-V3.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Thesis</a>
+                            <a href="../../documents/Graduation_Project_Presentation.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-powerpoint mr-1"></i> Slides</a>
+                        </div>
+                    </div>
+
+                    <!-- Additional Engineering Systems -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Conference Paper Review System</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                A web-based peer review workflow system for conference paper management built with PHP, MySQL, and HTML.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/design-document.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Design Document</a>
+                            <a href="https://github.com/iebeid/paper-submission-application.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Enterprise DB & GA Timesheets -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Enterprise Database Architecture & Timesheets</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Relational data models, SQL Server triggers/views, a Pet Store Data Warehouse in Microsoft BI Studio, and an interactive GA timesheet management system for Arkansas Tech University.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="../../documents/GA_timesheets.pdf" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fas fa-file-pdf mr-1"></i> Timesheets Document</a>
+                            <a href="https://github.com/iebeid/petstore-dataware-house.git" target="_blank" class="text-sky-600 hover:underline mr-3"><i class="fab fa-github mr-1"></i> Data Warehouse</a>
+                            <a href="https://github.com/iebeid/cisdatabase.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> SQL Scripts</a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Section 4: Memberships, Developer Forums & Educational Tools -->
+            <section class="bg-white p-6 rounded-xl shadow-md">
+                <h2 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-globe text-sky-600 mr-2"></i> Professional Affiliations, Forums & Tooling
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-700">
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-3 border-b pb-1">Professional Organizations</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="https://myacm.acm.org/" target="_blank" class="text-sky-600 hover:underline">ACM (Association for Computing Machinery)</a></li>
+                            <li><a href="http://www.ieee.org/" target="_blank" class="text-sky-600 hover:underline">IEEE</a></li>
+                            <li><a href="https://www.computer.org/" target="_blank" class="text-sky-600 hover:underline">IEEE Computer Society</a></li>
+                            <li><a href="http://www.imaging.org/" target="_blank" class="text-sky-600 hover:underline">Society of Imaging Science & Tech</a></li>
+                            <li><a href="https://nsf.gov/" target="_blank" class="text-sky-600 hover:underline">National Science Foundation (NSF)</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-3 border-b pb-1">Developer Communities</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="http://stackoverflow.com/users/5012284/akef" target="_blank" class="text-sky-600 hover:underline">Stack Overflow Profile</a></li>
+                            <li><a href="https://github.com/iebeid" target="_blank" class="text-sky-600 hover:underline">GitHub Repositories</a></li>
+                            <li><a href="https://www.codeproject.com/" target="_blank" class="text-sky-600 hover:underline">CodeProject</a></li>
+                            <li><a href="https://developer.nvidia.com/" target="_blank" class="text-sky-600 hover:underline">NVIDIA Developer Program</a></li>
+                            <li><a href="https://software.intel.com/" target="_blank" class="text-sky-600 hover:underline">Intel Developer Zone</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-3 border-b pb-1">Conferences & Venues</h4>
+                        <ul class="space-y-1.5">
+                            <li><a href="https://mcbios.org/" target="_blank" class="text-sky-600 hover:underline">MCBIOS Annual Conferences</a></li>
+                            <li><a href="http://sc16.supercomputing.org/" target="_blank" class="text-sky-600 hover:underline">Supercomputing (SC)</a></li>
+                            <li><a href="http://s2015.siggraph.org/" target="_blank" class="text-sky-600 hover:underline">ACM SIGGRAPH</a></li>
+                            <li><a href="http://www.imaging.org/" target="_blank" class="text-sky-600 hover:underline">Electronic Imaging & JIST</a></li>
+                            <li><a href="https://link.springer.com/" target="_blank" class="text-sky-600 hover:underline">Springer ITNG & IEEE CBMS</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div>
     </main>
+
     <footer class="bg-gray-800 text-white py-6 mt-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
     <script>
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     </script>
 </body>
 </html>

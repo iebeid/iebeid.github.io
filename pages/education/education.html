@@ -1,8 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academic qualifications, doctoral training at UT Austin and UA Little Rock, certifications, and technical proficiencies of Dr. Islam Akef Ebeid.">
+    <meta property="og:title" content="Education & Credentials - Dr. Islam Akef Ebeid">
+    <meta property="og:description" content="Academic qualifications, doctoral training at UT Austin and UA Little Rock, certifications, and technical proficiencies of Dr. Islam Akef Ebeid.">
+    <meta property="og:type" content="website">
     <title>Education - Islam Akef Ebeid</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,14 +17,16 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Custom styles to complement Tailwind */
         body {
             font-family: 'Georgia', serif;
-            background-color: #f8fafc; /* light grey background */
-            color: #1f2937; /* dark grey text */
+            background-color: #f8fafc;
+            color: #1f2937;
         }
         .section-title {
             @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        }
+        .tag {
+            @apply inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full;
         }
     </style>
 </head>
@@ -33,216 +39,227 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
-                    <a href="education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
-                    <a href="../research/research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
-                    <a href="../teaching/teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
-                    <a href="../service/service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
-                    <a href="../business/business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
-                    <a href="../hobbies/hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
-                    <a href="../media/media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
-                    <a href="../downloads/downloads.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
+                    <a href="education.html" class="text-sky-600 font-semibold transition">Education</a>
+                    <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
+                    <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
+                    <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="../downloads/downloads.html" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
                 </nav>
+            </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
+                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
+                <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
+                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
+                <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
+                <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
+                <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
+                <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
+                <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
+                <a href="../downloads/downloads.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Downloads</a>
             </div>
         </div>
     </header>
+
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Education</h1>
-        <div class="max-w-4xl mx-auto">
-            <div class="relative border-l-2 border-sky-200 pl-8">
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2014 - 2022</p>
-                    <h3 class="text-xl font-semibold text-gray-900">MSc, Ph.D. in Computer and Information Science</h3>
-                    <p class="text-md font-medium text-gray-700">University of Arkansas at Little Rock, Little Rock, AR</p>
-                    <p class="mt-2 text-gray-600">Mentors: John Talburt, Elizabeth Pierce</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2017 - 2021</p>
-                    <h3 class="text-xl font-semibold text-gray-900">MSc, Ph.D. (Transferred) Graduate work</h3>
-                    <p class="text-md font-medium text-gray-700">The University of Texas at Austin, Austin, TX</p>
-                    <p class="mt-2 text-gray-600">School of Information and the Department of Statistics and Data Sciences. Mentors: Jacek Gwizdka, Ying Ding</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2011 - 2013</p>
-                    <h3 class="text-xl font-semibold text-gray-900">Professional MSc in Computer and Information Science</h3>
-                    <p class="text-md font-medium text-gray-700">Arkansas Tech University, Russellville, AR</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2003 - 2008</p>
-                    <h3 class="text-xl font-semibold text-gray-900">BSc in Electrical & Computer Engineering</h3>
-                    <p class="text-md font-medium text-gray-700">Ain Shams University, Cairo, Egypt</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2000 - 2003</p>
-                    <h3 class="text-xl font-semibold text-gray-900">General Secondary Diploma in Mathematics</h3>
-                    <p class="text-md font-medium text-gray-700">The English School in Cairo (El Nasr School), Cairo, Egypt</p>
-                </div>
-            </div>
-        </div>
-        <div class="divTableRow">
-            <div class="divTableCell">
-                <fieldset style="border: 0;">
-                    <legend><b>Companies I worked for</b></legend>
-                    <p>
-                        <a href="http://www.intel.com/content/www/us/en/homepage.html" target="_blank">Intel</a><br/>
-                        <a href="https://inaboard.ark.org/" target="_blank">Information Network of Arkansas</a><br/>
-                        <a href="http://www.wedotechnologies.com/en/" target="_blank">Wedo Technologies</a><br/>
-                        <a href="https://www.orange.com/en/home" target="_blank">Orange Telecom</a><br/>
-                        <a href="http://www.xpressintegration.com/" target="_blank">Xpress Integration</a><br/>
-                        <a href="http://www.iam.ma/index.aspx" target="_blank">Maroc Telecom</a><br/>
-                        <a href="https://www.tunisietelecom.tn/Fr" target="_blank">Tunisie Telecom</a><br/>
-                        <a href="http://hannainst.com/" target="_blank">Hanna Instruments</a><br/>
-                        <a href="http://gizasystems.com/" target="_blank">Giza Systems</a><br/>
-                        <a href="https://www.vodafone.com/content/index.html" target="_blank">Vodafone</a><br/>
-                    </p>
-                </fieldset>
-            </div>
-            <div class="divTableCell">
-                <fieldset style="border: 0;">
-                    <legend><b>Universities & Schools I attended</b></legend>
-                    <p>
-                        <a href="http://utexas.edu/" target="_blank">University of Texas at Austin</a><br/>
-                        <a href="http://ualr.edu/" target="_blank">University of Arkansas at Little Rock</a><br/>
-                        <a href="http://www.atu.edu/" target="_blank">Arkansas Tech University</a><br/>
-                        <a href="http://www.asu.edu.eg/" target="_blank">Ain Shams University</a><br/>
-                        <a href="http://www.esc-obog.org/" target="_blank">The English School in Cairo</a><br/>
-                        <a href="https://www.facebook.com/ThebesNews/" target="_blank">Thebes Language School</a><br/>
-                    </p>
-                    <div id="column_left">
+        <h1 class="section-title text-center">Education & Academic Journey</h1>
 
-                        <h2>Main Endeavours</h2>
-                        <p>I have worked on several projects and researches in industry and
-                            academia in the fields of control systems , web design , web
-                            development , three tier software systems and software engineering. </p>
-                        <p>My research areas are: Data Visualization, Virtual Reality and
-                            Data Analysis</p>
-                        <p>I am currently pursuing my PHD in Information Science at the
-                            University of Arkansas at Little Rock.<br />
-                            Please visit:<br />
-                            <a href="http://ualr.edu" target="_blank">http://ualr.edu</a>/<br />
-                            <a href="http://ualr.edu/informationscience/" target="_blank">http://ualr.edu/informationscience/</a><br />
-                            <br />
-                            Previously I was employed by the National Information Consortium
-                            Incorporated as a Software Developer and assigned to the
-                            Arkansas.gov project carried on by the Information Network of
-                            Arkansas which is a subsidiary of NIC Inc.<br />
-                            Please visit: <br />
-                            <a href="http://www.arkansas.gov/" target="_blank">http://www.arkansas.gov/</a><br />
-                            <a href="http://ina.arkansas.gov/" target="_blank">http://ina.arkansas.gov/</a><br />
-                            <a href="http://www.egov.com/" target="_blank">http://www.egov.com/</a><br />
-                            <br />
-                            Previously graduated with a Master of Science degree in Information
-                            Technology with a distinctive graduation project titled "Displaying
-                            data structures and algorithms in a graphical user interface".<br />
-                            Please visit: <br />
-                            <a href="http://www.atu.edu/" target="_blank">http://www.atu.edu/</a><br />
-                            <a href="http://cs.atu.edu/" target="_blank">http://cs.atu.edu/</a><br />
-                            <br />
-                            I have a B.Sc in Systems Engineering from Ain Shams University in
-                            Cairo, Egypt.<br />
-                            Please visit: <a href="http://www.asu.edu.eg/" target="_blank">http://www.asu.edu.eg/</a></p>
+        <div class="max-w-4xl mx-auto space-y-12">
+
+            <!-- Section 1: Academic Degrees Timeline -->
+            <section class="bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center border-b pb-3">
+                    <i class="fas fa-graduation-cap text-sky-600 mr-3"></i> Academic Degrees & Qualifications
+                </h2>
+                <div class="relative border-l-2 border-sky-300 pl-8 space-y-10">
+                    
+                    <!-- UALR PhD -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-0.5 rounded-full">2014 – 2022</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1">Ph.D. & MSc in Computer and Information Science</h3>
+                        <p class="text-md font-medium text-gray-700">University of Arkansas at Little Rock, Little Rock, AR</p>
+                        <p class="mt-1 text-sm text-gray-600">
+                            <strong>Focus:</strong> Data and Information Science, Graph-Based Unsupervised Entity Resolution.<br>
+                            <strong>Dissertation:</strong> <em>"Graph-Based Unsupervised Entity Resolution for Identifying Entity Profiles in Ambiguous Data"</em><br>
+                            <strong>Mentors:</strong> Dr. John Talburt, Dr. Elizabeth Pierce • <em>Outstanding Doctoral Graduate Award (2022)</em>
+                        </p>
                     </div>
-                </fieldset>
-                <fieldset style="border: 0;">
+
+                    <!-- UT Austin -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-0.5 rounded-full">2017 – 2021</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1">Ph.D. & MSc Graduate Studies (Transferred 72 Credit Hours)</h3>
+                        <p class="text-md font-medium text-gray-700">The University of Texas at Austin, Austin, TX</p>
+                        <p class="mt-1 text-sm text-gray-600">
+                            School of Information and Department of Statistics & Data Sciences.<br>
+                            Fellowship & Graduate Research Assistant at Texas Advanced Computing Center (TACC).<br>
+                            <strong>Mentors:</strong> Dr. Jacek Gwizdka, Dr. Ying Ding • <em>UT Austin Graduate Recruitment Fellowship Award</em>
+                        </p>
+                    </div>
+
+                    <!-- ATU MSc -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-0.5 rounded-full">2011 – 2013</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1">Professional MSc in Computer and Information Science</h3>
+                        <p class="text-md font-medium text-gray-700">Arkansas Tech University, Russellville, AR</p>
+                        <p class="mt-1 text-sm text-gray-600">
+                            <strong>Graduation Project:</strong> <em>"Displaying Data Structures & Algorithms in a Graphical User Interface for Genesis Programming Language"</em>
+                        </p>
+                    </div>
+
+                    <!-- Ain Shams BSc -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-0.5 rounded-full">2003 – 2008</span>
+                        <h3 class="text-xl font-bold text-gray-900 mt-1">BSc in Electrical & Computer Engineering (Systems Engineering)</h3>
+                        <p class="text-md font-medium text-gray-700">Ain Shams University, Cairo, Egypt</p>
+                        <p class="mt-1 text-sm text-gray-600">
+                            <strong>Capstone Project:</strong> <em>"Intersection Collision Avoidance System (ICAS) for Automated Traffic Systems"</em> (Distinctive Capstone Project Award)
+                        </p>
+                    </div>
+
+                    <!-- Secondary School -->
+                    <div class="relative">
+                        <div class="absolute -left-[41px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs bg-gray-100 text-gray-700 font-semibold px-2.5 py-0.5 rounded-full">2000 – 2003</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">General Secondary Diploma (Mathematics Major)</h3>
+                        <p class="text-md font-medium text-gray-700">The English School in Cairo (El Nasr School), Cairo, Egypt</p>
+                    </div>
+
+                </div>
+
+                <div class="mt-8 pt-4 border-t flex flex-wrap gap-4 text-sm text-gray-700">
+                    <div><span class="font-bold text-gray-900">Professional Engineering Certifications:</span></div>
+                    <div><span class="tag bg-emerald-100 text-emerald-800"><i class="fas fa-check-circle mr-1"></i> FE (Fundamentals of Engineering)</span></div>
+                    <div><span class="tag bg-emerald-100 text-emerald-800"><i class="fas fa-check-circle mr-1"></i> ITIL Certified</span></div>
+                    <div><span class="tag bg-emerald-100 text-emerald-800"><i class="fas fa-check-circle mr-1"></i> Egyptian Syndicate of Engineers (2008)</span></div>
+                </div>
+            </section>
+
+            <!-- Section 2: Narrative, Mission & Vision -->
+            <section class="bg-white p-8 rounded-xl shadow-md space-y-6">
+                <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 flex items-center">
+                    <i class="fas fa-compass text-sky-600 mr-3"></i> Academic Endeavors, Mission & Vision
+                </h2>
+
+                <div class="space-y-4 text-gray-700 leading-relaxed">
+                    <p>
+                        I am an Assistant Professor and researcher whose academic foundation was shaped by systematic training in Mathematics, Systems Engineering, and Computer & Information Science across Egypt and leading United States institutions. My Ph.D. work investigated automated data integration, entity resolution, and knowledge discovery, bridging graph theory, machine learning, and natural language processing.
+                    </p>
+                    <p>
+                        Information Science combines computer science, data science, library science, psychology, and cognitive ergonomics. Coming from an Electrical and Computer Engineering background, I was drawn to this interdisciplinary synthesis to understand how complex data architectures interact with real-world users and biomedical discovery pipelines.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                    <div class="bg-sky-50 p-5 rounded-lg border-l-4 border-sky-600">
+                        <h3 class="text-lg font-bold text-sky-900 mb-2"><i class="fas fa-bullseye mr-2"></i> Mission</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            To advance scientific discovery by fostering an accessible, ethical, and artificially intelligent data ecosystem. Driving automatic integration of scientific information, ensuring responsible and sustainable scientific computing, and empowering underrepresented groups in computational and data sciences.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50 p-5 rounded-lg border-l-4 border-amber-600">
+                        <h3 class="text-lg font-bold text-amber-900 mb-2"><i class="fas fa-eye mr-2"></i> Vision</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            A future where data quality, graph theory, and foundation models unite into transparent, ethical systems that accelerate biomedical discovery. To define the next generation of biomedical intelligence where structured relational networks clarify the underlying logic of life.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Research Expertise & Technical Skillset Evolution -->
+            <section class="bg-white p-8 rounded-xl shadow-md space-y-6">
+                <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 flex items-center">
+                    <i class="fas fa-laptop-code text-sky-600 mr-3"></i> Research Expertise & Technical Skillset
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border border-gray-200 rounded-lg p-5">
+                        <h3 class="font-bold text-gray-900 mb-3 text-base flex items-center">
+                            <span class="w-2.5 h-2.5 bg-sky-600 rounded-full mr-2"></span> Core Research Domains
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• <strong>Entity Resolution & Data Quality:</strong> Graph theory, modularity optimization, and NLP for ambiguous records.</li>
+                            <li>• <strong>Biomedical Information Retrieval:</strong> Graph representation learning and vector embedding models for PubMed literature.</li>
+                            <li>• <strong>Human Factors & Cognitive Modeling:</strong> Eye tracking, scanpath entropy, and operator cognitive load.</li>
+                            <li>• <strong>Scientific Visualization:</strong> WebGL, OpenGL, Unity, and immersive CAVE VR environments.</li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-5">
+                        <h3 class="font-bold text-gray-900 mb-3 text-base flex items-center">
+                            <span class="w-2.5 h-2.5 bg-sky-600 rounded-full mr-2"></span> Technical Tools & Systems
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• <strong>Modern Stack:</strong> Python, C/C++, Unix, PyTorch, PyTorch Geometric, TensorFlow, Scikit-Learn.</li>
+                            <li>• <strong>High-Performance Computing:</strong> HPC cluster configuration, CUDA particles, SLURM, TACC workflows.</li>
+                            <li>• <strong>Data Engineering:</strong> SQL Server, T-SQL views & triggers, Microsoft BI Studio Data Warehouses.</li>
+                            <li>• <strong>Interactive 3D & Graphics:</strong> OpenGL, WebGL, D3.js, OpenCV, VRPN, Leap Motion, Unity.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Institutions Attended & Industry Employers -->
+            <section class="bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center border-b pb-3">
+                    <i class="fas fa-building text-sky-600 mr-3"></i> Universities Attended & Industry Employers
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
                     <div>
-                        <p>
-                            I am a Ph.D. Candidate at the Department of Information Science at the
-                            University of Arkansas at Little Rock. My Ph.D. work focuses on automating
-                            data integration and curation for knowledge discovery. Information from
-                            multiple sources is identified, and the underlying entities represented
-                            in the integrated data are extracted using Natural Language Processing
-                            and Machine Learning techniques. I am interested in general in the idea
-                            of knowledge discovery from large datasets. These datasets could be a
-                            relational database, text documents, or graph and network data.
-                            The process of knowledge discovery usually passes by several steps from
-                            data preprocessing and integration, data mining, information extraction,
-                            and finally, knowledge discovery. I am also interested in the applications
-                            of automated knowledge discovery in biomedicine and machine learning for
-                            societal good and computational social science. In addition, I have a minor
-                            interest in Human-Computer Interaction, User Experience, Eye Tracking and
-                            Information Visualization, and the applications of Computer Graphics in Science.
-                            Information Science has evolved to combine computer science, library science,
-                            data science, psychology, and social science. It can be seen as an
-                            interdisciplinary and collaborative applied branch of computer science,
-                            which drew me to that field, especially coming from my Electrical
-                            and Computer Engineering background. Please feel free to connect
-                            through e-mail or any of the social networks links at the bottom. I am a PhD Student at the School of Information at the University of Texas at Austin. I research innovative ways of visualizing information
-                            especially with the emergence of new new media. I also experiment with data science, data analytics and machine learning techniques to study
-                            Human Computer Interaction through fusing sensors. I focus on research topics that lie in the intersection between human computer interaction,
-                            information visualization and data analytics. Shaped by a systematic education in Mathematics, Systems Engineering and Computer & Information Science
-                            combined with several years of industry experience in data modelling, database and user interfaces, I strive to push the boundaries in HCI research.
-                            I recently graduated from the University of Arkansas at Little Rock with a Ph.D. in Computer and Information Science, focusing on Data and Information Science. I worked under the guidance and mentorship of John Talburt and Elizabeth Pierce. Prior to that, I was a Ph.D. student at the University of Texas at Austin, where I worked with Ying Ding.
-
-                        </p>
-
-
-                        <p><b>Mission</b></p>
-                        <p> My primary goal is to contribute to advancing scientific discovery by fostering a more accessible, ethical, and artificially intelligent (AI) data and information ecosystem. I am passionate about driving the automatic integration and harmonization of all scientific information, ensuring efficient organization, cleaning, archival, and practical mining for new insights. I believe in the transformative power of interdisciplinary collaboration, particularly between data science, artificial intelligence, and the core scientific disciplines. I am committed to advancing responsible and sustainable scientific computing and AI practices, minimizing their environmental impact, and ensuring ethical considerations are paramount in all research endeavors. Finally, I am dedicated to empowering underrepresented groups in computational, information, and data sciences, including women, refugees, and financially challenged populations, by creating inclusive and equitable opportunities for all.
-                            More </p>
-                        <p><b>Vision</b> </p>
-                        <p>My research interests and experiences are centered around the role of data quality, curation, and engineering in artificial intelligence and their applications in the sciences. I develop and adapt methods and frameworks rooted in graph theory, natural language processing, machine learning, and deep learning. I apply the developed methods in information retrieval (computer science), data mining of digital libraries and information networks (information science), biomedical informatics (biology), non-profit studies (social sciences), and human-computer interaction (psychology). My vision is to aid and automate the process of scientific discovery and inquiry by developing ethical and artificially intelligent systems capable of integrating, cleaning, organizing, and mining scientific information automatically and efficiently.    </p>
-                        <p> <b>Current Research Interests</b> </p>
-                        <p>Data Quality in AI: I investigate the critical role of data quality in training artificial intelligence<br>
-                            models, particularly in scientific domains where data integrity is essential.<br>
-                            Biomedical Data Integration: I develop efficient techniques for integrating large biomedical<br>
-                            datasets extracted from digital libraries with omics datasets using the Knowledge Graph data<br>
-                            model.<br>
-                            Graph-Based Representation Learning: I develop scalable graph-based representation<br>
-                            learning techniques to leverage the power of integrated datasets for applications in information<br>
-                            retrieval, search engines, and entity matching.</p>
-                        <p>
-                            <b>Main Research Experience:</b></p>
-                        <ol>
-                            <li>Entity resolution and matching with graph theory and natural language processing</li>
-                            <li>Biomedical information retrieval with graph representation learning</li>
-                        </ol>
-                        <p>
-                            <b>Secondary Research Experience:</b></p>
-                        <ol>
-                            <li>Human factors in computing and information seeking with eye tracking</li>
-                            <li>Scientific visualization of biological data</li>
-                        </ol>
-                        <p>
-                            <b>Current Skillset (Python, C\C++, Unix):</b></p>
-                        <ol>
-                            <li>Graph theory and network mining algorithms</li>
-                            <li>Applied linear algebra algorithms</li>
-                            <li>Natural language processing algorithms</li>
-                            <li>Machine learning and deep learning models and experimentation with TensorFlow</li>
-                            <li>Setting up high-performance computing environments and data management systems</li>
-                        </ol>
-                        <p>
-                            <b>Older Skillset (C\C++, Java, SQL):</b></p>
-                        <ol>
-                            <li>Experimental design and statistical analysis in eye-tracking studies</li>
-                            <li>Image processing with OpenCV, mainly for filtering, localization, and mapping</li>
-                            <li>Computer graphics with OpenGL and WebGL for creating scientific visualizations</li>
-                            <li>Software engineering, especially web applications and services based on the MVC design pattern and backend ETL operations</li>
-                        </ol>
-                        </p>
-                        </p>
+                        <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wider text-xs text-sky-700">Academic Institutions</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• <a href="http://utexas.edu/" target="_blank" class="text-sky-600 hover:underline font-medium">The University of Texas at Austin</a> (Austin, TX)</li>
+                            <li>• <a href="http://ualr.edu/" target="_blank" class="text-sky-600 hover:underline font-medium">University of Arkansas at Little Rock</a> (Little Rock, AR)</li>
+                            <li>• <a href="http://www.atu.edu/" target="_blank" class="text-sky-600 hover:underline font-medium">Arkansas Tech University</a> (Russellville, AR)</li>
+                            <li>• <a href="http://www.asu.edu.eg/" target="_blank" class="text-sky-600 hover:underline font-medium">Ain Shams University</a> (Cairo, Egypt)</li>
+                            <li>• <a href="http://www.esc-obog.org/" target="_blank" class="text-sky-600 hover:underline font-medium">The English School in Cairo (El Nasr School)</a> (Cairo, Egypt)</li>
+                        </ul>
                     </div>
-                </fieldset>
-            </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wider text-xs text-sky-700">Industry & Professional Experience</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>• <a href="http://www.intel.com/" target="_blank" class="text-sky-600 hover:underline font-medium">Intel Corporation</a> (Santa Clara, CA) — Software Engineering Intern</li>
+                            <li>• <a href="https://inaboard.ark.org/" target="_blank" class="text-sky-600 hover:underline font-medium">Information Network of Arkansas / Arkansas.gov</a> (Little Rock, AR)</li>
+                            <li>• <a href="http://www.wedotechnologies.com/" target="_blank" class="text-sky-600 hover:underline font-medium">WeDo Technologies</a> (Cairo, Egypt) — Revenue assurance & fraud</li>
+                            <li>• <a href="https://www.orange.com/" target="_blank" class="text-sky-600 hover:underline font-medium">Orange Telecom</a> (Cairo, Egypt) — Software Developer</li>
+                            <li>• <a href="http://www.xpressintegration.com/" target="_blank" class="text-sky-600 hover:underline font-medium">Xpress Integration</a> (Cairo, Egypt) — Software Developer</li>
+                            <li>• <a href="http://gizasystems.com/" target="_blank" class="text-sky-600 hover:underline font-medium">Giza Systems & Vodafone</a> (Cairo, Egypt) — Engineering Internships</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
+
     <footer class="bg-gray-800 text-white py-6 mt-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
     <script>
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     </script>
 </body>
 </html>

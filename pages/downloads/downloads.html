@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Source - Islam Akef Ebeid</title>
+    <meta name="description" content="Downloadable papers, technical design reports, course syllabi, interactive job talk presentation slides, and CV of Dr. Islam Akef Ebeid.">
+    <meta property="og:title" content="Downloads, Presentations & Documents - Dr. Islam Akef Ebeid">
+    <meta property="og:description" content="Downloadable papers, technical design reports, course syllabi, interactive job talk presentation slides, and CV of Dr. Islam Akef Ebeid.">
+    <meta property="og:type" content="website">
+    <title>Downloads & Presentations - Dr. Islam Akef Ebeid</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -13,11 +17,10 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Custom styles to complement Tailwind */
         body {
             font-family: 'Georgia', serif;
-            background-color: #f8fafc; /* light grey background */
-            color: #1f2937; /* dark grey text */
+            background-color: #f8fafc;
+            color: #1f2937;
         }
         .section-title {
             @apply text-3xl font-bold text-gray-800 mb-8 text-center;
@@ -33,92 +36,259 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
-                    <a href="../education/education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
-                    <a href="../research/research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
-                    <a href="../teaching/teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
-                    <a href="../service/service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
-                    <a href="../business/business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
-                    <a href="../hobbies/hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
-                    <a href="../media/media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
-                    <a href="downloads.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
+                    <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
+                    <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
+                    <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
+                    <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="downloads.html" class="text-sky-600 font-semibold transition">Downloads</a>
                 </nav>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
+                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
+                <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
+                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
+                <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
+                <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
+                <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
+                <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
+                <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
+                <a href="downloads.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Downloads</a>
             </div>
         </div>
     </header>
+
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Downloads</h1>
-        <div class="max-w-4xl mx-auto">
-            <div class="space-y-8">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Master's Project: Genesis Development Environment</h3>
-                    <p class="text-gray-600">The main goal of this system is to provide a graphical representation of these changes in two ways: displaying the behavior, of an existing algorithm and moving graphical objects around the screen to simulate an algorithm and the system automatically generates the code.</p>
-                    <div class="mt-4">
-                        <a href="../files/documents/Writing/Genesis%20Development%20Environment%20Design%20Document.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Final Design Document</a>
-                        <a href="../files/documents/Writing/ThesisParagraph.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Thesis Abstract</a>
-                        <a href="docs/Writing/ThesisProposal.pdf" target="_blank" class="text-sky-600 hover:underline">Thesis Proposal</a>
-                    </div>
+        <h1 class="section-title">Open Source Downloads & Presentation Slides</h1>
+        <p class="text-center text-gray-600 max-w-2xl mx-auto -mt-4 mb-10 text-base">
+            Access and download interactive conference slides, job talk presentations, graduate project specifications, research monographs, and open-source repositories.
+        </p>
+
+        <div class="max-w-4xl mx-auto space-y-8">
+
+            <!-- Featured: Nile University Job Talk Presentation -->
+            <div class="bg-gradient-to-br from-white via-sky-50 to-white p-6 sm:p-8 rounded-xl shadow-lg border border-sky-200">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                        <i class="fas fa-chalkboard-teacher mr-1"></i> Featured Interactive Presentation
+                    </span>
+                    <span class="text-sm text-gray-500 font-medium"><i class="far fa-calendar-alt mr-1"></i> October 12, 2026</span>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Bachelor's Project: Intersection Collision Avoidance System (ICAS)</h3>
-                    <p class="text-gray-600">An applications development for a series of technologies directly linking road vehicles to their physical surroundings in order to improve road safety. A Java based server client application + hardware implementation (GPS-Microcontrollers), based upon that vehicles can be connected to servers on the streets to be able to control traffic.</p>
-                    <div class="mt-4">
-                        <a href="docs/Writing/The VII propject-V3.pdf" target="_blank" class="text-sky-600 hover:underline mr-4">Thesis</a>
-                        <a href="docs/Writing/Graduation_Project_Presentation.pdf" target="_blank" class="text-sky-600 hover:underline">Thesis Slides</a>
-                    </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Faculty Candidate Job Talk â— School of ITCS, Nile University</h2>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                    Full Reveal.js interactive presentation for the School of Information Technology and Computer Science (ITCS) faculty interview. Details academic credentials, teaching portfolio, research trajectory, active NSF CISE/CCF award ($600K collaborative / $210K TWU), Data2AI4LifeSciences Lab roadmap, and strategic alignments with Egypt's Vision 2030.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <a href="talk/index.html" target="_blank" class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow-md transition">
+                        <i class="fas fa-desktop mr-2"></i> Launch Presentation (Full Screen)
+                    </a>
+                    <a href="../../documents/CV_Ebeid.pdf" target="_blank" class="inline-flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-4 py-2.5 rounded-lg transition text-sm">
+                        <i class="fas fa-file-pdf mr-1.5"></i> Download CV (PDF)
+                    </a>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Paper Submission Application</h3>
-                    <p class="text-gray-600">A simple Web-based system for the review of conference papers. Developed as part of the Web Development Class at Arkansas Tech University. Tools: Php, MySql, HTML</p>
-                    <div class="mt-4">
-                        <a href="../files/documents/Writing/design-document.pdf" target="_blank" class="text-sky-600 hover:underline">Design Document</a>
+
+                <!-- Embedded Slide Preview Frame -->
+                <div class="rounded-lg overflow-hidden border border-gray-300 shadow-inner bg-black">
+                    <div class="bg-gray-800 px-4 py-2 flex items-center justify-between text-xs text-gray-300">
+                        <span><i class="fas fa-tv mr-1.5 text-sky-400"></i> Interactive Slide Deck (Use Arrow Keys or Space to navigate)</span>
+                        <a href="talk/index.html" target="_blank" class="text-sky-300 hover:underline">Open in new tab <i class="fas fa-external-link-alt ml-1"></i></a>
                     </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Information Visualization in virtual environments using Unity</h3>
-                    <p class="text-gray-600">An attempt to create basic graph elements in Unity game engine and visualize it on mobiles and HMDs</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/info-viz-unity.git" target="_blank" class="text-sky-600 hover:underline">GitHub</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Extracting an Isosurface from DICOM Volume Images</h3>
-                    <p class="text-gray-600">Evaluating various ways to render an iso surface from volume data sets</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/dicom-to-isosurface.git" target="_blank" class="text-sky-600 hover:underline">GitHub</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Intel RealSense Tracker</h3>
-                    <p class="text-gray-600">A simple VRPN tracker for reflective marker ball configuration that can be set on glasses for prespective trakcing</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/realsense-tracking.git" target="_blank" class="text-sky-600 hover:underline">GitHub</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">RaymarcherVR</h3>
-                    <p class="text-gray-600">The idea of raymarching shaders hightened by ShaderToy website took my thoughts to porting ShaderToy to the desktop</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/RaymarcherVR.git" target="_blank" class="text-sky-600 hover:underline">GitHub</a>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Exploring quad buffered stereo on Nvidia Quadro 6000</h3>
-                    <p class="text-gray-600">A simple OpenGL render to explore how Quad Buffered Stereo cards like Nvidia's Quadro 6000 work</p>
-                    <div class="mt-4">
-                        <a href="https://github.com/iebeid/quad-buffered-stereo.git" target="_blank" class="text-sky-600 hover:underline">GitHub</a>
-                    </div>
+                    <iframe src="talk/index.html" title="Nile University Job Talk Slides" class="w-full h-96 md:h-[460px] border-0" loading="lazy" allowfullscreen></iframe>
                 </div>
             </div>
+
+            <!-- Invited Talks & Lectures Record from CV -->
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-microphone-alt text-sky-600 mr-2"></i> Invited Talks, Lectures & Graduate Seminars
+                </h3>
+                <ul class="space-y-4 text-gray-700 text-sm">
+                    <li class="border-l-4 border-sky-500 pl-4">
+                        <div class="font-semibold text-gray-900">The MidSouth Computational Biology & Bioinformatics Society (MCBIOS) Talk (2024)</div>
+                        <div class="text-xs text-gray-600">MedGCN: Query-time Character Level Embedding for Biomedical Named Entity Recognition via Bidirectional Graph Convolutional Neural Networks</div>
+                    </li>
+                    <li class="border-l-4 border-sky-500 pl-4">
+                        <div class="font-semibold text-gray-900">UA Little Rock Graduate Seminar (Donaghy College of Engineering, Science & Mathematics, 2022)</div>
+                        <div class="text-xs text-gray-600">Knowledge Representation & Data Mining using Knowledge Graphs</div>
+                    </li>
+                    <li class="border-l-4 border-sky-500 pl-4">
+                        <div class="font-semibold text-gray-900">Electronic Imaging Symposium (EI 2016)</div>
+                        <div class="text-xs text-gray-600">VisInt-X: Visualizing Interactions in Cross-linked Proteins</div>
+                    </li>
+                    <li class="border-l-4 border-sky-500 pl-4">
+                        <div class="font-semibold text-gray-900">University of Arkansas at Little Rock Research Expo (2015)</div>
+                        <div class="text-xs text-gray-600 mb-1">XLPM Map Viewer: A Protein-Protein Interaction Map Viewer</div>
+                        <div class="flex gap-3 text-xs">
+                            <a href="../../documents/XLPM-Map-Viewer-Final.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Presentation Deck (PDF)</a>
+                            <a href="../../documents/XLPMol3DViewer.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> 3D Viewer Presentation</a>
+                        </div>
+                    </li>
+                    <li class="border-l-4 border-amber-500 pl-4">
+                        <div class="font-semibold text-gray-900">ACM SIGGRAPH Insights & Deep Learning in Computer Graphics</div>
+                        <div class="text-xs text-gray-600 mb-1">State-of-the-art reports on NVIDIA Deep Learning in Computer Vision, 360-degree projection mapping, and real-time graphics frontiers.</div>
+                        <div class="flex gap-3 text-xs">
+                            <a href="../../documents/siggraph-summary.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> SIGGRAPH Comprehensive Report (32 pgs)</a>
+                            <a href="../../documents/siggraph.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> NVIDIA Deep Learning Summary</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Open Source Systems & Technical Documents -->
+            <div class="space-y-6">
+                <h3 class="text-xl font-bold text-gray-900 flex items-center">
+                    <i class="fas fa-file-download text-sky-600 mr-2"></i> Technical Design Documents & Software Repositories
+                </h3>
+
+                <!-- Genesis Development Environment -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Master's Project: Genesis Development Environment (GDE)</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        A visual programming runtime providing animated algorithm behavior and graphical data structure manipulation while generating underlying source code.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="../../documents/Genesis Development Environment Design Document.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Design Document</a>
+                        <a href="../../documents/ThesisParagraph.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Thesis Abstract</a>
+                        <a href="../../documents/ThesisProposal.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Thesis Proposal</a>
+                        <a href="https://github.com/iebeid/genesis-visual-programming.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- ICAS -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Bachelor's Project: Intersection Collision Avoidance System (ICAS)</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        A Java client-server application and microcontroller/GPS hardware implementation linking vehicles directly to road infrastructure to automate collision avoidance and optimize traffic.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="../../documents/The-VII-propject-V3.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Final Thesis PDF</a>
+                        <a href="../../documents/Graduation_Project_Presentation.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-powerpoint mr-1"></i> Presentation Slides</a>
+                    </div>
+                </div>
+
+                <!-- Paper Submission Web App -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Conference Paper Submission & Review Application</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        A web-based system for submitting and reviewing conference papers developed with PHP, MySQL, and HTML.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="../../documents/design-document.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Design Document</a>
+                        <a href="https://github.com/iebeid/paper-submission-application.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- Unity Info Viz -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Information Visualization in Virtual Environments (Unity)</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        Basic interactive graph elements built in Unity for mobile and head-mounted virtual reality displays.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="https://github.com/iebeid/info-viz-unity.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- DICOM -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Extracting an Isosurface from DICOM Volume Images</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        Algorithms for rendering isosurfaces from volumetric medical imaging data.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="https://github.com/iebeid/dicom-to-isosurface.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- RealSense Tracker -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Intel RealSense Head & Marker Tracker</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        A VRPN tracker for reflective marker ball configurations on glasses for perspective head tracking.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="https://github.com/iebeid/realsense-tracking.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- RaymarcherVR -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">RaymarcherVR</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        Desktop raymarching shaders ported to virtual reality for procedural 3D visual environments.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="https://github.com/iebeid/RaymarcherVR.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- Quad Buffered Stereo -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Quad Buffered Stereo on Nvidia Quadro 6000</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        An OpenGL renderer exploring quad-buffered stereo rendering on professional workstation graphics hardware.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="https://github.com/iebeid/quad-buffered-stereo.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                    </div>
+                </div>
+
+                <!-- IT Security & E-Discovery Policies -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">IT Security Policies & E-Discovery Standards</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        Legal compliance, electronically stored information (ESI) governance, and digital security operational policies drafted for higher education institutional administration.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="../../documents/IT Policies.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> IT Policies & E-Discovery PDF</a>
+                        <a href="../../documents/The-National-Visualization-Lab.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> National Visualization Lab Security Policy</a>
+                    </div>
+                </div>
+
+                <!-- Academic Department Architecture & Outreach -->
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                    <h4 class="text-lg font-bold text-gray-800 mb-1">Academic Department Web Architecture & Student Affairs</h4>
+                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                        Comprehensive architecture specifications for university departmental portals, ABET accreditation tracking, and international student service operations.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
+                        <a href="../../documents/department_website.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Department Portal Specification</a>
+                        <a href="../../documents/Arkansas Tech University.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> ATU CIS Department Outline</a>
+                        <a href="../../documents/Arkansas_Tech_University_Profile.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Institutional Profile</a>
+                        <a href="../../documents/RFsingaporefinal_compact_2_edited.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> International Services Guide</a>
+                        <a href="../../documents/English Language Institute.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> English Language Institute Curriculum</a>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </main>
+
     <footer class="bg-gray-800 text-white py-6 mt-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
     <script>
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     </script>
 </body>
 </html>

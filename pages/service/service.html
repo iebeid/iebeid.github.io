@@ -1,8 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Institutional governance, scholarly peer review, NSF panel service, and community leadership of Dr. Islam Akef Ebeid.">
+    <meta property="og:title" content="Service & Leadership - Dr. Islam Akef Ebeid">
+    <meta property="og:description" content="Institutional governance, scholarly peer review, NSF panel service, and community leadership of Dr. Islam Akef Ebeid.">
+    <meta property="og:type" content="website">
     <title>Service - Islam Akef Ebeid</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -13,14 +17,16 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Custom styles to complement Tailwind */
         body {
             font-family: 'Georgia', serif;
-            background-color: #f8fafc; /* light grey background */
-            color: #1f2937; /* dark grey text */
+            background-color: #f8fafc;
+            color: #1f2937;
         }
         .section-title {
             @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        }
+        .tag {
+            @apply inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full;
         }
     </style>
 </head>
@@ -33,33 +39,206 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
-                    <a href="../education/education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
-                    <a href="../research/research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
-                    <a href="../teaching/teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
-                    <a href="service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
-                    <a href="../business/business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
-                    <a href="../hobbies/hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
-                    <a href="../media/media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
-                    <a href="../downloads/downloads.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
+                    <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
+                    <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="service.html" class="text-sky-600 font-semibold transition">Service</a>
+                    <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
+                    <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="../downloads/downloads.html" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
                 </nav>
+            </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
+                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
+                <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
+                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
+                <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
+                <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
+                <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
+                <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
+                <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
+                <a href="../downloads/downloads.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Downloads</a>
             </div>
         </div>
     </header>
+
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Service</h1>
-        <p class="text-center text-lg text-gray-700">This page is under construction. It will soon feature my philosophy in service and how I integrate institutional, departmental, and community service together, in addition to a listing of all service efforts and committee memberships.</p>
-        <div class="text-center mt-8">
-            <a href="../index.html" class="text-sky-600 font-semibold hover:underline">Go back to the main page</a>
+        <h1 class="section-title text-center">Institutional, Scholarly & Community Service</h1>
+
+        <div class="max-w-4xl mx-auto space-y-10">
+
+            <!-- Service Philosophy -->
+            <section class="bg-white p-8 rounded-xl shadow-md border-l-4 border-sky-600">
+                <h2 class="text-2xl font-bold text-gray-900 mb-3 flex items-center">
+                    <i class="fas fa-hands-helping text-sky-600 mr-3"></i> Service Philosophy & Values
+                </h2>
+                <p class="text-gray-700 leading-relaxed text-sm md:text-base">
+                    My service is grounded in the conviction that academic leadership requires active institutional citizenship, rigorous peer-review stewardship, and meaningful community outreach. I integrate departmental governance, scholarly editorial contributions, and civic volunteerism to advance equity, access, and excellence across academia and society.
+                </p>
+            </section>
+
+            <!-- 1. Institutional & University Governance -->
+            <section class="bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
+                    <i class="fas fa-university text-sky-600 mr-3"></i> Institutional & Departmental Governance
+                </h2>
+                <div class="space-y-4">
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">Faculty Recruitment Coordinator (2023, 2024)</div>
+                        <div class="text-xs text-sky-700 font-semibold">Division of Computer Science, Texas Woman's University</div>
+                        <p class="text-sm text-gray-600 mt-1">Coordinated search committee logistics, candidate evaluation pipelines, interview schedules, and faculty onboarding.</p>
+                    </div>
+
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">Division Curriculum Committee Member (2024)</div>
+                        <div class="text-xs text-sky-700 font-semibold">Division of Computer Science, Texas Woman's University</div>
+                        <p class="text-sm text-gray-600 mt-1">Evaluated and modernized undergraduate and graduate computer science courses and degree program requirements.</p>
+                    </div>
+
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">AI Initiative at TWU Committee Member (2024)</div>
+                        <div class="text-xs text-sky-700 font-semibold">Texas Woman's University</div>
+                        <p class="text-sm text-gray-600 mt-1">Formulated institutional strategies and responsible adoption policies for AI in teaching and research.</p>
+                    </div>
+
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">University Sustainability Committee Member (2024)</div>
+                        <div class="text-xs text-sky-700 font-semibold">Texas Woman's University</div>
+                        <p class="text-sm text-gray-600 mt-1">Contributed to campus-wide sustainable operations and energy-efficient computational infrastructure initiatives.</p>
+                    </div>
+
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">Faculty Advisor, Computer Science Club (2023)</div>
+                        <div class="text-xs text-sky-700 font-semibold">Southern Arkansas University</div>
+                        <p class="text-sm text-gray-600 mt-1">Mentored student coding competitions, hackathons, industry networking sessions, and career preparation workshops.</p>
+                    </div>
+
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">Diversity & Inclusion Committee Member (2018 â‚¬â&bull; œ 2019)</div>
+                        <div class="text-xs text-sky-700 font-semibold">School of Information, The University of Texas at Austin</div>
+                        <p class="text-sm text-gray-600 mt-1">Promoted inclusive student representation and departmental accessibility initiatives.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Scholarly & Editorial Peer Review -->
+            <section class="bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
+                    <i class="fas fa-file-signature text-sky-600 mr-3"></i> Scholarly Service & Peer Review
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wider text-xs text-sky-700">Journal Reviewing</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>â• <em>Nature Quality & Quantity</em> (2025)</li>
+                            <li>â• <em>Journal of Supercomputing</em> (2025)</li>
+                            <li>â• <em>Journal of Nonprofit Management and Leadership</em> (2024)</li>
+                            <li>â• <em>Journal of Natural Language Engineering</em>, Cambridge University Press (2022â–2023)</li>
+                            <li>â• <em>Journal of Imaging Science & Technology (JIST)</em> (2016â–2018)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-3 uppercase tracking-wider text-xs text-sky-700">Conference Reviewing & Editorial</h3>
+                        <ul class="space-y-2 text-gray-700">
+                            <li>â• <em>IEEE BIBM</em> (Bioinformatics & Biomedicine, 2022)</li>
+                            <li>â• <em>ACM CIKM</em> (2020)</li>
+                            <li>â• <em>ACM SIGKDD</em> Workshop on Knowledge Graphs (2020)</li>
+                            <li>â• <em>ACM SIGCHI ETRA</em> (2018â–2019)</li>
+                            <li>â• <strong>Editorial Board:</strong> <em>Research in Biomedical Engineering & Technology</em> (2025â–Present)</li>
+                            <li>â• <strong>Editorial Fellow:</strong> <em>The Journal of Information & Culture</em>, Univ. of Texas Press (2019)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2.5 Thesis, Dissertation & Capstone Advising -->
+            <section class="bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
+                    <i class="fas fa-user-graduate text-sky-600 mr-3"></i> Thesis, Dissertation & Capstone Advising
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-gray-900">Predicting Alzheimerâ&bull; ™s Disease Progression via ML</div>
+                        <div class="text-xs text-sky-700 font-semibold">Jordan Frazier â— Capstone Project (Spring 2024)</div>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-gray-900">Oral Bacteria & Cardiovascular Risks in Microbiome</div>
+                        <div class="text-xs text-sky-700 font-semibold">Dominique Pettway â— Graduate Research (Fall 2024)</div>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-gray-900">Fraudulent Credit Card Transaction Predictions</div>
+                        <div class="text-xs text-sky-700 font-semibold">Heaven Campbell & Marilly Bobo â— Research (Fall 2024)</div>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-gray-900">Drug Repurposing: ML for Disease-Drug Relations</div>
+                        <div class="text-xs text-sky-700 font-semibold">Peggy Berko â— Graduate Project (Fall 2024)</div>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-gray-900">First-Generation Student Retention Rates at R1s</div>
+                        <div class="text-xs text-sky-700 font-semibold">Yesenia Martinez â— Analytics Study (Fall 2024)</div>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
+                        <div class="font-bold text-gray-900">Automated EDW Architecture for Cybersecurity Analytics</div>
+                        <div class="text-xs text-sky-700 font-semibold">Munira Karim â— Capstone Project (Spring 2025)</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Community Engagement & Public Service -->
+            <section class="bg-white p-8 rounded-xl shadow-md">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
+                    <i class="fas fa-heart text-sky-600 mr-3"></i> Community Engagement & Public Service
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                    <div class="border border-gray-100 p-4 rounded-lg bg-gray-50">
+                        <div class="font-bold text-gray-900">Dallas CASA (Court Appointed Special Advocates)</div>
+                        <div class="text-xs text-gray-500">Dallas, TX (2023)</div>
+                        <p class="text-xs text-gray-600 mt-1">Volunteer in training advocating for children in the protective care system.</p>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-gray-50">
+                        <div class="font-bold text-gray-900">Refugee Services of Texas</div>
+                        <div class="text-xs text-gray-500">Austin, TX (2018 â‚¬â&bull; œ 2020)</div>
+                        <p class="text-xs text-gray-600 mt-1">Community volunteer assisting refugee resettlement, cultural integration, and language access.</p>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-gray-50">
+                        <div class="font-bold text-gray-900">Citizens&rsquo; Climate Lobby & IANT</div>
+                        <div class="text-xs text-gray-500">Dallas, TX (2024)</div>
+                        <p class="text-xs text-gray-600 mt-1">Volunteer civic engagement on environmental stewardship and community building.</p>
+                    </div>
+                    <div class="border border-gray-100 p-4 rounded-lg bg-gray-50">
+                        <div class="font-bold text-gray-900">Resala Foundation</div>
+                        <div class="text-xs text-gray-500">Cairo, Egypt (2003 â‚¬â&bull; œ 2008)</div>
+                        <p class="text-xs text-gray-600 mt-1">Volunteer community service supporting youth education and community aid in Cairo.</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
+
     <footer class="bg-gray-800 text-white py-6 mt-12">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
     <script>
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
     </script>
 </body>
 </html>

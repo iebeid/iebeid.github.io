@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business - Islam Akef Ebeid</title>
+    <meta name="description" content="Unity Consulting, enterprise software engineering, and consulting portfolio of Dr. Islam Akef Ebeid across telecom, government, and corporate systems.">
+    <meta property="og:title" content="Business & Consulting - Dr. Islam Akef Ebeid">
+    <meta property="og:description" content="Unity Consulting, enterprise software engineering, and consulting portfolio of Dr. Islam Akef Ebeid across telecom, government, and corporate systems.">
+    <meta property="og:type" content="website">
+    <title>Business & Consulting - Islam Akef Ebeid</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -13,11 +17,10 @@
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Custom styles to complement Tailwind */
         body {
             font-family: 'Georgia', serif;
-            background-color: #f8fafc; /* light grey background */
-            color: #1f2937; /* dark grey text */
+            background-color: #f8fafc;
+            color: #1f2937;
         }
         .section-title {
             @apply text-3xl font-bold text-gray-800 mb-8 text-center;
@@ -25,9 +28,13 @@
         .tag {
             @apply inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full;
         }
+        .scrolled {
+            @apply bg-white/90 backdrop-blur-sm shadow-lg;
+        }
     </style>
 </head>
 <body class="antialiased">
+    <!-- Header & Navigation -->
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -36,165 +43,569 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
-                    <a href="../education/education.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Education</a>
-                    <a href="../research/research.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Research</a>
-                    <a href="../teaching/teaching.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
-                    <a href="../service/service.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Service</a>
-                    <a href="business.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Business</a>
-                    <a href="../hobbies/hobbies.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
-                    <a href="../media/media.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Media</a>
-                    <a href="../downloads/downloads.html" target="_blank" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
+                    <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
+                    <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
+                    <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
+                    <a href="business.html" class="text-sky-600 font-semibold transition">Business</a>
+                    <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
+                    <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
+                    <a href="../downloads/downloads.html" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
                 </nav>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
+                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
+                <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
+                <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
+                <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
+                <a href="business.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Business</a>
+                <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
+                <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
+                <a href="../downloads/downloads.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Downloads</a>
             </div>
         </div>
     </header>
+
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Unity Consulting</h1>
-        <div class="max-w-4xl mx-auto">
-            <p class="text-lg text-gray-700 mb-8">
-                My journey as a software developer, working with diverse organizations like Xpress Integration, Vodafone, and Arkansas.gov, has provided me with a unique perspective on the challenges and opportunities in the tech industry. These experiences, coupled with my academic research, have culminated in the creation of Unity Consulting, a firm dedicated to providing innovative and efficient solutions to complex data and software challenges.
+        <!-- Hero Section -->
+        <div class="max-w-5xl mx-auto text-center mb-16">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4 text-center">Unity Systems & Startup Ventures</h1>
+            <p class="text-xl text-sky-700 font-medium mb-6">Bridging Advanced Computational Intelligence & Scalable Enterprise Software</p>
+            <p class="text-lg text-gray-700 leading-relaxed text-justify md:text-center max-w-4xl mx-auto">
+                <strong>Unity Systems</strong> is my technology startup and entrepreneurial venture dedicated to developing intelligent data architectures, high-impact community platforms, and mission-critical software solutions. My industry career as a software engineer and consultant across multinational telecom operators, state government portals, and technology corporations (including Xpress Integration, Orange Telecom, WeDo Technologies, Vodafone, and Arkansas.gov) provides the rigorous engineering foundation for our software ventures.
             </p>
-
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Current Projects</h2>
-            <div class="bg-white p-6 rounded-lg shadow-md mb-8">
-                <h3 class="text-xl font-bold text-gray-800 mb-2">The Dallas Muslim News</h3>
-                <p class="text-gray-600">A community-focused news platform for the Dallas Muslim community.</p>
-                <div class="mt-4">
-                    <a href="https://www.meetup.com/the-dallas-muslim-news" target="_blank" class="text-sky-600 hover:underline">Learn More</a>
-                </div>
-            </div>
-
-            <h2 class="text-2xl font-bold text-gray-800 mb-6">Professional Journey</h2>
-            <div class="relative border-l-2 border-sky-200 pl-8">
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2013 - 2014</p>
-                    <h3 class="text-xl font-semibold text-gray-900">Software Developer</h3>
-                    <p class="text-md font-medium text-gray-700">Arkansas.gov / National Information Consortium Inc., Little Rock, AR</p>
-                    <p class="mt-2 text-gray-600">Developed and maintained web applications and services for the state of Arkansas, gaining experience in public sector software development and data management.</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2010 - 2011</p>
-                    <h3 class="text-xl font-semibold text-gray-900">Software Developer</h3>
-                    <p class="text-md font-medium text-gray-700">WeDo Technologies, Cairo, Egypt</p>
-                    <p class="mt-2 text-gray-600">Worked on enterprise software solutions, focusing on revenue assurance and fraud management for telecommunication companies.</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2009 - 2010</p>
-                    <h3 class="text-xl font-semibold text-gray-900">Software Developer</h3>
-                    <p class="text-md font-medium text-gray-700">Orange Telecom, Cairo, Egypt</p>
-                    <p class="mt-2 text-gray-600">Contributed to the development of software for a major telecommunications provider, enhancing my skills in large-scale system development.</p>
-                </div>
-                <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2009</p>
-                    <h3 class="text-xl font-semibold text-gray-900">Software Developer</h3>
-                    <p class="text-md font-medium text-gray-700">Xpress Integration, Cairo, Egypt</p>
-                    <p class="mt-2 text-gray-600">Developed custom software solutions for various clients, honing my skills in rapid application development and client communication.</p>
-                </div>
-                 <!-- Timeline Item -->
-                <div class="mb-12">
-                    <div class="absolute -left-1.5 w-3 h-3 bg-sky-600 rounded-full"></div>
-                    <p class="text-sm text-gray-500">2005 - 2008</p>
-                    <h3 class="text-xl font-semibold text-gray-900">Software Engineering Intern</h3>
-                    <p class="text-md font-medium text-gray-700">Giza Systems and Vodafone, Cairo, Egypt</p>
-                    <p class="mt-2 text-gray-600">Gained early exposure to the software development lifecycle and corporate IT environments.</p>
-                </div>
-            </div>
-
-            <h2 class="text-2xl font-bold text-gray-800 mt-12 mb-6">Professional Certifications</h2>
-            <div class="flex flex-wrap gap-4">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Fundamentals of Engineering (FE)</h3>
-                    <p class="text-gray-600">A comprehensive exam covering a broad range of engineering subjects.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">ITIL Foundation Certificate in IT Service Management</h3>
-                    <p class="text-gray-600">Demonstrates knowledge of the ITIL terminology, structure, and basic concepts.</p>
-                </div>
-            </div>
-            <div class="text-center mt-12">
-                <a href="../index.html" class="text-sky-600 font-semibold hover:underline">Go back to the main page</a>
-            </div>
         </div>
 
-        <section>
-            <div class="divTable"><br/><br/><br/><br/>
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell"><fieldset style="border: 0;"><legend><b>Companies I worked for</b></legend>
-                            <p>
-                                <a href="http://www.intel.com/content/www/us/en/homepage.html" target="_blank">Intel</a><br/>
-                                <a href="https://inaboard.ark.org/" target="_blank">Information Network of Arkansas</a><br/>
-                                <a href="http://www.wedotechnologies.com/en/" target="_blank">Wedo Technologies</a><br/>
-                                <a href="https://www.orange.com/en/home" target="_blank">Orange Telecom</a><br/>
-                                <a href="http://www.xpressintegration.com/" target="_blank">Xpress Integration</a><br/>
-                                <a href="http://www.iam.ma/index.aspx" target="_blank">Maroc Telecom</a><br/>
-                                <a href="https://www.tunisietelecom.tn/Fr" target="_blank">Tunisie Telecom</a><br/>
-                                <a href="http://hannainst.com/" target="_blank">Hanna Instruments</a><br/>
-                                <a href="http://gizasystems.com/" target="_blank">Giza Systems</a><br/>
-                                <a href="https://www.vodafone.com/content/index.html" target="_blank">Vodafone</a><br/>
-                            </p>
-                        </fieldset>
-                        </div>
-                        <div class="divTableCell"><fieldset style="border: 0;"><legend><b>Job Search Tools I recommend</b></legend>
-                            <p>
-                                <a href="https://www.monster.com/account/homepage/" target="_blank">Monster</a><br/>
-                                <a href="https://www.glassdoor.com/index.htm" target="_blank">Glassdoor</a><br/>
-                                <a href="https://www.indeed.com/" target="_blank">Indeed</a><br/>
-                                <a href="https://www.freelancer.com/" target="_blank">Freelancer</a><br/>
-                                <a href="http://www.tutor.com/" target="_blank">Tutor</a><br/>
-                            </p>
-                        </fieldset>
-                        </div>
+        <div class="max-w-5xl mx-auto space-y-16">
+
+            <!-- Startup Profile: Unity Systems -->
+            <section>
+                <div class="bg-gradient-to-r from-sky-900 to-indigo-900 text-white p-8 rounded-2xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-sky-700">
+                    <div>
+                        <span class="inline-block bg-sky-400/20 text-sky-200 border border-sky-400/30 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                            <i class="fas fa-rocket mr-1"></i> Technology Startup Venture
+                        </span>
+                        <h2 class="text-3xl font-bold">Unity Systems</h2>
+                        <p class="text-sky-200 text-sm mt-2 max-w-2xl leading-relaxed">
+                            Developing proprietary solutions for intelligent knowledge extraction, community publishing, and enterprise-grade data engineering. Unity Systems bridges modern neuro-symbolic AI paradigms and high-durability enterprise software engineering.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="mailto:iaebeid@gmail.com" class="inline-flex items-center justify-center gap-2 bg-white text-sky-900 font-bold px-6 py-3 rounded-lg shadow hover:bg-sky-50 transition whitespace-nowrap text-sm">
+                            <i class="fas fa-handshake"></i> Business Inquiry
+                        </a>
                     </div>
                 </div>
+            </section>
+
+            <!-- Enterprise & Telecom Software Engineering Portfolio -->
+            <section>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600">
+                        <i class="fas fa-cubes text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Enterprise Systems & Consulting Portfolio</h2>
+                        <p class="text-gray-600 text-sm">Industrial projects engineered across telecommunications, government services, and enterprise software.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- INA / Arkansas.gov -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/arkansas-gov-logo.png" alt="Arkansas.gov Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">Information Network of Arkansas (INA)</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Software Developer at Arkansas.gov / NIC Inc.</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                Architected and maintained mission-critical citizen web services, high-throughput backend data pipelines, and transactional payment gateways powering the official Arkansas State Government portal (<a href="https://www.arkansas.gov" target="_blank" class="text-sky-600 hover:underline">Arkansas.gov</a>).
+                            </p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                Handled high-security state agency integrations, resolving complex relational database discrepancies, optimizing transactional query throughput, and engineering secure RESTful endpoints for digital public sector applications serving millions of constituents.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-building mr-1"></i> Public Sector / State Gov</span>
+                            <a href="https://github.com/iebeid/information-network-of-arkansas.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Smart Promotion Tool (Xpress / Maroc & Tunisie Telecom) -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/spt.png" alt="Smart Promotion Tool Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">Smart Promotion Tool (SPT)</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Xpress Integration / Maroc Telecom & Tunisie Telecom</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                Designed and implemented an automated telecom promotional campaign engine to drastically minimize time-to-market for complex subscriber marketing campaigns across North African operators.
+                            </p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                Engineered a multi-tier architecture composed of an interactive Adobe Flex front-end module, a high-performance Java/Spring/CXF Web Services server, and backend PL/SQL batch processors evaluating millions of subscriber contracts against dynamic eligibility criteria with automated bonus and discount application.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-broadcast-tower mr-1"></i> Telecom Billing / BSCS</span>
+                            <a href="https://github.com/iebeid/smart-promotion-tool.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Contract Layout Printing (Xpress / Tunisie Telecom) -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/Logo_tunisietelecom.jpg" alt="Tunisie Telecom Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">Contract Layout Printing Suite</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Xpress Integration / Tunisie Telecom</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                Engineered a complete, from-scratch enterprise application addressing critical gaps in BSCS Customer Care CX for nationwide customer care branches across Tunisia.
+                            </p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                Built with MVC Java, JSPs, Servlets, and JDBC/SQL, the suite provides instantaneous multi-page contract retrieval, layout inspection, and synchronized printing workflows directly integrated into customer service desk terminals.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-file-contract mr-1"></i> Customer Care CX</span>
+                            <a href="https://github.com/iebeid/contract-print-layout.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- BSCS iX R2 Migration (Xpress / Tunisie Telecom) -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/Logo_tunisietelecom.jpg" alt="Tunisie Telecom Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">BSCS iX R2 Migration & UAT</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Billing Migration Quality Assurance & Time-to-Market Tool</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                Executed precision User Acceptance Testing (UAT) and diagnostic validation during large-scale migration of billing platforms to BSCS iX R2, validating mission-critical Customer Care CX web modules.
+                            </p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                Authored the Time-To-Market Enhancement Tool in Java, XML, and JAXB to verify non-kernel BSCS modules (MP, MI, BS, Roaming) for seamless backward and forward compatibility across telecom environments.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-check-double mr-1"></i> Billing Migration / UAT</span>
+                            <a href="https://github.com/iebeid/bscs-migration.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Orange Telecom: webMethods Middleware Integration Suite -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 md:col-span-2 hover:border-sky-200 transition">
+                        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4 pb-4 border-b border-gray-100">
+                            <div class="flex items-center gap-4">
+                                <img src="../../images/orange.jpg" alt="Orange Telecom Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">Orange Telecom: Enterprise Integration Middleware Suite</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Software Developer / Enterprise Application Integration (EAI)</p>
+                                </div>
+                            </div>
+                            <a href="https://github.com/iebeid/webmethods.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> webMethods Repositories
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <p class="font-semibold text-gray-900 mb-1"><i class="fas fa-code-branch text-sky-600 mr-1.5"></i> webMethods 8 Migration</p>
+                                <p class="text-xs text-gray-600">Large-scale migration of mission-critical middleware and flow services from webMethods 6.5 to webMethods 8.</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <p class="font-semibold text-gray-900 mb-1"><i class="fas fa-network-wired text-sky-600 mr-1.5"></i> CRM Offer Assignment Integration</p>
+                                <p class="text-xs text-gray-600">Middleware bridge synchronizing customer relationship management (CRM) workflows with real-time rating and billing engines.</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <p class="font-semibold text-gray-900 mb-1"><i class="fas fa-bolt text-sky-600 mr-1.5"></i> Rate Plan Instant Migration Handler</p>
+                                <p class="text-xs text-gray-600">Real-time integration between Billing and Intelligent Network (IN) charging to execute instant plan switching and automated customer notifications.</p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100">
+                                <p class="font-semibold text-gray-900 mb-1"><i class="fas fa-music text-sky-600 mr-1.5"></i> RBT Framework Integration Layer</p>
+                                <p class="text-xs text-gray-600">High-throughput web services layer integrating subscriber billing with the multimedia Ring Back Tone (RBT) provisioning core.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WeDo Technologies (RAID) -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/wedo.png" alt="WeDo Technologies Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">WeDo Technologies</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Delivery Consultant II / RAID Revenue Assurance & Fraud Management</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-3">
+                                Handled deployment, custom integration, and technical consulting for the world-class RAID Revenue Assurance and Fraud Management platform at leading telecommunications client sites.
+                            </p>
+                            <p class="text-gray-600 text-xs leading-relaxed mb-4">
+                                Authored and delivered comprehensive developer training modules on RAID web services architectures, connecting billing backends, Call Detail Record (CDR) auditing pipelines, and webMethods integration platforms.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-shield-alt mr-1"></i> Revenue Assurance / Telecom</span>
+                            <a href="https://github.com/iebeid/raid-tutorial.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Training Modules
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Vodafone -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/vodafone-1-728.jpg" alt="Vodafone Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">Vodafone</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Team Portal - Time Sheets Management</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Designed and deployed a secure internal web application using Microsoft Visual Studio and C# for engineering teams to submit, track, and audit project timesheets and departmental deliverables.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-clock mr-1"></i> Internal Corporate Portal</span>
+                            <a href="https://github.com/iebeid/team-portal-time-sheet-application.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Xpress Integration Website -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col justify-between hover:border-sky-200 transition">
+                        <div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <img src="../../images/xpress-logo.png" alt="Xpress Integration Logo" class="w-16 h-16 object-contain rounded border p-1 bg-white">
+                                <div>
+                                    <h3 class="text-lg font-bold text-gray-900">Xpress Integration Corporate Portal</h3>
+                                    <p class="text-sm font-semibold text-sky-600">Rich Interactive Web Platform</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                                Designed and authored an interactive corporate web presence using Adobe Flash Builder / Flex, showcasing consulting offerings, project case studies, and corporate capabilities.
+                            </p>
+                        </div>
+                        <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                            <span class="text-xs text-gray-500 font-medium"><i class="fas fa-desktop mr-1"></i> Interactive Media</span>
+                            <a href="https://github.com/iebeid/xpress-integration-website.git" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-full transition">
+                                <i class="fab fa-github"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Freelance & Independent Products / Startup Ventures -->
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 md:col-span-2 hover:border-sky-200 transition">
+                        <div class="mb-4 pb-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-gray-900">Independent Applications & Startup Solutions</h3>
+                            <p class="text-sm font-semibold text-sky-600">Proprietary Software Systems, Web Platforms & Mobile Tools</p>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            <!-- Project 1: The Dallas Muslim News (Newest) -->
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between hover:border-sky-300 transition">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <div class="w-12 h-12 bg-sky-100 text-sky-700 rounded-lg flex items-center justify-center text-xl flex-shrink-0">
+                                            <i class="fas fa-newspaper"></i>
+                                        </div>
+                                        <h4 class="font-bold text-gray-900 text-sm">The Dallas Muslim News</h4>
+                                    </div>
+                                    <span class="inline-block bg-sky-100 text-sky-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase mb-2">4th Project / Active Platform</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                        Community-focused publishing and cultural engagement platform serving the Muslim community across Greater Dallas-Fort Worth.
+                                    </p>
+                                </div>
+                                <div class="pt-2 border-t border-gray-200">
+                                    <a href="https://www.meetup.com/the-dallas-muslim-news" target="_blank" class="text-xs font-semibold text-sky-600 hover:underline"><i class="fas fa-users mr-1"></i>Meetup Platform</a>
+                                </div>
+                            </div>
+
+                            <!-- Project 2: TakolEih -->
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between hover:border-sky-300 transition">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <img src="../../images/owner.jpg" alt="TakolEih Logo" class="w-12 h-12 object-cover rounded-lg border">
+                                        <h4 class="font-bold text-gray-900 text-sm">TakolEih: Restaurant Guide</h4>
+                                    </div>
+                                    <span class="inline-block bg-gray-200 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase mb-2">Web Application</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                        Cairo restaurant guide populating location coordinates, menus, cuisine categories, and user queries in a web-based portal.
+                                    </p>
+                                </div>
+                                <div class="flex flex-wrap gap-2 pt-2 border-t border-gray-200">
+                                    <a href="https://github.com/iebeid/takol-eh.git" target="_blank" class="text-xs font-semibold text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i>GitHub</a>
+                                    <a href="../../documents/takol-eh.pdf" target="_blank" class="text-xs font-semibold text-rose-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i>Paper</a>
+                                </div>
+                            </div>
+
+                            <!-- Project 3: Jupiter Inventory -->
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between hover:border-sky-300 transition">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <img src="../../images/Jupiter.jpg" alt="Jupiter Logo" class="w-12 h-12 object-cover rounded-lg border">
+                                        <h4 class="font-bold text-gray-900 text-sm">Jupiter Inventory System</h4>
+                                    </div>
+                                    <span class="inline-block bg-gray-200 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase mb-2">Database MVC</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                        MVC-architected database management system designed for small and medium business inventory tracking and stock auditing.
+                                    </p>
+                                </div>
+                                <div class="pt-2 border-t border-gray-200">
+                                    <a href="https://github.com/iebeid/jupiter-inventory-system.git" target="_blank" class="text-xs font-semibold text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i>GitHub</a>
+                                </div>
+                            </div>
+
+                            <!-- Project 4: Smart-HRM -->
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 flex flex-col justify-between hover:border-sky-300 transition">
+                                <div>
+                                    <div class="flex items-center gap-3 mb-3">
+                                        <img src="../../images/hr1.png" alt="HRM Logo" class="w-12 h-12 object-cover rounded-lg border">
+                                        <h4 class="font-bold text-gray-900 text-sm">Smart-HRM Platform</h4>
+                                    </div>
+                                    <span class="inline-block bg-gray-200 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase mb-2">Enterprise HR</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed mb-3">
+                                        Full-featured web tool managing corporate human resources, organizational records, attendance records, and personnel rosters.
+                                    </p>
+                                </div>
+                                <div class="pt-2 border-t border-gray-200">
+                                    <a href="https://github.com/iebeid/human-resources-management-tool.git" target="_blank" class="text-xs font-semibold text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i>GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Industry Career Timeline -->
+            <section>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600">
+                        <i class="fas fa-briefcase text-lg"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Industry Career Journey</h2>
+                </div>
+                <div class="relative border-l-2 border-sky-200 pl-8 space-y-8">
+                    <!-- Item 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-[37px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full">2013 - 2014</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">Software Developer</h3>
+                        <p class="text-sm font-medium text-gray-700">Arkansas.gov / National Information Consortium Inc. (NIC), Little Rock, AR</p>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">Developed and maintained mission-critical web applications, citizen portals, and payment gateway backends for the state of Arkansas.</p>
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="relative">
+                        <div class="absolute -left-[37px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full">2010 - 2011</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">Software Developer</h3>
+                        <p class="text-sm font-medium text-gray-700">WeDo Technologies, Cairo, Egypt</p>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">Engineered telecom enterprise software solutions focusing on the RAID Revenue Assurance platform and fraud management.</p>
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="relative">
+                        <div class="absolute -left-[37px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full">2009 - 2010</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">Software Developer</h3>
+                        <p class="text-sm font-medium text-gray-700">Orange Telecom, Cairo, Egypt</p>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">Contributed to high-scale telecom middleware integration across webMethods, CRM offer assignment, rating systems, and billing services.</p>
+                    </div>
+                    <!-- Item 4 -->
+                    <div class="relative">
+                        <div class="absolute -left-[37px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full">2009</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">Software Developer</h3>
+                        <p class="text-sm font-medium text-gray-700">Xpress Integration, Cairo, Egypt</p>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">Delivered bespoke telecom billing solutions including the Smart Promotion Tool (SPT) and BSCS billing system integration for North African operators.</p>
+                    </div>
+                    <!-- Item 5 -->
+                    <div class="relative">
+                        <div class="absolute -left-[37px] top-1.5 w-4 h-4 bg-sky-600 rounded-full border-4 border-white shadow"></div>
+                        <span class="text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full">2005 - 2008</span>
+                        <h3 class="text-lg font-bold text-gray-900 mt-1">Software Engineering Intern</h3>
+                        <p class="text-sm font-medium text-gray-700">Giza Systems & Vodafone, Cairo, Egypt</p>
+                        <p class="mt-2 text-sm text-gray-600 leading-relaxed">Built foundation in corporate IT lifecycles, enterprise database administration, and team portal development.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Corporate & Client Network -->
+            <section>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600">
+                        <i class="fas fa-handshake text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Companies & Organizations Worked For / Consulted With</h2>
+                        <p class="text-gray-600 text-sm">A global network of technology leaders, telecom operators, and state agencies.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <a href="http://www.intel.com" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-microchip text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Intel</span>
+                    </a>
+                    <a href="https://inaboard.ark.org/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-landmark text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Arkansas.gov (INA)</span>
+                    </a>
+                    <a href="http://www.wedotechnologies.com" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-shield-alt text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">WeDo Technologies</span>
+                    </a>
+                    <a href="https://www.orange.com" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-signal text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Orange Telecom</span>
+                    </a>
+                    <a href="http://www.xpressintegration.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-network-wired text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Xpress Integration</span>
+                    </a>
+                    <a href="http://www.iam.ma" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-globe-africa text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Maroc Telecom</span>
+                    </a>
+                    <a href="https://www.tunisietelecom.tn" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-phone-alt text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Tunisie Telecom</span>
+                    </a>
+                    <a href="http://hannainst.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-vial text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Hanna Instruments</span>
+                    </a>
+                    <a href="http://gizasystems.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-server text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Giza Systems</span>
+                    </a>
+                    <a href="https://www.vodafone.com" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition flex flex-col items-center justify-center">
+                        <i class="fas fa-broadcast-tower text-sky-600 text-2xl mb-2"></i>
+                        <span class="font-bold text-gray-800 text-sm">Vodafone</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Professional Certifications -->
+            <section>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600">
+                        <i class="fas fa-certificate text-lg"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-800">Professional Engineering Certifications</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fas fa-award text-amber-500 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-gray-900">Fundamentals of Engineering (FE)</h3>
+                        </div>
+                        <p class="text-sm font-semibold text-sky-600 mb-2">NCEES Accredited Engineering Examination</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Rigorous national examination covering fundamental engineering sciences, computational principles, and ethics.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fas fa-check-circle text-emerald-500 text-2xl"></i>
+                            <h3 class="text-xl font-bold text-gray-900">ITIL Foundation Certificate</h3>
+                        </div>
+                        <p class="text-sm font-semibold text-sky-600 mb-2">IT Service Management (ITSM)</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">Certified in IT service lifecycle frameworks, continual service improvement, incident governance, and enterprise delivery standards.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Job Search & Career Platforms -->
+            <section>
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600">
+                        <i class="fas fa-search-dollar text-lg"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">Job Search & Career Resources</h2>
+                        <p class="text-gray-600 text-sm">Recommended portals for technical roles, freelance contracts, and academic opportunities.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                    <a href="https://www.indeed.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition">
+                        <i class="fas fa-search text-sky-600 text-xl mb-2"></i>
+                        <span class="block font-bold text-gray-800 text-sm">Indeed</span>
+                    </a>
+                    <a href="https://www.glassdoor.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition">
+                        <i class="fas fa-door-open text-emerald-600 text-xl mb-2"></i>
+                        <span class="block font-bold text-gray-800 text-sm">Glassdoor</span>
+                    </a>
+                    <a href="https://www.monster.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition">
+                        <i class="fas fa-briefcase text-purple-600 text-xl mb-2"></i>
+                        <span class="block font-bold text-gray-800 text-sm">Monster</span>
+                    </a>
+                    <a href="https://www.freelancer.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition">
+                        <i class="fas fa-laptop-code text-cyan-600 text-xl mb-2"></i>
+                        <span class="block font-bold text-gray-800 text-sm">Freelancer</span>
+                    </a>
+                    <a href="http://www.tutor.com/" target="_blank" class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:border-sky-500 hover:shadow-md text-center transition">
+                        <i class="fas fa-chalkboard-teacher text-indigo-600 text-xl mb-2"></i>
+                        <span class="block font-bold text-gray-800 text-sm">Tutor.com</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Navigation Back -->
+            <div class="text-center pt-8 border-t border-gray-200">
+                <a href="../../index.html" class="inline-flex items-center gap-2 text-sky-600 font-semibold hover:text-sky-800 transition">
+                    <i class="fas fa-arrow-left"></i> Return to Main Homepage
+                </a>
             </div>
-            <br/>
-            <hr/>
-            <div id="content" class="module"><h1>Information Network of Arkansas</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/arkansas-gov-logo.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Software Developer at INA</b></div><div style='width: 680px;  height: 70px; float: right;'>I was responsible for fixing backend server scripts and database issues for all web apps associated with Arkansas.gov</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/information-network-of-arkansas.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Xpress Integration</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/spt.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Smart Promotion Tool</b></div><div style='width: 680px;  height: 70px; float: right;'>In order to make business tasks easier and to minimize time to market for the new promotions, I designed a promotion end to end solution. Smart Promotion Tool is a flexible and efficient solution, it integrates all the functionalities to define and manage promotions for eligible contracts. SPT defines promotions, evaluate the Contracts and Customers according the chosen selection criteria. apply the promotion according the chosen application mechanism.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/smart-promotion-tool.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/Logo_tunisietelecom.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Contract Layout Printing</b></div><div style='width: 680px;  height: 70px; float: right;'>Due to the lack of the contract printing functionality in the Customer Care CX and based on their trust the business decided to assign the Contract Layout Printing application as a from scratch task , it enables the user to print the contract after reviewing</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/contract-print-layout.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/Logo_tunisietelecom.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>BSCSIX R2 Migrated Billing System  - User Acceptance Test</b></div><div style='width: 680px;  height: 70px; float: right;'>Providing the client with a highly precise testing and enabling them to clearly know points of weakness based on their trust as highly efficient billing consultants. I was involved in the Customer Care CX web application testing provided that it is the main component of the system.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/bscs-migration.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/xpress-logo.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Xpress Integration Website</b></div><div style='width: 680px;  height: 70px; float: right;'>Using Adobe Flash builder I revamped Xpress Integration's website to a rich interactive web venue.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/xpress-integration-website.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Orange Telecom</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/orange.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>webMethods 8 Migration</b></div><div style='width: 680px;  height: 70px; float: right;'>upgrading webMethods 6.5 to webMethods 8</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/webmethods.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/orange.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>CRM Offer Assignment Tool Integration</b></div><div style='width: 680px;  height: 70px; float: right;'>Integrating Customer Relationship Management System with the Billing and the Rating systems</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/webmethods.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/orange.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Rate plan Instant Migration Handler</b></div><div style='width: 680px;  height: 70px; float: right;'>Integrating Billing and Charging (IN) systems to provide the functionality of texting the customer after rate plan change</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/webmethods.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/orange.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>RBT (Ring Back Tone) Framework Integration Layer</b></div><div style='width: 680px;  height: 70px; float: right;'>A set of web services that provides integration functionalities between the Billing and the RBT framework</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/webmethods.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Wedo Technologies</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/wedo.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>RAID Revenue Assurance Software</b></div><div style='width: 680px;  height: 70px; float: right;'>Revenue assurance software training</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/raid-tutorial.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Vodafone</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/vodafone-1-728.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Team Portal-Time Sheets</b></div><div style='width: 680px;  height: 70px; float: right;'>Designed a web application to upload employees time sheets on the internal team portal (MS Visual Studio C#)</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/team-portal-time-sheet-application.git'>github</a></div></fieldset>            </div>
-        </section>
-        <section>
-            <hr/>
-            <div id="content" class="module"><h1>Freelance</h1>
-                <fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/hr1.png'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Human Resources Management Tool </b></div><div style='width: 680px;  height: 70px; float: right;'>A web based tool to manage human resources in any company</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/human-resources-management-tool.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/Jupiter.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>Inventory management tool</b></div><div style='width: 680px;  height: 70px; float: right;'>A web based model view controller designed database management system for business inventory.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/jupiter-inventory-system.git'>github</a></div></fieldset><fieldset style='border: 0;'><div style='width: 800px; height: 100px;'><div style='width: 100px; height: 100px; float: left;'><img width='100px' height='100px' src='../files/images/owner.jpg'/></div><div style='width: 680px;  height: 20px; float: right;'><b>TakolEih: Restaurant guide</b></div><div style='width: 680px;  height: 70px; float: right;'>A website that populates the restaurants available in the city of Cairo, also populates the menus and location based on the search.</div><div style='width: 680px;  height: 10px; float: right;'>  <a target='_blank' href='https://github.com/iebeid/takol-eh.git'>github</a>  <a target='_blank' href='../files/documents/takol-eh.pdf'>paper</a></div></div></fieldset>            </div>
-        </section>
+
+        </div>
     </main>
-    <footer class="bg-gray-800 text-white py-6 mt-12">
+
+    <footer class="bg-gray-800 text-white py-6 mt-16">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
+
     <script>
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
+        const navbar = document.getElementById('navbar');
+        window.onscroll = function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
     </script>
 </body>
 </html>
