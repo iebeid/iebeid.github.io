@@ -1,0 +1,339 @@
+/* ==========================================================================
+   Nile University Job Talk - Modern Academic Reveal.js Stylesheet
+   Dr. Islam Akef Ebeid - School of ITCS
+   ========================================================================== */
+
+:root {
+    --primary-accent: #00d2ff;
+    --secondary-accent: #f5a623;
+    --success-accent: #2ecc71;
+    --purple-accent: #a855f7;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --bg-card-hover: rgba(255, 255, 255, 0.07);
+    --border-card: rgba(0, 210, 255, 0.22);
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+}
+
+/* Base presentation typography & layout */
+.reveal {
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 24px;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.reveal .slides {
+    text-align: center;
+}
+
+.reveal .slides section {
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+/* Headings */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.reveal h1 { 
+    font-size: 2.1em; 
+    color: #ffffff; 
+    line-height: 1.15;
+}
+
+.reveal h2 { 
+    font-size: 1.5em; 
+    color: var(--primary-accent); 
+    margin-bottom: 6px; 
+}
+
+.reveal h3 { 
+    font-size: 1.15em; 
+    color: var(--secondary-accent); 
+    margin-bottom: 8px; 
+}
+
+.subtitle {
+    font-size: 0.78em;
+    color: var(--text-dim);
+    margin-top: 0;
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+}
+
+/* Highlight helpers */
+.highlight-blue { color: var(--primary-accent); font-weight: 600; }
+.highlight-gold { color: var(--secondary-accent); font-weight: 600; }
+.highlight-green { color: var(--success-accent); font-weight: 600; }
+.highlight-purple { color: var(--purple-accent); font-weight: 600; }
+
+/* Badges & Pills */
+.badge {
+    display: inline-block;
+    background: rgba(0, 210, 255, 0.12);
+    color: var(--primary-accent);
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    padding: 2px 9px;
+    border-radius: 12px;
+    font-size: 0.62em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1px 3px;
+    vertical-align: middle;
+}
+
+.badge-gold {
+    background: rgba(245, 166, 35, 0.14);
+    color: var(--secondary-accent);
+    border-color: rgba(245, 166, 35, 0.4);
+}
+
+.badge-green {
+    background: rgba(46, 204, 113, 0.14);
+    color: var(--success-accent);
+    border-color: rgba(46, 204, 113, 0.4);
+}
+
+.badge-purple {
+    background: rgba(168, 85, 247, 0.14);
+    color: var(--purple-accent);
+    border-color: rgba(168, 85, 247, 0.4);
+}
+
+/* Acronym Explainer */
+abbr.acronym {
+    border-bottom: 1px dotted var(--primary-accent);
+    text-decoration: none;
+    font-weight: 600;
+    cursor: help;
+}
+
+.acronym-pill {
+    display: inline-block;
+    font-size: 0.75em;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border-left: 2px solid var(--secondary-accent);
+    margin: 2px 0;
+}
+
+/* Responsive Grids */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    text-align: left;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    text-align: left;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    text-align: left;
+}
+
+/* Card Styling */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    font-size: 0.82em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.card h4 {
+    margin: 0 0 6px 0;
+    color: #ffffff;
+    font-size: 1em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 4px;
+}
+
+.card p {
+    margin: 0 0 6px 0;
+    line-height: 1.35;
+}
+
+/* Metric / Stat Boxes */
+.stat-card {
+    background: linear-gradient(135deg, rgba(0, 210, 255, 0.1), rgba(0, 40, 80, 0.25));
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 1.7em;
+    font-weight: 800;
+    color: var(--primary-accent);
+    line-height: 1.05;
+}
+
+.stat-label {
+    font-size: 0.65em;
+    color: #cbd5e1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+    line-height: 1.2;
+}
+
+/* Clean, un-cluttered compact list */
+ul.compact-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+ul.compact-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+    line-height: 1.32;
+    color: #e2e8f0;
+}
+
+ul.compact-list li:last-child {
+    margin-bottom: 0;
+}
+
+ul.compact-list li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--primary-accent);
+    font-size: 1em;
+}
+
+/* Timeline */
+.timeline-item {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 8px;
+    border-left: 2px solid var(--primary-accent);
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item .time {
+    font-size: 0.68em;
+    color: var(--secondary-accent);
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.timeline-item .title {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.88em;
+    line-height: 1.2;
+}
+
+.timeline-item .desc {
+    font-size: 0.74em;
+    color: var(--text-dim);
+    line-height: 1.25;
+}
+
+/* Spotlight Card for Special / Personal Project */
+.spotlight-card {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(20, 20, 35, 0.4));
+    border: 1px solid rgba(168, 85, 247, 0.4);
+    border-radius: 8px;
+    padding: 14px 18px;
+    text-align: left;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);
+}
+
+/* Links */
+a {
+    color: var(--primary-accent) !important;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Floating Navigation Bar for Switching Decks */
+.deck-nav {
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    z-index: 9999;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+}
+
+.deck-nav a {
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    color: #e2e8f0 !important;
+    padding: 5px 12px;
+    border-radius: 20px;
+    text-decoration: none !important;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    transition: all 0.2s ease;
+}
+
+.deck-nav a:hover {
+    background: rgba(0, 210, 255, 0.2);
+    border-color: var(--primary-accent);
+    color: #ffffff !important;
+}
+
+.deck-nav a.active-deck {
+    background: rgba(245, 166, 35, 0.2);
+    border-color: rgba(245, 166, 35, 0.6);
+    color: var(--secondary-accent) !important;
+}
+
+@media (max-width: 768px) {
+    .deck-nav {
+        top: 6px;
+        left: 8px;
+        right: 8px;
+        gap: 5px;
+        font-size: 11px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .deck-nav a {
+        padding: 4px 9px;
+        white-space: nowrap;
+    }
+}
+
+@media print {
+    .deck-nav {
+        display: none !important;
+    }
+}

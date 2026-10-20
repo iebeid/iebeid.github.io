@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased overflow-x-hidden">
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -68,81 +68,12 @@
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Open Source Downloads & Presentation Slides</h1>
+        <h1 class="section-title">Technical Design Documents &amp; Software Repositories</h1>
         <p class="text-center text-gray-600 max-w-2xl mx-auto -mt-4 mb-10 text-base">
-            Access and download interactive conference slides, job talk presentations, graduate project specifications, research monographs, and open-source repositories.
+            Access and download open-source software repositories, graduate project design documents, system specifications, and institutional governance monographs.
         </p>
 
         <div class="max-w-4xl mx-auto space-y-8">
-
-            <!-- Featured: Nile University Job Talk Presentation -->
-            <div class="bg-gradient-to-br from-white via-sky-50 to-white p-6 sm:p-8 rounded-xl shadow-lg border border-sky-200">
-                <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-                        <i class="fas fa-chalkboard-teacher mr-1"></i> Featured Interactive Presentation
-                    </span>
-                    <span class="text-sm text-gray-500 font-medium"><i class="far fa-calendar-alt mr-1"></i> October 12, 2026</span>
-                </div>
-                <h2 class="text-2xl font-bold text-gray-900 mb-2">Faculty Candidate Job Talk â— School of ITCS, Nile University</h2>
-                <p class="text-gray-700 text-sm leading-relaxed mb-4">
-                    Full Reveal.js interactive presentation for the School of Information Technology and Computer Science (ITCS) faculty interview. Details academic credentials, teaching portfolio, research trajectory, active NSF CISE/CCF award ($600K collaborative / $210K TWU), Data2AI4LifeSciences Lab roadmap, and strategic alignments with Egypt's Vision 2030.
-                </p>
-                
-                <div class="flex flex-wrap items-center gap-3 mb-6">
-                    <a href="talk/index.html" target="_blank" class="inline-flex items-center bg-sky-600 hover:bg-sky-700 text-white font-semibold px-5 py-2.5 rounded-lg shadow-md transition">
-                        <i class="fas fa-desktop mr-2"></i> Launch Presentation (Full Screen)
-                    </a>
-                    <a href="../../documents/CV_Ebeid.pdf" target="_blank" class="inline-flex items-center bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold px-4 py-2.5 rounded-lg transition text-sm">
-                        <i class="fas fa-file-pdf mr-1.5"></i> Download CV (PDF)
-                    </a>
-                </div>
-
-                <!-- Embedded Slide Preview Frame -->
-                <div class="rounded-lg overflow-hidden border border-gray-300 shadow-inner bg-black">
-                    <div class="bg-gray-800 px-4 py-2 flex items-center justify-between text-xs text-gray-300">
-                        <span><i class="fas fa-tv mr-1.5 text-sky-400"></i> Interactive Slide Deck (Use Arrow Keys or Space to navigate)</span>
-                        <a href="talk/index.html" target="_blank" class="text-sky-300 hover:underline">Open in new tab <i class="fas fa-external-link-alt ml-1"></i></a>
-                    </div>
-                    <iframe src="talk/index.html" title="Nile University Job Talk Slides" class="w-full h-96 md:h-[460px] border-0" loading="lazy" allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <!-- Invited Talks & Lectures Record from CV -->
-            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                    <i class="fas fa-microphone-alt text-sky-600 mr-2"></i> Invited Talks, Lectures & Graduate Seminars
-                </h3>
-                <ul class="space-y-4 text-gray-700 text-sm">
-                    <li class="border-l-4 border-sky-500 pl-4">
-                        <div class="font-semibold text-gray-900">The MidSouth Computational Biology & Bioinformatics Society (MCBIOS) Talk (2024)</div>
-                        <div class="text-xs text-gray-600">MedGCN: Query-time Character Level Embedding for Biomedical Named Entity Recognition via Bidirectional Graph Convolutional Neural Networks</div>
-                    </li>
-                    <li class="border-l-4 border-sky-500 pl-4">
-                        <div class="font-semibold text-gray-900">UA Little Rock Graduate Seminar (Donaghy College of Engineering, Science & Mathematics, 2022)</div>
-                        <div class="text-xs text-gray-600">Knowledge Representation & Data Mining using Knowledge Graphs</div>
-                    </li>
-                    <li class="border-l-4 border-sky-500 pl-4">
-                        <div class="font-semibold text-gray-900">Electronic Imaging Symposium (EI 2016)</div>
-                        <div class="text-xs text-gray-600">VisInt-X: Visualizing Interactions in Cross-linked Proteins</div>
-                    </li>
-                    <li class="border-l-4 border-sky-500 pl-4">
-                        <div class="font-semibold text-gray-900">University of Arkansas at Little Rock Research Expo (2015)</div>
-                        <div class="text-xs text-gray-600 mb-1">XLPM Map Viewer: A Protein-Protein Interaction Map Viewer</div>
-                        <div class="flex gap-3 text-xs">
-                            <a href="../../documents/XLPM-Map-Viewer-Final.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Presentation Deck (PDF)</a>
-                            <a href="../../documents/XLPMol3DViewer.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> 3D Viewer Presentation</a>
-                        </div>
-                    </li>
-                    <li class="border-l-4 border-amber-500 pl-4">
-                        <div class="font-semibold text-gray-900">ACM SIGGRAPH Insights & Deep Learning in Computer Graphics</div>
-                        <div class="text-xs text-gray-600 mb-1">State-of-the-art reports on NVIDIA Deep Learning in Computer Vision, 360-degree projection mapping, and real-time graphics frontiers.</div>
-                        <div class="flex gap-3 text-xs">
-                            <a href="../../documents/siggraph-summary.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> SIGGRAPH Comprehensive Report (32 pgs)</a>
-                            <a href="../../documents/siggraph.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> NVIDIA Deep Learning Summary</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
 
             <!-- Open Source Systems & Technical Documents -->
             <div class="space-y-6">
