@@ -136,21 +136,27 @@
                         </div>
                     </div>
 
-                    <!-- VisInt-X -->
-                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
+                    <!-- VisInt-X & XLPM Map Viewer -->
+                    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between border-2 border-sky-200">
                         <div>
                             <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-xl font-bold text-gray-900">VisInt-X: Visualizing Cross-Linked Proteins</h3>
-                                <span class="tag">Electronic Imaging</span>
+                                <h3 class="text-xl font-bold text-gray-900">VisInt-X &amp; XLPM: Cross-Linked Proteomics Suite</h3>
+                                <span class="tag">Electronic Imaging / JIST</span>
                             </div>
                             <div class="mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-2">
                                 <img src="../../images/protein.png" alt="Protein Cross-linking Visualization" class="h-28 object-contain">
                             </div>
-                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                                A WebGL and D3-based interactive visualization of data coming out of the XLPM algorithm on 2 protein structures. Presented at Electronic Imaging (EI 2016) and Journal of Imaging Science & Technology.
+                            <p class="text-gray-600 text-sm leading-relaxed mb-3">
+                                An end-to-end chemical cross-linking mass spectrometry (XL-MS) curation and visual analytics platform. Raw Orbitrap MS/MS spectra undergo heavy relational curation (15-table <code>xlpmwebv1</code> schema &amp; Perl engine with 5 ppm precursor / 0.8 Da <code>b/y</code> fragment matching, <code>14N/15N</code> isotopic filtering, and C-Score ranking) and are explored through a 3-tier D3.js matrix/treemap synchronized with a 3Dmol.js WebGL dual-protein viewer.
                             </p>
+                            <div class="mb-4">
+                                <a href="xlpm/index.html" class="w-full inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-2.5 px-4 rounded-lg shadow transition">
+                                    <i class="fas fa-play-circle text-sm"></i> Launch Live Interactive XLPM / VisInt-X Demo (6 Curated Presets)
+                                </a>
+                            </div>
                         </div>
                         <div class="pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm">
+                            <a href="xlpm/index.html" class="text-emerald-700 font-bold hover:underline"><i class="fas fa-laptop-code mr-1"></i> Live Demo</a>
                             <a href="../../documents/XLPM Map.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Abstract</a>
                             <a href="../../documents/xlpm-nofigures-final.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Final Article</a>
                             <a href="../../documents/XLPM-SPIE-IST-submission.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Conference Paper</a>

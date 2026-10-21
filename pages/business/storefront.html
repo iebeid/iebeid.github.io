@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Unity Systems — High-Performance Software Storefront. Production-ready, dual-licensed software components across Data Curation, AI Modeling Engines, and GPU/VR Visualization.">
+    <meta property="og:title" content="Unity Systems | High-Performance AI & Compute Software Storefront">
+    <meta property="og:description" content="Decoupled pipelines, high-performance logic libraries, and math infrastructure packages compiled and optimized across the AI and data lifecycles.">
+    <meta property="og:type" content="website">
+    <title>Unity Systems (أنظمة الوحدة) | High-Performance AI &amp; Compute Software Storefront</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #0a0e14;
+            --bg-surface: #101520;
+            --bg-card: #151d30;
+            --bg-code: #070a10;
+            --border-color: #1e293b;
+            --border-highlight: #26354a;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-cyan: #00f2fe;
+            --brand-primary: #38bdf8;
+            --brand-hover: #0ea5e9;
+            --accent-green: #34d399;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            padding-bottom: 4rem;
+            overflow-x: hidden;
+        }
+
+        /* Top Portfolio Return Banner */
+        .top-bar {
+            background: linear-gradient(90deg, #0f172a 0%, #1e1b4b 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.55rem 1.5rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .top-bar-inner {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar a {
+            color: var(--brand-primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .top-bar a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(52, 211, 153, 0.1);
+            color: var(--accent-green);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            padding: 0.15rem 0.65rem;
+            border-radius: 999px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.72rem;
+        }
+
+        /* Sticky Main Header */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(10, 14, 20, 0.88);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 2rem;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent-cyan), #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #070a10;
+            font-weight: 900;
+            font-size: 1.05rem;
+            font-family: monospace;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+        }
+
+        .brand-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            flex-wrap: wrap;
+        }
+
+        .brand-title span.accent {
+            color: var(--accent-cyan);
+        }
+
+        .brand-divider {
+            color: #334155;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        .brand-arabic {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #f8fafc;
+            letter-spacing: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .brand-arabic span {
+            color: var(--accent-cyan);
+        }
+
+        .region-tag {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--brand-primary);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.28);
+            padding: 0.1rem 0.45rem;
+            border-radius: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        .brand-subtitle {
+            display: block;
+            font-size: 0.68rem;
+            font-family: monospace;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a.github-link {
+            background-color: #1e293b;
+            color: #fff;
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-highlight);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a.github-link:hover {
+            background-color: #334155;
+            border-color: var(--brand-primary);
+        }
+
+        main {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4.5rem 0 3rem;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3rem;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--brand-primary);
+            font-family: monospace;
+            font-size: 0.78rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 {
+            font-size: 2.85rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--brand-primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.12rem;
+            margin-bottom: 2rem;
+            max-width: 650px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-primary);
+            color: #070a10;
+            padding: 0.8rem 1.65rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-cyan);
+            transform: translateY(-1px);
+        }
+
+        .install-cmd {
+            background-color: var(--bg-code);
+            border: 1px solid var(--border-highlight);
+            padding: 0.72rem 1.2rem;
+            border-radius: 6px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.88rem;
+            color: var(--accent-green);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .install-cmd:hover {
+            border-color: var(--brand-primary);
+        }
+
+        .install-cmd::before {
+            content: "$";
+            color: var(--text-muted);
+        }
+
+        /* Flagship Terminal Window in Hero */
+        .code-window {
+            background-color: var(--bg-code);
+            border: 1px solid var(--border-highlight);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: #334155;
+        }
+
+        .code-dot.red { background-color: #ef4444; }
+        .code-dot.amber { background-color: #f59e0b; }
+        .code-dot.green { background-color: #10b981; }
+
+        .code-window pre {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            line-height: 1.65;
+        }
+
+        .keyword { color: #f43f5e; }
+        .comment { color: #64748b; font-style: italic; }
+        .string { color: #34d399; }
+        .function { color: #60a5fa; }
+        .type { color: #8be9fd; }
+
+        /* Lifecycle Pillars Overview */
+        .model-section {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-heading {
+            margin-bottom: 2rem;
+        }
+
+        .section-heading h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 780px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pillar-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .pillar-card .pillar-step {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--accent-amber);
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 0.15rem 0.55rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .pillar-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Catalog Section */
+        .catalog-section {
+            padding: 3.5rem 0;
+        }
+
+        .matrix-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.25rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-muted);
+            padding: 0.55rem 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background-color: rgba(0, 242, 254, 0.08);
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .product-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            border-color: var(--brand-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(21, 29, 48, 0.5);
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tech-tag {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.72rem;
+            padding: 0.15rem 0.55rem;
+            border-radius: 4px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .tech-tag.lifecycle {
+            color: var(--accent-amber);
+            border-color: rgba(245, 158, 11, 0.35);
+        }
+
+        .tech-tag.stack {
+            color: var(--accent-cyan);
+            border-color: rgba(0, 242, 254, 0.35);
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            color: #fff;
+        }
+
+        .product-card .description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            min-height: 4.2rem;
+        }
+
+        .snippet-container {
+            background-color: var(--bg-code);
+            padding: 1.1rem 1.25rem;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.78rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .snippet-container pre {
+            color: #cbd5e1;
+            white-space: pre;
+            line-height: 1.55;
+        }
+
+        .card-footer {
+            padding: 1.35rem 1.5rem;
+            margin-top: auto;
+            background-color: rgba(21, 29, 48, 0.25);
+        }
+
+        .licensing-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.15rem;
+            gap: 1rem;
+        }
+
+        .license-type {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .license-type strong {
+            color: var(--text-main);
+            font-family: monospace;
+        }
+
+        .price-tag {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .price-tag span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.65rem 0.75rem;
+            border-radius: 5px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-oss {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-main);
+        }
+
+        .btn-oss:hover {
+            background-color: #1e293b;
+            border-color: var(--text-muted);
+        }
+
+        .btn-commercial {
+            background-color: var(--accent-cyan);
+            color: #070a10;
+        }
+
+        .btn-commercial:hover {
+            background-color: var(--brand-primary);
+        }
+
+        /* Fair-Code Dual-Licensing Comparison Section */
+        .licensing-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header-center {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header-center h2 {
+            font-size: 2.15rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header-center p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .license-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+
+        .license-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+            border-radius: 12px;
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .license-card.highlight {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.14);
+        }
+
+        .badge {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background-color: rgba(56, 189, 248, 0.12);
+            color: var(--brand-primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.65rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .license-card h3 {
+            font-size: 1.35rem;
+            color: #fff;
+            margin-bottom: 0.35rem;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin: 0.85rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            font-family: monospace;
+        }
+
+        .price sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .license-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .license-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .license-features li {
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #cbd5e1;
+        }
+
+        .icon-check { color: var(--accent-green); font-weight: bold; }
+        .icon-cross { color: var(--accent-rose); font-weight: bold; }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.75rem;
+        }
+
+        .faq-item {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .faq-item h4 {
+            font-size: 1.02rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* License Request Modal */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 10, 16, 0.82);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--brand-primary);
+            border-radius: 12px;
+            max-width: 540px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+            font-family: monospace;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: var(--bg-code);
+            border: 1px solid var(--border-highlight);
+            color: #fff;
+            padding: 0.65rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            max-width: 1360px;
+            margin: 3rem auto 0;
+            padding: 2.5rem 2rem 0;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--brand-primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 0 2.5rem;
+            }
+            .pillars-grid,
+            .license-grid,
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Portfolio Return Bar -->
+    <div class="top-bar">
+        <div class="top-bar-inner">
+            <a href="business.html">
+                <i class="fas fa-arrow-left"></i> Back to Dr. Islam Akef Ebeid &mdash; Business &amp; Consulting Portfolio
+            </a>
+            <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+                <span class="region-tag"><i class="fas fa-globe"></i> UNITED STATES &bull; EGYPT</span>
+                <span class="status-pill"><i class="fas fa-circle" style="font-size: 0.5rem;"></i> PRE-INCORPORATION PREVIEW STOREFRONT</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Storefront Header -->
+    <header>
+        <div class="nav-container">
+            <a href="storefront.html" class="brand-logo">
+                <div class="brand-icon">U&#955;</div>
+                <div>
+                    <div class="brand-title">
+                        <span>UNITY<span class="accent">SYSTEMS</span></span>
+                        <span class="brand-divider">|</span>
+                        <span class="brand-arabic" dir="rtl" lang="ar">أنظمة <span>الوحدة</span></span>
+                        <span class="region-tag">US &bull; EG</span>
+                    </div>
+                    <span class="brand-subtitle">AI Lifecycle &bull; Scientific Compute &bull; Graphics Engines</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#architecture">Lifecycle Model</a>
+                <a href="#catalog">Core Catalog</a>
+                <a href="#licensing">Dual-Licensing Protocol</a>
+                <a href="#faq">Enterprise MSAs &amp; FAQ</a>
+                <a href="https://github.com/iebeid" target="_blank" class="github-link">
+                    <i class="fab fa-github"></i> GitHub Registry
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section (Integrating AILifecycleKit + OmniLifecycle Storefront) -->
+        <section class="hero">
+            <div>
+                <div class="hero-badge">
+                    <i class="fas fa-layer-group"></i> Dual-Licensed Fair-Code Software Ecosystem
+                </div>
+                <h1>Production-Ready <span>AI Lifecycle &amp; Compute</span> Components.</h1>
+                <p>
+                    Decoupled pipelines, local dataset curation &amp; drift tracking SDKs, biomedical graph neural network engines, and ultra-low-latency C++/CUDA visualization packages compiled and optimized across the artificial intelligence and scientific data lifecycles.
+                </p>
+                <div class="hero-actions">
+                    <a href="#catalog" class="btn-primary">
+                        <i class="fas fa-cubes"></i> Explore Component Catalog
+                    </a>
+                    <div class="install-cmd" onclick="copyInstallCmd(this)" title="Click to copy pip install command">
+                        <span id="pip-text">pip install ailifecyclekit</span>
+                        <i class="far fa-copy" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-window" id="code">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <div class="code-dot red"></div>
+                        <div class="code-dot amber"></div>
+                        <div class="code-dot green"></div>
+                    </div>
+                    <span>example_pipeline.py &mdash; Unity Systems SDK</span>
+                </div>
+                <pre><code><span class="keyword">import</span> ailifecyclekit <span class="keyword">as</span> alk
+<span class="keyword">import</span> protgram_gcn <span class="keyword">as</span> pgg
+
+<span class="comment"># 1. Initialize local dataset curation &amp; drift evaluator</span>
+tracker = alk.<span class="function">DriftTracker</span>(baseline_dataset=<span class="string">"v1_clean.parquet"</span>)
+anomalies = tracker.<span class="function">evaluate_stream</span>(incoming_tensor, threshold=<span class="string">0.85</span>)
+tracker.<span class="function">commit_lineage</span>(export_path=<span class="string">"./metadata/"</span>)
+
+<span class="comment"># 2. Execute structural N-gram Graph Convolutional forecasting</span>
+pipeline = pgg.<span class="function">Pipeline</span>(mode=<span class="string">"direct"</span>)
+matrix = pipeline.<span class="function">compute_ngrams</span>(sequence_tensor)
+predictions = pipeline.<span class="function">eval_interaction</span>(matrix)</code></pre>
+            </div>
+        </section>
+
+        <!-- Three-Pillar Architecture Model -->
+        <section class="model-section" id="architecture">
+            <div class="section-heading">
+                <h2>The Unity Systems Technical &amp; Commercial Architecture</h2>
+                <p>
+                    Unity Systems packages peer-reviewed algorithms and industrial software engineering into modular, self-contained libraries across three decoupled lifecycle layers. Every component is available free for open-source/academic research and commercially licensed for proprietary enterprise deployment.
+                </p>
+            </div>
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <span class="pillar-step">01 // DATA_CURATION</span>
+                    <h3>Data Curation, Drift &amp; Spatial Telemetry</h3>
+                    <p>
+                        Automated local dataset preprocessing, Parquet lineage versioning, continuous distribution drift detection (<strong>AILifecycleKit</strong>), and high-precision visual/spatial telemetry vector extraction (<strong>EyeArt Engine</strong>).
+                    </p>
+                </div>
+                <div class="pillar-card">
+                    <span class="pillar-step">02 // MODELING_ENGINES</span>
+                    <h3>Neuro-Symbolic &amp; Graph Modeling Engines</h3>
+                    <p>
+                        Domain-specialized deep learning and Graph Convolutional Network (GCN) pipelines for structural proteomics (<strong>ProtGram-DirectGCN</strong>) and unsupervised modularity-based entity resolution in large-scale knowledge graphs (<strong>ModER-GraphER</strong>).
+                    </p>
+                </div>
+                <div class="pillar-card">
+                    <span class="pillar-step">03 // VISUALIZATION_REPORTING</span>
+                    <h3>GPU Compute &amp; Immersive Visualization</h3>
+                    <p>
+                        Ultra-low-latency C++, CUDA, OpenGL, and WebGL rendering engines for multi-million particle simulations (<strong>CudaParticles Engine</strong>), stereoscopic VR raymarching (<strong>RaymarcherVR Engine</strong>), and structural cross-linking inspection (<strong>VisInt-X</strong>).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Component Catalog -->
+        <section class="catalog-section" id="catalog">
+            <div class="section-heading">
+                <h2>Core Software Component Catalog</h2>
+                <p>Filter production-ready packages by AI &amp; data lifecycle stage. Inspect API usage, open-source repositories, and commercial node/seat licensing.</p>
+            </div>
+
+            <div class="matrix-controls">
+                <button class="filter-btn active" onclick="filterSystem('ALL_SYSTEMS', this)">ALL_SYSTEMS (7)</button>
+                <button class="filter-btn" onclick="filterSystem('DATA_CURATION', this)">DATA_CURATION (3)</button>
+                <button class="filter-btn" onclick="filterSystem('MODELING_ENGINES', this)">MODELING_ENGINES (2)</button>
+                <button class="filter-btn" onclick="filterSystem('VISUALIZATION_REPORTING', this)">VISUALIZATION_REPORTING (3)</button>
+            </div>
+
+            <div class="solution-grid">
+
+                <!-- PRODUCT 1: AILifecycleKit -->
+                <article class="product-card" data-category="DATA_CURATION">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">DATA_CURATION</span>
+                            <span class="tech-tag stack">Python / Parquet / Lineage</span>
+                        </div>
+                        <h3>AILifecycleKit</h3>
+                        <p class="description">
+                            Lightweight Python SDK engineered to automate local dataset curation, data preprocessing, deterministic lineage versioning, and real-time tensor drift evaluation in production AI pipelines.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="keyword">import</span> ailifecyclekit <span class="keyword">as</span> alk
+tracker = alk.<span class="function">DriftTracker</span>(baseline_dataset=<span class="string">"v1_clean.parquet"</span>)
+anomalies = tracker.<span class="function">evaluate_stream</span>(incoming_tensor, threshold=<span class="string">0.85</span>)
+tracker.<span class="function">commit_lineage</span>(export_path=<span class="string">"./metadata/"</span>)</pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$499<span>/dev seat</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
+                            <button type="button" onclick="openLicenseModal('AILifecycleKit ($499 / dev seat)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 2: ProtGram-DirectGCN -->
+                <article class="product-card" data-category="MODELING_ENGINES">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">MODELING_ENGINES</span>
+                            <span class="tech-tag stack">Python / PyTorch / GCN</span>
+                        </div>
+                        <h3>ProtGram-DirectGCN</h3>
+                        <p class="description">
+                            Deep learning optimization pipeline engineered for structural protein-protein interaction (PPI) forecasting using hierarchical n-gram tokenization structures mapped directly to Graph Convolutional Networks.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="keyword">import</span> protgram_gcn <span class="keyword">as</span> pgg
+pipeline = pgg.<span class="function">Pipeline</span>(mode=<span class="string">"direct"</span>)
+matrix = pipeline.<span class="function">compute_ngrams</span>(sequence_tensor)
+predictions = pipeline.<span class="function">eval_interaction</span>(matrix)</pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$1,200<span>/node</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
+                            <button type="button" onclick="openLicenseModal('ProtGram-DirectGCN ($1,200 / node)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 3: EyeArt Engine -->
+                <article class="product-card" data-category="DATA_CURATION">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">DATA_CURATION</span>
+                            <span class="tech-tag stack">Python / PyTorch / Vision</span>
+                        </div>
+                        <h3>EyeArt Engine</h3>
+                        <p class="description">
+                            Production-ready eye-tracking and behavioral visual telemetry processing array. Compiles high-frequency gaze and spatial video streams into localized feature vectors for neurological and HCI analytics.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="keyword">import</span> eyeart <span class="keyword">as</span> ea
+tracker = ea.<span class="function">SpatialTracker</span>(precision=<span class="string">"high"</span>)
+frame_stream = ea.<span class="function">load_video_pipeline</span>(<span class="string">"./raw_data/"</span>)
+telemetry = tracker.<span class="function">extract_vector_array</span>(frame_stream)</pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>MIT</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$850<span>/license</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
+                            <button type="button" onclick="openLicenseModal('EyeArt Engine ($850 / license)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 4: RaymarcherVR Engine -->
+                <article class="product-card" data-category="VISUALIZATION_REPORTING">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">VISUALIZATION_REPORTING</span>
+                            <span class="tech-tag stack">C++ / CUDA / OpenGL</span>
+                        </div>
+                        <h3>RaymarcherVR Engine</h3>
+                        <p class="description">
+                            Ultra-low-latency C++ pipeline delivering direct raymarching shader computations inside virtual environments, CAVE projection rooms, quad-buffered stereo workstations, or head-mounted arrays.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="keyword">#include</span> <span class="string">&lt;raymarch_vr.h&gt;</span>
+VRRenderer* runtime = <span class="keyword">new</span> VRRenderer();
+runtime-&gt;<span class="function">initializeContext</span>(QUAD_BUFFERED_STEREO);
+runtime-&gt;<span class="function">injectComputeKernels</span>(cuda_particles);</pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$2,450<span>/binary</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://github.com/iebeid/RaymarcherVR.git" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
+                            <button type="button" onclick="openLicenseModal('RaymarcherVR Engine ($2,450 / binary)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 5: CudaParticles Engine -->
+                <article class="product-card" data-category="VISUALIZATION_REPORTING">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">VISUALIZATION_REPORTING</span>
+                            <span class="tech-tag stack">C++ / CUDA / OpenGL</span>
+                        </div>
+                        <h3>CudaParticles Engine</h3>
+                        <p class="description">
+                            High-performance particle interaction framework offloading multi-million point array physics calculations directly to NVIDIA CUDA compute units with zero-copy OpenGL pipeline integration.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="type">void</span> <span class="function">computeStream</span>() {
+    cudaMemcpy(d_data, h_data, size, cudaMemcpyHostToDevice);
+    runParticleKernel&lt;&lt;&lt;blocks, threads&gt;&gt;&gt;(d_data);
+}</pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$950<span>/license</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://github.com/iebeid/cuda-particles.git" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
+                            <button type="button" onclick="openLicenseModal('CudaParticles Engine ($950 / license)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 6: ModER-GraphER -->
+                <article class="product-card" data-category="MODELING_ENGINES">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">MODELING_ENGINES</span>
+                            <span class="tech-tag stack">Python / Graph ER / LSH</span>
+                        </div>
+                        <h3>ModER-GraphER</h3>
+                        <p class="description">
+                            Unsupervised graph entity resolution engine combining Locality-Sensitive Hashing (LSH) with Composite Modularity Optimization to deduplicate and link records across massive heterogeneous knowledge graphs.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="keyword">import</span> moder_er <span class="keyword">as</span> mer
+resolver = mer.<span class="function">ModularityResolver</span>(lsh_bands=<span class="string">16</span>)
+bipartite_graph = resolver.<span class="function">build_similarity_graph</span>(records_df)
+clusters = resolver.<span class="function">optimize_communities</span>(bipartite_graph)</pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$1,100<span>/node</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
+                            <button type="button" onclick="openLicenseModal('ModER-GraphER ($1,100 / node)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PRODUCT 7: XLPM-VisIntX Suite (Featured Live Interactive Demo) -->
+                <article id="xlpm-product" class="product-card" data-category="DATA_CURATION VISUALIZATION_REPORTING" style="border-color: var(--accent-cyan); box-shadow: 0 0 22px rgba(0, 242, 254, 0.12);">
+                    <div class="card-header">
+                        <div class="tag-container">
+                            <span class="tech-tag lifecycle">DATA_CURATION + VISUALIZATION_REPORTING</span>
+                            <span class="tech-tag stack">Perl / MySQL / D3.js / 3Dmol.js</span>
+                        </div>
+                        <h3>XLPM-VisIntX Suite</h3>
+                        <p class="description">
+                            End-to-end chemical cross-linking mass spectrometry (XL-MS) relational curation pipeline (15-table <code>xlpmwebv1</code> schema, 5 ppm / 0.8 Da <code>b/y</code> ion matcher, <code>14N/15N</code> isotope engine) paired with a 3-tier D3.js &amp; 3Dmol.js WebGL dual-protein viewer.
+                        </p>
+                    </div>
+                    <div class="snippet-container">
+                        <pre><span class="comment">// Launch 3-level D3 matrix + 3Dmol.js PDB viewer on curated MS/MS</span>
+<span class="keyword">var</span> seqTable = <span class="function">createSequenceTable</span>(preset.fasta);
+<span class="keyword">var</span> msBlocks = <span class="function">createBlockTable</span>(preset.tandem_ms_cscore);
+<span class="function">main</span>(preset.fasta, preset.tandem_ms_cscore); <span class="comment">// Syncs 3PGZ / 3R4G</span></pre>
+                    </div>
+                    <div class="card-footer">
+                        <div class="licensing-box">
+                            <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
+                            <div class="price-tag">$1,650<span>/suite</span></div>
+                        </div>
+                        <div class="action-row">
+                            <a href="../research/xlpm/index.html" class="btn btn-oss" style="border-color: var(--accent-green); color: var(--accent-green);"><i class="fas fa-play-circle"></i> Live Demo (6 Presets)</a>
+                            <button type="button" onclick="openLicenseModal('XLPM-VisIntX Suite ($1,650 / suite)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- Dual-Licensing Protocol Section -->
+        <section class="licensing-section" id="licensing">
+            <div class="section-header-center">
+                <h2>Our Fair-Code Dual-Licensing Ecosystem</h2>
+                <p>
+                    We believe in advancing open scientific reproducibility while building a sustainable software engineering business. All Unity Systems modules are dual-licensed based on your deployment and IP requirements.
+                </p>
+            </div>
+
+            <div class="license-grid">
+                <!-- Tier 1: Open Source -->
+                <div class="license-card">
+                    <h3>Open Source &amp; Academic</h3>
+                    <div class="price">$0 <sub>/ forever</sub></div>
+                    <p>Licensed under <strong>AGPLv3 / MIT</strong>. Ideal for academic researchers, students, hobbyists, and open-source software applications.</p>
+                    <ul class="license-features">
+                        <li><span class="icon-check">&#10003;</span> Full source code inspection &amp; fork rights</li>
+                        <li><span class="icon-check">&#10003;</span> Free community releases &amp; public issue tracking</li>
+                        <li><span class="icon-check">&#10003;</span> Unrestricted use in peer-reviewed academic studies</li>
+                        <li><span class="icon-cross">&#10007;</span> Must open-source downstream application logic if distributed or hosted over a network (AGPLv3)</li>
+                    </ul>
+                    <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss">View GitHub Repositories</a>
+                </div>
+
+                <!-- Tier 2: Commercial Component License -->
+                <div class="license-card highlight">
+                    <div class="badge">Recommended</div>
+                    <h3>Commercial Seat / Node</h3>
+                    <div class="price">$499&ndash;$2,450 <sub>/ unit</sub></div>
+                    <p>A flexible <strong>Proprietary Commercial License</strong> that completely bypasses AGPLv3 copyleft restrictions and protects your closed-source IP.</p>
+                    <ul class="license-features">
+                        <li><span class="icon-check">&#10003;</span> Embed in commercial, closed-source SaaS &amp; on-prem products</li>
+                        <li><span class="icon-check">&#10003;</span> Removes all AGPLv3 open-source disclosure obligations</li>
+                        <li><span class="icon-check">&#10003;</span> Private PyPI / pre-compiled C++ binary registry access token</li>
+                        <li><span class="icon-check">&#10003;</span> 1 year of priority email &amp; Slack engineering support</li>
+                        <li><span class="icon-check">&#10003;</span> Perpetual right-to-use for the licensed major version</li>
+                    </ul>
+                    <button type="button" onclick="openLicenseModal('Commercial Seat / Node License')" class="btn btn-commercial">Request Commercial License</button>
+                </div>
+
+                <!-- Tier 3: Enterprise MSA -->
+                <div class="license-card" id="enterprise">
+                    <h3>Enterprise Site &amp; MSA</h3>
+                    <div class="price">Custom <sub>/ annual</sub></div>
+                    <p>Tailored <strong>Master Service Agreements (MSAs)</strong> for enterprise R&amp;D organizations, telecom operators, and biotech platforms.</p>
+                    <ul class="license-features">
+                        <li><span class="icon-check">&#10003;</span> Organization-wide unlimited seat &amp; cluster node deployment</li>
+                        <li><span class="icon-check">&#10003;</span> Custom corporate indemnification &amp; legal compliance terms</li>
+                        <li><span class="icon-check">&#10003;</span> Dedicated architectural integration &amp; custom feature engineering</li>
+                        <li><span class="icon-check">&#10003;</span> Direct Principal Investigator / Architect advisory SLA</li>
+                    </ul>
+                    <button type="button" onclick="openLicenseModal('Enterprise Site License & Custom MSA')" class="btn btn-oss">Contact Enterprise Sales</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enterprise FAQ -->
+        <section class="faq-section" id="faq">
+            <div class="section-header-center">
+                <h2>Enterprise Licensing &amp; Fulfillment FAQ</h2>
+                <p>How Unity Systems delivers commercial licenses, private package tokens, and custom engineering agreements.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4><i class="fas fa-file-signature" style="color: var(--accent-cyan);"></i> Do you offer customized Master Service Agreements (MSAs)?</h4>
+                    <p>
+                        Yes. If your corporate legal or procurement team requires customized indemnification limits, vendor onboarding, or an enterprise-wide site license instead of individual developer seats or compute nodes, contact us directly to execute a custom MSA.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fas fa-box-open" style="color: var(--accent-green);"></i> How is the commercial key &amp; package delivered?</h4>
+                    <p>
+                        Upon license execution, your engineering team receives a unique authentication token for our private PyPI and compiled binary registry along with a counter-signed legal PDF copy of your commercial license agreement.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fas fa-scale-balanced" style="color: var(--accent-amber);"></i> When do I need a Commercial License vs. AGPLv3?</h4>
+                    <p>
+                        If you are using our libraries for academic research or open-source software released under a compatible license, the $0 AGPLv3/MIT tier applies. If you embed our libraries into a proprietary product, internal commercial pipeline, or hosted network service without disclosing your source code, a Commercial License is required.
+                    </p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fas fa-screwdriver-wrench" style="color: var(--brand-primary);"></i> Can Unity Systems build custom extensions for our stack?</h4>
+                    <p>
+                        Yes. Beyond off-the-shelf component licensing, Unity Systems provides bespoke R&amp;D consulting to integrate our AI lifecycle, biomedical graph, and GPU visualization engines directly into your enterprise data infrastructure.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Commercial License Inquiry Modal -->
+    <div id="license-modal" class="modal-backdrop" onclick="if(event.target === this) closeLicenseModal()">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3><i class="fas fa-key" style="color: var(--accent-cyan); margin-right: 6px;"></i> Commercial License &amp; MSA Request</h3>
+                <button class="modal-close" onclick="closeLicenseModal()" aria-label="Close">&times;</button>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.25rem;">
+                Unity Systems is currently in pre-incorporation preview. Submit your licensing inquiry below to generate a direct request to Dr. Islam Akef Ebeid for commercial evaluation tokens, quote generation, or custom MSA terms.
+            </p>
+            <form onsubmit="submitLicenseRequest(event)">
+                <div class="form-group">
+                    <label for="selected-product">SELECTED COMPONENT / TIER</label>
+                    <select id="selected-product" required>
+                        <option value="AILifecycleKit ($499 / dev seat)">AILifecycleKit ($499 / dev seat)</option>
+                        <option value="ProtGram-DirectGCN ($1,200 / node)">ProtGram-DirectGCN ($1,200 / node)</option>
+                        <option value="EyeArt Engine ($850 / license)">EyeArt Engine ($850 / license)</option>
+                        <option value="RaymarcherVR Engine ($2,450 / binary)">RaymarcherVR Engine ($2,450 / binary)</option>
+                        <option value="CudaParticles Engine ($950 / license)">CudaParticles Engine ($950 / license)</option>
+                        <option value="ModER-GraphER ($1,100 / node)">ModER-GraphER ($1,100 / node)</option>
+                        <option value="XLPM-VisIntX Suite ($1,650 / suite)">XLPM-VisIntX Suite ($1,650 / suite)</option>
+                        <option value="Commercial Seat / Node License">Commercial Seat / Node License</option>
+                        <option value="Enterprise Site License & Custom MSA">Enterprise Site License &amp; Custom MSA</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="org-name">ORGANIZATION / COMPANY NAME</label>
+                    <input type="text" id="org-name" placeholder="e.g., Acme Biotech Corp." required>
+                </div>
+                <div class="form-group">
+                    <label for="seat-count">ESTIMATED SEATS / NODES</label>
+                    <input type="text" id="seat-count" placeholder="e.g., 5 developer seats / 2 compute nodes" value="1">
+                </div>
+                <div class="form-group">
+                    <label for="use-case">DEPLOYMENT &amp; INTEGRATION NOTES</label>
+                    <textarea id="use-case" rows="3" placeholder="Briefly describe your commercial use case or MSA requirements..."></textarea>
+                </div>
+                <div class="action-row" style="margin-top: 1.25rem;">
+                    <button type="button" class="btn btn-oss" onclick="closeLicenseModal()">Cancel</button>
+                    <button type="submit" class="btn btn-commercial"><i class="fas fa-paper-plane"></i> Send License Inquiry</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div>
+            <strong>Unity Systems | <span dir="rtl" lang="ar" style="font-family: 'Cairo', sans-serif;">أنظمة الوحدة</span></strong> (United States &amp; Egypt) &mdash; A Technology Venture by <a href="business.html">Dr. Islam Akef Ebeid</a>. Distributed under Dual AGPLv3 / MIT &amp; Commercial terms.
+        </div>
+        <div>
+            <a href="business.html">Business Portfolio</a> &bull;
+            <a href="../../index.html">Main Website</a> &bull;
+            <a href="mailto:iaebeid@gmail.com">iaebeid@gmail.com</a>
+        </div>
+    </footer>
+
+    <script>
+        function filterSystem(category, element) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                const cats = (card.getAttribute('data-category') || '').split(/\s+/);
+                if (category === 'ALL_SYSTEMS' || cats.includes(category)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        function copyInstallCmd(el) {
+            const text = document.getElementById('pip-text').textContent;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text);
+                const original = document.getElementById('pip-text').textContent;
+                document.getElementById('pip-text').textContent = 'Copied: ' + original;
+                setTimeout(() => {
+                    document.getElementById('pip-text').textContent = original;
+                }, 1800);
+            }
+        }
+
+        function openLicenseModal(productName) {
+            const modal = document.getElementById('license-modal');
+            const select = document.getElementById('selected-product');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value === productName) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            modal.classList.add('open');
+        }
+
+        function closeLicenseModal() {
+            document.getElementById('license-modal').classList.remove('open');
+        }
+
+        function submitLicenseRequest(e) {
+            e.preventDefault();
+            const product = document.getElementById('selected-product').value;
+            const org = document.getElementById('org-name').value;
+            const seats = document.getElementById('seat-count').value;
+            const notes = document.getElementById('use-case').value;
+
+            const subject = encodeURIComponent('Unity Systems Commercial License Inquiry: ' + product);
+            const body = encodeURIComponent(
+                'Organization: ' + org + '\n' +
+                'Product / Tier: ' + product + '\n' +
+                'Estimated Seats / Nodes: ' + seats + '\n\n' +
+                'Deployment & Integration Notes:\n' + notes
+            );
+            window.location.href = 'mailto:iaebeid@gmail.com?subject=' + subject + '&body=' + body;
+            closeLicenseModal();
+        }
+    </script>
+</body>
+</html>
