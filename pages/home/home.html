@@ -16,14 +16,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <style>
+    <style type="text/tailwindcss">
         body {
             font-family: 'Georgia', serif;
             background-color: #f8fafc;
             color: #1f2937;
-        }
-        .section-title {
-            @apply text-3xl font-bold text-gray-800 mb-8 text-center;
         }
         .tag {
             @apply inline-block bg-sky-100 text-sky-800 text-xs font-semibold mr-1.5 mb-1.5 px-2.5 py-1 rounded-full;
@@ -44,8 +41,10 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="home.html" class="text-sky-600 font-semibold transition">Home</a>
+                    <a href="../relations/relations.html" class="text-gray-600 hover:text-sky-600 transition">Relations</a>
                     <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
                     <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="../scholarship/scholarship.html" class="text-gray-600 hover:text-sky-600 transition">Scholarship</a>
                     <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
                     <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
                     <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
@@ -62,8 +61,10 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
                 <a href="home.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Home</a>
+                <a href="../relations/relations.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Relations</a>
                 <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
                 <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
+                <a href="../scholarship/scholarship.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Scholarship</a>
                 <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
                 <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
                 <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
@@ -102,16 +103,10 @@
                             <a href="../research/lab.html" class="inline-flex items-center gap-2 bg-emerald-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow hover:bg-emerald-700 transition">
                                 <i class="fas fa-flask"></i> Data2AI4LifeSciences Lab
                             </a>
-                            <a href="../media/talk/summary.html" target="_blank" class="inline-flex items-center gap-2 bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow hover:bg-indigo-700 transition">
-                                <i class="fas fa-award"></i> 10-Min Executive Brief (Dean &amp; Provost)
-                            </a>
-                            <a href="../media/talk/talk.html" target="_blank" class="inline-flex items-center gap-2 bg-purple-600 text-white font-semibold px-5 py-2.5 rounded-lg shadow hover:bg-purple-700 transition">
-                                <i class="fas fa-chalkboard-teacher"></i> 20-Min Job Talk Slides (Committee)
-                            </a>
                             <a href="https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en" target="_blank" class="inline-flex items-center gap-2 bg-gray-100 text-gray-800 font-semibold px-5 py-2.5 rounded-lg hover:bg-gray-200 transition border border-gray-200">
                                 <i class="fas fa-graduation-cap"></i> Google Scholar
                             </a>
-                            <a href="#contact" class="inline-flex items-center gap-2 bg-gray-100 text-gray-800 font-semibold px-5 py-2.5 rounded-lg hover:bg-gray-200 transition border border-gray-200">
+                            <a href="../relations/relations.html" class="inline-flex items-center gap-2 bg-gray-100 text-gray-800 font-semibold px-5 py-2.5 rounded-lg hover:bg-gray-200 transition border border-gray-200">
                                 <i class="fas fa-envelope"></i> Connect
                             </a>
                         </div>
@@ -121,39 +116,6 @@
                         <div class="relative p-2 bg-white rounded-full shadow-2xl border-4 border-sky-100">
                             <img src="../../images/image1.jpg" alt="Islam Akef Ebeid" class="rounded-full w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 object-cover">
                         </div>
-                        <div class="mt-4 text-center">
-                            <p class="text-sm font-semibold text-gray-800">Islam Akef Ebeid, Ph.D.</p>
-                            <p class="text-xs text-gray-500">Ph.D. Computer & Information Science</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Announcement: Nile University Job Talk & Final Interview Presentations -->
-        <section class="bg-gradient-to-r from-sky-900 to-indigo-900 text-white py-8 shadow-inner">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center text-amber-300 text-2xl flex-shrink-0 border border-white/20">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div>
-                            <span class="inline-block bg-amber-400 text-gray-900 text-xs font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider mb-1">Featured Interview Presentations</span>
-                            <h2 class="text-xl sm:text-2xl font-bold">Faculty Candidate Presentations &mdash; School of ITCS, Nile University</h2>
-                            <p class="text-sm text-sky-200 mt-1">View both the <strong>10-Minute Executive Self-Brief</strong> (Final Interview with Dean &amp; Provost) and the <strong>20-Minute Full Job Talk</strong> (ITCS Committee), or download in PowerPoint (.pptx) &amp; PDF formats.</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-wrap items-center gap-3">
-                        <a href="../media/talk/summary.html" target="_blank" class="inline-flex items-center gap-2 bg-amber-400 text-gray-950 font-bold px-5 py-2.5 rounded-lg shadow hover:bg-amber-300 transition whitespace-nowrap">
-                            <i class="fas fa-bolt"></i> View 10-Min Executive Brief
-                        </a>
-                        <a href="../media/talk/talk.html" target="_blank" class="inline-flex items-center gap-2 bg-white text-sky-900 font-bold px-5 py-2.5 rounded-lg shadow hover:bg-sky-50 transition whitespace-nowrap">
-                            <i class="fas fa-play"></i> View 20-Min Job Talk
-                        </a>
-                        <a href="../media/media.html" class="inline-flex items-center gap-2 bg-sky-700 text-white font-semibold px-4 py-2.5 rounded-lg hover:bg-sky-600 transition whitespace-nowrap border border-sky-500">
-                            <i class="fas fa-download"></i> PPTX &amp; PDF (Media &amp; Talks)
-                        </a>
                     </div>
                 </div>
             </div>
@@ -216,44 +178,81 @@
 
                         <!-- News & Announcements Card -->
                         <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                                <i class="fas fa-newspaper text-sky-600"></i> News & Announcements
-                            </h3>
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-xl font-bold text-gray-800 flex items-center gap-2">
+                                    <i class="fas fa-newspaper text-sky-600"></i> News & Announcements
+                                </h3>
+                                <span class="text-[11px] font-semibold uppercase tracking-wider bg-sky-50 text-sky-700 px-2.5 py-0.5 rounded-full border border-sky-200">Latest Highlights</span>
+                            </div>
                             <div class="space-y-4 text-sm text-gray-700">
-                                
                                 <div class="border-l-2 border-emerald-500 pl-3">
-                                    <span class="font-bold text-emerald-800 block">October 2026</span>
-                                    <p>Invited faculty interview and presentation for the School of ITCS at Nile University.</p>
+                                    <span class="font-bold text-emerald-800 block">October 2025</span>
+                                    <p>Awarded a <strong>$600,000 ($210,000 TWU portion)</strong> collaborative <strong>National Science Foundation (NSF CISE/CCF)</strong> grant as Principal Investigator for <em>"Towards auto-prompt textual annotations generation with domain knowledge for multimodal medical image segmentation"</em> (2025–2028).</p>
                                 </div>
 
                                 <div class="border-l-2 border-sky-500 pl-3">
                                     <span class="font-bold text-sky-800 block">October 2025</span>
-                                    <p>Published new paper in <em>Frontiers in Bioinformatics</em> on residue transition graphs for protein interaction prediction.</p>
+                                    <p>Published senior-authored journal article on <strong>ProtGram-DirectGCN</strong> (<em>"Inferred global dense residue transition graphs from primary structure sequences enable protein interaction prediction via directed graph convolutional neural networks"</em>) in <em>Frontiers in Bioinformatics</em>.</p>
                                 </div>
 
                                 <div class="border-l-2 border-sky-500 pl-3">
-                                    <span class="font-bold text-sky-800 block">August 2025</span>
-                                    <p>Awarded $210K / $600K collaborative National Science Foundation (NSF) Grant (CISE/CCF) as Principal Investigator.</p>
+                                    <span class="font-bold text-sky-800 block">June 2025</span>
+                                    <p>Published <em>"Adapting a Segmentation Foundation Model for Medical Image Classification"</em> in the <em>Proceedings of the 38th IEEE International Symposium on Computer-Based Medical Systems (CBMS 2025)</em>.</p>
                                 </div>
 
                                 <div class="border-l-2 border-sky-500 pl-3">
-                                    <span class="font-bold text-sky-800 block">October 2024</span>
-                                    <p>Teaching Foundations of Data Science and Fundamentals of Informatics at Texas Woman's University.</p>
+                                    <span class="font-bold text-sky-800 block">Spring 2025</span>
+                                    <p>Awarded <strong>TWU Internal Research Grant ($5,000)</strong> as PI for HPC AI infrastructure upgrades; appointed to the Editorial Board of <em>Research in Biomedical Engineering and Technology</em>; and participated in <em>TACCSTER 2025</em> at UT Austin.</p>
                                 </div>
 
-                                <!-- Collapsible Historical Archive to preserve 100% of information -->
-                                <details class="pt-2 text-xs text-gray-500">
-                                    <summary class="cursor-pointer font-semibold text-sky-600 hover:text-sky-800 focus:outline-none mb-2">
-                                        <i class="fas fa-history mr-1"></i> Historical Milestones Archive (2016 - 2017)
-                                    </summary>
-                                    <div class="space-y-2 pl-2 border-l border-gray-200 mt-2">
-                                        <p><span class="font-semibold text-gray-700">January 2017:</span> Travel to Miami for family engagements.</p>
-                                        <p><span class="font-semibold text-gray-700">December 2016:</span> Complete revamping and redesign of personal academic website.</p>
-                                        <p><span class="font-semibold text-gray-700">November 2016:</span> Participated in the Supercomputing 2016 (SC16) conference.</p>
-                                        <p><span class="font-semibold text-gray-700">October 2016:</span> Research on multi-projector auto-calibration algorithms.</p>
-                                    </div>
-                                </details>
+                                <!-- Collapsible Historical Archives to keep the sidebar compact while preserving 100% of career milestones -->
+                                <div class="pt-3 border-t border-gray-100 space-y-2.5 text-xs text-gray-600">
+                                    <!-- 2023 - 2024 Archive -->
+                                    <details class="group bg-gray-50 rounded-lg border border-gray-200/80 p-2.5">
+                                        <summary class="cursor-pointer font-semibold text-sky-700 hover:text-sky-900 focus:outline-none flex items-center justify-between">
+                                            <span><i class="fas fa-calendar-check mr-1.5 text-sky-600"></i> 2023 – 2024 Milestones (Faculty & Lab Launch)</span>
+                                            <i class="fas fa-chevron-down text-[10px] text-gray-400 group-open:rotate-180 transition-transform"></i>
+                                        </summary>
+                                        <div class="space-y-2.5 pl-2.5 border-l-2 border-sky-200 mt-3 text-gray-600 leading-relaxed">
+                                            <p><span class="font-semibold text-gray-800">Fall 2024:</span> Advised 5 M.Sc. graduate capstones in Health Informatics & Data Science at TWU; taught <em>Foundations of Data Science</em> and <em>Fundamentals of Informatics</em>; attended <em>TACCSTER 2024</em> (Austin, TX), <em>ISNA 2024</em>, and <em>ACM SIGCSE Early Research Scholars</em>.</p>
+                                            <p><span class="font-semibold text-gray-800">March 2024:</span> Delivered invited oral presentation on <strong>MedGCN</strong> at <em>MCBIOS 2024</em> (Atlanta, GA) and published two civic op-ed letters in the <em>Denton Record-Chronicle</em> (March 16–17 & March 30–31).</p>
+                                            <p><span class="font-semibold text-gray-800">Spring 2024:</span> Taught <em>Data Warehousing</em>, <em>Statistical Programming</em>, and <em>Programming for Informatics</em> at TWU; advised graduate capstone on ML models for Alzheimer's Disease progression; served on TWU AI Initiative, Sustainability, and Curriculum committees.</p>
+                                            <p><span class="font-semibold text-gray-800">August 2023:</span> Joined <strong>Texas Woman's University (TWU)</strong> as Assistant Professor of Computer Science; awarded <strong>$66,000 Startup Fund</strong> to establish the <strong>Data2AI4LifeSciences Lab</strong> and received <strong>The Hanover Grants Academy Award</strong>.</p>
+                                            <p><span class="font-semibold text-gray-800">Summer 2023:</span> Published essays on AI and spiritual philosophy in <em>Illumination</em> and <em>AI Monks</em> on Medium; volunteered with <em>Dallas CASA</em>.</p>
+                                            <p><span class="font-semibold text-gray-800">Spring 2023:</span> Served as Assistant Professor of Computer Science and Faculty Advisor for the CS Club at <strong>Southern Arkansas University</strong> (teaching <em>Computer Science II</em>, <em>Database Management Systems</em>, and <em>Unix Operating Systems</em>).</p>
+                                        </div>
+                                    </details>
 
+                                    <!-- 2017 - 2022 Archive -->
+                                    <details class="group bg-gray-50 rounded-lg border border-gray-200/80 p-2.5">
+                                        <summary class="cursor-pointer font-semibold text-sky-700 hover:text-sky-900 focus:outline-none flex items-center justify-between">
+                                            <span><i class="fas fa-graduation-cap mr-1.5 text-sky-600"></i> 2017 – 2022 Milestones (Postdoc, Ph.D. & UT Austin)</span>
+                                            <i class="fas fa-chevron-down text-[10px] text-gray-400 group-open:rotate-180 transition-transform"></i>
+                                        </summary>
+                                        <div class="space-y-2.5 pl-2.5 border-l-2 border-sky-200 mt-3 text-gray-600 leading-relaxed">
+                                            <p><span class="font-semibold text-gray-800">2022 – 2023:</span> Postdoctoral Research Associate at the <strong>University of North Texas (UNT)</strong> conducting NIH-funded Graph Neural Network research for drug repurposing; peer reviewer for <em>Cambridge University Press Journal of Natural Language Engineering</em> and <em>IEEE BIBM</em>.</p>
+                                            <p><span class="font-semibold text-gray-800">May 2022:</span> Graduated with <strong>Ph.D. in Computer & Information Science</strong> from <strong>UA Little Rock</strong> and honored as <strong>Outstanding Doctoral Graduate (2022)</strong>; published <strong>MedGraph</strong> in <em>Frontiers in Big Data</em>, <strong>ModER</strong> in <em>IJACSA</em>, and <em>ITNG 2022</em> (Springer).</p>
+                                            <p><span class="font-semibold text-gray-800">2020 – 2021:</span> Earned M.Sc. in Computer & Information Science; co-authored the landmark <strong>PubMed Knowledge Graph</strong> in <em>Nature Scientific Data</em> (2020), COVID-19 literature networks in <em>Scientometrics</em> (2021), and computational social science research in <em>Voluntas</em> (2021); completed Data Science Research Internship at <strong>AbbVie Inc.</strong> and selected for the <strong>Data Science for Social Good Fellowship</strong>.</p>
+                                            <p><span class="font-semibold text-gray-800">2017 – 2020:</span> Doctoral Researcher & Teaching Fellow at <strong>The University of Texas at Austin</strong> and the <strong>Texas Advanced Computing Center (TACC)</strong> (funded by <strong>Lockheed Martin</strong> and <strong>Intel</strong>); won the <strong>Best Short Paper Award at ACM SIGCHI ETRA 2019</strong>, <strong>UT Austin Professional Development Award (2019)</strong>, and <strong>UT Austin Graduate Recruitment Fellowship (2017)</strong>; served as Editorial Fellow at the <em>Journal of Information & Culture</em> (UT Press).</p>
+                                        </div>
+                                    </details>
+
+                                    <!-- 2005 - 2017 Archive -->
+                                    <details class="group bg-gray-50 rounded-lg border border-gray-200/80 p-2.5">
+                                        <summary class="cursor-pointer font-semibold text-sky-700 hover:text-sky-900 focus:outline-none flex items-center justify-between">
+                                            <span><i class="fas fa-history mr-1.5 text-sky-600"></i> 2005 – 2017 Archive (Early Research & Industry)</span>
+                                            <i class="fas fa-chevron-down text-[10px] text-gray-400 group-open:rotate-180 transition-transform"></i>
+                                        </summary>
+                                        <div class="space-y-2.5 pl-2.5 border-l-2 border-sky-200 mt-3 text-gray-600 leading-relaxed">
+                                            <p><span class="font-semibold text-gray-800">January 2017:</span> Travel to Miami for family engagements; completed Software Engineering Internship at <strong>Intel Corporation</strong> (Santa Clara, CA) working on Intel Graphics Performance Analyzers.</p>
+                                            <p><span class="font-semibold text-gray-800">December 2016:</span> Complete revamping and redesign of personal academic website.</p>
+                                            <p><span class="font-semibold text-gray-800">November 2016:</span> Participated in the <em>Supercomputing 2016 (SC16)</em> conference in Salt Lake City, UT.</p>
+                                            <p><span class="font-semibold text-gray-800">October 2016:</span> Research on multi-projector auto-calibration algorithms at the <strong>Emerging Analytics Center (EAC)</strong>; published <strong>XLPM / VisInt-X</strong> in <em>IS&T Electronic Imaging (EI 2016)</em> and <em>MCBIOS (2015–2016)</em>.</p>
+                                            <p><span class="font-semibold text-gray-800">2011 – 2014:</span> Software Developer at <strong>Arkansas.gov (NIC Inc.)</strong> building state e-government portals; graduated with a <strong>Professional M.Sc. in Computer & Information Science</strong> from <strong>Arkansas Tech University</strong> (2013).</p>
+                                            <p><span class="font-semibold text-gray-800">2005 – 2011:</span> Telecom & Enterprise Software Engineer at <strong>WeDo Technologies</strong>, <strong>Orange Telecom (Mobinil)</strong>, and <strong>Xpress Integration</strong> (delivering Openwave SMSC/MMSC deployments for <em>Maroc Telecom</em> and <em>Tunisie Telecom</em>); Electronics Engineer at <strong>Hanna Instruments</strong>; earned <strong>B.Sc. in Electrical & Computer Engineering</strong> from <strong>Ain Shams University</strong> (2008, <em>Distinctive Capstone Project Award</em> for <em>ICAS</em>).</p>
+                                        </div>
+                                    </details>
+                                </div>
                             </div>
                         </div>
 
@@ -266,7 +265,6 @@
         <section id="current-projects" class="py-16 bg-white border-y border-gray-100">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="section-title">Current Research & Flagship Projects</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
                         <!-- Project 1: ProtGram-DirectGCN -->
@@ -324,7 +322,6 @@
         <section id="experience" class="py-16">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="section-title">Academic & Professional Experience</h2>
                     <div class="relative border-l-2 border-sky-200 pl-8 space-y-8">
                         
                         <!-- TWU -->
@@ -428,7 +425,6 @@
         <section id="publications" class="py-16 bg-white border-y border-gray-100">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="max-w-4xl mx-auto">
-                    <h2 class="section-title">Selected Publications</h2>
                     <p class="text-center text-gray-600 mb-8 text-sm">
                         For a complete bibliographic record, visit my profiles on 
                         <a href="https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en" target="_blank" class="text-sky-600 font-semibold hover:underline">Google Scholar</a>, 
@@ -485,49 +481,6 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Section 6: Contact & Profiles -->
-        <section id="contact" class="py-16">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="section-title">Get In Touch</h2>
-                    <p class="text-gray-700 leading-relaxed mb-6">
-                        I am always open to discussing research collaborations, student mentorship, academic initiatives, and consulting engagements.
-                    </p>
-
-                    <!-- Contact Details Card -->
-                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100 mb-8 space-y-4">
-                        <div>
-                            <p class="text-xs uppercase font-bold text-gray-400 tracking-wider mb-1">Email Correspondence</p>
-                            <div class="space-y-1">
-                                <p><a href="mailto:iebeid@twu.edu" class="text-lg font-bold text-sky-600 hover:text-sky-800 transition">iebeid@twu.edu</a> (Institutional)</p>
-                                <p><a href="mailto:iaebeid@utexas.edu" class="text-base font-semibold text-sky-600 hover:text-sky-800 transition">iaebeid@utexas.edu</a> (Alumni / UT Austin)</p>
-                                <p><a href="mailto:iaebeid@gmail.com" class="text-base font-semibold text-sky-600 hover:text-sky-800 transition">iaebeid@gmail.com</a> (Personal)</p>
-                            </div>
-                        </div>
-
-                        <div class="pt-3 border-t border-gray-100">
-                            <p class="text-xs uppercase font-bold text-gray-400 tracking-wider mb-1">Office & Telephone</p>
-                            <p class="text-sm text-gray-700 font-medium">Cell: <span class="font-bold">512-921-1311</span> | Office: <span class="font-bold">940-898-2165</span></p>
-                            <p class="text-sm text-gray-600 mt-1">Texas Woman&rsquo;s University | MCL 412 | Denton, TX 76204</p>
-                        </div>
-                    </div>
-
-                    <!-- Social / Academic Icons -->
-                    <div class="flex flex-wrap justify-center gap-4 text-2xl text-gray-600">
-                        <a href="https://github.com/iebeid" target="_blank" title="GitHub" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fab fa-github"></i></a>
-                        <a href="https://www.linkedin.com/in/islam-akef-ebeid-5b0427340/" target="_blank" title="LinkedIn" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://twitter.com/i3akef" target="_blank" title="Twitter / X" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fab fa-twitter"></i></a>
-                        <a href="https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en" target="_blank" title="Google Scholar" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="https://www.researchgate.net/profile/Islam-Ebeid" target="_blank" title="ResearchGate" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fab fa-researchgate"></i></a>
-                        <a href="https://www.webofscience.com/wos/author/record/GLQ-8040-2022" target="_blank" title="Web of Science" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fas fa-flask"></i></a>
-                        <a href="https://dl.acm.org/profile/99659275617" target="_blank" title="ACM Digital Library" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fas fa-book"></i></a>
-                        <a href="https://dblp.org/pid/182/4444.html" target="_blank" title="DBLP" class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center hover:text-sky-600 hover:shadow transition border border-gray-100"><i class="fas fa-database"></i></a>
-                    </div>
-
                 </div>
             </div>
         </section>

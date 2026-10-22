@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Downloadable papers, technical design reports, course syllabi, interactive job talk presentation slides, and CV of Dr. Islam Akef Ebeid.">
-    <meta property="og:title" content="Downloads, Presentations & Documents - Dr. Islam Akef Ebeid">
-    <meta property="og:description" content="Downloadable papers, technical design reports, course syllabi, interactive job talk presentation slides, and CV of Dr. Islam Akef Ebeid.">
-    <meta property="og:type" content="website">
-    <title>Downloads & Presentations - Dr. Islam Akef Ebeid</title>
+    <title>Downloads &amp; Documents - Dr. Islam Akef Ebeid</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -22,12 +18,16 @@
             background-color: #f8fafc;
             color: #1f2937;
         }
-        .section-title {
-            @apply text-3xl font-bold text-gray-800 mb-8 text-center;
+        .scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
         }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
+
+    <!-- Header & Navigation -->
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -36,8 +36,10 @@
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
                     <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                    <a href="../relations/relations.html" class="text-gray-600 hover:text-sky-600 transition">Relations</a>
                     <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
                     <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
+                    <a href="../scholarship/scholarship.html" class="text-gray-600 hover:text-sky-600 transition">Scholarship</a>
                     <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
                     <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
                     <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
@@ -54,9 +56,11 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
                 <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../relations/relations.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Relations</a>
                 <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
                 <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
                 <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
+                <a href="../scholarship/scholarship.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Scholarship</a>
                 <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
                 <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
                 <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
@@ -68,156 +72,1003 @@
     </header>
 
     <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="section-title">Technical Design Documents &amp; Software Repositories</h1>
-        <p class="text-center text-gray-600 max-w-2xl mx-auto -mt-4 mb-10 text-base">
-            Access and download open-source software repositories, graduate project design documents, system specifications, and institutional governance monographs.
-        </p>
+        <div class="max-w-4xl mx-auto space-y-10">
 
-        <div class="max-w-4xl mx-auto space-y-8">
-
-            <!-- Open Source Systems & Technical Documents -->
-            <div class="space-y-6">
-                <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                    <i class="fas fa-file-download text-sky-600 mr-2"></i> Technical Design Documents & Software Repositories
-                </h3>
-
-                <!-- Genesis Development Environment -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Master's Project: Genesis Development Environment (GDE)</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        A visual programming runtime providing animated algorithm behavior and graphical data structure manipulation while generating underlying source code.
+            <!-- Header & Filter Bar -->
+            <div class="bg-white p-6 sm:p-8 rounded-xl shadow-md border-l-4 border-sky-600 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-folder-open text-sky-600 mr-3"></i> Downloads &amp; Document Index
+                    </h1>
+                    <p class="text-sm text-gray-600 mt-1">
+                        A consolidated directory of all academic publications, technical reports, presentation decks, course syllabi, and software architecture documents across this website.
                     </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="../../documents/Genesis Development Environment Design Document.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Design Document</a>
-                        <a href="../../documents/ThesisParagraph.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Thesis Abstract</a>
-                        <a href="../../documents/ThesisProposal.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Thesis Proposal</a>
-                        <a href="https://github.com/iebeid/genesis-visual-programming.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
+                </div>
+                <!-- Quick Search Input -->
+                <div class="w-full md:w-72 flex-shrink-0">
+                    <div class="relative">
+                        <input id="search-input" type="text" placeholder="Search documents..." class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400 text-xs"></i>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px] text-gray-400 mt-1 px-1">
+                        <span>47 downloadable files cataloged</span>
+                        <span id="match-count" class="font-medium text-sky-600">Showing all</span>
                     </div>
                 </div>
-
-                <!-- ICAS -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Bachelor's Project: Intersection Collision Avoidance System (ICAS)</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        A Java client-server application and microcontroller/GPS hardware implementation linking vehicles directly to road infrastructure to automate collision avoidance and optimize traffic.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="../../documents/The-VII-propject-V3.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Final Thesis PDF</a>
-                        <a href="../../documents/Graduation_Project_Presentation.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-powerpoint mr-1"></i> Presentation Slides</a>
-                    </div>
-                </div>
-
-                <!-- Paper Submission Web App -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Conference Paper Submission & Review Application</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        A web-based system for submitting and reviewing conference papers developed with PHP, MySQL, and HTML.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="../../documents/design-document.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Design Document</a>
-                        <a href="https://github.com/iebeid/paper-submission-application.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
-                    </div>
-                </div>
-
-                <!-- Unity Info Viz -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Information Visualization in Virtual Environments (Unity)</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        Basic interactive graph elements built in Unity for mobile and head-mounted virtual reality displays.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="https://github.com/iebeid/info-viz-unity.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
-                    </div>
-                </div>
-
-                <!-- DICOM -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Extracting an Isosurface from DICOM Volume Images</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        Algorithms for rendering isosurfaces from volumetric medical imaging data.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="https://github.com/iebeid/dicom-to-isosurface.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
-                    </div>
-                </div>
-
-                <!-- RealSense Tracker -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Intel RealSense Head & Marker Tracker</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        A VRPN tracker for reflective marker ball configurations on glasses for perspective head tracking.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="https://github.com/iebeid/realsense-tracking.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
-                    </div>
-                </div>
-
-                <!-- RaymarcherVR -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">RaymarcherVR</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        Desktop raymarching shaders ported to virtual reality for procedural 3D visual environments.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="https://github.com/iebeid/RaymarcherVR.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
-                    </div>
-                </div>
-
-                <!-- Quad Buffered Stereo -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Quad Buffered Stereo on Nvidia Quadro 6000</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        An OpenGL renderer exploring quad-buffered stereo rendering on professional workstation graphics hardware.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="https://github.com/iebeid/quad-buffered-stereo.git" target="_blank" class="text-sky-600 hover:underline"><i class="fab fa-github mr-1"></i> GitHub Code</a>
-                    </div>
-                </div>
-
-                <!-- IT Security & E-Discovery Policies -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">IT Security Policies & E-Discovery Standards</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        Legal compliance, electronically stored information (ESI) governance, and digital security operational policies drafted for higher education institutional administration.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="../../documents/IT Policies.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> IT Policies & E-Discovery PDF</a>
-                        <a href="../../documents/The-National-Visualization-Lab.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> National Visualization Lab Security Policy</a>
-                    </div>
-                </div>
-
-                <!-- Academic Department Architecture & Outreach -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-100">
-                    <h4 class="text-lg font-bold text-gray-800 mb-1">Academic Department Web Architecture & Student Affairs</h4>
-                    <p class="text-gray-600 text-xs leading-relaxed mb-4">
-                        Comprehensive architecture specifications for university departmental portals, ABET accreditation tracking, and international student service operations.
-                    </p>
-                    <div class="flex flex-wrap gap-4 text-xs font-semibold">
-                        <a href="../../documents/department_website.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Department Portal Specification</a>
-                        <a href="../../documents/Arkansas Tech University.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> ATU CIS Department Outline</a>
-                        <a href="../../documents/Arkansas_Tech_University_Profile.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> Institutional Profile</a>
-                        <a href="../../documents/RFsingaporefinal_compact_2_edited.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> International Services Guide</a>
-                        <a href="../../documents/English Language Institute.pdf" target="_blank" class="text-sky-600 hover:underline"><i class="fas fa-file-pdf mr-1"></i> English Language Institute Curriculum</a>
-                    </div>
-                </div>
-
             </div>
+
+            <!-- Category 1: Curriculum Vitae & Profiles -->
+            <section class="space-y-4 doc-group">
+                <div class="flex items-center gap-2.5 pb-2 border-b-2 border-sky-600">
+                    <i class="fas fa-id-badge text-sky-600 text-lg"></i>
+                    <h2 class="text-xl font-bold text-gray-800">Curriculum Vitae &amp; Institutional Profiles</h2>
+                </div>
+                <ul class="space-y-3">
+                    <!-- Item 1 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-sky-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Curriculum Vitae (CV) &mdash; Dr. Islam Akef Ebeid</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Complete faculty record, active NSF collaborative grant, peer-reviewed publications, awards, and university teaching.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">461 KB</span>
+                            <a href="../../documents/CV_Ebeid.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 2 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-sky-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Arkansas Tech University Institutional Profile</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Overview of graduate programs, regional accreditation, academic departments, and research profile.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">129 KB</span>
+                            <a href="../../documents/Arkansas_Tech_University_Profile.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 3 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-sky-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">ATU Computer &amp; Information Science Department Profile</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Detailed departmental profile, computing curricula, laboratory facilities, and faculty research.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">939 KB</span>
+                            <a href="../../documents/Arkansas Tech University.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Category 2: Presentations, Talks & Seminars -->
+            <section class="space-y-4 doc-group">
+                <div class="flex items-center gap-2.5 pb-2 border-b-2 border-amber-500">
+                    <i class="fas fa-chalkboard-teacher text-amber-600 text-lg"></i>
+                    <h2 class="text-xl font-bold text-gray-800">Presentations, Invited Talks &amp; Seminars</h2>
+                </div>
+                <ul class="space-y-3">
+                    <!-- Item 1: Executive Brief -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-powerpoint"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Faculty Job Talk: Executive Brief (10-Minute High-Level Overview)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Condensed presentation summarizing foundational AI research agenda, grant strategy, and teaching.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 self-end sm:self-center flex-shrink-0">
+                            <a href="../media/talk/NU_Executive_Brief_10Min.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-semibold transition border border-rose-200 hover:border-rose-600">
+                                <i class="fas fa-file-pdf"></i> PDF (514 KB)
+                            </a>
+                            <a href="../media/talk/NU_Executive_Brief_10Min.pptx" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-lg text-xs font-semibold transition border border-amber-200 hover:border-amber-600">
+                                <i class="fas fa-file-powerpoint"></i> PPTX (21 KB)
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 2: Full Job Talk -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-powerpoint"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Faculty Job Talk: Full Research &amp; Teaching Presentation (20-Minute)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Comprehensive colloquium slides detailing neuro-symbolic AI, biomedical foundation models, and student mentorship.</p>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 self-end sm:self-center flex-shrink-0">
+                            <a href="../media/talk/NU_Job_Talk_20Min.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-rose-50 text-rose-700 hover:bg-rose-600 hover:text-white rounded-lg text-xs font-semibold transition border border-rose-200 hover:border-rose-600">
+                                <i class="fas fa-file-pdf"></i> PDF (1.0 MB)
+                            </a>
+                            <a href="../media/talk/NU_Job_Talk_20Min.pptx" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-lg text-xs font-semibold transition border border-amber-200 hover:border-amber-600">
+                                <i class="fas fa-file-powerpoint"></i> PPTX (42 KB)
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 3: ICAS Slides -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-powerpoint"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">ICAS Capstone Defense Presentation Deck</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Graduation project slides on connected vehicle infrastructure and intersection collision prevention (Ain Shams Univ).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">3.7 MB</span>
+                            <a href="../../documents/Graduation_Project_Presentation.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-amber-50 text-amber-800 hover:bg-amber-600 hover:text-white rounded-lg text-xs font-semibold transition border border-amber-200 hover:border-amber-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Deck
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 4: VisInt-X Presentation -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">VisInt-X / XLPM Electronic Imaging Presentation</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Multi-projector auto-calibration and unconstrained spatial camera-projector mapping algorithms.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">738 KB</span>
+                            <a href="../../documents/visintx_presentation.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 5: XLPM Map Viewer Deck -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">XLPM Map Viewer Presentation Deck</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Technical slide deck demonstrating planar homography transforms and multi-surface map rendering.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">498 KB</span>
+                            <a href="../../documents/XLPM-Map-Viewer-Final.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 6: XLPMol 3D Viewer Presentation -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">XLPMol 3D Biomolecular Viewer Presentation</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Interactive 3D molecular structure visualizer integrated into projective spatial displays.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">474 KB</span>
+                            <a href="../../documents/XLPMol3DViewer.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 7: VisInt-X Poster -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">VisInt-X Scientific Poster (MCBIOS 2016)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">High-resolution scientific conference poster presented at the MidSouth Computational Biology &amp; Bioinformatics Society.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">711 KB</span>
+                            <a href="../../documents/IAE_VISINTX.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 8: SIGGRAPH 2016 Report -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">ACM SIGGRAPH 2016 Comprehensive Conference Report (32 Pages)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Deep-dive technical report covering VR advancements, raytracing, and GPU shaders from SIGGRAPH 2016 (Anaheim, CA).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">2.4 MB</span>
+                            <a href="../../documents/siggraph-summary.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Item 9: NVIDIA Deep Learning Summary -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-amber-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">NVIDIA Deep Learning Workshop Summary (SIGGRAPH)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Technical notes from NVIDIA GPU deep learning and DIGITS neural network training workshops.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">177 KB</span>
+                            <a href="../../documents/siggraph.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Category 3: Research Papers, Theses & Technical Reports -->
+            <section class="space-y-4 doc-group">
+                <div class="flex items-center gap-2.5 pb-2 border-b-2 border-emerald-600">
+                    <i class="fas fa-book-reader text-emerald-600 text-lg"></i>
+                    <h2 class="text-xl font-bold text-gray-800">Research Papers, Theses &amp; Technical Reports</h2>
+                </div>
+                <ul class="space-y-3">
+                    <!-- GDE Design Document -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Genesis Development Environment (GDE) Design Document</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Comprehensive software architecture specification for the Genesis visual algorithm runtime (ATU M.Sc. Thesis Project).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">1.1 MB</span>
+                            <a href="../../documents/Genesis Development Environment Design Document.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Thesis Paragraph / Abstract -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Genesis Visual Programming Thesis Abstract</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Official graduate project abstract summarizing dynamic data structure visualization and compilation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">377 KB</span>
+                            <a href="../../documents/ThesisParagraph.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Thesis Proposal -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Genesis Visual Programming Thesis Proposal</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Formal thesis project proposal, methodology, technical feasibility, and deliverables timeline.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">123 KB</span>
+                            <a href="../../documents/ThesisProposal.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- ICAS Thesis -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Intersection Collision Avoidance System (ICAS) Final Thesis</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Undergraduate Capstone Thesis (Grade &lsquo;A&rsquo;, Ain Shams Univ) detailing Vehicle Infrastructure Integration (VII) and GPS telemetry.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">2.9 MB</span>
+                            <a href="../../documents/The-VII-propject-V3.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- XLPM Final Journal Paper -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">XLPM Journal Paper: Spatial Map Auto-Calibration</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Journal of Imaging Science &amp; Technology (JIST) final article on multi-projector auto-calibration algorithms.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">476 KB</span>
+                            <a href="../../documents/xlpm-nofigures-final.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- XLPM IS&T SPIE Submission -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">XLPM IS&amp;T / SPIE Electronic Imaging Submission</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Conference proceedings paper on robust feature-based computer vision projection onto non-planar terrain.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">658 KB</span>
+                            <a href="../../documents/XLPM-SPIE-IST-submission.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- XLPM Map Abstract -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">XLPM Map Multi-Projector Alignment Extended Abstract</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Formulation of geometric warping and blended edge seamless display matrices.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">338 KB</span>
+                            <a href="../../documents/XLPM Map.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- LDA Report -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Comparative Evaluation of LDA Topic Modeling: Mallet vs. Gensim</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Doctoral research report evaluating perplexity and coherence metrics across the 20 Newsgroups corpus.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">1.2 MB</span>
+                            <a href="../../documents/FinalReportInfoSci.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Big Data Healthcare Governance Paper -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Data Governance in Healthcare Information Systems</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Scholarly research paper on hospital data quality, patient safety, and HIPAA lifecycle compliance (UALR Research Expo).</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">180 KB</span>
+                            <a href="../../documents/Ebeid_Final_Paper.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CAVE VR Final Paper -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CAVE Real-Time Object Scanner Final Research Paper</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Implementation and empirical performance of real-time 3D mesh scanning and VR rendering in the CAVE environment.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">217 KB</span>
+                            <a href="../../documents/vr-project-final-paper.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CAVE VR Proposal -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CAVE Real-Time Object Scanner Project Proposal</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">System proposal coupling Intel RealSense depth sensors with Leap Motion hand tracking in VR-Juggler.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">300 KB</span>
+                            <a href="../../documents/vr-project-proposal.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- RealSense Progress Report -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-emerald-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">RealSense 3D Scanning Turntable Technical Progress Report</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Experimental evaluation of point-cloud density, rotation calibration, and OBJ polygon reconstruction.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">443 KB</span>
+                            <a href="../../documents/Real.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Category 4: Course Syllabi (Teaching Portfolio) -->
+            <section class="space-y-4 doc-group">
+                <div class="flex items-center gap-2.5 pb-2 border-b-2 border-indigo-600">
+                    <i class="fas fa-graduation-cap text-indigo-600 text-lg"></i>
+                    <h2 class="text-xl font-bold text-gray-800">Course Syllabi &amp; Curricular Materials</h2>
+                </div>
+                <ul class="space-y-3">
+                    <!-- CSCI 3603 Fall 2024 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 3603: Data Warehousing (Fall 2024 Syllabus)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Star schema, ETL pipelines, OLAP cubes, and enterprise data warehousing.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">223 KB</span>
+                            <a href="../../documents/CSCI-3603-2-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 3603 / 5573 Fall 2023 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 3603 / 5573: Data Warehousing (Fall 2023 Syllabus)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Dual-listed undergraduate/graduate curriculum in dimensional data modeling.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">221 KB</span>
+                            <a href="../../documents/CSCI-3603-5573-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 5103 Fall 2024 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 5103: Foundations of Data Science (Fall 2024 Syllabus)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Statistical learning, linear algebra, supervised ML, and EDA in Python.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">232 KB</span>
+                            <a href="../../documents/CSCI-5103-2-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 5103 Fall 2023 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 5103: Foundations of Data Science (Fall 2023 Syllabus)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Foundational graduate syllabus for Master of Science in Data Science.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">259 KB</span>
+                            <a href="../../documents/CSCI-5103-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 5803 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 5803: Statistical Programming for Informatics</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Advanced probability, statistical testing, and biostatistical computation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">249 KB</span>
+                            <a href="../../documents/CSCI-5803-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 5663 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 5663: Statistical Programming (R &amp; Python)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Applied programming across R statistical packages and Python scientific stack.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">216 KB</span>
+                            <a href="../../documents/CSCI-5663-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 5001 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 5001: Fundamentals of Informatics (HB 2504 Compliance)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Interdisciplinary informatics core curriculum and foundational data lifecycle.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">99 KB</span>
+                            <a href="../../documents/CSCI-5001-Syllabus-HB2504.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- CSCI 2111 / 2113 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">CSCI 2111 / 2113: Programming for Informatics (Lecture &amp; Lab)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Texas Woman&rsquo;s University &bull; Procedural and object-oriented programming for health sciences and informatics.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">174 KB</span>
+                            <a href="../../documents/CSCI-2111-2113-Syllabus-Ebeid.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- MCIS 5133 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">MCIS 5133: Database Management Systems</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Southern Arkansas University &bull; Relational algebra, SQL query optimization, concurrency control, and transactions.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">199 KB</span>
+                            <a href="../../documents/MCIS-5133-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- MCIS 5013 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">MCIS 5013: Unix Operating Systems</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Southern Arkansas University &bull; Linux kernel architecture, Bash scripting, process scheduling, and systems administration.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">220 KB</span>
+                            <a href="../../documents/MCIS-5013-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- PAISE 2019 -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-indigo-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">PAISE 2019: Parallel Artificial Intelligence Systems &amp; Engineering</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">The University of Texas at Austin &bull; High-performance computing, distributed training, MPI, and OpenMP architectures.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">138 KB</span>
+                            <a href="../../documents/PAISE-2019-Syllabus.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-lg text-xs font-semibold transition border border-indigo-200 hover:border-indigo-600">
+                                <i class="fas fa-download text-[11px]"></i> Download Syllabus
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Category 5: Software Design Specs, Governance Policies & Enterprise Guides -->
+            <section class="space-y-4 doc-group">
+                <div class="flex items-center gap-2.5 pb-2 border-b-2 border-purple-600">
+                    <i class="fas fa-file-invoice text-purple-600 text-lg"></i>
+                    <h2 class="text-xl font-bold text-gray-800">Software Design Specs, Governance Policies &amp; Enterprise Guides</h2>
+                </div>
+                <ul class="space-y-3">
+                    <!-- Department Website Spec -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Academic Department Web Architecture Specification</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Comprehensive functional and technical specification for university departmental web portals and student rosters.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">1.4 MB</span>
+                            <a href="../../documents/department_website.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- English Language Institute -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">English Language Institute Curriculum Architecture</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Curriculum design, placement protocols, and international program structure at Arkansas Tech University.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">497 KB</span>
+                            <a href="../../documents/English Language Institute.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- International Services Guide -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">International Student Services &amp; Exchange Operations Guide</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Comprehensive handbook detailing visa regulations, student orientation, exchange workflows, and service operations.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">5.9 MB</span>
+                            <a href="../../documents/RFsingaporefinal_compact_2_edited.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- IT Policies & E-Discovery -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">IT Security Policies &amp; E-Discovery Standards</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Institutional cybersecurity policy standards, electronical discovery guidelines (ESI), and higher ed compliance.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">560 KB</span>
+                            <a href="../../documents/IT Policies.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- National Visualization Lab -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">The National Visualization Laboratory Operational Policy</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Data management protocol, HPC access controls, and supercomputing visualization facility guidelines.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">476 KB</span>
+                            <a href="../../documents/The-National-Visualization-Lab.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- GA Timesheets -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Graduate Assistant Timesheet System Architecture</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Database schema, administrative auditing rules, and web portal documentation for student employee payroll.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">2.4 MB</span>
+                            <a href="../../documents/GA_timesheets.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Design Document -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Conference Paper Submission &amp; Review System Design Document</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Relational database schema, user authorization roles, and PHP/MySQL peer-review submission workflow.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">523 KB</span>
+                            <a href="../../documents/design-document.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- TakolEih -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">TakolEih: Cairo Restaurant Guide Technical Documentation</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Full multi-tier web application architecture, Spring/Hibernate data layer, and Flex GUI documentation.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">2.9 MB</span>
+                            <a href="../../documents/takol-eh.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Smart Promotion Tool -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Smart Promotion Tool: Telecom Campaign Portfolio (Maroc Telecom)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Enterprise telecom BSS promotion configuration module and SMS marketing automation system.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">247 KB</span>
+                            <a href="../../documents/Smart Promotion Tool.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+
+                    <!-- Contrat d'Impression Guide -->
+                    <li class="doc-item p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:border-purple-300 hover:shadow-md transition flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center text-lg flex-shrink-0 mt-0.5">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base">Application du Contrat d&rsquo;Impression &mdash; Guide de l&rsquo;Utilisateur (Tunisie Telecom)</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">Enterprise user and operations manual for telecom subscriber contract generation and BSCS billing printing.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 self-end sm:self-center flex-shrink-0">
+                            <span class="text-xs text-gray-400 font-mono font-medium">426 KB</span>
+                            <a href="../../documents/Application_du_contrat_d_impression_guide_de_l_utilisateur.pdf" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-sky-50 text-sky-700 hover:bg-sky-600 hover:text-white rounded-lg text-xs font-semibold transition border border-sky-200 hover:border-sky-600">
+                                <i class="fas fa-download text-[11px]"></i> Download PDF
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </section>
 
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6 mt-12">
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-16">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
+
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.onscroll = function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        };
+
+        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         if (mobileMenuButton && mobileMenu) {
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Real-time Search / Filter functionality
+        const searchInput = document.getElementById('search-input');
+        const docItems = document.querySelectorAll('.doc-item');
+        const docGroups = document.querySelectorAll('.doc-group');
+        const matchCount = document.getElementById('match-count');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                let matches = 0;
+
+                docItems.forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    if (query === '' || text.includes(query)) {
+                        item.classList.remove('hidden');
+                        matches++;
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+
+                // Hide empty categories
+                docGroups.forEach(group => {
+                    const visibleInGroup = group.querySelectorAll('.doc-item:not(.hidden)');
+                    if (visibleInGroup.length === 0) {
+                        group.classList.add('hidden');
+                    } else {
+                        group.classList.remove('hidden');
+                    }
+                });
+
+                if (query === '') {
+                    matchCount.textContent = 'Showing all (47 files)';
+                } else {
+                    matchCount.textContent = `${matches} matching file${matches === 1 ? '' : 's'}`;
+                }
             });
         }
     </script>
