@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iebeid.github.io/sitemap.xml

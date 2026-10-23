@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Linux Libertine Font & Fallbacks -->
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Institutional governance, scholarly peer review, NSF panel service, and community leadership of Dr. Islam Akef Ebeid.">
     <meta property="og:title" content="Service & Leadership - Dr. Islam Akef Ebeid">
     <meta property="og:description" content="Institutional governance, scholarly peer review, NSF panel service, and community leadership of Dr. Islam Akef Ebeid.">
     <meta property="og:type" content="website">
-    <title>Service - Islam Akef Ebeid</title>
+    <link rel="canonical" href="https://iebeid.github.io/pages/service/service.html">
+    <title>Islam Akef Ebeid</title>
+    <!-- Favicon Tab Icon -->
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/favicon.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -18,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
             background-color: #f8fafc;
             color: #1f2937;
         }
@@ -31,20 +38,29 @@
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
+                        <!-- Header & Navigation (Templated via js/template.js) -->
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <a href="../../index.html" class="text-xl font-bold text-gray-800">Islam Akef Ebeid <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-8 ml-2"></a>
+                    <a href="../home/home.html" class="flex items-center gap-2.5 sm:gap-3 group">
+                        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="../../images/Islamic-Pattern-08-min.jpg" alt="Islamic Pattern Emblem" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-sky-700 transition">Islam Akef Ebeid</span>
+                            <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-7 sm:h-8 ml-0.5">
+                        </div>
+                    </a>
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                    <a href="../home/home.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
                     <a href="../relations/relations.html" class="text-gray-600 hover:text-sky-600 transition">Relations</a>
                     <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
                     <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
                     <a href="../scholarship/scholarship.html" class="text-gray-600 hover:text-sky-600 transition">Scholarship</a>
                     <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
-                    <a href="service.html" class="text-sky-600 font-semibold transition">Service</a>
+                    <a href="../service/service.html" class="text-sky-600 font-semibold transition">Service</a>
                     <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
                     <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
                     <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
@@ -58,14 +74,13 @@
             </div>
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
-                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../home/home.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
                 <a href="../relations/relations.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Relations</a>
                 <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
                 <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
-                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
                 <a href="../scholarship/scholarship.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Scholarship</a>
                 <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
-                <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
+                <a href="../service/service.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Service</a>
                 <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
                 <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
                 <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
@@ -91,7 +106,7 @@
             <!-- 1. Institutional & University Governance -->
             <section class="bg-white p-8 rounded-xl shadow-md">
                 <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
-                    <i class="fas fa-university text-sky-600 mr-3"></i> Institutional & Departmental Governance
+                    <i class="fas fa-university text-sky-600 mr-3"></i> 1. Institutional & Departmental Governance
                 </h2>
                 <div class="space-y-4">
                     <div class="border-l-2 border-sky-400 pl-4 py-1">
@@ -129,13 +144,266 @@
                         <div class="text-xs text-sky-700 font-semibold">School of Information, The University of Texas at Austin</div>
                         <p class="text-sm text-gray-600 mt-1">Promoted inclusive student representation and departmental accessibility initiatives.</p>
                     </div>
+
+                    <div class="border-l-2 border-sky-400 pl-4 py-1">
+                        <div class="font-bold text-gray-900">International Student Guide &amp; Cultural Program Coordinator (Summer 2012)</div>
+                        <div class="text-xs text-sky-700 font-semibold">International and Multicultural Student Services Office (IMSSO), Arkansas Tech University</div>
+                        <p class="text-sm text-gray-600 mt-1">Spearheaded international student orientation, cross-cultural diplomacy, and community programming; coordinated logistics for major multicultural showcases and civic celebrations.</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- 2. Scholarly & Editorial Peer Review -->
+            <!-- 2. Campus Cultural Leadership & Community Events Gallery -->
+            <section id="campus-leadership" class="bg-white p-8 rounded-xl shadow-md border-l-4 border-rose-500">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-2 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                            <i class="fas fa-images text-rose-600 mr-3"></i> 2. Campus Cultural Leadership &amp; Community Events Gallery
+                        </h2>
+                        <p class="text-xs text-gray-500 mt-1">International Education, Multicultural Festivals, Student Leadership &amp; Athletics</p>
+                    </div>
+                    <span class="text-xs bg-rose-50 text-rose-700 font-semibold px-3 py-1 rounded-full border border-rose-200 self-start sm:self-center">
+                        Arkansas Tech University &bull; IMSSO Project
+                    </span>
+                </div>
+
+                <div class="bg-rose-50/60 p-5 rounded-lg border border-rose-100 mb-6">
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        During my summer service as an <strong>International Student Guide</strong> at the <strong>International and Multicultural Student Services Office (IMSSO)</strong> at <strong>Arkansas Tech University</strong>, I directed campus-wide cultural leadership initiatives, new international student orientation, cross-cultural diplomacy, and institutional event logistics. This project united domestic and international student cohorts through comprehensive cultural, academic, and athletic celebrations across the university.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 mb-6">
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/InternationalBusinessFairSmall.jpg" alt="International Business Fair Poster" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">Business Fair</div>
+                            <div class="text-[10px] text-gray-500">Global Commerce &amp; Culture</div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/InternationalFashionShowSmall.jpg" alt="International Fashion Show Poster" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">Fashion Show</div>
+                            <div class="text-[10px] text-gray-500">Traditional Attire &amp; Heritage</div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/InternationalFilmScreeningSmall.jpg" alt="International Film Screening Poster" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">Film Screening</div>
+                            <div class="text-[10px] text-gray-500">World Cinema Showcase</div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/InternationalPerspectivesForumSmall.jpg" alt="International Perspectives Forum Poster" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">Perspectives Forum</div>
+                            <div class="text-[10px] text-gray-500">Cross-Cultural Dialogue</div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/InternationalTalentExpoSmall.jpg" alt="International Talent Expo Poster" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">Talent Expo</div>
+                            <div class="text-[10px] text-gray-500">Multicultural Arts &amp; Music</div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/IEW3Small.jpg" alt="International Education Week Showcase" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">IEW Showcase</div>
+                            <div class="text-[10px] text-gray-500">International Education Week</div>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-sm bg-white group flex flex-col justify-between">
+                        <div class="overflow-hidden">
+                            <img src="../../images/VolleyballTournamentSmall.jpg" alt="Volleyball Tournament Athletics Cup Poster" class="w-full h-36 object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="p-2 text-center bg-gray-50 border-t border-gray-100">
+                            <div class="text-xs font-bold text-gray-800">Athletics Cup</div>
+                            <div class="text-[10px] text-gray-500">Inter-Collegiate Sports</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-gray-600 gap-3">
+                    <div class="flex items-center gap-2">
+                        <span class="font-semibold text-rose-700"><i class="fas fa-certificate mr-1"></i> Institutional Project:</span>
+                        <span>IMSSO Summer Leadership &amp; Student Affairs Engagement</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <a href="../../documents/RFsingaporefinal_compact_2_edited.pdf" target="_blank" class="inline-flex items-center gap-1 text-sky-600 hover:underline font-semibold">
+                            <i class="fas fa-file-pdf"></i> View International Services Operations Guide
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Institutional Service Visual Artwork & Creative Media Portfolio -->
+            <section id="visual-artwork" class="bg-white p-8 rounded-xl shadow-md border-l-4 border-purple-600">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-gray-100 gap-2 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 flex items-center">
+                            <i class="fas fa-palette text-purple-600 mr-3"></i> 3. Institutional Service Visual Artwork &amp; Creative Media Portfolio
+                        </h2>
+                        <p class="text-xs text-gray-500 mt-1">Campus Event Posters, Graphic Design, Institutional Branding &amp; Portal UI Architecture</p>
+                    </div>
+                    <span class="text-xs bg-purple-50 text-purple-700 font-semibold px-3 py-1 rounded-full border border-purple-200 self-start sm:self-center">
+                        Design &amp; Creative Portfolio
+                    </span>
+                </div>
+
+                <p class="text-sm text-gray-700 leading-relaxed mb-6">
+                    A core dimension of my institutional service portfolio comprises visual arts, graphic design, promotional poster artwork, and digital user-interface design. During my service at Arkansas Tech University, the International &amp; Multicultural Student Services Office (IMSSO), and broader university governance, I designed high-resolution cultural event flyers, photo contest marketing materials, and departmental web system architectures that elevated student engagement and institutional visibility.
+                </p>
+
+                <!-- Artwork Showcase Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Artwork 1: Tour of Iran Poster -->
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+                        <div>
+                            <div class="overflow-hidden rounded-lg border border-gray-200 bg-white mb-3">
+                                <img src="../../images/TourOfIranSmall.jpg" alt="Tour of Iran Cultural Heritage Poster" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2 py-0.5 rounded">Event Poster</span>
+                                <span class="text-[11px] text-gray-500">2400 &times; 3600 High-Res</span>
+                            </div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1">"Tour of Iran" Cultural Event Poster</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Original graphic design created for a university cultural exhibition night celebrating Persian historical architecture, cultural landmarks, literature, and heritage.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-200/80 text-[11px] text-gray-500 flex items-center justify-between">
+                            <span><i class="fas fa-brush mr-1"></i> Visual Design</span>
+                            <span class="font-medium text-gray-700">Cultural Programming</span>
+                        </div>
+                    </div>
+
+                    <!-- Artwork 2: Photo Contest Poster -->
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+                        <div>
+                            <div class="overflow-hidden rounded-lg border border-gray-200 bg-white mb-3">
+                                <img src="../../images/PhotoContestSmall.jpg" alt="Campus Photo Contest Official Poster" class="w-full h-56 object-cover object-top hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2 py-0.5 rounded">Campus Media</span>
+                                <span class="text-[11px] text-gray-500">2400 &times; 3600 High-Res</span>
+                            </div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1">Annual Campus Photo Contest Poster</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Promotional poster and visual guidelines for the campus-wide student photography competition, encouraging creative visual documentation of landscape, wildlife, and university life.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-200/80 text-[11px] text-gray-500 flex items-center justify-between">
+                            <span><i class="fas fa-camera mr-1"></i> Student Affairs Media</span>
+                            <span class="font-medium text-gray-700">Campus Competition</span>
+                        </div>
+                    </div>
+
+                    <!-- Artwork 3: Systems Architecture Blueprint -->
+                    <div class="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+                        <div>
+                            <div class="overflow-hidden rounded-lg border border-gray-200 bg-white mb-3">
+                                <img src="../../images/design.jpg" alt="Institutional Systems Architecture Blueprint" class="w-full h-56 object-contain bg-slate-100 p-2 hover:scale-105 transition duration-300">
+                            </div>
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-purple-700 bg-purple-100 px-2 py-0.5 rounded">Technical Diagram</span>
+                                <span class="text-[11px] text-gray-500">Policy Schema</span>
+                            </div>
+                            <h3 class="text-base font-bold text-gray-900 mb-1">Institutional IT &amp; Security Architecture</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed">
+                                Architectural schematic for enterprise server governance, institutional access policies, cybersecurity protocols, and computational research laboratory design.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-200/80 text-[11px] text-gray-500 flex items-center justify-between">
+                            <span><i class="fas fa-network-wired mr-1"></i> Systems Design</span>
+                            <span class="font-medium text-gray-700">Governance Blueprint</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Digital Portals, Institutional Branding & UI Design Sub-Block -->
+                <div class="border-t border-gray-100 pt-6">
+                    <h3 class="text-base font-bold text-gray-900 mb-4 flex items-center">
+                        <i class="fas fa-laptop-code text-purple-600 mr-2"></i> Institutional Branding, Digital Portals &amp; UI Architecture
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="p-3 bg-white border border-gray-200 rounded-lg flex items-center gap-3">
+                            <div class="w-16 h-16 bg-slate-50 border border-gray-100 rounded flex items-center justify-center p-1 flex-shrink-0">
+                                <img src="../../images/atu-logo.png" alt="Arkansas Tech University Logo" class="max-h-12 max-w-full object-contain">
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900 text-xs">ATU Visual Identity</div>
+                                <div class="text-[11px] text-gray-600">Institutional branding standards, department logos, and publication layouts.</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-white border border-gray-200 rounded-lg flex items-center gap-3">
+                            <div class="w-16 h-16 bg-slate-50 border border-gray-100 rounded flex items-center justify-center p-1 flex-shrink-0">
+                                <img src="../../images/imsso1.png" alt="IMSSO Portal Layout" class="max-h-12 max-w-full object-contain">
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900 text-xs">IMSSO Student Portal UI</div>
+                                <div class="text-[11px] text-gray-600">Web interface architecture designed for international admissions and orientation.</div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-white border border-gray-200 rounded-lg flex items-center gap-3">
+                            <div class="w-16 h-16 bg-slate-50 border border-gray-100 rounded flex items-center justify-center p-1 flex-shrink-0">
+                                <img src="../../images/imsso2.png" alt="Student Affairs Information System Dashboard" class="max-h-12 max-w-full object-contain">
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900 text-xs">Student Affairs Dashboard</div>
+                                <div class="text-[11px] text-gray-600">Administrative dashboard for exchange operations, event tracking, and compliance.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Institutional Documentation & Publications Links -->
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 flex flex-wrap items-center justify-between gap-3 text-xs">
+                        <span class="font-semibold text-gray-700"><i class="fas fa-folder-open text-purple-600 mr-1.5"></i> Supporting Portfolio Documents &amp; Policy Manuals:</span>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="../../documents/department_website.pdf" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-gray-200 rounded text-sky-700 hover:text-sky-900 hover:border-sky-300 font-medium transition">
+                                <i class="fas fa-file-pdf text-red-500"></i> Department Web Spec
+                            </a>
+                            <a href="../../documents/Arkansas Tech University.pdf" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-gray-200 rounded text-sky-700 hover:text-sky-900 hover:border-sky-300 font-medium transition">
+                                <i class="fas fa-file-pdf text-red-500"></i> Institutional Governance
+                            </a>
+                            <a href="../../documents/Arkansas_Tech_University_Profile.pdf" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-gray-200 rounded text-sky-700 hover:text-sky-900 hover:border-sky-300 font-medium transition">
+                                <i class="fas fa-file-pdf text-red-500"></i> ATU Profile
+                            </a>
+                            <a href="../../documents/RFsingaporefinal_compact_2_edited.pdf" target="_blank" class="inline-flex items-center gap-1 px-2.5 py-1 bg-white border border-gray-200 rounded text-sky-700 hover:text-sky-900 hover:border-sky-300 font-medium transition">
+                                <i class="fas fa-file-pdf text-red-500"></i> Exchange Operations Guide
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Scholarly & Editorial Peer Review -->
             <section class="bg-white p-8 rounded-xl shadow-md">
                 <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
-                    <i class="fas fa-file-signature text-sky-600 mr-3"></i> Scholarly Service &amp; Peer Review
+                    <i class="fas fa-file-signature text-sky-600 mr-3"></i> 4. Scholarly Service &amp; Peer Review
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                     <div>
@@ -162,10 +430,10 @@
                 </div>
             </section>
 
-            <!-- 2.5 Thesis, Dissertation & Capstone Advising -->
+            <!-- 5. Thesis, Dissertation & Capstone Advising -->
             <section class="bg-white p-8 rounded-xl shadow-md">
                 <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
-                    <i class="fas fa-user-graduate text-sky-600 mr-3"></i> Thesis, Dissertation &amp; Capstone Advising
+                    <i class="fas fa-user-graduate text-sky-600 mr-3"></i> 5. Thesis, Dissertation &amp; Capstone Advising
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
                     <div class="border border-gray-100 p-4 rounded-lg bg-slate-50">
@@ -195,10 +463,10 @@
                 </div>
             </section>
 
-            <!-- 3. Community Engagement & Public Service -->
+            <!-- 6. Community Engagement & Public Service -->
             <section class="bg-white p-8 rounded-xl shadow-md">
                 <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
-                    <i class="fas fa-heart text-sky-600 mr-3"></i> Community Engagement &amp; Public Service
+                    <i class="fas fa-heart text-sky-600 mr-3"></i> 6. Community Engagement &amp; Public Service
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
                     <div class="border border-gray-100 p-4 rounded-lg bg-gray-50">
@@ -224,10 +492,10 @@
                 </div>
             </section>
 
-            <!-- 4. Professional Affiliations, Forums & Tooling -->
+            <!-- 7. Professional Affiliations, Forums & Tooling -->
             <section class="bg-white p-8 rounded-xl shadow-md">
                 <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center border-b pb-3">
-                    <i class="fas fa-globe text-sky-600 mr-3"></i> Professional Affiliations, Forums &amp; Tooling
+                    <i class="fas fa-globe text-sky-600 mr-3"></i> 7. Professional Affiliations, Forums &amp; Tooling
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-700">
                     <div>
@@ -267,20 +535,14 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6 mt-12">
+                        <!-- Footer (Templated via js/template.js) -->
+    <footer id="footer" class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
+            <p>&copy; <span id="year">2026</span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-    </script>
+
+    <!-- Global Template Engine (Single Source of Truth for Header & Footer) -->
+    <script src="../../js/template.js"></script>
 </body>
 </html>

@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Linux Libertine Font & Fallbacks -->
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarship - Dr. Islam Akef Ebeid</title>
+    <link rel="canonical" href="https://iebeid.github.io/pages/scholarship/scholarship.html">
+    <title>Islam Akef Ebeid</title>
+    <!-- Favicon Tab Icon -->
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/favicon.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -14,7 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
             background-color: #f8fafc;
             color: #1f2937;
         }
@@ -33,19 +40,27 @@
 </head>
 <body class="antialiased overflow-x-hidden">
 
-    <!-- Header & Navigation -->
+                        <!-- Header & Navigation (Templated via js/template.js) -->
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <a href="../../index.html" class="text-xl font-bold text-gray-800">Islam Akef Ebeid <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-8 ml-2"></a>
+                    <a href="../home/home.html" class="flex items-center gap-2.5 sm:gap-3 group">
+                        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="../../images/Islamic-Pattern-08-min.jpg" alt="Islamic Pattern Emblem" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-sky-700 transition">Islam Akef Ebeid</span>
+                            <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-7 sm:h-8 ml-0.5">
+                        </div>
+                    </a>
                 </div>
-                <nav class="hidden md:flex md:items-center md:space-x-6 lg:space-x-8">
-                    <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                <nav class="hidden md:flex md:items-center md:space-x-8">
+                    <a href="../home/home.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
                     <a href="../relations/relations.html" class="text-gray-600 hover:text-sky-600 transition">Relations</a>
                     <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
                     <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
-                    <a href="scholarship.html" class="text-sky-600 font-semibold transition">Scholarship</a>
+                    <a href="../scholarship/scholarship.html" class="text-sky-600 font-semibold transition">Scholarship</a>
                     <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
                     <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
                     <a href="../business/business.html" class="text-gray-600 hover:text-sky-600 transition">Business</a>
@@ -61,12 +76,11 @@
             </div>
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
-                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../home/home.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
                 <a href="../relations/relations.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Relations</a>
                 <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
                 <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
-                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
-                <a href="scholarship.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Scholarship</a>
+                <a href="../scholarship/scholarship.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Scholarship</a>
                 <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
                 <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
                 <a href="../business/business.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Business</a>
@@ -89,14 +103,14 @@
                         <i class="fas fa-feather-alt mr-1"></i> Intellectual &amp; Scholarly Inquiries
                     </span>
                     <span class="bg-teal-400/15 text-teal-200 border border-teal-400/30 text-xs px-3 py-1 rounded-full font-mono">
-                        Fiqh &bull; Psychology &bull; Monograph Projects
+                        Fiqh &bull; Psychology &bull; Books &bull; Essays &bull; Poetry
                     </span>
                 </div>
                 <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-3">
-                    Islamic Jurisprudence, Psychology &amp; Intellectual Works
+                    Islamic Jurisprudence, Psychology, Writing &amp; Creative Works
                 </h1>
                 <p class="text-emerald-100/90 text-base sm:text-lg leading-relaxed max-w-3xl">
-                    Dedicated to scholarly research in classical and contemporary Islamic jurisprudence (<em>Fiqh</em> &amp; <em>Usul al-Fiqh</em>), interdisciplinary studies in human psychology and cognitive sciences, and forthcoming manuscript and book projects.
+                    Dedicated to scholarly research in classical and contemporary Islamic jurisprudence (<em>Fiqh</em> &amp; <em>Usul al-Fiqh</em>), interdisciplinary studies in human psychology, forthcoming monographs, reflective essays, and creative verse.
                 </p>
                 </div>
             </div>
@@ -326,38 +340,177 @@
                 </div>
             </section>
 
+            <!-- Section 4: Essays, Thought Leadership & Public Scholarship -->
+            <section id="writing" class="bg-white p-8 rounded-xl shadow-md border-l-4 border-sky-600">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fas fa-feather-alt"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">
+                                Essays, Thought Leadership &amp; Public Scholarship
+                            </h2>
+                            <p class="text-sm text-gray-600 mt-0.5">
+                                Reflective writing on higher education, information science theory, AI governance, and cultural commentary.
+                            </p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-50 text-sky-800 border border-sky-200 self-start sm:self-auto">
+                        <i class="fab fa-medium"></i> Essays &bull; Medium
+                    </span>
+                </div>
+
+                <div class="text-gray-700 space-y-4 text-base leading-relaxed">
+                    <p>
+                        Public intellectual discourse forms a bridge between specialized laboratory research and broader civic society. Through long-form essays, op-eds, and reflective articles, I examine the societal transformations wrought by artificial intelligence, the pedagogical mission of modern research universities, and the philosophy of information science.
+                    </p>
+                    <p>
+                        My essays frequently engage with the human dimensions of technology&mdash;exploring how algorithms intersect with human dignity, ethical accountability, and educational equity.
+                    </p>
+                </div>
+
+                <!-- Medium Feature Banner -->
+                <div class="mt-6 p-5 bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white rounded-xl shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border border-sky-800/60">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-12 h-12 bg-white text-slate-900 rounded-xl flex items-center justify-center text-2xl flex-shrink-0 shadow">
+                            <i class="fab fa-medium"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-base">Long-Form Articles on Medium</h3>
+                            <p class="text-xs text-sky-200 mt-0.5">Follow @ebeid for essays on higher education, AI ethics, and information theory.</p>
+                        </div>
+                    </div>
+                    <a href="https://medium.com/@ebeid" target="_blank" class="inline-flex items-center gap-2 bg-sky-400 hover:bg-sky-300 text-slate-950 font-bold px-5 py-2.5 rounded-lg shadow transition whitespace-nowrap text-xs flex-shrink-0">
+                        <i class="fab fa-medium text-sm"></i> Read on Medium <i class="fas fa-external-link-alt text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Thematic Focus Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 mt-6 border-t border-gray-100">
+                    <div class="p-4 rounded-xl border border-gray-200 bg-sky-50/30">
+                        <div class="flex items-center gap-2 text-sky-800 font-bold text-sm mb-2">
+                            <i class="fas fa-microchip"></i>
+                            <span>AI Ethics &amp; Governance</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            Interrogating algorithmic accountability, public health data privacy, machine learning bias, and the ethical responsibilities of software engineers.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-sky-50/30">
+                        <div class="flex items-center gap-2 text-sky-800 font-bold text-sm mb-2">
+                            <i class="fas fa-university"></i>
+                            <span>Higher Education &amp; Mentorship</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            Reflections on academic leadership, inclusive computer science pedagogy, undergraduate research pathways, and graduate student development.
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-gray-200 bg-sky-50/30">
+                        <div class="flex items-center gap-2 text-sky-800 font-bold text-sm mb-2">
+                            <i class="fas fa-book-open"></i>
+                            <span>Information Science &amp; Heritage</span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed">
+                            Theoretical explorations into knowledge organization, Cairo&rsquo;s historic institutional libraries, and the epistemology of data curation.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Poetry, Verse & Contemplative Literature -->
+            <section id="poetry" class="bg-white p-8 rounded-xl shadow-md border-l-4 border-purple-600">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4 mb-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">
+                                Poetry, Verse &amp; Contemplative Literature
+                            </h2>
+                            <p class="text-sm text-gray-600 mt-0.5">
+                                Spiritual devotion, existential reflection, and the beauty of classical and contemporary Arabic and English verse.
+                            </p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-50 text-purple-800 border border-purple-200 self-start sm:self-auto">
+                        <i class="fas fa-book-reader"></i> Creative Writing &bull; Verse
+                    </span>
+                </div>
+
+                <div class="text-gray-700 space-y-4 text-base leading-relaxed">
+                    <p>
+                        Poetry serves as a contemplative sanctuary and a medium of existential inquiry. Drawing inspiration from classical Arabic poetic traditions, spiritual hymnology, and contemporary reflective verse, my creative writing explores themes of spiritual yearning, transience, memory, cultural heritage, and the search for transcendent meaning amidst modern technological complexity.
+                    </p>
+                    <p>
+                        Through both structured classical meters and free reflective verse in Arabic and English, these compositions examine the inner landscape of the soul, the dialogue between reason and faith, and the enduring beauty of contemplative silence.
+                    </p>
+                </div>
+
+                <!-- Poetic Pillars Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6 mt-6 border-t border-gray-100">
+                    <div class="bg-gradient-to-br from-purple-50/50 to-white p-6 rounded-xl border border-purple-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                                    Spiritual Devotion
+                                </span>
+                                <i class="fas fa-moon text-purple-600 text-sm"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-900 text-base mb-2">Devotional &amp; Metaphysical Verse</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                                Contemplative meditations on divine grace, spiritual longing, sacred remembrance (<em>Dhikr</em>), and the quest for inner peace through sacred traditions.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-purple-100 text-[11px] font-semibold text-purple-700 flex items-center justify-between">
+                            <span>Classical Meters &amp; Rhythms</span>
+                            <i class="fas fa-feather text-[10px]"></i>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-50/50 to-white p-6 rounded-xl border border-purple-200 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                                    Existential Inquiry
+                                </span>
+                                <i class="fas fa-compass text-purple-600 text-sm"></i>
+                            </div>
+                            <h3 class="font-bold text-gray-900 text-base mb-2">Heritage, Memory &amp; The Human Condition</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed mb-4">
+                                Poetic inquiries exploring the passage of time, the nostalgia of ancient cities, cultural diaspora, and the quiet dignity of the human journey.
+                            </p>
+                        </div>
+                        <div class="pt-3 border-t border-purple-100 text-[11px] font-semibold text-purple-700 flex items-center justify-between">
+                            <span>Contemporary Arabic &amp; English Verse</span>
+                            <i class="fas fa-feather text-[10px]"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Creative Verse Excerpt Card -->
+                <div class="mt-6 p-5 bg-purple-50/60 rounded-xl border border-purple-200/80 text-center">
+                    <p class="text-xs text-purple-900 italic font-serif">
+                        &ldquo;Between the precision of the proof and the silence of the night, words become the sanctuary where intellect meets the soul.&rdquo;
+                    </p>
+                    <span class="block text-[11px] font-semibold text-purple-700 mt-2 uppercase tracking-wider">&mdash; Islam Akef Ebeid</span>
+                </div>
+            </section>
+
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6 mt-16">
+                        <!-- Footer (Templated via js/template.js) -->
+    <footer id="footer" class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
+            <p>&copy; <span id="year">2026</span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        const navbar = document.getElementById('navbar');
-        window.onscroll = function () {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        };
-
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
-        }
-    </script>
+    <!-- Global Template Engine (Single Source of Truth for Header & Footer) -->
+    <script src="../../js/template.js"></script>
 </body>
 </html>

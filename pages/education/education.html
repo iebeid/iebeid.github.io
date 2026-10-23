@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Linux Libertine Font & Fallbacks -->
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Academic qualifications, doctoral training at UT Austin and UA Little Rock, certifications, and technical proficiencies of Dr. Islam Akef Ebeid.">
     <meta property="og:title" content="Education & Credentials - Dr. Islam Akef Ebeid">
     <meta property="og:description" content="Academic qualifications, doctoral training at UT Austin and UA Little Rock, certifications, and technical proficiencies of Dr. Islam Akef Ebeid.">
     <meta property="og:type" content="website">
-    <title>Education - Islam Akef Ebeid</title>
+    <link rel="canonical" href="https://iebeid.github.io/pages/education/education.html">
+    <title>Islam Akef Ebeid</title>
+    <!-- Favicon Tab Icon -->
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/favicon.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -18,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
             background-color: #f8fafc;
             color: #1f2937;
         }
@@ -31,16 +38,25 @@
     </style>
 </head>
 <body class="antialiased">
+                        <!-- Header & Navigation (Templated via js/template.js) -->
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <a href="../../index.html" class="text-xl font-bold text-gray-800">Islam Akef Ebeid <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-8 ml-2"></a>
+                    <a href="../home/home.html" class="flex items-center gap-2.5 sm:gap-3 group">
+                        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="../../images/Islamic-Pattern-08-min.jpg" alt="Islamic Pattern Emblem" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-sky-700 transition">Islam Akef Ebeid</span>
+                            <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-7 sm:h-8 ml-0.5">
+                        </div>
+                    </a>
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                    <a href="../home/home.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
                     <a href="../relations/relations.html" class="text-gray-600 hover:text-sky-600 transition">Relations</a>
-                    <a href="education.html" class="text-sky-600 font-semibold transition">Education</a>
+                    <a href="../education/education.html" class="text-sky-600 font-semibold transition">Education</a>
                     <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
                     <a href="../scholarship/scholarship.html" class="text-gray-600 hover:text-sky-600 transition">Scholarship</a>
                     <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
@@ -50,7 +66,6 @@
                     <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
                     <a href="../downloads/downloads.html" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
                 </nav>
-            </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none" aria-label="Toggle menu">
                         <i class="fas fa-bars text-xl"></i>
@@ -59,11 +74,10 @@
             </div>
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
-                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../home/home.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
                 <a href="../relations/relations.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Relations</a>
-                <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
+                <a href="../education/education.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Education</a>
                 <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
-                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
                 <a href="../scholarship/scholarship.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Scholarship</a>
                 <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
                 <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
@@ -152,38 +166,7 @@
                 </div>
             </section>
 
-            <!-- Section 2: Narrative, Mission & Vision -->
-            <section class="bg-white p-8 rounded-xl shadow-md space-y-6">
-                <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 flex items-center">
-                    <i class="fas fa-compass text-sky-600 mr-3"></i> Academic Endeavors, Mission & Vision
-                </h2>
-
-                <div class="space-y-4 text-gray-700 leading-relaxed">
-                    <p>
-                        I am an Assistant Professor and researcher whose academic foundation was shaped by systematic training in Mathematics, Systems Engineering, and Computer & Information Science across Egypt and leading United States institutions. My Ph.D. work investigated automated data integration, entity resolution, and knowledge discovery, bridging graph theory, machine learning, and natural language processing.
-                    </p>
-                    <p>
-                        Information Science combines computer science, data science, library science, psychology, and cognitive ergonomics. Coming from an Electrical and Computer Engineering background, I was drawn to this interdisciplinary synthesis to understand how complex data architectures interact with real-world users and biomedical discovery pipelines.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                    <div class="bg-sky-50 p-5 rounded-lg border-l-4 border-sky-600">
-                        <h3 class="text-lg font-bold text-sky-900 mb-2"><i class="fas fa-bullseye mr-2"></i> Mission</h3>
-                        <p class="text-sm text-gray-700 leading-relaxed">
-                            To advance scientific discovery by fostering an accessible, ethical, and artificially intelligent data ecosystem. Driving automatic integration of scientific information, ensuring responsible and sustainable scientific computing, and empowering underrepresented groups in computational and data sciences.
-                        </p>
-                    </div>
-                    <div class="bg-amber-50 p-5 rounded-lg border-l-4 border-amber-600">
-                        <h3 class="text-lg font-bold text-amber-900 mb-2"><i class="fas fa-eye mr-2"></i> Vision</h3>
-                        <p class="text-sm text-gray-700 leading-relaxed">
-                            A future where data quality, graph theory, and foundation models unite into transparent, ethical systems that accelerate biomedical discovery. To define the next generation of biomedical intelligence where structured relational networks clarify the underlying logic of life.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section 3: Research Expertise & Technical Skillset Evolution -->
+            <!-- Section 2: Research Expertise & Technical Skillset Evolution -->
             <section class="bg-white p-8 rounded-xl shadow-md space-y-6">
                 <h2 class="text-2xl font-bold text-gray-800 border-b pb-3 flex items-center">
                     <i class="fas fa-laptop-code text-sky-600 mr-3"></i> Research Expertise & Technical Skillset
@@ -216,7 +199,7 @@
                 </div>
             </section>
 
-            <!-- Section 4: Academic Institutions Attended -->
+            <!-- Section 3: Academic Institutions Attended -->
             <section class="bg-white p-8 rounded-xl shadow-md">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-3 mb-6">
                     <h2 class="text-2xl font-bold text-gray-800 flex items-center">
@@ -270,20 +253,14 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6 mt-12">
+                        <!-- Footer (Templated via js/template.js) -->
+    <footer id="footer" class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
+            <p>&copy; <span id="year">2026</span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-    </script>
+
+    <!-- Global Template Engine (Single Source of Truth for Header & Footer) -->
+    <script src="../../js/template.js"></script>
 </body>
 </html>

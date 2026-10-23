@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
+    <!-- Linux Libertine Font & Fallbacks -->
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Unity Systems startup venture, enterprise software engineering, and consulting portfolio of Dr. Islam Akef Ebeid across telecom, government, and corporate systems.">
     <meta property="og:title" content="Business & Consulting - Dr. Islam Akef Ebeid">
     <meta property="og:description" content="Unity Systems startup venture, enterprise software engineering, and consulting portfolio of Dr. Islam Akef Ebeid across telecom, government, and corporate systems.">
     <meta property="og:type" content="website">
-    <title>Business &amp; Consulting - Islam Akef Ebeid</title>
+    <link rel="canonical" href="https://iebeid.github.io/pages/business/business.html">
+    <title>Islam Akef Ebeid</title>
+    <!-- Favicon Tab Icon -->
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/favicon.png">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Georgia -->
@@ -18,7 +25,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
             background-color: #f8fafc;
             color: #1f2937;
         }
@@ -34,22 +41,30 @@
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
-    <!-- Header & Navigation -->
+                        <!-- Header & Navigation (Templated via js/template.js) -->
     <header id="navbar" class="sticky top-0 bg-white/90 backdrop-blur-sm shadow-lg z-50 transition-all duration-300">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex-shrink-0">
-                    <a href="../../index.html" class="text-xl font-bold text-gray-800">Islam Akef Ebeid <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-8 ml-2"></a>
+                    <a href="../home/home.html" class="flex items-center gap-2.5 sm:gap-3 group">
+                        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="../../images/Islamic-Pattern-08-min.jpg" alt="Islamic Pattern Emblem" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-sky-700 transition">Islam Akef Ebeid</span>
+                            <img src="../../images/arabic-name.png" alt="Arabic Name" class="inline-block h-7 sm:h-8 ml-0.5">
+                        </div>
+                    </a>
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="../../index.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
+                    <a href="../home/home.html" class="text-gray-600 hover:text-sky-600 transition">Home</a>
                     <a href="../relations/relations.html" class="text-gray-600 hover:text-sky-600 transition">Relations</a>
                     <a href="../education/education.html" class="text-gray-600 hover:text-sky-600 transition">Education</a>
                     <a href="../research/research.html" class="text-gray-600 hover:text-sky-600 transition">Research</a>
                     <a href="../scholarship/scholarship.html" class="text-gray-600 hover:text-sky-600 transition">Scholarship</a>
                     <a href="../teaching/teaching.html" class="text-gray-600 hover:text-sky-600 transition">Teaching</a>
                     <a href="../service/service.html" class="text-gray-600 hover:text-sky-600 transition">Service</a>
-                    <a href="business.html" class="text-sky-600 font-semibold transition">Business</a>
+                    <a href="../business/business.html" class="text-sky-600 font-semibold transition">Business</a>
                     <a href="../hobbies/hobbies.html" class="text-gray-600 hover:text-sky-600 transition">Hobbies</a>
                     <a href="../media/media.html" class="text-gray-600 hover:text-sky-600 transition">Media</a>
                     <a href="../downloads/downloads.html" class="text-gray-600 hover:text-sky-600 transition">Downloads</a>
@@ -62,15 +77,14 @@
             </div>
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4 space-y-2 border-t border-gray-100 pt-2">
-                <a href="../../index.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
+                <a href="../home/home.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Home</a>
                 <a href="../relations/relations.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Relations</a>
                 <a href="../education/education.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Education</a>
                 <a href="../research/research.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research</a>
-                <a href="../research/lab.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Research Lab</a>
                 <a href="../scholarship/scholarship.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Scholarship</a>
                 <a href="../teaching/teaching.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Teaching</a>
                 <a href="../service/service.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Service</a>
-                <a href="business.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Business</a>
+                <a href="../business/business.html" class="block px-3 py-2 text-sky-600 font-semibold bg-sky-50 rounded">Business</a>
                 <a href="../hobbies/hobbies.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Hobbies</a>
                 <a href="../media/media.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Media</a>
                 <a href="../downloads/downloads.html" class="block px-3 py-2 text-gray-600 hover:bg-sky-50 rounded">Downloads</a>
@@ -902,32 +916,14 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6 mt-16">
+                        <!-- Footer (Templated via js/template.js) -->
+    <footer id="footer" class="bg-gray-800 text-white py-6">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <span id="year"></span> Islam Akef Ebeid. All Rights Reserved.</p>
+            <p>&copy; <span id="year">2026</span> Islam Akef Ebeid. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        const navbar = document.getElementById('navbar');
-        window.onscroll = function () {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        };
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-            });
-        }
-    </script>
+    <!-- Global Template Engine (Single Source of Truth for Header & Footer) -->
+    <script src="../../js/template.js"></script>
 </body>
 </html>

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Linux Libertine Font & Fallbacks -->
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The Data2AI4LifeSciences Lab directed by Dr. Islam Akef Ebeid at Texas Woman's University, advancing multimodal neuro-symbolic biomedical AI.">
     <meta property="og:title" content="Data2AI4LifeSciences Laboratory - Dr. Islam Akef Ebeid">
     <meta property="og:description" content="The Data2AI4LifeSciences Lab directed by Dr. Islam Akef Ebeid at Texas Woman's University, advancing multimodal neuro-symbolic biomedical AI.">
     <meta property="og:type" content="website">
-    <title>Data2AI4LifeSciences Laboratory @ TWU</title>
+    <link rel="canonical" href="https://iebeid.github.io/pages/research/lab.html">
+    <title>Islam Akef Ebeid</title>
+    <!-- Favicon Tab Icon -->
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png">
+    <link rel="apple-touch-icon" href="../../images/favicon.png">
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Configure Tailwind to use Inter font -->
@@ -16,7 +23,7 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Linux Libertine', 'Linux Libertine O', 'Georgia', 'Times New Roman', 'Times', 'serif'],
                     },
                     colors: {
                         'twu-maroon': '#850928',
@@ -32,7 +39,7 @@
             scroll-behavior: smooth;
         }
         body {
-            font-family: 'Inter', sans-serif;
+        font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
         }
         .section-title {
             @apply text-3xl font-bold mb-6 border-b-2 border-twu-maroon pb-2;
