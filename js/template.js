@@ -77,21 +77,22 @@
     // 4. HEADER HTML TEMPLATE (Islamic-Pattern-08-min.jpg Emblem + Branding)
     // ---------------------------------------------------------------------
     const homeHref = rootPrefix === './' ? 'pages/home/home.html' : '../home/home.html';
+    const portalHref = rootPrefix === './' ? 'pages/portal/portal.html' : '../portal/portal.html';
     const emblemSrc = `${rootPrefix}images/Islamic-Pattern-08-min.jpg`;
     const arabicNameSrc = `${rootPrefix}images/arabic-name.png`;
 
     const headerContent = `
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex-shrink-0">
-                    <a href="${homeHref}" class="flex items-center gap-2.5 sm:gap-3 group">
-                        <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0">
-                            <img src="${emblemSrc}" alt="Islamic Pattern Emblem" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-sky-700 transition">Islam Akef Ebeid</span>
-                            <img src="${arabicNameSrc}" alt="Arabic Name" class="inline-block h-7 sm:h-8 ml-0.5">
-                        </div>
+                <div class="flex-shrink-0 flex items-center gap-2.5 sm:gap-3">
+                    <!-- Circular Emblem Logo Linking to Personal Portal Login -->
+                    <a href="${portalHref}" rel="nofollow" title="Open Personal Portal" class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden flex-shrink-0 block hover:ring-2 hover:ring-sky-500 hover:scale-105 transition duration-300">
+                        <img src="${emblemSrc}" alt="Islamic Pattern Emblem" class="w-full h-full object-cover">
+                    </a>
+                    <!-- Name & Arabic Calligraphy Linking to Home Page -->
+                    <a href="${homeHref}" class="flex items-center gap-2 group">
+                        <span class="text-lg sm:text-xl font-bold text-gray-800 group-hover:text-sky-700 transition">Islam Akef Ebeid</span>
+                        <img src="${arabicNameSrc}" alt="Arabic Name" class="inline-block h-7 sm:h-8 ml-0.5">
                     </a>
                 </div>
                 <nav class="hidden md:flex md:items-center md:space-x-8">
@@ -114,9 +115,11 @@
     // 5. FOOTER HTML TEMPLATE
     // ---------------------------------------------------------------------
     const currentYear = new Date().getFullYear();
+    const sitemapHref = `${rootPrefix}sitemap.xml`;
+    const portalHref = rootPrefix === './' ? 'pages/portal/portal.html' : '../portal/portal.html';
     const footerContent = `
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; <span id="year">${currentYear}</span> Islam Akef Ebeid. All Rights Reserved.</p>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; <span id="year">${currentYear}</span> Islam Akef Ebeid. All Rights Reserved. <span class="mx-2 text-gray-500">&bull;</span> <a href="${sitemapHref}" target="_blank" class="text-gray-400 hover:text-sky-400 transition underline underline-offset-2">Sitemap</a> <span class="mx-2 text-gray-500">&bull;</span> <a href="${portalHref}" class="text-gray-400 hover:text-sky-400 transition underline underline-offset-2" title="Private Executive Portal"><i class="fas fa-lock text-[10px] mr-0.5"></i> Portal</a></p>
         </div>
     `;
 

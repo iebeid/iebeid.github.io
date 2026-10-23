@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Prevent Search Engine Indexing & Discovery -->
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+    <title>Personal Portal & Command Center - Dr. Islam Akef Ebeid</title>
+    <!-- Linux Libertine Font & CDN Fonts -->
+    <link href="https://fonts.cdnfonts.com/css/linux-libertine" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../images/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .serif-heading {
+            font-family: "Linux Libertine", "Linux Libertine O", Georgia, serif;
+        }
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        .tab-btn.active {
+            background-color: #0284c7;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- ================================================================= -->
+    <!-- 1. LOGIN GATE SCREEN (Shown when unauthenticated) -->
+    <!-- ================================================================= -->
+    <div id="login-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950 p-4 transition-opacity duration-300">
+        <div class="w-full max-w-md bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-8 backdrop-blur-xl relative overflow-hidden">
+            <!-- Glow background effect -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-sky-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="text-center relative z-10">
+                <div class="mx-auto w-20 h-20 rounded-full overflow-hidden border-2 border-sky-400/30 p-1 shadow-lg shadow-sky-500/10 mb-4 bg-slate-800">
+                    <img src="../../images/Islamic-Pattern-08-min.jpg" alt="Emblem" class="w-full h-full object-cover rounded-full">
+                </div>
+                <h1 class="serif-heading text-2xl font-bold text-white tracking-wide">Dr. Islam Akef Ebeid</h1>
+                <p class="text-xs uppercase tracking-widest text-sky-400 font-semibold mt-1">Executive Personal Portal</p>
+                <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/80 border border-slate-700/60 text-[11px] text-slate-400">
+                    <i class="fas fa-shield-alt text-emerald-400 text-xs"></i> Single-User Authenticated Gateway
+                </div>
+            </div>
+
+            <form id="login-form" class="mt-8 space-y-4 relative z-10">
+                <div>
+                    <label for="passcode-input" class="block text-xs font-medium text-slate-400 uppercase tracking-wider mb-2">Master Passcode</label>
+                    <div class="relative">
+                        <input type="password" id="passcode-input" autofocus required autocomplete="current-password"
+                            placeholder="Enter portal passcode..." 
+                            class="w-full bg-slate-800/90 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition pr-10">
+                        <button type="button" id="toggle-password-btn" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200">
+                            <i class="fas fa-eye text-sm" id="eye-icon"></i>
+                        </button>
+                    </div>
+                    <div id="login-error" class="hidden text-rose-400 text-xs mt-2 flex items-center gap-1.5">
+                        <i class="fas fa-exclamation-circle"></i> <span>Incorrect passcode. Please try again.</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" id="remember-me" checked class="rounded border-slate-700 bg-slate-800 text-sky-600 focus:ring-sky-500 h-4 w-4">
+                        <span>Keep me logged in</span>
+                    </label>
+                    <span class="text-slate-500 text-[11px]">Passcode default: <code class="text-sky-300">islam2026</code></span>
+                </div>
+
+                <button type="submit" class="w-full py-3 px-4 bg-sky-600 hover:bg-sky-500 active:scale-[0.99] text-white text-sm font-semibold rounded-xl shadow-lg shadow-sky-600/30 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-lock-open text-xs"></i> Unlock Command Center
+                </button>
+            </form>
+
+            <div class="mt-6 pt-6 border-t border-slate-800/80 text-center relative z-10">
+                <a href="../home/home.html" class="text-xs text-slate-400 hover:text-sky-400 transition inline-flex items-center gap-1.5">
+                    <i class="fas fa-arrow-left"></i> Return to Public Website
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- 2. MAIN PORTAL APP (Visible once authenticated) -->
+    <!-- ================================================================= -->
+    <div id="portal-app" class="hidden flex-1 flex flex-col">
+        
+        <!-- Top App Bar -->
+        <header class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16 gap-4">
+                    
+                    <!-- Left: Identity & Badge -->
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full overflow-hidden border border-sky-500/40 p-0.5 flex-shrink-0 bg-slate-800">
+                            <img src="../../images/Islamic-Pattern-08-min.jpg" alt="Emblem" class="w-full h-full object-cover rounded-full">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="serif-heading text-lg font-bold text-white tracking-wide">Islam Akef Ebeid</span>
+                                <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/30">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span> Personal Portal
+                                </span>
+                            </div>
+                            <div id="live-clock" class="text-[11px] text-slate-400 font-mono">Loading time...</div>
+                        </div>
+                    </div>
+
+                    <!-- Center: Quick Global Search -->
+                    <div class="hidden md:flex flex-1 max-w-md mx-4">
+                        <div class="relative w-full">
+                            <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input type="text" id="global-search-input" 
+                                placeholder="Search 415 bookmarks, folders, or messages... (Ctrl+K)" 
+                                class="w-full bg-slate-800/80 border border-slate-700/80 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-lg pl-9 pr-8 py-1.5 text-xs text-white placeholder-slate-400 outline-none transition">
+                            <button id="clear-search-btn" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Quick Actions -->
+                    <div class="flex items-center gap-3">
+                        <a href="../home/home.html" target="_blank" title="Open Public Website" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition">
+                            <i class="fas fa-globe text-sky-400"></i> <span>Website</span>
+                        </a>
+                        <button id="logout-btn" title="Lock Portal" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition">
+                            <i class="fas fa-lock"></i> <span>Lock</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tab Navigation Bar -->
+            <div class="bg-slate-900 border-t border-slate-800/60 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-7xl mx-auto flex items-center gap-2 py-2 overflow-x-auto scrollbar-none">
+                    <button data-tab="tab-dashboard" class="tab-btn active px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0">
+                        <i class="fas fa-th-large"></i> <span>Dashboard &amp; Launchpad</span>
+                    </button>
+                    <button data-tab="tab-bookmarks" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0">
+                        <i class="fas fa-bookmark"></i> <span>Bookmarks Catalog <span id="nav-bm-count" class="ml-1 text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-sky-400">415</span></span>
+                    </button>
+                    <button data-tab="tab-inbox" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0 relative">
+                        <i class="fas fa-inbox"></i> <span>Message Hub &amp; Inbox</span>
+                        <span id="unread-badge" class="ml-1.5 px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-rose-500 text-white">3</span>
+                    </button>
+                    <button data-tab="tab-scratchpad" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0">
+                        <i class="fas fa-sticky-note"></i> <span>Scratchpad &amp; Tasks</span>
+                    </button>
+                    <button data-tab="tab-settings" class="tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0">
+                        <i class="fas fa-sliders-h"></i> <span>Settings</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- ============================================================= -->
+        <!-- TAB 1: DASHBOARD & LAUNCHPAD -->
+        <!-- ============================================================= -->
+        <main id="tab-dashboard" class="tab-content flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+            
+            <!-- Hero Stats Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fas fa-bookmark"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white" id="stat-total-bookmarks">415</div>
+                        <div class="text-xs text-slate-400">Archived Bookmarks</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white" id="stat-pinned-count">12</div>
+                        <div class="text-xs text-slate-400">Pinned Favorites</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white" id="stat-dash-count">55 Launchpad</div>
+                        <div class="text-xs text-slate-400">Dashboard &amp; Quick Access</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white" id="stat-unread-messages">3 New</div>
+                        <div class="text-xs text-slate-400">Portal Inquiries</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Drivers & Quick Access (Curated strictly from the Dashboard folder) -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+                    <div>
+                        <h2 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-rocket text-sky-400"></i> Daily Drivers &amp; Quick Access
+                        </h2>
+                        <p class="text-xs text-slate-400">From your <strong>Dashboard</strong> folder &bull; Email accounts, virtual meetings, banks, tasks, and auto-learned frequently used links</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="openAddBookmarkModal('Dashboard')" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-sky-600/20 hover:bg-sky-600 text-sky-300 hover:text-white rounded-lg text-xs font-semibold border border-sky-500/30 transition">
+                            <i class="fas fa-plus"></i> <span>Add Shortcut</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Subfolder Filter Pills for Dashboard -->
+                <div id="dash-subfolder-filters" class="flex flex-wrap items-center gap-1.5 pt-1">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <div id="quick-launch-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 pt-2">
+                    <!-- Populated via JavaScript from Dashboard Folder -->
+                </div>
+            </div>
+
+            <!-- Two-Column Section: Core Sections Quick Jump & Dashboard Scratchpad -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Category Folders Quick Jump -->
+                <div class="lg:col-span-2 bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-layer-group text-sky-400"></i> Core Bookmark Categories
+                        </h2>
+                        <button onclick="switchTab('tab-bookmarks')" class="text-xs text-sky-400 hover:underline">View All 415 &rarr;</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Work Card -->
+                        <div onclick="filterCategoryAndOpen('Work')" class="cursor-pointer group p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-sky-500/50 transition">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-white group-hover:text-sky-300 transition flex items-center gap-2">
+                                    <i class="fas fa-briefcase text-sky-400"></i> Work &amp; Academia
+                                </span>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">185 links</span>
+                            </div>
+                            <p class="text-xs text-slate-400 line-clamp-2">Research grant portals, NSF, TWU, teaching syllabi, courseware, service committees, and academic publications.</p>
+                        </div>
+
+                        <!-- Life Card -->
+                        <div onclick="filterCategoryAndOpen('Life')" class="cursor-pointer group p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-emerald-500/50 transition">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-white group-hover:text-emerald-300 transition flex items-center gap-2">
+                                    <i class="fas fa-heart text-emerald-400"></i> Life &amp; Personal
+                                </span>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">138 links</span>
+                            </div>
+                            <p class="text-xs text-slate-400 line-clamp-2">Finance, investments, healthcare, home services, legal affairs, travel bookings, and community resources.</p>
+                        </div>
+
+                        <!-- Tools Card -->
+                        <div onclick="filterCategoryAndOpen('Tools')" class="cursor-pointer group p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-purple-500/50 transition">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-white group-hover:text-purple-300 transition flex items-center gap-2">
+                                    <i class="fas fa-tools text-purple-400"></i> Engineering Tools &amp; AI
+                                </span>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">37 links</span>
+                            </div>
+                            <p class="text-xs text-slate-400 line-clamp-2">Coding tools, Python/C++ repos, GitHub, cloud storage, LLMs, AI assistants, and developer utilities.</p>
+                        </div>
+
+                        <!-- Dashboard Card -->
+                        <div onclick="filterCategoryAndOpen('Dashboard')" class="cursor-pointer group p-4 rounded-xl bg-slate-800/60 hover:bg-slate-800 border border-slate-700/60 hover:border-amber-500/50 transition">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="font-bold text-sm text-white group-hover:text-amber-300 transition flex items-center gap-2">
+                                    <i class="fas fa-tachometer-alt text-amber-400"></i> Operational Dashboard
+                                </span>
+                                <span class="text-xs px-2 py-0.5 rounded-full bg-slate-700 text-slate-300">55 links</span>
+                            </div>
+                            <p class="text-xs text-slate-400 line-clamp-2">Banking, communications, media hubs, task trackers, retirement accounts, and routine dashboards.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Sticky Scratchpad (Saves to LocalStorage) -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h2 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
+                                <i class="fas fa-pen-fancy text-amber-400"></i> Quick Scratchpad
+                            </h2>
+                            <span id="scratch-save-status" class="text-[10px] text-slate-500">Auto-saved</span>
+                        </div>
+                        <p class="text-xs text-slate-400 mb-3">Persistent browser notepad for rapid meeting notes, grant ideas, or links.</p>
+                        <textarea id="dashboard-scratchpad" rows="7" 
+                            placeholder="Type temporary notes, reminders, or draft ideas here... (automatically saved to this browser)"
+                            class="w-full bg-slate-800 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-500 outline-none resize-none transition font-mono"></textarea>
+                    </div>
+                    <div class="mt-3 flex items-center justify-between text-xs text-slate-500">
+                        <button onclick="clearScratchpad()" class="hover:text-rose-400 transition"><i class="fas fa-trash-alt mr-1"></i> Clear</button>
+                        <span>LocalStorage Encrypted Session</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- ============================================================= -->
+        <!-- TAB 2: BOOKMARKS EXPLORER (Interactive 415 Items) -->
+        <!-- ============================================================= -->
+        <main id="tab-bookmarks" class="tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+            
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm">
+                <div>
+                    <h2 class="serif-heading text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-bookmark text-sky-400"></i> Personal Bookmarks Directory
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Curated links extracted from your browser profile &bull; Fully searchable, editable, and organized</p>
+                </div>
+
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <!-- Bookmarks Search -->
+                    <div class="relative flex-1 sm:w-72">
+                        <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="bm-search-input" placeholder="Search title, URL, domain, folder..."
+                            class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl pl-9 pr-8 py-2 text-xs text-white placeholder-slate-400 outline-none transition">
+                        <button id="bm-clear-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+                            <i class="fas fa-times-circle"></i>
+                        </button>
+                    </div>
+
+                    <!-- Add Bookmark Button -->
+                    <button onclick="openAddBookmarkModal()" class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex-shrink-0">
+                        <i class="fas fa-plus"></i> <span>Add Bookmark</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap items-center gap-2" id="category-pills">
+                <button data-cat="all" class="cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition">
+                    All Bookmarks (415)
+                </button>
+                <button data-cat="Work" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                    <i class="fas fa-briefcase text-sky-400 mr-1.5"></i> Work (185)
+                </button>
+                <button data-cat="Life" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                    <i class="fas fa-heart text-emerald-400 mr-1.5"></i> Life (138)
+                </button>
+                <button data-cat="Tools" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                    <i class="fas fa-tools text-purple-400 mr-1.5"></i> Tools (37)
+                </button>
+                <button data-cat="Dashboard" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+                    <i class="fas fa-tachometer-alt text-amber-400 mr-1.5"></i> Dashboard (55)
+                </button>
+                <button data-cat="pinned" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-amber-300 border border-amber-500/30 transition">
+                    <i class="fas fa-star text-amber-400 mr-1.5"></i> Pinned Only
+                </button>
+            </div>
+
+            <!-- Subfolder Filter Chips (Populated dynamically) -->
+            <div id="subfolder-chips-container" class="flex flex-wrap gap-1.5 pt-1">
+                <!-- Dynamically populated based on active category -->
+            </div>
+
+            <!-- Bookmarks Results Grid -->
+            <div class="flex items-center justify-between text-xs text-slate-400 px-1">
+                <span id="results-count-label">Showing 415 bookmarks</span>
+                <span class="text-[11px] text-slate-500">Click star to pin &bull; Click link to launch</span>
+            </div>
+
+            <div id="bookmarks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <div id="no-results-msg" class="hidden py-16 text-center text-slate-500">
+                <i class="fas fa-search text-3xl mb-3 text-slate-600"></i>
+                <p class="text-sm">No bookmarks matching your search query.</p>
+            </div>
+
+        </main>
+
+
+        <!-- ============================================================= -->
+        <!-- TAB 3: MESSAGE HUB & INBOX -->
+        <!-- ============================================================= -->
+        <main id="tab-inbox" class="tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+            
+            <div class="bg-slate-900 rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden flex flex-col h-[760px]">
+                
+                <!-- Inbox Toolbar -->
+                <div class="p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <h2 class="serif-heading text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-inbox text-rose-400"></i> Personal Message Center
+                        </h2>
+                        <span class="text-xs bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-0.5 rounded-full font-semibold">
+                            Unified Mailbox
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="openFormIntegrationModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition">
+                            <i class="fas fa-plug"></i> <span>Connect Contact Form</span>
+                        </button>
+                        <button onclick="refreshInbox()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="Refresh Inbox">
+                            <i class="fas fa-sync-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Inbox Split Pane (Left: List, Right: Viewer) -->
+                <div class="flex-1 flex overflow-hidden">
+                    
+                    <!-- Left Column: Message List -->
+                    <div class="w-full md:w-5/12 border-r border-slate-800 flex flex-col bg-slate-900/60">
+                        <!-- Message Search -->
+                        <div class="p-3 border-b border-slate-800/80">
+                            <div class="relative">
+                                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                                <input type="text" id="msg-search-input" placeholder="Search sender, subject, keywords..."
+                                    class="w-full bg-slate-800/80 border border-slate-700/60 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 outline-none transition">
+                            </div>
+                        </div>
+
+                        <!-- Message List Container -->
+                        <div id="messages-list" class="flex-1 overflow-y-auto divide-y divide-slate-800/60">
+                            <!-- Populated via JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Detail View -->
+                    <div class="hidden md:flex flex-1 flex-col bg-slate-950/40 p-6 overflow-y-auto" id="message-detail-pane">
+                        <!-- Default placeholder state -->
+                        <div class="m-auto text-center text-slate-500" id="msg-placeholder">
+                            <i class="fas fa-envelope-open text-4xl mb-3 text-slate-700"></i>
+                            <h3 class="text-sm font-semibold text-slate-400">Select a message to view details</h3>
+                            <p class="text-xs text-slate-600 mt-1">Inquiries submitted via your website contact form appear here</p>
+                        </div>
+
+                        <!-- Active Message Content Container -->
+                        <div id="msg-content-container" class="hidden flex-col h-full space-y-6">
+                            <!-- Detail Header -->
+                            <div class="border-b border-slate-800 pb-4">
+                                <div class="flex items-start justify-between gap-4 mb-3">
+                                    <h3 id="msg-subject" class="serif-heading text-xl font-bold text-white"></h3>
+                                    <div class="flex items-center gap-2 flex-shrink-0">
+                                        <button id="msg-star-btn" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 transition" title="Star message">
+                                            <i class="far fa-star"></i>
+                                        </button>
+                                        <button id="msg-delete-btn" class="p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition" title="Archive / Delete">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between text-xs text-slate-400">
+                                    <div class="flex items-center gap-2">
+                                        <div id="msg-avatar" class="w-8 h-8 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs uppercase"></div>
+                                        <div>
+                                            <div id="msg-sender" class="font-bold text-slate-200"></div>
+                                            <div id="msg-email" class="text-slate-500 text-[11px]"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div id="msg-date" class="font-mono text-slate-400"></div>
+                                        <span id="msg-tag" class="inline-block mt-1 text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-slate-800 text-sky-400 border border-slate-700"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detail Body -->
+                            <div id="msg-body" class="text-sm text-slate-300 leading-relaxed flex-1 whitespace-pre-wrap font-sans">
+                            </div>
+
+                            <!-- Reply Bar -->
+                            <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                                <div class="text-xs text-slate-500">
+                                    <i class="fas fa-shield-alt text-emerald-400 mr-1"></i> Private Message Store
+                                </div>
+                                <a id="msg-reply-link" href="#" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex items-center gap-2">
+                                    <i class="fas fa-reply"></i> Reply via Email Client
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <!-- ============================================================= -->
+        <!-- TAB 4: SCRATCHPAD & TASKS -->
+        <!-- ============================================================= -->
+        <main id="tab-scratchpad" class="tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm">
+                <h2 class="serif-heading text-xl font-bold text-white flex items-center gap-2 mb-2">
+                    <i class="fas fa-sticky-note text-amber-400"></i> Executive Scratchpad &amp; Task Memo
+                </h2>
+                <p class="text-xs text-slate-400 mb-6">Long-form draft workspace and persistent todo list for grant proposals, meeting agendas, and reminders.</p>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Text Memo Area -->
+                    <div class="space-y-3">
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-400">Research &amp; Strategy Memo</label>
+                        <textarea id="full-scratchpad" rows="16" placeholder="Write full memos, research bullet points, paper drafts, or grant notes here..."
+                            class="w-full bg-slate-800/80 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 rounded-xl p-4 text-xs text-slate-200 font-mono outline-none resize-none transition leading-relaxed"></textarea>
+                    </div>
+
+                    <!-- Task List -->
+                    <div class="space-y-3 flex flex-col justify-between">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Immediate Tasks &amp; Milestones</label>
+                            
+                            <!-- Add Task input -->
+                            <div class="flex gap-2 mb-4">
+                                <input type="text" id="new-task-input" placeholder="Add new task or milestone..."
+                                    class="flex-1 bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-500 outline-none">
+                                <button onclick="addTask()" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold transition">
+                                    <i class="fas fa-plus"></i> Add
+                                </button>
+                            </div>
+
+                            <!-- Tasks Container -->
+                            <ul id="task-list" class="space-y-2 max-h-[360px] overflow-y-auto pr-1">
+                                <!-- Populated dynamically -->
+                            </ul>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800 text-xs text-slate-500 flex items-center justify-between">
+                            <span>Tasks automatically persist in your private local store</span>
+                            <button onclick="clearCompletedTasks()" class="text-rose-400 hover:underline">Clear Completed</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        <!-- ============================================================= -->
+        <!-- TAB 5: SETTINGS & SECURITY -->
+        <!-- ============================================================= -->
+        <main id="tab-settings" class="tab-content hidden flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+            <div class="bg-slate-900 p-8 rounded-2xl border border-slate-800/80 shadow-sm space-y-6">
+                <div>
+                    <h2 class="serif-heading text-2xl font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-shield-alt text-sky-400"></i> Portal Security &amp; Data Configuration
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1">Manage portal access credentials, backup exports, and data synchronization.</p>
+                </div>
+
+                <!-- Change Passcode Card -->
+                <div class="p-6 rounded-xl bg-slate-800/50 border border-slate-700/60 space-y-4">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-key text-amber-400"></i> Change Master Passcode
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Update the master passcode required to access your command center on this browser. Default passcode is <code class="text-sky-300">islam2026</code>.
+                    </p>
+
+                    <form id="change-passcode-form" class="space-y-3 max-w-md">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">New Passcode</label>
+                            <input type="password" id="new-passcode" required minlength="6" placeholder="Enter new passcode (min 6 characters)"
+                                class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Confirm New Passcode</label>
+                            <input type="password" id="confirm-passcode" required minlength="6" placeholder="Re-enter new passcode"
+                                class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                        </div>
+                        <div id="passcode-change-msg" class="text-xs hidden font-medium"></div>
+                        <button type="submit" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition">
+                            Save New Passcode
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Data Export & Backup -->
+                <div class="p-6 rounded-xl bg-slate-800/50 border border-slate-700/60 space-y-4">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i class="fas fa-file-export text-emerald-400"></i> Bookmarks Export &amp; Portability
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Export your organized 415 bookmarks catalog in standard JSON format for offline backup or machine learning integration.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="downloadBookmarksJSON()" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition inline-flex items-center gap-1.5">
+                            <i class="fas fa-download"></i> Download bookmarks.json
+                        </button>
+                        <a href="../../sitemap.xml" target="_blank" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition inline-flex items-center gap-1.5">
+                            <i class="fas fa-sitemap text-sky-400"></i> View Public Sitemap.xml
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Session Reset -->
+                <div class="p-6 rounded-xl bg-rose-500/5 border border-rose-500/20 space-y-3">
+                    <h3 class="text-sm font-bold text-rose-300 flex items-center gap-2">
+                        <i class="fas fa-trash-alt text-rose-400"></i> Clear Local Cache &amp; Reset Portal
+                    </h3>
+                    <p class="text-xs text-slate-400">
+                        Clears your custom pinned bookmarks, custom passcode, scratchpad, and locks session immediately.
+                    </p>
+                    <button onclick="resetPortalData()" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition">
+                        Reset Local Portal Storage
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+            <p>&copy; 2026 Dr. Islam Akef Ebeid &bull; Private Personal Command Center &bull; All Rights Reserved.</p>
+        </footer>
+
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- 3. CONNECT CONTACT FORM MODAL (Phase 2 Integration) -->
+    <!-- ================================================================= -->
+    <div id="form-integration-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-plug text-sky-400"></i> Connect Website Contact Form
+                </h3>
+                <button onclick="closeFormIntegrationModal()" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
+                <p>
+                    Your Message Hub is configured to display incoming inquiries from your public contact form on <code class="text-sky-300">pages/relations/relations.html</code>.
+                </p>
+                <div class="bg-slate-800 p-3.5 rounded-xl border border-slate-700 space-y-2">
+                    <div class="font-bold text-white flex items-center gap-1.5">
+                        <i class="fas fa-check-circle text-emerald-400"></i> Recommended Serverless Integrations:
+                    </div>
+                    <ul class="list-disc list-inside space-y-1 text-slate-400 text-[11px]">
+                        <li><strong>Formspree / Formkeep / Web3Forms:</strong> Zero-backend webhook forwarding to your inbox.</li>
+                        <li><strong>Supabase / Firebase Free Tier:</strong> Direct database collection with real-time sync.</li>
+                        <li><strong>Google Apps Script / Sheets:</strong> Free private spreadsheet API acting as your mailbox database.</li>
+                    </ul>
+                </div>
+                <p class="text-slate-400 text-[11px]">
+                    Phase 1 includes demo messages and an active local store. When you are ready for Phase 2, we will connect the live webhook endpoints directly!
+                </p>
+            </div>
+            <div class="mt-6 flex justify-end">
+                <button onclick="closeFormIntegrationModal()" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold transition">
+                    Got it
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================================================================= -->
+    <!-- ADD / EDIT BOOKMARK MODAL -->
+    <!-- ================================================================= -->
+    <div id="add-bookmark-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 backdrop-blur-sm">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-plus-circle text-sky-400"></i> Add New Bookmark
+                </h3>
+                <button onclick="closeAddBookmarkModal()" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="add-bookmark-form" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Title / Name *</label>
+                    <input type="text" id="bm-new-name" required placeholder="e.g. Canvas LMS, NSF Fastlane, GitHub..."
+                        class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Destination URL *</label>
+                    <input type="url" id="bm-new-url" required placeholder="https://..."
+                        class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Top Folder *</label>
+                        <select id="bm-new-cat" class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                            <option value="Dashboard">Dashboard (Daily Drivers)</option>
+                            <option value="Work">Work</option>
+                            <option value="Life">Life</option>
+                            <option value="Tools">Tools</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Subfolder</label>
+                        <input type="text" id="bm-new-sub" placeholder="e.g. Communication, Research..."
+                            class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none">
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 pt-1">
+                    <label class="flex items-center gap-2 cursor-pointer text-xs text-slate-300">
+                        <input type="checkbox" id="bm-new-pin" class="rounded border-slate-700 bg-slate-800 text-sky-600 focus:ring-sky-500 h-4 w-4">
+                        <span>Pin to Daily Drivers / Starred</span>
+                    </label>
+                </div>
+                <div class="flex justify-end gap-2 pt-4 border-t border-slate-800">
+                    <button type="button" onclick="closeAddBookmarkModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5">
+                        <i class="fas fa-check"></i> Save Bookmark
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Embedded Data & Scripts -->
+    <script src="bookmarks_data.js"></script>
+    <script src="portal.js"></script>
+</body>
+</html>

@@ -1,5 +1,14 @@
-# PyCharm
+# IDE & Editor Configs
 .idea/
+.idea
+.junie/
+.junie
+*.iml
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
 
 # Virtual Environment
 venv/

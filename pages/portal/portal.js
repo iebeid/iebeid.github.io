@@ -1,0 +1,1280 @@
+/**
+ * Dr. Islam Akef Ebeid - Personal Command Center & Portal Script
+ * Aligned precisely with Chrome Bookmarks hierarchy:
+ * 1. Work (185)
+ * 2. Life (138)
+ * 3. Tools (37)
+ * 4. Dashboard (55) -> Houses "Daily Drivers & Quick Access"
+ * 
+ * Features:
+ * - Dynamic addition & deletion of bookmarks with localStorage persistence
+ * - Smart frequency & usage tracking (promotes most-used links into Quick Access)
+ * - Pinned favorites, search highlighting, messaging hub, scratchpad, tasks
+ */
+
+(function () {
+    // -------------------------------------------------------------------------
+    // 1. STATE & CONSTANTS
+    // -------------------------------------------------------------------------
+    const DEFAULT_PASSCODE = 'islam2026';
+    const PASSCODE_STORAGE_KEY = 'portal_master_passcode';
+    const AUTH_SESSION_KEY = 'portal_auth_token';
+    const PINNED_STORAGE_KEY = 'portal_pinned_bookmarks';
+    const SCRATCHPAD_KEY = 'portal_scratchpad_content';
+    const TASKS_KEY = 'portal_tasks_list';
+    const MESSAGES_KEY = 'portal_messages_list';
+    const CUSTOM_BM_KEY = 'portal_custom_bookmarks';
+    const DELETED_BM_KEY = 'portal_deleted_bookmarks';
+    const USAGE_STATS_KEY = 'portal_usage_stats';
+
+    let activeCategory = 'all';
+    let activeSubfolder = null;
+    let activeDashFilter = 'all';
+    let searchQuery = '';
+    let selectedMessageId = null;
+
+    // Seed Messages (Academic, grant, and student inquiries)
+    const SEED_MESSAGES = [
+        {
+            id: 1,
+            sender: "Dr. Sarah Lin",
+            email: "slin@mit.edu",
+            subject: "Potential Collab: Multimodal Medical Segmentation & Auto-prompting",
+            date: "Oct 22, 2026",
+            tag: "Research Collab",
+            unread: true,
+            starred: true,
+            body: `Dear Dr. Ebeid,\n\nI read your recent work on foundation models for medical image segmentation and your newly awarded NSF grant with great interest. Our laboratory at MIT is currently developing complementary prompt-tuning pipelines for high-throughput radiology datasets.\n\nWe would love to discuss a potential joint workshop submission for CVPR or IEEE BIBM, and perhaps explore whether our pre-trained encoders could integrate with your directed graph convolutional framework.\n\nWould you be open to a brief 20-minute Zoom call sometime next week?\n\nWarm regards,\nDr. Sarah Lin\nAssociate Professor, Department of EECS, MIT`
+        },
+        {
+            id: 2,
+            sender: "Alexandria Morales",
+            email: "amorales@twu.edu",
+            subject: "Inquiry regarding Undergraduate Research in Data2AI4LifeSciences Lab",
+            date: "Oct 21, 2026",
+            tag: "Student Mentorship",
+            unread: true,
+            starred: false,
+            body: `Hello Dr. Ebeid,\n\nI am a junior Computer Science major at TWU enrolled in your database course. I am very interested in bioinformatics and machine learning, and I saw on your faculty page that your research group works with graph neural networks on protein structures.\n\nCould I schedule a time during your office hours to ask about potential undergraduate research assistant positions or independent study opportunities for Spring 2027?\n\nThank you for your time and guidance!\n\nAlexandria Morales\nB.S. in Computer Science Candidate, TWU`
+        },
+        {
+            id: 3,
+            sender: "Program Director (NSF CISE)",
+            email: "cise-program@nsf.gov",
+            subject: "NSF CISE/CCF PI Meeting & Grant Reporting Schedule",
+            date: "Oct 19, 2026",
+            tag: "Grant Operations",
+            unread: true,
+            starred: true,
+            body: `Dear Dr. Ebeid,\n\nCongratulations again on your collaborative award under the CCF/CISE program. This is an informational reminder that the annual PI meeting will be held in Alexandria, VA in late spring.\n\nPlease ensure your preliminary project milestones and student support reporting protocols are updated in Research.gov.\n\nSincerely,\nDivision of Computing and Communication Foundations\nNational Science Foundation`
+        },
+        {
+            id: 4,
+            sender: "Dr. Tarek Mansour",
+            email: "tmansour@cairo.edu.eg",
+            subject: "Invitation: Keynote Session on AI in Drug Discovery",
+            date: "Oct 15, 2026",
+            tag: "Keynote / Invited Talk",
+            unread: false,
+            starred: false,
+            body: `Dear Dr. Islam,\n\nI hope this email finds you well. The organizing committee of the International Conference on Bioinformatics and Computational Health Systems in Cairo would be honored to host you as an invited keynote speaker this December.\n\nGiven your extensive expertise across entity resolution, structural proteomics, and foundation models, your presentation would be invaluable to our faculty and graduate students.\n\nPlease let us know if your schedule might accommodate this invitation.\n\nBest regards,\nProf. Tarek Mansour\nFaculty of Computers and Artificial Intelligence`
+        }
+    ];
+
+    // -------------------------------------------------------------------------
+    // 2. AUTHENTICATION & SECURITY
+    // -------------------------------------------------------------------------
+    function getStoredPasscode() {
+        return localStorage.getItem(PASSCODE_STORAGE_KEY) || DEFAULT_PASSCODE;
+    }
+
+    function isAuthenticated() {
+        return sessionStorage.getItem(AUTH_SESSION_KEY) === 'authenticated' ||
+               localStorage.getItem(AUTH_SESSION_KEY) === 'authenticated';
+    }
+
+    function authenticate(passcode, remember) {
+        const correct = getStoredPasscode();
+        if (passcode === correct) {
+            if (remember) {
+                localStorage.setItem(AUTH_SESSION_KEY, 'authenticated');
+            } else {
+                sessionStorage.setItem(AUTH_SESSION_KEY, 'authenticated');
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function logout() {
+        sessionStorage.removeItem(AUTH_SESSION_KEY);
+        localStorage.removeItem(AUTH_SESSION_KEY);
+        document.getElementById('portal-app').classList.add('hidden');
+        document.getElementById('login-screen').classList.remove('hidden');
+        document.getElementById('passcode-input').value = '';
+        document.getElementById('login-error').classList.add('hidden');
+    }
+
+    function initAuth() {
+        const loginScreen = document.getElementById('login-screen');
+        const portalApp = document.getElementById('portal-app');
+        const loginForm = document.getElementById('login-form');
+        const passInput = document.getElementById('passcode-input');
+        const loginError = document.getElementById('login-error');
+        const rememberMe = document.getElementById('remember-me');
+        const togglePassBtn = document.getElementById('toggle-password-btn');
+        const eyeIcon = document.getElementById('eye-icon');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        if (isAuthenticated()) {
+            loginScreen.classList.add('hidden');
+            portalApp.classList.remove('hidden');
+        } else {
+            loginScreen.classList.remove('hidden');
+            portalApp.classList.add('hidden');
+        }
+
+        if (togglePassBtn) {
+            togglePassBtn.addEventListener('click', () => {
+                if (passInput.type === 'password') {
+                    passInput.type = 'text';
+                    eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    passInput.type = 'password';
+                    eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            });
+        }
+
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const entered = passInput.value.trim();
+                if (authenticate(entered, rememberMe.checked)) {
+                    loginError.classList.add('hidden');
+                    loginScreen.classList.add('opacity-0');
+                    setTimeout(() => {
+                        loginScreen.classList.add('hidden');
+                        loginScreen.classList.remove('opacity-0');
+                        portalApp.classList.remove('hidden');
+                        renderAll();
+                    }, 250);
+                } else {
+                    loginError.classList.remove('hidden');
+                    passInput.select();
+                }
+            });
+        }
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', logout);
+        }
+
+        // Change Passcode Form
+        const changePassForm = document.getElementById('change-passcode-form');
+        const newPass = document.getElementById('new-passcode');
+        const confirmPass = document.getElementById('confirm-passcode');
+        const changeMsg = document.getElementById('passcode-change-msg');
+
+        if (changePassForm) {
+            changePassForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (newPass.value !== confirmPass.value) {
+                    changeMsg.className = 'text-xs text-rose-400 block';
+                    changeMsg.textContent = 'Passcodes do not match.';
+                    return;
+                }
+                if (newPass.value.length < 6) {
+                    changeMsg.className = 'text-xs text-rose-400 block';
+                    changeMsg.textContent = 'Passcode must be at least 6 characters.';
+                    return;
+                }
+                localStorage.setItem(PASSCODE_STORAGE_KEY, newPass.value);
+                changeMsg.className = 'text-xs text-emerald-400 block';
+                changeMsg.textContent = 'Master passcode updated successfully! Remember your new passcode.';
+                newPass.value = '';
+                confirmPass.value = '';
+            });
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. LIVE CLOCK
+    // -------------------------------------------------------------------------
+    function startClock() {
+        const clockEl = document.getElementById('live-clock');
+        function update() {
+            if (!clockEl) return;
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-US', {
+                weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+            });
+            const timeStr = now.toLocaleTimeString('en-US', {
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+            clockEl.textContent = `${dateStr} \u2022 ${timeStr}`;
+        }
+        update();
+        setInterval(update, 1000);
+    }
+
+    // -------------------------------------------------------------------------
+    // 4. TAB NAVIGATION
+    // -------------------------------------------------------------------------
+    window.switchTab = function (tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            if (btn.getAttribute('data-tab') === tabId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        document.querySelectorAll('.tab-content').forEach(content => {
+            if (content.id === tabId) {
+                content.classList.remove('hidden');
+            } else {
+                content.classList.add('hidden');
+            }
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    function initTabs() {
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                if (tabId) switchTab(tabId);
+            });
+        });
+    }
+
+    // -------------------------------------------------------------------------
+    // 5. BOOKMARKS STORAGE & RESOLUTION (CRUD + STATS)
+    // -------------------------------------------------------------------------
+    function getCustomBookmarks() {
+        try {
+            return JSON.parse(localStorage.getItem(CUSTOM_BM_KEY) || '[]');
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveCustomBookmarks(bms) {
+        localStorage.setItem(CUSTOM_BM_KEY, JSON.stringify(bms));
+    }
+
+    function getDeletedBookmarkIds() {
+        try {
+            return JSON.parse(localStorage.getItem(DELETED_BM_KEY) || '[]');
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function saveDeletedBookmarkIds(ids) {
+        localStorage.setItem(DELETED_BM_KEY, JSON.stringify(ids));
+    }
+
+    function getUsageStats() {
+        try {
+            return JSON.parse(localStorage.getItem(USAGE_STATS_KEY) || '{}');
+        } catch (e) {
+            return {};
+        }
+    }
+
+    function saveUsageStats(stats) {
+        localStorage.setItem(USAGE_STATS_KEY, JSON.stringify(stats));
+    }
+
+    function getBookmarkUsageCount(bmId) {
+        const stats = getUsageStats();
+        const item = stats[String(bmId)];
+        return (item && item.count) ? item.count : 0;
+    }
+
+    function getAllBookmarks() {
+        let baseList = [];
+        if (window.PORTAL_BOOKMARKS && Array.isArray(window.PORTAL_BOOKMARKS.bookmarks)) {
+            baseList = window.PORTAL_BOOKMARKS.bookmarks;
+        }
+        const custom = getCustomBookmarks();
+        const deletedSet = new Set(getDeletedBookmarkIds());
+        
+        // Merge base + custom, filtering out deleted bookmarks
+        const combined = [...custom, ...baseList].filter(bm => !deletedSet.has(bm.id));
+        return combined;
+    }
+
+    function getPinnedIds() {
+        const stored = localStorage.getItem(PINNED_STORAGE_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
+        }
+        // Default: first 8 bookmarks from Dashboard folder
+        const allBms = getAllBookmarks();
+        const dashBms = allBms.filter(b => b.category === 'Dashboard').slice(0, 8);
+        const initial = dashBms.map(b => b.id);
+        localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(initial));
+        return initial;
+    }
+
+    function togglePin(bmId) {
+        let pinned = getPinnedIds();
+        const idNum = parseInt(bmId, 10);
+        if (pinned.includes(idNum)) {
+            pinned = pinned.filter(id => id !== idNum);
+        } else {
+            pinned.push(idNum);
+        }
+        localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(pinned));
+        renderDashboardDailyDrivers();
+        renderBookmarks();
+        updateStats();
+    }
+    window.togglePin = togglePin;
+
+    // Smart Launch Tracker: records click frequency and updates Quick Access
+    function trackLaunch(bmId, url) {
+        const stats = getUsageStats();
+        const idStr = String(bmId);
+        if (!stats[idStr]) {
+            stats[idStr] = { count: 0, lastUsed: Date.now() };
+        }
+        stats[idStr].count += 1;
+        stats[idStr].lastUsed = Date.now();
+        saveUsageStats(stats);
+
+        window.open(url, '_blank', 'noopener,noreferrer');
+
+        // Immediately update views to reflect new usage ranking
+        setTimeout(() => {
+            renderDashboardDailyDrivers();
+            renderBookmarks();
+        }, 100);
+    }
+    window.trackLaunch = trackLaunch;
+
+    // Delete Bookmark with confirmation
+    function deleteBookmark(bmId) {
+        const allBms = getAllBookmarks();
+        const bm = allBms.find(b => b.id === bmId);
+        const title = bm ? bm.name : 'this bookmark';
+        
+        if (!confirm(`Are you sure you want to remove "${title}"?`)) {
+            return;
+        }
+
+        // Add to deleted IDs
+        const deleted = getDeletedBookmarkIds();
+        if (!deleted.includes(bmId)) {
+            deleted.push(bmId);
+            saveDeletedBookmarkIds(deleted);
+        }
+
+        // Remove from custom list if it was a user-added one
+        const custom = getCustomBookmarks().filter(b => b.id !== bmId);
+        saveCustomBookmarks(custom);
+
+        // Remove from pinned
+        const pinned = getPinnedIds().filter(id => id !== bmId);
+        localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(pinned));
+
+        // Clean stats
+        const stats = getUsageStats();
+        delete stats[String(bmId)];
+        saveUsageStats(stats);
+
+        renderAll();
+    }
+    window.deleteBookmark = deleteBookmark;
+
+    // Copy to clipboard helper
+    function copyToClipboard(text, btnElement) {
+        navigator.clipboard.writeText(text).then(() => {
+            const originalHTML = btnElement.innerHTML;
+            btnElement.innerHTML = '<i class="fas fa-check text-emerald-400"></i>';
+            setTimeout(() => {
+                btnElement.innerHTML = originalHTML;
+            }, 1500);
+        });
+    }
+    window.copyToClipboard = copyToClipboard;
+
+    // -------------------------------------------------------------------------
+    // 6. ADD BOOKMARK MODAL & FORM
+    // -------------------------------------------------------------------------
+    window.openAddBookmarkModal = function (defaultCat) {
+        const modal = document.getElementById('add-bookmark-modal');
+        if (!modal) return;
+        const catSelect = document.getElementById('bm-new-cat');
+        if (catSelect && defaultCat) {
+            catSelect.value = defaultCat;
+        }
+        document.getElementById('bm-new-name').value = '';
+        document.getElementById('bm-new-url').value = '';
+        document.getElementById('bm-new-sub').value = '';
+        document.getElementById('bm-new-pin').checked = (defaultCat === 'Dashboard');
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.getElementById('bm-new-name').focus();
+    };
+
+    window.closeAddBookmarkModal = function () {
+        const modal = document.getElementById('add-bookmark-modal');
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    };
+
+    function initAddBookmarkForm() {
+        const form = document.getElementById('add-bookmark-form');
+        if (!form) return;
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('bm-new-name').value.trim();
+            let url = document.getElementById('bm-new-url').value.trim();
+            const category = document.getElementById('bm-new-cat').value;
+            let subfolder = document.getElementById('bm-new-sub').value.trim();
+            const isPin = document.getElementById('bm-new-pin').checked;
+
+            if (!name || !url) return;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
+            }
+
+            let domain = 'web';
+            try {
+                domain = new URL(url).hostname.replace('www.', '');
+            } catch (err) {
+                domain = url.split('/')[2] || 'web';
+            }
+
+            if (!subfolder) {
+                subfolder = 'General';
+            }
+
+            const newId = Date.now();
+            const newBm = {
+                id: newId,
+                name: name,
+                url: url,
+                category: category,
+                subfolder: subfolder,
+                path: `${category} / ${subfolder}`,
+                path_parts: [category, subfolder],
+                domain: domain,
+                isCustom: true
+            };
+
+            const custom = getCustomBookmarks();
+            custom.unshift(newBm);
+            saveCustomBookmarks(custom);
+
+            if (isPin) {
+                const pinned = getPinnedIds();
+                if (!pinned.includes(newId)) {
+                    pinned.unshift(newId);
+                    localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(pinned));
+                }
+            }
+
+            // Initial seed usage
+            const stats = getUsageStats();
+            stats[String(newId)] = { count: 1, lastUsed: Date.now() };
+            saveUsageStats(stats);
+
+            closeAddBookmarkModal();
+            renderAll();
+        });
+    }
+
+    // -------------------------------------------------------------------------
+    // 7. RENDER DASHBOARD (DAILY DRIVERS & AUTO-LEARNED FREQUENT BOOKMARKS)
+    // -------------------------------------------------------------------------
+    function renderDashboardDailyDrivers() {
+        const container = document.getElementById('quick-launch-grid');
+        const filterContainer = document.getElementById('dash-subfolder-filters');
+        if (!container) return;
+
+        const allBms = getAllBookmarks();
+        const pinnedIds = getPinnedIds();
+        const stats = getUsageStats();
+
+        // 1. Base Dashboard Bookmarks from user's "Dashboard" folder
+        const dashBms = allBms.filter(b => b.category === 'Dashboard');
+
+        // 2. Auto-identified frequently used bookmarks (count >= 2 from any category, or top launched)
+        const frequentBms = allBms.filter(b => {
+            const count = getBookmarkUsageCount(b.id);
+            return count >= 2;
+        }).sort((a, b) => getBookmarkUsageCount(b.id) - getBookmarkUsageCount(a.id));
+
+        // Combined pool for Daily Drivers:
+        // Includes all Dashboard folder bookmarks + any non-dashboard bookmark that is used frequently
+        const combinedPoolMap = new Map();
+        dashBms.forEach(b => combinedPoolMap.set(b.id, b));
+        frequentBms.forEach(b => combinedPoolMap.set(b.id, b));
+        const combinedDailyDrivers = Array.from(combinedPoolMap.values());
+
+        // Extract subfolders under Dashboard
+        const dashSubfolders = new Set();
+        dashBms.forEach(b => {
+            if (b.subfolder) dashSubfolders.add(b.subfolder);
+        });
+        const sortedSubs = Array.from(dashSubfolders).sort();
+
+        // Render subfolder filter buttons for Dashboard
+        if (filterContainer) {
+            let filterHtml = `
+                <button onclick="setDashFilter('all')" class="${activeDashFilter === 'all' ? 'bg-sky-600 text-white font-bold' : 'bg-slate-800 text-slate-400 hover:text-white'} px-3 py-1 rounded-lg text-xs transition">
+                    All Quick Access (${combinedDailyDrivers.length})
+                </button>
+            `;
+
+            // Dedicated filter for Frequently Used bookmarks
+            filterHtml += `
+                <button onclick="setDashFilter('__frequent__')" class="${activeDashFilter === '__frequent__' ? 'bg-amber-500 text-slate-900 font-bold' : 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300'} px-2.5 py-1 rounded-lg text-xs border border-amber-500/30 transition flex items-center gap-1.5">
+                    <i class="fas fa-fire text-amber-400"></i> Frequently Used (${frequentBms.length})
+                </button>
+            `;
+
+            for (let sub of sortedSubs) {
+                const count = dashBms.filter(b => b.subfolder === sub).length;
+                const isActive = activeDashFilter === sub;
+                filterHtml += `
+                    <button onclick="setDashFilter('${escapeHtml(sub)}')" class="${isActive ? 'bg-sky-600 text-white font-bold' : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200'} px-2.5 py-1 rounded-lg text-xs border border-slate-700/60 transition">
+                        ${escapeHtml(sub)} (${count})
+                    </button>
+                `;
+            }
+            filterContainer.innerHTML = filterHtml;
+        }
+
+        // Determine which bookmarks to display based on active filter
+        let displayBms = [];
+        if (activeDashFilter === 'all') {
+            displayBms = combinedDailyDrivers;
+        } else if (activeDashFilter === '__frequent__') {
+            displayBms = frequentBms;
+        } else {
+            displayBms = dashBms.filter(b => b.subfolder === activeDashFilter);
+        }
+
+        if (displayBms.length === 0) {
+            container.innerHTML = `
+                <div class="col-span-full py-12 text-center text-xs text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
+                    <i class="fas fa-info-circle text-sky-400 text-base mb-2 block"></i>
+                    ${activeDashFilter === '__frequent__' 
+                        ? 'No frequent bookmarks yet. As you launch bookmarks in the portal, they will automatically appear here!'
+                        : 'No bookmarks found in this section.'}
+                </div>`;
+            return;
+        }
+
+        container.innerHTML = displayBms.map(bm => {
+            const isPinned = pinnedIds.includes(bm.id);
+            const domain = bm.domain || 'web';
+            const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+            const count = getBookmarkUsageCount(bm.id);
+            const isAutoPromoted = (bm.category !== 'Dashboard' && count >= 2);
+            
+            // Clean subpath display
+            const pathDisplay = bm.path_parts ? bm.path_parts.slice(1).join(' > ') : (bm.subfolder || bm.category);
+
+            return `
+                <div class="group relative bg-slate-800/70 hover:bg-slate-800 border border-slate-700/60 hover:border-sky-500/60 rounded-xl p-3.5 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+                    
+                    <!-- Action tools top-right -->
+                    <div class="absolute top-2.5 right-2.5 flex items-center gap-1.5">
+                        ${count > 0 ? `
+                            <span title="Launched ${count} times" class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-1">
+                                <i class="fas fa-fire text-amber-400"></i> ${count}
+                            </span>
+                        ` : ''}
+                        <button onclick="togglePin(${bm.id})" title="${isPinned ? 'Pinned Favorite' : 'Pin'}" 
+                            class="text-xs transition ${isPinned ? 'text-amber-400' : 'text-slate-600 hover:text-amber-400'}">
+                            <i class="${isPinned ? 'fas' : 'far'} fa-star"></i>
+                        </button>
+                        <button onclick="deleteBookmark(${bm.id})" title="Remove Bookmark" 
+                            class="text-slate-600 hover:text-rose-400 text-xs transition opacity-0 group-hover:opacity-100">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+
+                    <!-- Main Link Clickable -->
+                    <div onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')" class="block pr-16 cursor-pointer">
+                        <div class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700/80 p-2 flex items-center justify-center mb-2.5">
+                            <img src="${faviconUrl}" alt="${domain}" onerror="this.onerror=null;this.src='../../images/favicon.png'" class="w-6 h-6 object-contain">
+                        </div>
+                        <h4 class="font-bold text-xs text-white group-hover:text-sky-300 transition line-clamp-1" title="${escapeHtml(bm.name)}">
+                            ${escapeHtml(bm.name)}
+                        </h4>
+                        <div class="flex items-center gap-1.5 mt-0.5">
+                            <span class="text-[10px] text-slate-400 truncate">${escapeHtml(domain)}</span>
+                            ${isAutoPromoted ? '<span class="text-[9px] text-amber-400 bg-amber-500/10 px-1 rounded font-semibold">Auto-Promoted</span>' : ''}
+                        </div>
+                    </div>
+
+                    <!-- Footer Details & Quick Launch -->
+                    <div class="mt-3 pt-2 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-slate-500">
+                        <span class="truncate max-w-[120px] text-[10px] font-mono text-sky-400" title="${escapeHtml(bm.path || '')}">
+                            ${escapeHtml(pathDisplay || bm.category)}
+                        </span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="copyToClipboard('${escapeHtml(bm.url)}', this)" title="Copy URL" class="text-slate-500 hover:text-slate-300">
+                                <i class="far fa-copy text-[10px]"></i>
+                            </button>
+                            <button onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')" title="Launch Link" class="text-sky-400 hover:text-sky-300">
+                                <i class="fas fa-external-link-alt text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    window.setDashFilter = function (sub) {
+        activeDashFilter = sub;
+        renderDashboardDailyDrivers();
+    };
+
+    // -------------------------------------------------------------------------
+    // 8. RENDER BOOKMARKS EXPLORER (The 4 Top Folders: Work, Life, Tools, Dashboard)
+    // -------------------------------------------------------------------------
+    function renderSubfolderChips() {
+        const container = document.getElementById('subfolder-chips-container');
+        if (!container) return;
+
+        if (activeCategory === 'pinned') {
+            container.innerHTML = '';
+            return;
+        }
+
+        const allBms = getAllBookmarks();
+        const subfolders = new Set();
+        for (let bm of allBms) {
+            if (activeCategory === 'all' || bm.category === activeCategory) {
+                if (bm.subfolder && bm.subfolder !== 'General') {
+                    subfolders.add(bm.subfolder);
+                }
+            }
+        }
+
+        const sortedSubs = Array.from(subfolders).sort();
+
+        if (sortedSubs.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        let html = `
+            <button data-sub="" class="sub-chip ${activeSubfolder === null ? 'bg-sky-500/20 text-sky-300 border-sky-500/40' : 'bg-slate-800 text-slate-400 border-slate-700'} px-2.5 py-1 rounded text-[11px] font-medium border transition">
+                All ${activeCategory === 'all' ? 'Subfolders' : activeCategory}
+            </button>
+        `;
+
+        for (let s of sortedSubs) {
+            const isActive = activeSubfolder === s;
+            const count = allBms.filter(b => (activeCategory === 'all' || b.category === activeCategory) && b.subfolder === s).length;
+            html += `
+                <button data-sub="${escapeHtml(s)}" class="sub-chip ${isActive ? 'bg-sky-500/20 text-sky-300 border-sky-500/40' : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border-slate-700/60'} px-2.5 py-1 rounded text-[11px] font-medium border transition">
+                    ${escapeHtml(s)} (${count})
+                </button>
+            `;
+        }
+
+        container.innerHTML = html;
+
+        container.querySelectorAll('.sub-chip').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const val = btn.getAttribute('data-sub');
+                activeSubfolder = val ? val : null;
+                renderSubfolderChips();
+                renderBookmarks();
+            });
+        });
+    }
+
+    function renderBookmarks() {
+        const grid = document.getElementById('bookmarks-grid');
+        const countLabel = document.getElementById('results-count-label');
+        const noResults = document.getElementById('no-results-msg');
+        if (!grid) return;
+
+        const allBms = getAllBookmarks();
+        const pinnedIds = getPinnedIds();
+        const query = searchQuery.toLowerCase().trim();
+
+        const filtered = allBms.filter(bm => {
+            // Category check (Work, Life, Tools, Dashboard, or pinned)
+            if (activeCategory === 'pinned') {
+                if (!pinnedIds.includes(bm.id)) return false;
+            } else if (activeCategory !== 'all') {
+                if (bm.category !== activeCategory) return false;
+            }
+
+            // Subfolder check
+            if (activeSubfolder) {
+                if (bm.subfolder !== activeSubfolder) return false;
+            }
+
+            // Search query check
+            if (query) {
+                const matchName = bm.name && bm.name.toLowerCase().includes(query);
+                const matchUrl = bm.url && bm.url.toLowerCase().includes(query);
+                const matchDomain = bm.domain && bm.domain.toLowerCase().includes(query);
+                const matchPath = bm.path && bm.path.toLowerCase().includes(query);
+                if (!matchName && !matchUrl && !matchDomain && !matchPath) return false;
+            }
+
+            return true;
+        });
+
+        countLabel.textContent = `Showing ${filtered.length} of ${allBms.length} bookmarks`;
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        noResults.classList.add('hidden');
+
+        grid.innerHTML = filtered.map(bm => {
+            const isPinned = pinnedIds.includes(bm.id);
+            const domain = bm.domain || 'web';
+            const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+            const count = getBookmarkUsageCount(bm.id);
+
+            // Category badge color
+            let badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
+            if (bm.category === 'Work') badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
+            else if (bm.category === 'Life') badgeColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
+            else if (bm.category === 'Tools') badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
+            else if (bm.category === 'Dashboard') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+
+            return `
+                <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition group">
+                    <div>
+                        <!-- Header with domain, badges & actions -->
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <div class="flex items-center gap-2 overflow-hidden">
+                                <img src="${faviconUrl}" alt="" onerror="this.onerror=null;this.src='../../images/favicon.png'" class="w-4 h-4 object-contain flex-shrink-0 rounded-sm">
+                                <span class="text-[11px] font-mono text-slate-400 truncate" title="${escapeHtml(domain)}">
+                                    ${escapeHtml(domain)}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                ${count > 0 ? `
+                                    <span title="Launched ${count} times" class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                                        <i class="fas fa-fire text-amber-400"></i> ${count}
+                                    </span>
+                                ` : ''}
+                                <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${badgeColor}">
+                                    ${bm.category}
+                                </span>
+                                <button onclick="togglePin(${bm.id})" title="${isPinned ? 'Unpin' : 'Pin to Launchpad'}"
+                                    class="text-xs transition ml-1 ${isPinned ? 'text-amber-400' : 'text-slate-600 hover:text-amber-400'}">
+                                    <i class="${isPinned ? 'fas' : 'far'} fa-star"></i>
+                                </button>
+                                <button onclick="deleteBookmark(${bm.id})" title="Delete Bookmark"
+                                    class="text-slate-600 hover:text-rose-400 text-xs transition opacity-0 group-hover:opacity-100 ml-0.5">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Bookmark Title -->
+                        <div onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
+                            class="font-semibold text-sm text-slate-200 group-hover:text-sky-300 transition line-clamp-2 leading-snug cursor-pointer" 
+                            title="${escapeHtml(bm.name)}">
+                            ${highlightQuery(escapeHtml(bm.name), query)}
+                        </div>
+
+                        <!-- Path Breadcrumbs -->
+                        <div class="mt-2 text-[10px] text-slate-500 truncate" title="${escapeHtml(bm.path || '')}">
+                            <i class="fas fa-folder-open text-[9px] text-slate-600 mr-1"></i> ${escapeHtml(bm.path || bm.category)}
+                        </div>
+                    </div>
+
+                    <!-- Footer Action Bar -->
+                    <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                        <button onclick="copyToClipboard('${escapeHtml(bm.url)}', this)" title="Copy URL" 
+                            class="text-slate-500 hover:text-slate-300 transition text-[11px] flex items-center gap-1">
+                            <i class="far fa-copy"></i> <span>Copy</span>
+                        </button>
+
+                        <button onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
+                            class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-sky-600 text-sky-400 hover:text-white text-[11px] font-semibold transition">
+                            <span>Open</span> <i class="fas fa-external-link-alt text-[9px]"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function highlightQuery(text, query) {
+        if (!query) return text;
+        const re = new RegExp(`(${query.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+        return text.replace(re, '<mark class="bg-sky-500/30 text-sky-200 px-0.5 rounded">$1</mark>');
+    }
+
+    function initCategoryPills() {
+        const container = document.getElementById('category-pills');
+        if (!container) return;
+
+        container.querySelectorAll('.cat-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                container.querySelectorAll('.cat-pill').forEach(b => {
+                    b.className = 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+                });
+                btn.className = 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition';
+                activeCategory = btn.getAttribute('data-cat');
+                activeSubfolder = null;
+                renderSubfolderChips();
+                renderBookmarks();
+            });
+        });
+    }
+
+    window.filterCategoryAndOpen = function (categoryName) {
+        switchTab('tab-bookmarks');
+        activeCategory = categoryName;
+        activeSubfolder = null;
+        
+        const container = document.getElementById('category-pills');
+        if (container) {
+            container.querySelectorAll('.cat-pill').forEach(b => {
+                if (b.getAttribute('data-cat') === categoryName) {
+                    b.className = 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition';
+                } else {
+                    b.className = 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
+                }
+            });
+        }
+        renderSubfolderChips();
+        renderBookmarks();
+    };
+
+    // -------------------------------------------------------------------------
+    // 9. SEARCH FUNCTIONALITY
+    // -------------------------------------------------------------------------
+    function initSearch() {
+        const globalSearch = document.getElementById('global-search-input');
+        const clearGlobal = document.getElementById('clear-search-btn');
+        const bmSearch = document.getElementById('bm-search-input');
+        const clearBm = document.getElementById('bm-clear-btn');
+
+        function onSearchInput(val) {
+            searchQuery = val;
+            if (globalSearch && globalSearch.value !== val) globalSearch.value = val;
+            if (bmSearch && bmSearch.value !== val) bmSearch.value = val;
+
+            if (clearGlobal) clearGlobal.classList.toggle('hidden', !val);
+            if (clearBm) clearBm.classList.toggle('hidden', !val);
+
+            renderBookmarks();
+        }
+
+        if (globalSearch) {
+            globalSearch.addEventListener('input', (e) => {
+                onSearchInput(e.target.value);
+                if (e.target.value && document.getElementById('tab-bookmarks').classList.contains('hidden')) {
+                    switchTab('tab-bookmarks');
+                }
+            });
+        }
+
+        if (clearGlobal) {
+            clearGlobal.addEventListener('click', () => {
+                onSearchInput('');
+                if (globalSearch) globalSearch.focus();
+            });
+        }
+
+        if (bmSearch) {
+            bmSearch.addEventListener('input', (e) => onSearchInput(e.target.value));
+        }
+
+        if (clearBm) {
+            clearBm.addEventListener('click', () => {
+                onSearchInput('');
+                if (bmSearch) bmSearch.focus();
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
+                e.preventDefault();
+                if (globalSearch) {
+                    globalSearch.focus();
+                    globalSearch.select();
+                }
+            }
+        });
+    }
+
+    // -------------------------------------------------------------------------
+    // 10. MESSAGE HUB & INBOX
+    // -------------------------------------------------------------------------
+    function getStoredMessages() {
+        const stored = localStorage.getItem(MESSAGES_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
+        }
+        localStorage.setItem(MESSAGES_KEY, JSON.stringify(SEED_MESSAGES));
+        return SEED_MESSAGES;
+    }
+
+    function saveMessages(msgs) {
+        localStorage.setItem(MESSAGES_KEY, JSON.stringify(msgs));
+        renderInbox();
+        updateStats();
+    }
+
+    function renderInbox() {
+        const msgs = getStoredMessages();
+        const listEl = document.getElementById('messages-list');
+        const searchInput = document.getElementById('msg-search-input');
+        const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        if (!listEl) return;
+
+        const filtered = msgs.filter(m => {
+            if (!query) return true;
+            return m.sender.toLowerCase().includes(query) ||
+                   m.subject.toLowerCase().includes(query) ||
+                   m.email.toLowerCase().includes(query) ||
+                   m.body.toLowerCase().includes(query);
+        });
+
+        if (filtered.length === 0) {
+            listEl.innerHTML = `<div class="p-8 text-center text-xs text-slate-500">No messages found.</div>`;
+            return;
+        }
+
+        listEl.innerHTML = filtered.map(m => {
+            const isSelected = m.id === selectedMessageId;
+            const initials = m.sender.split(' ').map(n => n[0]).join('').slice(0, 2);
+
+            return `
+                <div onclick="selectMessage(${m.id})" class="p-3.5 cursor-pointer transition flex items-start gap-3 ${isSelected ? 'bg-slate-800' : 'hover:bg-slate-800/50'} ${m.unread ? 'border-l-2 border-rose-500' : 'border-l-2 border-transparent'}">
+                    <div class="w-8 h-8 rounded-full ${m.unread ? 'bg-rose-500 text-white' : 'bg-slate-700 text-slate-300'} flex items-center justify-center font-bold text-xs flex-shrink-0">
+                        ${initials}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between gap-1 mb-0.5">
+                            <span class="text-xs font-bold truncate ${m.unread ? 'text-white' : 'text-slate-300'}">${escapeHtml(m.sender)}</span>
+                            <span class="text-[10px] text-slate-500 flex-shrink-0">${m.date}</span>
+                        </div>
+                        <div class="text-xs font-medium text-slate-200 truncate ${m.unread ? 'font-bold text-white' : ''}">
+                            ${escapeHtml(m.subject)}
+                        </div>
+                        <div class="text-[11px] text-slate-400 truncate mt-0.5">
+                            ${escapeHtml(m.body.slice(0, 60))}...
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        if (selectedMessageId) {
+            renderMessageDetail(selectedMessageId);
+        }
+    }
+
+    window.selectMessage = function (msgId) {
+        selectedMessageId = msgId;
+        const msgs = getStoredMessages();
+        const msg = msgs.find(m => m.id === msgId);
+        if (msg && msg.unread) {
+            msg.unread = false;
+            saveMessages(msgs);
+        } else {
+            renderInbox();
+        }
+        renderMessageDetail(msgId);
+    };
+
+    function renderMessageDetail(msgId) {
+        const msgs = getStoredMessages();
+        const msg = msgs.find(m => m.id === msgId);
+        const placeholder = document.getElementById('msg-placeholder');
+        const container = document.getElementById('msg-content-container');
+
+        if (!msg) {
+            if (placeholder) placeholder.classList.remove('hidden');
+            if (container) container.classList.add('hidden');
+            return;
+        }
+
+        if (placeholder) placeholder.classList.add('hidden');
+        if (container) {
+            container.classList.remove('hidden');
+            container.classList.add('flex');
+        }
+
+        document.getElementById('msg-subject').textContent = msg.subject;
+        document.getElementById('msg-sender').textContent = msg.sender;
+        document.getElementById('msg-email').textContent = msg.email;
+        document.getElementById('msg-date').textContent = msg.date;
+        document.getElementById('msg-tag').textContent = msg.tag;
+        document.getElementById('msg-body').textContent = msg.body;
+        document.getElementById('msg-avatar').textContent = msg.sender.split(' ').map(n => n[0]).join('').slice(0, 2);
+
+        const replyLink = document.getElementById('msg-reply-link');
+        replyLink.href = `mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject)}`;
+
+        const starBtn = document.getElementById('msg-star-btn');
+        starBtn.innerHTML = `<i class="${msg.starred ? 'fas' : 'far'} fa-star"></i>`;
+        starBtn.onclick = () => {
+            msg.starred = !msg.starred;
+            saveMessages(msgs);
+            renderMessageDetail(msg.id);
+        };
+
+        const deleteBtn = document.getElementById('msg-delete-btn');
+        deleteBtn.onclick = () => {
+            const updated = msgs.filter(m => m.id !== msg.id);
+            selectedMessageId = null;
+            saveMessages(updated);
+            renderMessageDetail(null);
+        };
+    }
+
+    window.refreshInbox = function () {
+        renderInbox();
+        const btn = document.querySelector('[title="Refresh Inbox"] i');
+        if (btn) {
+            btn.classList.add('fa-spin');
+            setTimeout(() => btn.classList.remove('fa-spin'), 600);
+        }
+    };
+
+    window.openFormIntegrationModal = function () {
+        const modal = document.getElementById('form-integration-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+    };
+
+    window.closeFormIntegrationModal = function () {
+        const modal = document.getElementById('form-integration-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    };
+
+    // -------------------------------------------------------------------------
+    // 11. SCRATCHPAD & TASKS
+    // -------------------------------------------------------------------------
+    function initScratchpad() {
+        const dashScratch = document.getElementById('dashboard-scratchpad');
+        const fullScratch = document.getElementById('full-scratchpad');
+        const saveStatus = document.getElementById('scratch-save-status');
+
+        const saved = localStorage.getItem(SCRATCHPAD_KEY) || '';
+        if (dashScratch) dashScratch.value = saved;
+        if (fullScratch) fullScratch.value = saved;
+
+        function save(val) {
+            localStorage.setItem(SCRATCHPAD_KEY, val);
+            if (dashScratch && dashScratch.value !== val) dashScratch.value = val;
+            if (fullScratch && fullScratch.value !== val) fullScratch.value = val;
+            if (saveStatus) {
+                saveStatus.textContent = 'Saved just now';
+                setTimeout(() => { if (saveStatus) saveStatus.textContent = 'Auto-saved'; }, 2000);
+            }
+        }
+
+        if (dashScratch) dashScratch.addEventListener('input', (e) => save(e.target.value));
+        if (fullScratch) fullScratch.addEventListener('input', (e) => save(e.target.value));
+    }
+
+    window.clearScratchpad = function () {
+        if (confirm('Are you sure you want to clear your scratchpad?')) {
+            localStorage.removeItem(SCRATCHPAD_KEY);
+            const dashScratch = document.getElementById('dashboard-scratchpad');
+            const fullScratch = document.getElementById('full-scratchpad');
+            if (dashScratch) dashScratch.value = '';
+            if (fullScratch) fullScratch.value = '';
+        }
+    };
+
+    // Task List Logic
+    function getStoredTasks() {
+        const stored = localStorage.getItem(TASKS_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
+        }
+        const initialTasks = [
+            { id: 1, text: "Review NSF project milestone deliverables for student research assistants", done: false },
+            { id: 2, text: "Finalize revision comments for Frontiers in Bioinformatics ProtGram manuscript", done: true },
+            { id: 3, text: "Upload CSCI modern coursework lab assignments to Canvas", done: false }
+        ];
+        localStorage.setItem(TASKS_KEY, JSON.stringify(initialTasks));
+        return initialTasks;
+    }
+
+    function saveTasks(tasks) {
+        localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
+        renderTasks();
+    }
+
+    function renderTasks() {
+        const list = document.getElementById('task-list');
+        if (!list) return;
+        const tasks = getStoredTasks();
+
+        list.innerHTML = tasks.map(t => `
+            <li class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/60 gap-3 group">
+                <label class="flex items-center gap-2.5 cursor-pointer flex-1 min-w-0">
+                    <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${t.id})" 
+                        class="rounded border-slate-700 bg-slate-900 text-sky-600 focus:ring-sky-500 h-4 w-4">
+                    <span class="text-xs text-slate-200 truncate ${t.done ? 'line-through text-slate-500' : ''}">
+                        ${escapeHtml(t.text)}
+                    </span>
+                </label>
+                <button onclick="deleteTask(${t.id})" class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-rose-400 text-xs transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </li>
+        `).join('');
+    }
+
+    window.addTask = function () {
+        const input = document.getElementById('new-task-input');
+        if (!input || !input.value.trim()) return;
+        const tasks = getStoredTasks();
+        tasks.push({
+            id: Date.now(),
+            text: input.value.trim(),
+            done: false
+        });
+        saveTasks(tasks);
+        input.value = '';
+    };
+
+    window.toggleTask = function (id) {
+        const tasks = getStoredTasks();
+        const task = tasks.find(t => t.id === id);
+        if (task) {
+            task.done = !task.done;
+            saveTasks(tasks);
+        }
+    };
+
+    window.deleteTask = function (id) {
+        const tasks = getStoredTasks().filter(t => t.id !== id);
+        saveTasks(tasks);
+    };
+
+    window.clearCompletedTasks = function () {
+        const tasks = getStoredTasks().filter(t => !t.done);
+        saveTasks(tasks);
+    };
+
+    // -------------------------------------------------------------------------
+    // 12. EXPORT & RESET DATA
+    // -------------------------------------------------------------------------
+    window.downloadBookmarksJSON = function () {
+        const allBms = getAllBookmarks();
+        const exportData = {
+            total_bookmarks: allBms.length,
+            exported_at: new Date().toISOString(),
+            bookmarks: allBms
+        };
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `islam_ebeid_bookmarks_portal_${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    window.resetPortalData = function () {
+        if (confirm('Warning: This will clear your custom passcode, custom added bookmarks, pinned favorites, tasks, and logout. Reset now?')) {
+            localStorage.removeItem(PASSCODE_STORAGE_KEY);
+            localStorage.removeItem(PINNED_STORAGE_KEY);
+            localStorage.removeItem(SCRATCHPAD_KEY);
+            localStorage.removeItem(TASKS_KEY);
+            localStorage.removeItem(MESSAGES_KEY);
+            localStorage.removeItem(CUSTOM_BM_KEY);
+            localStorage.removeItem(DELETED_BM_KEY);
+            localStorage.removeItem(USAGE_STATS_KEY);
+            logout();
+        }
+    };
+
+    // -------------------------------------------------------------------------
+    // 13. STATS & UPDATE HELPERS
+    // -------------------------------------------------------------------------
+    function updateStats() {
+        const allBms = getAllBookmarks();
+        const pinned = getPinnedIds();
+        const msgs = getStoredMessages();
+        const unreadCount = msgs.filter(m => m.unread).length;
+        const dashCount = allBms.filter(b => b.category === 'Dashboard').length;
+
+        const totalBmEl = document.getElementById('stat-total-bookmarks');
+        const dashCountEl = document.getElementById('stat-dash-count');
+        const pinnedEl = document.getElementById('stat-pinned-count');
+        const unreadEl = document.getElementById('stat-unread-messages');
+        const unreadBadge = document.getElementById('unread-badge');
+        const navBmCount = document.getElementById('nav-bm-count');
+
+        if (totalBmEl) totalBmEl.textContent = allBms.length;
+        if (dashCountEl) dashCountEl.textContent = `${dashCount} Launchpad`;
+        if (pinnedEl) pinnedEl.textContent = pinned.length;
+        if (unreadEl) unreadEl.textContent = `${unreadCount} New`;
+        if (unreadBadge) {
+            unreadBadge.textContent = unreadCount;
+            unreadBadge.classList.toggle('hidden', unreadCount === 0);
+        }
+        if (navBmCount) navBmCount.textContent = allBms.length;
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function renderAll() {
+        renderDashboardDailyDrivers();
+        renderSubfolderChips();
+        renderBookmarks();
+        renderInbox();
+        renderTasks();
+        initScratchpad();
+        updateStats();
+    }
+
+    // -------------------------------------------------------------------------
+    // 14. INITIALIZATION
+    // -------------------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+        initAuth();
+        startClock();
+        initTabs();
+        initCategoryPills();
+        initSearch();
+        initAddBookmarkForm();
+        if (isAuthenticated()) {
+            renderAll();
+        }
+    });
+
+})();

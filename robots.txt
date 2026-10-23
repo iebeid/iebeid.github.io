@@ -1,4 +1,10 @@
+User-agent: Googlebot
+Disallow: /pages/portal/
+Disallow: /pages/portal/*
+
 User-agent: *
+Disallow: /pages/portal/
+Disallow: /pages/portal/*
 Allow: /
 
 Sitemap: https://iebeid.github.io/sitemap.xml
