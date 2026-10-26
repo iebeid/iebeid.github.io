@@ -1224,8 +1224,20 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             if (!textResponse) throw new Error("No valid response from Gemini");
             
             // parse the raw text back to an array
-            const cleanText = textResponse.replace(/^\s*```(json)?\s*|\s*```\s*$/g, '').trim();
-            const matchedIds = JSON.parse(cleanText);
+            let cleanText = textResponse.replace(/^\s*```(json)?\s*|\s*```\s*$/g, '').trim();
+            let matchedIds = [];
+            try {
+                // Find first [ and last ] to extract just the array
+                const startIdx = cleanText.indexOf('[');
+                const endIdx = cleanText.lastIndexOf(']');
+                if (startIdx !== -1 && endIdx !== -1 && endIdx >= startIdx) {
+                    cleanText = cleanText.substring(startIdx, endIdx + 1);
+                }
+                matchedIds = JSON.parse(cleanText);
+            } catch (e) {
+                console.error("Failed to parse Gemini response as JSON:", textResponse);
+                throw new Error("Could not parse AI response as JSON: " + textResponse.substring(0, 50) + "...");
+            }
 
             if (!Array.isArray(matchedIds)) {
                 throw new Error("Response is not an array");
@@ -1240,6 +1252,15 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             // Re-render
             if (typeof renderBookmarks === 'function') {
                 renderBookmarks();
+                // Also update UI to show clear button
+                const clearBm = document.getElementById('bm-clear-btn');
+                if (clearBm) clearBm.classList.remove('hidden');
+                
+                // Force a render of subfolders/dash if needed
+                if (typeof renderDashboardDailyDrivers === 'function') renderDashboardDailyDrivers();
+                
+            } else {
+                alert("Error: renderBookmarks is not a function.");
             }
             
             if (aiMatchedIds.length === 0) {
