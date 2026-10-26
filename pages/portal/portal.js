@@ -303,8 +303,16 @@
         const custom = getCustomBookmarks();
         const deletedSet = new Set(getDeletedBookmarkIds());
         
-        // Merge base + custom, filtering out deleted bookmarks
-        const combined = [...custom, ...baseList].filter(bm => !deletedSet.has(bm.id));
+        let combined = [...custom, ...baseList].filter(bm => !deletedSet.has(bm.id));
+        
+        const dynamicTags = JSON.parse(localStorage.getItem('portal_ai_tags_cache') || '{}');
+        combined = combined.map(bm => {
+            if (dynamicTags[bm.id]) {
+                bm.ai_tags = dynamicTags[bm.id];
+            }
+            return bm;
+        });
+        
         return combined;
     }
 
@@ -601,7 +609,8 @@
                 const matchUrl = bm.url && bm.url.toLowerCase().includes(query);
                 const matchDomain = bm.domain && bm.domain.toLowerCase().includes(query);
                 const matchPath = bm.path && bm.path.toLowerCase().includes(query);
-                if (!matchName && !matchUrl && !matchDomain && !matchPath) return false;
+                const matchTags = bm.ai_tags && bm.ai_tags.toLowerCase().includes(query);
+                if (!matchName && !matchUrl && !matchDomain && !matchPath && !matchTags) return false;
             }
             return true;
         });
@@ -1442,4 +1451,6 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     };
 
 })();
+
+
 
