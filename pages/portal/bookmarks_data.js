@@ -28,7 +28,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "23andme.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "23andme, dna testing, genetic ancestry, health reports, genealogy, genome sequencing, trait analysis"
                         }
                     ]
                 },
@@ -49,7 +49,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "360absence.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "disability insurance, short term disability, leave management, FMLA, absence management, employee benefits, healthcare"
                         }
                     ]
                 },
@@ -70,7 +70,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aaai.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "aaai 2024, artificial intelligence, machine learning, ai conference, intelligent systems, computer science research"
                         },
                         {
                             "id": 71,
@@ -85,7 +85,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aaai.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "aaai, artificial intelligence, machine learning, ai research, computer science, academic conference, neural networks, robotics"
                         }
                     ]
                 },
@@ -106,7 +106,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aaas.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "aaas, science, scientific research, general science, science journal, scientific association, stem, academic publishing"
                         }
                     ]
                 },
@@ -127,7 +127,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aaup.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "aaup, university professors, higher education, academic freedom, faculty advocacy, tenure, university administration"
                         }
                     ]
                 },
@@ -148,7 +148,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "abet.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "abet, accreditation, computing programs, higher education standards, computer science, quality assurance, engineering education"
                         }
                     ]
                 },
@@ -169,7 +169,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "absenceresources.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "compsych, absence resources, leave management, fmla tracking, employee assistance program, disability leave, login portal"
                         }
                     ]
                 },
@@ -190,7 +190,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "academia.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "academia.edu, research sharing, academic social network, scholarly communication, research papers, open access"
                         }
                     ]
                 },
@@ -211,7 +211,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "access-ci.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "cyberinfrastructure, supercomputing, hpc allocations, nsf access, research computing, resource allocation, high performance computing"
                         }
                     ]
                 },
@@ -232,7 +232,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aclweb.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "acl 2026, natural language processing, computational linguistics, nlp conference, language models, text mining, artificial intelligence"
                         }
                     ]
                 },
@@ -253,7 +253,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "acm.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "intelligent systems, artificial intelligence, acm journal, machine learning, computer science, data mining, tist"
                         },
                         {
                             "id": 41,
@@ -268,7 +268,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "acm.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "knowledge discovery, data mining, machine learning, big data, acm journal, data analytics, database systems, tkdd"
                         },
                         {
                             "id": 69,
@@ -283,7 +283,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "acm.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sigai, artificial intelligence, acm, machine learning, ai research, computer science, intelligent systems, academic society"
                         },
                         {
                             "id": 83,
@@ -298,7 +298,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "acm.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "acm, computing machinery, computer science, software engineering, technical society, digital library, academic publishing"
                         },
                         {
                             "id": 180,
@@ -313,7 +313,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "acm.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, acm digital library, computer science, computing research, publications, academic profile, author"
                         }
                     ]
                 },
@@ -334,7 +334,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "adobe.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "adobe research, data science awards, academic funding, machine learning grant, data analytics, computer science awards"
                         },
                         {
                             "id": 339,
@@ -349,7 +349,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "adobe.com"
                             ],
-                            "ai_tags": "creative cloud, photoshop, illustrator, pdf reader, acrobat, digital media, graphic design software"
+                            "ai_tags": "graphic design, photoshop, creative cloud, pdf tools, digital art, video editing, illustrator"
                         }
                     ]
                 },
@@ -370,7 +370,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "affirm.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "buy now pay later, bnpl, monthly installments, point of sale financing, online shopping credit"
                         }
                     ]
                 },
@@ -391,7 +391,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aicamp.ai"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "aicamp, artificial intelligence, machine learning, developer community, ai events, tech education, workshops, deep learning"
                         }
                     ]
                 },
@@ -412,7 +412,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aikido-international.org"
                             ],
-                            "ai_tags": "Aikido, martial arts, global organization, Japanese martial arts, international sports, Budo"
+                            "ai_tags": "international aikido federation, global martial arts, aikido governing body, martial arts organization, world aikido, martial arts federation"
                         }
                     ]
                 },
@@ -433,7 +433,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ala.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ala, american library association, libraries, librarianship, information literacy, public libraries, literacy, academic association"
                         }
                     ]
                 },
@@ -454,7 +454,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "alahlynet.com.eg"
                             ],
-                            "ai_tags": "nbe, al ahly net, egyptian bank, online banking, financial services, bank account"
+                            "ai_tags": "national bank of egypt, alahlynet, nbe, egyptian banking, online bank, wire transfers, savings account, finance egypt"
                         }
                     ]
                 },
@@ -475,7 +475,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aldiwan.net"
                             ],
-                            "ai_tags": "Arabic poetry, poems, classical Arabic, poets, literature, Arabic culture"
+                            "ai_tags": "arabic poetry, aldiwan, classic poems, literature archive, arabic verses, middle eastern literature, poetry collection"
                         }
                     ]
                 },
@@ -496,7 +496,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "alhuwayni.com"
                             ],
-                            "ai_tags": "islamic lectures, islamic studies, sermons, books, scholars, abu ishaq al heweny, islamic charity"
+                            "ai_tags": "islamic lectures, abu ishaaq al huwayni, islamic scholarship, khutbah, sermons, islamic books, charity, dawah"
                         }
                     ]
                 },
@@ -517,7 +517,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "aliexpress.com"
                             ],
-                            "ai_tags": "online shopping, e-commerce, china wholesale, cheap products, imported goods, aliexpress"
+                            "ai_tags": "aliexpress, cheap shopping, online marketplace, china imports, wholesale products, global e-commerce, discount store"
                         }
                     ]
                 },
@@ -538,7 +538,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "allstate.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "life insurance, allstate, insurance policy, death benefit, financial security, term life"
                         }
                     ]
                 },
@@ -559,7 +559,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "alltrails.com"
                             ],
-                            "ai_tags": "hiking, trail maps, outdoor recreation, GPS trails, walking, running, outdoor fitness"
+                            "ai_tags": "hiking trails, outdoor navigation, trail maps, walking routes, nature exploration, mountain biking, outdoor fitness, gps hiking"
                         }
                     ]
                 },
@@ -580,7 +580,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amazon.com"
                             ],
-                            "ai_tags": "online shopping, ecommerce, retail, prime delivery, electronics, books, marketplace"
+                            "ai_tags": "amazon, online shopping, ecommerce, retail, delivery, prime, products, marketplace"
                         }
                     ]
                 },
@@ -601,7 +601,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amazon.eg"
                             ],
-                            "ai_tags": "e-commerce, online shopping, marketplace, retail, delivery, amazon egypt"
+                            "ai_tags": "online shopping, e-commerce, amazon egypt, retail store, online deals, electronics, buy online, marketplace"
                         }
                     ]
                 },
@@ -622,7 +622,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amberpharmacy.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "amber specialty pharmacy, specialty pharmacy, prescription drugs, medication management, home delivery, healthcare"
                         }
                     ]
                 },
@@ -643,7 +643,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amia.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "medical informatics, health informatics, healthcare, biomedical informatics, clinical data, medicine, amia conference"
                         },
                         {
                             "id": 63,
@@ -658,7 +658,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amia.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biomedical informatics, healthcare, amia, health IT, medical informatics, health data, clinical informatics, research association"
                         }
                     ]
                 },
@@ -679,7 +679,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amnestyusa.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "amnesty international, human rights, volunteer opportunities, advocacy, social justice, non profit activism, civil rights"
                         }
                     ]
                 },
@@ -700,7 +700,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ampalestine.org"
                             ],
-                            "ai_tags": "palestine advocacy, human rights, american muslims, social justice, grassroots activism, civil rights, middle east"
+                            "ai_tags": "american muslims for palestine, palestine advocacy, human rights, palestinian solidarity, civic engagement, activism, middle east policy"
                         }
                     ]
                 },
@@ -721,7 +721,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "amsetweb.net"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "amset, education technology, academic association, scientific research, professional society, learning, technology education"
                         }
                     ]
                 },
@@ -742,7 +742,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "apa.org"
                             ],
-                            "ai_tags": "psychology, podcast, mental health, American Psychological Association, behavioral science, human behavior"
+                            "ai_tags": "psychology, apa podcast, mental health, human behavior, science, psychology research, emotional health, psychological science"
                         }
                     ]
                 },
@@ -763,7 +763,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "applytexas.org"
                             ],
-                            "ai_tags": "college application, texas universities, higher education, college admissions, state portal, applytexas"
+                            "ai_tags": "ApplyTexas, college application, Texas admissions, higher education, university application, undergraduate"
                         }
                     ]
                 },
@@ -784,7 +784,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "arabicpoetry.ac.uk"
                             ],
-                            "ai_tags": "Arabic literature, poetry, classical Arabic, database, literature research, poems"
+                            "ai_tags": "arabic poetry, classical poetry, literature database, arabic literature, digital humanities, academic research, poems, middle eastern culture"
                         }
                     ]
                 },
@@ -805,7 +805,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "arthousedallas.com"
                             ],
-                            "ai_tags": "arts community, creative arts, Dallas Texas, visual arts, music, culture, nonprofit"
+                            "ai_tags": "art, dallas, creative community, artists, non profit, culture, visual arts, events"
                         }
                     ]
                 },
@@ -826,7 +826,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "arxiv.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "arxiv, preprints, open access, scientific papers, computer science, physics, paper repository"
                         }
                     ]
                 },
@@ -847,7 +847,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "asist.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "asist 2024, information science, information technology, data management, library science, information systems conference"
                         },
                         {
                             "id": 64,
@@ -862,7 +862,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "asist.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "information science, asist, information technology, library science, information retrieval, research, academic society, data science"
                         }
                     ]
                 },
@@ -883,7 +883,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "asu.edu.eg"
                             ],
-                            "ai_tags": "ain shams university, engineering faculty, higher education egypt, engineering school, academic department, engineering degrees"
+                            "ai_tags": "Ain Shams University, Faculty of Engineering, Egypt engineering school, university portal, higher education"
                         },
                         {
                             "id": 142,
@@ -898,7 +898,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "asu.edu.eg"
                             ],
-                            "ai_tags": "ain shams alumni, university graduates, alumni network, graduate portal, university network, egypt"
+                            "ai_tags": "Ain Shams University, alumni network, graduate portal, Egypt university alumni, higher education"
                         },
                         {
                             "id": 143,
@@ -913,7 +913,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "asu.edu.eg"
                             ],
-                            "ai_tags": "ain shams university, engineering school, academic programs, higher education, engineering research, egypt"
+                            "ai_tags": "Ain Shams University, engineering department, higher education, engineering curriculum, Egypt academics"
                         }
                     ]
                 },
@@ -934,7 +934,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "atxmuslims.com"
                             ],
-                            "ai_tags": "austin muslims, local community, texas muslims, community events, islamic center, networking, local resources"
+                            "ai_tags": "austin muslim community, austin texas, local muslims, community network, texas muslims, religious resources, local events"
                         }
                     ]
                 },
@@ -955,7 +955,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "awsacademy.com"
                             ],
-                            "ai_tags": "cloud computing, aws certification, cloud training, amazon web services, higher education curriculum, tech skills"
+                            "ai_tags": "AWS Academy, cloud computing, Amazon Web Services, AWS certification, IT education, cloud training"
                         }
                     ]
                 },
@@ -976,7 +976,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "azharegypt.edu.eg"
                             ],
-                            "ai_tags": "al azhar university, distance learning, e-learning portal, islamic education, egypt university, online education"
+                            "ai_tags": "Al-Azhar University, e-learning portal, distance education, Islamic university, Egypt higher education"
                         }
                     ]
                 },
@@ -997,7 +997,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "baitulmaal.org"
                             ],
-                            "ai_tags": "islamic charity, humanitarian aid, relief organization, zakat, global poverty relief, emergency aid, non-profit"
+                            "ai_tags": "baitulmaal, islamic charity, international relief, zakat, emergency aid, humanitarian assistance, poverty alleviation"
                         }
                     ]
                 },
@@ -1018,7 +1018,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bankofamerica.com"
                             ],
-                            "ai_tags": "online banking, credit cards, bank account, finance, bank of america, financial services"
+                            "ai_tags": "bank of america, bofa, online banking, credit cards, home loans, checking account, wealth management, financial service"
                         }
                     ]
                 },
@@ -1039,7 +1039,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "basmah.org"
                             ],
-                            "ai_tags": "humanitarian relief, rohingya refugee aid, charity organization, disaster relief, orphan care, medical aid"
+                            "ai_tags": "basmah, rohingya relief, humanitarian aid, refugee assistance, orphan support, islamic charity, bangladesh relief"
                         }
                     ]
                 },
@@ -1060,7 +1060,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bcbstx.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "blue cross blue shield, bcbs texas, health insurance, medical coverage, health plan, insurance provider"
                         }
                     ]
                 },
@@ -1081,7 +1081,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bcm.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "academic jobs, assistant professor, artificial intelligence, data science, baylor college of medicine, faculty position, medical research, healthcare ai"
                         },
                         {
                             "id": 184,
@@ -1096,7 +1096,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bcm.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "academic jobs, assistant professor, data science, trauma research, critical care, healthcare disparities, baylor college of medicine, faculty position"
                         }
                     ]
                 },
@@ -1117,7 +1117,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "betterimpact.com"
                             ],
-                            "ai_tags": "volunteer management, non-profit software, volunteer portal, scheduling, civic engagement, impact tracking"
+                            "ai_tags": "better impact, volunteer management, volunteer portal, non-profit software, community service, scheduling"
                         }
                     ]
                 },
@@ -1138,7 +1138,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "biorender.com"
                             ],
-                            "ai_tags": "scientific illustration, biology diagrams, graphical abstract, science figure generator, biomedical graphics, research illustrations"
+                            "ai_tags": "scientific illustration, biology diagrams, scientific figures, life sciences, medical graphics, research visualization"
                         }
                     ]
                 },
@@ -1159,7 +1159,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "biorxiv.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biorxiv, biology preprints, life sciences, research papers, open access, preprint server, biological research"
                         }
                     ]
                 },
@@ -1180,7 +1180,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bitbucket.org"
                             ],
-                            "ai_tags": "git repository, version control, code hosting, atlassian, software development, ci/cd"
+                            "ai_tags": "bitbucket, git repository, version control, code hosting, atlassian, devops, software development"
                         }
                     ]
                 },
@@ -1201,7 +1201,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bitbybitbook.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "social science, computational social science, digital research, data science, research methods, sociology, ethics, open textbook"
                         }
                     ]
                 },
@@ -1222,7 +1222,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "bitly.com"
                             ],
-                            "ai_tags": "URL shortener, link management, analytics, click tracking, marketing tools, short links"
+                            "ai_tags": "bitly, url shortener, link management, short links, link tracking, analytics, digital marketing"
                         }
                     ]
                 },
@@ -1243,7 +1243,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "capitalone.com"
                             ],
-                            "ai_tags": "credit card, online banking, personal finance, capital one, checking account, loans"
+                            "ai_tags": "capital one, credit cards, online banking, savings account, auto loans, finance, banking app, rewards cards"
                         }
                     ]
                 },
@@ -1264,7 +1264,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "carfax.com"
                             ],
-                            "ai_tags": "vehicle history report, car check, used car history, vin lookup, auto history, car maintenance"
+                            "ai_tags": "carfax, vehicle history report, vin lookup, used cars, car inspection, auto history"
                         }
                     ]
                 },
@@ -1285,7 +1285,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "carvana.com"
                             ],
-                            "ai_tags": "used cars, online car buy, car seller, vehicle delivery, car shopping, auto trade in"
+                            "ai_tags": "carvana, buy car online, used cars, auto sales, car vending machine, sell car, online dealership"
                         }
                     ]
                 },
@@ -1306,7 +1306,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "cernerhealth.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "cerner health, patient portal, medical records, ehr, health portal, login, healthcare access"
                         }
                     ]
                 },
@@ -1327,7 +1327,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "chase.com"
                             ],
-                            "ai_tags": "online banking, bank account, credit card, finance, checking, mortgages, jpmorgan chase"
+                            "ai_tags": "chase bank, online banking, credit cards, checking account, mortgages, loans, financial services, money management"
                         }
                     ]
                 },
@@ -1348,7 +1348,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "chess.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "chess, online chess, chess.com, board games, chess strategy, multiplayer, tactics, turn based"
                         }
                     ]
                 },
@@ -1369,7 +1369,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "citiprogram.org"
                             ],
-                            "ai_tags": "research ethics, compliance training, citi program, human subjects, biosafety, irb, higher education"
+                            "ai_tags": "CITI program, research ethics, compliance training, IRB certification, human subjects, bioethics"
                         }
                     ]
                 },
@@ -1390,7 +1390,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "claude.ai"
                             ],
-                            "ai_tags": "anthropic, Claude AI, chatbot, generative AI, LLM, AI assistant, natural language processing"
+                            "ai_tags": "anthropic, claude ai, chatbot, generative ai, llm, ai assistant, prompt engineering"
                         }
                     ]
                 },
@@ -1411,7 +1411,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "climaterealitydfw.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "climate reality project, climate action, political involvement, dfw, environmental advocacy, global warming, policy advocacy"
                         }
                     ]
                 },
@@ -1432,7 +1432,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "cloudbank.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "cloud computing, research cloud, cloud credits, nsf cloudbank, computational research, high performance computing"
                         }
                     ]
                 },
@@ -1453,7 +1453,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "coinbase.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "crypto exchange, bitcoin, cryptocurrency trading, buy crypto, digital wallet, altcoins"
                         }
                     ]
                 },
@@ -1474,7 +1474,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "cointracker.io"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "crypto tax, cryptocurrency portfolio, bitcoin tax, crypto tracker, crypto accounting, tax software"
                         }
                     ]
                 },
@@ -1495,7 +1495,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "commoncrawl.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "web crawl, open dataset, web data, web scraping, data archive, corpus, llm training data, common crawl"
                         }
                     ]
                 },
@@ -1516,7 +1516,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "computer.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "pattern recognition, machine learning, computer vision, ieee journal, deep learning, artificial intelligence, tpami"
                         },
                         {
                             "id": 43,
@@ -1531,7 +1531,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "computer.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "data engineering, knowledge management, data mining, database systems, ieee journal, information retrieval, tkde"
                         }
                     ]
                 },
@@ -1552,7 +1552,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "comsoc.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "green communications, energy efficient networking, telecommunications, ieee journal, wireless networks, sustainable computing"
                         }
                     ]
                 },
@@ -1573,7 +1573,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "coursera.org"
                             ],
-                            "ai_tags": "online learning, professional certificates, moocs, e-learning, skill development, online degrees, technical courses"
+                            "ai_tags": "Coursera, online learning, MOOC, professional certificates, skill courses, e-learning platform"
                         }
                     ]
                 },
@@ -1594,7 +1594,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "creditkarma.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "credit score, credit report, financial health, credit monitoring, free credit score, loans"
                         }
                     ]
                 },
@@ -1615,7 +1615,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "cvs.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "cvs pharmacy, prescriptions, drug store, minuteclinic, medication refill, health retail"
                         }
                     ]
                 },
@@ -1636,7 +1636,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dallas-ai.org"
                             ],
-                            "ai_tags": "artificial intelligence, machine learning, Dallas Texas, tech community, networking, AI events"
+                            "ai_tags": "dallas ai, artificial intelligence, machine learning, tech community, dallas texas, ai networking, data science, tech events"
                         }
                     ]
                 },
@@ -1657,7 +1657,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dallasinstitute.org"
                             ],
-                            "ai_tags": "humanities, culture, Dallas Texas, educational programs, philosophy, literature, lectures"
+                            "ai_tags": "dallas institute, humanities, culture, education, literature, philosophy, lectures, arts"
                         }
                     ]
                 },
@@ -1678,7 +1678,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dallasmakerspace.org"
                             ],
-                            "ai_tags": "makerspace, DIY, workshops, 3D printing, woodworking, Dallas events, tech community"
+                            "ai_tags": "dallas, makerspace, workshops, events, calendar, community, diy, technology, fabrication"
                         }
                     ]
                 },
@@ -1699,7 +1699,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dallasnews.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "dallas news, dallas morning news, texas news, local journalism, breaking news, dallas tx, newspaper"
                         }
                     ]
                 },
@@ -1720,7 +1720,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dallaspaleo.org"
                             ],
-                            "ai_tags": "fossils, paleontology, geology, Dallas Texas, prehistoric, natural history science"
+                            "ai_tags": "paleontology, fossils, dallas texas, prehistoric life, geology, earth science, fossil collecting, scientific society"
                         }
                     ]
                 },
@@ -1741,7 +1741,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dallaspoetry.com"
                             ],
-                            "ai_tags": "poetry, Dallas Texas, spoken word, literary group, local poets, creative writing"
+                            "ai_tags": "dallas poetry society, local poetry, poetry community, literary events, dallas texas, spoken word, poetry workshops"
                         }
                     ]
                 },
@@ -1762,7 +1762,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dbdiagram.io"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "database design, erd, entity relationship diagram, database diagram, sql, schema design, data modeling, visual tool"
                         }
                     ]
                 },
@@ -1783,7 +1783,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "deepai.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, deepai, artificial intelligence, machine learning, ai research, deep learning, publications"
                         }
                     ]
                 },
@@ -1804,7 +1804,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "deepvellum.com"
                             ],
-                            "ai_tags": "publishing, independent publisher, bookstore, translated literature, Dallas Texas, literary arts"
+                            "ai_tags": "deep vellum, independent publisher, translated literature, dallas bookstore, book publishing, non-profit publisher, literary arts"
                         }
                     ]
                 },
@@ -1825,7 +1825,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "deltadentalins.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "delta dental, dental insurance, teeth care, oral health, dentist network, dental benefits"
                         }
                     ]
                 },
@@ -1846,7 +1846,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dentonrc.com"
                             ],
-                            "ai_tags": "local news, opinion, denton texas, letters to editor, journalism, public discourse, community news"
+                            "ai_tags": "denton record chronicle, letters to the editor, denton texas, local news, opinion, journalism, community forum"
                         },
                         {
                             "id": 126,
@@ -1861,7 +1861,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dentonrc.com"
                             ],
-                            "ai_tags": "local news, opinion, denton texas, letters to editor, journalism, local commentary, public forum"
+                            "ai_tags": "local news, letters to editor, opinion piece, Denton Texas, journalism, Denton Record Chronicle"
                         },
                         {
                             "id": 201,
@@ -1876,7 +1876,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dentonrc.com"
                             ],
-                            "ai_tags": "local news, Denton Texas, journalism, newspapers, North Texas, current events"
+                            "ai_tags": "denton news, local journalism, texas news, record chronicle, newspaper, denton texas, current events, local press"
                         }
                     ]
                 },
@@ -1897,7 +1897,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dfwworld.org"
                             ],
-                            "ai_tags": "international affairs, foreign policy, world affairs, global diplomacy, dallas fort worth, education, public policy"
+                            "ai_tags": "world affairs council, international relations, global affairs, foreign policy, diplomacy, dallas, international education"
                         }
                     ]
                 },
@@ -1918,7 +1918,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dfwwritersworkshop.org"
                             ],
-                            "ai_tags": "writing workshop, creative writing, DFW area, critique group, publishing, authors"
+                            "ai_tags": "dfw writers workshop, writing community, dallas fort worth, critique group, creative writing, author support, publishing tips"
                         }
                     ]
                 },
@@ -1939,7 +1939,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "digitalmeasures.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "watermark, digital measures, faculty activity reporting, tenure evaluation, higher ed software, academic administration"
                         }
                     ]
                 },
@@ -1960,7 +1960,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "discord.com"
                             ],
-                            "ai_tags": "chat, voice chat, gaming community, messaging, servers, voip, online communities"
+                            "ai_tags": "chat, voice chat, gaming community, messaging app, servers, voip, text chat, streaming community"
                         }
                     ]
                 },
@@ -1981,7 +1981,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dma.org"
                             ],
-                            "ai_tags": "art museum, Dallas Texas, art exhibits, fine arts, culture, visual arts"
+                            "ai_tags": "dallas museum of art, dma, art museum, fine art, culture, exhibitions, galleries, dallas"
                         }
                     ]
                 },
@@ -2002,7 +2002,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "dropbox.com"
                             ],
-                            "ai_tags": "cloud storage, file sharing, file synchronization, cloud backup, document management, drive"
+                            "ai_tags": "dropbox, cloud storage, file sharing, cloud backup, file sync, file hosting, document sharing"
                         }
                     ]
                 },
@@ -2023,7 +2023,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "drugbank.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "drug database, pharmacology, pharmaceuticals, drug targets, cheminformatics, biochemistry, medicine, drugbank"
                         }
                     ]
                 },
@@ -2044,7 +2044,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "earnin.com"
                             ],
-                            "ai_tags": "earned wage access, paycheck advance, financial app, payday cash advance, budgeting"
+                            "ai_tags": "earnin, cash advance, payday loan, earned wage access, paycheck advance, personal finance, salary tracker, money app"
                         }
                     ]
                 },
@@ -2065,7 +2065,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "easychair.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "easychair, conference management, academic publishing, paper submission, peer review, scientific conferences, proceedings"
                         }
                     ]
                 },
@@ -2086,7 +2086,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ebay.com"
                             ],
-                            "ai_tags": "online auction, ecommerce, secondhand shopping, marketplace, buying and selling, collectibles"
+                            "ai_tags": "ebay, online auctions, ecommerce, shopping, marketplace, buying, selling, deals"
                         }
                     ]
                 },
@@ -2107,7 +2107,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ecva.net"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "computer vision, image processing, machine learning, deep learning, pattern recognition, ai conference, eccv"
                         }
                     ]
                 },
@@ -2128,7 +2128,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "eddiebauer.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "outdoor clothing, outerwear, jackets, apparel, activewear, boots, camping gear, travel clothing"
                         }
                     ]
                 },
@@ -2149,7 +2149,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "edx.org"
                             ],
-                            "ai_tags": "online courses, mooc, online learning, higher education, certifications, university classes, self-paced learning"
+                            "ai_tags": "edX, online courses, MOOC, distance learning, professional certificates, e-learning platform"
                         }
                     ]
                 },
@@ -2170,7 +2170,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "eea.org.eg"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "egyptian engineers syndicate, engineering association, egypt, professional licensing, union, engineering society"
                         }
                     ]
                 },
@@ -2191,7 +2191,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "eehc.gov.eg"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "unified electricity platform, egypt electric holding company, eehc, electricity services, utility bill egypt, power services"
                         }
                     ]
                 },
@@ -2212,7 +2212,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "empower-retirement.com"
                             ],
-                            "ai_tags": "texas retirement, deferred compensation, 401k, 457 plan, state employee savings, empower retirement"
+                            "ai_tags": "texasaver, texas deferred compensation, state employee retirement, empower retirement, 401k 457 plan, retirement savings"
                         }
                     ]
                 },
@@ -2233,7 +2233,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "empower.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "retirement planning, 401k, financial management, wealth management, investments, retirement accounts"
                         }
                     ]
                 },
@@ -2254,7 +2254,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "eneba.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "eneba, video games, digital game keys, cd keys, gaming store, game deals, digital marketplace"
                         }
                     ]
                 },
@@ -2275,7 +2275,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ensun.io"
                             ],
-                            "ai_tags": "artificial intelligence, drug discovery, biotech companies, egypt tech, pharmaceuticals, ai research, market analysis"
+                            "ai_tags": "AI drug discovery, Egypt biotech, artificial intelligence, healthtech, pharmaceutical startups, Ensun"
                         }
                     ]
                 },
@@ -2296,7 +2296,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "enterprise.com"
                             ],
-                            "ai_tags": "car rental, rental cars, vehicle rental, enterprise rent-a-car, auto rental, travel"
+                            "ai_tags": "enterprise, car rental, rental car, auto rental, fleet management, vehicle hire, travel"
                         }
                     ]
                 },
@@ -2317,7 +2317,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "epicgames.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "epic games, epic games store, pc gaming, game launcher, unreal engine, video games, digital store"
                         }
                     ]
                 },
@@ -2338,7 +2338,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "equifax.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "credit bureau, credit report, credit score, identity theft protection, credit monitoring, credit freeze"
                         }
                     ]
                 },
@@ -2359,7 +2359,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ets.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "gre, graduate record examination, ets, grad school admissions, standardized testing, test prep, graduate school"
                         }
                     ]
                 },
@@ -2380,7 +2380,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "evernote.com"
                             ],
-                            "ai_tags": "note taking, productivity, digital notebook, organization, task management, notes, archiving"
+                            "ai_tags": "note taking, productivity, digital notebook, organization, task management, notes, cloud sync, document editing"
                         }
                     ]
                 },
@@ -2401,7 +2401,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "exin.com"
                             ],
-                            "ai_tags": "itil certification, it service management, exin, framework, information technology, professional certification"
+                            "ai_tags": "ITIL foundation, IT service management, ITSM, certification, EXIN exam, IT governance"
                         }
                     ]
                 },
@@ -2422,7 +2422,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "experian.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "credit bureau, credit report, credit score, identity protection, credit monitoring, credit check"
                         }
                     ]
                 },
@@ -2443,7 +2443,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "facebook.com"
                             ],
-                            "ai_tags": "social media, social network, networking, messaging, newsfeed, community, connections"
+                            "ai_tags": "social media, networking, social network, messaging, community, posts, meta, friends"
                         }
                     ]
                 },
@@ -2464,7 +2464,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "fair.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "fair, media criticism, journalism, media watchdog, news analysis, media literacy, progressive media"
                         }
                     ]
                 },
@@ -2485,7 +2485,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "fidelity.com"
                             ],
-                            "ai_tags": "investments, stock trading, mutual funds, 401k, brokerage, wealth management, retirement accounts"
+                            "ai_tags": "investment brokerage, 401k, stock trading, mutual funds, retirement savings, wealth management, financial services"
                         }
                     ]
                 },
@@ -2506,7 +2506,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "flickr.com"
                             ],
-                            "ai_tags": "photo sharing, photography, image hosting, photo gallery, pictures, digital storage"
+                            "ai_tags": "flickr, photo sharing, image hosting, photography, picture storage, photo gallery, digital photos"
                         }
                     ]
                 },
@@ -2527,7 +2527,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "frontiersin.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "academic publishing, open access, scientific journals, research papers, peer review, science publisher, frontiers"
                         },
                         {
                             "id": 177,
@@ -2542,7 +2542,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "frontiersin.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, frontiers, open access, scientific research, publications, academic profile, biomedical journal"
                         }
                     ]
                 },
@@ -2563,7 +2563,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "gainpeace.com"
                             ],
-                            "ai_tags": "dawah, islamic outreach, islam education, interfaith dialogue, peace in islam, public outreach"
+                            "ai_tags": "gainpeace, dawah, islamic outreach, education on islam, comparative religion, interfaith understanding, muslim organization"
                         }
                     ]
                 },
@@ -2584,7 +2584,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "gedmatch.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "gedmatch, genealogy, dna analysis, genetic ancestry, chromosome browser, family tree, gedcom, genetic matching"
                         }
                     ]
                 },
@@ -2605,7 +2605,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "gemcenters.org"
                             ],
-                            "ai_tags": "careers, special education, plano texas, gem academy, job opportunities, special needs school, hiring"
+                            "ai_tags": "GEM Academy, Plano Texas, career opportunities, special education jobs, non-profit careers, hiring"
                         }
                     ]
                 },
@@ -2626,7 +2626,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "alphafold, deepmind, protein folding, bioinformatics, structural biology, machine learning, molecular biology, ai"
                         },
                         {
                             "id": 52,
@@ -2641,7 +2641,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "openfold, alphafold3, protein structure, biomolecules, open source, computational biology, pytorch, bioinformatics"
                         },
                         {
                             "id": 53,
@@ -2656,7 +2656,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "openfold, alphafold2, protein folding, pytorch, computational biology, gpu optimization, deep learning, bioinformatics"
                         },
                         {
                             "id": 54,
@@ -2671,7 +2671,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "alphafold3, protein folding, open source, bioinformatics, structural biology, machine learning, computational biology"
                         },
                         {
                             "id": 342,
@@ -2686,7 +2686,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.com"
                             ],
-                            "ai_tags": "AI pair programmer, code completion, autocompletion, generative AI, coding assistant, github, developer tool"
+                            "ai_tags": "ai pair programmer, github, coding assistant, code completion, generative ai, developer productivity"
                         },
                         {
                             "id": 398,
@@ -2701,7 +2701,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.com"
                             ],
-                            "ai_tags": "code repository, git, software development, version control, open source, coding, devops"
+                            "ai_tags": "github, git repository, code hosting, open source, software development, version control, programming, developer community"
                         }
                     ]
                 },
@@ -2722,7 +2722,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.io"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "data structures, information retrieval, python, algorithms, search engines, programming, computer science, textbook"
                         },
                         {
                             "id": 151,
@@ -2737,7 +2737,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.io"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "data science, artificial intelligence, life sciences, bioinformatics, research lab, machine learning, computational biology"
                         },
                         {
                             "id": 166,
@@ -2752,7 +2752,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.io"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "github pages, personal website, portfolio, web hosting, web development, personal site"
                         },
                         {
                             "id": 283,
@@ -2767,7 +2767,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "github.io"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "vahaduo, g25 coordinates, ancient dna, genetic admixture, pca calculator, distance matrix, genealogy"
                         }
                     ]
                 },
@@ -2788,7 +2788,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "glassdoor.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "glassdoor, company reviews, salary search, employer ratings, job listings, interview prep, career research"
                         }
                     ]
                 },
@@ -2809,7 +2809,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "godaddy.com"
                             ],
-                            "ai_tags": "domain registration, web hosting, domain name, website builder, DNS management, ssl certificate"
+                            "ai_tags": "domain registration, web hosting, dns management, website builder, ssl certificates, web services"
                         }
                     ]
                 },
@@ -2830,7 +2830,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "gokickball.com"
                             ],
-                            "ai_tags": "kickball, adult sports league, social sports, recreational sports, outdoor games, fitness"
+                            "ai_tags": "go kickball, adult sports, social league, kickball, recreation, fitness, team sports, outdoor activities"
                         }
                     ]
                 },
@@ -2851,7 +2851,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "academic search, research papers, literature review, citations, scholarly articles, publications, journal search"
                         },
                         {
                             "id": 181,
@@ -2866,7 +2866,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, google scholar, researcher profile, citations, academic publications, author, computer science"
                         },
                         {
                             "id": 328,
@@ -2881,7 +2881,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "google APIs, developer platform, android SDK, web development, google cloud tools, coding resources"
+                            "ai_tags": "google apis, android development, cloud computing, developer documentation, software engineering, web development"
                         },
                         {
                             "id": 335,
@@ -2896,7 +2896,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "search engine, web search, tech giant, internet search, google tools, online services"
+                            "ai_tags": "search engine, web search, online information, internet services, google search"
                         },
                         {
                             "id": 341,
@@ -2911,7 +2911,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "google search console, sitemap submission, webmaster tools, SEO, index site, search indexing"
+                            "ai_tags": "seo, google search console, webmaster tools, site indexing, xml sitemaps, web optimization"
                         },
                         {
                             "id": 343,
@@ -2926,7 +2926,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "gemini api, generative AI platform, LLM development, prompt engineering, google AI, developer tools"
+                            "ai_tags": "gemini api, generative ai, llm prototyping, google ai, prompt engineering, developer tools"
                         },
                         {
                             "id": 346,
@@ -2941,7 +2941,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "google notebooklm, AI research assistant, document analysis, note taking, LLM notebook, source citations"
+                            "ai_tags": "research assistant, ai note taking, document analysis, rag, google ai, summarization, research tools"
                         },
                         {
                             "id": 347,
@@ -2956,7 +2956,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "google gemini, AI chatbot, generative AI, LLM, google AI assistant, multimodal AI"
+                            "ai_tags": "google ai, chatbot, generative ai, llm, multimodal ai, artificial intelligence assistant"
                         },
                         {
                             "id": 348,
@@ -2971,7 +2971,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "GCP, cloud computing, cloud management, server hosting, Google Cloud Platform, cloud infrastructure, IAM"
+                            "ai_tags": "gcp, cloud computing, infrastructure management, google cloud, serverless, cloud dashboard"
                         },
                         {
                             "id": 353,
@@ -2986,7 +2986,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "cloud storage, file storage, file sharing, google workspace, documents, cloud backup"
+                            "ai_tags": "cloud storage, google drive, file backup, document sharing, cloud backup, storage, google workspace"
                         },
                         {
                             "id": 361,
@@ -3001,7 +3001,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "gmail, email, google account, inbox, webmail, personal email"
+                            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
                         },
                         {
                             "id": 362,
@@ -3016,7 +3016,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "gmail, email, google account, inbox, webmail, email address"
+                            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
                         },
                         {
                             "id": 363,
@@ -3031,7 +3031,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "gmail, email, google account, inbox, webmail, personal email"
+                            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
                         },
                         {
                             "id": 364,
@@ -3046,7 +3046,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "gmail, email, google account, inbox, webmail, email address"
+                            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
                         },
                         {
                             "id": 365,
@@ -3061,7 +3061,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "email, twu, texas womans university, academic email, google workspace, university email"
+                            "ai_tags": "email, gmail, twu, academic email, university account, google workspace, webmail"
                         },
                         {
                             "id": 366,
@@ -3076,7 +3076,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "email, utexas, university of texas, academic email, google workspace, university email"
+                            "ai_tags": "email, gmail, utexas, academic email, university account, google workspace, webmail"
                         },
                         {
                             "id": 367,
@@ -3091,7 +3091,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "email, ualr, university of arkansas little rock, academic email, google workspace, university email"
+                            "ai_tags": "email, gmail, ualr, academic email, university account, google workspace, webmail"
                         },
                         {
                             "id": 374,
@@ -3106,7 +3106,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "mobile network, cellular, mvno, google phone plan, international roaming, sim card"
+                            "ai_tags": "google fi, mobile service, cell carrier, mvno, wireless plan, phone service, international roaming"
                         },
                         {
                             "id": 375,
@@ -3121,7 +3121,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "text messaging, sms, web messaging, google messages, chat, android sync"
+                            "ai_tags": "messages for web, google messages, sms, text messaging, rcs, web chat, phone sync"
                         },
                         {
                             "id": 376,
@@ -3136,7 +3136,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "contact manager, address book, phone numbers, sync contacts, google workspace"
+                            "ai_tags": "contacts, address book, phone numbers, google contacts, email contacts, sync, address directory, people management"
                         },
                         {
                             "id": 377,
@@ -3151,7 +3151,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "app store, android apps, digital store, mobile apps, games, google play store"
+                            "ai_tags": "app store, android apps, games, digital store, play store, google play, downloads, media marketplace"
                         },
                         {
                             "id": 378,
@@ -3166,7 +3166,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "voip, phone number, virtual phone, calling, sms, voicemail, telecommunication"
+                            "ai_tags": "voip, virtual phone, internet calling, text messaging, voicemail, call forwarding, phone number, google voice"
                         },
                         {
                             "id": 385,
@@ -3181,7 +3181,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "video conferencing, online meetings, video call, google workspace, screen sharing, remote meetings"
+                            "ai_tags": "video conferencing, google meet, online meetings, virtual workspace, web video calls, screen sharing, google workspace"
                         },
                         {
                             "id": 399,
@@ -3196,7 +3196,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "task manager, to do list, checklist, google tasks, productivity, reminders, planning"
+                            "ai_tags": "google todo, task manager, to-do list, productivity tool, reminders, organization, checklist, daily planner"
                         },
                         {
                             "id": 400,
@@ -3211,7 +3211,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "task management, to do list, google tasks, reminders, daily planning, productivity, scheduling"
+                            "ai_tags": "google tasks, task management, checklist, to-do list, productivity, schedule planner, reminders, task tracking"
                         },
                         {
                             "id": 405,
@@ -3226,7 +3226,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "google.com"
                             ],
-                            "ai_tags": "academic search, research literature, scientific papers, citations, scholarly articles, journals"
+                            "ai_tags": "academic search engine, research papers, scholarly literature, citations, peer reviewed articles, scientific publications, bibliography"
                         }
                     ]
                 },
@@ -3247,7 +3247,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "grammarly.com"
                             ],
-                            "ai_tags": "grammar checker, writing assistant, proofreading, spell check, editing tool, english writing, tone detection"
+                            "ai_tags": "grammar checker, writing assistant, proofreading, spell check, tone detector, copy editing, writing tool, plagiarism checker"
                         }
                     ]
                 },
@@ -3268,7 +3268,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "grants.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "federal grants, government funding, grant search, federal awards, grant application, US government, funding opportunities"
                         }
                     ]
                 },
@@ -3289,7 +3289,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "greenteapress.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "python, programming, textbook, computer science, coding, learn python, open textbook, software development"
                         }
                     ]
                 },
@@ -3310,7 +3310,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "hackerrank.com"
                             ],
-                            "ai_tags": "coding challenges, technical interview, competitive programming, algorithm practice, developer assessment, python, java"
+                            "ai_tags": "hackerrank, coding practice, technical interview, programming challenges, developer assessment, algorithms"
                         }
                     ]
                 },
@@ -3331,7 +3331,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "healthcare.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "affordable care act, healthcare gov, health insurance, obamacare, health marketplace, coverage enrollment, federal insurance"
                         }
                     ]
                 },
@@ -3352,7 +3352,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "hearthousedallas.org"
                             ],
-                            "ai_tags": "youth education, non-profit, refugee support, after-school program, dallas, child development, community service"
+                            "ai_tags": "heart house dallas, refugee youth, after school program, dallas non-profit, education, social emotional learning, child welfare"
                         }
                     ]
                 },
@@ -3373,7 +3373,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "hertz.com"
                             ],
-                            "ai_tags": "car rental, rental cars, vehicle rental, auto rental, travel, fleet"
+                            "ai_tags": "hertz, car rental, vehicle rental, rental car, airport rental, travel, vehicle hire"
                         }
                     ]
                 },
@@ -3394,7 +3394,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "huggingface.co"
                             ],
-                            "ai_tags": "machine learning, AI models, open source AI, transformers, datasets, NLP, deep learning, PyTorch"
+                            "ai_tags": "machine learning, open source ai, transformers, nlp, ai models, deep learning, datasets"
                         }
                     ]
                 },
@@ -3415,7 +3415,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "hulu.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "hulu, streaming service, tv shows, movies, live tv, video streaming, entertainment, on demand"
                         }
                     ]
                 },
@@ -3436,7 +3436,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "iant.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islamic association of north texas, mosque, iant, muslim community, dallas, religious organization, community center"
                         }
                     ]
                 },
@@ -3457,7 +3457,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "iclr.cc"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "iclr 2024, representation learning, deep learning, machine learning, neural networks, ai conference"
                         }
                     ]
                 },
@@ -3478,7 +3478,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "icml.cc"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "icml 2024, machine learning, deep learning, ai research, data science, machine learning algorithms, computer science conference"
                         }
                     ]
                 },
@@ -3499,7 +3499,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "icna.org"
                             ],
-                            "ai_tags": "islamic organization, dawah, relief, muslim youth, community service, north america, non-profit"
+                            "ai_tags": "icna, islamic circle of north america, dawah, social services, muslim outreach, islamic charity, community relief"
                         }
                     ]
                 },
@@ -3520,7 +3520,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "idealist.org"
                             ],
-                            "ai_tags": "human rights, volunteering, non-profit jobs, social justice, global advocacy, community service, idealist"
+                            "ai_tags": "idealist, human rights, volunteering, social justice, non-profit careers, activism, global impact"
                         }
                     ]
                 },
@@ -3541,7 +3541,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ieee.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ieee, electrical engineering, computer science, technical standards, technology organization, professional society, engineering research"
                         },
                         {
                             "id": 176,
@@ -3556,7 +3556,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ieee.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, ieee, academic profile, computer science, publications, research, author, electrical engineering"
                         }
                     ]
                 },
@@ -3577,7 +3577,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ijcai.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "artificial intelligence, ai conference, machine learning, research, computer science, academic conference, ijcai"
                         }
                     ]
                 },
@@ -3598,7 +3598,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ikea.com"
                             ],
-                            "ai_tags": "furniture, home decor, Scandinavian design, home furnishings, interior design, household goods"
+                            "ai_tags": "ikea, furniture, home decor, home goods, interior design, flat pack, home improvement, swedish"
                         }
                     ]
                 },
@@ -3619,7 +3619,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "illustrativedna.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "illustrative dna, ancient dna, genetic ancestry, admixture analysis, pca plot, population genetics, deep ancestry"
                         }
                     ]
                 },
@@ -3640,7 +3640,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "indeed.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "indeed, job search, job board, hiring platform, employment search, resume upload, careers"
                         }
                     ]
                 },
@@ -3661,7 +3661,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "infoculturejournal.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "information and culture, history journal, media studies, humanities, information science, academic publishing, library science"
                         }
                     ]
                 },
@@ -3682,7 +3682,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "intel.com"
                             ],
-                            "ai_tags": "intel SDK, developer tools, hardware optimization, parallel programming, software development, oneapi, driver software"
+                            "ai_tags": "hardware, intel, drivers, software development, parallel computing, processors, embedded systems"
                         }
                     ]
                 },
@@ -3703,7 +3703,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "interfolio.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "interfolio, faculty dossier, academic tenure, recommendation letters, higher ed hiring, academic credentials"
                         }
                     ]
                 },
@@ -3724,7 +3724,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "irs.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "federal taxes, irs refund, tax return, tax account, government portal, income tax"
                         }
                     ]
                 },
@@ -3745,7 +3745,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ischools.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "iconference, ischools, information science, academic conference, library science, digital humanities, information management, research"
                         }
                     ]
                 },
@@ -3766,7 +3766,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "islamweb.net"
                             ],
-                            "ai_tags": "islamic rulings, fatwa, quran, hadith, islamic articles, arabic, religious knowledge"
+                            "ai_tags": "Islamweb, Islamic fatwa, Quran, Hadith, Islamic portal, religious education, Arabic Islamic resource"
                         }
                     ]
                 },
@@ -3787,7 +3787,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "isna.net"
                             ],
-                            "ai_tags": "muslim organization, islamic convention, north america muslims, community advocacy, islamic education, interfaith"
+                            "ai_tags": "isna, islamic society of north america, muslim organization, interfaith dialogue, community empowerment, islamic convention, north american muslims"
                         }
                     ]
                 },
@@ -3808,7 +3808,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "jetbrains.com"
                             ],
-                            "ai_tags": "IDE, developer tools, PyCharm, IntelliJ IDEA, WebStorm, software development, programming software"
+                            "ai_tags": "ide, intellij, pycharm, code editor, developer tools, software engineering, jetbrains"
                         }
                     ]
                 },
@@ -3829,7 +3829,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "joinhandshake.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "handshake, college career center, campus recruiting, student internships, entry level jobs, university hiring"
                         }
                     ]
                 },
@@ -3850,7 +3850,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "jumia.com.eg"
                             ],
-                            "ai_tags": "online shopping, e-commerce, egypt retail, electronics, fashion, marketplace, jumia"
+                            "ai_tags": "jumia, online shopping, e-commerce egypt, fashion, electronics, online deals, retail marketplace, mobile shopping"
                         }
                     ]
                 },
@@ -3871,7 +3871,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kaggle.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "data science, machine learning, datasets, python, competitions, artificial intelligence, data analysis, kaggle"
                         }
                     ]
                 },
@@ -3892,7 +3892,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kanopy.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "kanopy, movie streaming, public library, documentaries, educational video, indie cinema, free streaming"
                         }
                     ]
                 },
@@ -3913,7 +3913,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kdd.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "kdd 2023, data mining, knowledge discovery, big data, data science, machine learning, analytics conference"
                         },
                         {
                             "id": 66,
@@ -3928,7 +3928,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kdd.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sigkdd, data mining, machine learning, knowledge discovery, acm, big data, data science, academic conference"
                         }
                     ]
                 },
@@ -3949,7 +3949,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kennethcole.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "fashion, clothing, designer apparel, footwear, shoes, mens fashion, womens fashion, accessories"
                         }
                     ]
                 },
@@ -3970,7 +3970,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "klarna.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "buy now pay later, bnpl, installment payments, shopping app, pay in 4, flexible payments"
                         }
                     ]
                 },
@@ -3991,7 +3991,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kotoaiki.org"
                             ],
-                            "ai_tags": "Aikido, martial arts, Texas, self defense, Japanese martial arts, dojo"
+                            "ai_tags": "aikido, martial arts, texas dojo, kotokai, self defense, traditional martial arts, japanese budo, physical discipline"
                         }
                     ]
                 },
@@ -4012,7 +4012,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "kroger.com"
                             ],
-                            "ai_tags": "grocery store, supermarket, food market, pharmacy, digital coupons, grocery delivery"
+                            "ai_tags": "kroger, grocery store, supermarket, food, pharmacy, groceries, coupons, retail"
                         }
                     ]
                 },
@@ -4033,7 +4033,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "leetcode.com"
                             ],
-                            "ai_tags": "coding interview, algorithm challenges, data structures, competitive programming, job prep, coding practice, software engineering"
+                            "ai_tags": "coding, algorithms, interview prep, data structures, programming, competitive programming, software engineering"
                         }
                     ]
                 },
@@ -4054,7 +4054,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "link.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "fast checkout, one click payment, stripe link, payment method, express checkout, digital wallet"
                         }
                     ]
                 },
@@ -4075,7 +4075,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "linkedin.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "power bi, data visualization, business intelligence, analytics, linkedin learning, dashboards, business analytics, microsoft"
                         },
                         {
                             "id": 322,
@@ -4090,7 +4090,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "linkedin.com"
                             ],
-                            "ai_tags": "linkedin profile, professional network, career profile, software engineer, professional resume, social networking"
+                            "ai_tags": "linkedin, professional profile, networking, career, resume, professional connection, employment"
                         },
                         {
                             "id": 403,
@@ -4105,7 +4105,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "linkedin.com"
                             ],
-                            "ai_tags": "professional networking, job search, career, business network, recruitment, resume, employment"
+                            "ai_tags": "professional networking, job search, career, resume, recruitment, business networking, employment, industry news"
                         }
                     ]
                 },
@@ -4126,7 +4126,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "linktr.ee"
                             ],
-                            "ai_tags": "social media, linktree, content creator, barbering, hair blending, social links, link aggregator"
+                            "ai_tags": "ibz blends, Linktree, social media, barbering, haircut content, Instagram TikTok links"
                         }
                     ]
                 },
@@ -4147,7 +4147,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "linuxcommand.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "linux, command line, bash, shell scripting, terminal, open source, operating systems, sysadmin, ebook"
                         }
                     ]
                 },
@@ -4168,7 +4168,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "live.com"
                             ],
-                            "ai_tags": "cloud storage, microsoft, file sharing, file backup, office 365, document sync"
+                            "ai_tags": "onedrive, cloud storage, microsoft, file sync, cloud backup, document sharing, office 365"
                         },
                         {
                             "id": 368,
@@ -4183,7 +4183,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "live.com"
                             ],
-                            "ai_tags": "hotmail, outlook, email, microsoft account, webmail, inbox"
+                            "ai_tags": "email, hotmail, outlook, microsoft email, webmail, inbox, communication"
                         }
                     ]
                 },
@@ -4204,7 +4204,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "login.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "government authentication, identity verification, single sign-on, login portal, federal access, security, user account"
                         }
                     ]
                 },
@@ -4225,7 +4225,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "loopnet.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "commercial real estate, property listings, commercial property, office space, leasing, real estate investment"
                         }
                     ]
                 },
@@ -4246,7 +4246,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "loseit.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "lose it, calorie counter, weight loss, diet tracker, nutrition app, macro tracking, fitness"
                         }
                     ]
                 },
@@ -4267,7 +4267,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "lowes.com"
                             ],
-                            "ai_tags": "home improvement, hardware store, building materials, tools, appliances, gardening"
+                            "ai_tags": "lowes, home improvement, hardware store, tools, appliances, building materials, renovation, gardening"
                         }
                     ]
                 },
@@ -4288,7 +4288,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "lyft.com"
                             ],
-                            "ai_tags": "rideshare, taxi, ride hailing, transportation, driver, urban mobility, carpool"
+                            "ai_tags": "lyft, rideshare, ride hailing, taxi service, car service, transportation, driver"
                         }
                     ]
                 },
@@ -4309,7 +4309,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mansfieldmasjid.org"
                             ],
-                            "ai_tags": "mosque, islamic center, mansfield texas, muslim community, worship, local masjid, community center"
+                            "ai_tags": "mansfield islamic center, mosque, masjid, mansfield texas, muslim community, prayer services, religious center"
                         }
                     ]
                 },
@@ -4330,7 +4330,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "manuscriptcentral.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "scholarone, peer review, manuscript submission, academic publishing, scholarly publishing, journal management, research paper, publication portal"
                         }
                     ]
                 },
@@ -4351,7 +4351,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "masamts.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "emergency medical transport, medical evacuation, ambulance membership, air ambulance, transport insurance"
                         }
                     ]
                 },
@@ -4372,7 +4372,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mathcha.io"
                             ],
-                            "ai_tags": "math editor, latex, diagrams, formula editor, mathematics, technical writing, online documents"
+                            "ai_tags": "math editor, latex, formulas, mathematics, diagramming, mathcha, online editor, document creation"
                         }
                     ]
                 },
@@ -4393,7 +4393,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mathpix.com"
                             ],
-                            "ai_tags": "OCR, math OCR, latex converter, document parsing, formula extraction, scientific document, image to latex"
+                            "ai_tags": "ocr, latex, math ocr, image to text, scientific formulas, pdf extraction, equation editor"
                         }
                     ]
                 },
@@ -4414,7 +4414,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mcbios.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "mcbios 2024, computational biology, bioinformatics, biosciences, computational genetics, mid-south bioinformatics"
                         },
                         {
                             "id": 65,
@@ -4429,7 +4429,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mcbios.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "mcbios, computational biology, bioinformatics, biosciences, genetics, data analysis, research association, computational science"
                         }
                     ]
                 },
@@ -4450,7 +4450,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mcssaustin.org"
                             ],
-                            "ai_tags": "social services, charitable organization, austin texas, muslim relief, community support, non-profit, financial assistance"
+                            "ai_tags": "mcss austin, muslim community support services, social services, financial aid, austin texas, charity, assistance program"
                         }
                     ]
                 },
@@ -4471,7 +4471,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "medium.com"
                             ],
-                            "ai_tags": "blogging platform, articles, writing, tech blogs, online publishing, stories"
+                            "ai_tags": "medium, blogging, articles, publishing, writing, technology, reading, stories, online publication"
                         }
                     ]
                 },
@@ -4492,7 +4492,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "meetup.com"
                             ],
-                            "ai_tags": "local events, networking, community groups, social meetups, activities, gatherings"
+                            "ai_tags": "meetup, community groups, local events, social networking, interest groups, event discovery, professional networking, hobby groups"
                         }
                     ]
                 },
@@ -4513,7 +4513,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "methodisthealthsystem.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "methodist richardson, hospital, richardson texas, medical center, healthcare, emergency care, patient care"
                         }
                     ]
                 },
@@ -4534,7 +4534,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "metlife.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "metlife legal plans, legal insurance, group legal coverage, legal benefits, attorney services, estate planning"
                         }
                     ]
                 },
@@ -4555,7 +4555,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "metronissandallas.com"
                             ],
-                            "ai_tags": "nissan dealership, car dealer dallas, dallas auto sales, car service, nissan parts, vehicle buying"
+                            "ai_tags": "nissan dallas, car dealership, metro nissan, auto sales, vehicle service, dallas texas, new cars"
                         }
                     ]
                 },
@@ -4576,7 +4576,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "microsoft.com"
                             ],
-                            "ai_tags": "windows, office 365, azure, software, enterprise technology, surface, xbox, tech company"
+                            "ai_tags": "windows, cloud computing, azure, enterprise software, developer tools, productivity software"
                         },
                         {
                             "id": 358,
@@ -4591,7 +4591,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "microsoft.com"
                             ],
-                            "ai_tags": "digital whiteboard, collaboration, brainstorming, drawing canvas, remote work, microsoft whiteboard"
+                            "ai_tags": "whiteboard, microsoft whiteboard, collaboration, digital canvas, brainstorming, drawing, visual planning"
                         },
                         {
                             "id": 384,
@@ -4606,7 +4606,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "microsoft.com"
                             ],
-                            "ai_tags": "team collaboration, video meetings, workplace chat, office 365, remote work, business communication"
+                            "ai_tags": "team collaboration, video meetings, workplace chat, microsoft 365, online workspace, enterprise communication, video calls"
                         }
                     ]
                 },
@@ -4627,7 +4627,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "mod.gov.eg"
                             ],
-                            "ai_tags": "intelligence studies, security institute, egypt ministry of defense, national security, military education, intelligence institute"
+                            "ai_tags": "military intelligence, security studies, egypt ministry of defense, intelligence institute, national security, military academy"
                         }
                     ]
                 },
@@ -4648,7 +4648,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "moneymanagement.org"
                             ],
-                            "ai_tags": "money management, credit counseling, debt management, financial education, budgeting, non profit aid"
+                            "ai_tags": "money management international, debt counseling, credit management, debt relief, budgeting, non profit finance, financial advice"
                         }
                     ]
                 },
@@ -4669,7 +4669,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "monster.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "monster, job board, career advice, job portal, employment site, recruitment, job search"
                         }
                     ]
                 },
@@ -4690,7 +4690,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "movementgyms.com"
                             ],
-                            "ai_tags": "rock climbing, bouldering, fitness gym, Plano Texas, indoor climbing, yoga"
+                            "ai_tags": "rock climbing, bouldering, climbing gym, fitness center, plano texas, movement gyms, indoor climbing, sports"
                         }
                     ]
                 },
@@ -4711,7 +4711,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "msubmit.net"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "imaging science, journal, image processing, technical publishing, peer review, optics, digital imaging, scientific research"
                         }
                     ]
                 },
@@ -4732,7 +4732,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "muhsen.org"
                             ],
-                            "ai_tags": "disability advocacy, special needs, islamic inclusivity, donation, accessibility, muslim community, non-profit"
+                            "ai_tags": "muhsen, special needs, disability accessibility, muslim community inclusion, charity donation, accommodation, special needs support"
                         }
                     ]
                 },
@@ -4753,7 +4753,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "muppies.org"
                             ],
-                            "ai_tags": "muslim professionals, networking, career development, business network, leadership, professional organization"
+                            "ai_tags": "muppies, muslim professionals, professional networking, career advancement, leadership, mentorship, business association"
                         }
                     ]
                 },
@@ -4774,7 +4774,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "muslimcentral.com"
                             ],
-                            "ai_tags": "Islam, Islamic podcasts, lectures, sermons, Muslim audio, Quran, scholars"
+                            "ai_tags": "islamic podcasts, muslim lectures, audio sermons, islam, quran teaching, islamic knowledge, religious podcast, spirituality"
                         }
                     ]
                 },
@@ -4795,7 +4795,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "muslimspace.org"
                             ],
-                            "ai_tags": "muslim community, austin texas, inclusive community, interfaith, education, social events, community support"
+                            "ai_tags": "muslim space, austin texas, muslim community, inclusive spaces, community events, spiritual growth, local non-profit"
                         }
                     ]
                 },
@@ -4816,7 +4816,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "myretirementmanager.com"
                             ],
-                            "ai_tags": "retirement management, retirement savings, financial planning, account management, employer benefits"
+                            "ai_tags": "retirement plan management, 403b, 457b, savings plans, retirement administration, financial planning"
                         }
                     ]
                 },
@@ -4837,7 +4837,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nasa.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nasa, space exploration, astronomy, space science, aeronautics, universe, space agency, astrophysics"
                         }
                     ]
                 },
@@ -4858,7 +4858,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nationalcasagal.org"
                             ],
-                            "ai_tags": "child advocacy, casa, foster care, volunteer opportunities, youth support, legal advocacy, non-profit"
+                            "ai_tags": "casa, court appointed special advocates, foster care, child advocacy, volunteer advocate, child welfare, legal support"
                         }
                     ]
                 },
@@ -4879,7 +4879,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "naturalgrocers.com"
                             ],
-                            "ai_tags": "organic food, health store, vitamins, natural groceries, dietary supplements, wellness"
+                            "ai_tags": "natural grocers, organic food, health food, natural products, groceries, vitamins, supplements, dietary"
                         }
                     ]
                 },
@@ -4900,7 +4900,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nature.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "scientific data, open data, datasets, research data, nature journal, open access, data repository, science"
                         },
                         {
                             "id": 37,
@@ -4915,7 +4915,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nature.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "machine intelligence, artificial intelligence, machine learning, deep learning, robotics, nature journal, academic research"
                         },
                         {
                             "id": 38,
@@ -4930,7 +4930,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nature.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "computational science, computational biology, simulation, scientific computing, data science, nature journal, mathematical modeling"
                         },
                         {
                             "id": 39,
@@ -4945,7 +4945,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nature.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "open access, scientific research, nature portfolio, multidisciplinary, peer review, academic journal, scientific reports"
                         }
                     ]
                 },
@@ -4966,7 +4966,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nature.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "the nature conservancy, environmental charity, donations, land conservation, wildlife protection, non profit, eco fundraising"
                         }
                     ]
                 },
@@ -4987,7 +4987,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ncedc.gov.eg"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "north cairo electricity distribution, egypt electricity, power company, electric utility, bill payment, ncedc"
                         }
                     ]
                 },
@@ -5008,7 +5008,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ncees.org"
                             ],
-                            "ai_tags": "engineering exams, fe exam, pe exam, engineering licensure, surveying, professional certification, ncees"
+                            "ai_tags": "engineering exam, NCEES, licensure, PE exam, FE exam, professional engineering, surveying"
                         },
                         {
                             "id": 169,
@@ -5023,7 +5023,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ncees.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ncees, pe exam, fe exam, engineering license, professional engineer, engineering credential"
                         }
                     ]
                 },
@@ -5044,7 +5044,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nih.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biomedical research, health grants, nih funding, research proposals, medical research, federal funding, national institutes of health"
                         },
                         {
                             "id": 5,
@@ -5059,7 +5059,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nih.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biomedical informatics, data science, nih r01, nlm grants, medical data, research funding, clinical informatics"
                         },
                         {
                             "id": 6,
@@ -5074,7 +5074,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nih.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biomedical data, data repositories, knowledgebases, nih r24, research infrastructure, bioinformatics, data sharing"
                         },
                         {
                             "id": 47,
@@ -5089,7 +5089,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nih.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ncbi, pubmed, biomedical literature, genetics, bioinformatics, nih, national library of medicine, citations"
                         },
                         {
                             "id": 154,
@@ -5104,7 +5104,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nih.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sciencv, biosketch, nih grants, cv generator, researcher profile, federal grants, academic resume"
                         }
                     ]
                 },
@@ -5125,7 +5125,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nips.cc"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "neurips 2023, machine learning, neural networks, deep learning, artificial intelligence, ai conference, computer science"
                         }
                     ]
                 },
@@ -5146,7 +5146,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "noorart.com"
                             ],
-                            "ai_tags": "islamic books, educational toys, arabic learning, muslim kids, islamic media, online bookstore, homeschooling"
+                            "ai_tags": "Noorart, Islamic store, Arabic books, children educational materials, Islamic curriculum, online shop"
                         }
                     ]
                 },
@@ -5167,7 +5167,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nsf.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nsf career award, early career faculty, national science foundation, research proposal, tenure track funding, grant application"
                         },
                         {
                             "id": 152,
@@ -5182,7 +5182,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nsf.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nsf, research grants, grant funding, award search, federal funding, national science foundation, academic grants"
                         }
                     ]
                 },
@@ -5203,7 +5203,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ntta.org"
                             ],
-                            "ai_tags": "north texas tollway authority, tolltag, texas tolls, dallas toll roads, highway toll, toll payment"
+                            "ai_tags": "ntta, north texas tollway authority, tolltag, toll road, dallas highways, toll payment"
                         }
                     ]
                 },
@@ -5224,7 +5224,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nvidia.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nvidia research, gpu grant, academic hardware awards, ai research funding, machine learning grants, computer science research"
                         },
                         {
                             "id": 329,
@@ -5239,7 +5239,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nvidia.com"
                             ],
-                            "ai_tags": "GPU, graphics card, AI hardware, deep learning, CUDA, drivers, gaming, artificial intelligence"
+                            "ai_tags": "gpus, graphics cards, cuda, deep learning, artificial intelligence, hardware, acceleration"
                         },
                         {
                             "id": 337,
@@ -5254,7 +5254,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "nvidia.com"
                             ],
-                            "ai_tags": "GPU, graphics card, AI hardware, deep learning, CUDA, drivers, gaming, artificial intelligence"
+                            "ai_tags": "gpus, cuda, graphics processing, deep learning, artificial intelligence, compute hardware"
                         }
                     ]
                 },
@@ -5275,7 +5275,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "office.com"
                             ],
-                            "ai_tags": "office 365, outlook, email, twu, texas womans university, academic email, microsoft office"
+                            "ai_tags": "email, office 365, outlook, twu, academic email, university account, webmail"
                         },
                         {
                             "id": 370,
@@ -5290,7 +5290,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "office.com"
                             ],
-                            "ai_tags": "office 365, outlook, email, saumag, southern arkansas university, academic email, microsoft office"
+                            "ai_tags": "email, office 365, outlook, saumag, academic email, university account, webmail"
                         }
                     ]
                 },
@@ -5311,7 +5311,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "openai.com"
                             ],
-                            "ai_tags": "ChatGPT, GPT-4, generative AI, artificial intelligence, LLM, OpenAI API, machine learning"
+                            "ai_tags": "chatgpt, gpt-4, artificial intelligence, generative ai, llm, openai api, machine learning"
                         }
                     ]
                 },
@@ -5332,7 +5332,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "openreview.net"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, openreview, peer review, machine learning, ai research, academic papers, conferences"
                         }
                     ]
                 },
@@ -5353,7 +5353,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "orange.eg"
                             ],
-                            "ai_tags": "telecom, mobile network, internet service provider, cellular, egypt, orange carrier"
+                            "ai_tags": "telecom, orange egypt, mobile operator, cellular, internet service provider, network, egypt"
                         },
                         {
                             "id": 379,
@@ -5368,7 +5368,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "orange.eg"
                             ],
-                            "ai_tags": "broadband, dsl internet, home wireless, router, isp, egypt internet, orange telecom"
+                            "ai_tags": "internet service provider, orange egypt, home broadband, dsl internet, wireless router, wifi plans, telecom, egypt internet"
                         }
                     ]
                 },
@@ -5389,7 +5389,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "orcid.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "orcid, researcher id, persistent identifier, publication tracking, author id, academic profile, scholarly identity"
                         }
                     ]
                 },
@@ -5410,7 +5410,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "origin.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "origin, electronic arts, ea, pc gaming, game launcher, video games, digital store"
                         }
                     ]
                 },
@@ -5431,7 +5431,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "overleaf.com"
                             ],
-                            "ai_tags": "latex editor, online latex, academic writing, research paper, typesetting, collaboration, bibtex"
+                            "ai_tags": "latex, overleaf, academic writing, collaborative editor, research papers, typesetting, bibliography"
                         }
                     ]
                 },
@@ -5452,7 +5452,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "palestinianelegance.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "palestinian clothing, thobe, tatreez, ethnic fashion, traditional embroidery, boutique, middle eastern apparel"
                         }
                     ]
                 },
@@ -5473,7 +5473,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "palestinianyouthmovement.com"
                             ],
-                            "ai_tags": "palestinian youth, youth advocacy, human rights, grassroots activism, social justice, community organizing"
+                            "ai_tags": "palestinian youth movement, youth activism, palestinian liberation, community organizing, diaspora, grassroots activism, social justice"
                         }
                     ]
                 },
@@ -5494,7 +5494,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "paymentworks.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "vendor management, business payments, supplier onboarding, fraud prevention, b2b payments"
                         }
                     ]
                 },
@@ -5515,7 +5515,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "pbs.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "pbs, public broadcasting, public television, documentaries, news, educational media, culture"
                         }
                     ]
                 },
@@ -5536,7 +5536,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "peerj.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "peerj, open access, scientific journal, peer review, biological sciences, computer science, open science, academic research"
                         }
                     ]
                 },
@@ -5557,7 +5557,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "planoaikido.com"
                             ],
-                            "ai_tags": "Aikido, martial arts, Plano Texas, self defense, dojo, Japanese martial arts"
+                            "ai_tags": "aikido, martial arts, plano texas, self defense, dojo, japanese martial arts, physical training, combat sports"
                         }
                     ]
                 },
@@ -5578,7 +5578,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "poetryfoundation.org"
                             ],
-                            "ai_tags": "poetry, literature, poems, poets, literary magazine, creative writing"
+                            "ai_tags": "poetry, poems, poetry foundation, literary magazine, poets, literature, creative writing, famous poems"
                         }
                     ]
                 },
@@ -5599,7 +5599,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "pogil.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "pogil, process oriented guided inquiry learning, active learning, stem education, teaching methodology, pedagogy, student centered"
                         }
                     ]
                 },
@@ -5620,7 +5620,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "progressive.com"
                             ],
-                            "ai_tags": "auto insurance, car insurance, insurance quotes, vehicle insurance, progressive home, insurance policy"
+                            "ai_tags": "progressive, car insurance, auto insurance, vehicle coverage, insurance quote, claims, policy"
                         }
                     ]
                 },
@@ -5641,7 +5641,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "projectzamzam.org"
                             ],
-                            "ai_tags": "humanitarian aid, water relief, clean water, charity organization, global aid, non-profit, water projects"
+                            "ai_tags": "project zamzam, clean water, humanitarian charity, relief projects, water wells, global aid, non-profit relief"
                         }
                     ]
                 },
@@ -5662,7 +5662,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "proton.me"
                             ],
-                            "ai_tags": "protonmail, encrypted email, privacy, secure mail, proton vpn, encrypted drive, cybersecurity"
+                            "ai_tags": "encrypted email, privacy tools, protonmail, vpn, data security, encrypted cloud"
                         },
                         {
                             "id": 371,
@@ -5677,7 +5677,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "proton.me"
                             ],
-                            "ai_tags": "protonmail, encrypted email, secure email, privacy, webmail, proton"
+                            "ai_tags": "email, protonmail, encrypted email, secure email, privacy, webmail, encrypted messaging"
                         }
                     ]
                 },
@@ -5698,7 +5698,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "pushkin.fm"
                             ],
-                            "ai_tags": "Malcolm Gladwell, history podcast, storytelling, journalism, Pushkin Industries, revisionist history"
+                            "ai_tags": "revisionist history, malcolm gladwell, history podcast, pushkin industries, storytelling, historical analysis, audiobooks, culture"
                         }
                     ]
                 },
@@ -5719,7 +5719,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "quran.com"
                             ],
-                            "ai_tags": "quran, holy quran, islam, islamic scripture, recitations, quran translation, tafsir, verses"
+                            "ai_tags": "quran online, quran recitations, islamic scripture, quran translation, tafsir, surah, islam, holy quran"
                         }
                     ]
                 },
@@ -5740,7 +5740,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ratemyprofessors.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "rate my professors, professor reviews, college ratings, course feedback, student reviews, university classes"
                         }
                     ]
                 },
@@ -5761,7 +5761,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "rcsb.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "protein data bank, pdb, 3d protein structures, structural biology, crystallography, macromolecules, molecular biology, rcsb"
                         }
                     ]
                 },
@@ -5782,7 +5782,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "rescue.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "international rescue committee, irc, refugee aid, humanitarian relief, donation match, charity, disaster response"
                         }
                     ]
                 },
@@ -5803,7 +5803,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "research.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nsf grants, national science foundation, research proposals, proposal submission, grant management, federal research funding"
                         }
                     ]
                 },
@@ -5824,7 +5824,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "researchgate.net"
                             ],
-                            "ai_tags": "academic research, researchgate, scientific papers, publication, citations, researcher profile"
+                            "ai_tags": "academic research, scientific papers, researchgate, citations, publications, scholarly profile, academic network"
                         }
                     ]
                 },
@@ -5845,7 +5845,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "richardsoniq.com"
                             ],
-                            "ai_tags": "innovation district, tech hub, Richardson Texas, business development, startups, technology"
+                            "ai_tags": "richardson innovation quarter, tech hub, richardson iq, texas technology, startup incubator, innovation district, smart city"
                         }
                     ]
                 },
@@ -5866,7 +5866,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "riotgames.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "riot games, league of legends, valorant, video game developer, esports, online gaming, multiplayer"
                         }
                     ]
                 },
@@ -5887,7 +5887,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "robinhood.com"
                             ],
-                            "ai_tags": "stock trading, investing, commission free, crypto trading, options trading, finance app, stocks"
+                            "ai_tags": "stock trading app, investing, cryptocurrency, options trading, commission free trading, stocks, portfolio management"
                         }
                     ]
                 },
@@ -5908,7 +5908,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "sabafarrukh.com"
                             ],
-                            "ai_tags": "original art, paintings, visual art, artist portfolio, art gallery, custom artwork, fine art"
+                            "ai_tags": "paintings, artist portfolio, visual arts, fine art, Saba Farrukh, art gallery, oil paintings"
                         }
                     ]
                 },
@@ -5929,7 +5929,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "salamcharityusa.org"
                             ],
-                            "ai_tags": "islamic charity, humanitarian aid, relief projects, orphan support, non-profit, zakat, emergency aid"
+                            "ai_tags": "Salam Charity USA, non-profit, Islamic relief, humanitarian aid, donations, zakat charity"
                         }
                     ]
                 },
@@ -5950,7 +5950,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "salamfoundation.us"
                             ],
-                            "ai_tags": "islamic school, education, private school, curriculum, youth education, faith-based learning"
+                            "ai_tags": "Salam Academy, Islamic school, private education, Islamic curriculum, youth education, academy"
                         }
                     ]
                 },
@@ -5971,7 +5971,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "salesforce-sites.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "grants portal, grant management system, proposal submission, award tracking, online grant portal, salesforce grants"
                         },
                         {
                             "id": 15,
@@ -5986,7 +5986,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "salesforce-sites.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "research portal, research administration, project management, grant portal, research system, institutional research"
                         }
                     ]
                 },
@@ -6007,7 +6007,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "samsclub.com"
                             ],
-                            "ai_tags": "wholesale club, bulk shopping, grocery store, membership retail, discount store"
+                            "ai_tags": "sams club, wholesale, warehouse club, bulk shopping, groceries, membership, retail, discounts"
                         }
                     ]
                 },
@@ -6028,7 +6028,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "samsung.com"
                             ],
-                            "ai_tags": "smartphones, electronics, galaxy, smart appliances, televisions, memory chips, mobile technology"
+                            "ai_tags": "smartphones, consumer electronics, galaxy, hardware, semiconductors, mobile devices"
                         }
                     ]
                 },
@@ -6049,7 +6049,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "scispace.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "scispace, academic profile, research citations, publication metrics, ut austin, paper search, author statistics"
                         }
                     ]
                 },
@@ -6070,7 +6070,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "scopus.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "scopus, citation database, academic research, peer reviewed journals, scientific database, research metrics, publication search"
                         }
                     ]
                 },
@@ -6091,7 +6091,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "scribd.com"
                             ],
-                            "ai_tags": "digital library, ebooks, audiobooks, documents, reading, academic papers, publications"
+                            "ai_tags": "scribd, digital library, ebooks, audiobooks, documents, reading, subscription, publications"
                         }
                     ]
                 },
@@ -6112,7 +6112,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "semanticscholar.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "semantic scholar, ai search engine, paper search, citation analysis, academic literature, research discovery, scientific papers"
                         }
                     ]
                 },
@@ -6133,7 +6133,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "sharepoint.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "hanover research, shared drive, sharepoint drive, grant consulting resources, research documents, team collaboration"
                         }
                     ]
                 },
@@ -6154,7 +6154,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "sigchi.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sigchi, human computer interaction, hci, user experience, acm, ux research, interaction design, academic conference"
                         }
                     ]
                 },
@@ -6175,7 +6175,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "skype.com"
                             ],
-                            "ai_tags": "video calling, voip, chat, international calls, instant messaging, microsoft skype"
+                            "ai_tags": "video calls, voip, international calling, instant messaging, chat, phone calls, virtual communication"
                         }
                     ]
                 },
@@ -6196,7 +6196,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "slack.com"
                             ],
-                            "ai_tags": "team collaboration, workplace chat, messaging, productivity, channels, work communication"
+                            "ai_tags": "workplace chat, team messaging, business communication, collaboration, productivity, corporate channels, work productivity"
                         }
                     ]
                 },
@@ -6217,7 +6217,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "slideshare.net"
                             ],
-                            "ai_tags": "presentations, slide decks, powerpoint, document sharing, infographics, professional slides"
+                            "ai_tags": "slideshare, presentations, slide decks, powerpoint, document sharing, infographics, slide hosting"
                         }
                     ]
                 },
@@ -6238,7 +6238,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "smu.edu"
                             ],
-                            "ai_tags": "SMU, Southern Methodist University, campus events, Dallas Texas, university calendar, lectures"
+                            "ai_tags": "smu, southern methodist university, dallas, events, campus calendar, higher education, university"
                         }
                     ]
                 },
@@ -6259,7 +6259,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "sony.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sony research awards, corporate grants, tech innovation, faculty funding, engineering research, technology awards"
                         }
                     ]
                 },
@@ -6280,7 +6280,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "sonyentertainmentnetwork.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sony, playstation network, psn, sony entertainment, gaming account, digital entertainment, playstation"
                         }
                     ]
                 },
@@ -6301,7 +6301,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "spotify.com"
                             ],
-                            "ai_tags": "music streaming, podcasts, audio, playlists, songs, streaming service"
+                            "ai_tags": "music streaming, podcasts, audio, digital music, playlists, songs, online streaming, music discovery"
                         }
                     ]
                 },
@@ -6322,7 +6322,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "springer.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "academic publishing, research papers, scientific journals, books, scholarly articles, publisher, springer"
                         },
                         {
                             "id": 32,
@@ -6337,7 +6337,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "springer.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nonprofit organizations, third sector, volunteering, social science, academic journal, civil society, voluntas, springer"
                         },
                         {
                             "id": 33,
@@ -6352,7 +6352,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "springer.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "scientometrics, bibliometrics, citation analysis, research evaluation, science of science, academic journal, info science"
                         },
                         {
                             "id": 36,
@@ -6367,7 +6367,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "springer.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "supercomputing, high performance computing, parallel processing, computer architecture, academic journal, algorithms, springer"
                         }
                     ]
                 },
@@ -6388,7 +6388,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "springernature.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "scientific journal, general science, peer review, research papers, nature portfolio, academic publishing, multidisciplinary"
                         },
                         {
                             "id": 78,
@@ -6403,7 +6403,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "springernature.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "reviewer dashboard, peer review, academic publishing, springer nature, manuscript review, research evaluation, scholarly journals"
                         }
                     ]
                 },
@@ -6424,7 +6424,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "stackexchange.com"
                             ],
-                            "ai_tags": "Q&A platform, community answers, technical forum, knowledge sharing, developer discussion, expert advice"
+                            "ai_tags": "q&a, knowledge sharing, tech community, support forums, problem solving, discussion"
                         }
                     ]
                 },
@@ -6445,7 +6445,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "stackoverflow.com"
                             ],
-                            "ai_tags": "programming Q&A, developer community, coding help, bug fixing, software questions, technical forum"
+                            "ai_tags": "programming, coding help, software development, q&a, debugging, error resolution, developer community"
                         }
                     ]
                 },
@@ -6466,7 +6466,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "stanford.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "nifty assignments, computer science education, cs assignments, stanford, programming, teaching, coding projects, pedagogy"
                         },
                         {
                             "id": 61,
@@ -6481,7 +6481,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "stanford.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "parallel computing, computer architecture, stanford, cs149, high performance computing, gpu programming, multithreading, computer science"
                         }
                     ]
                 },
@@ -6502,7 +6502,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "state.gov"
                             ],
-                            "ai_tags": "visa application, ds-160, state department, us embassy, visa status, consular services, travel"
+                            "ai_tags": "ceac, state department, ds-160, consular application, us visa, immigrant application, travel"
                         },
                         {
                             "id": 304,
@@ -6517,7 +6517,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "state.gov"
                             ],
-                            "ai_tags": "nonimmigrant visa, travel instructions, us visa, ds-160, state department, immigration, tourist visa"
+                            "ai_tags": "nonimmigrant visa, ds160 instructions, us entry, tourist visa, work visa, state department, travel"
                         }
                     ]
                 },
@@ -6538,7 +6538,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "steampowered.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "steam, pc gaming, valve, video game store, digital distribution, gaming platform, game library"
                         }
                     ]
                 },
@@ -6559,7 +6559,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "stripe.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "payment gateway, payment processing, online payments, developer api, merchant services, e-commerce"
                         }
                     ]
                 },
@@ -6580,7 +6580,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "sunnah.com"
                             ],
-                            "ai_tags": "hadith database, prophet muhammad, bukhari, muslim, sunnah reference, islamic texts, authentic hadith"
+                            "ai_tags": "Sunnah.com, Hadith database, Prophet Muhammad, Sahih Bukhari, Sahih Muslim, Islamic scripture"
                         }
                     ]
                 },
@@ -6601,7 +6601,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "supercomputing.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "supercomputing, high performance computing, hpc, parallel computing, cluster computing, computer architecture, sc conference"
                         }
                     ]
                 },
@@ -6622,7 +6622,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "tandfonline.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biomedical engineering, medical technology, bioengineering, taylor and francis, scientific journal, healthcare technology, academic research"
                         }
                     ]
                 },
@@ -6643,7 +6643,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "target.com"
                             ],
-                            "ai_tags": "retail store, department store, online shopping, clothing, home goods, groceries"
+                            "ai_tags": "target, retail, department store, shopping, household goods, apparel, groceries, discount store"
                         }
                     ]
                 },
@@ -6664,7 +6664,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "taxact.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "tax preparation, e-file taxes, tax return, income tax software, filing taxes, tax refund"
                         }
                     ]
                 },
@@ -6685,7 +6685,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "techjobsforgood.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "tech jobs for good, social impact jobs, non profit tech, tech careers, purpose driven jobs, mission driven hiring"
                         }
                     ]
                 },
@@ -6706,7 +6706,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "texas.gov"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "texas state benefits, ers texas, state employee retirement, pensions, health insurance, public retirement"
                         },
                         {
                             "id": 410,
@@ -6721,7 +6721,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "texas.gov"
                             ],
-                            "ai_tags": "teacher retirement system, texas pension, public school retirement, state benefits, retirement planning"
+                            "ai_tags": "teacher retirement system, texas pension, trs texas, public employee retirement, state benefits, retirement fund"
                         }
                     ]
                 },
@@ -6742,7 +6742,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "texaslegal.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "texas legal, affordable legal plans, legal insurance, attorney network, legal coverage, estate planning"
                         }
                     ]
                 },
@@ -6763,7 +6763,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "thenorthface.com"
                             ],
-                            "ai_tags": "outdoor gear, outerwear, jackets, hiking equipment, camping apparel, winter clothing"
+                            "ai_tags": "the north face, outdoor gear, jackets, outerwear, hiking, camping, activewear, apparel"
                         }
                     ]
                 },
@@ -6784,7 +6784,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "thetexastheatre.com"
                             ],
-                            "ai_tags": "movie theater, independent cinema, Oak Cliff Dallas, historic theater, film screenings"
+                            "ai_tags": "texas theatre, cinema, movie theater, dallas, historic, independent film, oak cliff, entertainment"
                         }
                     ]
                 },
@@ -6805,7 +6805,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "thewilddetectives.com"
                             ],
-                            "ai_tags": "bookstore, bar, Dallas Texas, literary venue, independent bookstore, Oak Cliff"
+                            "ai_tags": "wild detectives, independent bookstore, dallas texas, literary venue, coffee shop bar, bookshop, cultural space"
                         }
                     ]
                 },
@@ -6826,7 +6826,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "thrushpoetryjournal.com"
                             ],
-                            "ai_tags": "poetry journal, literary magazine, contemporary poetry, literature, creative writing"
+                            "ai_tags": "thrush poetry journal, literary magazine, contemporary poetry, literary journal, short poems, independent publishing, creative writing"
                         }
                     ]
                 },
@@ -6847,7 +6847,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "tiaa.org"
                             ],
-                            "ai_tags": "retirement planning, financial services, pension, investments, annuities, higher education finance, 401k"
+                            "ai_tags": "retirement planning, financial services, investments, annuities, pensions, wealth management, non profit finance"
                         }
                     ]
                 },
@@ -6868,7 +6868,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "tmc.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "biomedical informatics, artificial intelligence, associate professor, uthealth houston, texas medical center, faculty jobs, health data science, academia"
                         }
                     ]
                 },
@@ -6889,7 +6889,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "toms.com"
                             ],
-                            "ai_tags": "shoes, footwear, apparel, accessories, casual shoes, ethical fashion"
+                            "ai_tags": "toms, shoes, footwear, apparel, fashion, slip on shoes, accessories, social enterprise"
                         }
                     ]
                 },
@@ -6910,7 +6910,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "transunion.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "credit bureau, credit report, credit score, credit monitoring, identity theft, dispute credit"
                         }
                     ]
                 },
@@ -6931,7 +6931,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "turkishairlines.com"
                             ],
-                            "ai_tags": "airline, flight booking, travel, istanbul hub, star alliance, air travel, flight status"
+                            "ai_tags": "turkish airlines, flights, air travel, flight booking, airline tickets, aviation, travel"
                         }
                     ]
                 },
@@ -6952,7 +6952,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "twu.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "texas womans university, twu rep, internal research grant, faculty funding, university research enhancement, institutional funding"
                         },
                         {
                             "id": 89,
@@ -6967,7 +6967,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "twu.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "twu, texas woman's university, higher education, academic programs, university center, campus research, higher learning"
                         },
                         {
                             "id": 90,
@@ -6982,7 +6982,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "twu.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "sustainability, texas woman's university, green campus, environmental conservation, eco friendly initiatives, twu, campus sustainability"
                         },
                         {
                             "id": 182,
@@ -6997,7 +6997,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "twu.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "islam ebeid, twu, texas womans university, faculty profile, professor, academic research, computer science"
                         }
                     ]
                 },
@@ -7018,7 +7018,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "uber.com"
                             ],
-                            "ai_tags": "rideshare, taxi, ride hailing, food delivery, transportation, driver, uber eats"
+                            "ai_tags": "uber, rideshare, ride hailing, taxi service, driver, transportation, food delivery"
                         }
                     ]
                 },
@@ -7039,7 +7039,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ubisoft.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ubisoft, video game publisher, game developer, ubisoft connect, gaming store, pc gaming"
                         }
                     ]
                 },
@@ -7060,7 +7060,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "udemy.com"
                             ],
-                            "ai_tags": "online courses, video tutorials, skill learning, programming, self-learning, online education, practical skills"
+                            "ai_tags": "Udemy, online courses, video tutorials, skill acquisition, coding bootcamp, self-paced learning"
                         }
                     ]
                 },
@@ -7081,7 +7081,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "uhaul.com"
                             ],
-                            "ai_tags": "truck rental, moving truck, moving services, trailer rental, self storage, packing supplies"
+                            "ai_tags": "u-haul, truck rental, moving truck, storage units, moving boxes, trailer rental, self storage"
                         }
                     ]
                 },
@@ -7102,7 +7102,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "un.org"
                             ],
-                            "ai_tags": "education, united nations, sustainable development, sdgs, global goals, quality education, sustainability"
+                            "ai_tags": "united nations, education, sustainable development goals, sdg, global literacy, international development, quality education"
                         }
                     ]
                 },
@@ -7123,7 +7123,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unausa.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "una usa, united nations association, advocacy, political involvement, global affairs, civic engagement, un support"
                         },
                         {
                             "id": 103,
@@ -7138,7 +7138,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unausa.org"
                             ],
-                            "ai_tags": "united nations, dallas, advocacy, diplomacy, global issues, human rights, civic engagement"
+                            "ai_tags": "una usa, united nations association, dallas, human rights, global advocacy, international diplomacy, community involvement"
                         }
                     ]
                 },
@@ -7159,7 +7159,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unhcr.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "unhcr, un refugee agency, refugee data, displacement statistics, humanitarian data, migration trends, global crisis"
                         }
                     ]
                 },
@@ -7180,7 +7180,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "uni-trier.de"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "dblp, computer science bibliography, research publications, author profile, academic papers, citations"
                         }
                     ]
                 },
@@ -7201,7 +7201,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "uniprot.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "proteins, protein sequence, bioinformatics, genomics, molecular biology, biological database, uniprot, amino acids"
                         }
                     ]
                 },
@@ -7222,7 +7222,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "united.com"
                             ],
-                            "ai_tags": "airline, flight booking, flights, air travel, star alliance, mileageplus, boarding pass"
+                            "ai_tags": "united airlines, flights, air travel, flight booking, star alliance, airline tickets, aviation"
                         }
                     ]
                 },
@@ -7243,7 +7243,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unitymuslims.net"
                             ],
-                            "ai_tags": "muslim community, unity, islamic organization, faith based, local events, community outreach"
+                            "ai_tags": "united muslims, muslim community, unity, islamic charity, outreach, religious community, local services"
                         }
                     ]
                 },
@@ -7264,7 +7264,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unt.edu"
                             ],
-                            "ai_tags": "astronomy, stargazing, UNT, university event, telescopes, observatory, night sky"
+                            "ai_tags": "star parties, astronomy, university of north texas, unt observatory, stargazing, telescopes, night sky, space science"
                         },
                         {
                             "id": 231,
@@ -7279,7 +7279,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unt.edu"
                             ],
-                            "ai_tags": "UNT, Denton Texas, campus calendar, university events, student activities, academic events"
+                            "ai_tags": "unt, university of north texas, denton, events, calendar, campus, student activities, higher education"
                         }
                     ]
                 },
@@ -7300,7 +7300,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unu.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "united nations university, unu, academic research, think tank, global development, volunteer opportunities, international education"
                         }
                     ]
                 },
@@ -7321,7 +7321,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "unv.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "un volunteers, unv, united nations, international development, volunteer work, humanitarian aid, global service"
                         }
                     ]
                 },
@@ -7342,7 +7342,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "upstart.com"
                             ],
-                            "ai_tags": "personal loans, ai lending, debt consolidation, credit, borrowing, fintech"
+                            "ai_tags": "upstart, personal loans, credit approval, refinancing, debt consolidation, ai lending, borrowing money, online loan"
                         }
                     ]
                 },
@@ -7363,7 +7363,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "uscis.gov"
                             ],
-                            "ai_tags": "immigration, visa, citizenship, green card, us government, residency, legal status, passport"
+                            "ai_tags": "immigration, green card, citizenship, uscis, legal status, naturalization, visa processing"
                         }
                     ]
                 },
@@ -7384,7 +7384,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "usembassy.gov"
                             ],
-                            "ai_tags": "us embassy egypt, cairo embassy, embassy contact, consular services, diplomatic mission, us visa cairo"
+                            "ai_tags": "us embassy egypt, cairo embassy, embassy contact, consular services, diplomatic mission, support"
                         },
                         {
                             "id": 309,
@@ -7399,7 +7399,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "usembassy.gov"
                             ],
-                            "ai_tags": "us embassy cairo, egypt diplomatic mission, american embassy, consular services, passport services, visa appointment"
+                            "ai_tags": "us embassy egypt, cairo embassy, diplomatic mission, american citizen services, consular office"
                         }
                     ]
                 },
@@ -7420,7 +7420,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "usps.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "usps, united states postal service, package tracking, shipping, mail service, post office, stamps"
                         }
                     ]
                 },
@@ -7441,7 +7441,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "ustraveldocs.com"
                             ],
-                            "ai_tags": "visa appointment, ustraveldocs, us visa scheduling, embassy appointment, visa interview, passport collection"
+                            "ai_tags": "ustraveldocs, visa appointment, consular scheduling, us embassy, visa fee payment, passport tracking"
                         }
                     ]
                 },
@@ -7462,7 +7462,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "usvisascheduling.com"
                             ],
-                            "ai_tags": "us visa scheduling, visa portal, appointment booking, embassy interview, us travel, nonimmigrant visa"
+                            "ai_tags": "us visa scheduling, visa appointment, customer self service, consular slot, embassy appointment"
                         }
                     ]
                 },
@@ -7483,7 +7483,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "uta.edu"
                             ],
-                            "ai_tags": "UT Arlington, campus events, Arlington Texas, university calendar, student life, academic events"
+                            "ai_tags": "uta, ut arlington, events, calendar, campus events, arlington texas, higher education"
                         }
                     ]
                 },
@@ -7504,7 +7504,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utdallas.edu"
                             ],
-                            "ai_tags": "artificial intelligence, machine learning, UT Dallas, deep learning, data science, research institute"
+                            "ai_tags": "applied ai, machine learning research, ut dallas, caiml, artificial intelligence, academic research, data science, technology lab"
                         },
                         {
                             "id": 228,
@@ -7519,7 +7519,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utdallas.edu"
                             ],
-                            "ai_tags": "international students, visa support, study abroad, immigration, UT Dallas, university services"
+                            "ai_tags": "ut dallas, utd, international students, visa, immigration, study abroad, campus support, services"
                         },
                         {
                             "id": 229,
@@ -7534,7 +7534,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utdallas.edu"
                             ],
-                            "ai_tags": "UT Dallas, campus events, university calendar, student activities, Richardson Texas"
+                            "ai_tags": "ut dallas, utd, comet calendar, events, campus activities, student life, university calendar"
                         }
                     ]
                 },
@@ -7555,7 +7555,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utexas.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ut refugee mentorship, ut austin, volunteer opportunities, refugee support, community service, student activism, mentorship"
                         },
                         {
                             "id": 131,
@@ -7570,7 +7570,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utexas.edu"
                             ],
-                            "ai_tags": "computer science, ut austin, computing school, academic department, software engineering, higher education"
+                            "ai_tags": "UT Austin, school of computing, computer science, higher education, academic portal, Texas engineering"
                         },
                         {
                             "id": 132,
@@ -7585,7 +7585,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utexas.edu"
                             ],
-                            "ai_tags": "ut austin, student portal, university administration, academic portal, course registration, internal portal"
+                            "ai_tags": "UT Direct, UT Austin, student portal, university login, campus services, administrative portal"
                         },
                         {
                             "id": 227,
@@ -7600,7 +7600,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utexas.edu"
                             ],
-                            "ai_tags": "UT Austin, university events, campus calendar, Austin Texas, academic lectures, announcements"
+                            "ai_tags": "ut austin, university of texas, events, calendar, campus, higher education, austin, announcements"
                         }
                     ]
                 },
@@ -7621,7 +7621,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utsouthwestern.edu"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "mychart, ut southwestern, patient portal, medical records, health portal, doctor appointments, ehr"
                         }
                     ]
                 },
@@ -7642,7 +7642,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utswmed.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "ut southwestern, oral surgery, dentist, oral surgeon, dds, dental care, dallas health"
                         },
                         {
                             "id": 286,
@@ -7657,7 +7657,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "utswmed.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "clements university hospital, ut southwestern, dallas hospital, medical center, emergency care, healthcare facility"
                         }
                     ]
                 },
@@ -7678,7 +7678,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "venmo.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "peer to peer payments, p2p, send money, mobile wallet, split bills, social payments"
                         }
                     ]
                 },
@@ -7699,7 +7699,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "vldb.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "vldb 2024, database systems, very large data bases, data management, big data infrastructure, database research"
                         }
                     ]
                 },
@@ -7720,7 +7720,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "volunteermatch.org"
                             ],
-                            "ai_tags": "volunteering, non-profit, community service, charity, volunteer opportunities, social impact, civic engagement"
+                            "ai_tags": "volunteermatch, volunteering, community service, non-profit opportunities, charity work, civic engagement, social impact"
                         }
                     ]
                 },
@@ -7741,7 +7741,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wageworks.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "cobra insurance, wage works, health coverage, employee benefits, continuation coverage, flexible spending, insurance portal"
                         }
                     ]
                 },
@@ -7762,7 +7762,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "walgreens.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "walgreens, pharmacy, drug store, prescriptions, health and wellness, retail pharmacy, photo printing"
                         }
                     ]
                 },
@@ -7783,7 +7783,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "walmart.com"
                             ],
-                            "ai_tags": "retail chain, online shopping, department store, groceries, discount supercenter"
+                            "ai_tags": "walmart, retail, superstore, groceries, department store, discount shopping, online shopping, household goods"
                         }
                     ]
                 },
@@ -7804,7 +7804,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "watchit.com"
                             ],
-                            "ai_tags": "video streaming, egyptian shows, arabic series, movies, vod, drama, entertainment"
+                            "ai_tags": "watch it, arabic streaming, egyptian series, tv drama, video on demand, movies streaming, entertainment, live tv"
                         }
                     ]
                 },
@@ -7825,7 +7825,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wck.org"
                             ],
-                            "ai_tags": "disaster relief, food assistance, humanitarian aid, crisis response, emergency hunger relief, non-profit, world central kitchen"
+                            "ai_tags": "world central kitchen, wck, disaster relief, humanitarian aid, food relief, emergency response, global hunger"
                         }
                     ]
                 },
@@ -7846,7 +7846,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "webofscience.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "web of science, citation index, scholarly database, academic research, journal metrics, research literature, scientific publishing"
                         }
                     ]
                 },
@@ -7867,7 +7867,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wegreened.com"
                             ],
-                            "ai_tags": "chen immigration, law firm, eb1, eb2 niw, green card attorney, immigration lawyer, visa attorney"
+                            "ai_tags": "chen immigration, wegreened, green card lawyer, eb1, eb2 niw, immigration attorney, law firm"
                         }
                     ]
                 },
@@ -7888,7 +7888,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wenzo.com"
                             ],
-                            "ai_tags": "case management, legal software, workflow, law firm, practice management, immigration software, client tracking"
+                            "ai_tags": "case management, legal software, law firm workflow, immigration platform, case tracking, legal tech"
                         }
                     ]
                 },
@@ -7909,7 +7909,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wes.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "wes, world education services, degree evaluation, credential evaluation, international transcripts, foreign degree conversion"
                         }
                     ]
                 },
@@ -7930,7 +7930,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "westernunion.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "money transfer, wire transfer, international remittance, send cash, currency exchange"
                         }
                     ]
                 },
@@ -7951,7 +7951,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wgbh.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "wgbh, gbh, public broadcasting, pbs boston, radio, podcasts, news, educational media"
                         }
                     ]
                 },
@@ -7972,7 +7972,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "whatsapp.com"
                             ],
-                            "ai_tags": "messaging, instant messaging, chat app, encrypted chat, voice call, video call, meta"
+                            "ai_tags": "whatsapp, messaging app, chat, instant messaging, voice call, video call, communication"
                         }
                     ]
                 },
@@ -7993,7 +7993,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wikipedia.org"
                             ],
-                            "ai_tags": "islamic movies, historical series, arabic drama, wikipedia, islamic cinema, tv shows, film history"
+                            "ai_tags": "Islamic movies, Islamic TV shows, Wikipedia list, Islamic history, religious cinema, media directory"
                         }
                     ]
                 },
@@ -8014,7 +8014,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "wrapsnet.org"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "refugee processing center, rpc, refugee statistics, migration data, resettlement, wrapsnet, us refugee admissions"
                         }
                     ]
                 },
@@ -8035,7 +8035,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "writersgarret.org"
                             ],
-                            "ai_tags": "literary arts, writing community, Dallas Texas, workshops, creative writing, authors"
+                            "ai_tags": "writers garret, literary organization, writing workshops, dallas texas, creative writing classes, literary arts, author education"
                         }
                     ]
                 },
@@ -8056,7 +8056,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "yahoo.com"
                             ],
-                            "ai_tags": "yahoo mail, email, webmail, inbox, yahoo account"
+                            "ai_tags": "email, yahoo mail, webmail, inbox, personal email, communication"
                         }
                     ]
                 },
@@ -8077,7 +8077,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "yellowpages.com.eg"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "mahmoud el rifai lawyer, legal services dokki, egypt attorneys, law firm cairo, yellow pages egypt, legal contact"
                         }
                     ]
                 },
@@ -8098,7 +8098,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "youtube.com"
                             ],
-                            "ai_tags": "video streaming, online videos, content creators, vlogs, entertainment, video platform"
+                            "ai_tags": "video streaming, online videos, music videos, content creators, youtube, entertainment, video platform, watching clips"
                         }
                     ]
                 },
@@ -8119,7 +8119,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "zellepay.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "money transfer, peer to peer payments, send money, bank transfer, mobile payments, instant transfer"
                         }
                     ]
                 },
@@ -8140,7 +8140,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "zillow.com"
                             ],
-                            "ai_tags": ""
+                            "ai_tags": "real estate, homes for sale, house hunting, apartments, property listings, rent, mortgage rates"
                         }
                     ]
                 },
@@ -8161,7 +8161,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "zoom.us"
                             ],
-                            "ai_tags": "video conferencing, online meetings, webinar, screen sharing, video call, virtual meetings"
+                            "ai_tags": "video conferencing, online meetings, video calling, virtual meeting, webinars, remote work, screen sharing"
                         }
                     ]
                 },
@@ -8182,7 +8182,7 @@ window.PORTAL_BOOKMARKS = {
                                 "Bookmarks",
                                 "zotero.org"
                             ],
-                            "ai_tags": "reference manager, bibliography, research tool, citations, academic papers, library manager"
+                            "ai_tags": "zotero, reference manager, citation tool, bibliography, academic research, pdf management, research manager"
                         }
                     ]
                 }
@@ -8202,7 +8202,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "login.gov"
-            ]
+            ],
+            "ai_tags": "government authentication, identity verification, single sign-on, login portal, federal access, security, user account"
         },
         {
             "id": 2,
@@ -8216,7 +8217,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nih.gov"
-            ]
+            ],
+            "ai_tags": "biomedical research, health grants, nih funding, research proposals, medical research, federal funding, national institutes of health"
         },
         {
             "id": 3,
@@ -8230,7 +8232,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "grants.gov"
-            ]
+            ],
+            "ai_tags": "federal grants, government funding, grant search, federal awards, grant application, US government, funding opportunities"
         },
         {
             "id": 4,
@@ -8244,7 +8247,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "research.gov"
-            ]
+            ],
+            "ai_tags": "nsf grants, national science foundation, research proposals, proposal submission, grant management, federal research funding"
         },
         {
             "id": 5,
@@ -8258,7 +8262,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nih.gov"
-            ]
+            ],
+            "ai_tags": "biomedical informatics, data science, nih r01, nlm grants, medical data, research funding, clinical informatics"
         },
         {
             "id": 6,
@@ -8272,7 +8277,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nih.gov"
-            ]
+            ],
+            "ai_tags": "biomedical data, data repositories, knowledgebases, nih r24, research infrastructure, bioinformatics, data sharing"
         },
         {
             "id": 7,
@@ -8286,7 +8292,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "cloudbank.org"
-            ]
+            ],
+            "ai_tags": "cloud computing, research cloud, cloud credits, nsf cloudbank, computational research, high performance computing"
         },
         {
             "id": 8,
@@ -8300,7 +8307,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "access-ci.org"
-            ]
+            ],
+            "ai_tags": "cyberinfrastructure, supercomputing, hpc allocations, nsf access, research computing, resource allocation, high performance computing"
         },
         {
             "id": 9,
@@ -8314,7 +8322,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nvidia.com"
-            ]
+            ],
+            "ai_tags": "nvidia research, gpu grant, academic hardware awards, ai research funding, machine learning grants, computer science research"
         },
         {
             "id": 10,
@@ -8328,7 +8337,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "sony.com"
-            ]
+            ],
+            "ai_tags": "sony research awards, corporate grants, tech innovation, faculty funding, engineering research, technology awards"
         },
         {
             "id": 11,
@@ -8342,7 +8352,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "adobe.com"
-            ]
+            ],
+            "ai_tags": "adobe research, data science awards, academic funding, machine learning grant, data analytics, computer science awards"
         },
         {
             "id": 12,
@@ -8356,7 +8367,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "twu.edu"
-            ]
+            ],
+            "ai_tags": "texas womans university, twu rep, internal research grant, faculty funding, university research enhancement, institutional funding"
         },
         {
             "id": 13,
@@ -8370,7 +8382,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nsf.gov"
-            ]
+            ],
+            "ai_tags": "nsf career award, early career faculty, national science foundation, research proposal, tenure track funding, grant application"
         },
         {
             "id": 14,
@@ -8384,7 +8397,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "salesforce-sites.com"
-            ]
+            ],
+            "ai_tags": "grants portal, grant management system, proposal submission, award tracking, online grant portal, salesforce grants"
         },
         {
             "id": 15,
@@ -8398,7 +8412,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "salesforce-sites.com"
-            ]
+            ],
+            "ai_tags": "research portal, research administration, project management, grant portal, research system, institutional research"
         },
         {
             "id": 16,
@@ -8412,7 +8427,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "sharepoint.com"
-            ]
+            ],
+            "ai_tags": "hanover research, shared drive, sharepoint drive, grant consulting resources, research documents, team collaboration"
         },
         {
             "id": 17,
@@ -8426,7 +8442,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nips.cc"
-            ]
+            ],
+            "ai_tags": "neurips 2023, machine learning, neural networks, deep learning, artificial intelligence, ai conference, computer science"
         },
         {
             "id": 18,
@@ -8440,7 +8457,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "aaai.org"
-            ]
+            ],
+            "ai_tags": "aaai 2024, artificial intelligence, machine learning, ai conference, intelligent systems, computer science research"
         },
         {
             "id": 19,
@@ -8454,7 +8472,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "iclr.cc"
-            ]
+            ],
+            "ai_tags": "iclr 2024, representation learning, deep learning, machine learning, neural networks, ai conference"
         },
         {
             "id": 20,
@@ -8468,7 +8487,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "icml.cc"
-            ]
+            ],
+            "ai_tags": "icml 2024, machine learning, deep learning, ai research, data science, machine learning algorithms, computer science conference"
         },
         {
             "id": 21,
@@ -8482,7 +8502,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "kdd.org"
-            ]
+            ],
+            "ai_tags": "kdd 2023, data mining, knowledge discovery, big data, data science, machine learning, analytics conference"
         },
         {
             "id": 22,
@@ -8496,7 +8517,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "asist.org"
-            ]
+            ],
+            "ai_tags": "asist 2024, information science, information technology, data management, library science, information systems conference"
         },
         {
             "id": 23,
@@ -8510,7 +8532,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "vldb.org"
-            ]
+            ],
+            "ai_tags": "vldb 2024, database systems, very large data bases, data management, big data infrastructure, database research"
         },
         {
             "id": 24,
@@ -8524,7 +8547,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "mcbios.com"
-            ]
+            ],
+            "ai_tags": "mcbios 2024, computational biology, bioinformatics, biosciences, computational genetics, mid-south bioinformatics"
         },
         {
             "id": 25,
@@ -8538,7 +8562,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "aclweb.org"
-            ]
+            ],
+            "ai_tags": "acl 2026, natural language processing, computational linguistics, nlp conference, language models, text mining, artificial intelligence"
         },
         {
             "id": 26,
@@ -8552,7 +8577,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ijcai.org"
-            ]
+            ],
+            "ai_tags": "artificial intelligence, ai conference, machine learning, research, computer science, academic conference, ijcai"
         },
         {
             "id": 27,
@@ -8566,7 +8592,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ecva.net"
-            ]
+            ],
+            "ai_tags": "computer vision, image processing, machine learning, deep learning, pattern recognition, ai conference, eccv"
         },
         {
             "id": 28,
@@ -8580,7 +8607,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "amia.org"
-            ]
+            ],
+            "ai_tags": "medical informatics, health informatics, healthcare, biomedical informatics, clinical data, medicine, amia conference"
         },
         {
             "id": 29,
@@ -8594,7 +8622,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "supercomputing.org"
-            ]
+            ],
+            "ai_tags": "supercomputing, high performance computing, hpc, parallel computing, cluster computing, computer architecture, sc conference"
         },
         {
             "id": 30,
@@ -8608,7 +8637,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "frontiersin.org"
-            ]
+            ],
+            "ai_tags": "academic publishing, open access, scientific journals, research papers, peer review, science publisher, frontiers"
         },
         {
             "id": 31,
@@ -8622,7 +8652,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "springer.com"
-            ]
+            ],
+            "ai_tags": "academic publishing, research papers, scientific journals, books, scholarly articles, publisher, springer"
         },
         {
             "id": 32,
@@ -8636,7 +8667,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "springer.com"
-            ]
+            ],
+            "ai_tags": "nonprofit organizations, third sector, volunteering, social science, academic journal, civil society, voluntas, springer"
         },
         {
             "id": 33,
@@ -8650,7 +8682,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "springer.com"
-            ]
+            ],
+            "ai_tags": "scientometrics, bibliometrics, citation analysis, research evaluation, science of science, academic journal, info science"
         },
         {
             "id": 34,
@@ -8664,7 +8697,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nature.com"
-            ]
+            ],
+            "ai_tags": "scientific data, open data, datasets, research data, nature journal, open access, data repository, science"
         },
         {
             "id": 35,
@@ -8678,7 +8712,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "springernature.com"
-            ]
+            ],
+            "ai_tags": "scientific journal, general science, peer review, research papers, nature portfolio, academic publishing, multidisciplinary"
         },
         {
             "id": 36,
@@ -8692,7 +8727,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "springer.com"
-            ]
+            ],
+            "ai_tags": "supercomputing, high performance computing, parallel processing, computer architecture, academic journal, algorithms, springer"
         },
         {
             "id": 37,
@@ -8706,7 +8742,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nature.com"
-            ]
+            ],
+            "ai_tags": "machine intelligence, artificial intelligence, machine learning, deep learning, robotics, nature journal, academic research"
         },
         {
             "id": 38,
@@ -8720,7 +8757,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nature.com"
-            ]
+            ],
+            "ai_tags": "computational science, computational biology, simulation, scientific computing, data science, nature journal, mathematical modeling"
         },
         {
             "id": 39,
@@ -8734,7 +8772,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nature.com"
-            ]
+            ],
+            "ai_tags": "open access, scientific research, nature portfolio, multidisciplinary, peer review, academic journal, scientific reports"
         },
         {
             "id": 40,
@@ -8748,7 +8787,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "acm.org"
-            ]
+            ],
+            "ai_tags": "intelligent systems, artificial intelligence, acm journal, machine learning, computer science, data mining, tist"
         },
         {
             "id": 41,
@@ -8762,7 +8802,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "acm.org"
-            ]
+            ],
+            "ai_tags": "knowledge discovery, data mining, machine learning, big data, acm journal, data analytics, database systems, tkdd"
         },
         {
             "id": 42,
@@ -8776,7 +8817,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "computer.org"
-            ]
+            ],
+            "ai_tags": "pattern recognition, machine learning, computer vision, ieee journal, deep learning, artificial intelligence, tpami"
         },
         {
             "id": 43,
@@ -8790,7 +8832,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "computer.org"
-            ]
+            ],
+            "ai_tags": "data engineering, knowledge management, data mining, database systems, ieee journal, information retrieval, tkde"
         },
         {
             "id": 44,
@@ -8804,7 +8847,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "comsoc.org"
-            ]
+            ],
+            "ai_tags": "green communications, energy efficient networking, telecommunications, ieee journal, wireless networks, sustainable computing"
         },
         {
             "id": 45,
@@ -8818,7 +8862,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "commoncrawl.org"
-            ]
+            ],
+            "ai_tags": "web crawl, open dataset, web data, web scraping, data archive, corpus, llm training data, common crawl"
         },
         {
             "id": 46,
@@ -8832,7 +8877,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "kaggle.com"
-            ]
+            ],
+            "ai_tags": "data science, machine learning, datasets, python, competitions, artificial intelligence, data analysis, kaggle"
         },
         {
             "id": 47,
@@ -8846,7 +8892,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nih.gov"
-            ]
+            ],
+            "ai_tags": "ncbi, pubmed, biomedical literature, genetics, bioinformatics, nih, national library of medicine, citations"
         },
         {
             "id": 48,
@@ -8860,7 +8907,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "uniprot.org"
-            ]
+            ],
+            "ai_tags": "proteins, protein sequence, bioinformatics, genomics, molecular biology, biological database, uniprot, amino acids"
         },
         {
             "id": 49,
@@ -8874,7 +8922,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "drugbank.com"
-            ]
+            ],
+            "ai_tags": "drug database, pharmacology, pharmaceuticals, drug targets, cheminformatics, biochemistry, medicine, drugbank"
         },
         {
             "id": 50,
@@ -8888,7 +8937,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "rcsb.org"
-            ]
+            ],
+            "ai_tags": "protein data bank, pdb, 3d protein structures, structural biology, crystallography, macromolecules, molecular biology, rcsb"
         },
         {
             "id": 51,
@@ -8902,7 +8952,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.com"
-            ]
+            ],
+            "ai_tags": "alphafold, deepmind, protein folding, bioinformatics, structural biology, machine learning, molecular biology, ai"
         },
         {
             "id": 52,
@@ -8916,7 +8967,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.com"
-            ]
+            ],
+            "ai_tags": "openfold, alphafold3, protein structure, biomolecules, open source, computational biology, pytorch, bioinformatics"
         },
         {
             "id": 53,
@@ -8930,7 +8982,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.com"
-            ]
+            ],
+            "ai_tags": "openfold, alphafold2, protein folding, pytorch, computational biology, gpu optimization, deep learning, bioinformatics"
         },
         {
             "id": 54,
@@ -8944,7 +8997,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.com"
-            ]
+            ],
+            "ai_tags": "alphafold3, protein folding, open source, bioinformatics, structural biology, machine learning, computational biology"
         },
         {
             "id": 55,
@@ -8958,7 +9012,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "bitbybitbook.com"
-            ]
+            ],
+            "ai_tags": "social science, computational social science, digital research, data science, research methods, sociology, ethics, open textbook"
         },
         {
             "id": 56,
@@ -8972,7 +9027,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "dbdiagram.io"
-            ]
+            ],
+            "ai_tags": "database design, erd, entity relationship diagram, database diagram, sql, schema design, data modeling, visual tool"
         },
         {
             "id": 57,
@@ -8986,7 +9042,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "greenteapress.com"
-            ]
+            ],
+            "ai_tags": "python, programming, textbook, computer science, coding, learn python, open textbook, software development"
         },
         {
             "id": 58,
@@ -9000,7 +9057,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "stanford.edu"
-            ]
+            ],
+            "ai_tags": "nifty assignments, computer science education, cs assignments, stanford, programming, teaching, coding projects, pedagogy"
         },
         {
             "id": 59,
@@ -9014,7 +9072,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "linuxcommand.org"
-            ]
+            ],
+            "ai_tags": "linux, command line, bash, shell scripting, terminal, open source, operating systems, sysadmin, ebook"
         },
         {
             "id": 60,
@@ -9028,7 +9087,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "linkedin.com"
-            ]
+            ],
+            "ai_tags": "power bi, data visualization, business intelligence, analytics, linkedin learning, dashboards, business analytics, microsoft"
         },
         {
             "id": 61,
@@ -9042,7 +9102,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "stanford.edu"
-            ]
+            ],
+            "ai_tags": "parallel computing, computer architecture, stanford, cs149, high performance computing, gpu programming, multithreading, computer science"
         },
         {
             "id": 62,
@@ -9056,7 +9117,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.io"
-            ]
+            ],
+            "ai_tags": "data structures, information retrieval, python, algorithms, search engines, programming, computer science, textbook"
         },
         {
             "id": 63,
@@ -9070,7 +9132,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "amia.org"
-            ]
+            ],
+            "ai_tags": "biomedical informatics, healthcare, amia, health IT, medical informatics, health data, clinical informatics, research association"
         },
         {
             "id": 64,
@@ -9084,7 +9147,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "asist.org"
-            ]
+            ],
+            "ai_tags": "information science, asist, information technology, library science, information retrieval, research, academic society, data science"
         },
         {
             "id": 65,
@@ -9098,7 +9162,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "mcbios.com"
-            ]
+            ],
+            "ai_tags": "mcbios, computational biology, bioinformatics, biosciences, genetics, data analysis, research association, computational science"
         },
         {
             "id": 66,
@@ -9112,7 +9177,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "kdd.org"
-            ]
+            ],
+            "ai_tags": "sigkdd, data mining, machine learning, knowledge discovery, acm, big data, data science, academic conference"
         },
         {
             "id": 67,
@@ -9126,7 +9192,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ischools.org"
-            ]
+            ],
+            "ai_tags": "iconference, ischools, information science, academic conference, library science, digital humanities, information management, research"
         },
         {
             "id": 68,
@@ -9140,7 +9207,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "sigchi.org"
-            ]
+            ],
+            "ai_tags": "sigchi, human computer interaction, hci, user experience, acm, ux research, interaction design, academic conference"
         },
         {
             "id": 69,
@@ -9154,7 +9222,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "acm.org"
-            ]
+            ],
+            "ai_tags": "sigai, artificial intelligence, acm, machine learning, ai research, computer science, intelligent systems, academic society"
         },
         {
             "id": 70,
@@ -9168,7 +9237,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "aaas.org"
-            ]
+            ],
+            "ai_tags": "aaas, science, scientific research, general science, science journal, scientific association, stem, academic publishing"
         },
         {
             "id": 71,
@@ -9182,7 +9252,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "aaai.org"
-            ]
+            ],
+            "ai_tags": "aaai, artificial intelligence, machine learning, ai research, computer science, academic conference, neural networks, robotics"
         },
         {
             "id": 72,
@@ -9196,7 +9267,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ala.org"
-            ]
+            ],
+            "ai_tags": "ala, american library association, libraries, librarianship, information literacy, public libraries, literacy, academic association"
         },
         {
             "id": 73,
@@ -9210,7 +9282,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "aicamp.ai"
-            ]
+            ],
+            "ai_tags": "aicamp, artificial intelligence, machine learning, developer community, ai events, tech education, workshops, deep learning"
         },
         {
             "id": 74,
@@ -9224,7 +9297,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "amsetweb.net"
-            ]
+            ],
+            "ai_tags": "amset, education technology, academic association, scientific research, professional society, learning, technology education"
         },
         {
             "id": 75,
@@ -9238,7 +9312,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "manuscriptcentral.com"
-            ]
+            ],
+            "ai_tags": "scholarone, peer review, manuscript submission, academic publishing, scholarly publishing, journal management, research paper, publication portal"
         },
         {
             "id": 76,
@@ -9252,7 +9327,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "easychair.org"
-            ]
+            ],
+            "ai_tags": "easychair, conference management, academic publishing, paper submission, peer review, scientific conferences, proceedings"
         },
         {
             "id": 77,
@@ -9266,7 +9342,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "msubmit.net"
-            ]
+            ],
+            "ai_tags": "imaging science, journal, image processing, technical publishing, peer review, optics, digital imaging, scientific research"
         },
         {
             "id": 78,
@@ -9280,7 +9357,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "springernature.com"
-            ]
+            ],
+            "ai_tags": "reviewer dashboard, peer review, academic publishing, springer nature, manuscript review, research evaluation, scholarly journals"
         },
         {
             "id": 79,
@@ -9294,7 +9372,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "peerj.com"
-            ]
+            ],
+            "ai_tags": "peerj, open access, scientific journal, peer review, biological sciences, computer science, open science, academic research"
         },
         {
             "id": 80,
@@ -9308,7 +9387,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "infoculturejournal.org"
-            ]
+            ],
+            "ai_tags": "information and culture, history journal, media studies, humanities, information science, academic publishing, library science"
         },
         {
             "id": 81,
@@ -9322,7 +9402,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "tandfonline.com"
-            ]
+            ],
+            "ai_tags": "biomedical engineering, medical technology, bioengineering, taylor and francis, scientific journal, healthcare technology, academic research"
         },
         {
             "id": 82,
@@ -9336,7 +9417,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ieee.org"
-            ]
+            ],
+            "ai_tags": "ieee, electrical engineering, computer science, technical standards, technology organization, professional society, engineering research"
         },
         {
             "id": 83,
@@ -9350,7 +9432,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "acm.org"
-            ]
+            ],
+            "ai_tags": "acm, computing machinery, computer science, software engineering, technical society, digital library, academic publishing"
         },
         {
             "id": 84,
@@ -9364,7 +9447,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "aaup.org"
-            ]
+            ],
+            "ai_tags": "aaup, university professors, higher education, academic freedom, faculty advocacy, tenure, university administration"
         },
         {
             "id": 85,
@@ -9378,7 +9462,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "eea.org.eg"
-            ]
+            ],
+            "ai_tags": "egyptian engineers syndicate, engineering association, egypt, professional licensing, union, engineering society"
         },
         {
             "id": 86,
@@ -9392,7 +9477,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "iant.com"
-            ]
+            ],
+            "ai_tags": "islamic association of north texas, mosque, iant, muslim community, dallas, religious organization, community center"
         },
         {
             "id": 87,
@@ -9406,7 +9492,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "abet.org"
-            ]
+            ],
+            "ai_tags": "abet, accreditation, computing programs, higher education standards, computer science, quality assurance, engineering education"
         },
         {
             "id": 88,
@@ -9420,7 +9507,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "pogil.org"
-            ]
+            ],
+            "ai_tags": "pogil, process oriented guided inquiry learning, active learning, stem education, teaching methodology, pedagogy, student centered"
         },
         {
             "id": 89,
@@ -9434,7 +9522,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "twu.edu"
-            ]
+            ],
+            "ai_tags": "twu, texas woman's university, higher education, academic programs, university center, campus research, higher learning"
         },
         {
             "id": 90,
@@ -9448,7 +9537,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "twu.edu"
-            ]
+            ],
+            "ai_tags": "sustainability, texas woman's university, green campus, environmental conservation, eco friendly initiatives, twu, campus sustainability"
         },
         {
             "id": 91,
@@ -9462,7 +9552,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nature.org"
-            ]
+            ],
+            "ai_tags": "the nature conservancy, environmental charity, donations, land conservation, wildlife protection, non profit, eco fundraising"
         },
         {
             "id": 92,
@@ -9476,7 +9567,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "climaterealitydfw.org"
-            ]
+            ],
+            "ai_tags": "climate reality project, climate action, political involvement, dfw, environmental advocacy, global warming, policy advocacy"
         },
         {
             "id": 93,
@@ -9490,7 +9582,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "wrapsnet.org"
-            ]
+            ],
+            "ai_tags": "refugee processing center, rpc, refugee statistics, migration data, resettlement, wrapsnet, us refugee admissions"
         },
         {
             "id": 94,
@@ -9504,7 +9597,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "utexas.edu"
-            ]
+            ],
+            "ai_tags": "ut refugee mentorship, ut austin, volunteer opportunities, refugee support, community service, student activism, mentorship"
         },
         {
             "id": 95,
@@ -9518,7 +9612,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "amnestyusa.org"
-            ]
+            ],
+            "ai_tags": "amnesty international, human rights, volunteer opportunities, advocacy, social justice, non profit activism, civil rights"
         },
         {
             "id": 96,
@@ -9532,7 +9627,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "rescue.org"
-            ]
+            ],
+            "ai_tags": "international rescue committee, irc, refugee aid, humanitarian relief, donation match, charity, disaster response"
         },
         {
             "id": 97,
@@ -9546,7 +9642,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "unausa.org"
-            ]
+            ],
+            "ai_tags": "una usa, united nations association, advocacy, political involvement, global affairs, civic engagement, un support"
         },
         {
             "id": 98,
@@ -9560,7 +9657,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "unv.org"
-            ]
+            ],
+            "ai_tags": "un volunteers, unv, united nations, international development, volunteer work, humanitarian aid, global service"
         },
         {
             "id": 99,
@@ -9574,7 +9672,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "unu.edu"
-            ]
+            ],
+            "ai_tags": "united nations university, unu, academic research, think tank, global development, volunteer opportunities, international education"
         },
         {
             "id": 100,
@@ -9588,7 +9687,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "unhcr.org"
-            ]
+            ],
+            "ai_tags": "unhcr, un refugee agency, refugee data, displacement statistics, humanitarian data, migration trends, global crisis"
         },
         {
             "id": 101,
@@ -9603,7 +9703,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "un.org"
             ],
-            "ai_tags": "education, united nations, sustainable development, sdgs, global goals, quality education, sustainability"
+            "ai_tags": "united nations, education, sustainable development goals, sdg, global literacy, international development, quality education"
         },
         {
             "id": 102,
@@ -9618,7 +9718,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dfwworld.org"
             ],
-            "ai_tags": "international affairs, foreign policy, world affairs, global diplomacy, dallas fort worth, education, public policy"
+            "ai_tags": "world affairs council, international relations, global affairs, foreign policy, diplomacy, dallas, international education"
         },
         {
             "id": 103,
@@ -9633,7 +9733,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "unausa.org"
             ],
-            "ai_tags": "united nations, dallas, advocacy, diplomacy, global issues, human rights, civic engagement"
+            "ai_tags": "una usa, united nations association, dallas, human rights, global advocacy, international diplomacy, community involvement"
         },
         {
             "id": 104,
@@ -9648,7 +9748,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "betterimpact.com"
             ],
-            "ai_tags": "volunteer management, non-profit software, volunteer portal, scheduling, civic engagement, impact tracking"
+            "ai_tags": "better impact, volunteer management, volunteer portal, non-profit software, community service, scheduling"
         },
         {
             "id": 105,
@@ -9663,7 +9763,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "volunteermatch.org"
             ],
-            "ai_tags": "volunteering, non-profit, community service, charity, volunteer opportunities, social impact, civic engagement"
+            "ai_tags": "volunteermatch, volunteering, community service, non-profit opportunities, charity work, civic engagement, social impact"
         },
         {
             "id": 106,
@@ -9678,7 +9778,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "hearthousedallas.org"
             ],
-            "ai_tags": "youth education, non-profit, refugee support, after-school program, dallas, child development, community service"
+            "ai_tags": "heart house dallas, refugee youth, after school program, dallas non-profit, education, social emotional learning, child welfare"
         },
         {
             "id": 107,
@@ -9693,7 +9793,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "idealist.org"
             ],
-            "ai_tags": "human rights, volunteering, non-profit jobs, social justice, global advocacy, community service, idealist"
+            "ai_tags": "idealist, human rights, volunteering, social justice, non-profit careers, activism, global impact"
         },
         {
             "id": 108,
@@ -9708,7 +9808,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ampalestine.org"
             ],
-            "ai_tags": "palestine advocacy, human rights, american muslims, social justice, grassroots activism, civil rights, middle east"
+            "ai_tags": "american muslims for palestine, palestine advocacy, human rights, palestinian solidarity, civic engagement, activism, middle east policy"
         },
         {
             "id": 109,
@@ -9723,7 +9823,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "palestinianyouthmovement.com"
             ],
-            "ai_tags": "palestinian youth, youth advocacy, human rights, grassroots activism, social justice, community organizing"
+            "ai_tags": "palestinian youth movement, youth activism, palestinian liberation, community organizing, diaspora, grassroots activism, social justice"
         },
         {
             "id": 110,
@@ -9738,7 +9838,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "nationalcasagal.org"
             ],
-            "ai_tags": "child advocacy, casa, foster care, volunteer opportunities, youth support, legal advocacy, non-profit"
+            "ai_tags": "casa, court appointed special advocates, foster care, child advocacy, volunteer advocate, child welfare, legal support"
         },
         {
             "id": 111,
@@ -9753,7 +9853,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "wck.org"
             ],
-            "ai_tags": "disaster relief, food assistance, humanitarian aid, crisis response, emergency hunger relief, non-profit, world central kitchen"
+            "ai_tags": "world central kitchen, wck, disaster relief, humanitarian aid, food relief, emergency response, global hunger"
         },
         {
             "id": 112,
@@ -9768,7 +9868,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "baitulmaal.org"
             ],
-            "ai_tags": "islamic charity, humanitarian aid, relief organization, zakat, global poverty relief, emergency aid, non-profit"
+            "ai_tags": "baitulmaal, islamic charity, international relief, zakat, emergency aid, humanitarian assistance, poverty alleviation"
         },
         {
             "id": 113,
@@ -9783,7 +9883,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "basmah.org"
             ],
-            "ai_tags": "humanitarian relief, rohingya refugee aid, charity organization, disaster relief, orphan care, medical aid"
+            "ai_tags": "basmah, rohingya relief, humanitarian aid, refugee assistance, orphan support, islamic charity, bangladesh relief"
         },
         {
             "id": 114,
@@ -9798,7 +9898,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "mansfieldmasjid.org"
             ],
-            "ai_tags": "mosque, islamic center, mansfield texas, muslim community, worship, local masjid, community center"
+            "ai_tags": "mansfield islamic center, mosque, masjid, mansfield texas, muslim community, prayer services, religious center"
         },
         {
             "id": 115,
@@ -9813,7 +9913,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "isna.net"
             ],
-            "ai_tags": "muslim organization, islamic convention, north america muslims, community advocacy, islamic education, interfaith"
+            "ai_tags": "isna, islamic society of north america, muslim organization, interfaith dialogue, community empowerment, islamic convention, north american muslims"
         },
         {
             "id": 116,
@@ -9828,7 +9928,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "icna.org"
             ],
-            "ai_tags": "islamic organization, dawah, relief, muslim youth, community service, north america, non-profit"
+            "ai_tags": "icna, islamic circle of north america, dawah, social services, muslim outreach, islamic charity, community relief"
         },
         {
             "id": 117,
@@ -9843,7 +9943,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "muslimspace.org"
             ],
-            "ai_tags": "muslim community, austin texas, inclusive community, interfaith, education, social events, community support"
+            "ai_tags": "muslim space, austin texas, muslim community, inclusive spaces, community events, spiritual growth, local non-profit"
         },
         {
             "id": 118,
@@ -9858,7 +9958,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "atxmuslims.com"
             ],
-            "ai_tags": "austin muslims, local community, texas muslims, community events, islamic center, networking, local resources"
+            "ai_tags": "austin muslim community, austin texas, local muslims, community network, texas muslims, religious resources, local events"
         },
         {
             "id": 119,
@@ -9873,7 +9973,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "unitymuslims.net"
             ],
-            "ai_tags": "muslim community, unity, islamic organization, faith based, local events, community outreach"
+            "ai_tags": "united muslims, muslim community, unity, islamic charity, outreach, religious community, local services"
         },
         {
             "id": 120,
@@ -9888,7 +9988,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "muppies.org"
             ],
-            "ai_tags": "muslim professionals, networking, career development, business network, leadership, professional organization"
+            "ai_tags": "muppies, muslim professionals, professional networking, career advancement, leadership, mentorship, business association"
         },
         {
             "id": 121,
@@ -9903,7 +10003,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "mcssaustin.org"
             ],
-            "ai_tags": "social services, charitable organization, austin texas, muslim relief, community support, non-profit, financial assistance"
+            "ai_tags": "mcss austin, muslim community support services, social services, financial aid, austin texas, charity, assistance program"
         },
         {
             "id": 122,
@@ -9918,7 +10018,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "gainpeace.com"
             ],
-            "ai_tags": "dawah, islamic outreach, islam education, interfaith dialogue, peace in islam, public outreach"
+            "ai_tags": "gainpeace, dawah, islamic outreach, education on islam, comparative religion, interfaith understanding, muslim organization"
         },
         {
             "id": 123,
@@ -9933,7 +10033,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "projectzamzam.org"
             ],
-            "ai_tags": "humanitarian aid, water relief, clean water, charity organization, global aid, non-profit, water projects"
+            "ai_tags": "project zamzam, clean water, humanitarian charity, relief projects, water wells, global aid, non-profit relief"
         },
         {
             "id": 124,
@@ -9948,7 +10048,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "muhsen.org"
             ],
-            "ai_tags": "disability advocacy, special needs, islamic inclusivity, donation, accessibility, muslim community, non-profit"
+            "ai_tags": "muhsen, special needs, disability accessibility, muslim community inclusion, charity donation, accommodation, special needs support"
         },
         {
             "id": 125,
@@ -9963,7 +10063,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dentonrc.com"
             ],
-            "ai_tags": "local news, opinion, denton texas, letters to editor, journalism, public discourse, community news"
+            "ai_tags": "denton record chronicle, letters to the editor, denton texas, local news, opinion, journalism, community forum"
         },
         {
             "id": 126,
@@ -9978,7 +10078,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dentonrc.com"
             ],
-            "ai_tags": "local news, opinion, denton texas, letters to editor, journalism, local commentary, public forum"
+            "ai_tags": "local news, letters to editor, opinion piece, Denton Texas, journalism, Denton Record Chronicle"
         },
         {
             "id": 127,
@@ -9993,7 +10093,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ncees.org"
             ],
-            "ai_tags": "engineering exams, fe exam, pe exam, engineering licensure, surveying, professional certification, ncees"
+            "ai_tags": "engineering exam, NCEES, licensure, PE exam, FE exam, professional engineering, surveying"
         },
         {
             "id": 128,
@@ -10008,7 +10108,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "citiprogram.org"
             ],
-            "ai_tags": "research ethics, compliance training, citi program, human subjects, biosafety, irb, higher education"
+            "ai_tags": "CITI program, research ethics, compliance training, IRB certification, human subjects, bioethics"
         },
         {
             "id": 129,
@@ -10023,7 +10123,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "exin.com"
             ],
-            "ai_tags": "itil certification, it service management, exin, framework, information technology, professional certification"
+            "ai_tags": "ITIL foundation, IT service management, ITSM, certification, EXIN exam, IT governance"
         },
         {
             "id": 130,
@@ -10038,7 +10138,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "applytexas.org"
             ],
-            "ai_tags": "college application, texas universities, higher education, college admissions, state portal, applytexas"
+            "ai_tags": "ApplyTexas, college application, Texas admissions, higher education, university application, undergraduate"
         },
         {
             "id": 131,
@@ -10053,7 +10153,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "utexas.edu"
             ],
-            "ai_tags": "computer science, ut austin, computing school, academic department, software engineering, higher education"
+            "ai_tags": "UT Austin, school of computing, computer science, higher education, academic portal, Texas engineering"
         },
         {
             "id": 132,
@@ -10068,7 +10168,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "utexas.edu"
             ],
-            "ai_tags": "ut austin, student portal, university administration, academic portal, course registration, internal portal"
+            "ai_tags": "UT Direct, UT Austin, student portal, university login, campus services, administrative portal"
         },
         {
             "id": 133,
@@ -10083,7 +10183,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "edx.org"
             ],
-            "ai_tags": "online courses, mooc, online learning, higher education, certifications, university classes, self-paced learning"
+            "ai_tags": "edX, online courses, MOOC, distance learning, professional certificates, e-learning platform"
         },
         {
             "id": 134,
@@ -10098,7 +10198,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "coursera.org"
             ],
-            "ai_tags": "online learning, professional certificates, moocs, e-learning, skill development, online degrees, technical courses"
+            "ai_tags": "Coursera, online learning, MOOC, professional certificates, skill courses, e-learning platform"
         },
         {
             "id": 135,
@@ -10113,7 +10213,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "udemy.com"
             ],
-            "ai_tags": "online courses, video tutorials, skill learning, programming, self-learning, online education, practical skills"
+            "ai_tags": "Udemy, online courses, video tutorials, skill acquisition, coding bootcamp, self-paced learning"
         },
         {
             "id": 136,
@@ -10128,7 +10228,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "awsacademy.com"
             ],
-            "ai_tags": "cloud computing, aws certification, cloud training, amazon web services, higher education curriculum, tech skills"
+            "ai_tags": "AWS Academy, cloud computing, Amazon Web Services, AWS certification, IT education, cloud training"
         },
         {
             "id": 137,
@@ -10143,7 +10243,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "islamweb.net"
             ],
-            "ai_tags": "islamic rulings, fatwa, quran, hadith, islamic articles, arabic, religious knowledge"
+            "ai_tags": "Islamweb, Islamic fatwa, Quran, Hadith, Islamic portal, religious education, Arabic Islamic resource"
         },
         {
             "id": 138,
@@ -10158,7 +10258,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "wikipedia.org"
             ],
-            "ai_tags": "islamic movies, historical series, arabic drama, wikipedia, islamic cinema, tv shows, film history"
+            "ai_tags": "Islamic movies, Islamic TV shows, Wikipedia list, Islamic history, religious cinema, media directory"
         },
         {
             "id": 139,
@@ -10173,7 +10273,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "sunnah.com"
             ],
-            "ai_tags": "hadith database, prophet muhammad, bukhari, muslim, sunnah reference, islamic texts, authentic hadith"
+            "ai_tags": "Sunnah.com, Hadith database, Prophet Muhammad, Sahih Bukhari, Sahih Muslim, Islamic scripture"
         },
         {
             "id": 140,
@@ -10188,7 +10288,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "azharegypt.edu.eg"
             ],
-            "ai_tags": "al azhar university, distance learning, e-learning portal, islamic education, egypt university, online education"
+            "ai_tags": "Al-Azhar University, e-learning portal, distance education, Islamic university, Egypt higher education"
         },
         {
             "id": 141,
@@ -10203,7 +10303,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "asu.edu.eg"
             ],
-            "ai_tags": "ain shams university, engineering faculty, higher education egypt, engineering school, academic department, engineering degrees"
+            "ai_tags": "Ain Shams University, Faculty of Engineering, Egypt engineering school, university portal, higher education"
         },
         {
             "id": 142,
@@ -10218,7 +10318,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "asu.edu.eg"
             ],
-            "ai_tags": "ain shams alumni, university graduates, alumni network, graduate portal, university network, egypt"
+            "ai_tags": "Ain Shams University, alumni network, graduate portal, Egypt university alumni, higher education"
         },
         {
             "id": 143,
@@ -10233,7 +10333,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "asu.edu.eg"
             ],
-            "ai_tags": "ain shams university, engineering school, academic programs, higher education, engineering research, egypt"
+            "ai_tags": "Ain Shams University, engineering department, higher education, engineering curriculum, Egypt academics"
         },
         {
             "id": 144,
@@ -10248,7 +10348,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "sabafarrukh.com"
             ],
-            "ai_tags": "original art, paintings, visual art, artist portfolio, art gallery, custom artwork, fine art"
+            "ai_tags": "paintings, artist portfolio, visual arts, fine art, Saba Farrukh, art gallery, oil paintings"
         },
         {
             "id": 145,
@@ -10263,7 +10363,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "gemcenters.org"
             ],
-            "ai_tags": "careers, special education, plano texas, gem academy, job opportunities, special needs school, hiring"
+            "ai_tags": "GEM Academy, Plano Texas, career opportunities, special education jobs, non-profit careers, hiring"
         },
         {
             "id": 146,
@@ -10278,7 +10378,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "linktr.ee"
             ],
-            "ai_tags": "social media, linktree, content creator, barbering, hair blending, social links, link aggregator"
+            "ai_tags": "ibz blends, Linktree, social media, barbering, haircut content, Instagram TikTok links"
         },
         {
             "id": 147,
@@ -10293,7 +10393,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "salamcharityusa.org"
             ],
-            "ai_tags": "islamic charity, humanitarian aid, relief projects, orphan support, non-profit, zakat, emergency aid"
+            "ai_tags": "Salam Charity USA, non-profit, Islamic relief, humanitarian aid, donations, zakat charity"
         },
         {
             "id": 148,
@@ -10308,7 +10408,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "noorart.com"
             ],
-            "ai_tags": "islamic books, educational toys, arabic learning, muslim kids, islamic media, online bookstore, homeschooling"
+            "ai_tags": "Noorart, Islamic store, Arabic books, children educational materials, Islamic curriculum, online shop"
         },
         {
             "id": 149,
@@ -10323,7 +10423,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "salamfoundation.us"
             ],
-            "ai_tags": "islamic school, education, private school, curriculum, youth education, faith-based learning"
+            "ai_tags": "Salam Academy, Islamic school, private education, Islamic curriculum, youth education, academy"
         },
         {
             "id": 150,
@@ -10338,7 +10438,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ensun.io"
             ],
-            "ai_tags": "artificial intelligence, drug discovery, biotech companies, egypt tech, pharmaceuticals, ai research, market analysis"
+            "ai_tags": "AI drug discovery, Egypt biotech, artificial intelligence, healthtech, pharmaceutical startups, Ensun"
         },
         {
             "id": 151,
@@ -10352,7 +10452,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.io"
-            ]
+            ],
+            "ai_tags": "data science, artificial intelligence, life sciences, bioinformatics, research lab, machine learning, computational biology"
         },
         {
             "id": 152,
@@ -10366,7 +10467,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nsf.gov"
-            ]
+            ],
+            "ai_tags": "nsf, research grants, grant funding, award search, federal funding, national science foundation, academic grants"
         },
         {
             "id": 153,
@@ -10380,7 +10482,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "google.com"
-            ]
+            ],
+            "ai_tags": "academic search, research papers, literature review, citations, scholarly articles, publications, journal search"
         },
         {
             "id": 154,
@@ -10394,7 +10497,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nih.gov"
-            ]
+            ],
+            "ai_tags": "sciencv, biosketch, nih grants, cv generator, researcher profile, federal grants, academic resume"
         },
         {
             "id": 155,
@@ -10408,7 +10512,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "orcid.org"
-            ]
+            ],
+            "ai_tags": "orcid, researcher id, persistent identifier, publication tracking, author id, academic profile, scholarly identity"
         },
         {
             "id": 156,
@@ -10422,7 +10527,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "uni-trier.de"
-            ]
+            ],
+            "ai_tags": "dblp, computer science bibliography, research publications, author profile, academic papers, citations"
         },
         {
             "id": 157,
@@ -10436,7 +10542,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "webofscience.com"
-            ]
+            ],
+            "ai_tags": "web of science, citation index, scholarly database, academic research, journal metrics, research literature, scientific publishing"
         },
         {
             "id": 158,
@@ -10450,7 +10557,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "semanticscholar.org"
-            ]
+            ],
+            "ai_tags": "semantic scholar, ai search engine, paper search, citation analysis, academic literature, research discovery, scientific papers"
         },
         {
             "id": 159,
@@ -10464,7 +10572,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "scopus.com"
-            ]
+            ],
+            "ai_tags": "scopus, citation database, academic research, peer reviewed journals, scientific database, research metrics, publication search"
         },
         {
             "id": 160,
@@ -10478,7 +10587,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "academia.edu"
-            ]
+            ],
+            "ai_tags": "academia.edu, research sharing, academic social network, scholarly communication, research papers, open access"
         },
         {
             "id": 161,
@@ -10492,7 +10602,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "arxiv.org"
-            ]
+            ],
+            "ai_tags": "arxiv, preprints, open access, scientific papers, computer science, physics, paper repository"
         },
         {
             "id": 162,
@@ -10506,7 +10617,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "biorxiv.org"
-            ]
+            ],
+            "ai_tags": "biorxiv, biology preprints, life sciences, research papers, open access, preprint server, biological research"
         },
         {
             "id": 163,
@@ -10520,7 +10632,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ratemyprofessors.com"
-            ]
+            ],
+            "ai_tags": "rate my professors, professor reviews, college ratings, course feedback, student reviews, university classes"
         },
         {
             "id": 164,
@@ -10534,7 +10647,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "interfolio.com"
-            ]
+            ],
+            "ai_tags": "interfolio, faculty dossier, academic tenure, recommendation letters, higher ed hiring, academic credentials"
         },
         {
             "id": 165,
@@ -10548,7 +10662,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "digitalmeasures.com"
-            ]
+            ],
+            "ai_tags": "watermark, digital measures, faculty activity reporting, tenure evaluation, higher ed software, academic administration"
         },
         {
             "id": 166,
@@ -10562,7 +10677,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.io"
-            ]
+            ],
+            "ai_tags": "github pages, personal website, portfolio, web hosting, web development, personal site"
         },
         {
             "id": 167,
@@ -10576,7 +10692,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "wes.org"
-            ]
+            ],
+            "ai_tags": "wes, world education services, degree evaluation, credential evaluation, international transcripts, foreign degree conversion"
         },
         {
             "id": 168,
@@ -10590,7 +10707,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ets.org"
-            ]
+            ],
+            "ai_tags": "gre, graduate record examination, ets, grad school admissions, standardized testing, test prep, graduate school"
         },
         {
             "id": 169,
@@ -10604,7 +10722,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ncees.org"
-            ]
+            ],
+            "ai_tags": "ncees, pe exam, fe exam, engineering license, professional engineer, engineering credential"
         },
         {
             "id": 170,
@@ -10618,7 +10737,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "glassdoor.com"
-            ]
+            ],
+            "ai_tags": "glassdoor, company reviews, salary search, employer ratings, job listings, interview prep, career research"
         },
         {
             "id": 171,
@@ -10632,7 +10752,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "indeed.com"
-            ]
+            ],
+            "ai_tags": "indeed, job search, job board, hiring platform, employment search, resume upload, careers"
         },
         {
             "id": 172,
@@ -10646,7 +10767,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "techjobsforgood.com"
-            ]
+            ],
+            "ai_tags": "tech jobs for good, social impact jobs, non profit tech, tech careers, purpose driven jobs, mission driven hiring"
         },
         {
             "id": 173,
@@ -10660,7 +10782,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "monster.com"
-            ]
+            ],
+            "ai_tags": "monster, job board, career advice, job portal, employment site, recruitment, job search"
         },
         {
             "id": 174,
@@ -10674,7 +10797,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "joinhandshake.com"
-            ]
+            ],
+            "ai_tags": "handshake, college career center, campus recruiting, student internships, entry level jobs, university hiring"
         },
         {
             "id": 175,
@@ -10688,7 +10812,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "scispace.com"
-            ]
+            ],
+            "ai_tags": "scispace, academic profile, research citations, publication metrics, ut austin, paper search, author statistics"
         },
         {
             "id": 176,
@@ -10702,7 +10827,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ieee.org"
-            ]
+            ],
+            "ai_tags": "islam ebeid, ieee, academic profile, computer science, publications, research, author, electrical engineering"
         },
         {
             "id": 177,
@@ -10716,7 +10842,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "frontiersin.org"
-            ]
+            ],
+            "ai_tags": "islam ebeid, frontiers, open access, scientific research, publications, academic profile, biomedical journal"
         },
         {
             "id": 178,
@@ -10730,7 +10857,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "deepai.org"
-            ]
+            ],
+            "ai_tags": "islam ebeid, deepai, artificial intelligence, machine learning, ai research, deep learning, publications"
         },
         {
             "id": 179,
@@ -10744,7 +10872,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "openreview.net"
-            ]
+            ],
+            "ai_tags": "islam ebeid, openreview, peer review, machine learning, ai research, academic papers, conferences"
         },
         {
             "id": 180,
@@ -10758,7 +10887,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "acm.org"
-            ]
+            ],
+            "ai_tags": "islam ebeid, acm digital library, computer science, computing research, publications, academic profile, author"
         },
         {
             "id": 181,
@@ -10772,7 +10902,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "google.com"
-            ]
+            ],
+            "ai_tags": "islam ebeid, google scholar, researcher profile, citations, academic publications, author, computer science"
         },
         {
             "id": 182,
@@ -10786,7 +10917,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "twu.edu"
-            ]
+            ],
+            "ai_tags": "islam ebeid, twu, texas womans university, faculty profile, professor, academic research, computer science"
         },
         {
             "id": 183,
@@ -10800,7 +10932,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "bcm.edu"
-            ]
+            ],
+            "ai_tags": "academic jobs, assistant professor, artificial intelligence, data science, baylor college of medicine, faculty position, medical research, healthcare ai"
         },
         {
             "id": 184,
@@ -10814,7 +10947,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "bcm.edu"
-            ]
+            ],
+            "ai_tags": "academic jobs, assistant professor, data science, trauma research, critical care, healthcare disparities, baylor college of medicine, faculty position"
         },
         {
             "id": 185,
@@ -10828,7 +10962,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "tmc.edu"
-            ]
+            ],
+            "ai_tags": "biomedical informatics, artificial intelligence, associate professor, uthealth houston, texas medical center, faculty jobs, health data science, academia"
         },
         {
             "id": 186,
@@ -10842,7 +10977,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "eneba.com"
-            ]
+            ],
+            "ai_tags": "eneba, video games, digital game keys, cd keys, gaming store, game deals, digital marketplace"
         },
         {
             "id": 187,
@@ -10856,7 +10992,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "steampowered.com"
-            ]
+            ],
+            "ai_tags": "steam, pc gaming, valve, video game store, digital distribution, gaming platform, game library"
         },
         {
             "id": 188,
@@ -10870,7 +11007,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "origin.com"
-            ]
+            ],
+            "ai_tags": "origin, electronic arts, ea, pc gaming, game launcher, video games, digital store"
         },
         {
             "id": 189,
@@ -10884,7 +11022,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "epicgames.com"
-            ]
+            ],
+            "ai_tags": "epic games, epic games store, pc gaming, game launcher, unreal engine, video games, digital store"
         },
         {
             "id": 190,
@@ -10898,7 +11037,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "riotgames.com"
-            ]
+            ],
+            "ai_tags": "riot games, league of legends, valorant, video game developer, esports, online gaming, multiplayer"
         },
         {
             "id": 191,
@@ -10912,7 +11052,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ubisoft.com"
-            ]
+            ],
+            "ai_tags": "ubisoft, video game publisher, game developer, ubisoft connect, gaming store, pc gaming"
         },
         {
             "id": 192,
@@ -10926,7 +11067,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "chess.com"
-            ]
+            ],
+            "ai_tags": "chess, online chess, chess.com, board games, chess strategy, multiplayer, tactics, turn based"
         },
         {
             "id": 193,
@@ -10940,7 +11082,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "sonyentertainmentnetwork.com"
-            ]
+            ],
+            "ai_tags": "sony, playstation network, psn, sony entertainment, gaming account, digital entertainment, playstation"
         },
         {
             "id": 194,
@@ -10954,7 +11097,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "hulu.com"
-            ]
+            ],
+            "ai_tags": "hulu, streaming service, tv shows, movies, live tv, video streaming, entertainment, on demand"
         },
         {
             "id": 195,
@@ -10968,7 +11112,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "kanopy.com"
-            ]
+            ],
+            "ai_tags": "kanopy, movie streaming, public library, documentaries, educational video, indie cinema, free streaming"
         },
         {
             "id": 196,
@@ -10982,7 +11127,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "wgbh.org"
-            ]
+            ],
+            "ai_tags": "wgbh, gbh, public broadcasting, pbs boston, radio, podcasts, news, educational media"
         },
         {
             "id": 197,
@@ -10996,7 +11142,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "nasa.gov"
-            ]
+            ],
+            "ai_tags": "nasa, space exploration, astronomy, space science, aeronautics, universe, space agency, astrophysics"
         },
         {
             "id": 198,
@@ -11010,7 +11157,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "pbs.org"
-            ]
+            ],
+            "ai_tags": "pbs, public broadcasting, public television, documentaries, news, educational media, culture"
         },
         {
             "id": 199,
@@ -11024,7 +11172,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "fair.org"
-            ]
+            ],
+            "ai_tags": "fair, media criticism, journalism, media watchdog, news analysis, media literacy, progressive media"
         },
         {
             "id": 200,
@@ -11038,7 +11187,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "dallasnews.com"
-            ]
+            ],
+            "ai_tags": "dallas news, dallas morning news, texas news, local journalism, breaking news, dallas tx, newspaper"
         },
         {
             "id": 201,
@@ -11053,7 +11203,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dentonrc.com"
             ],
-            "ai_tags": "local news, Denton Texas, journalism, newspapers, North Texas, current events"
+            "ai_tags": "denton news, local journalism, texas news, record chronicle, newspaper, denton texas, current events, local press"
         },
         {
             "id": 202,
@@ -11068,7 +11218,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "muslimcentral.com"
             ],
-            "ai_tags": "Islam, Islamic podcasts, lectures, sermons, Muslim audio, Quran, scholars"
+            "ai_tags": "islamic podcasts, muslim lectures, audio sermons, islam, quran teaching, islamic knowledge, religious podcast, spirituality"
         },
         {
             "id": 203,
@@ -11083,7 +11233,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "apa.org"
             ],
-            "ai_tags": "psychology, podcast, mental health, American Psychological Association, behavioral science, human behavior"
+            "ai_tags": "psychology, apa podcast, mental health, human behavior, science, psychology research, emotional health, psychological science"
         },
         {
             "id": 204,
@@ -11098,7 +11248,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "pushkin.fm"
             ],
-            "ai_tags": "Malcolm Gladwell, history podcast, storytelling, journalism, Pushkin Industries, revisionist history"
+            "ai_tags": "revisionist history, malcolm gladwell, history podcast, pushkin industries, storytelling, historical analysis, audiobooks, culture"
         },
         {
             "id": 205,
@@ -11113,7 +11263,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "spotify.com"
             ],
-            "ai_tags": "music streaming, podcasts, audio, playlists, songs, streaming service"
+            "ai_tags": "music streaming, podcasts, audio, digital music, playlists, songs, online streaming, music discovery"
         },
         {
             "id": 206,
@@ -11128,7 +11278,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "alltrails.com"
             ],
-            "ai_tags": "hiking, trail maps, outdoor recreation, GPS trails, walking, running, outdoor fitness"
+            "ai_tags": "hiking trails, outdoor navigation, trail maps, walking routes, nature exploration, mountain biking, outdoor fitness, gps hiking"
         },
         {
             "id": 207,
@@ -11143,7 +11293,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "movementgyms.com"
             ],
-            "ai_tags": "rock climbing, bouldering, fitness gym, Plano Texas, indoor climbing, yoga"
+            "ai_tags": "rock climbing, bouldering, climbing gym, fitness center, plano texas, movement gyms, indoor climbing, sports"
         },
         {
             "id": 208,
@@ -11158,7 +11308,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dallaspaleo.org"
             ],
-            "ai_tags": "fossils, paleontology, geology, Dallas Texas, prehistoric, natural history science"
+            "ai_tags": "paleontology, fossils, dallas texas, prehistoric life, geology, earth science, fossil collecting, scientific society"
         },
         {
             "id": 209,
@@ -11173,7 +11323,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "planoaikido.com"
             ],
-            "ai_tags": "Aikido, martial arts, Plano Texas, self defense, dojo, Japanese martial arts"
+            "ai_tags": "aikido, martial arts, plano texas, self defense, dojo, japanese martial arts, physical training, combat sports"
         },
         {
             "id": 210,
@@ -11188,7 +11338,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "kotoaiki.org"
             ],
-            "ai_tags": "Aikido, martial arts, Texas, self defense, Japanese martial arts, dojo"
+            "ai_tags": "aikido, martial arts, texas dojo, kotokai, self defense, traditional martial arts, japanese budo, physical discipline"
         },
         {
             "id": 211,
@@ -11203,7 +11353,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "aikido-international.org"
             ],
-            "ai_tags": "Aikido, martial arts, global organization, Japanese martial arts, international sports, Budo"
+            "ai_tags": "international aikido federation, global martial arts, aikido governing body, martial arts organization, world aikido, martial arts federation"
         },
         {
             "id": 212,
@@ -11218,7 +11368,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "arabicpoetry.ac.uk"
             ],
-            "ai_tags": "Arabic literature, poetry, classical Arabic, database, literature research, poems"
+            "ai_tags": "arabic poetry, classical poetry, literature database, arabic literature, digital humanities, academic research, poems, middle eastern culture"
         },
         {
             "id": 213,
@@ -11233,7 +11383,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "aldiwan.net"
             ],
-            "ai_tags": "Arabic poetry, poems, classical Arabic, poets, literature, Arabic culture"
+            "ai_tags": "arabic poetry, aldiwan, classic poems, literature archive, arabic verses, middle eastern literature, poetry collection"
         },
         {
             "id": 214,
@@ -11248,7 +11398,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "poetryfoundation.org"
             ],
-            "ai_tags": "poetry, literature, poems, poets, literary magazine, creative writing"
+            "ai_tags": "poetry, poems, poetry foundation, literary magazine, poets, literature, creative writing, famous poems"
         },
         {
             "id": 215,
@@ -11263,7 +11413,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "thrushpoetryjournal.com"
             ],
-            "ai_tags": "poetry journal, literary magazine, contemporary poetry, literature, creative writing"
+            "ai_tags": "thrush poetry journal, literary magazine, contemporary poetry, literary journal, short poems, independent publishing, creative writing"
         },
         {
             "id": 216,
@@ -11278,7 +11428,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "thewilddetectives.com"
             ],
-            "ai_tags": "bookstore, bar, Dallas Texas, literary venue, independent bookstore, Oak Cliff"
+            "ai_tags": "wild detectives, independent bookstore, dallas texas, literary venue, coffee shop bar, bookshop, cultural space"
         },
         {
             "id": 217,
@@ -11293,7 +11443,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dfwwritersworkshop.org"
             ],
-            "ai_tags": "writing workshop, creative writing, DFW area, critique group, publishing, authors"
+            "ai_tags": "dfw writers workshop, writing community, dallas fort worth, critique group, creative writing, author support, publishing tips"
         },
         {
             "id": 218,
@@ -11308,7 +11458,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "deepvellum.com"
             ],
-            "ai_tags": "publishing, independent publisher, bookstore, translated literature, Dallas Texas, literary arts"
+            "ai_tags": "deep vellum, independent publisher, translated literature, dallas bookstore, book publishing, non-profit publisher, literary arts"
         },
         {
             "id": 219,
@@ -11323,7 +11473,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "writersgarret.org"
             ],
-            "ai_tags": "literary arts, writing community, Dallas Texas, workshops, creative writing, authors"
+            "ai_tags": "writers garret, literary organization, writing workshops, dallas texas, creative writing classes, literary arts, author education"
         },
         {
             "id": 220,
@@ -11338,7 +11488,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dallaspoetry.com"
             ],
-            "ai_tags": "poetry, Dallas Texas, spoken word, literary group, local poets, creative writing"
+            "ai_tags": "dallas poetry society, local poetry, poetry community, literary events, dallas texas, spoken word, poetry workshops"
         },
         {
             "id": 221,
@@ -11353,7 +11503,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "unt.edu"
             ],
-            "ai_tags": "astronomy, stargazing, UNT, university event, telescopes, observatory, night sky"
+            "ai_tags": "star parties, astronomy, university of north texas, unt observatory, stargazing, telescopes, night sky, space science"
         },
         {
             "id": 222,
@@ -11368,7 +11518,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dallas-ai.org"
             ],
-            "ai_tags": "artificial intelligence, machine learning, Dallas Texas, tech community, networking, AI events"
+            "ai_tags": "dallas ai, artificial intelligence, machine learning, tech community, dallas texas, ai networking, data science, tech events"
         },
         {
             "id": 223,
@@ -11383,7 +11533,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "utdallas.edu"
             ],
-            "ai_tags": "artificial intelligence, machine learning, UT Dallas, deep learning, data science, research institute"
+            "ai_tags": "applied ai, machine learning research, ut dallas, caiml, artificial intelligence, academic research, data science, technology lab"
         },
         {
             "id": 224,
@@ -11398,7 +11548,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "richardsoniq.com"
             ],
-            "ai_tags": "innovation district, tech hub, Richardson Texas, business development, startups, technology"
+            "ai_tags": "richardson innovation quarter, tech hub, richardson iq, texas technology, startup incubator, innovation district, smart city"
         },
         {
             "id": 225,
@@ -11413,7 +11563,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "meetup.com"
             ],
-            "ai_tags": "local events, networking, community groups, social meetups, activities, gatherings"
+            "ai_tags": "meetup, community groups, local events, social networking, interest groups, event discovery, professional networking, hobby groups"
         },
         {
             "id": 226,
@@ -11428,7 +11578,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dallasmakerspace.org"
             ],
-            "ai_tags": "makerspace, DIY, workshops, 3D printing, woodworking, Dallas events, tech community"
+            "ai_tags": "dallas, makerspace, workshops, events, calendar, community, diy, technology, fabrication"
         },
         {
             "id": 227,
@@ -11443,7 +11593,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "utexas.edu"
             ],
-            "ai_tags": "UT Austin, university events, campus calendar, Austin Texas, academic lectures, announcements"
+            "ai_tags": "ut austin, university of texas, events, calendar, campus, higher education, austin, announcements"
         },
         {
             "id": 228,
@@ -11458,7 +11608,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "utdallas.edu"
             ],
-            "ai_tags": "international students, visa support, study abroad, immigration, UT Dallas, university services"
+            "ai_tags": "ut dallas, utd, international students, visa, immigration, study abroad, campus support, services"
         },
         {
             "id": 229,
@@ -11473,7 +11623,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "utdallas.edu"
             ],
-            "ai_tags": "UT Dallas, campus events, university calendar, student activities, Richardson Texas"
+            "ai_tags": "ut dallas, utd, comet calendar, events, campus activities, student life, university calendar"
         },
         {
             "id": 230,
@@ -11488,7 +11638,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "smu.edu"
             ],
-            "ai_tags": "SMU, Southern Methodist University, campus events, Dallas Texas, university calendar, lectures"
+            "ai_tags": "smu, southern methodist university, dallas, events, campus calendar, higher education, university"
         },
         {
             "id": 231,
@@ -11503,7 +11653,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "unt.edu"
             ],
-            "ai_tags": "UNT, Denton Texas, campus calendar, university events, student activities, academic events"
+            "ai_tags": "unt, university of north texas, denton, events, calendar, campus, student activities, higher education"
         },
         {
             "id": 232,
@@ -11518,7 +11668,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "uta.edu"
             ],
-            "ai_tags": "UT Arlington, campus events, Arlington Texas, university calendar, student life, academic events"
+            "ai_tags": "uta, ut arlington, events, calendar, campus events, arlington texas, higher education"
         },
         {
             "id": 233,
@@ -11533,7 +11683,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "arthousedallas.com"
             ],
-            "ai_tags": "arts community, creative arts, Dallas Texas, visual arts, music, culture, nonprofit"
+            "ai_tags": "art, dallas, creative community, artists, non profit, culture, visual arts, events"
         },
         {
             "id": 234,
@@ -11548,7 +11698,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "thetexastheatre.com"
             ],
-            "ai_tags": "movie theater, independent cinema, Oak Cliff Dallas, historic theater, film screenings"
+            "ai_tags": "texas theatre, cinema, movie theater, dallas, historic, independent film, oak cliff, entertainment"
         },
         {
             "id": 235,
@@ -11563,7 +11713,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dma.org"
             ],
-            "ai_tags": "art museum, Dallas Texas, art exhibits, fine arts, culture, visual arts"
+            "ai_tags": "dallas museum of art, dma, art museum, fine art, culture, exhibitions, galleries, dallas"
         },
         {
             "id": 236,
@@ -11578,7 +11728,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dallasinstitute.org"
             ],
-            "ai_tags": "humanities, culture, Dallas Texas, educational programs, philosophy, literature, lectures"
+            "ai_tags": "dallas institute, humanities, culture, education, literature, philosophy, lectures, arts"
         },
         {
             "id": 237,
@@ -11593,7 +11743,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "gokickball.com"
             ],
-            "ai_tags": "kickball, adult sports league, social sports, recreational sports, outdoor games, fitness"
+            "ai_tags": "go kickball, adult sports, social league, kickball, recreation, fitness, team sports, outdoor activities"
         },
         {
             "id": 238,
@@ -11608,7 +11758,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "medium.com"
             ],
-            "ai_tags": "blogging platform, articles, writing, tech blogs, online publishing, stories"
+            "ai_tags": "medium, blogging, articles, publishing, writing, technology, reading, stories, online publication"
         },
         {
             "id": 239,
@@ -11623,7 +11773,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "bitly.com"
             ],
-            "ai_tags": "URL shortener, link management, analytics, click tracking, marketing tools, short links"
+            "ai_tags": "bitly, url shortener, link management, short links, link tracking, analytics, digital marketing"
         },
         {
             "id": 240,
@@ -11638,7 +11788,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ebay.com"
             ],
-            "ai_tags": "online auction, ecommerce, secondhand shopping, marketplace, buying and selling, collectibles"
+            "ai_tags": "ebay, online auctions, ecommerce, shopping, marketplace, buying, selling, deals"
         },
         {
             "id": 241,
@@ -11653,7 +11803,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "amazon.com"
             ],
-            "ai_tags": "online shopping, ecommerce, retail, prime delivery, electronics, books, marketplace"
+            "ai_tags": "amazon, online shopping, ecommerce, retail, delivery, prime, products, marketplace"
         },
         {
             "id": 242,
@@ -11668,7 +11818,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "samsclub.com"
             ],
-            "ai_tags": "wholesale club, bulk shopping, grocery store, membership retail, discount store"
+            "ai_tags": "sams club, wholesale, warehouse club, bulk shopping, groceries, membership, retail, discounts"
         },
         {
             "id": 243,
@@ -11683,7 +11833,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "walmart.com"
             ],
-            "ai_tags": "retail chain, online shopping, department store, groceries, discount supercenter"
+            "ai_tags": "walmart, retail, superstore, groceries, department store, discount shopping, online shopping, household goods"
         },
         {
             "id": 244,
@@ -11698,7 +11848,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "kroger.com"
             ],
-            "ai_tags": "grocery store, supermarket, food market, pharmacy, digital coupons, grocery delivery"
+            "ai_tags": "kroger, grocery store, supermarket, food, pharmacy, groceries, coupons, retail"
         },
         {
             "id": 245,
@@ -11713,7 +11863,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "target.com"
             ],
-            "ai_tags": "retail store, department store, online shopping, clothing, home goods, groceries"
+            "ai_tags": "target, retail, department store, shopping, household goods, apparel, groceries, discount store"
         },
         {
             "id": 246,
@@ -11728,7 +11878,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "naturalgrocers.com"
             ],
-            "ai_tags": "organic food, health store, vitamins, natural groceries, dietary supplements, wellness"
+            "ai_tags": "natural grocers, organic food, health food, natural products, groceries, vitamins, supplements, dietary"
         },
         {
             "id": 247,
@@ -11743,7 +11893,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ikea.com"
             ],
-            "ai_tags": "furniture, home decor, Scandinavian design, home furnishings, interior design, household goods"
+            "ai_tags": "ikea, furniture, home decor, home goods, interior design, flat pack, home improvement, swedish"
         },
         {
             "id": 248,
@@ -11758,7 +11908,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "lowes.com"
             ],
-            "ai_tags": "home improvement, hardware store, building materials, tools, appliances, gardening"
+            "ai_tags": "lowes, home improvement, hardware store, tools, appliances, building materials, renovation, gardening"
         },
         {
             "id": 249,
@@ -11773,7 +11923,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "toms.com"
             ],
-            "ai_tags": "shoes, footwear, apparel, accessories, casual shoes, ethical fashion"
+            "ai_tags": "toms, shoes, footwear, apparel, fashion, slip on shoes, accessories, social enterprise"
         },
         {
             "id": 250,
@@ -11788,7 +11938,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "thenorthface.com"
             ],
-            "ai_tags": "outdoor gear, outerwear, jackets, hiking equipment, camping apparel, winter clothing"
+            "ai_tags": "the north face, outdoor gear, jackets, outerwear, hiking, camping, activewear, apparel"
         },
         {
             "id": 251,
@@ -11802,7 +11952,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "kennethcole.com"
-            ]
+            ],
+            "ai_tags": "fashion, clothing, designer apparel, footwear, shoes, mens fashion, womens fashion, accessories"
         },
         {
             "id": 252,
@@ -11816,7 +11967,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "eddiebauer.com"
-            ]
+            ],
+            "ai_tags": "outdoor clothing, outerwear, jackets, apparel, activewear, boots, camping gear, travel clothing"
         },
         {
             "id": 253,
@@ -11830,7 +11982,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "palestinianelegance.com"
-            ]
+            ],
+            "ai_tags": "palestinian clothing, thobe, tatreez, ethnic fashion, traditional embroidery, boutique, middle eastern apparel"
         },
         {
             "id": 254,
@@ -11844,7 +11997,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "zillow.com"
-            ]
+            ],
+            "ai_tags": "real estate, homes for sale, house hunting, apartments, property listings, rent, mortgage rates"
         },
         {
             "id": 255,
@@ -11858,7 +12012,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "loopnet.com"
-            ]
+            ],
+            "ai_tags": "commercial real estate, property listings, commercial property, office space, leasing, real estate investment"
         },
         {
             "id": 256,
@@ -11872,7 +12027,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "creditkarma.com"
-            ]
+            ],
+            "ai_tags": "credit score, credit report, financial health, credit monitoring, free credit score, loans"
         },
         {
             "id": 257,
@@ -11886,7 +12042,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "experian.com"
-            ]
+            ],
+            "ai_tags": "credit bureau, credit report, credit score, identity protection, credit monitoring, credit check"
         },
         {
             "id": 258,
@@ -11900,7 +12057,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "transunion.com"
-            ]
+            ],
+            "ai_tags": "credit bureau, credit report, credit score, credit monitoring, identity theft, dispute credit"
         },
         {
             "id": 259,
@@ -11914,7 +12072,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "equifax.com"
-            ]
+            ],
+            "ai_tags": "credit bureau, credit report, credit score, identity theft protection, credit monitoring, credit freeze"
         },
         {
             "id": 260,
@@ -11928,7 +12087,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "cointracker.io"
-            ]
+            ],
+            "ai_tags": "crypto tax, cryptocurrency portfolio, bitcoin tax, crypto tracker, crypto accounting, tax software"
         },
         {
             "id": 261,
@@ -11942,7 +12102,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "coinbase.com"
-            ]
+            ],
+            "ai_tags": "crypto exchange, bitcoin, cryptocurrency trading, buy crypto, digital wallet, altcoins"
         },
         {
             "id": 262,
@@ -11956,7 +12117,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "irs.gov"
-            ]
+            ],
+            "ai_tags": "federal taxes, irs refund, tax return, tax account, government portal, income tax"
         },
         {
             "id": 263,
@@ -11970,7 +12132,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "taxact.com"
-            ]
+            ],
+            "ai_tags": "tax preparation, e-file taxes, tax return, income tax software, filing taxes, tax refund"
         },
         {
             "id": 264,
@@ -11984,7 +12147,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "affirm.com"
-            ]
+            ],
+            "ai_tags": "buy now pay later, bnpl, monthly installments, point of sale financing, online shopping credit"
         },
         {
             "id": 265,
@@ -11998,7 +12162,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "klarna.com"
-            ]
+            ],
+            "ai_tags": "buy now pay later, bnpl, installment payments, shopping app, pay in 4, flexible payments"
         },
         {
             "id": 266,
@@ -12012,7 +12177,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "zellepay.com"
-            ]
+            ],
+            "ai_tags": "money transfer, peer to peer payments, send money, bank transfer, mobile payments, instant transfer"
         },
         {
             "id": 267,
@@ -12026,7 +12192,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "venmo.com"
-            ]
+            ],
+            "ai_tags": "peer to peer payments, p2p, send money, mobile wallet, split bills, social payments"
         },
         {
             "id": 268,
@@ -12040,7 +12207,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "link.com"
-            ]
+            ],
+            "ai_tags": "fast checkout, one click payment, stripe link, payment method, express checkout, digital wallet"
         },
         {
             "id": 269,
@@ -12054,7 +12222,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "westernunion.com"
-            ]
+            ],
+            "ai_tags": "money transfer, wire transfer, international remittance, send cash, currency exchange"
         },
         {
             "id": 270,
@@ -12068,7 +12237,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "paymentworks.com"
-            ]
+            ],
+            "ai_tags": "vendor management, business payments, supplier onboarding, fraud prevention, b2b payments"
         },
         {
             "id": 271,
@@ -12082,7 +12252,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "stripe.com"
-            ]
+            ],
+            "ai_tags": "payment gateway, payment processing, online payments, developer api, merchant services, e-commerce"
         },
         {
             "id": 272,
@@ -12096,7 +12267,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "empower.com"
-            ]
+            ],
+            "ai_tags": "retirement planning, 401k, financial management, wealth management, investments, retirement accounts"
         },
         {
             "id": 273,
@@ -12110,7 +12282,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "texas.gov"
-            ]
+            ],
+            "ai_tags": "texas state benefits, ers texas, state employee retirement, pensions, health insurance, public retirement"
         },
         {
             "id": 274,
@@ -12124,7 +12297,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "masamts.com"
-            ]
+            ],
+            "ai_tags": "emergency medical transport, medical evacuation, ambulance membership, air ambulance, transport insurance"
         },
         {
             "id": 275,
@@ -12138,7 +12312,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "allstate.com"
-            ]
+            ],
+            "ai_tags": "life insurance, allstate, insurance policy, death benefit, financial security, term life"
         },
         {
             "id": 276,
@@ -12152,7 +12327,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "360absence.com"
-            ]
+            ],
+            "ai_tags": "disability insurance, short term disability, leave management, FMLA, absence management, employee benefits, healthcare"
         },
         {
             "id": 277,
@@ -12166,7 +12342,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "healthcare.gov"
-            ]
+            ],
+            "ai_tags": "affordable care act, healthcare gov, health insurance, obamacare, health marketplace, coverage enrollment, federal insurance"
         },
         {
             "id": 278,
@@ -12180,7 +12357,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "wageworks.com"
-            ]
+            ],
+            "ai_tags": "cobra insurance, wage works, health coverage, employee benefits, continuation coverage, flexible spending, insurance portal"
         },
         {
             "id": 279,
@@ -12194,7 +12372,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "bcbstx.com"
-            ]
+            ],
+            "ai_tags": "blue cross blue shield, bcbs texas, health insurance, medical coverage, health plan, insurance provider"
         },
         {
             "id": 280,
@@ -12208,7 +12387,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "23andme.com"
-            ]
+            ],
+            "ai_tags": "23andme, dna testing, genetic ancestry, health reports, genealogy, genome sequencing, trait analysis"
         },
         {
             "id": 281,
@@ -12222,7 +12402,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "gedmatch.com"
-            ]
+            ],
+            "ai_tags": "gedmatch, genealogy, dna analysis, genetic ancestry, chromosome browser, family tree, gedcom, genetic matching"
         },
         {
             "id": 282,
@@ -12236,7 +12417,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "illustrativedna.com"
-            ]
+            ],
+            "ai_tags": "illustrative dna, ancient dna, genetic ancestry, admixture analysis, pca plot, population genetics, deep ancestry"
         },
         {
             "id": 283,
@@ -12250,7 +12432,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "github.io"
-            ]
+            ],
+            "ai_tags": "vahaduo, g25 coordinates, ancient dna, genetic admixture, pca calculator, distance matrix, genealogy"
         },
         {
             "id": 284,
@@ -12264,7 +12447,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "utswmed.org"
-            ]
+            ],
+            "ai_tags": "ut southwestern, oral surgery, dentist, oral surgeon, dds, dental care, dallas health"
         },
         {
             "id": 285,
@@ -12278,7 +12462,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "deltadentalins.com"
-            ]
+            ],
+            "ai_tags": "delta dental, dental insurance, teeth care, oral health, dentist network, dental benefits"
         },
         {
             "id": 286,
@@ -12292,7 +12477,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "utswmed.org"
-            ]
+            ],
+            "ai_tags": "clements university hospital, ut southwestern, dallas hospital, medical center, emergency care, healthcare facility"
         },
         {
             "id": 287,
@@ -12306,7 +12492,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "methodisthealthsystem.org"
-            ]
+            ],
+            "ai_tags": "methodist richardson, hospital, richardson texas, medical center, healthcare, emergency care, patient care"
         },
         {
             "id": 288,
@@ -12320,7 +12507,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "cernerhealth.com"
-            ]
+            ],
+            "ai_tags": "cerner health, patient portal, medical records, ehr, health portal, login, healthcare access"
         },
         {
             "id": 289,
@@ -12334,7 +12522,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "utsouthwestern.edu"
-            ]
+            ],
+            "ai_tags": "mychart, ut southwestern, patient portal, medical records, health portal, doctor appointments, ehr"
         },
         {
             "id": 290,
@@ -12348,7 +12537,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "amberpharmacy.com"
-            ]
+            ],
+            "ai_tags": "amber specialty pharmacy, specialty pharmacy, prescription drugs, medication management, home delivery, healthcare"
         },
         {
             "id": 291,
@@ -12362,7 +12552,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "walgreens.com"
-            ]
+            ],
+            "ai_tags": "walgreens, pharmacy, drug store, prescriptions, health and wellness, retail pharmacy, photo printing"
         },
         {
             "id": 292,
@@ -12376,7 +12567,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "cvs.com"
-            ]
+            ],
+            "ai_tags": "cvs pharmacy, prescriptions, drug store, minuteclinic, medication refill, health retail"
         },
         {
             "id": 293,
@@ -12390,7 +12582,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "absenceresources.com"
-            ]
+            ],
+            "ai_tags": "compsych, absence resources, leave management, fmla tracking, employee assistance program, disability leave, login portal"
         },
         {
             "id": 294,
@@ -12404,7 +12597,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "loseit.com"
-            ]
+            ],
+            "ai_tags": "lose it, calorie counter, weight loss, diet tracker, nutrition app, macro tracking, fitness"
         },
         {
             "id": 295,
@@ -12418,7 +12612,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "usps.com"
-            ]
+            ],
+            "ai_tags": "usps, united states postal service, package tracking, shipping, mail service, post office, stamps"
         },
         {
             "id": 296,
@@ -12432,7 +12627,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "ncedc.gov.eg"
-            ]
+            ],
+            "ai_tags": "north cairo electricity distribution, egypt electricity, power company, electric utility, bill payment, ncedc"
         },
         {
             "id": 297,
@@ -12446,7 +12642,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "eehc.gov.eg"
-            ]
+            ],
+            "ai_tags": "unified electricity platform, egypt electric holding company, eehc, electricity services, utility bill egypt, power services"
         },
         {
             "id": 298,
@@ -12460,7 +12657,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "yellowpages.com.eg"
-            ]
+            ],
+            "ai_tags": "mahmoud el rifai lawyer, legal services dokki, egypt attorneys, law firm cairo, yellow pages egypt, legal contact"
         },
         {
             "id": 299,
@@ -12474,7 +12672,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "texaslegal.org"
-            ]
+            ],
+            "ai_tags": "texas legal, affordable legal plans, legal insurance, attorney network, legal coverage, estate planning"
         },
         {
             "id": 300,
@@ -12488,7 +12687,8 @@ window.PORTAL_BOOKMARKS = {
             "path_parts": [
                 "Bookmarks",
                 "metlife.com"
-            ]
+            ],
+            "ai_tags": "metlife legal plans, legal insurance, group legal coverage, legal benefits, attorney services, estate planning"
         },
         {
             "id": 301,
@@ -12503,7 +12703,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "uscis.gov"
             ],
-            "ai_tags": "immigration, visa, citizenship, green card, us government, residency, legal status, passport"
+            "ai_tags": "immigration, green card, citizenship, uscis, legal status, naturalization, visa processing"
         },
         {
             "id": 302,
@@ -12518,7 +12718,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "wenzo.com"
             ],
-            "ai_tags": "case management, legal software, workflow, law firm, practice management, immigration software, client tracking"
+            "ai_tags": "case management, legal software, law firm workflow, immigration platform, case tracking, legal tech"
         },
         {
             "id": 303,
@@ -12533,7 +12733,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "state.gov"
             ],
-            "ai_tags": "visa application, ds-160, state department, us embassy, visa status, consular services, travel"
+            "ai_tags": "ceac, state department, ds-160, consular application, us visa, immigrant application, travel"
         },
         {
             "id": 304,
@@ -12548,7 +12748,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "state.gov"
             ],
-            "ai_tags": "nonimmigrant visa, travel instructions, us visa, ds-160, state department, immigration, tourist visa"
+            "ai_tags": "nonimmigrant visa, ds160 instructions, us entry, tourist visa, work visa, state department, travel"
         },
         {
             "id": 305,
@@ -12563,7 +12763,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ustraveldocs.com"
             ],
-            "ai_tags": "visa appointment, ustraveldocs, us visa scheduling, embassy appointment, visa interview, passport collection"
+            "ai_tags": "ustraveldocs, visa appointment, consular scheduling, us embassy, visa fee payment, passport tracking"
         },
         {
             "id": 306,
@@ -12578,7 +12778,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "usvisascheduling.com"
             ],
-            "ai_tags": "us visa scheduling, visa portal, appointment booking, embassy interview, us travel, nonimmigrant visa"
+            "ai_tags": "us visa scheduling, visa appointment, customer self service, consular slot, embassy appointment"
         },
         {
             "id": 307,
@@ -12593,7 +12793,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "usembassy.gov"
             ],
-            "ai_tags": "us embassy egypt, cairo embassy, embassy contact, consular services, diplomatic mission, us visa cairo"
+            "ai_tags": "us embassy egypt, cairo embassy, embassy contact, consular services, diplomatic mission, support"
         },
         {
             "id": 308,
@@ -12608,7 +12808,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "wegreened.com"
             ],
-            "ai_tags": "chen immigration, law firm, eb1, eb2 niw, green card attorney, immigration lawyer, visa attorney"
+            "ai_tags": "chen immigration, wegreened, green card lawyer, eb1, eb2 niw, immigration attorney, law firm"
         },
         {
             "id": 309,
@@ -12623,7 +12823,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "usembassy.gov"
             ],
-            "ai_tags": "us embassy cairo, egypt diplomatic mission, american embassy, consular services, passport services, visa appointment"
+            "ai_tags": "us embassy egypt, cairo embassy, diplomatic mission, american citizen services, consular office"
         },
         {
             "id": 310,
@@ -12638,7 +12838,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "turkishairlines.com"
             ],
-            "ai_tags": "airline, flight booking, travel, istanbul hub, star alliance, air travel, flight status"
+            "ai_tags": "turkish airlines, flights, air travel, flight booking, airline tickets, aviation, travel"
         },
         {
             "id": 311,
@@ -12653,7 +12853,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "united.com"
             ],
-            "ai_tags": "airline, flight booking, flights, air travel, star alliance, mileageplus, boarding pass"
+            "ai_tags": "united airlines, flights, air travel, flight booking, star alliance, airline tickets, aviation"
         },
         {
             "id": 312,
@@ -12668,7 +12868,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "uber.com"
             ],
-            "ai_tags": "rideshare, taxi, ride hailing, food delivery, transportation, driver, uber eats"
+            "ai_tags": "uber, rideshare, ride hailing, taxi service, driver, transportation, food delivery"
         },
         {
             "id": 313,
@@ -12683,7 +12883,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "lyft.com"
             ],
-            "ai_tags": "rideshare, taxi, ride hailing, transportation, driver, urban mobility, carpool"
+            "ai_tags": "lyft, rideshare, ride hailing, taxi service, car service, transportation, driver"
         },
         {
             "id": 314,
@@ -12698,7 +12898,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "uhaul.com"
             ],
-            "ai_tags": "truck rental, moving truck, moving services, trailer rental, self storage, packing supplies"
+            "ai_tags": "u-haul, truck rental, moving truck, storage units, moving boxes, trailer rental, self storage"
         },
         {
             "id": 315,
@@ -12713,7 +12913,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "hertz.com"
             ],
-            "ai_tags": "car rental, rental cars, vehicle rental, auto rental, travel, fleet"
+            "ai_tags": "hertz, car rental, vehicle rental, rental car, airport rental, travel, vehicle hire"
         },
         {
             "id": 316,
@@ -12728,7 +12928,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "enterprise.com"
             ],
-            "ai_tags": "car rental, rental cars, vehicle rental, enterprise rent-a-car, auto rental, travel"
+            "ai_tags": "enterprise, car rental, rental car, auto rental, fleet management, vehicle hire, travel"
         },
         {
             "id": 317,
@@ -12743,7 +12943,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "progressive.com"
             ],
-            "ai_tags": "auto insurance, car insurance, insurance quotes, vehicle insurance, progressive home, insurance policy"
+            "ai_tags": "progressive, car insurance, auto insurance, vehicle coverage, insurance quote, claims, policy"
         },
         {
             "id": 318,
@@ -12758,7 +12958,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "carfax.com"
             ],
-            "ai_tags": "vehicle history report, car check, used car history, vin lookup, auto history, car maintenance"
+            "ai_tags": "carfax, vehicle history report, vin lookup, used cars, car inspection, auto history"
         },
         {
             "id": 319,
@@ -12773,7 +12973,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "metronissandallas.com"
             ],
-            "ai_tags": "nissan dealership, car dealer dallas, dallas auto sales, car service, nissan parts, vehicle buying"
+            "ai_tags": "nissan dallas, car dealership, metro nissan, auto sales, vehicle service, dallas texas, new cars"
         },
         {
             "id": 320,
@@ -12788,7 +12988,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "carvana.com"
             ],
-            "ai_tags": "used cars, online car buy, car seller, vehicle delivery, car shopping, auto trade in"
+            "ai_tags": "carvana, buy car online, used cars, auto sales, car vending machine, sell car, online dealership"
         },
         {
             "id": 321,
@@ -12803,7 +13003,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "ntta.org"
             ],
-            "ai_tags": "north texas tollway authority, tolltag, texas tolls, dallas toll roads, highway toll, toll payment"
+            "ai_tags": "ntta, north texas tollway authority, tolltag, toll road, dallas highways, toll payment"
         },
         {
             "id": 322,
@@ -12818,7 +13018,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "linkedin.com"
             ],
-            "ai_tags": "linkedin profile, professional network, career profile, software engineer, professional resume, social networking"
+            "ai_tags": "linkedin, professional profile, networking, career, resume, professional connection, employment"
         },
         {
             "id": 323,
@@ -12833,7 +13033,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "whatsapp.com"
             ],
-            "ai_tags": "messaging, instant messaging, chat app, encrypted chat, voice call, video call, meta"
+            "ai_tags": "whatsapp, messaging app, chat, instant messaging, voice call, video call, communication"
         },
         {
             "id": 324,
@@ -12848,7 +13048,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "bitbucket.org"
             ],
-            "ai_tags": "git repository, version control, code hosting, atlassian, software development, ci/cd"
+            "ai_tags": "bitbucket, git repository, version control, code hosting, atlassian, devops, software development"
         },
         {
             "id": 325,
@@ -12863,7 +13063,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "hackerrank.com"
             ],
-            "ai_tags": "coding challenges, technical interview, competitive programming, algorithm practice, developer assessment, python, java"
+            "ai_tags": "hackerrank, coding practice, technical interview, programming challenges, developer assessment, algorithms"
         },
         {
             "id": 326,
@@ -12878,7 +13078,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "leetcode.com"
             ],
-            "ai_tags": "coding interview, algorithm challenges, data structures, competitive programming, job prep, coding practice, software engineering"
+            "ai_tags": "coding, algorithms, interview prep, data structures, programming, competitive programming, software engineering"
         },
         {
             "id": 327,
@@ -12893,7 +13093,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "intel.com"
             ],
-            "ai_tags": "intel SDK, developer tools, hardware optimization, parallel programming, software development, oneapi, driver software"
+            "ai_tags": "hardware, intel, drivers, software development, parallel computing, processors, embedded systems"
         },
         {
             "id": 328,
@@ -12908,7 +13108,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "google APIs, developer platform, android SDK, web development, google cloud tools, coding resources"
+            "ai_tags": "google apis, android development, cloud computing, developer documentation, software engineering, web development"
         },
         {
             "id": 329,
@@ -12923,7 +13123,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "nvidia.com"
             ],
-            "ai_tags": "GPU, graphics card, AI hardware, deep learning, CUDA, drivers, gaming, artificial intelligence"
+            "ai_tags": "gpus, graphics cards, cuda, deep learning, artificial intelligence, hardware, acceleration"
         },
         {
             "id": 330,
@@ -12938,7 +13138,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "stackexchange.com"
             ],
-            "ai_tags": "Q&A platform, community answers, technical forum, knowledge sharing, developer discussion, expert advice"
+            "ai_tags": "q&a, knowledge sharing, tech community, support forums, problem solving, discussion"
         },
         {
             "id": 331,
@@ -12953,7 +13153,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "stackoverflow.com"
             ],
-            "ai_tags": "programming Q&A, developer community, coding help, bug fixing, software questions, technical forum"
+            "ai_tags": "programming, coding help, software development, q&a, debugging, error resolution, developer community"
         },
         {
             "id": 332,
@@ -12968,7 +13168,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "huggingface.co"
             ],
-            "ai_tags": "machine learning, AI models, open source AI, transformers, datasets, NLP, deep learning, PyTorch"
+            "ai_tags": "machine learning, open source ai, transformers, nlp, ai models, deep learning, datasets"
         },
         {
             "id": 333,
@@ -12983,7 +13183,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "godaddy.com"
             ],
-            "ai_tags": "domain registration, web hosting, domain name, website builder, DNS management, ssl certificate"
+            "ai_tags": "domain registration, web hosting, dns management, website builder, ssl certificates, web services"
         },
         {
             "id": 334,
@@ -12998,7 +13198,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "microsoft.com"
             ],
-            "ai_tags": "windows, office 365, azure, software, enterprise technology, surface, xbox, tech company"
+            "ai_tags": "windows, cloud computing, azure, enterprise software, developer tools, productivity software"
         },
         {
             "id": 335,
@@ -13013,7 +13213,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "search engine, web search, tech giant, internet search, google tools, online services"
+            "ai_tags": "search engine, web search, online information, internet services, google search"
         },
         {
             "id": 336,
@@ -13028,7 +13228,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "proton.me"
             ],
-            "ai_tags": "protonmail, encrypted email, privacy, secure mail, proton vpn, encrypted drive, cybersecurity"
+            "ai_tags": "encrypted email, privacy tools, protonmail, vpn, data security, encrypted cloud"
         },
         {
             "id": 337,
@@ -13043,7 +13243,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "nvidia.com"
             ],
-            "ai_tags": "GPU, graphics card, AI hardware, deep learning, CUDA, drivers, gaming, artificial intelligence"
+            "ai_tags": "gpus, cuda, graphics processing, deep learning, artificial intelligence, compute hardware"
         },
         {
             "id": 338,
@@ -13058,7 +13258,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "jetbrains.com"
             ],
-            "ai_tags": "IDE, developer tools, PyCharm, IntelliJ IDEA, WebStorm, software development, programming software"
+            "ai_tags": "ide, intellij, pycharm, code editor, developer tools, software engineering, jetbrains"
         },
         {
             "id": 339,
@@ -13073,7 +13273,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "adobe.com"
             ],
-            "ai_tags": "creative cloud, photoshop, illustrator, pdf reader, acrobat, digital media, graphic design software"
+            "ai_tags": "graphic design, photoshop, creative cloud, pdf tools, digital art, video editing, illustrator"
         },
         {
             "id": 340,
@@ -13088,7 +13288,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "samsung.com"
             ],
-            "ai_tags": "smartphones, electronics, galaxy, smart appliances, televisions, memory chips, mobile technology"
+            "ai_tags": "smartphones, consumer electronics, galaxy, hardware, semiconductors, mobile devices"
         },
         {
             "id": 341,
@@ -13103,7 +13303,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "google search console, sitemap submission, webmaster tools, SEO, index site, search indexing"
+            "ai_tags": "seo, google search console, webmaster tools, site indexing, xml sitemaps, web optimization"
         },
         {
             "id": 342,
@@ -13118,7 +13318,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "github.com"
             ],
-            "ai_tags": "AI pair programmer, code completion, autocompletion, generative AI, coding assistant, github, developer tool"
+            "ai_tags": "ai pair programmer, github, coding assistant, code completion, generative ai, developer productivity"
         },
         {
             "id": 343,
@@ -13133,7 +13333,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "gemini api, generative AI platform, LLM development, prompt engineering, google AI, developer tools"
+            "ai_tags": "gemini api, generative ai, llm prototyping, google ai, prompt engineering, developer tools"
         },
         {
             "id": 344,
@@ -13148,7 +13348,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "openai.com"
             ],
-            "ai_tags": "ChatGPT, GPT-4, generative AI, artificial intelligence, LLM, OpenAI API, machine learning"
+            "ai_tags": "chatgpt, gpt-4, artificial intelligence, generative ai, llm, openai api, machine learning"
         },
         {
             "id": 345,
@@ -13163,7 +13363,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "claude.ai"
             ],
-            "ai_tags": "anthropic, Claude AI, chatbot, generative AI, LLM, AI assistant, natural language processing"
+            "ai_tags": "anthropic, claude ai, chatbot, generative ai, llm, ai assistant, prompt engineering"
         },
         {
             "id": 346,
@@ -13178,7 +13378,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "google notebooklm, AI research assistant, document analysis, note taking, LLM notebook, source citations"
+            "ai_tags": "research assistant, ai note taking, document analysis, rag, google ai, summarization, research tools"
         },
         {
             "id": 347,
@@ -13193,7 +13393,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "google gemini, AI chatbot, generative AI, LLM, google AI assistant, multimodal AI"
+            "ai_tags": "google ai, chatbot, generative ai, llm, multimodal ai, artificial intelligence assistant"
         },
         {
             "id": 348,
@@ -13208,7 +13408,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "GCP, cloud computing, cloud management, server hosting, Google Cloud Platform, cloud infrastructure, IAM"
+            "ai_tags": "gcp, cloud computing, infrastructure management, google cloud, serverless, cloud dashboard"
         },
         {
             "id": 349,
@@ -13223,7 +13423,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "mathpix.com"
             ],
-            "ai_tags": "OCR, math OCR, latex converter, document parsing, formula extraction, scientific document, image to latex"
+            "ai_tags": "ocr, latex, math ocr, image to text, scientific formulas, pdf extraction, equation editor"
         },
         {
             "id": 350,
@@ -13238,7 +13438,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "biorender.com"
             ],
-            "ai_tags": "scientific illustration, biology diagrams, graphical abstract, science figure generator, biomedical graphics, research illustrations"
+            "ai_tags": "scientific illustration, biology diagrams, scientific figures, life sciences, medical graphics, research visualization"
         },
         {
             "id": 351,
@@ -13253,7 +13453,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "mathcha.io"
             ],
-            "ai_tags": "math editor, latex, diagrams, formula editor, mathematics, technical writing, online documents"
+            "ai_tags": "math editor, latex, formulas, mathematics, diagramming, mathcha, online editor, document creation"
         },
         {
             "id": 352,
@@ -13268,7 +13468,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "overleaf.com"
             ],
-            "ai_tags": "latex editor, online latex, academic writing, research paper, typesetting, collaboration, bibtex"
+            "ai_tags": "latex, overleaf, academic writing, collaborative editor, research papers, typesetting, bibliography"
         },
         {
             "id": 353,
@@ -13283,7 +13483,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "cloud storage, file storage, file sharing, google workspace, documents, cloud backup"
+            "ai_tags": "cloud storage, google drive, file backup, document sharing, cloud backup, storage, google workspace"
         },
         {
             "id": 354,
@@ -13298,7 +13498,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "live.com"
             ],
-            "ai_tags": "cloud storage, microsoft, file sharing, file backup, office 365, document sync"
+            "ai_tags": "onedrive, cloud storage, microsoft, file sync, cloud backup, document sharing, office 365"
         },
         {
             "id": 355,
@@ -13313,7 +13513,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "dropbox.com"
             ],
-            "ai_tags": "cloud storage, file sharing, file synchronization, cloud backup, document management, drive"
+            "ai_tags": "dropbox, cloud storage, file sharing, cloud backup, file sync, file hosting, document sharing"
         },
         {
             "id": 356,
@@ -13328,7 +13528,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "flickr.com"
             ],
-            "ai_tags": "photo sharing, photography, image hosting, photo gallery, pictures, digital storage"
+            "ai_tags": "flickr, photo sharing, image hosting, photography, picture storage, photo gallery, digital photos"
         },
         {
             "id": 357,
@@ -13343,7 +13543,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "scribd.com"
             ],
-            "ai_tags": "digital library, ebooks, audiobooks, documents, reading, academic papers, publications"
+            "ai_tags": "scribd, digital library, ebooks, audiobooks, documents, reading, subscription, publications"
         },
         {
             "id": 358,
@@ -13358,7 +13558,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "microsoft.com"
             ],
-            "ai_tags": "digital whiteboard, collaboration, brainstorming, drawing canvas, remote work, microsoft whiteboard"
+            "ai_tags": "whiteboard, microsoft whiteboard, collaboration, digital canvas, brainstorming, drawing, visual planning"
         },
         {
             "id": 359,
@@ -13373,7 +13573,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "slideshare.net"
             ],
-            "ai_tags": "presentations, slide decks, powerpoint, document sharing, infographics, professional slides"
+            "ai_tags": "slideshare, presentations, slide decks, powerpoint, document sharing, infographics, slide hosting"
         },
         {
             "id": 360,
@@ -13388,7 +13588,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "zotero.org"
             ],
-            "ai_tags": "reference manager, bibliography, research tool, citations, academic papers, library manager"
+            "ai_tags": "zotero, reference manager, citation tool, bibliography, academic research, pdf management, research manager"
         },
         {
             "id": 361,
@@ -13403,7 +13603,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "gmail, email, google account, inbox, webmail, personal email"
+            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
         },
         {
             "id": 362,
@@ -13418,7 +13618,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "gmail, email, google account, inbox, webmail, email address"
+            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
         },
         {
             "id": 363,
@@ -13433,7 +13633,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "gmail, email, google account, inbox, webmail, personal email"
+            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
         },
         {
             "id": 364,
@@ -13448,7 +13648,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "gmail, email, google account, inbox, webmail, email address"
+            "ai_tags": "email, gmail, webmail, google account, inbox, messaging, communication"
         },
         {
             "id": 365,
@@ -13463,7 +13663,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "email, twu, texas womans university, academic email, google workspace, university email"
+            "ai_tags": "email, gmail, twu, academic email, university account, google workspace, webmail"
         },
         {
             "id": 366,
@@ -13478,7 +13678,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "email, utexas, university of texas, academic email, google workspace, university email"
+            "ai_tags": "email, gmail, utexas, academic email, university account, google workspace, webmail"
         },
         {
             "id": 367,
@@ -13493,7 +13693,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "email, ualr, university of arkansas little rock, academic email, google workspace, university email"
+            "ai_tags": "email, gmail, ualr, academic email, university account, google workspace, webmail"
         },
         {
             "id": 368,
@@ -13508,7 +13708,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "live.com"
             ],
-            "ai_tags": "hotmail, outlook, email, microsoft account, webmail, inbox"
+            "ai_tags": "email, hotmail, outlook, microsoft email, webmail, inbox, communication"
         },
         {
             "id": 369,
@@ -13523,7 +13723,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "office.com"
             ],
-            "ai_tags": "office 365, outlook, email, twu, texas womans university, academic email, microsoft office"
+            "ai_tags": "email, office 365, outlook, twu, academic email, university account, webmail"
         },
         {
             "id": 370,
@@ -13538,7 +13738,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "office.com"
             ],
-            "ai_tags": "office 365, outlook, email, saumag, southern arkansas university, academic email, microsoft office"
+            "ai_tags": "email, office 365, outlook, saumag, academic email, university account, webmail"
         },
         {
             "id": 371,
@@ -13553,7 +13753,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "proton.me"
             ],
-            "ai_tags": "protonmail, encrypted email, secure email, privacy, webmail, proton"
+            "ai_tags": "email, protonmail, encrypted email, secure email, privacy, webmail, encrypted messaging"
         },
         {
             "id": 372,
@@ -13568,7 +13768,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "yahoo.com"
             ],
-            "ai_tags": "yahoo mail, email, webmail, inbox, yahoo account"
+            "ai_tags": "email, yahoo mail, webmail, inbox, personal email, communication"
         },
         {
             "id": 373,
@@ -13583,7 +13783,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "orange.eg"
             ],
-            "ai_tags": "telecom, mobile network, internet service provider, cellular, egypt, orange carrier"
+            "ai_tags": "telecom, orange egypt, mobile operator, cellular, internet service provider, network, egypt"
         },
         {
             "id": 374,
@@ -13598,7 +13798,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "mobile network, cellular, mvno, google phone plan, international roaming, sim card"
+            "ai_tags": "google fi, mobile service, cell carrier, mvno, wireless plan, phone service, international roaming"
         },
         {
             "id": 375,
@@ -13613,7 +13813,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "text messaging, sms, web messaging, google messages, chat, android sync"
+            "ai_tags": "messages for web, google messages, sms, text messaging, rcs, web chat, phone sync"
         },
         {
             "id": 376,
@@ -13628,7 +13828,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "contact manager, address book, phone numbers, sync contacts, google workspace"
+            "ai_tags": "contacts, address book, phone numbers, google contacts, email contacts, sync, address directory, people management"
         },
         {
             "id": 377,
@@ -13643,7 +13843,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "app store, android apps, digital store, mobile apps, games, google play store"
+            "ai_tags": "app store, android apps, games, digital store, play store, google play, downloads, media marketplace"
         },
         {
             "id": 378,
@@ -13658,7 +13858,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "voip, phone number, virtual phone, calling, sms, voicemail, telecommunication"
+            "ai_tags": "voip, virtual phone, internet calling, text messaging, voicemail, call forwarding, phone number, google voice"
         },
         {
             "id": 379,
@@ -13673,7 +13873,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "orange.eg"
             ],
-            "ai_tags": "broadband, dsl internet, home wireless, router, isp, egypt internet, orange telecom"
+            "ai_tags": "internet service provider, orange egypt, home broadband, dsl internet, wireless router, wifi plans, telecom, egypt internet"
         },
         {
             "id": 380,
@@ -13688,7 +13888,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "discord.com"
             ],
-            "ai_tags": "chat, voice chat, gaming community, messaging, servers, voip, online communities"
+            "ai_tags": "chat, voice chat, gaming community, messaging app, servers, voip, text chat, streaming community"
         },
         {
             "id": 381,
@@ -13703,7 +13903,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "slack.com"
             ],
-            "ai_tags": "team collaboration, workplace chat, messaging, productivity, channels, work communication"
+            "ai_tags": "workplace chat, team messaging, business communication, collaboration, productivity, corporate channels, work productivity"
         },
         {
             "id": 382,
@@ -13718,7 +13918,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "zoom.us"
             ],
-            "ai_tags": "video conferencing, online meetings, webinar, screen sharing, video call, virtual meetings"
+            "ai_tags": "video conferencing, online meetings, video calling, virtual meeting, webinars, remote work, screen sharing"
         },
         {
             "id": 383,
@@ -13733,7 +13933,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "skype.com"
             ],
-            "ai_tags": "video calling, voip, chat, international calls, instant messaging, microsoft skype"
+            "ai_tags": "video calls, voip, international calling, instant messaging, chat, phone calls, virtual communication"
         },
         {
             "id": 384,
@@ -13748,7 +13948,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "microsoft.com"
             ],
-            "ai_tags": "team collaboration, video meetings, workplace chat, office 365, remote work, business communication"
+            "ai_tags": "team collaboration, video meetings, workplace chat, microsoft 365, online workspace, enterprise communication, video calls"
         },
         {
             "id": 385,
@@ -13763,7 +13963,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "video conferencing, online meetings, video call, google workspace, screen sharing, remote meetings"
+            "ai_tags": "video conferencing, google meet, online meetings, virtual workspace, web video calls, screen sharing, google workspace"
         },
         {
             "id": 386,
@@ -13778,7 +13978,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "amazon.eg"
             ],
-            "ai_tags": "e-commerce, online shopping, marketplace, retail, delivery, amazon egypt"
+            "ai_tags": "online shopping, e-commerce, amazon egypt, retail store, online deals, electronics, buy online, marketplace"
         },
         {
             "id": 387,
@@ -13793,7 +13993,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "jumia.com.eg"
             ],
-            "ai_tags": "online shopping, e-commerce, egypt retail, electronics, fashion, marketplace, jumia"
+            "ai_tags": "jumia, online shopping, e-commerce egypt, fashion, electronics, online deals, retail marketplace, mobile shopping"
         },
         {
             "id": 388,
@@ -13808,7 +14008,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "aliexpress.com"
             ],
-            "ai_tags": "online shopping, e-commerce, china wholesale, cheap products, imported goods, aliexpress"
+            "ai_tags": "aliexpress, cheap shopping, online marketplace, china imports, wholesale products, global e-commerce, discount store"
         },
         {
             "id": 389,
@@ -13823,7 +14023,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "youtube.com"
             ],
-            "ai_tags": "video streaming, online videos, content creators, vlogs, entertainment, video platform"
+            "ai_tags": "video streaming, online videos, music videos, content creators, youtube, entertainment, video platform, watching clips"
         },
         {
             "id": 390,
@@ -13838,7 +14038,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "watchit.com"
             ],
-            "ai_tags": "video streaming, egyptian shows, arabic series, movies, vod, drama, entertainment"
+            "ai_tags": "watch it, arabic streaming, egyptian series, tv drama, video on demand, movies streaming, entertainment, live tv"
         },
         {
             "id": 391,
@@ -13853,7 +14053,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "chase.com"
             ],
-            "ai_tags": "online banking, bank account, credit card, finance, checking, mortgages, jpmorgan chase"
+            "ai_tags": "chase bank, online banking, credit cards, checking account, mortgages, loans, financial services, money management"
         },
         {
             "id": 392,
@@ -13868,7 +14068,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "capitalone.com"
             ],
-            "ai_tags": "credit card, online banking, personal finance, capital one, checking account, loans"
+            "ai_tags": "capital one, credit cards, online banking, savings account, auto loans, finance, banking app, rewards cards"
         },
         {
             "id": 393,
@@ -13883,7 +14083,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "alahlynet.com.eg"
             ],
-            "ai_tags": "nbe, al ahly net, egyptian bank, online banking, financial services, bank account"
+            "ai_tags": "national bank of egypt, alahlynet, nbe, egyptian banking, online bank, wire transfers, savings account, finance egypt"
         },
         {
             "id": 394,
@@ -13898,7 +14098,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "bankofamerica.com"
             ],
-            "ai_tags": "online banking, credit cards, bank account, finance, bank of america, financial services"
+            "ai_tags": "bank of america, bofa, online banking, credit cards, home loans, checking account, wealth management, financial service"
         },
         {
             "id": 395,
@@ -13913,7 +14113,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "earnin.com"
             ],
-            "ai_tags": "earned wage access, paycheck advance, financial app, payday cash advance, budgeting"
+            "ai_tags": "earnin, cash advance, payday loan, earned wage access, paycheck advance, personal finance, salary tracker, money app"
         },
         {
             "id": 396,
@@ -13928,7 +14128,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "moneymanagement.org"
             ],
-            "ai_tags": "money management, credit counseling, debt management, financial education, budgeting, non profit aid"
+            "ai_tags": "money management international, debt counseling, credit management, debt relief, budgeting, non profit finance, financial advice"
         },
         {
             "id": 397,
@@ -13943,7 +14143,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "upstart.com"
             ],
-            "ai_tags": "personal loans, ai lending, debt consolidation, credit, borrowing, fintech"
+            "ai_tags": "upstart, personal loans, credit approval, refinancing, debt consolidation, ai lending, borrowing money, online loan"
         },
         {
             "id": 398,
@@ -13958,7 +14158,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "github.com"
             ],
-            "ai_tags": "code repository, git, software development, version control, open source, coding, devops"
+            "ai_tags": "github, git repository, code hosting, open source, software development, version control, programming, developer community"
         },
         {
             "id": 399,
@@ -13973,7 +14173,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "task manager, to do list, checklist, google tasks, productivity, reminders, planning"
+            "ai_tags": "google todo, task manager, to-do list, productivity tool, reminders, organization, checklist, daily planner"
         },
         {
             "id": 400,
@@ -13988,7 +14188,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "task management, to do list, google tasks, reminders, daily planning, productivity, scheduling"
+            "ai_tags": "google tasks, task management, checklist, to-do list, productivity, schedule planner, reminders, task tracking"
         },
         {
             "id": 401,
@@ -14003,7 +14203,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "evernote.com"
             ],
-            "ai_tags": "note taking, productivity, digital notebook, organization, task management, notes, archiving"
+            "ai_tags": "note taking, productivity, digital notebook, organization, task management, notes, cloud sync, document editing"
         },
         {
             "id": 402,
@@ -14018,7 +14218,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "facebook.com"
             ],
-            "ai_tags": "social media, social network, networking, messaging, newsfeed, community, connections"
+            "ai_tags": "social media, networking, social network, messaging, community, posts, meta, friends"
         },
         {
             "id": 403,
@@ -14033,7 +14233,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "linkedin.com"
             ],
-            "ai_tags": "professional networking, job search, career, business network, recruitment, resume, employment"
+            "ai_tags": "professional networking, job search, career, resume, recruitment, business networking, employment, industry news"
         },
         {
             "id": 404,
@@ -14048,7 +14248,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "researchgate.net"
             ],
-            "ai_tags": "academic research, researchgate, scientific papers, publication, citations, researcher profile"
+            "ai_tags": "academic research, scientific papers, researchgate, citations, publications, scholarly profile, academic network"
         },
         {
             "id": 405,
@@ -14063,7 +14263,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
             ],
-            "ai_tags": "academic search, research literature, scientific papers, citations, scholarly articles, journals"
+            "ai_tags": "academic search engine, research papers, scholarly literature, citations, peer reviewed articles, scientific publications, bibliography"
         },
         {
             "id": 406,
@@ -14078,7 +14278,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "grammarly.com"
             ],
-            "ai_tags": "grammar checker, writing assistant, proofreading, spell check, editing tool, english writing, tone detection"
+            "ai_tags": "grammar checker, writing assistant, proofreading, spell check, tone detector, copy editing, writing tool, plagiarism checker"
         },
         {
             "id": 407,
@@ -14093,7 +14293,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "alhuwayni.com"
             ],
-            "ai_tags": "islamic lectures, islamic studies, sermons, books, scholars, abu ishaq al heweny, islamic charity"
+            "ai_tags": "islamic lectures, abu ishaaq al huwayni, islamic scholarship, khutbah, sermons, islamic books, charity, dawah"
         },
         {
             "id": 408,
@@ -14108,7 +14308,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "quran.com"
             ],
-            "ai_tags": "quran, holy quran, islam, islamic scripture, recitations, quran translation, tafsir, verses"
+            "ai_tags": "quran online, quran recitations, islamic scripture, quran translation, tafsir, surah, islam, holy quran"
         },
         {
             "id": 409,
@@ -14123,7 +14323,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "tiaa.org"
             ],
-            "ai_tags": "retirement planning, financial services, pension, investments, annuities, higher education finance, 401k"
+            "ai_tags": "retirement planning, financial services, investments, annuities, pensions, wealth management, non profit finance"
         },
         {
             "id": 410,
@@ -14138,7 +14338,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "texas.gov"
             ],
-            "ai_tags": "teacher retirement system, texas pension, public school retirement, state benefits, retirement planning"
+            "ai_tags": "teacher retirement system, texas pension, trs texas, public employee retirement, state benefits, retirement fund"
         },
         {
             "id": 411,
@@ -14153,7 +14353,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "myretirementmanager.com"
             ],
-            "ai_tags": "retirement management, retirement savings, financial planning, account management, employer benefits"
+            "ai_tags": "retirement plan management, 403b, 457b, savings plans, retirement administration, financial planning"
         },
         {
             "id": 412,
@@ -14168,7 +14368,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "fidelity.com"
             ],
-            "ai_tags": "investments, stock trading, mutual funds, 401k, brokerage, wealth management, retirement accounts"
+            "ai_tags": "investment brokerage, 401k, stock trading, mutual funds, retirement savings, wealth management, financial services"
         },
         {
             "id": 413,
@@ -14183,7 +14383,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "empower-retirement.com"
             ],
-            "ai_tags": "texas retirement, deferred compensation, 401k, 457 plan, state employee savings, empower retirement"
+            "ai_tags": "texasaver, texas deferred compensation, state employee retirement, empower retirement, 401k 457 plan, retirement savings"
         },
         {
             "id": 414,
@@ -14198,7 +14398,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "robinhood.com"
             ],
-            "ai_tags": "stock trading, investing, commission free, crypto trading, options trading, finance app, stocks"
+            "ai_tags": "stock trading app, investing, cryptocurrency, options trading, commission free trading, stocks, portfolio management"
         },
         {
             "id": 415,
@@ -14213,7 +14413,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "mod.gov.eg"
             ],
-            "ai_tags": "intelligence studies, security institute, egypt ministry of defense, national security, military education, intelligence institute"
+            "ai_tags": "military intelligence, security studies, egypt ministry of defense, intelligence institute, national security, military academy"
         }
     ]
 };
