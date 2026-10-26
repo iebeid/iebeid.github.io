@@ -1172,6 +1172,8 @@
     };
 
     window.triggerAISearch = async function() {
+        console.log("AI Search Button Clicked!");
+        
         const query = document.getElementById('bm-search-input').value.trim();
         if (!query) return;
 
