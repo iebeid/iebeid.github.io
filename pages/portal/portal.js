@@ -756,6 +756,7 @@
             else if (bm.category === 'Life') badgeColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
             else if (bm.category === 'Tools') badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
             else if (bm.category === 'Dashboard') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
+            else if (bm.category === 'Accounts') badgeColor = 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
 
             return `
                 <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition group">
@@ -1278,3 +1279,4 @@
     });
 
 })();
+
