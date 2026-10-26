@@ -556,14 +556,20 @@
     }
 
     function renderBookmarks() {
+        console.log("-> renderBookmarks() called. aiSearchMode:", aiSearchMode, "query:", searchQuery);
         const grid = document.getElementById('bookmarks-grid');
         const countLabel = document.getElementById('results-count-label');
         const noResults = document.getElementById('no-results-msg');
-        if (!grid) return;
+        if (!grid) {
+            console.log("No grid found!");
+            return;
+        }
 
         const allBms = getAllBookmarks();
         const pinnedIds = getPinnedIds();
         const query = searchQuery.toLowerCase().trim();
+        
+        console.log("Total bookmarks available:", allBms.length);
 
         const filtered = allBms.filter(bm => {
             // Absolute override for AI search: Ignore categories/folders entirely
@@ -594,6 +600,13 @@
 
             return true;
         });
+
+        console.log("Filtered bookmarks count:", filtered.length);
+        if (aiSearchMode) {
+             console.log("AI Matched IDs were:", aiMatchedIds);
+             const matchedInAllBms = allBms.filter(b => aiMatchedIds.includes(b.id));
+             console.log("Of those AI IDs, this many exist in allBms:", matchedInAllBms.length);
+        }
 
         countLabel.textContent = `Showing ${filtered.length} of ${allBms.length} bookmarks`;
 
