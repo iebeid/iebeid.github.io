@@ -1249,6 +1249,10 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             aiSearchMode = true;
             aiMatchedIds = matchedIds.map(id => Number(id)); // ensure they are numbers
             
+            // Force category to 'all' so we search across everything
+            activeCategory = 'all';
+            activeSubfolder = null;
+            
             console.log("AI matched IDs:", aiMatchedIds);
             
             // Re-render
