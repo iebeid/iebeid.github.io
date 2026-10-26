@@ -357,6 +357,21 @@
     }
     window.trackLaunch = trackLaunch;
 
+    window.editBookmark = function(bmId) {
+        const allBms = getAllBookmarks();
+        const bm = allBms.find(b => b.id === bmId);
+        if (!bm) return;
+
+        document.getElementById('add-modal-title').innerHTML = '<i class="fas fa-bookmark text-sky-400"></i> Edit Bookmark';
+        document.getElementById('bm-edit-id').value = bmId;
+        document.getElementById('bm-new-name').value = bm.name || '';
+        document.getElementById('bm-new-url').value = bm.url || '';
+        document.getElementById('bm-new-cat').value = bm.category || 'Bookmarks';
+        document.getElementById('bm-new-sub').value = bm.path || '';
+
+        document.getElementById('add-modal').classList.remove('hidden');
+    };
+
     // Delete Bookmark with confirmation
     function deleteBookmark(bmId) {
         const allBms = getAllBookmarks();
@@ -555,41 +570,32 @@
         });
     }
 
-    function renderBookmarks() {
-        console.log("-> renderBookmarks() called. aiSearchMode:", aiSearchMode, "query:", searchQuery);
-        const grid = document.getElementById('bookmarks-grid');
-        const countLabel = document.getElementById('results-count-label');
-        const noResults = document.getElementById('no-results-msg');
-        if (!grid) {
-            console.log("No grid found!");
-            return;
-        }
-
+    function renderDashboardSearchResults() {
+        const grid = document.getElementById('dashboard-bookmarks-grid');
+        const statusLabel = document.getElementById('dashboard-results-status');
+        const noResults = document.getElementById('dashboard-no-results-msg');
+        const emptyMsg = document.getElementById('dashboard-empty-search-msg');
+        
+        if (!grid) return;
+        
         const allBms = getAllBookmarks();
         const pinnedIds = getPinnedIds();
         const query = searchQuery.toLowerCase().trim();
         
-        console.log("Total bookmarks available:", allBms.length);
+        if (!query && !aiSearchMode) {
+            grid.innerHTML = '';
+            statusLabel.classList.add('hidden');
+            noResults.classList.add('hidden');
+            emptyMsg.classList.remove('hidden');
+            return;
+        }
+        
+        emptyMsg.classList.add('hidden');
 
         const filtered = allBms.filter(bm => {
-            // Absolute override for AI search: Ignore categories/folders entirely
             if (aiSearchMode) {
                 return aiMatchedIds.includes(bm.id);
             }
-
-            // Category check (Work, Life, Tools, Dashboard, or pinned)
-            if (activeCategory === 'pinned') {
-                if (!pinnedIds.includes(bm.id)) return false;
-            } else if (activeCategory !== 'all') {
-                if (bm.category !== activeCategory) return false;
-            }
-
-            // Subfolder check
-            if (activeSubfolder) {
-                if (bm.subfolder !== activeSubfolder) return false;
-            }
-
-            // Standard text search query check
             if (query) {
                 const matchName = bm.name && bm.name.toLowerCase().includes(query);
                 const matchUrl = bm.url && bm.url.toLowerCase().includes(query);
@@ -597,16 +603,97 @@
                 const matchPath = bm.path && bm.path.toLowerCase().includes(query);
                 if (!matchName && !matchUrl && !matchDomain && !matchPath) return false;
             }
-
             return true;
         });
 
-        console.log("Filtered bookmarks count:", filtered.length);
-        if (aiSearchMode) {
-             console.log("AI Matched IDs were:", aiMatchedIds);
-             const matchedInAllBms = allBms.filter(b => aiMatchedIds.includes(b.id));
-             console.log("Of those AI IDs, this many exist in allBms:", matchedInAllBms.length);
+        statusLabel.textContent = `Found ${filtered.length} matches`;
+        statusLabel.classList.remove('hidden');
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
         }
+
+        noResults.classList.add('hidden');
+
+        grid.innerHTML = filtered.map(bm => {
+            const isPinned = pinnedIds.includes(bm.id);
+            const domain = bm.domain || 'web';
+            const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+            const count = getBookmarkUsageCount(bm.id);
+
+            let badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
+            if (bm.category === 'Bookmarks') badgeColor = 'bg-slate-700/50 text-sky-400 border-slate-700';
+
+            return `
+                <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition group">
+                    <div>
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <div class="flex items-center gap-2 overflow-hidden">
+                                <img src="${faviconUrl}" alt="" onerror="this.onerror=null;this.src='../../images/favicon.png'" class="w-4 h-4 object-contain flex-shrink-0 rounded-sm">
+                                <span class="text-[11px] font-mono text-slate-400 truncate" title="${escapeHtml(domain)}">
+                                    ${escapeHtml(domain)}
+                                </span>
+                            </div>
+                            <div class="flex items-center gap-1.5 flex-shrink-0">
+                                ${count > 0 ? `
+                                <span title="Launched ${count} times" class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                                    <i class="fas fa-fire text-amber-400"></i> ${count}
+                                </span>
+                                ` : ''}
+                                <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${badgeColor}">
+                                    ${bm.category}
+                                </span>
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-bold text-slate-200 leading-snug line-clamp-2 mb-1 cursor-pointer hover:text-sky-400 transition" onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')">
+                            ${bm.name}
+                        </h3>
+                        ${bm.path && bm.path !== 'General' ? `<p class="text-[10px] text-slate-500 font-mono truncate"><i class="fas fa-folder-open mr-1"></i>${escapeHtml(bm.path)}</p>` : ''}
+                    </div>
+                    <div class="flex items-center justify-between mt-4 pt-3 border-t border-slate-800/60">
+                        <button onclick="togglePin(${bm.id})" class="text-xs ${isPinned ? 'text-amber-400 hover:text-amber-300' : 'text-slate-500 hover:text-slate-300'} transition" title="${isPinned ? 'Unpin' : 'Pin to top'}">
+                            <i class="fas fa-star"></i>
+                        </button>
+                        <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="editBookmark(${bm.id})" class="w-7 h-7 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition" title="Edit">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button onclick="deleteBookmark(${bm.id})" class="w-7 h-7 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition" title="Delete">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <button onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')" class="w-7 h-7 rounded-lg bg-sky-600 hover:bg-sky-500 text-white shadow shadow-sky-500/20 flex items-center justify-center transition" title="Launch">
+                                <i class="fas fa-external-link-alt text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function renderBookmarks() {
+        const grid = document.getElementById('dashboard-bookmarks-grid');
+        const countLabel = document.getElementById('results-count-label');
+        const noResults = document.getElementById('no-results-msg');
+        if (!grid) return;
+
+        const allBms = getAllBookmarks();
+        const pinnedIds = getPinnedIds();
+        
+        // The directory now only filters by category and subfolder
+        const filtered = allBms.filter(bm => {
+            if (activeCategory === 'pinned') {
+                if (!pinnedIds.includes(bm.id)) return false;
+            } else if (activeCategory !== 'all') {
+                if (bm.category !== activeCategory) return false;
+            }
+            if (activeSubfolder) {
+                if (bm.subfolder !== activeSubfolder) return false;
+            }
+            return true;
+        });
 
         countLabel.textContent = `Showing ${filtered.length} of ${allBms.length} bookmarks`;
 
@@ -751,7 +838,7 @@
             if (clearGlobal) clearGlobal.classList.toggle('hidden', !val);
             if (clearBm) clearBm.classList.toggle('hidden', !val);
 
-            renderBookmarks();
+            renderDashboardSearchResults();
         }
 
         if (globalSearch) {
@@ -1280,17 +1367,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             console.log("AI matched IDs:", aiMatchedIds);
             
             // Re-render
-            if (typeof renderBookmarks === 'function') {
-                renderBookmarks();
+            if (typeof renderDashboardSearchResults === 'function') {
+                renderDashboardSearchResults();
                 // Also update UI to show clear button
                 const clearBm = document.getElementById('bm-clear-btn');
                 if (clearBm) clearBm.classList.remove('hidden');
-                
-                // Force a render of subfolders/dash if needed
-                if (typeof renderDashboardDailyDrivers === 'function') renderDashboardDailyDrivers();
-                
-            } else {
-                alert("Error: renderBookmarks is not a function.");
             }
             
             if (aiMatchedIds.length === 0) {

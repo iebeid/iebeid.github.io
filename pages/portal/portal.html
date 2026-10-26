@@ -224,6 +224,48 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Dashboard Search Section -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fas fa-search text-indigo-400"></i> Smart Search
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">Search your bookmarks semantically with AI or via text.</p>
+                    </div>
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <div class="relative flex-1 sm:w-96 flex items-center gap-2">
+                            <div class="relative w-full">
+                                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                                <input type="text" id="bm-search-input" placeholder="Search title, URL, domain, folder..."
+                                    class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl pl-9 pr-14 py-2 text-xs text-white placeholder-slate-400 outline-none transition">
+                                <button id="bm-clear-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+                                    <i class="fas fa-times-circle"></i>
+                                </button>
+                            </div>
+                            <button id="ai-search-btn" title="AI Semantic Search (Press Enter in search box)" onclick="triggerAISearch()" class="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white rounded-xl shadow-lg shadow-purple-500/20 text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fas fa-sparkles"></i> AI
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="dashboard-results-status" class="text-xs text-slate-400 mb-4 hidden"></div>
+                <div id="dashboard-bookmarks-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Search Results Go Here -->
+                </div>
+                <div id="dashboard-no-results-msg" class="py-12 text-center text-slate-500 hidden">
+                    <i class="fas fa-search text-3xl mb-3 text-slate-600"></i>
+                    <h3 class="text-sm font-semibold text-slate-400">No matches found</h3>
+                    <p class="text-xs mt-1">Try a different AI prompt or text query.</p>
+                </div>
+                <div id="dashboard-empty-search-msg" class="py-12 text-center text-slate-500">
+                    <i class="fas fa-magic text-3xl mb-3 text-slate-600"></i>
+                    <h3 class="text-sm font-semibold text-slate-400">Ready to search</h3>
+                    <p class="text-xs mt-1">Enter a query above to explore your bookmarks.</p>
+                </div>
+            </div>
 
             
 
@@ -615,6 +657,7 @@
                 </button>
             </div>
             <form id="add-bookmark-form" class="space-y-4">
+                <input type="hidden" id="bm-edit-id" value="">
                 <div>
                     <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Title / Name *</label>
                     <input type="text" id="bm-new-name" required placeholder="e.g. Canvas LMS, NSF Fastlane, GitHub..."
