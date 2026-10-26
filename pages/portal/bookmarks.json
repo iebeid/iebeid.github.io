@@ -7661,12 +7661,14 @@
             "type": "bookmark",
             "url": "https://www.nature.com/natmachintell/?utm_medium=referral&utm_source=rh_recs",
             "domain": "nature.com",
-            "category": "Accounts",
-            "subfolder": "Apple",
-            "path": "Accounts / Apple",
+            "category": "Work",
+            "subfolder": "Research",
+            "path": "Work > Research > Dissimination > Journals",
             "path_parts": [
-                "Accounts",
-                "Apple"
+                "Work",
+                "Research",
+                "Dissimination",
+                "Journals"
             ]
         },
         {
@@ -7739,12 +7741,14 @@
             "type": "bookmark",
             "url": "https://www.computer.org/csdl/journal/tp",
             "domain": "computer.org",
-            "category": "Accounts",
-            "subfolder": "Apple",
-            "path": "Accounts / Apple",
+            "category": "Work",
+            "subfolder": "Research",
+            "path": "Work > Research > Dissimination > Journals",
             "path_parts": [
-                "Accounts",
-                "Apple"
+                "Work",
+                "Research",
+                "Dissimination",
+                "Journals"
             ]
         },
         {
@@ -8369,12 +8373,14 @@
             "type": "bookmark",
             "url": "https://www.acm.org/",
             "domain": "acm.org",
-            "category": "Accounts",
-            "subfolder": "Apple",
-            "path": "Accounts / Apple",
+            "category": "Work",
+            "subfolder": "Service",
+            "path": "Work > Service > Professional > Memberships",
             "path_parts": [
-                "Accounts",
-                "Apple"
+                "Work",
+                "Service",
+                "Professional",
+                "Memberships"
             ]
         },
         {
@@ -9921,12 +9927,13 @@
             "type": "bookmark",
             "url": "https://jobs.bcm.edu/job/Houston-Assistant-Professor-Artificial-Intelligence-and-Data-Scientist-TX-77001/24671-en_US/?feedId=410200&utm_source=LinkedInJobPostings",
             "domain": "jobs.bcm.edu",
-            "category": "Accounts",
-            "subfolder": "Microsoft",
-            "path": "Accounts / Microsoft",
+            "category": "Work",
+            "subfolder": "Career",
+            "path": "Work > Career > Jobs",
             "path_parts": [
-                "Accounts",
-                "Microsoft"
+                "Work",
+                "Career",
+                "Jobs"
             ]
         },
         {
@@ -9935,12 +9942,13 @@
             "type": "bookmark",
             "url": "https://jobs.bcm.edu/job/Houston-Assistant-Professor-Data-Science-(Trauma,-Critical-Care,-and-Healthcare-Disparities-Research)-TX-77001/25331-en_US/?feedId=410200&utm_source=LinkedInJobPostings",
             "domain": "jobs.bcm.edu",
-            "category": "Accounts",
-            "subfolder": "Microsoft",
-            "path": "Accounts / Microsoft",
+            "category": "Work",
+            "subfolder": "Career",
+            "path": "Work > Career > Jobs",
             "path_parts": [
-                "Accounts",
-                "Microsoft"
+                "Work",
+                "Career",
+                "Jobs"
             ]
         },
         {
@@ -10517,12 +10525,13 @@
             "type": "bookmark",
             "url": "https://caiml.utdallas.edu/",
             "domain": "caiml.utdallas.edu",
-            "category": "Accounts",
-            "subfolder": "Apple",
-            "path": "Accounts / Apple",
+            "category": "Life",
+            "subfolder": "Hobbies",
+            "path": "Life > Hobbies > AI",
             "path_parts": [
-                "Accounts",
-                "Apple"
+                "Life",
+                "Hobbies",
+                "AI"
             ]
         },
         {
@@ -10591,12 +10600,13 @@
             "type": "bookmark",
             "url": "https://isso.utdallas.edu/",
             "domain": "isso.utdallas.edu",
-            "category": "Accounts",
-            "subfolder": "Microsoft",
-            "path": "Accounts / Microsoft",
+            "category": "Life",
+            "subfolder": "Hobbies",
+            "path": "Life > Hobbies > Social",
             "path_parts": [
-                "Accounts",
-                "Microsoft"
+                "Life",
+                "Hobbies",
+                "Social"
             ]
         },
         {
@@ -10980,12 +10990,12 @@
             "type": "bookmark",
             "url": "https://www.loopnet.com/search/office-space/for-lease/?max-rent=300&rent-type=total_month&sk=0fdac5f8b9f010a6aa4b28bdf877f985&bb=urzotni0yJk37rmgC&view=map",
             "domain": "loopnet.com",
-            "category": "Accounts",
-            "subfolder": "Microsoft",
-            "path": "Accounts / Microsoft",
+            "category": "Life",
+            "subfolder": "Shopping",
+            "path": "Life > Shopping",
             "path_parts": [
-                "Accounts",
-                "Microsoft"
+                "Life",
+                "Shopping"
             ]
         },
         {
@@ -11475,12 +11485,13 @@
             "type": "bookmark",
             "url": "https://cernerhealth.com/oauth/authenticate?redirect_uri=https%3A%2F%2Fcernerhealth.com%2Fsaml%2Fsso%2Fresponse%3Fmessage_id%3D_9d0c922d-5ece-4971-8ae5-31f2a9655de7%26issuer%3Dhttps%253A%252F%252Fbaptisthealthsystem.myhealth-rec.com%252Fsession-api%252Fprotocol%252Fsaml2%252Fmetadata&sign_in_only=on&client_id=298ac369744e4cdcad0be44a200d8401",
             "domain": "cernerhealth.com",
-            "category": "Accounts",
-            "subfolder": "Meta",
-            "path": "Accounts / Meta",
+            "category": "Life",
+            "subfolder": "Health",
+            "path": "Life > Health > Clincs",
             "path_parts": [
-                "Accounts",
-                "Meta"
+                "Life",
+                "Health",
+                "Clincs"
             ]
         },
         {
@@ -11504,12 +11515,13 @@
             "type": "bookmark",
             "url": "https://my.amberpharmacy.com/profile",
             "domain": "my.amberpharmacy.com",
-            "category": "Accounts",
-            "subfolder": "Apple",
-            "path": "Accounts / Apple",
+            "category": "Life",
+            "subfolder": "Health",
+            "path": "Life > Health > Pharmacy",
             "path_parts": [
-                "Accounts",
-                "Apple"
+                "Life",
+                "Health",
+                "Pharmacy"
             ]
         },
         {
@@ -11758,12 +11770,14 @@
             "type": "bookmark",
             "url": "https://eg.usembassy.gov/contact/#embassy",
             "domain": "eg.usembassy.gov",
-            "category": "Accounts",
-            "subfolder": "Microsoft",
-            "path": "Accounts / Microsoft",
+            "category": "Life",
+            "subfolder": "Legal",
+            "path": "Life > Legal > Immigration > US Embassy",
             "path_parts": [
-                "Accounts",
-                "Microsoft"
+                "Life",
+                "Legal",
+                "Immigration",
+                "US Embassy"
             ]
         },
         {
