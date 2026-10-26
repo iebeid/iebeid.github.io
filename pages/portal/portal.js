@@ -566,6 +566,11 @@
         const query = searchQuery.toLowerCase().trim();
 
         const filtered = allBms.filter(bm => {
+            // Absolute override for AI search: Ignore categories/folders entirely
+            if (aiSearchMode) {
+                return aiMatchedIds.includes(bm.id);
+            }
+
             // Category check (Work, Life, Tools, Dashboard, or pinned)
             if (activeCategory === 'pinned') {
                 if (!pinnedIds.includes(bm.id)) return false;
@@ -578,10 +583,8 @@
                 if (bm.subfolder !== activeSubfolder) return false;
             }
 
-            // Search query check
-            if (aiSearchMode) {
-                if (!aiMatchedIds.includes(bm.id)) return false;
-            } else if (query) {
+            // Standard text search query check
+            if (query) {
                 const matchName = bm.name && bm.name.toLowerCase().includes(query);
                 const matchUrl = bm.url && bm.url.toLowerCase().includes(query);
                 const matchDomain = bm.domain && bm.domain.toLowerCase().includes(query);
