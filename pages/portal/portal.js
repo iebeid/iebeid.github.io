@@ -1042,19 +1042,16 @@
 
         const saved = localStorage.getItem(SCRATCHPAD_KEY) || '';
         
-        // Disable browser autofill which can sometimes fire input events on load
+        if (dashScratch && document.activeElement !== dashScratch) dashScratch.value = saved;
+        if (fullScratch && document.activeElement !== fullScratch) fullScratch.value = saved;
+
+        if (initScratchpad.initialized) return;
+        initScratchpad.initialized = true;
+
         if (dashScratch) dashScratch.setAttribute('autocomplete', 'off');
         if (fullScratch) fullScratch.setAttribute('autocomplete', 'off');
 
-        if (dashScratch) dashScratch.value = saved;
-        if (fullScratch) fullScratch.value = saved;
-
-        // Add a flag to prevent saving during initial load if browser fires ghost events
-        let isReady = false;
-        setTimeout(() => { isReady = true; }, 500);
-
         function save(val) {
-            if (!isReady) return; // Prevent ghost overwrites
             localStorage.setItem(SCRATCHPAD_KEY, val);
             if (dashScratch && dashScratch.value !== val) dashScratch.value = val;
             if (fullScratch && fullScratch.value !== val) fullScratch.value = val;
@@ -1064,10 +1061,14 @@
             }
         }
 
-        // Use keyup and paste instead of 'input' to be safer against browser auto-restores
-        ['keyup', 'paste', 'change', 'input'].forEach(evt => {
-            if (dashScratch) dashScratch.addEventListener(evt, (e) => save(e.target.value));
-            if (fullScratch) fullScratch.addEventListener(evt, (e) => save(e.target.value));
+        ['keyup', 'paste', 'input', 'change'].forEach(evt => {
+            const handler = (e) => {
+                if (document.activeElement === e.target) {
+                    save(e.target.value);
+                }
+            };
+            if (dashScratch) dashScratch.addEventListener(evt, handler);
+            if (fullScratch) fullScratch.addEventListener(evt, handler);
         });
     }
     
@@ -1441,3 +1442,4 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     };
 
 })();
+
