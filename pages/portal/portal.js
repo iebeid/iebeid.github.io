@@ -31,6 +31,8 @@
     let activeSubfolder = null;
     let activeDashFilter = 'all';
     let searchQuery = '';
+    let aiSearchMode = false;
+    let aiMatchedIds = [];
     let selectedMessageId = null;
 
     // Seed Messages (Academic, grant, and student inquiries)
@@ -577,7 +579,9 @@
             }
 
             // Search query check
-            if (query) {
+            if (aiSearchMode) {
+                if (!aiMatchedIds.includes(bm.id)) return false;
+            } else if (query) {
                 const matchName = bm.name && bm.name.toLowerCase().includes(query);
                 const matchUrl = bm.url && bm.url.toLowerCase().includes(query);
                 const matchDomain = bm.domain && bm.domain.toLowerCase().includes(query);
@@ -723,6 +727,8 @@
 
         function onSearchInput(val) {
             searchQuery = val;
+            aiSearchMode = false;
+            aiMatchedIds = [];
             if (globalSearch && globalSearch.value !== val) globalSearch.value = val;
             if (bmSearch && bmSearch.value !== val) bmSearch.value = val;
 
@@ -1128,12 +1134,118 @@
         }
     });
 
+
+    // -------------------------------------------------------------------------
+
+
+    // -------------------------------------------------------------------------
+    // 15. AI SEARCH & SETTINGS
+    // -------------------------------------------------------------------------
+
+    window.openSettingsModal = function() {
+        const modal = document.getElementById('settings-modal');
+        const keyInput = document.getElementById('settings-gemini-key');
+        const savedKey = localStorage.getItem('gemini_api_key');
+        if (savedKey) {
+            keyInput.value = savedKey;
+        }
+        modal.classList.remove('hidden');
+        // trigger reflow
+        void modal.offsetWidth;
+        modal.classList.remove('opacity-0');
+        modal.classList.add('opacity-100');
+    };
+
+    window.closeSettingsModal = function() {
+        const modal = document.getElementById('settings-modal');
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    };
+
+    window.saveSettings = function() {
+        const keyInput = document.getElementById('settings-gemini-key');
+        localStorage.setItem('gemini_api_key', keyInput.value.trim());
+        window.closeSettingsModal();
+    };
+
+    window.triggerAISearch = async function() {
+        const query = document.getElementById('bm-search-input').value.trim();
+        if (!query) return;
+
+        const apiKey = localStorage.getItem('gemini_api_key');
+        if (!apiKey) {
+            alert('Please set your Gemini API Key in Settings to use AI Search.');
+            window.openSettingsModal();
+            return;
+        }
+
+        const btn = document.getElementById('ai-search-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Searching...`;
+        btn.disabled = true;
+
+        try {
+            // Get all bookmarks locally
+            const allBms = typeof getAllBookmarks === 'function' ? getAllBookmarks() : window.PORTAL_BOOKMARKS.bookmarks;
+            // Minimize data to avoid huge token count
+            const minimizedBms = allBms.map(bm => ({ id: bm.id, name: bm.name, domain: bm.domain }));
+            
+            const prompt = `You are a semantic search assistant for my bookmarks. The user query is: "${query}"
+
+Here is the JSON list of my bookmarks:
+${JSON.stringify(minimizedBms)}
+
+Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantically match the query. Do not wrap in markdown blocks, just return the raw JSON array. If no matches, return [].`;
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: prompt }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.1
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
+            
+            if (!textResponse) throw new Error("No valid response from Gemini");
+            
+            // parse the raw text back to an array
+            const cleanText = textResponse.replace(/^\s*```(json)?\s*|\s*```\s*$/g, '').trim();
+            const matchedIds = JSON.parse(cleanText);
+
+            if (!Array.isArray(matchedIds)) {
+                throw new Error("Response is not an array");
+            }
+
+            // Set state and render
+            aiSearchMode = true;
+            aiMatchedIds = matchedIds;
+            
+            // Re-render
+            if (typeof renderBookmarks === 'function') {
+                renderBookmarks();
+            }
+
+        } catch (err) {
+            console.error(err);
+            alert('AI Search failed: ' + err.message);
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    };
+
 })();
-
-
-
-
-
-
-
-

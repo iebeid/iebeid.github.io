@@ -106,6 +106,9 @@
                 <a href="../home/home.html" class="text-xs text-slate-400 hover:text-sky-400 transition inline-flex items-center gap-1.5">
                     <i class="fas fa-arrow-left"></i> Return to Public Website
                 </a>
+                        <button onclick="openSettingsModal()" title="Portal Settings" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition">
+                            <i class="fas fa-cog text-slate-400"></i> <span>Settings</span>
+                        </button>
             </div>
         </div>
     </div>
@@ -155,6 +158,9 @@
                         <a href="../home/home.html" target="_blank" title="Open Public Website" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition">
                             <i class="fas fa-globe text-sky-400"></i> <span>Website</span>
                         </a>
+                        <button onclick="openSettingsModal()" title="Portal Settings" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition">
+                            <i class="fas fa-cog text-slate-400"></i> <span>Settings</span>
+                        </button>
                         <button id="logout-btn" title="Lock Portal" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition">
                             <i class="fas fa-lock"></i> <span>Lock</span>
                         </button>
@@ -260,13 +266,18 @@
                 </div>
 
                 <div class="flex items-center gap-3 w-full sm:w-auto">
-                    <!-- Bookmarks Search -->
-                    <div class="relative flex-1 sm:w-72">
-                        <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input type="text" id="bm-search-input" placeholder="Search title, URL, domain, folder..."
-                            class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl pl-9 pr-8 py-2 text-xs text-white placeholder-slate-400 outline-none transition">
-                        <button id="bm-clear-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
-                            <i class="fas fa-times-circle"></i>
+                                        <!-- Bookmarks Search -->
+                    <div class="relative flex-1 sm:w-72 flex items-center gap-2">
+                        <div class="relative w-full">
+                            <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input type="text" id="bm-search-input" placeholder="Search title, URL, domain, folder..."
+                                class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl pl-9 pr-14 py-2 text-xs text-white placeholder-slate-400 outline-none transition">
+                            <button id="bm-clear-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </div>
+                        <button id="ai-search-btn" title="AI Semantic Search (Press Enter in search box)" onclick="triggerAISearch()" class="px-3 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-400 hover:to-purple-500 text-white rounded-xl shadow-lg shadow-purple-500/20 text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fas fa-sparkles"></i> AI
                         </button>
                     </div>
 
@@ -645,7 +656,42 @@
     <!-- Embedded Data & Scripts -->
     <script src="bookmarks_data.js"></script>
     <script src="portal.js"></script>
+    <!-- ================================================================= -->
+    <!-- SETTINGS MODAL -->
+    <!-- ================================================================= -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-sm p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl w-full max-w-md transform scale-95 transition-transform duration-300 overflow-hidden relative">
+            <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-800/50">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="fas fa-cog text-slate-400"></i> Portal Settings
+                </h3>
+                <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-white transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-5 space-y-4">
+                <div class="bg-indigo-500/10 border border-indigo-500/20 p-3 rounded-xl flex items-start gap-3">
+                    <i class="fas fa-robot text-indigo-400 mt-0.5"></i>
+                    <div>
+                        <h4 class="text-xs font-bold text-white">AI Search Integration</h4>
+                        <p class="text-[11px] text-slate-400 mt-1">Enable semantic bookmark searching by providing a Google Gemini API Key. Your key is stored securely only in your browser's local storage.</p>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Gemini API Key</label>
+                    <input type="password" id="settings-gemini-key" placeholder="AIzaSy..." 
+                        class="w-full bg-slate-800 border border-slate-700 focus:border-indigo-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono">
+                    <p class="text-[10px] text-slate-500 mt-1"><a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-400 hover:underline">Get an API key from Google AI Studio</a></p>
+                </div>
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-800/30 flex justify-end gap-2">
+                <button onclick="closeSettingsModal()" class="px-4 py-2 text-xs font-semibold text-slate-300 hover:text-white transition">Cancel</button>
+                <button onclick="saveSettings()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition">Save Settings</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
 
 
