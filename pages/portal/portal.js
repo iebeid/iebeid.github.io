@@ -1200,7 +1200,7 @@ ${JSON.stringify(minimizedBms)}
 
 Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantically match the query. Do not wrap in markdown blocks, just return the raw JSON array. If no matches, return [].`;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -1214,7 +1214,8 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             });
 
             if (!response.ok) {
-                throw new Error(`API request failed: ${response.status}`);
+                const errText = await response.text();
+                throw new Error(`API Error ${response.status}: ${errText}`);
             }
 
             const data = await response.json();
