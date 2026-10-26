@@ -494,153 +494,7 @@
     // -------------------------------------------------------------------------
     // 7. RENDER DASHBOARD (DAILY DRIVERS & AUTO-LEARNED FREQUENT BOOKMARKS)
     // -------------------------------------------------------------------------
-    function renderDashboardDailyDrivers() {
-        const container = document.getElementById('quick-launch-grid');
-        const filterContainer = document.getElementById('dash-subfolder-filters');
-        if (!container) return;
-
-        const allBms = getAllBookmarks();
-        const pinnedIds = getPinnedIds();
-        const stats = getUsageStats();
-
-        // 1. Base Dashboard Bookmarks from user's "Dashboard" folder
-        const dashBms = allBms.filter(b => b.category === 'Dashboard');
-
-        // 2. Auto-identified frequently used bookmarks (count >= 2 from any category, or top launched)
-        const frequentBms = allBms.filter(b => {
-            const count = getBookmarkUsageCount(b.id);
-            return count >= 2;
-        }).sort((a, b) => getBookmarkUsageCount(b.id) - getBookmarkUsageCount(a.id));
-
-        // Combined pool for Daily Drivers:
-        // Includes all Dashboard folder bookmarks + any non-dashboard bookmark that is used frequently
-        const combinedPoolMap = new Map();
-        dashBms.forEach(b => combinedPoolMap.set(b.id, b));
-        frequentBms.forEach(b => combinedPoolMap.set(b.id, b));
-        const combinedDailyDrivers = Array.from(combinedPoolMap.values());
-
-        // Extract subfolders under Dashboard
-        const dashSubfolders = new Set();
-        dashBms.forEach(b => {
-            if (b.subfolder) dashSubfolders.add(b.subfolder);
-        });
-        const sortedSubs = Array.from(dashSubfolders).sort();
-
-        // Render subfolder filter buttons for Dashboard
-        if (filterContainer) {
-            let filterHtml = `
-                <button onclick="setDashFilter('all')" class="${activeDashFilter === 'all' ? 'bg-sky-600 text-white font-bold' : 'bg-slate-800 text-slate-400 hover:text-white'} px-3 py-1 rounded-lg text-xs transition">
-                    All Quick Access (${combinedDailyDrivers.length})
-                </button>
-            `;
-
-            // Dedicated filter for Frequently Used bookmarks
-            filterHtml += `
-                <button onclick="setDashFilter('__frequent__')" class="${activeDashFilter === '__frequent__' ? 'bg-amber-500 text-slate-900 font-bold' : 'bg-amber-500/10 hover:bg-amber-500/20 text-amber-300'} px-2.5 py-1 rounded-lg text-xs border border-amber-500/30 transition flex items-center gap-1.5">
-                    <i class="fas fa-fire text-amber-400"></i> Frequently Used (${frequentBms.length})
-                </button>
-            `;
-
-            for (let sub of sortedSubs) {
-                const count = dashBms.filter(b => b.subfolder === sub).length;
-                const isActive = activeDashFilter === sub;
-                filterHtml += `
-                    <button onclick="setDashFilter('${escapeHtml(sub)}')" class="${isActive ? 'bg-sky-600 text-white font-bold' : 'bg-slate-800/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200'} px-2.5 py-1 rounded-lg text-xs border border-slate-700/60 transition">
-                        ${escapeHtml(sub)} (${count})
-                    </button>
-                `;
-            }
-            filterContainer.innerHTML = filterHtml;
-        }
-
-        // Determine which bookmarks to display based on active filter
-        let displayBms = [];
-        if (activeDashFilter === 'all') {
-            displayBms = combinedDailyDrivers;
-        } else if (activeDashFilter === '__frequent__') {
-            displayBms = frequentBms;
-        } else {
-            displayBms = dashBms.filter(b => b.subfolder === activeDashFilter);
-        }
-
-        if (displayBms.length === 0) {
-            container.innerHTML = `
-                <div class="col-span-full py-12 text-center text-xs text-slate-500 bg-slate-950/40 rounded-xl border border-slate-800/60">
-                    <i class="fas fa-info-circle text-sky-400 text-base mb-2 block"></i>
-                    ${activeDashFilter === '__frequent__' 
-                        ? 'No frequent bookmarks yet. As you launch bookmarks in the portal, they will automatically appear here!'
-                        : 'No bookmarks found in this section.'}
-                </div>`;
-            return;
-        }
-
-        container.innerHTML = displayBms.map(bm => {
-            const isPinned = pinnedIds.includes(bm.id);
-            const domain = bm.domain || 'web';
-            const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-            const count = getBookmarkUsageCount(bm.id);
-            const isAutoPromoted = (bm.category !== 'Dashboard' && count >= 2);
-            
-            // Clean subpath display
-            const pathDisplay = bm.path_parts ? bm.path_parts.slice(1).join(' > ') : (bm.subfolder || bm.category);
-
-            return `
-                <div class="group relative bg-slate-800/70 hover:bg-slate-800 border border-slate-700/60 hover:border-sky-500/60 rounded-xl p-3.5 flex flex-col justify-between shadow-sm hover:shadow-md transition">
-                    
-                    <!-- Action tools top-right -->
-                    <div class="absolute top-2.5 right-2.5 flex items-center gap-1.5">
-                        ${count > 0 ? `
-                            <span title="Launched ${count} times" class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-1">
-                                <i class="fas fa-fire text-amber-400"></i> ${count}
-                            </span>
-                        ` : ''}
-                        <button onclick="togglePin(${bm.id})" title="${isPinned ? 'Pinned Favorite' : 'Pin'}" 
-                            class="text-xs transition ${isPinned ? 'text-amber-400' : 'text-slate-600 hover:text-amber-400'}">
-                            <i class="${isPinned ? 'fas' : 'far'} fa-star"></i>
-                        </button>
-                        <button onclick="deleteBookmark(${bm.id})" title="Remove Bookmark" 
-                            class="text-slate-600 hover:text-rose-400 text-xs transition opacity-0 group-hover:opacity-100">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </div>
-
-                    <!-- Main Link Clickable -->
-                    <div onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')" class="block pr-16 cursor-pointer">
-                        <div class="w-10 h-10 rounded-lg bg-slate-900 border border-slate-700/80 p-2 flex items-center justify-center mb-2.5">
-                            <img src="${faviconUrl}" alt="${domain}" onerror="this.onerror=null;this.src='../../images/favicon.png'" class="w-6 h-6 object-contain">
-                        </div>
-                        <h4 class="font-bold text-xs text-white group-hover:text-sky-300 transition line-clamp-1" title="${escapeHtml(bm.name)}">
-                            ${escapeHtml(bm.name)}
-                        </h4>
-                        <div class="flex items-center gap-1.5 mt-0.5">
-                            <span class="text-[10px] text-slate-400 truncate">${escapeHtml(domain)}</span>
-                            ${isAutoPromoted ? '<span class="text-[9px] text-amber-400 bg-amber-500/10 px-1 rounded font-semibold">Auto-Promoted</span>' : ''}
-                        </div>
-                    </div>
-
-                    <!-- Footer Details & Quick Launch -->
-                    <div class="mt-3 pt-2 border-t border-slate-700/50 flex items-center justify-between text-[11px] text-slate-500">
-                        <span class="truncate max-w-[120px] text-[10px] font-mono text-sky-400" title="${escapeHtml(bm.path || '')}">
-                            ${escapeHtml(pathDisplay || bm.category)}
-                        </span>
-                        <div class="flex items-center gap-2">
-                            <button onclick="copyToClipboard('${escapeHtml(bm.url)}', this)" title="Copy URL" class="text-slate-500 hover:text-slate-300">
-                                <i class="far fa-copy text-[10px]"></i>
-                            </button>
-                            <button onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')" title="Launch Link" class="text-sky-400 hover:text-sky-300">
-                                <i class="fas fa-external-link-alt text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-
-    window.setDashFilter = function (sub) {
-        activeDashFilter = sub;
-        renderDashboardDailyDrivers();
-    };
+    function renderDashboardDailyDrivers() { return; }
 
     // -------------------------------------------------------------------------
     // 8. RENDER BOOKMARKS EXPLORER (The 4 Top Folders: Work, Life, Tools, Dashboard)
@@ -751,12 +605,8 @@
             const count = getBookmarkUsageCount(bm.id);
 
             // Category badge color
-            let badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
-            if (bm.category === 'Work') badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
-            else if (bm.category === 'Life') badgeColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
-            else if (bm.category === 'Tools') badgeColor = 'bg-purple-500/10 text-purple-400 border-purple-500/20';
-            else if (bm.category === 'Dashboard') badgeColor = 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-            else if (bm.category === 'Accounts') badgeColor = 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
+                        let badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
+            if (bm.category === 'Bookmarks') badgeColor = 'bg-slate-700/50 text-sky-400 border-slate-700';
 
             return `
                 <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition group">
@@ -1279,4 +1129,11 @@
     });
 
 })();
+
+
+
+
+
+
+
 
