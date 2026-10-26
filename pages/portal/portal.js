@@ -1242,6 +1242,25 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
         } catch (err) {
             console.error(err);
+            
+            // Diagnostic fallback if model not found
+            if (err.message.includes("404")) {
+                try {
+                    const diagResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+                    if (diagResponse.ok) {
+                        const diagData = await diagResponse.json();
+                        const availableModels = diagData.models
+                            .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes("generateContent"))
+                            .map(m => m.name)
+                            .join("\n");
+                        alert(`Model not found (404). But your key is valid! Available models for your key are:\n\n${availableModels}\n\nPlease reply to the AI with this list.`);
+                        return;
+                    }
+                } catch (diagErr) {
+                    console.error("Diagnostic failed", diagErr);
+                }
+            }
+            
             alert('AI Search failed: ' + err.message);
         } finally {
             btn.innerHTML = originalText;
