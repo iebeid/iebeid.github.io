@@ -1233,11 +1233,17 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
             // Set state and render
             aiSearchMode = true;
-            aiMatchedIds = matchedIds;
+            aiMatchedIds = matchedIds.map(id => Number(id)); // ensure they are numbers
+            
+            console.log("AI matched IDs:", aiMatchedIds);
             
             // Re-render
             if (typeof renderBookmarks === 'function') {
                 renderBookmarks();
+            }
+            
+            if (aiMatchedIds.length === 0) {
+                alert("AI didn't find any bookmarks matching that query.");
             }
 
         } catch (err) {
