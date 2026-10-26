@@ -1253,7 +1253,13 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                             .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes("generateContent"))
                             .map(m => m.name)
                             .join("\n");
-                        alert(`Model not found (404). But your key is valid! Available models for your key are:\n\n${availableModels}\n\nPlease reply to the AI with this list.`);
+                        const msg = `Model not found (404). But your key is valid! Available models for your key are:\n\n${availableModels}`;
+                        try {
+                            await navigator.clipboard.writeText(availableModels);
+                            alert(msg + "\n\n(SUCCESS: This list has been automatically COPIED to your clipboard! You can just paste it to the AI.)");
+                        } catch (cpErr) {
+                            prompt(msg + "\n\nCopy the text below:", availableModels);
+                        }
                         return;
                     }
                 } catch (diagErr) {
