@@ -1041,10 +1041,20 @@
         const saveStatus = document.getElementById('scratch-save-status');
 
         const saved = localStorage.getItem(SCRATCHPAD_KEY) || '';
+        
+        // Disable browser autofill which can sometimes fire input events on load
+        if (dashScratch) dashScratch.setAttribute('autocomplete', 'off');
+        if (fullScratch) fullScratch.setAttribute('autocomplete', 'off');
+
         if (dashScratch) dashScratch.value = saved;
         if (fullScratch) fullScratch.value = saved;
 
+        // Add a flag to prevent saving during initial load if browser fires ghost events
+        let isReady = false;
+        setTimeout(() => { isReady = true; }, 500);
+
         function save(val) {
+            if (!isReady) return; // Prevent ghost overwrites
             localStorage.setItem(SCRATCHPAD_KEY, val);
             if (dashScratch && dashScratch.value !== val) dashScratch.value = val;
             if (fullScratch && fullScratch.value !== val) fullScratch.value = val;
@@ -1054,9 +1064,27 @@
             }
         }
 
-        if (dashScratch) dashScratch.addEventListener('input', (e) => save(e.target.value));
-        if (fullScratch) fullScratch.addEventListener('input', (e) => save(e.target.value));
+        // Use keyup and paste instead of 'input' to be safer against browser auto-restores
+        ['keyup', 'paste', 'change', 'input'].forEach(evt => {
+            if (dashScratch) dashScratch.addEventListener(evt, (e) => save(e.target.value));
+            if (fullScratch) fullScratch.addEventListener(evt, (e) => save(e.target.value));
+        });
     }
+    
+    window.downloadScratchpad = function() {
+        const content = localStorage.getItem(SCRATCHPAD_KEY) || '';
+        if (!content) return alert("Scratchpad is empty.");
+        
+        const blob = new Blob([content], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `scratchpad_backup_${new Date().toISOString().split('T')[0]}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
 
     window.clearScratchpad = function () {
         if (confirm('Are you sure you want to clear your scratchpad?')) {
