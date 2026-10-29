@@ -22,19 +22,19 @@
     <style>
         :root {
             --bg-main: #ffffff;
-            --bg-surface: #101520;
-            --bg-card: #151d30;
-            --bg-code: #070a10;
-            --border-color: #1e293b;
-            --border-highlight: #26354a;
+            --bg-surface: #ffffff;
+            --bg-card: #ffffff;
+            --bg-code: #ffffff;
+            --border-color: #4b5563;
+            --border-highlight: #4b5563;
             --text-main: #4b5563;
             --text-muted: #6b7280;
-            --accent-cyan: #00f2fe;
-            --brand-primary: #0f172a;
-            --brand-hover: #1e293b;
-            --accent-green: #34d399;
-            --accent-amber: #f59e0b;
-            --accent-rose: #f43f5e;
+            --accent-cyan: #1e3a8a;
+            --brand-primary: #1e3a8a;
+            --brand-hover: #172554;
+            --accent-green: #047857;
+            --accent-amber: #b45309;
+            --accent-rose: #b91c1c;
         }
 
         * {
@@ -93,9 +93,9 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            background: rgba(52, 211, 153, 0.1);
+            background: rgba(4, 120, 87, 0.08);
             color: var(--accent-green);
-            border: 1px solid rgba(52, 211, 153, 0.25);
+            border: 1px solid rgba(4, 120, 87, 0.3);
             padding: 0.15rem 0.65rem;
             border-radius: 999px;
             font-family: "SFMono-Regular", Consolas, monospace;
@@ -123,7 +123,7 @@
         }
 
         .brand-logo {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
@@ -131,31 +131,38 @@
         }
 
         .brand-icon {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            aspect-ratio: 1 / 1;
             border-radius: 8px;
             background: #ffffff;
-            border: 2px solid #000000;
-            color: #000000;
+            border: 2px solid #4b5563;
+            color: #1e3a8a;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #000000;
-            font-weight: 900;
-            font-size: 1.05rem;
-            font-family: monospace;
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
             box-shadow: none;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            line-height: 1;
         }
 
         .brand-title {
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
+            font-size: 1.28rem;
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: 0.01em;
             color: #4b5563;
             display: flex;
             align-items: center;
             gap: 0.55rem;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
         }
 
         .brand-title span.accent {
@@ -196,12 +203,18 @@
         }
 
         .brand-subtitle {
-            display: block;
-            font-size: 0.68rem;
-            font-family: monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.58rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
             color: var(--text-muted);
-            letter-spacing: 0.04em;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -224,20 +237,22 @@
         }
 
         .nav-links a.github-link {
-            background-color: #1e293b;
+            background-color: #ffffff;
             color: #4b5563;
             padding: 0.45rem 0.9rem;
             border-radius: 6px;
             font-size: 0.85rem;
-            border: 1px solid var(--border-highlight);
+            border: 1px solid #4b5563;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.2s;
         }
 
         .nav-links a.github-link:hover {
-            background-color: #334155;
-            border-color: var(--brand-primary);
+            background-color: #f9fafb;
+            border-color: #1e3a8a;
+            color: #1e3a8a;
         }
 
         main {
@@ -282,7 +297,7 @@
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, var(--accent-cyan), var(--brand-primary));
+            background: linear-gradient(90deg, #1e3a8a, #0f172a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -302,8 +317,9 @@
         }
 
         .btn-primary {
-            background-color: var(--brand-primary);
-            color: #000000;
+            background-color: #ffffff;
+            border: 1px solid #4b5563;
+            color: #4b5563;
             padding: 0.8rem 1.65rem;
             border-radius: 6px;
             font-weight: 700;
@@ -316,7 +332,9 @@
         }
 
         .btn-primary:hover {
-            background-color: var(--accent-cyan);
+            background-color: #f9fafb;
+            border-color: #1f2937;
+            color: #1f2937;
             transform: translateY(-1px);
         }
 
@@ -350,7 +368,7 @@
             border: 1px solid var(--border-highlight);
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .code-header {
@@ -378,22 +396,22 @@
         }
 
         .code-dot.red { background-color: #ef4444; }
-        .code-dot.amber { background-color: #f59e0b; }
+        .code-dot.amber { background-color: #b45309; }
         .code-dot.green { background-color: #10b981; }
 
         .code-window pre {
             font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
             font-size: 0.85rem;
-            color: #e2e8f0;
+            color: #1f2937;
             overflow-x: auto;
             line-height: 1.65;
         }
 
-        .keyword { color: #f43f5e; }
+        .keyword { color: #b91c1c; }
         .comment { color: #64748b; font-style: italic; }
-        .string { color: #34d399; }
-        .function { color: #60a5fa; }
-        .type { color: #8be9fd; }
+        .string { color: #047857; }
+        .function { color: #1e40af; }
+        .type { color: #1e3a8a; }
 
         /* Lifecycle Pillars Overview */
         .model-section {
@@ -437,8 +455,8 @@
             font-family: monospace;
             font-size: 0.75rem;
             color: var(--accent-amber);
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: rgba(180, 83, 9, 0.08);
+            border: 1px solid rgba(180, 83, 9, 0.3);
             padding: 0.15rem 0.55rem;
             border-radius: 4px;
             display: inline-block;
@@ -484,9 +502,10 @@
 
         .filter-btn.active,
         .filter-btn:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            background-color: rgba(0, 242, 254, 0.08);
+            border-color: #1e3a8a;
+            color: #1e3a8a;
+            background-color: #f9fafb;
+            font-weight: 700;
         }
 
         .solution-grid {
@@ -508,7 +527,7 @@
         .product-card:hover {
             border-color: var(--brand-primary);
             transform: translateY(-2px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
         }
 
         .product-card.hidden {
@@ -518,7 +537,7 @@
         .card-header {
             padding: 1.5rem;
             border-bottom: 1px solid var(--border-color);
-            background-color: rgba(21, 29, 48, 0.5);
+            background-color: #f9fafb;
         }
 
         .tag-container {
@@ -539,12 +558,12 @@
 
         .tech-tag.lifecycle {
             color: var(--accent-amber);
-            border-color: rgba(245, 158, 11, 0.35);
+            border-color: rgba(180, 83, 9, 0.35);
         }
 
         .tech-tag.stack {
             color: var(--accent-cyan);
-            border-color: rgba(0, 242, 254, 0.35);
+            border-color: rgba(30, 58, 138, 0.35);
         }
 
         .product-card h3 {
@@ -571,7 +590,7 @@
         }
 
         .snippet-container pre {
-            color: #cbd5e1;
+            color: #1f2937;
             white-space: pre;
             line-height: 1.55;
         }
@@ -579,7 +598,7 @@
         .card-footer {
             padding: 1.35rem 1.5rem;
             margin-top: auto;
-            background-color: rgba(21, 29, 48, 0.25);
+            background-color: #f9fafb;
         }
 
         .licensing-box {
@@ -643,17 +662,22 @@
         }
 
         .btn-oss:hover {
-            background-color: #1e293b;
-            border-color: var(--text-muted);
+            background-color: #f9fafb;
+            border-color: #1f2937;
+            color: #1f2937;
         }
 
         .btn-commercial {
-            background-color: var(--accent-cyan);
-            color: #000000;
+            background-color: #ffffff;
+            border: 1px solid #4b5563;
+            color: #1e3a8a;
+            font-weight: 700;
         }
 
         .btn-commercial:hover {
-            background-color: var(--brand-primary);
+            background-color: #f9fafb;
+            border-color: #1e3a8a;
+            color: #1e3a8a;
         }
 
         /* Fair-Code Dual-Licensing Comparison Section */
@@ -758,7 +782,7 @@
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            color: #cbd5e1;
+            color: #1f2937;
         }
 
         .icon-check { color: var(--accent-green); font-weight: bold; }
@@ -913,6 +937,125 @@
                 font-size: 2.1rem;
             }
         }
+
+        /* ==========================================================================
+           CANONICAL TRADEMARK LOGO SPECIFICATION - UNITY SYSTEMS / الوحدة للأنظمة
+           Isolated, self-contained design block for corporate registration & trademarking
+           ========================================================================== */
+        .unity-systems-trademark-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: #ffffff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .unity-systems-trademark-brand .brand-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 2px solid #4b5563;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            box-shadow: none;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .unity-systems-trademark-brand .brand-content {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .unity-systems-trademark-brand .brand-text-column {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+        }
+
+        .unity-systems-trademark-brand .brand-title {
+            font-size: 1.28rem;
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            flex-wrap: nowrap;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .unity-systems-trademark-brand .brand-title .word-unity {
+            color: #4b5563;
+        }
+
+        .unity-systems-trademark-brand .brand-title .word-systems {
+            color: #1e3a8a;
+        }
+
+        .unity-systems-trademark-brand .brand-divider {
+            color: #4b5563;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        .unity-systems-trademark-brand .brand-arabic {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4b5563;
+            letter-spacing: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .unity-systems-trademark-brand .brand-arabic .arabic-systems {
+            color: #1e3a8a;
+        }
+
+        .unity-systems-trademark-brand .region-tag {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            background: rgba(30, 58, 138, 0.08);
+            border: 1px solid rgba(30, 58, 138, 0.25);
+            padding: 0.12rem 0.45rem;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .unity-systems-trademark-brand .brand-subtitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.58rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
+            color: #6b7280;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -933,16 +1076,19 @@
     <!-- Storefront Header -->
     <header>
         <div class="nav-container">
-            <a href="storefront.html" class="brand-logo">
-                <div class="brand-icon">&#933;&#931;</div>
-                <div>
-                    <div class="brand-title">
-                        <span>UNITY<span class="accent">SYSTEMS</span></span>
-                        <span class="brand-divider">|</span>
-                        <span class="brand-arabic" dir="rtl" lang="ar">الوحدة <span>للأنظمة</span></span>
-                        <span class="region-tag">US &bull; EG</span>
+            <!-- CANONICAL TRADEMARK LOGO COMPONENT -->
+            <a href="storefront.html" class="unity-systems-trademark-brand" aria-label="Unity Systems Brand Logo">
+                <div class="brand-icon" title="Upsilon Sigma (Unity Systems)">&#933;&#931;</div>
+                <div class="brand-content">
+                    <div class="brand-text-column">
+                        <div class="brand-title">
+                            <span><span class="word-unity">UNITY</span><span class="word-systems">SYSTEMS</span></span>
+                            <span class="brand-divider">|</span>
+                            <span class="brand-arabic" dir="rtl" lang="ar"><span class="arabic-unity">الوحدة</span> <span class="arabic-systems">للأنظمة</span></span>
+                        </div>
+                        <span class="brand-subtitle"><span>Data Engineering</span><span>&bull;</span><span>AI Lifecycle</span><span>&bull;</span><span>Scientific Compute</span></span>
                     </div>
-                    <span class="brand-subtitle">AI Lifecycle &bull; Scientific Compute &bull; Graphics Engines</span>
+                    <span class="region-tag">US &bull; EG</span>
                 </div>
             </a>
             <nav class="nav-links">
@@ -1103,11 +1249,11 @@ predictions = pipeline.<span class="function">eval_interaction</span>(matrix)</p
                     <div class="card-footer">
                         <div class="licensing-box">
                             <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
-                            <div class="price-tag">$1,200<span>/node</span></div>
+                            <div class="price-tag" style="font-size:0.9em;color:#888;">Past Demo</div>
                         </div>
                         <div class="action-row">
                             <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
-                            <button type="button" onclick="openLicenseModal('ProtGram-DirectGCN ($1,200 / node)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                            <button type="button" disabled class="btn btn-commercial" style="opacity: 0.7; cursor: not-allowed;"><i class="fas fa-info-circle"></i> Not for Sale - Past Work Demo</button>
                         </div>
                     </div>
                 </article>
@@ -1163,11 +1309,11 @@ runtime-&gt;<span class="function">injectComputeKernels</span>(cuda_particles);<
                     <div class="card-footer">
                         <div class="licensing-box">
                             <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
-                            <div class="price-tag">$2,450<span>/binary</span></div>
+                            <div class="price-tag" style="font-size:0.9em;color:#888;">Past Demo</div>
                         </div>
                         <div class="action-row">
                             <a href="https://github.com/iebeid/RaymarcherVR.git" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
-                            <button type="button" onclick="openLicenseModal('RaymarcherVR Engine ($2,450 / binary)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                            <button type="button" disabled class="btn btn-commercial" style="opacity: 0.7; cursor: not-allowed;"><i class="fas fa-info-circle"></i> Not for Sale - Past Work Demo</button>
                         </div>
                     </div>
                 </article>
@@ -1193,11 +1339,11 @@ runtime-&gt;<span class="function">injectComputeKernels</span>(cuda_particles);<
                     <div class="card-footer">
                         <div class="licensing-box">
                             <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
-                            <div class="price-tag">$950<span>/license</span></div>
+                            <div class="price-tag" style="font-size:0.9em;color:#888;">Past Demo</div>
                         </div>
                         <div class="action-row">
                             <a href="https://github.com/iebeid/cuda-particles.git" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
-                            <button type="button" onclick="openLicenseModal('CudaParticles Engine ($950 / license)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                            <button type="button" disabled class="btn btn-commercial" style="opacity: 0.7; cursor: not-allowed;"><i class="fas fa-info-circle"></i> Not for Sale - Past Work Demo</button>
                         </div>
                     </div>
                 </article>
@@ -1223,17 +1369,17 @@ clusters = resolver.<span class="function">optimize_communities</span>(bipartite
                     <div class="card-footer">
                         <div class="licensing-box">
                             <div class="license-type">Dual-Licensed: <br><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>
-                            <div class="price-tag">$1,100<span>/node</span></div>
+                            <div class="price-tag" style="font-size:0.9em;color:#888;">Past Demo</div>
                         </div>
                         <div class="action-row">
                             <a href="https://github.com/iebeid" target="_blank" class="btn btn-oss"><i class="fab fa-github"></i> Source Code</a>
-                            <button type="button" onclick="openLicenseModal('ModER-GraphER ($1,100 / node)')" class="btn btn-commercial"><i class="fas fa-key"></i> License Codebase</button>
+                            <button type="button" disabled class="btn btn-commercial" style="opacity: 0.7; cursor: not-allowed;"><i class="fas fa-info-circle"></i> Not for Sale - Past Work Demo</button>
                         </div>
                     </div>
                 </article>
 
                 <!-- PRODUCT 7: XLPM-VisIntX Suite (Featured Live Interactive Demo) -->
-                <article id="xlpm-product" class="product-card" data-category="DATA_CURATION VISUALIZATION_REPORTING" style="border-color: var(--accent-cyan); box-shadow: 0 0 22px rgba(0, 242, 254, 0.12);">
+                <article id="xlpm-product" class="product-card" data-category="DATA_CURATION VISUALIZATION_REPORTING" style="border-color: #4b5563; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);">
                     <div class="card-header">
                         <div class="tag-container">
                             <span class="tech-tag lifecycle">DATA_CURATION + VISUALIZATION_REPORTING</span>
@@ -1371,12 +1517,6 @@ clusters = resolver.<span class="function">optimize_communities</span>(bipartite
                     <label for="selected-product">SELECTED COMPONENT / TIER</label>
                     <select id="selected-product" required>
                         <option value="AILifecycleKit ($499 / dev seat)">AILifecycleKit ($499 / dev seat)</option>
-                        <option value="ProtGram-DirectGCN ($1,200 / node)">ProtGram-DirectGCN ($1,200 / node)</option>
-                        
-                        <option value="RaymarcherVR Engine ($2,450 / binary)">RaymarcherVR Engine ($2,450 / binary)</option>
-                        <option value="CudaParticles Engine ($950 / license)">CudaParticles Engine ($950 / license)</option>
-                        <option value="ModER-GraphER ($1,100 / node)">ModER-GraphER ($1,100 / node)</option>
-                        
                         <option value="Commercial Seat / Node License">Commercial Seat / Node License</option>
                         <option value="Enterprise Site License & Custom MSA">Enterprise Site License &amp; Custom MSA</option>
                     </select>
