@@ -1313,23 +1313,36 @@ def extract_portal_bookmarks(conn: sqlite3.Connection):
         cur = conn.cursor()
         count = 0
         for item in bookmarks_list:
+            cat = item.get("category", "Bookmarks")
+            sub = item.get("subfolder", "")
+            domain = item.get("domain", "") or sub
+            path_str = item.get("path", f"{cat} > {sub}" if sub else cat)
+            ai_tags = item.get("ai_tags", "")
             cur.execute("""
-            INSERT INTO portal_bookmarks (chrome_id, title, url, category, subfolder, favicon, pinned, click_count)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO portal_bookmarks (
+                chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(chrome_id) DO UPDATE SET
                 title = excluded.title,
                 url = excluded.url,
+                domain = excluded.domain,
                 category = excluded.category,
-                subfolder = excluded.subfolder;
+                subfolder = excluded.subfolder,
+                path = excluded.path,
+                ai_tags = excluded.ai_tags;
             """, (
                 str(item.get("id")),
                 item.get("name", item.get("title", "Untitled")),
                 item.get("url", "#"),
-                item.get("category", "General"),
-                item.get("subfolder", ""),
+                domain,
+                cat,
+                sub,
+                path_str,
+                ai_tags,
                 item.get("favicon", ""),
-                0,
-                0
+                1 if item.get("pinned") else 0,
+                int(item.get("clicks", 0) or 0)
             ))
             count += 1
 

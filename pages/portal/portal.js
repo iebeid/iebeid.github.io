@@ -261,8 +261,9 @@
 
     function getAllBookmarks() {
         let baseList = [];
-        if (window.PORTAL_BOOKMARKS && Array.isArray(window.PORTAL_BOOKMARKS.bookmarks)) {
-            baseList = window.PORTAL_BOOKMARKS.bookmarks;
+        const bmSource = window.PORTAL_BOOKMARKS || window.PORTAL_BOOKMARKS_DATA || (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_bookmarks);
+        if (bmSource && Array.isArray(bmSource.bookmarks)) {
+            baseList = bmSource.bookmarks;
         }
         const custom = getCustomBookmarks();
         const deletedSet = new Set(getDeletedBookmarkIds());

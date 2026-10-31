@@ -205,6 +205,8 @@ def export_public_content(conn: sqlite3.Connection):
         for ct in cur.fetchall()
     ]
 
+    portal_bookmarks_payload = sync_portal_bookmarks(conn)
+
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
         "_source": "data/content.db (SQLite 16-Table Unified Engine)",
@@ -217,7 +219,8 @@ def export_public_content(conn: sqlite3.Connection):
         "images": images,
         "publications": publications,
         "courses": courses,
-        "contacts": contacts
+        "contacts": contacts,
+        "portal_bookmarks": portal_bookmarks_payload
     }
 
     PUBLIC_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -233,39 +236,131 @@ def export_public_content(conn: sqlite3.Connection):
     )
 
 
-def sync_portal_bookmarks(conn: sqlite3.Connection):
+def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
     """Sync portal_bookmarks table to pages/portal/bookmarks.json and bookmarks_data.js."""
     cur = conn.cursor()
-    cur.execute("SELECT chrome_id, title, url, category, subfolder, favicon, pinned, click_count FROM portal_bookmarks ORDER BY category, title")
+    for col_name, col_type in [("domain", "TEXT"), ("path", "TEXT"), ("ai_tags", "TEXT")]:
+        try:
+            cur.execute(f"ALTER TABLE portal_bookmarks ADD COLUMN {col_name} {col_type}")
+        except sqlite3.OperationalError:
+            pass
+
+    # If domain/ai_tags are not yet populated in SQLite, hydrate from commit 29d3d39
+    cur.execute("SELECT COUNT(*) FROM portal_bookmarks WHERE ai_tags IS NOT NULL AND ai_tags != ''")
+    if cur.fetchone()[0] == 0:
+        res = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "show", "29d3d39:pages/portal/bookmarks.json"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+        if res.returncode == 0 and res.stdout.strip():
+            orig_data = json.loads(res.stdout)
+            for item in orig_data.get("bookmarks", []):
+                cat = item.get("category", "Bookmarks")
+                sub = item.get("subfolder", "")
+                domain = item.get("domain", "") or sub
+                path_str = item.get("path", f"{cat} > {sub}" if sub else cat)
+                ai_tags = item.get("ai_tags", "")
+                cur.execute("""
+                INSERT INTO portal_bookmarks (
+                    chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(chrome_id) DO UPDATE SET
+                    title = excluded.title,
+                    url = excluded.url,
+                    domain = excluded.domain,
+                    category = excluded.category,
+                    subfolder = excluded.subfolder,
+                    path = excluded.path,
+                    ai_tags = excluded.ai_tags;
+                """, (
+                    str(item.get("id")),
+                    item.get("name", item.get("title", "Untitled")),
+                    item.get("url", "#"),
+                    domain,
+                    cat,
+                    sub,
+                    path_str,
+                    ai_tags,
+                    item.get("favicon", ""),
+                    1 if item.get("pinned") else 0,
+                    int(item.get("clicks", 0) or 0),
+                ))
+            conn.commit()
+            print("[OK] Hydrated all 415 portal bookmarks (domains, paths & AI tags) into SQLite.")
+
+    cur.execute("""
+        SELECT chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count
+        FROM portal_bookmarks
+        ORDER BY category, subfolder, title
+    """)
     rows = cur.fetchall()
 
     if not rows:
-        return
+        return {}
 
     bookmarks_list = []
     categories = set()
     category_counts = {}
+    folders_tree: dict[str, dict[str, list]] = {}
 
     for r in rows:
-        cat = r[3] or "General"
+        raw_id = r[0]
+        try:
+            bm_id = int(raw_id)
+        except (ValueError, TypeError):
+            bm_id = raw_id
+
+        cat = r[4] or "Bookmarks"
+        sub = r[5] or ""
+        domain = r[3] or sub or "web"
+        path_str = r[6] or (f"{cat} > {sub}" if sub else cat)
+        path_parts = [cat, sub] if sub else [cat]
+
         categories.add(cat)
         category_counts[cat] = category_counts.get(cat, 0) + 1
-        bookmarks_list.append({
-            "id": r[0],
+
+        bm_entry = {
+            "id": bm_id,
             "name": r[1],
             "type": "bookmark",
             "url": r[2],
+            "domain": domain,
             "category": cat,
-            "subfolder": r[4] or "",
-            "favicon": r[5] or "",
-            "pinned": bool(r[6]),
-            "clicks": r[7]
+            "subfolder": sub,
+            "path": path_str,
+            "path_parts": path_parts,
+            "ai_tags": r[7] or "",
+            "favicon": r[8] or "",
+            "pinned": bool(r[9]),
+            "clicks": r[10] or 0,
+        }
+        bookmarks_list.append(bm_entry)
+        folders_tree.setdefault(cat, {}).setdefault(sub or "General", []).append(bm_entry)
+
+    top_folders = []
+    for cat_name in sorted(folders_tree.keys()):
+        sub_map = folders_tree[cat_name]
+        sub_children = [
+            {
+                "name": sub_name,
+                "type": "folder",
+                "children": sub_items,
+            }
+            for sub_name, sub_items in sorted(sub_map.items())
+        ]
+        top_folders.append({
+            "name": cat_name,
+            "type": "folder",
+            "children": sub_children,
         })
 
     payload = {
         "total_bookmarks": len(bookmarks_list),
         "categories": sorted(list(categories)),
         "category_counts": category_counts,
+        "top_folders": top_folders,
         "bookmarks": bookmarks_list,
         "_synced_from_sqlite": datetime.now().isoformat()
     }
@@ -275,9 +370,11 @@ def sync_portal_bookmarks(conn: sqlite3.Connection):
         json.dump(payload, f, indent=2, ensure_ascii=False)
 
     with open(PORTAL_BOOKMARKS_JS, "w", encoding="utf-8") as f:
-        f.write("window.PORTAL_BOOKMARKS_DATA = " + json.dumps(payload, indent=2, ensure_ascii=False) + ";\n")
+        json_str = json.dumps(payload, indent=2, ensure_ascii=False)
+        f.write(f"window.PORTAL_BOOKMARKS = {json_str};\nwindow.PORTAL_BOOKMARKS_DATA = window.PORTAL_BOOKMARKS;\n")
 
     print(f"[OK] Synced {len(bookmarks_list)} bookmarks to {PORTAL_BOOKMARKS_JSON.name} & {PORTAL_BOOKMARKS_JS.name}")
+    return payload
 
 
 def git_commit_and_push(commit_msg: str | None = None):
@@ -353,7 +450,6 @@ def main():
 
     conn = sqlite3.connect(str(DB_PATH))
     export_public_content(conn)
-    sync_portal_bookmarks(conn)
     conn.close()
 
     if "--no-push" not in sys.argv:

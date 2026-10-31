@@ -251,13 +251,21 @@ def init_database(db_path: Path = DB_PATH):
         chrome_id TEXT UNIQUE,
         title TEXT NOT NULL,
         url TEXT NOT NULL,
+        domain TEXT,
         category TEXT NOT NULL,
         subfolder TEXT,
+        path TEXT,
+        ai_tags TEXT,
         favicon TEXT,
         pinned INTEGER DEFAULT 0,
         click_count INTEGER DEFAULT 0
     );
     """)
+    for col_name, col_type in [("domain", "TEXT"), ("path", "TEXT"), ("ai_tags", "TEXT")]:
+        try:
+            cur.execute(f"ALTER TABLE portal_bookmarks ADD COLUMN {col_name} {col_type}")
+        except sqlite3.OperationalError:
+            pass
 
     # 13. Portal Scratches Database
     cur.execute("""
