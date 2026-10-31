@@ -1,4 +1,4 @@
-window.PORTAL_BOOKMARKS = {
+{
   "total_bookmarks": 415,
   "categories": [
     "Bookmarks"
@@ -16906,6 +16906,5 @@ window.PORTAL_BOOKMARKS = {
       "clicks": 0
     }
   ],
-  "_synced_from_sqlite": "2026-10-31T12:36:45.341313"
-};
-window.PORTAL_BOOKMARKS_DATA = window.PORTAL_BOOKMARKS;
+  "_synced_from_sqlite": "2026-10-31T13:24:39.756041"
+}

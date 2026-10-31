@@ -1301,7 +1301,9 @@ def extract_documents_and_media(conn: sqlite3.Connection):
 
 def extract_portal_bookmarks(conn: sqlite3.Connection):
     """Extract Chrome Bookmarks tree from bookmarks.json into portal_bookmarks table."""
-    bm_json_path = PAGES_DIR / "portal" / "bookmarks.json"
+    bm_json_path = DATA_DIR / "bookmarks.json"
+    if not bm_json_path.exists():
+        bm_json_path = PAGES_DIR / "portal" / "bookmarks.json"
     if not bm_json_path.exists():
         return
 

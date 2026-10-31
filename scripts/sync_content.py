@@ -19,8 +19,8 @@ DATA_DIR = REPO_ROOT / "data"
 DB_PATH = DATA_DIR / "content.db"
 PUBLIC_JSON_PATH = DATA_DIR / "public_content.json"
 PUBLIC_JS_PATH = DATA_DIR / "public_content.js"
-PORTAL_BOOKMARKS_JSON = REPO_ROOT / "pages" / "portal" / "bookmarks.json"
-PORTAL_BOOKMARKS_JS = REPO_ROOT / "pages" / "portal" / "bookmarks_data.js"
+PORTAL_BOOKMARKS_JSON = DATA_DIR / "bookmarks.json"
+PORTAL_BOOKMARKS_JS = REPO_ROOT / "js" / "bookmarks_data.js"
 
 
 def check_git_safety():
@@ -332,9 +332,25 @@ def export_public_content(conn: sqlite3.Connection):
         for r in cur.fetchall()
     }
 
+    xlpm_datasets = []
+    try:
+        cur.execute("SELECT dataset_key, dataset_type, group_name, rel_path, file_size_bytes FROM xlpm_datasets ORDER BY dataset_key")
+        xlpm_datasets = [
+            {
+                "dataset_key": r[0],
+                "dataset_type": r[1],
+                "group_name": r[2],
+                "rel_path": r[3],
+                "file_size_bytes": r[4],
+            }
+            for r in cur.fetchall()
+        ]
+    except sqlite3.OperationalError:
+        pass
+
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
-        "_source": "data/content.db (SQLite 16-Table Unified Engine)",
+        "_source": "data/content.db (SQLite 17-Table Unified Engine)",
         "meta": meta,
         "navigation_menu": top_nav,
         "html_templates": html_templates,
@@ -353,6 +369,7 @@ def export_public_content(conn: sqlite3.Connection):
         },
         "portal_messages": portal_messages,
         "portal_vault": portal_vault,
+        "xlpm_datasets": xlpm_datasets,
     }
 
     PUBLIC_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
