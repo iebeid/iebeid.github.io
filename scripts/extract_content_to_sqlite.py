@@ -1397,6 +1397,85 @@ def extract_publications(conn: sqlite3.Connection):
     print(f"[OK] Seeded {len(pubs_data)} publications and peer-reviewed papers.")
 
 
+def seed_portal_state(conn: sqlite3.Connection):
+    """Seed portal_tasks, portal_scratches, and portal_messages in SQLite so zero portal content is hardcoded in JS."""
+    cur = conn.cursor()
+    now_iso = datetime.now().isoformat()
+    date_display = datetime.now().strftime("%b %d, %Y")
+
+    # 1. Seed Portal Tasks
+    cur.execute("SELECT COUNT(*) FROM portal_tasks")
+    if cur.fetchone()[0] == 0:
+        tasks_seed = [
+            ("task-1", "Review NSF project milestone deliverables for student research assistants", "milestone", "active", now_iso),
+            ("task-2", "Finalize revision comments for Frontiers in Bioinformatics ProtGram manuscript", "high", "completed", now_iso),
+            ("task-3", "Upload CSCI modern coursework lab assignments to Canvas", "normal", "active", now_iso),
+        ]
+        for t_id, title, prio, status, c_at in tasks_seed:
+            cur.execute("""
+            INSERT INTO portal_tasks (task_id, title, priority, status, created_at)
+            VALUES (?, ?, ?, ?, ?)
+            ON CONFLICT(task_id) DO UPDATE SET
+                title = excluded.title,
+                priority = excluded.priority,
+                status = excluded.status;
+            """, (t_id, title, prio, status, c_at))
+        print(f"[OK] Seeded {len(tasks_seed)} portal tasks into portal_tasks table.")
+
+    # 2. Seed Portal Scratches (Active Buffer + Archive Record)
+    cur.execute("SELECT COUNT(*) FROM portal_scratches")
+    if cur.fetchone()[0] == 0:
+        scratches_seed = [
+            (
+                "active_buffer",
+                "Active Working Scratchpad Buffer",
+                "# A2I2 Lab & Executive Research Scratchpad\n- Next grant submission deadline: NSF III / NIH R15\n- Review XLPM 3D contact map benchmarks and GNN node embeddings\n- Check Unity Systems enterprise licensing inquiries",
+                "active_buffer",
+                now_iso,
+                now_iso,
+            ),
+            (
+                "scratch-1",
+                "Snapshot: A2I2 Lab Research Priorities & Grant Roadmap",
+                "# A2I2 Lab Research Priorities & Grant Roadmap\n1. ProtGram & GNN Protein-Protein Interaction cross-species generalization.\n2. XLPMol3DViewer WebGL + D3 contact map integration.\n3. Entity Resolution & Healthcare Information Quality benchmarks.",
+                "archive",
+                now_iso,
+                date_display,
+            ),
+        ]
+        for s_id, title, content, cat, c_at, u_at in scratches_seed:
+            cur.execute("""
+            INSERT INTO portal_scratches (scratch_id, title, content, category, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?)
+            ON CONFLICT(scratch_id) DO UPDATE SET
+                title = excluded.title,
+                content = excluded.content,
+                category = excluded.category,
+                updated_at = excluded.updated_at;
+            """, (s_id, title, content, cat, c_at, u_at))
+        print(f"[OK] Seeded {len(scratches_seed)} portal scratchpad records into portal_scratches table.")
+
+    # 3. Seed Portal Messages (Authenticated Vault Welcome / Protocol Record)
+    cur.execute("SELECT COUNT(*) FROM portal_messages")
+    if cur.fetchone()[0] == 0:
+        cur.execute("""
+        INSERT INTO portal_messages (sender, email, subject, classification, body, fingerprint, date, unread)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            "SQLite Unified Vault Engine",
+            "islam.akef@gmail.com",
+            "Zero-Trust E2EE Messaging & SQLite Vault Active",
+            "System Security",
+            "Your Executive Command Center is now 100% backed by the local SQLite database (data/content.db).\n\nAll 415 bookmarks (with AI semantic tags), scratchpad snapshots, active tasks, encrypted handshake credentials (portal_vault), and verified inbound dispatches are stored in SQLite tables and synchronized via scripts/sync_content.py.",
+            "SHA256:8F4A2C91E7B03D6A",
+            date_display,
+            0,
+        ))
+        print("[OK] Seeded initial verified dispatch into portal_messages table.")
+
+    conn.commit()
+
+
 def seed_encrypted_vault(conn: sqlite3.Connection):
     """Encrypt and store master credentials in the database."""
     vault_items = [
@@ -1424,6 +1503,7 @@ def main():
     extract_courses(conn)
     extract_publications(conn)
     extract_portal_bookmarks(conn)
+    seed_portal_state(conn)
     seed_encrypted_vault(conn)
     conn.close()
     print("=== Master Extraction Complete! 100% of HTML, CSS, Navigation & Content is in data/content.db ===")

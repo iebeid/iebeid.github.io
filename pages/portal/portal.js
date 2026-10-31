@@ -48,10 +48,78 @@
     let activeTaskFilter = 'all';
 
     // -------------------------------------------------------------------------
-    // 2. AUTHENTICATION & SECURITY
+    // 2. AUTHENTICATION & SECURITY (SQLite AES-256-GCM Vault + Local Override)
     // -------------------------------------------------------------------------
+    let unlockedVaultSecrets = {};
+
+    function base64ToUint8Array(b64) {
+        const bin = atob(b64);
+        const arr = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        return arr;
+    }
+
+    async function decryptSqliteVaultEntry(entry, passcode) {
+        if (!entry || !entry.ciphertext || !entry.nonce || !entry.salt) return null;
+        if (!window.crypto || !window.crypto.subtle) return null;
+        try {
+            const enc = new TextEncoder();
+            const salt = base64ToUint8Array(entry.salt);
+            const nonce = base64ToUint8Array(entry.nonce);
+            const ciphertext = base64ToUint8Array(entry.ciphertext);
+            const keyMaterial = await window.crypto.subtle.importKey(
+                'raw', enc.encode(passcode), { name: 'PBKDF2' }, false, ['deriveKey']
+            );
+            const aesKey = await window.crypto.subtle.deriveKey(
+                { name: 'PBKDF2', salt: salt, iterations: 100000, hash: 'SHA-256' },
+                keyMaterial,
+                { name: 'AES-GCM', length: 256 },
+                false,
+                ['decrypt']
+            );
+            const decrypted = await window.crypto.subtle.decrypt(
+                { name: 'AES-GCM', iv: nonce },
+                aesKey,
+                ciphertext
+            );
+            return new TextDecoder().decode(decrypted);
+        } catch (err) {
+            return null;
+        }
+    }
+
+    async function unlockSqliteVault(passcode) {
+        const vault = window.__SITE_DATABASE && window.__SITE_DATABASE.portal_vault;
+        if (!vault || typeof vault !== 'object') return false;
+        const masterEntry = vault.master_passcode;
+        if (!masterEntry) return false;
+        const plainMaster = await decryptSqliteVaultEntry(masterEntry, passcode);
+        if (plainMaster === null) return false;
+
+        unlockedVaultSecrets.master_passcode = plainMaster;
+        for (const [k, v] of Object.entries(vault)) {
+            if (k === 'master_passcode') continue;
+            const dec = await decryptSqliteVaultEntry(v, passcode);
+            if (dec !== null) unlockedVaultSecrets[k] = dec;
+        }
+        if (unlockedVaultSecrets.handshake_token || unlockedVaultSecrets.handshake_question) {
+            const hydratedConfig = {
+                passcode: unlockedVaultSecrets.handshake_token || DEFAULT_HANDSHAKE_CONFIG.passcode,
+                question: unlockedVaultSecrets.handshake_question || DEFAULT_HANDSHAKE_CONFIG.question,
+                answers: unlockedVaultSecrets.handshake_answers
+                    ? unlockedVaultSecrets.handshake_answers.split(',').map(s => s.trim()).filter(Boolean)
+                    : DEFAULT_HANDSHAKE_CONFIG.answers,
+                destinationEmail: unlockedVaultSecrets.destination_email || DEFAULT_HANDSHAKE_CONFIG.destinationEmail
+            };
+            if (!localStorage.getItem(HANDSHAKE_CONFIG_KEY)) {
+                localStorage.setItem(HANDSHAKE_CONFIG_KEY, JSON.stringify(hydratedConfig));
+            }
+        }
+        return true;
+    }
+
     function getStoredPasscode() {
-        return localStorage.getItem(PASSCODE_STORAGE_KEY) || DEFAULT_PASSCODE;
+        return localStorage.getItem(PASSCODE_STORAGE_KEY) || unlockedVaultSecrets.master_passcode || DEFAULT_PASSCODE;
     }
 
     function isAuthenticated() {
@@ -59,9 +127,18 @@
                localStorage.getItem(AUTH_SESSION_KEY) === 'authenticated';
     }
 
-    function authenticate(passcode, remember) {
-        const correct = getStoredPasscode();
-        if (passcode === correct) {
+    async function authenticate(passcode, remember) {
+        const localOverride = localStorage.getItem(PASSCODE_STORAGE_KEY);
+        let verified = false;
+        if (localOverride) {
+            verified = (passcode === localOverride);
+        } else {
+            verified = await unlockSqliteVault(passcode);
+            if (!verified && passcode === getStoredPasscode()) {
+                verified = true;
+            }
+        }
+        if (verified) {
             if (remember) {
                 localStorage.setItem(AUTH_SESSION_KEY, 'authenticated');
             } else {
@@ -113,10 +190,11 @@
         }
 
         if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
+            loginForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const entered = passInput.value.trim();
-                if (authenticate(entered, rememberMe.checked)) {
+                const ok = await authenticate(entered, rememberMe.checked);
+                if (ok) {
                     loginError.classList.add('hidden');
                     loginScreen.classList.add('opacity-0');
                     setTimeout(() => {
@@ -1145,27 +1223,36 @@
     const SEED_DUMMY_IDS = [1, 2, 3, 4];
     const SEED_DUMMY_EMAILS = ["slin@mit.edu", "amorales@twu.edu", "cise-program@nsf.gov", "tmansour@cairo.edu.eg"];
 
-    // Automatically purge legacy dummy messages from previous browser sessions
+    // Automatically purge legacy dummy messages and hydrate from SQLite portal_messages
+    function getSqliteMessages() {
+        const dbMsgs = window.__SITE_DATABASE && window.__SITE_DATABASE.portal_messages;
+        return Array.isArray(dbMsgs) ? dbMsgs : [];
+    }
+
     function purgeLegacyDummyMessages() {
         const stored = localStorage.getItem(MESSAGES_KEY);
+        const sqliteMsgs = getSqliteMessages();
         if (!stored) {
-            localStorage.setItem(MESSAGES_KEY, JSON.stringify([]));
+            localStorage.setItem(MESSAGES_KEY, JSON.stringify(sqliteMsgs));
             return;
         }
         try {
             const parsed = JSON.parse(stored);
             if (Array.isArray(parsed)) {
-                const cleaned = parsed.filter(m => 
+                let cleaned = parsed.filter(m => 
                     m && !SEED_DUMMY_IDS.includes(m.id) &&
                     !SEED_DUMMY_EMAILS.includes(m.email) &&
                     Boolean(m.fingerprint)
                 );
+                if (cleaned.length === 0 && sqliteMsgs.length > 0) {
+                    cleaned = sqliteMsgs;
+                }
                 localStorage.setItem(MESSAGES_KEY, JSON.stringify(cleaned));
             } else {
-                localStorage.setItem(MESSAGES_KEY, JSON.stringify([]));
+                localStorage.setItem(MESSAGES_KEY, JSON.stringify(sqliteMsgs));
             }
         } catch (e) {
-            localStorage.setItem(MESSAGES_KEY, JSON.stringify([]));
+            localStorage.setItem(MESSAGES_KEY, JSON.stringify(sqliteMsgs));
         }
     }
     purgeLegacyDummyMessages();
@@ -1176,7 +1263,6 @@
             try {
                 const parsed = JSON.parse(stored);
                 if (Array.isArray(parsed)) {
-                    // Filter out legacy dummy messages
                     const cleaned = parsed.filter(m => 
                         m && !SEED_DUMMY_IDS.includes(m.id) &&
                         !SEED_DUMMY_EMAILS.includes(m.email) &&
@@ -1185,11 +1271,15 @@
                     if (cleaned.length !== parsed.length) {
                         localStorage.setItem(MESSAGES_KEY, JSON.stringify(cleaned));
                     }
-                    return cleaned;
+                    if (cleaned.length > 0) return cleaned;
                 }
             } catch (e) { }
         }
-        return [];
+        const sqliteMsgs = getSqliteMessages();
+        if (sqliteMsgs.length > 0) {
+            localStorage.setItem(MESSAGES_KEY, JSON.stringify(sqliteMsgs));
+        }
+        return sqliteMsgs;
     }
 
     function saveMessages(msgs) {
@@ -1713,7 +1803,12 @@
     function initScratchpad() {
         const dashScratch = document.getElementById('dashboard-scratchpad');
         const fullScratch = document.getElementById('full-scratchpad');
-        const saved = localStorage.getItem(SCRATCHPAD_KEY) || '';
+        const sqliteBuffer = (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_scratches && window.__SITE_DATABASE.portal_scratches.active_buffer) || '';
+        let saved = localStorage.getItem(SCRATCHPAD_KEY);
+        if (saved === null) {
+            saved = sqliteBuffer;
+            if (saved) localStorage.setItem(SCRATCHPAD_KEY, saved);
+        }
 
         if (dashScratch && document.activeElement !== dashScratch) dashScratch.value = saved;
         if (fullScratch && document.activeElement !== fullScratch) fullScratch.value = saved;
@@ -1774,9 +1869,18 @@
     function getScratchesDb() {
         const stored = localStorage.getItem(SCRATCHES_DB_KEY);
         if (stored) {
-            try { return JSON.parse(stored); } catch (e) { }
+            try {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            } catch (e) { }
         }
-        return [];
+        const sqliteArchive = (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_scratches && Array.isArray(window.__SITE_DATABASE.portal_scratches.archive))
+            ? window.__SITE_DATABASE.portal_scratches.archive
+            : [];
+        if (sqliteArchive.length > 0) {
+            localStorage.setItem(SCRATCHES_DB_KEY, JSON.stringify(sqliteArchive));
+        }
+        return sqliteArchive;
     }
 
     function saveScratchesDb(entries) {
@@ -1965,19 +2069,22 @@
         }
     };
 
-    // Task List Logic
+    // Task List Logic (Hydrated from SQLite portal_tasks)
     function getStoredTasks() {
         const stored = localStorage.getItem(TASKS_KEY);
         if (stored) {
-            try { return JSON.parse(stored); } catch (e) { }
+            try {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+            } catch (e) { }
         }
-        const initialTasks = [
-            { id: 1, text: "Review NSF project milestone deliverables for student research assistants", priority: "milestone", done: false },
-            { id: 2, text: "Finalize revision comments for Frontiers in Bioinformatics ProtGram manuscript", priority: "high", done: true },
-            { id: 3, text: "Upload CSCI modern coursework lab assignments to Canvas", priority: "normal", done: false }
-        ];
-        localStorage.setItem(TASKS_KEY, JSON.stringify(initialTasks));
-        return initialTasks;
+        const sqliteTasks = (window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.portal_tasks))
+            ? window.__SITE_DATABASE.portal_tasks
+            : [];
+        if (sqliteTasks.length > 0) {
+            localStorage.setItem(TASKS_KEY, JSON.stringify(sqliteTasks));
+        }
+        return sqliteTasks;
     }
 
     function saveTasks(tasks) {

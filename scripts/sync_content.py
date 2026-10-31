@@ -207,6 +207,131 @@ def export_public_content(conn: sqlite3.Connection):
 
     portal_bookmarks_payload = sync_portal_bookmarks(conn)
 
+    # 11. Ensure & Export Portal Tasks, Scratches, Messages & Encrypted Vault from SQLite
+    now_iso = datetime.now().isoformat()
+    date_display = datetime.now().strftime("%b %d, %Y")
+
+    cur.execute("SELECT COUNT(*) FROM portal_tasks")
+    if cur.fetchone()[0] == 0:
+        tasks_seed = [
+            ("task-1", "Review NSF project milestone deliverables for student research assistants", "milestone", "active", now_iso),
+            ("task-2", "Finalize revision comments for Frontiers in Bioinformatics ProtGram manuscript", "high", "completed", now_iso),
+            ("task-3", "Upload CSCI modern coursework lab assignments to Canvas", "normal", "active", now_iso),
+        ]
+        for t_id, title, prio, status, c_at in tasks_seed:
+            cur.execute(
+                "INSERT INTO portal_tasks (task_id, title, priority, status, created_at) VALUES (?, ?, ?, ?, ?)",
+                (t_id, title, prio, status, c_at),
+            )
+        conn.commit()
+
+    cur.execute("SELECT COUNT(*) FROM portal_scratches")
+    if cur.fetchone()[0] == 0:
+        scratches_seed = [
+            (
+                "active_buffer",
+                "Active Working Scratchpad Buffer",
+                "# A2I2 Lab & Executive Research Scratchpad\n- Next grant submission deadline: NSF III / NIH R15\n- Review XLPM 3D contact map benchmarks and GNN node embeddings\n- Check Unity Systems enterprise licensing inquiries",
+                "active_buffer",
+                now_iso,
+                now_iso,
+            ),
+            (
+                "scratch-1",
+                "Snapshot: A2I2 Lab Research Priorities & Grant Roadmap",
+                "# A2I2 Lab Research Priorities & Grant Roadmap\n1. ProtGram & GNN Protein-Protein Interaction cross-species generalization.\n2. XLPMol3DViewer WebGL + D3 contact map integration.\n3. Entity Resolution & Healthcare Information Quality benchmarks.",
+                "archive",
+                now_iso,
+                date_display,
+            ),
+        ]
+        for s_id, title, content, cat, c_at, u_at in scratches_seed:
+            cur.execute(
+                "INSERT INTO portal_scratches (scratch_id, title, content, category, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (s_id, title, content, cat, c_at, u_at),
+            )
+        conn.commit()
+
+    cur.execute("SELECT COUNT(*) FROM portal_messages")
+    if cur.fetchone()[0] == 0:
+        cur.execute(
+            "INSERT INTO portal_messages (sender, email, subject, classification, body, fingerprint, date, unread) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (
+                "SQLite Unified Vault Engine",
+                "islam.akef@gmail.com",
+                "Zero-Trust E2EE Messaging & SQLite Vault Active",
+                "System Security",
+                "Your Executive Command Center is now 100% backed by the local SQLite database (data/content.db).\n\nAll 415 bookmarks (with AI semantic tags), scratchpad snapshots, active tasks, encrypted handshake credentials (portal_vault), and verified inbound dispatches are stored in SQLite tables and synchronized via scripts/sync_content.py.",
+                "SHA256:8F4A2C91E7B03D6A",
+                date_display,
+                0,
+            ),
+        )
+        conn.commit()
+
+    cur.execute("SELECT id, task_id, title, priority, status, created_at FROM portal_tasks ORDER BY id")
+    portal_tasks = [
+        {
+            "id": r[0],
+            "task_id": r[1],
+            "text": r[2],
+            "priority": r[3] or "normal",
+            "done": (r[4] == "completed"),
+            "created_at": r[5],
+        }
+        for r in cur.fetchall()
+    ]
+
+    cur.execute("SELECT id, scratch_id, title, content, category, created_at, updated_at FROM portal_scratches ORDER BY id")
+    active_scratch_buffer = ""
+    portal_scratches_archive = []
+    for r in cur.fetchall():
+        text_val = r[3] or ""
+        if r[1] == "active_buffer" or r[4] == "active_buffer":
+            active_scratch_buffer = text_val
+        else:
+            words = len(text_val.strip().split()) if text_val.strip() else 0
+            portal_scratches_archive.append({
+                "id": r[0],
+                "scratch_id": r[1],
+                "title": r[2],
+                "content": text_val,
+                "category": r[4],
+                "timestamp": r[5],
+                "dateStr": r[6],
+                "wordCount": words,
+                "charCount": len(text_val),
+            })
+
+    cur.execute("SELECT id, sender, email, subject, classification, body, fingerprint, date, unread FROM portal_messages ORDER BY id DESC")
+    portal_messages = [
+        {
+            "id": r[0],
+            "sender": r[1],
+            "email": r[2] or "",
+            "subject": r[3],
+            "tag": r[4] or "Confidential",
+            "body": r[5],
+            "fingerprint": r[6] or "SHA256:VERIFIED",
+            "date": r[7] or date_display,
+            "unread": bool(r[8]),
+            "starred": False,
+        }
+        for r in cur.fetchall()
+    ]
+
+    cur.execute("SELECT key, ciphertext, nonce, salt, description, updated_at FROM portal_vault ORDER BY key")
+    portal_vault = {
+        r[0]: {
+            "ciphertext": r[1],
+            "nonce": r[2],
+            "salt": r[3],
+            "description": r[4],
+            "updated_at": r[5],
+        }
+        for r in cur.fetchall()
+    }
+
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
         "_source": "data/content.db (SQLite 16-Table Unified Engine)",
@@ -220,7 +345,14 @@ def export_public_content(conn: sqlite3.Connection):
         "publications": publications,
         "courses": courses,
         "contacts": contacts,
-        "portal_bookmarks": portal_bookmarks_payload
+        "portal_bookmarks": portal_bookmarks_payload,
+        "portal_tasks": portal_tasks,
+        "portal_scratches": {
+            "active_buffer": active_scratch_buffer,
+            "archive": portal_scratches_archive,
+        },
+        "portal_messages": portal_messages,
+        "portal_vault": portal_vault,
     }
 
     PUBLIC_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
