@@ -206,13 +206,33 @@
                     </div>
                     <div>
                         <div class="text-2xl font-bold text-white" id="stat-total-bookmarks">415</div>
-                        <div class="text-xs text-slate-400">Archived Bookmarks</div>
+                        <div class="text-xs text-slate-400">Total Bookmarks</div>
                     </div>
                 </div>
 
                 
 
                 
+
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white" id="stat-total-clicks">0</div>
+                        <div class="text-xs text-slate-400">Total Launches</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-white" id="stat-top-favorites">10</div>
+                        <div class="text-xs text-slate-400">Top Favorites</div>
+                    </div>
+                </div>
 
                 <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4">
                     <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl flex-shrink-0">
@@ -225,6 +245,31 @@
                 </div>
             </div>
             
+            <!-- Top 10 Favorites Section -->
+            <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-base">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <h2 class="serif-heading text-base font-bold text-white flex items-center gap-2">
+                                Favorites
+                                <span class="text-[10px] bg-amber-500/20 text-amber-300 font-semibold px-2 py-0.5 rounded-full border border-amber-500/30">Top 10 Most Clicked</span>
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Your most frequently launched links, dynamically re-ranked on every click.</p>
+                        </div>
+                    </div>
+                    <span class="text-[11px] text-slate-500 flex items-center gap-1.5 font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Live Updating
+                    </span>
+                </div>
+                
+                <div id="dashboard-favorites-grid" class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <!-- Populated dynamically by renderDashboardFavorites() -->
+                </div>
+            </div>
+
             <!-- Dashboard Search Section -->
             <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
@@ -232,7 +277,7 @@
                         <h2 class="serif-heading text-lg font-bold text-white flex items-center gap-2">
                             <i class="fas fa-search text-indigo-400"></i> Smart Search
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1">Search your bookmarks semantically with AI or via text.</p>
+                        <p class="text-xs text-slate-400 mt-1">Search your bookmarks with real-time similarity & relevance ranking.</p>
                     </div>
                     <div class="flex items-center gap-3 w-full sm:w-auto">
                         <div class="relative flex-1 sm:w-96 flex items-center gap-2">
