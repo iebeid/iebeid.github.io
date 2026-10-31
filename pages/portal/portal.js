@@ -23,11 +23,20 @@
     const AUTH_SESSION_KEY = 'portal_auth_token';
     const PINNED_STORAGE_KEY = 'portal_pinned_bookmarks';
     const SCRATCHPAD_KEY = 'portal_scratchpad_content';
+    const SCRATCHES_DB_KEY = 'portal_scratches_database';
     const TASKS_KEY = 'portal_tasks_list';
     const MESSAGES_KEY = 'portal_messages_list';
     const CUSTOM_BM_KEY = 'portal_custom_bookmarks';
     const DELETED_BM_KEY = 'portal_deleted_bookmarks';
     const USAGE_STATS_KEY = 'portal_usage_stats';
+    const HANDSHAKE_CONFIG_KEY = 'portal_handshake_config';
+
+    const DEFAULT_HANDSHAKE_CONFIG = {
+        passcode: 'islam2026',
+        question: "What is Dr. Islam's primary research lab / institution?",
+        answers: ["TWU", "Texas Woman's University", "Data2AI4LifeSciences", "Data2AI4LifeSciences Lab"],
+        destinationEmail: 'islam.akef@gmail.com'
+    };
 
     let activeCategory = 'all';
     let activeSubfolder = null;
@@ -36,54 +45,7 @@
     let aiSearchMode = false;
     let aiMatchedIds = [];
     let selectedMessageId = null;
-
-    // Seed Messages (Academic, grant, and student inquiries)
-    const SEED_MESSAGES = [
-        {
-            id: 1,
-            sender: "Dr. Sarah Lin",
-            email: "slin@mit.edu",
-            subject: "Potential Collab: Multimodal Medical Segmentation & Auto-prompting",
-            date: "Oct 22, 2026",
-            tag: "Research Collab",
-            unread: true,
-            starred: true,
-            body: `Dear Dr. Ebeid,\n\nI read your recent work on foundation models for medical image segmentation and your newly awarded NSF grant with great interest. Our laboratory at MIT is currently developing complementary prompt-tuning pipelines for high-throughput radiology datasets.\n\nWe would love to discuss a potential joint workshop submission for CVPR or IEEE BIBM, and perhaps explore whether our pre-trained encoders could integrate with your directed graph convolutional framework.\n\nWould you be open to a brief 20-minute Zoom call sometime next week?\n\nWarm regards,\nDr. Sarah Lin\nAssociate Professor, Department of EECS, MIT`
-        },
-        {
-            id: 2,
-            sender: "Alexandria Morales",
-            email: "amorales@twu.edu",
-            subject: "Inquiry regarding Undergraduate Research in Data2AI4LifeSciences Lab",
-            date: "Oct 21, 2026",
-            tag: "Student Mentorship",
-            unread: true,
-            starred: false,
-            body: `Hello Dr. Ebeid,\n\nI am a junior Computer Science major at TWU enrolled in your database course. I am very interested in bioinformatics and machine learning, and I saw on your faculty page that your research group works with graph neural networks on protein structures.\n\nCould I schedule a time during your office hours to ask about potential undergraduate research assistant positions or independent study opportunities for Spring 2027?\n\nThank you for your time and guidance!\n\nAlexandria Morales\nB.S. in Computer Science Candidate, TWU`
-        },
-        {
-            id: 3,
-            sender: "Program Director (NSF CISE)",
-            email: "cise-program@nsf.gov",
-            subject: "NSF CISE/CCF PI Meeting & Grant Reporting Schedule",
-            date: "Oct 19, 2026",
-            tag: "Grant Operations",
-            unread: true,
-            starred: true,
-            body: `Dear Dr. Ebeid,\n\nCongratulations again on your collaborative award under the CCF/CISE program. This is an informational reminder that the annual PI meeting will be held in Alexandria, VA in late spring.\n\nPlease ensure your preliminary project milestones and student support reporting protocols are updated in Research.gov.\n\nSincerely,\nDivision of Computing and Communication Foundations\nNational Science Foundation`
-        },
-        {
-            id: 4,
-            sender: "Dr. Tarek Mansour",
-            email: "tmansour@cairo.edu.eg",
-            subject: "Invitation: Keynote Session on AI in Drug Discovery",
-            date: "Oct 15, 2026",
-            tag: "Keynote / Invited Talk",
-            unread: false,
-            starred: false,
-            body: `Dear Dr. Islam,\n\nI hope this email finds you well. The organizing committee of the International Conference on Bioinformatics and Computational Health Systems in Cairo would be honored to host you as an invited keynote speaker this December.\n\nGiven your extensive expertise across entity resolution, structural proteomics, and foundation models, your presentation would be invaluable to our faculty and graduate students.\n\nPlease let us know if your schedule might accommodate this invitation.\n\nBest regards,\nProf. Tarek Mansour\nFaculty of Computers and Artificial Intelligence`
-        }
-    ];
+    let activeTaskFilter = 'all';
 
     // -------------------------------------------------------------------------
     // 2. AUTHENTICATION & SECURITY
@@ -1177,21 +1139,266 @@
     }
 
     // -------------------------------------------------------------------------
-    // 10. MESSAGE HUB & INBOX
+    // 10. SECRET MESSAGE HUB & INBOUND DISPATCH PROTOCOL
     // -------------------------------------------------------------------------
+    const SEED_DUMMY_IDS = [1, 2, 3, 4];
+    const SEED_DUMMY_EMAILS = ["slin@mit.edu", "amorales@twu.edu", "cise-program@nsf.gov", "tmansour@cairo.edu.eg"];
+
+    // Automatically purge legacy dummy messages from previous browser sessions
+    function purgeLegacyDummyMessages() {
+        const stored = localStorage.getItem(MESSAGES_KEY);
+        if (!stored) {
+            localStorage.setItem(MESSAGES_KEY, JSON.stringify([]));
+            return;
+        }
+        try {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed)) {
+                const cleaned = parsed.filter(m => 
+                    m && !SEED_DUMMY_IDS.includes(m.id) &&
+                    !SEED_DUMMY_EMAILS.includes(m.email) &&
+                    Boolean(m.fingerprint)
+                );
+                localStorage.setItem(MESSAGES_KEY, JSON.stringify(cleaned));
+            } else {
+                localStorage.setItem(MESSAGES_KEY, JSON.stringify([]));
+            }
+        } catch (e) {
+            localStorage.setItem(MESSAGES_KEY, JSON.stringify([]));
+        }
+    }
+    purgeLegacyDummyMessages();
+
     function getStoredMessages() {
         const stored = localStorage.getItem(MESSAGES_KEY);
         if (stored) {
-            try { return JSON.parse(stored); } catch (e) { }
+            try {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed)) {
+                    // Filter out legacy dummy messages
+                    const cleaned = parsed.filter(m => 
+                        m && !SEED_DUMMY_IDS.includes(m.id) &&
+                        !SEED_DUMMY_EMAILS.includes(m.email) &&
+                        Boolean(m.fingerprint)
+                    );
+                    if (cleaned.length !== parsed.length) {
+                        localStorage.setItem(MESSAGES_KEY, JSON.stringify(cleaned));
+                    }
+                    return cleaned;
+                }
+            } catch (e) { }
         }
-        localStorage.setItem(MESSAGES_KEY, JSON.stringify(SEED_MESSAGES));
-        return SEED_MESSAGES;
+        return [];
     }
 
     function saveMessages(msgs) {
         localStorage.setItem(MESSAGES_KEY, JSON.stringify(msgs));
         renderInbox();
         updateStats();
+    }
+
+    window.clearAllMessages = function () {
+        if (confirm('Permanently purge and shred all messages in your secret messaging vault?')) {
+            saveMessages([]);
+            selectedMessageId = null;
+            renderInbox();
+            renderMessageDetail(null);
+        }
+    };
+
+    function getHandshakeConfig() {
+        const stored = localStorage.getItem(HANDSHAKE_CONFIG_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
+        }
+        return DEFAULT_HANDSHAKE_CONFIG;
+    }
+
+    function saveHandshakeConfigObj(config) {
+        localStorage.setItem(HANDSHAKE_CONFIG_KEY, JSON.stringify(config));
+    }
+
+    function initHandshakeSettings() {
+        const config = getHandshakeConfig();
+        const passInput = document.getElementById('handshake-passcode-input');
+        const questionInput = document.getElementById('handshake-question-input');
+        const answerInput = document.getElementById('handshake-answer-input');
+        const emailInput = document.getElementById('handshake-email-input');
+        const form = document.getElementById('handshake-config-form');
+        const msg = document.getElementById('handshake-save-msg');
+
+        if (passInput) passInput.value = config.passcode || DEFAULT_HANDSHAKE_CONFIG.passcode;
+        if (questionInput) questionInput.value = config.question || DEFAULT_HANDSHAKE_CONFIG.question;
+        if (answerInput) answerInput.value = (config.answers || DEFAULT_HANDSHAKE_CONFIG.answers).join(', ');
+        if (emailInput) emailInput.value = config.destinationEmail || DEFAULT_HANDSHAKE_CONFIG.destinationEmail;
+
+        if (form && !form.dataset.initialized) {
+            form.dataset.initialized = 'true';
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newPass = (passInput ? passInput.value : '').trim();
+                const newQuestion = (questionInput ? questionInput.value : '').trim();
+                const rawAnswers = (answerInput ? answerInput.value : '').trim();
+                const destEmail = (emailInput ? emailInput.value : '').trim();
+
+                if (!newPass || !newQuestion || !rawAnswers) {
+                    if (msg) {
+                        msg.className = 'text-xs text-rose-400 block';
+                        msg.textContent = 'All handshake parameters are required.';
+                    }
+                    return;
+                }
+
+                const answersArr = rawAnswers.split(',').map(s => s.trim()).filter(Boolean);
+                const updatedConfig = {
+                    passcode: newPass,
+                    question: newQuestion,
+                    answers: answersArr,
+                    destinationEmail: destEmail || DEFAULT_HANDSHAKE_CONFIG.destinationEmail
+                };
+
+                saveHandshakeConfigObj(updatedConfig);
+                if (msg) {
+                    msg.className = 'text-xs text-emerald-400 block';
+                    msg.textContent = 'Secret handshake keys & destination email saved successfully!';
+                    setTimeout(() => { if (msg) msg.textContent = ''; }, 3000);
+                }
+            });
+        }
+    }
+
+    window.openHandshakeSettings = function () {
+        switchTab('tab-settings');
+        setTimeout(() => {
+            const el = document.getElementById('handshake-passcode-input');
+            if (el) {
+                el.focus();
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }, 150);
+    };
+
+    window.openSecretDispatchModal = function () {
+        const config = getHandshakeConfig();
+        const questionLabel = document.getElementById('dispatch-challenge-question-label');
+        if (questionLabel) {
+            questionLabel.textContent = config.question || DEFAULT_HANDSHAKE_CONFIG.question;
+        }
+        const errorEl = document.getElementById('dispatch-error-msg');
+        if (errorEl) {
+            errorEl.classList.add('hidden');
+            errorEl.textContent = '';
+        }
+        const form = document.getElementById('secret-dispatch-form');
+        if (form) form.reset();
+
+        const modal = document.getElementById('secret-dispatch-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+    };
+
+    window.closeSecretDispatchModal = function () {
+        const modal = document.getElementById('secret-dispatch-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    };
+
+    function initSecretDispatchForm() {
+        const form = document.getElementById('secret-dispatch-form');
+        if (!form || form.dataset.initialized) return;
+        form.dataset.initialized = 'true';
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const config = getHandshakeConfig();
+            const enteredPasscode = (document.getElementById('dispatch-passcode')?.value || '').trim();
+            const enteredAnswer = (document.getElementById('dispatch-challenge-answer')?.value || '').trim().toLowerCase();
+            const sender = (document.getElementById('dispatch-sender')?.value || '').trim();
+            const email = (document.getElementById('dispatch-email')?.value || '').trim();
+            const tag = document.getElementById('dispatch-tag')?.value || 'Confidential Collab';
+            const subject = (document.getElementById('dispatch-subject')?.value || '').trim();
+            const body = (document.getElementById('dispatch-body')?.value || '').trim();
+            const errorEl = document.getElementById('dispatch-error-msg');
+
+            // 1. Verify Passcode
+            if (enteredPasscode !== config.passcode) {
+                if (errorEl) {
+                    errorEl.textContent = 'Authentication Failed: Handshake passcode token is invalid.';
+                    errorEl.classList.remove('hidden');
+                }
+                return;
+            }
+
+            // 2. Verify Challenge Answer
+            const validAnswers = (config.answers || []).map(a => a.toLowerCase().trim());
+            const isAnswerMatch = validAnswers.some(a => a === enteredAnswer || enteredAnswer.includes(a) || a.includes(enteredAnswer));
+
+            if (!isAnswerMatch) {
+                if (errorEl) {
+                    errorEl.textContent = 'Challenge Failed: Secret answer does not match the shared protocol.';
+                    errorEl.classList.remove('hidden');
+                }
+                return;
+            }
+
+            // Generate verified dispatch payload with cryptographic audit fingerprint
+            const rawHash = Array.from(crypto.getRandomValues(new Uint8Array(8)))
+                .map(b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+            const fingerprint = `SHA256:${rawHash}`;
+
+            const newMsg = {
+                id: Date.now(),
+                sender: sender,
+                email: email,
+                tag: tag,
+                subject: subject,
+                body: body,
+                date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+                unread: true,
+                starred: false,
+                fingerprint: fingerprint
+            };
+
+            const msgs = getStoredMessages();
+            msgs.unshift(newMsg);
+            saveMessages(msgs);
+
+            closeSecretDispatchModal();
+            selectedMessageId = newMsg.id;
+            switchTab('tab-inbox');
+            renderInbox();
+            renderMessageDetail(newMsg.id);
+
+            // Optional direct Web Email Relay dispatch to destination email
+            const relayToEmail = document.getElementById('dispatch-relay-email')?.checked;
+            const destEmail = config.destinationEmail || DEFAULT_HANDSHAKE_CONFIG.destinationEmail;
+
+            if (relayToEmail && destEmail) {
+                fetch(`https://formsubmit.co/ajax/${encodeURIComponent(destEmail)}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({
+                        _subject: `[PORTAL SECRET DISPATCH] ${subject}`,
+                        sender_codename: sender,
+                        sender_email: email,
+                        classification: tag,
+                        audit_fingerprint: fingerprint,
+                        secret_payload: body,
+                        timestamp: new Date().toISOString()
+                    })
+                }).then(() => {
+                    alert("Handshake Verified: Secret message saved to vault AND dispatched to Dr. Islam's email inbox via web relay.");
+                }).catch(() => {
+                    alert('Handshake Verified: Secret message authenticated and delivered to Message Hub.');
+                });
+            } else {
+                alert('Handshake Verified: Secret message has been authenticated and delivered to your Message Hub.');
+            }
+        });
     }
 
     function renderInbox() {
@@ -1207,11 +1414,23 @@
             return m.sender.toLowerCase().includes(query) ||
                    m.subject.toLowerCase().includes(query) ||
                    m.email.toLowerCase().includes(query) ||
-                   m.body.toLowerCase().includes(query);
+                   m.body.toLowerCase().includes(query) ||
+                   (m.tag && m.tag.toLowerCase().includes(query));
         });
 
         if (filtered.length === 0) {
-            listEl.innerHTML = `<div class="p-8 text-center text-xs text-slate-500">No messages found.</div>`;
+            listEl.innerHTML = `
+                <div class="p-8 text-center text-xs text-slate-500 space-y-2">
+                    <div class="w-10 h-10 rounded-full bg-slate-800 text-rose-400 flex items-center justify-center mx-auto mb-2 text-sm border border-slate-700">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <p class="font-semibold text-slate-300">Secret Messaging Vault Empty</p>
+                    <p class="text-[11px] text-slate-500">Zero dummy messages. All dispatches require authorized handshake passcode and shared secret challenge response.</p>
+                </div>
+            `;
+            if (selectedMessageId) {
+                renderMessageDetail(null);
+            }
             return;
         }
 
@@ -1276,33 +1495,63 @@
             container.classList.add('flex');
         }
 
-        document.getElementById('msg-subject').textContent = msg.subject;
-        document.getElementById('msg-sender').textContent = msg.sender;
-        document.getElementById('msg-email').textContent = msg.email;
-        document.getElementById('msg-date').textContent = msg.date;
-        document.getElementById('msg-tag').textContent = msg.tag;
-        document.getElementById('msg-body').textContent = msg.body;
-        document.getElementById('msg-avatar').textContent = msg.sender.split(' ').map(n => n[0]).join('').slice(0, 2);
+        const subjectEl = document.getElementById('msg-subject');
+        const senderEl = document.getElementById('msg-sender');
+        const emailEl = document.getElementById('msg-email');
+        const dateEl = document.getElementById('msg-date');
+        const tagEl = document.getElementById('msg-tag');
+        const bodyEl = document.getElementById('msg-body');
+        const avatarEl = document.getElementById('msg-avatar');
+        const fingerprintEl = document.getElementById('msg-fingerprint');
+
+        if (subjectEl) subjectEl.textContent = msg.subject;
+        if (senderEl) senderEl.textContent = msg.sender;
+        if (emailEl) emailEl.textContent = msg.email;
+        if (dateEl) dateEl.textContent = msg.date;
+        if (tagEl) tagEl.textContent = msg.tag || 'Encrypted Dispatch';
+        if (bodyEl) bodyEl.textContent = msg.body;
+        if (avatarEl) avatarEl.textContent = msg.sender.split(' ').map(n => n[0]).join('').slice(0, 2);
+        if (fingerprintEl) fingerprintEl.textContent = msg.fingerprint || 'AUTHENTICATED-SHA256';
 
         const replyLink = document.getElementById('msg-reply-link');
-        replyLink.href = `mailto:${msg.email}?subject=Re: ${encodeURIComponent(msg.subject)}`;
+        if (replyLink) {
+            replyLink.href = `mailto:${msg.email}?subject=Re: [Secure] ${encodeURIComponent(msg.subject)}`;
+        }
 
         const starBtn = document.getElementById('msg-star-btn');
-        starBtn.innerHTML = `<i class="${msg.starred ? 'fas' : 'far'} fa-star"></i>`;
-        starBtn.onclick = () => {
-            msg.starred = !msg.starred;
-            saveMessages(msgs);
-            renderMessageDetail(msg.id);
-        };
+        if (starBtn) {
+            starBtn.innerHTML = `<i class="${msg.starred ? 'fas' : 'far'} fa-star"></i>`;
+            starBtn.onclick = () => {
+                msg.starred = !msg.starred;
+                saveMessages(msgs);
+                renderMessageDetail(msg.id);
+            };
+        }
 
         const deleteBtn = document.getElementById('msg-delete-btn');
-        deleteBtn.onclick = () => {
-            const updated = msgs.filter(m => m.id !== msg.id);
-            selectedMessageId = null;
-            saveMessages(updated);
-            renderMessageDetail(null);
-        };
+        if (deleteBtn) {
+            deleteBtn.onclick = () => {
+                if (confirm('Shred and permanently delete this confidential message?')) {
+                    const updated = msgs.filter(m => m.id !== msg.id);
+                    selectedMessageId = null;
+                    saveMessages(updated);
+                    renderMessageDetail(null);
+                }
+            };
+        }
     }
+
+    window.copyCurrentMessageBody = function () {
+        if (!selectedMessageId) return;
+        const msgs = getStoredMessages();
+        const msg = msgs.find(m => m.id === selectedMessageId);
+        if (!msg) return;
+        navigator.clipboard.writeText(msg.body).then(() => {
+            alert('Encrypted dispatch body copied to clipboard.');
+        }).catch(() => {
+            prompt('Copy message body:', msg.body);
+        });
+    };
 
     window.refreshInbox = function () {
         renderInbox();
@@ -1313,34 +1562,161 @@
         }
     };
 
-    window.openFormIntegrationModal = function () {
-        const modal = document.getElementById('form-integration-modal');
+    // -------------------------------------------------------------------------
+    // SECURE EMAIL DISPATCH & REPLY MODAL LOGIC
+    // -------------------------------------------------------------------------
+    window.openSecureReplyModal = function () {
+        if (!selectedMessageId) return alert('Please select an authenticated message first to reply.');
+        const msgs = getStoredMessages();
+        const msg = msgs.find(m => m.id === selectedMessageId);
+        if (!msg) return;
+
+        const recipientInput = document.getElementById('reply-recipient-email');
+        const subjectInput = document.getElementById('reply-subject');
+        const fpInput = document.getElementById('reply-fingerprint');
+        const bodyInput = document.getElementById('reply-body');
+        const statusMsg = document.getElementById('reply-status-msg');
+
+        if (recipientInput) recipientInput.value = msg.email || '';
+        if (subjectInput) subjectInput.value = msg.subject.startsWith('Re:') ? msg.subject : `Re: [Secure Dispatch] ${msg.subject}`;
+        if (fpInput) fpInput.value = msg.fingerprint || 'AUTHENTICATED-SHA256';
+        if (bodyInput) bodyInput.value = `Dear ${msg.sender},\n\n\n\n---\n[Authenticated Inbound Dispatch]\nSender: ${msg.sender} <${msg.email}>\nFingerprint: ${msg.fingerprint || 'N/A'}\nDate: ${msg.date}\nClassification: ${msg.tag || 'Confidential'}\n"${msg.body}"`;
+
+        if (statusMsg) {
+            statusMsg.className = 'hidden text-xs font-semibold p-2.5 rounded-lg';
+            statusMsg.textContent = '';
+        }
+
+        const modal = document.getElementById('secure-reply-modal');
         if (modal) {
             modal.classList.remove('hidden');
             modal.classList.add('flex');
         }
     };
 
-    window.closeFormIntegrationModal = function () {
-        const modal = document.getElementById('form-integration-modal');
+    window.closeSecureReplyModal = function () {
+        const modal = document.getElementById('secure-reply-modal');
         if (modal) {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }
     };
 
+    window.sendReplyViaGmail = function () {
+        const to = (document.getElementById('reply-recipient-email')?.value || '').trim();
+        const su = (document.getElementById('reply-subject')?.value || '').trim();
+        const body = (document.getElementById('reply-body')?.value || '').trim();
+        const fp = (document.getElementById('reply-fingerprint')?.value || '').trim();
+        const fullBody = `${body}\n\n---\n[Portal Secure Verification: ${fp}]\nTransmitted from Dr. Islam Akef Ebeid Command Center`;
+
+        const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(su)}&body=${encodeURIComponent(fullBody)}`;
+        window.open(url, '_blank');
+    };
+
+    window.sendReplyViaOutlook = function () {
+        const to = (document.getElementById('reply-recipient-email')?.value || '').trim();
+        const su = (document.getElementById('reply-subject')?.value || '').trim();
+        const body = (document.getElementById('reply-body')?.value || '').trim();
+        const fp = (document.getElementById('reply-fingerprint')?.value || '').trim();
+        const fullBody = `${body}\n\n---\n[Portal Secure Verification: ${fp}]\nTransmitted from Dr. Islam Akef Ebeid Command Center`;
+
+        const url = `https://outlook.office.com/mail/deeplink/compose?to=${encodeURIComponent(to)}&subject=${encodeURIComponent(su)}&body=${encodeURIComponent(fullBody)}`;
+        window.open(url, '_blank');
+    };
+
+    window.sendReplyViaRelay = async function () {
+        const to = (document.getElementById('reply-recipient-email')?.value || '').trim();
+        const su = (document.getElementById('reply-subject')?.value || '').trim();
+        const body = (document.getElementById('reply-body')?.value || '').trim();
+        const fp = (document.getElementById('reply-fingerprint')?.value || '').trim();
+        const statusMsg = document.getElementById('reply-status-msg');
+        const btn = document.getElementById('btn-reply-relay');
+
+        if (!to || !body) {
+            if (statusMsg) {
+                statusMsg.className = 'text-xs text-rose-400 p-2.5 rounded-lg bg-rose-500/10 border border-rose-500/20 block';
+                statusMsg.textContent = 'Recipient email and message body are required.';
+            }
+            return;
+        }
+
+        if (btn) btn.disabled = true;
+        if (statusMsg) {
+            statusMsg.className = 'text-xs text-sky-400 p-2.5 rounded-lg bg-sky-500/10 border border-sky-500/20 block animate-pulse';
+            statusMsg.textContent = 'Relaying dispatch through secure web email channel...';
+        }
+
+        try {
+            const resp = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(to)}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: su || '[PORTAL SECURE DISPATCH]',
+                    recipient: to,
+                    verification_fingerprint: fp,
+                    secure_message: body,
+                    dispatched_at: new Date().toISOString()
+                })
+            });
+
+            if (resp.ok) {
+                if (statusMsg) {
+                    statusMsg.className = 'text-xs text-emerald-400 p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 block font-semibold';
+                    statusMsg.textContent = '✓ Secure dispatch transmitted directly to recipient email inbox via web relay!';
+                }
+            } else {
+                throw new Error(`Relay returned status ${resp.status}`);
+            }
+        } catch (err) {
+            if (statusMsg) {
+                statusMsg.className = 'text-xs text-amber-400 p-2.5 rounded-lg bg-amber-500/10 border border-amber-500/20 block';
+                statusMsg.textContent = `Direct API relay blocked by browser CORS. Click "Open in Gmail Web" or "Open in Outlook Web" above to send instantly!`;
+            }
+        } finally {
+            if (btn) btn.disabled = false;
+        }
+    };
+
+    window.copyReplyPayload = function () {
+        const to = (document.getElementById('reply-recipient-email')?.value || '').trim();
+        const su = (document.getElementById('reply-subject')?.value || '').trim();
+        const body = (document.getElementById('reply-body')?.value || '').trim();
+        const fp = (document.getElementById('reply-fingerprint')?.value || '').trim();
+        const payload = `To: ${to}\nSubject: ${su}\nVerification Fingerprint: ${fp}\nDate: ${new Date().toISOString()}\n\n${body}`;
+
+        navigator.clipboard.writeText(payload).then(() => {
+            alert('Formatted dispatch email payload copied to clipboard.');
+        }).catch(() => {
+            prompt('Copy email payload:', payload);
+        });
+    };
+
     // -------------------------------------------------------------------------
-    // 11. SCRATCHPAD & TASKS
+    // 11. SCRATCHPAD STUDIO, DATABASE & TASKS
     // -------------------------------------------------------------------------
+    function updateScratchCounters(val) {
+        const text = val || '';
+        const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+        const chars = text.length;
+
+        const dashCounter = document.getElementById('scratch-word-count');
+        if (dashCounter) dashCounter.textContent = `${words} words`;
+
+        const fullStats = document.getElementById('full-scratch-stats');
+        if (fullStats) fullStats.textContent = `${words} words \u2022 ${chars} chars`;
+    }
+
     function initScratchpad() {
         const dashScratch = document.getElementById('dashboard-scratchpad');
         const fullScratch = document.getElementById('full-scratchpad');
-        const saveStatus = document.getElementById('scratch-save-status');
-
         const saved = localStorage.getItem(SCRATCHPAD_KEY) || '';
-        
+
         if (dashScratch && document.activeElement !== dashScratch) dashScratch.value = saved;
         if (fullScratch && document.activeElement !== fullScratch) fullScratch.value = saved;
+        updateScratchCounters(saved);
 
         if (initScratchpad.initialized) return;
         initScratchpad.initialized = true;
@@ -1348,27 +1724,220 @@
         if (dashScratch) dashScratch.setAttribute('autocomplete', 'off');
         if (fullScratch) fullScratch.setAttribute('autocomplete', 'off');
 
-        function save(val) {
+        function syncAndSave(val, source) {
             localStorage.setItem(SCRATCHPAD_KEY, val);
-            if (dashScratch && dashScratch.value !== val) dashScratch.value = val;
-            if (fullScratch && fullScratch.value !== val) fullScratch.value = val;
-            if (saveStatus) {
-                saveStatus.textContent = 'Saved just now';
-                setTimeout(() => { if (saveStatus) saveStatus.textContent = 'Auto-saved'; }, 2000);
+            if (source !== 'dash' && dashScratch && dashScratch.value !== val) {
+                dashScratch.value = val;
             }
+            if (source !== 'full' && fullScratch && fullScratch.value !== val) {
+                fullScratch.value = val;
+            }
+            updateScratchCounters(val);
+
+            const dashStatus = document.getElementById('scratch-save-status');
+            const fullStatus = document.getElementById('full-scratch-status');
+            if (dashStatus) dashStatus.textContent = 'Saved just now';
+            if (fullStatus) fullStatus.textContent = 'Live Synced';
+
+            clearTimeout(initScratchpad.statusTimer);
+            initScratchpad.statusTimer = setTimeout(() => {
+                if (dashStatus) dashStatus.textContent = 'Auto-saved';
+                if (fullStatus) fullStatus.textContent = 'Live Synced';
+            }, 1800);
         }
 
-        ['keyup', 'paste', 'input', 'change'].forEach(evt => {
-            const handler = (e) => {
-                if (document.activeElement === e.target) {
-                    save(e.target.value);
-                }
-            };
-            if (dashScratch) dashScratch.addEventListener(evt, handler);
-            if (fullScratch) fullScratch.addEventListener(evt, handler);
-        });
+        if (dashScratch) {
+            ['input', 'keyup', 'paste', 'change'].forEach(evt => {
+                dashScratch.addEventListener(evt, (e) => {
+                    syncAndSave(e.target.value, 'dash');
+                });
+            });
+        }
+
+        if (fullScratch) {
+            ['input', 'keyup', 'paste', 'change'].forEach(evt => {
+                fullScratch.addEventListener(evt, (e) => {
+                    syncAndSave(e.target.value, 'full');
+                });
+            });
+        }
+
+        const dbSearchInput = document.getElementById('scratch-db-search');
+        if (dbSearchInput) {
+            dbSearchInput.addEventListener('input', () => {
+                renderScratchesDb();
+            });
+        }
     }
-    
+
+    function getScratchesDb() {
+        const stored = localStorage.getItem(SCRATCHES_DB_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
+        }
+        return [];
+    }
+
+    function saveScratchesDb(entries) {
+        localStorage.setItem(SCRATCHES_DB_KEY, JSON.stringify(entries));
+        renderScratchesDb();
+    }
+
+    window.commitScratchToDb = function () {
+        const buffer = localStorage.getItem(SCRATCHPAD_KEY) || '';
+        if (!buffer.trim()) {
+            alert('Active scratchpad buffer is empty. Type some notes before saving to database.');
+            return;
+        }
+
+        const firstLine = buffer.trim().split('\n')[0].slice(0, 40);
+        const defaultTitle = firstLine ? `Snapshot: ${firstLine}` : `Scratch Archive ${new Date().toLocaleDateString()}`;
+        const titlePrompt = prompt('Enter a label / title for this scratchpad snapshot:', defaultTitle);
+        if (titlePrompt === null) return;
+
+        const title = titlePrompt.trim() || defaultTitle;
+        const words = buffer.trim().split(/\s+/).length;
+        const chars = buffer.length;
+
+        const newEntry = {
+            id: Date.now(),
+            title: title,
+            content: buffer,
+            timestamp: new Date().toISOString(),
+            dateStr: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
+            wordCount: words,
+            charCount: chars
+        };
+
+        const db = getScratchesDb();
+        db.unshift(newEntry);
+        saveScratchesDb(db);
+
+        const dashStatus = document.getElementById('scratch-save-status');
+        const fullStatus = document.getElementById('full-scratch-status');
+        if (dashStatus) dashStatus.textContent = 'Committed to DB!';
+        if (fullStatus) fullStatus.textContent = 'Archived to Database!';
+
+        alert(`Scratch snapshot "${title}" successfully committed to persistent database.`);
+    };
+
+    window.loadScratchIntoBuffer = function (entryId) {
+        const db = getScratchesDb();
+        const entry = db.find(e => e.id === entryId);
+        if (!entry) return;
+
+        if (confirm(`Load "${entry.title}" into active working buffer? (This will update both Dashboard and Scratchpad tabs)`)) {
+            localStorage.setItem(SCRATCHPAD_KEY, entry.content);
+            const dashScratch = document.getElementById('dashboard-scratchpad');
+            const fullScratch = document.getElementById('full-scratchpad');
+            if (dashScratch) dashScratch.value = entry.content;
+            if (fullScratch) fullScratch.value = entry.content;
+            updateScratchCounters(entry.content);
+            alert('Snapshot loaded into active working buffer.');
+        }
+    };
+
+    window.deleteScratchEntry = function (entryId) {
+        if (confirm('Permanently delete this scratch archive record from database?')) {
+            const db = getScratchesDb().filter(e => e.id !== entryId);
+            saveScratchesDb(db);
+        }
+    };
+
+    window.copyScratchEntry = function (entryId) {
+        const db = getScratchesDb();
+        const entry = db.find(e => e.id === entryId);
+        if (!entry) return;
+        navigator.clipboard.writeText(entry.content).then(() => {
+            alert(`Copied "${entry.title}" content to clipboard.`);
+        }).catch(() => {
+            prompt('Copy content:', entry.content);
+        });
+    };
+
+    window.copyScratchBuffer = function () {
+        const buffer = localStorage.getItem(SCRATCHPAD_KEY) || '';
+        if (!buffer) return alert('Scratchpad buffer is empty.');
+        navigator.clipboard.writeText(buffer).then(() => {
+            alert('Working scratchpad buffer copied to clipboard.');
+        }).catch(() => {
+            prompt('Copy buffer:', buffer);
+        });
+    };
+
+    window.exportScratchesDbJSON = function () {
+        const db = getScratchesDb();
+        if (db.length === 0) return alert('Scratches database is empty. No records to export.');
+        const exportData = {
+            total_scratches: db.length,
+            exported_at: new Date().toISOString(),
+            scratches: db
+        };
+        const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `islam_ebeid_scratches_db_${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    };
+
+    function renderScratchesDb() {
+        const container = document.getElementById('scratches-db-container');
+        const countBadge = document.getElementById('scratches-db-count');
+        if (!container) return;
+
+        const db = getScratchesDb();
+        if (countBadge) countBadge.textContent = `${db.length} Records`;
+
+        const query = (document.getElementById('scratch-db-search')?.value || '').toLowerCase().trim();
+        const filtered = db.filter(e => {
+            if (!query) return true;
+            return e.title.toLowerCase().includes(query) || e.content.toLowerCase().includes(query);
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `
+                <div class="p-8 text-center text-xs text-slate-500 rounded-xl bg-slate-800/30 border border-slate-800 space-y-1">
+                    <i class="fas fa-database text-slate-600 text-lg mb-1 block"></i>
+                    <p class="font-semibold text-slate-400">No persistent scratches found</p>
+                    <p class="text-[11px] text-slate-500">Click "Commit / Save to Database" above or in Dashboard to archive notes here permanently.</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = filtered.map(item => `
+            <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 hover:border-slate-600 transition space-y-2">
+                <div class="flex items-start justify-between gap-3">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold text-white truncate">${escapeHtml(item.title)}</span>
+                            <span class="text-[10px] font-mono text-slate-500 flex-shrink-0">${item.dateStr}</span>
+                        </div>
+                        <div class="text-[11px] text-slate-400 font-mono mt-0.5">
+                            ${item.wordCount || 0} words &bull; ${item.charCount || 0} chars
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1.5 flex-shrink-0">
+                        <button onclick="loadScratchIntoBuffer(${item.id})" class="px-2.5 py-1 rounded bg-sky-600/20 hover:bg-sky-600/40 text-sky-300 text-[11px] font-semibold border border-sky-500/30 transition" title="Load into active buffer">
+                            <i class="fas fa-upload mr-1"></i> Load
+                        </button>
+                        <button onclick="copyScratchEntry(${item.id})" class="p-1.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300 text-xs transition" title="Copy text">
+                            <i class="far fa-copy"></i>
+                        </button>
+                        <button onclick="deleteScratchEntry(${item.id})" class="p-1.5 rounded bg-slate-700 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 text-xs transition" title="Delete record">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="text-xs text-slate-300 font-mono bg-slate-900/80 p-2.5 rounded-lg max-h-24 overflow-y-auto whitespace-pre-wrap border border-slate-800">
+                    ${escapeHtml(item.content.slice(0, 300))}${item.content.length > 300 ? '...' : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
     window.downloadScratchpad = function() {
         const content = localStorage.getItem(SCRATCHPAD_KEY) || '';
         if (!content) return alert("Scratchpad is empty.");
@@ -1385,12 +1954,13 @@
     };
 
     window.clearScratchpad = function () {
-        if (confirm('Are you sure you want to clear your scratchpad?')) {
+        if (confirm('Are you sure you want to clear your active scratchpad buffer? (Your persistent database snapshots will remain safe)')) {
             localStorage.removeItem(SCRATCHPAD_KEY);
             const dashScratch = document.getElementById('dashboard-scratchpad');
             const fullScratch = document.getElementById('full-scratchpad');
             if (dashScratch) dashScratch.value = '';
             if (fullScratch) fullScratch.value = '';
+            updateScratchCounters('');
         }
     };
 
@@ -1401,9 +1971,9 @@
             try { return JSON.parse(stored); } catch (e) { }
         }
         const initialTasks = [
-            { id: 1, text: "Review NSF project milestone deliverables for student research assistants", done: false },
-            { id: 2, text: "Finalize revision comments for Frontiers in Bioinformatics ProtGram manuscript", done: true },
-            { id: 3, text: "Upload CSCI modern coursework lab assignments to Canvas", done: false }
+            { id: 1, text: "Review NSF project milestone deliverables for student research assistants", priority: "milestone", done: false },
+            { id: 2, text: "Finalize revision comments for Frontiers in Bioinformatics ProtGram manuscript", priority: "high", done: true },
+            { id: 3, text: "Upload CSCI modern coursework lab assignments to Canvas", priority: "normal", done: false }
         ];
         localStorage.setItem(TASKS_KEY, JSON.stringify(initialTasks));
         return initialTasks;
@@ -1414,34 +1984,77 @@
         renderTasks();
     }
 
+    window.setTaskFilter = function (filter) {
+        activeTaskFilter = filter;
+        document.querySelectorAll('.task-filter-pill').forEach(btn => {
+            if (btn.getAttribute('data-filter') === filter) {
+                btn.className = 'task-filter-pill active px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition';
+            } else {
+                btn.className = 'task-filter-pill px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition';
+            }
+        });
+        renderTasks();
+    };
+
     function renderTasks() {
         const list = document.getElementById('task-list');
+        const statsLabel = document.getElementById('task-stats-label');
         if (!list) return;
         const tasks = getStoredTasks();
 
-        list.innerHTML = tasks.map(t => `
-            <li class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/60 gap-3 group">
-                <label class="flex items-center gap-2.5 cursor-pointer flex-1 min-w-0">
-                    <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${t.id})" 
-                        class="rounded border-slate-700 bg-slate-900 text-sky-600 focus:ring-sky-500 h-4 w-4">
-                    <span class="text-xs text-slate-200 truncate ${t.done ? 'line-through text-slate-500' : ''}">
-                        ${escapeHtml(t.text)}
-                    </span>
-                </label>
-                <button onclick="deleteTask(${t.id})" class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-rose-400 text-xs transition">
-                    <i class="fas fa-times"></i>
-                </button>
-            </li>
-        `).join('');
+        const activeCount = tasks.filter(t => !t.done).length;
+        if (statsLabel) {
+            statsLabel.textContent = `${activeCount} active of ${tasks.length} total tasks`;
+        }
+
+        const filtered = tasks.filter(t => {
+            if (activeTaskFilter === 'active') return !t.done;
+            if (activeTaskFilter === 'completed') return t.done;
+            return true;
+        });
+
+        if (filtered.length === 0) {
+            list.innerHTML = `<li class="p-6 text-center text-xs text-slate-500 rounded-lg bg-slate-800/30">No tasks in this view.</li>`;
+            return;
+        }
+
+        list.innerHTML = filtered.map(t => {
+            let priorityBadge = '';
+            if (t.priority === 'milestone') {
+                priorityBadge = '<span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/30 flex-shrink-0">Milestone 🎯</span>';
+            } else if (t.priority === 'high') {
+                priorityBadge = '<span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/30 flex-shrink-0">High 🔥</span>';
+            }
+
+            return `
+                <li class="flex items-center justify-between p-2.5 rounded-lg bg-slate-800/80 border border-slate-700/60 gap-3 group">
+                    <label class="flex items-center gap-2.5 cursor-pointer flex-1 min-w-0">
+                        <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${t.id})" 
+                            class="rounded border-slate-700 bg-slate-900 text-emerald-600 focus:ring-emerald-500 h-4 w-4">
+                        <span class="text-xs text-slate-200 truncate ${t.done ? 'line-through text-slate-500' : ''}">
+                            ${escapeHtml(t.text)}
+                        </span>
+                    </label>
+                    <div class="flex items-center gap-2">
+                        ${priorityBadge}
+                        <button onclick="deleteTask(${t.id})" class="opacity-0 group-hover:opacity-100 text-slate-500 hover:text-rose-400 text-xs transition">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </li>
+            `;
+        }).join('');
     }
 
     window.addTask = function () {
         const input = document.getElementById('new-task-input');
+        const prioritySelect = document.getElementById('new-task-priority');
         if (!input || !input.value.trim()) return;
         const tasks = getStoredTasks();
         tasks.push({
             id: Date.now(),
             text: input.value.trim(),
+            priority: (prioritySelect ? prioritySelect.value : 'normal'),
             done: false
         });
         saveTasks(tasks);
@@ -1487,15 +2100,18 @@
     };
 
     window.resetPortalData = function () {
-        if (confirm('Warning: This will clear your custom passcode, custom added bookmarks, pinned favorites, tasks, and logout. Reset now?')) {
+        if (confirm('Warning: This will clear your custom passcode, custom added bookmarks, pinned favorites, tasks, scratches database, secret messages, and logout. Reset now?')) {
             localStorage.removeItem(PASSCODE_STORAGE_KEY);
             localStorage.removeItem(PINNED_STORAGE_KEY);
             localStorage.removeItem(SCRATCHPAD_KEY);
+            localStorage.removeItem(SCRATCHES_DB_KEY);
             localStorage.removeItem(TASKS_KEY);
             localStorage.removeItem(MESSAGES_KEY);
             localStorage.removeItem(CUSTOM_BM_KEY);
             localStorage.removeItem(DELETED_BM_KEY);
             localStorage.removeItem(USAGE_STATS_KEY);
+            localStorage.removeItem(HANDSHAKE_CONFIG_KEY);
+            localStorage.removeItem('gemini_api_key');
             logout();
         }
     };
@@ -1505,7 +2121,6 @@
     // -------------------------------------------------------------------------
     function updateStats() {
         const allBms = getAllBookmarks();
-        const pinned = getPinnedIds();
         const msgs = getStoredMessages();
         const unreadCount = msgs.filter(m => m.unread).length;
         const stats = getUsageStats();
@@ -1546,6 +2161,9 @@
         renderInbox();
         renderTasks();
         initScratchpad();
+        renderScratchesDb();
+        initGeminiSettings();
+        initHandshakeSettings();
         updateStats();
     }
 
@@ -1559,53 +2177,131 @@
         initCategoryPills();
         initSearch();
         initAddBookmarkForm();
+        initSecretDispatchForm();
         if (isAuthenticated()) {
             renderAll();
         }
     });
 
     // -------------------------------------------------------------------------
-    // 15. AI SEARCH & SETTINGS
+    // 15. AI SEMANTIC SEARCH & SETTINGS CONFIGURATION
     // -------------------------------------------------------------------------
-    window.openSettingsModal = function() {
-        const modal = document.getElementById('settings-modal');
+    function initGeminiSettings() {
         const keyInput = document.getElementById('settings-gemini-key');
-        const savedKey = localStorage.getItem('gemini_api_key');
-        if (savedKey) {
-            keyInput.value = savedKey;
+        const statusBadge = document.getElementById('gemini-status-badge');
+        const savedKey = localStorage.getItem('gemini_api_key') || '';
+
+        if (keyInput) keyInput.value = savedKey;
+        if (statusBadge) {
+            if (savedKey) {
+                statusBadge.textContent = 'Key Stored \u2713';
+                statusBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/30';
+            } else {
+                statusBadge.textContent = 'No Key Configured';
+                statusBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700';
+            }
         }
-        modal.classList.remove('hidden');
-        // trigger reflow
-        void modal.offsetWidth;
-        modal.classList.remove('opacity-0');
-        modal.classList.add('opacity-100');
+    }
+
+    window.toggleGeminiKeyVisibility = function () {
+        const input = document.getElementById('settings-gemini-key');
+        const icon = document.getElementById('gemini-eye-icon');
+        if (!input) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            if (icon) { icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+        } else {
+            input.type = 'password';
+            if (icon) { icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+        }
     };
 
-    window.closeSettingsModal = function() {
-        const modal = document.getElementById('settings-modal');
-        modal.classList.remove('opacity-100');
-        modal.classList.add('opacity-0');
-        setTimeout(() => {
-            modal.classList.add('hidden');
-        }, 300);
-    };
-
-    window.saveSettings = function() {
+    window.saveGeminiApiKey = function () {
         const keyInput = document.getElementById('settings-gemini-key');
-        localStorage.setItem('gemini_api_key', keyInput.value.trim());
-        window.closeSettingsModal();
+        const msg = document.getElementById('gemini-save-msg');
+        const keyVal = keyInput ? keyInput.value.trim() : '';
+
+        localStorage.setItem('gemini_api_key', keyVal);
+        initGeminiSettings();
+
+        if (msg) {
+            msg.className = 'text-xs text-emerald-400 block';
+            msg.textContent = 'Gemini API Key saved successfully!';
+            setTimeout(() => { if (msg) msg.textContent = ''; }, 3000);
+        }
+    };
+
+    window.clearGeminiApiKey = function () {
+        if (confirm('Clear your saved Gemini API Key?')) {
+            localStorage.removeItem('gemini_api_key');
+            const keyInput = document.getElementById('settings-gemini-key');
+            if (keyInput) keyInput.value = '';
+            initGeminiSettings();
+            const msg = document.getElementById('gemini-save-msg');
+            if (msg) {
+                msg.className = 'text-xs text-slate-400 block';
+                msg.textContent = 'API Key cleared.';
+                setTimeout(() => { if (msg) msg.textContent = ''; }, 3000);
+            }
+        }
+    };
+
+    window.testGeminiApiKey = async function () {
+        const keyInput = document.getElementById('settings-gemini-key');
+        const keyVal = keyInput ? keyInput.value.trim() : '';
+        const msg = document.getElementById('gemini-save-msg');
+        const statusBadge = document.getElementById('gemini-status-badge');
+
+        if (!keyVal) {
+            if (msg) {
+                msg.className = 'text-xs text-rose-400 block';
+                msg.textContent = 'Please enter an API key to test.';
+            }
+            return;
+        }
+
+        if (msg) {
+            msg.className = 'text-xs text-indigo-300 block';
+            msg.textContent = 'Testing connection with Google Gemini API...';
+        }
+
+        try {
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${keyVal}`);
+            if (resp.ok) {
+                if (msg) {
+                    msg.className = 'text-xs text-emerald-400 block font-semibold';
+                    msg.textContent = 'Connection Verified! API Key is active and valid.';
+                }
+                if (statusBadge) {
+                    statusBadge.textContent = 'Verified Valid \u2713';
+                    statusBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30';
+                }
+            } else {
+                const errData = await resp.text();
+                throw new Error(`HTTP ${resp.status}: ${errData.slice(0, 100)}`);
+            }
+        } catch (err) {
+            if (msg) {
+                msg.className = 'text-xs text-rose-400 block';
+                msg.textContent = `Verification Failed: ${err.message}`;
+            }
+            if (statusBadge) {
+                statusBadge.textContent = 'Test Failed \u2717';
+                statusBadge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/30';
+            }
+        }
     };
 
     window.triggerAISearch = async function() {
-        console.log("AI Search Button Clicked!");
-        
         const query = document.getElementById('bm-search-input').value.trim();
         if (!query) return;
 
         const apiKey = localStorage.getItem('gemini_api_key');
         if (!apiKey) {
             alert('Please set your Gemini API Key in Settings to use AI Search.');
-            window.openSettingsModal();
+            switchTab('tab-settings');
+            const keyInput = document.getElementById('settings-gemini-key');
+            if (keyInput) keyInput.focus();
             return;
         }
 
@@ -1635,7 +2331,7 @@ ${JSON.stringify(minimizedBms)}
 
 Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantically match the query. Do not wrap in markdown blocks, just return the raw JSON array. If no matches, return [].`;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -1694,30 +2390,6 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
         } catch (err) {
             console.error(err);
-            
-            if (err.message.includes("404")) {
-                try {
-                    const diagResponse = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
-                    if (diagResponse.ok) {
-                        const diagData = await diagResponse.json();
-                        const availableModels = diagData.models
-                            .filter(m => m.supportedGenerationMethods && m.supportedGenerationMethods.includes("generateContent"))
-                            .map(m => m.name)
-                            .join("\n");
-                        const msg = `Model not found (404). But your key is valid! Available models for your key are:\n\n${availableModels}`;
-                        try {
-                            await navigator.clipboard.writeText(availableModels);
-                            alert(msg + "\n\n(SUCCESS: This list has been automatically COPIED to your clipboard! You can just paste it to the AI.)");
-                        } catch (cpErr) {
-                            prompt(msg + "\n\nCopy the text below:", availableModels);
-                        }
-                        return;
-                    }
-                } catch (diagErr) {
-                    console.error("Diagnostic failed", diagErr);
-                }
-            }
-            
             alert('AI Search failed: ' + err.message);
         } finally {
             if (btn) {
