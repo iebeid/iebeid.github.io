@@ -10,6 +10,7 @@ import sys
 import json
 import sqlite3
 import subprocess
+import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -526,14 +527,14 @@ def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
     return payload
 
 
-def git_commit_and_push(commit_msg: str | None = None):
+def git_commit_and_push(commit_msg: str | None = None, push: bool = True):
     """Stage all synchronized public artifacts, verify content.db is excluded, and commit + push to GitHub."""
     temp_helper = REPO_ROOT / "scripts" / "convert_all_to_shells.py"
     if temp_helper.exists():
         temp_helper.unlink()
 
     print("-" * 68)
-    print("[GIT] Preparing GitHub commit and push...")
+    print(f"[GIT] Preparing GitHub staging and commit (push={'ENABLED' if push else 'DISABLED'})...")
 
     # 1. Stage all tracked and untracked public files (respecting .gitignore)
     subprocess.run(["git", "-C", str(REPO_ROOT), "add", "-A"], check=True)
@@ -565,49 +566,82 @@ def git_commit_and_push(commit_msg: str | None = None):
             sys.exit(commit_res.returncode)
         print(f"[OK] Committed changes: {commit_msg}")
 
-    # 4. Push to GitHub remote
-    branch_res = subprocess.run(
-        ["git", "-C", str(REPO_ROOT), "rev-parse", "--abbrev-ref", "HEAD"],
-        capture_output=True,
-        text=True,
-        check=True,
-    )
-    branch = branch_res.stdout.strip() or "main"
-    print(f"[GIT] Pushing to origin/{branch}...")
-    push_res = subprocess.run(
-        ["git", "-C", str(REPO_ROOT), "push", "origin", branch],
-        capture_output=True,
-        text=True,
-    )
-    if push_res.returncode != 0:
-        print(f"[GIT ERROR] Push failed:\n{push_res.stderr or push_res.stdout}")
-        sys.exit(push_res.returncode)
-    print(f"[OK] Successfully pushed to GitHub (origin/{branch})!")
+    # 4. Push to GitHub remote if enabled
+    if push:
+        branch_res = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "rev-parse", "--abbrev-ref", "HEAD"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        branch = branch_res.stdout.strip() or "main"
+        print(f"[GIT] Pushing to origin/{branch}...")
+        push_res = subprocess.run(
+            ["git", "-C", str(REPO_ROOT), "push", "origin", branch],
+            capture_output=True,
+            text=True,
+        )
+        if push_res.returncode != 0:
+            print(f"[GIT ERROR] Push failed:\n{push_res.stderr or push_res.stdout}")
+            sys.exit(push_res.returncode)
+        print(f"[OK] Successfully pushed to GitHub (origin/{branch})!")
+    else:
+        print("[GIT] Skipping remote push (--no-push active). Changes committed locally.")
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Dr. Islam Akef Ebeid - SQLite Full-Stack Content & UI Sync Engine",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""Examples:
+  python scripts/sync_content.py                     # Full export, commit, and git push
+  python scripts/sync_content.py --no-push           # Export and git commit, without remote push
+  python scripts/sync_content.py --export-only       # Export public JSON/JS bundles without any git actions
+  python scripts/sync_content.py --dry-run           # Inspect database and validate without writing files
+  python scripts/sync_content.py -m "Update docs"    # Custom git commit message
+"""
+    )
+    parser.add_argument("--export-only", action="store_true", help="Export SQLite tables to JSON/JS bundles without git commit or push")
+    parser.add_argument("--no-push", action="store_true", help="Stage and commit changes locally, but skip pushing to remote origin")
+    parser.add_argument("--dry-run", action="store_true", help="Inspect and validate database tables without writing files or git changes")
+    parser.add_argument("-m", "--message", dest="commit_msg", type=str, default=None, help="Custom git commit message")
+
+    args = parser.parse_args()
+
     print("=" * 68)
     print("Dr. Islam Akef Ebeid - SQLite Full-Stack Content & UI Sync Engine")
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 68)
 
     if not DB_PATH.exists():
-        print(f"[ERROR] Database not found at {DB_PATH}. Run scripts/extract_content_to_sqlite.py first.")
+        print(f"[ERROR] Database not found at {DB_PATH}.")
         sys.exit(1)
 
     check_git_safety()
+
+    if args.dry_run:
+        print("[DRY RUN] Inspecting database tables and simulation...")
+        conn = sqlite3.connect(str(DB_PATH))
+        cur = conn.cursor()
+        pages_cnt = cur.execute("SELECT COUNT(*) FROM pages").fetchone()[0]
+        secs_cnt = cur.execute("SELECT COUNT(*) FROM page_sections").fetchone()[0]
+        bm_cnt = cur.execute("SELECT COUNT(*) FROM portal_bookmarks").fetchone()[0]
+        sheets_cnt = cur.execute("SELECT COUNT(*) FROM stylesheets").fetchone()[0]
+        print(f"[DRY RUN] DB contains {pages_cnt} pages, {secs_cnt} sections, {bm_cnt} bookmarks, {sheets_cnt} stylesheets.")
+        print("[DRY RUN] No files were modified and no git operations were executed.")
+        conn.close()
+        print("=" * 68)
+        print("[SUCCESS] Dry run completed cleanly.")
+        print("=" * 68)
+        return
 
     conn = sqlite3.connect(str(DB_PATH))
     export_public_content(conn)
     conn.close()
 
-    if "--no-push" not in sys.argv:
-        custom_msg = None
-        if "-m" in sys.argv:
-            idx = sys.argv.index("-m")
-            if idx + 1 < len(sys.argv):
-                custom_msg = sys.argv[idx + 1]
-        git_commit_and_push(custom_msg)
+    if not args.export_only:
+        should_push = not args.no_push
+        git_commit_and_push(commit_msg=args.commit_msg, push=should_push)
 
     print("=" * 68)
     print("[SUCCESS] Synchronization Complete! All HTML, CSS, Nav & Content synced.")
