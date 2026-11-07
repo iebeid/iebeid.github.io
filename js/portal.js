@@ -29,6 +29,7 @@
     const CUSTOM_BM_KEY = 'portal_custom_bookmarks';
     const DELETED_BM_KEY = 'portal_deleted_bookmarks';
     const USAGE_STATS_KEY = 'portal_usage_stats';
+    const REMEMBER_STORAGE_KEY = 'portal_remember_bookmarks';
     const HANDSHAKE_CONFIG_KEY = 'portal_handshake_config';
 
     const DEFAULT_HANDSHAKE_CONFIG = {
@@ -337,6 +338,119 @@
         return (item && item.count) ? item.count : 0;
     }
 
+    // -------------------------------------------------------------------------
+    // REMEMBER / SAVE FOR LATER ENGINE
+    // -------------------------------------------------------------------------
+    function getRememberedIds() {
+        const stored = localStorage.getItem(REMEMBER_STORAGE_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
+        }
+        return [];
+    }
+
+    function saveRememberedIds(ids) {
+        localStorage.setItem(REMEMBER_STORAGE_KEY, JSON.stringify(ids));
+    }
+
+    function toggleRemember(bmId) {
+        let ids = getRememberedIds();
+        const numId = Number(bmId);
+        const exists = ids.includes(numId);
+        if (exists) {
+            ids = ids.filter(id => id !== numId);
+        } else {
+            ids.unshift(numId);
+        }
+        saveRememberedIds(ids);
+        renderDashboardRemember();
+
+        // Update all visible button icons
+        document.querySelectorAll(`[data-remember-btn="${numId}"]`).forEach(btn => {
+            const icon = btn.querySelector('i');
+            if (icon) {
+                if (!exists) {
+                    icon.className = 'fas fa-bookmark text-violet-400';
+                    btn.title = 'Remove from Save for Later';
+                } else {
+                    icon.className = 'far fa-bookmark text-slate-400';
+                    btn.title = 'Save for Later';
+                }
+            }
+        });
+    }
+    window.toggleRemember = toggleRemember;
+
+    function clearAllRemembered() {
+        if (confirm("Clear all bookmarks from your 'Save for Later' list?")) {
+            saveRememberedIds([]);
+            renderDashboardRemember();
+            renderAll();
+        }
+    }
+    window.clearAllRemembered = clearAllRemembered;
+
+    function renderDashboardRemember() {
+        const grid = document.getElementById('dashboard-remember-grid');
+        const empty = document.getElementById('dashboard-remember-empty');
+        const badge = document.getElementById('remember-count-badge');
+        const clearBtn = document.getElementById('clear-remember-btn');
+        if (!grid) return;
+
+        const remIds = getRememberedIds();
+        const allBms = getAllBookmarks();
+        const bms = remIds.map(id => allBms.find(b => b.id === id)).filter(Boolean);
+
+        if (badge) {
+            badge.textContent = `${bms.length} Saved`;
+        }
+
+        if (bms.length === 0) {
+            grid.innerHTML = '';
+            grid.classList.add('hidden');
+            if (empty) empty.classList.remove('hidden');
+            if (clearBtn) clearBtn.classList.add('hidden');
+            return;
+        }
+
+        if (empty) empty.classList.add('hidden');
+        grid.classList.remove('hidden');
+        if (clearBtn) clearBtn.classList.remove('hidden');
+
+        grid.innerHTML = bms.map(bm => {
+            const domain = bm.domain || 'web';
+            const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+            return `
+            <div class="group relative bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-violet-500/50 rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shadow-sm">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <div class="w-6 h-6 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center justify-center flex-shrink-0 p-1">
+                                <img src="${faviconUrl}" alt="" class="w-4 h-4 object-contain rounded" onerror="this.onerror=null;this.src='../../images/favicon.png'"/>
+                            </div>
+                            <span class="text-[10px] font-mono font-medium text-violet-400 bg-violet-500/10 px-1.5 py-0.5 rounded truncate max-w-[120px]">${escapeHtml(domain)}</span>
+                        </div>
+                        <button onclick="toggleRemember(${bm.id})" class="text-slate-500 hover:text-rose-400 text-xs transition p-1" title="Remove from Save for Later">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <h4 class="text-xs font-semibold text-slate-200 group-hover:text-violet-300 transition line-clamp-2 cursor-pointer leading-snug"
+                        onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
+                        title="${escapeHtml(bm.name)}">
+                        ${escapeHtml(bm.name)}
+                    </h4>
+                </div>
+                <div class="flex items-center justify-between mt-3 pt-2 border-t border-slate-700/50 text-[11px]">
+                    <span class="text-[10px] text-slate-500 truncate max-w-[130px]"><i class="fas fa-folder mr-1 text-slate-600"></i>${escapeHtml(bm.subfolder || bm.category)}</span>
+                    <a href="${escapeHtml(bm.url)}" target="_blank" rel="noopener noreferrer" onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
+                       class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1 transition">
+                        <span>Open</span> <i class="fas fa-external-link-alt text-[9px]"></i>
+                    </a>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
     function generateSemanticTags(name, domain, subfolder, category) {
         const tokens = new Set();
         const stopwords = new Set([
@@ -345,7 +459,13 @@
             'welcome', 'untitled', 'web', 'com', 'org', 'edu', 'gov', 'net', 'io', 'html', 'php'
         ]);
 
+        const rawName = (name || '').toLowerCase();
         const d = (domain || '').toLowerCase().replace(/^www\./, '');
+
+        // Detect Email Accounts
+        if (rawName.includes('@') || d.includes('mail.') || d.includes('outlook') || d.includes('proton') || d.includes('inbox')) {
+            ['email', 'mail', 'inbox', 'webmail', 'messages', 'communication', 'account', 'email-account'].forEach(t => tokens.add(t));
+        }
         if (d) {
             tokens.add(d);
             const domainParts = d.split('.').filter(p => !stopwords.has(p) && p.length > 2);
@@ -863,9 +983,16 @@
                             <span class="text-[10px] font-mono px-1.5 py-0.5 rounded border ${rankBadgeClass}">
                                 #${rank}
                             </span>
-                            <span class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
-                                <i class="fas fa-fire text-amber-400 text-[8px]"></i> ${count}
-                            </span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="event.stopPropagation(); toggleRemember(${bm.id});" data-remember-btn="${bm.id}"
+                                    class="w-5 h-5 rounded hover:bg-slate-700/60 text-slate-400 hover:text-violet-400 flex items-center justify-center transition text-[10px]"
+                                    title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}">
+                                    <i class="${getRememberedIds().includes(bm.id) ? 'fas text-violet-400' : 'far'} fa-bookmark"></i>
+                                </button>
+                                <span class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
+                                    <i class="fas fa-fire text-amber-400 text-[8px]"></i> ${count}
+                                </span>
+                            </div>
                         </div>
                         <div class="flex items-center gap-2 mb-1.5">
                             <img src="${faviconUrl}" alt="" onerror="this.onerror=null;this.src='../../images/favicon.png'" class="w-4 h-4 object-contain flex-shrink-0 rounded-sm">
@@ -928,9 +1055,54 @@
         const tags = (bm.ai_tags || '').toLowerCase();
         const path = (bm.path || '').toLowerCase();
         const url = (bm.url || '').toLowerCase();
+        const cleanUrl = url.split('?')[0].split('#')[0];
 
         let score = 0;
         let reasons = [];
+
+        // 0. High-Priority Semantic Intent Handling (e.g. "email" -> user's email accounts)
+        const isEmailAccount = name.includes('@') ||
+            cleanUrl.includes('mail.google.com') ||
+            cleanUrl.includes('outlook.live.com') ||
+            cleanUrl.includes('outlook.office.com') ||
+            cleanUrl.includes('mail.proton.me') ||
+            cleanUrl.includes('mail.yahoo.com') ||
+            tags.includes('email-account');
+
+        const isEmailQuery = (q === 'email' || q === 'emails' || q === 'mail' || q === 'inbox' || q === 'webmail');
+
+        if (isEmailQuery && isEmailAccount) {
+            score += 2500;
+            reasons.unshift("Primary Email Account");
+        }
+
+        // Expanded Intent Synonym Mapping
+        const INTENT_MAP = {
+            'email': ['email', 'mail', 'inbox', 'webmail', 'gmail', 'outlook', 'hotmail', 'proton', 'yahoo', 'messages', 'communication'],
+            'emails': ['email', 'mail', 'inbox', 'webmail', 'gmail', 'outlook', 'hotmail', 'proton', 'yahoo', 'messages'],
+            'mail': ['email', 'mail', 'inbox', 'webmail', 'gmail', 'outlook', 'hotmail', 'proton', 'yahoo'],
+            'inbox': ['inbox', 'email', 'mail', 'gmail', 'outlook', 'webmail'],
+            'ai': ['ai', 'artificial-intelligence', 'machine-learning', 'ml', 'gnn', 'neural', 'deep-learning', 'transformers', 'nlp'],
+            'grant': ['grant', 'grants', 'nsf', 'nih', 'funding', 'proposal', 'awards', 'fastlane', 'research.gov'],
+            'grants': ['grant', 'grants', 'nsf', 'nih', 'funding', 'proposal', 'awards', 'fastlane', 'research.gov'],
+            'paper': ['paper', 'papers', 'publication', 'publications', 'manuscript', 'journal', 'arxiv', 'pubmed', 'ieee'],
+            'papers': ['paper', 'papers', 'publication', 'publications', 'manuscript', 'journal', 'arxiv', 'pubmed', 'ieee'],
+            'course': ['course', 'courses', 'teaching', 'class', 'classes', 'syllabus', 'canvas', 'lms', 'student', 'students', 'twu'],
+            'courses': ['course', 'courses', 'teaching', 'class', 'classes', 'syllabus', 'canvas', 'lms', 'student', 'students', 'twu'],
+            'teaching': ['teaching', 'course', 'courses', 'class', 'syllabus', 'canvas', 'lms', 'student', 'students', 'twu'],
+            'code': ['code', 'github', 'git', 'repo', 'repository', 'software', 'programming', 'python']
+        };
+
+        if (INTENT_MAP[q]) {
+            INTENT_MAP[q].forEach(syn => {
+                if (tags.includes(syn) || cleanUrl.includes(syn) || name.includes(syn)) {
+                    score += 350;
+                    if (!reasons.some(r => r.includes("Semantic Match") || r.includes("Email Account"))) {
+                        reasons.push(`Semantic Match: ${syn}`);
+                    }
+                }
+            });
+        }
 
         // 1. Exact Title Matches
         if (name === q) {
@@ -964,13 +1136,17 @@
             const tagList = tags.split(',').map(t => t.trim().toLowerCase());
             const exactTag = tagList.find(t => t === q);
             if (exactTag) {
-                score += 380;
-                reasons.push(`AI Tag: ${exactTag}`);
+                score += 400;
+                if (!reasons.some(r => r.includes("AI Tag") || r.includes("Email Account"))) {
+                    reasons.push(`AI Tag: ${exactTag}`);
+                }
             } else {
                 const subTag = tagList.find(t => t.includes(q));
                 if (subTag) {
-                    score += 160;
-                    reasons.push(`AI Tag: ${subTag}`);
+                    score += 180;
+                    if (!reasons.some(r => r.includes("AI Tag") || r.includes("Email Account"))) {
+                        reasons.push(`AI Tag: ${subTag}`);
+                    }
                 }
             }
         }
@@ -981,10 +1157,13 @@
             reasons.push(`Folder: ${bm.subfolder || bm.category}`);
         }
 
-        // 5. URL
-        if (url.includes(q)) {
-            score += 60;
+        // 5. Clean URL Path vs Query String
+        // Isolate query strings so telemetry like ?utm_medium=email or ?email_id= does not hijack search results
+        if (cleanUrl.includes(q)) {
+            score += 100;
             if (reasons.length === 0) reasons.push("URL Match");
+        } else if (url.includes(q)) {
+            score += 5; // Minimal weight for query string matches
         }
 
         // 6. Multi-term Token Coverage
@@ -1231,6 +1410,7 @@
                         </h3>
 
                         ${bm.path && bm.path !== 'General' ? `<p class="text-[10px] text-slate-500 font-mono truncate"><i class="fas fa-folder-open mr-1"></i>${escapeHtml(bm.path)}</p>` : ''}
+                        ${bm.ai_tags ? `<p class="text-[10px] text-slate-500 font-mono truncate mt-1" title="Tags: ${escapeHtml(bm.ai_tags)}"><i class="fas fa-tags mr-1 text-slate-600"></i>${escapeHtml(bm.ai_tags.split(',').slice(0, 5).join(', '))}</p>` : ''}
                     </div>
 
                     <!-- Footer Action Bar -->
@@ -1238,6 +1418,9 @@
                         <div class="flex items-center gap-2">
                             <button onclick="togglePin(${bm.id})" class="text-xs ${isPinned ? 'text-amber-400 hover:text-amber-300' : 'text-slate-500 hover:text-slate-300'} transition" title="${isPinned ? 'Unpin' : 'Pin to top'}">
                                 <i class="fas fa-star"></i>
+                            </button>
+                            <button onclick="toggleRemember(${bm.id})" data-remember-btn="${bm.id}" class="text-xs ${getRememberedIds().includes(bm.id) ? 'text-violet-400 hover:text-violet-300' : 'text-slate-500 hover:text-violet-400'} transition" title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}">
+                                <i class="${getRememberedIds().includes(bm.id) ? 'fas' : 'far'} fa-bookmark"></i>
                             </button>
                             <button onclick="copyToClipboard('${escapeHtml(bm.url)}', this)" class="text-xs text-slate-500 hover:text-slate-300 transition" title="Copy URL">
                                 <i class="far fa-copy"></i>
@@ -1327,6 +1510,11 @@
                                 <button onclick="togglePin(${bm.id})" title="${isPinned ? 'Unpin' : 'Pin to Launchpad'}"
                                     class="text-xs transition ml-1 ${isPinned ? 'text-amber-400' : 'text-slate-600 hover:text-amber-400'}">
                                     <i class="${isPinned ? 'fas' : 'far'} fa-star"></i>
+                                </button>
+                                <button onclick="toggleRemember(${bm.id})" title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}"
+                                    data-remember-btn="${bm.id}"
+                                    class="text-xs transition ml-1 ${getRememberedIds().includes(bm.id) ? 'text-violet-400' : 'text-slate-600 hover:text-violet-400'}">
+                                    <i class="${getRememberedIds().includes(bm.id) ? 'fas' : 'far'} fa-bookmark"></i>
                                 </button>
                                 <button onclick="deleteBookmark(${bm.id})" title="Delete Bookmark"
                                     class="text-slate-600 hover:text-rose-400 text-xs transition opacity-0 group-hover:opacity-100 ml-0.5">
@@ -2511,6 +2699,7 @@
     }
 
     function renderAll() {
+        renderDashboardRemember();
         renderDashboardFavorites();
         renderSubfolderChips();
         renderBookmarks();

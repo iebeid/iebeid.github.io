@@ -1,5 +1,5 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-07T18:44:57.981630",
+  "_generated_at": "2026-11-07T18:48:42.696521",
   "_source": "data/content.db (SQLite 17-Table Unified Engine)",
   "meta": {
     "author_name": {
@@ -20223,7 +20223,7 @@ window.__SITE_DATABASE = {
         "clicks": 0
       }
     ],
-    "_synced_from_sqlite": "2026-11-07T18:44:57.817227"
+    "_synced_from_sqlite": "2026-11-07T18:48:42.485793"
   },
   "portal_tasks": [
     {
