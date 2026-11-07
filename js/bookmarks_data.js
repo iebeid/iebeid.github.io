@@ -3124,7 +3124,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "github.io"
               ],
-              "ai_tags": "code, data2ai4lifesciences, developer, git, github, github.io, laboratory, open-source, repository, software, twu",
+              "ai_tags": "account, code, communication, correspondence, data2ai4lifesciences, developer, email, email-account, git, github, github.io, inbox, inbox-zero, laboratory, mail, messages, open-source, repository, software, twu, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3598,7 +3598,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "cloud, gmail, google, google.com, iaebeid",
+              "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iaebeid, inbox, inbox-zero, mail, messages, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3616,7 +3616,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "cloud, google, google.com, iaebeid, ualr",
+              "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iaebeid, inbox, inbox-zero, mail, messages, ualr, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3634,7 +3634,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "cloud, google, google.com, iaebeid, utexas",
+              "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iaebeid, inbox, inbox-zero, mail, messages, utexas, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3652,7 +3652,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "cloud, google, google.com, iebeid, twu",
+              "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iebeid, inbox, inbox-zero, mail, messages, twu, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3670,7 +3670,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "akef, cloud, ebeid, gmail, google, google.com, islam",
+              "ai_tags": "account, akef, cloud, communication, correspondence, ebeid, email, email-account, gmail, google, google-mail, google.com, inbox, inbox-zero, islam, mail, messages, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3688,7 +3688,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "akef, cloud, gmail, google, google.com, islam",
+              "ai_tags": "account, akef, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, inbox, inbox-zero, islam, mail, messages, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -3706,7 +3706,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "google.com"
               ],
-              "ai_tags": "cloud, gmail, google, google.com, ixakef",
+              "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, inbox, inbox-zero, ixakef, mail, messages, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -4822,7 +4822,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "live.com"
               ],
-              "ai_tags": "akef, hotmail, islam, live, live.com",
+              "ai_tags": "account, akef, communication, correspondence, email, email-account, hotmail, inbox, inbox-zero, islam, live, live.com, mail, messages, microsoft-mail, office365, outlook, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -6082,7 +6082,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "office.com"
               ],
-              "ai_tags": "iaebeid, office, office.com, saumag",
+              "ai_tags": "account, communication, correspondence, email, email-account, iaebeid, inbox, inbox-zero, mail, messages, microsoft-mail, office, office.com, office365, outlook, saumag, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -6100,7 +6100,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "office.com"
               ],
-              "ai_tags": "iebeid, office, office.com, twu",
+              "ai_tags": "account, communication, correspondence, email, email-account, iebeid, inbox, inbox-zero, mail, messages, microsoft-mail, office, office.com, office365, outlook, twu, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -6544,7 +6544,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "proton.me"
               ],
-              "ai_tags": "iaebeid, proton, proton.me",
+              "ai_tags": "account, communication, correspondence, email, email-account, encrypted-mail, iaebeid, inbox, inbox-zero, mail, messages, proton, proton.me, protonmail, webmail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -9280,7 +9280,7 @@ window.PORTAL_BOOKMARKS = {
                 "Bookmarks",
                 "yahoo.com"
               ],
-              "ai_tags": "akef, islam, yahoo, yahoo.com",
+              "ai_tags": "account, akef, communication, correspondence, email, email-account, inbox, inbox-zero, islam, mail, messages, webmail, yahoo, yahoo.com, yahoomail",
               "favicon": "",
               "pinned": false,
               "clicks": 0
@@ -11860,7 +11860,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "github.io"
       ],
-      "ai_tags": "code, data2ai4lifesciences, developer, git, github, github.io, laboratory, open-source, repository, software, twu",
+      "ai_tags": "account, code, communication, correspondence, data2ai4lifesciences, developer, email, email-account, git, github, github.io, inbox, inbox-zero, laboratory, mail, messages, open-source, repository, software, twu, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12310,7 +12310,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "cloud, gmail, google, google.com, iaebeid",
+      "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iaebeid, inbox, inbox-zero, mail, messages, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12328,7 +12328,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "cloud, google, google.com, iaebeid, ualr",
+      "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iaebeid, inbox, inbox-zero, mail, messages, ualr, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12346,7 +12346,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "cloud, google, google.com, iaebeid, utexas",
+      "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iaebeid, inbox, inbox-zero, mail, messages, utexas, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12364,7 +12364,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "cloud, google, google.com, iebeid, twu",
+      "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, iebeid, inbox, inbox-zero, mail, messages, twu, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12382,7 +12382,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "akef, cloud, ebeid, gmail, google, google.com, islam",
+      "ai_tags": "account, akef, cloud, communication, correspondence, ebeid, email, email-account, gmail, google, google-mail, google.com, inbox, inbox-zero, islam, mail, messages, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12400,7 +12400,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "akef, cloud, gmail, google, google.com, islam",
+      "ai_tags": "account, akef, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, inbox, inbox-zero, islam, mail, messages, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -12418,7 +12418,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "google.com"
       ],
-      "ai_tags": "cloud, gmail, google, google.com, ixakef",
+      "ai_tags": "account, cloud, communication, correspondence, email, email-account, gmail, google, google-mail, google.com, inbox, inbox-zero, ixakef, mail, messages, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -13282,7 +13282,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "live.com"
       ],
-      "ai_tags": "akef, hotmail, islam, live, live.com",
+      "ai_tags": "account, akef, communication, correspondence, email, email-account, hotmail, inbox, inbox-zero, islam, live, live.com, mail, messages, microsoft-mail, office365, outlook, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -14290,7 +14290,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "office.com"
       ],
-      "ai_tags": "iaebeid, office, office.com, saumag",
+      "ai_tags": "account, communication, correspondence, email, email-account, iaebeid, inbox, inbox-zero, mail, messages, microsoft-mail, office, office.com, office365, outlook, saumag, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -14308,7 +14308,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "office.com"
       ],
-      "ai_tags": "iebeid, office, office.com, twu",
+      "ai_tags": "account, communication, correspondence, email, email-account, iebeid, inbox, inbox-zero, mail, messages, microsoft-mail, office, office.com, office365, outlook, twu, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -14650,7 +14650,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "proton.me"
       ],
-      "ai_tags": "iaebeid, proton, proton.me",
+      "ai_tags": "account, communication, correspondence, email, email-account, encrypted-mail, iaebeid, inbox, inbox-zero, mail, messages, proton, proton.me, protonmail, webmail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -16792,7 +16792,7 @@ window.PORTAL_BOOKMARKS = {
         "Bookmarks",
         "yahoo.com"
       ],
-      "ai_tags": "akef, islam, yahoo, yahoo.com",
+      "ai_tags": "account, akef, communication, correspondence, email, email-account, inbox, inbox-zero, islam, mail, messages, webmail, yahoo, yahoo.com, yahoomail",
       "favicon": "",
       "pinned": false,
       "clicks": 0
@@ -16906,6 +16906,6 @@ window.PORTAL_BOOKMARKS = {
       "clicks": 0
     }
   ],
-  "_synced_from_sqlite": "2026-11-07T14:23:13.969857"
+  "_synced_from_sqlite": "2026-11-07T18:44:57.817227"
 };
 window.PORTAL_BOOKMARKS_DATA = window.PORTAL_BOOKMARKS;
