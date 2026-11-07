@@ -1,5 +1,5 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-07T14:13:56.562383",
+  "_generated_at": "2026-11-07T14:23:14.238187",
   "_source": "data/content.db (SQLite 17-Table Unified Engine)",
   "meta": {
     "author_name": {
@@ -1491,7 +1491,7 @@ window.__SITE_DATABASE = {
           "section_key": "portal_app",
           "heading": "Executive Portal Main Workspace",
           "subheading": null,
-          "content_html": "<div class=\"hidden flex-1 flex flex-col\" id=\"portal-app\">\n<!-- Top App Bar -->\n<header class=\"bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40\">\n<div class=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">\n<div class=\"flex items-center justify-between h-16 gap-4\">\n<!-- Left: Identity & Badge -->\n<div class=\"flex items-center gap-3\">\n<div class=\"w-9 h-9 rounded-full overflow-hidden border border-sky-500/40 p-0.5 flex-shrink-0 bg-slate-800\">\n<img alt=\"Emblem\" class=\"w-full h-full object-cover rounded-full\" src=\"../../images/Islamic-Pattern-08-min.jpg\"/>\n</div>\n<div>\n<div class=\"flex items-center gap-2\">\n<span class=\"serif-heading text-lg font-bold text-white tracking-wide\">Islam Akef Ebeid</span>\n<span class=\"hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/30\">\n<span class=\"w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse\"></span> Personal Portal\n                                </span>\n</div>\n<div class=\"text-[11px] text-slate-400 font-mono\" id=\"live-clock\">Loading time...</div>\n</div>\n</div>\n<!-- Center: Quick Global Search -->\n<div class=\"hidden md:flex flex-1 max-w-md mx-4\">\n<div class=\"relative w-full\">\n<i class=\"fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs\"></i>\n<input class=\"w-full bg-slate-800/80 border border-slate-700/80 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-lg pl-9 pr-8 py-1.5 text-xs text-white placeholder-slate-400 outline-none transition\" id=\"global-search-input\" placeholder=\"Search 415 bookmarks, folders, or messages... (Ctrl+K)\" type=\"text\"/>\n<button class=\"hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs\" id=\"clear-search-btn\">\n<i class=\"fas fa-times-circle\"></i>\n</button>\n</div>\n</div>\n<!-- Right: Quick Actions (Settings button merged into Settings Tab) -->\n<div class=\"flex items-center gap-3\">\n<a class=\"hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition\" href=\"../home/home.html\" target=\"_blank\" title=\"Open Public Website\">\n<i class=\"fas fa-globe text-sky-400\"></i> <span>Website</span>\n</a>\n<button class=\"inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition\" id=\"logout-btn\" title=\"Lock Portal\">\n<i class=\"fas fa-lock\"></i> <span>Lock</span>\n</button>\n</div>\n</div>\n</div>\n<!-- Tab Navigation Bar -->\n<div class=\"bg-slate-900 border-t border-slate-800/60 px-4 sm:px-6 lg:px-8\">\n<div class=\"max-w-7xl mx-auto flex items-center gap-2 py-2 overflow-x-auto scrollbar-none\">\n<button class=\"tab-btn active px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-dashboard\">\n<i class=\"fas fa-th-large\"></i> <span>Dashboard &amp; Launchpad</span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-bookmarks\">\n<i class=\"fas fa-bookmark\"></i> <span>Bookmarks Catalog <span class=\"ml-1 text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-sky-400\" id=\"nav-bm-count\">415</span></span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0 relative\" data-tab=\"tab-inbox\">\n<i class=\"fas fa-user-secret\"></i> <span>Secret Message Hub</span>\n<span class=\"ml-1.5 px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-rose-500 text-white hidden\" id=\"unread-badge\">0</span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-scratchpad\">\n<i class=\"fas fa-sticky-note\"></i> <span>Scratchpad Studio &amp; DB</span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-settings\">\n<i class=\"fas fa-sliders-h\"></i> <span>Settings &amp; Security</span>\n</button>\n</div>\n</div>\n</header>\n<!-- ============================================================= -->\n<!-- TAB 1: DASHBOARD & LAUNCHPAD -->\n<!-- ============================================================= -->\n<main class=\"tab-content flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8\" id=\"tab-dashboard\">\n<!-- Hero Stats Grid -->\n<div class=\"grid grid-cols-2 sm:grid-cols-4 gap-4\">\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-bookmark\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-total-bookmarks\">415</div>\n<div class=\"text-xs text-slate-400\">Total Bookmarks</div>\n</div>\n</div>\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-fire\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-total-clicks\">0</div>\n<div class=\"text-xs text-slate-400\">Total Launches</div>\n</div>\n</div>\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-star\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-top-favorites\">10</div>\n<div class=\"text-xs text-slate-400\">Top Favorites</div>\n</div>\n</div>\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-user-secret\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-unread-messages\">0 New</div>\n<div class=\"text-xs text-slate-400\">Secret Dispatches</div>\n</div>\n</div>\n</div>\n<!-- Top 10 Favorites Section -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm mb-6\">\n<div class=\"flex items-center justify-between mb-4\">\n<div class=\"flex items-center gap-2.5\">\n<div class=\"w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-base\">\n<i class=\"fas fa-star\"></i>\n</div>\n<div>\n<h2 class=\"serif-heading text-base font-bold text-white flex items-center gap-2\">\n                                Favorites\n                                <span class=\"text-[10px] bg-amber-500/20 text-amber-300 font-semibold px-2 py-0.5 rounded-full border border-amber-500/30\">Top 10 Most Clicked</span>\n</h2>\n<p class=\"text-xs text-slate-400 mt-0.5\">Your most frequently launched links, dynamically re-ranked on every click.</p>\n</div>\n</div>\n<span class=\"text-[11px] text-slate-500 flex items-center gap-1.5 font-mono\">\n<span class=\"w-2 h-2 rounded-full bg-emerald-400 animate-pulse\"></span> Live Updating\n                    </span>\n</div>\n<div class=\"grid grid-cols-2 sm:grid-cols-5 gap-3\" id=\"dashboard-favorites-grid\">\n<!-- Populated dynamically by renderDashboardFavorites() -->\n</div>\n</div>\n<!-- Dashboard Search Section -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6\">\n<div>\n<h2 class=\"serif-heading text-lg font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-search text-indigo-400\"></i> Smart Search\n                        </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Search your bookmarks with real-time similarity &amp; relevance ranking.</p>\n</div>\n<div class=\"flex items-center gap-3 w-full sm:w-auto\">\n<div class=\"relative flex-1 sm:w-96 flex items-center gap-2\">\n<div class=\"relative w-full\">\n<i class=\"fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs\"></i>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl pl-9 pr-14 py-2 text-xs text-white placeholder-slate-400 outline-none transition\" id=\"bm-search-input\" placeholder=\"Search title, URL, domain, folder...\" type=\"text\"/>\n<button class=\"hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs\" id=\"bm-clear-btn\">\n<i class=\"fas fa-times-circle\"></i>\n</button>\n</div>\n<button class=\"px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl shadow-sm text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap\" id=\"ai-refresh-btn\" onclick=\"refreshAITags()\" title=\"Refresh AI Tags for new bookmarks\"><i class=\"fas fa-sync-alt\"></i> Refresh Tags</button>\n</div>\n</div>\n</div>\n<div class=\"text-xs text-slate-400 mb-4 hidden\" id=\"dashboard-results-status\"></div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\" id=\"dashboard-bookmarks-grid\">\n<!-- Search Results Go Here -->\n</div>\n<div class=\"py-12 text-center text-slate-500 hidden\" id=\"dashboard-no-results-msg\">\n<i class=\"fas fa-search text-3xl mb-3 text-slate-600\"></i>\n<h3 class=\"text-sm font-semibold text-slate-400\">No matches found</h3>\n<p class=\"text-xs mt-1\">Try a different AI prompt or text query.</p>\n</div>\n<div class=\"py-12 text-center text-slate-500\" id=\"dashboard-empty-search-msg\">\n<i class=\"fas fa-magic text-3xl mb-3 text-slate-600\"></i>\n<h3 class=\"text-sm font-semibold text-slate-400\">Ready to search</h3>\n<p class=\"text-xs mt-1\">Enter a query above to explore your bookmarks.</p>\n</div>\n</div>\n<!-- Quick Sticky Scratchpad (Synchronized with Scratchpad Studio Tab) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h2 class=\"serif-heading text-lg font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-pen-fancy text-amber-400\"></i> Quick Scratchpad\n                        </h2>\n<span class=\"text-[10px] text-emerald-400 font-mono flex items-center gap-1\" id=\"scratch-save-status\">\n<i class=\"fas fa-sync-alt text-[9px]\"></i> Live Synced\n                        </span>\n</div>\n<p class=\"text-xs text-slate-400 mb-3\">Persistent browser notepad for rapid notes • Fully mirrored with your Scratchpad Studio and backend database.</p>\n<textarea class=\"w-full bg-slate-800 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-500 outline-none resize-none transition font-mono\" id=\"dashboard-scratchpad\" placeholder=\"Type temporary notes, reminders, or draft ideas here... (automatically saved to this browser and synced with Scratchpad Studio)\" rows=\"7\"></textarea>\n</div>\n<div class=\"mt-3 flex items-center justify-between text-xs text-slate-500\">\n<div class=\"flex items-center gap-4\">\n<button class=\"text-sky-400 hover:text-sky-300 font-semibold transition flex items-center gap-1\" onclick=\"commitScratchToDb()\" title=\"Save snapshot to Scratches Database\">\n<i class=\"fas fa-save\"></i> Save to DB\n                        </button>\n<button class=\"hover:text-rose-400 transition flex items-center gap-1\" onclick=\"clearScratchpad()\" title=\"Erase active buffer\">\n<i class=\"fas fa-eraser\"></i> Erase\n                        </button>\n<button class=\"hover:text-slate-300 transition flex items-center gap-1\" onclick=\"downloadScratchpad()\">\n<i class=\"fas fa-download\"></i> Export .txt\n                        </button>\n</div>\n<span class=\"text-[10px] text-slate-500 font-mono\">Encrypted LocalStore</span>\n</div>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 2: BOOKMARKS EXPLORER (Interactive 415 Items) -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6\" id=\"tab-bookmarks\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm\">\n<div>\n<h2 class=\"serif-heading text-2xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-bookmark text-sky-400\"></i> Personal Bookmarks Directory\n                    </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Curated links extracted from your browser profile • Fully searchable, editable, and organized</p>\n</div>\n<div class=\"flex items-center gap-3 w-full sm:w-auto\">\n<!-- Add Bookmark Button -->\n<button class=\"inline-flex items-center gap-1.5 px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex-shrink-0\" onclick=\"openAddBookmarkModal()\">\n<i class=\"fas fa-plus\"></i> <span>Add Bookmark</span>\n</button>\n</div>\n</div>\n<!-- Category Filter Pills -->\n<div class=\"flex flex-wrap items-center gap-2\" id=\"category-pills\">\n<button class=\"cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition\" data-cat=\"all\">\n                    All Bookmarks (415)\n                </button>\n<button class=\"cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition\" data-cat=\"Bookmarks\">\n<i class=\"fas fa-folder text-sky-400 mr-1.5\"></i> Bookmarks\n                </button>\n</div>\n<!-- Subfolder Filter Chips (Populated dynamically) -->\n<div class=\"flex flex-wrap gap-1.5 pt-1\" id=\"subfolder-chips-container\">\n<!-- Dynamically populated based on active category -->\n</div>\n<!-- Bookmarks Results Grid -->\n<div class=\"flex items-center justify-between text-xs text-slate-400 px-1\">\n<span id=\"results-count-label\">Showing 415 bookmarks</span>\n<span class=\"text-[11px] text-slate-500\">Click star to pin • Click link to launch</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\" id=\"bookmarks-grid\">\n<!-- Populated dynamically via JS -->\n</div>\n<div class=\"hidden py-16 text-center text-slate-500\" id=\"no-results-msg\">\n<i class=\"fas fa-search text-3xl mb-3 text-slate-600\"></i>\n<p class=\"text-sm\">No bookmarks matching your search query.</p>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 3: SECRET MESSAGE HUB & ENCRYPTED INBOX -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8\" id=\"tab-inbox\">\n<div class=\"bg-slate-900 rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden flex flex-col h-[760px]\">\n<!-- Inbox Toolbar -->\n<div class=\"p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-4\">\n<div class=\"flex items-center gap-3\">\n<h2 class=\"serif-heading text-xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-user-secret text-rose-400\"></i> Secret Message Hub\n                        </h2>\n<span class=\"text-xs bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1.5\">\n<i class=\"fas fa-shield-alt text-emerald-400\"></i> Zero-Trust Secret Protocol\n                        </span>\n</div>\n<div class=\"flex items-center gap-2\">\n<button class=\"inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-500 text-white shadow-sm shadow-rose-600/30 transition\" onclick=\"openSecretDispatchModal()\">\n<i class=\"fas fa-paper-plane\"></i> <span>Transmit Secret Dispatch</span>\n</button>\n<button class=\"hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition\" onclick=\"switchTab('tab-settings')\" title=\"Security Challenge Keys\">\n<i class=\"fas fa-key text-amber-400\"></i> <span>Handshake Keys</span>\n</button>\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition\" onclick=\"refreshInbox()\" title=\"Refresh Inbox\">\n<i class=\"fas fa-sync-alt text-xs\"></i>\n</button>\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition\" onclick=\"clearAllMessages()\" title=\"Purge &amp; Shred All Messages\">\n<i class=\"fas fa-trash-alt text-xs\"></i>\n</button>\n</div>\n</div>\n<!-- Inbox Split Pane (Left: List, Right: Viewer) -->\n<div class=\"flex-1 flex overflow-hidden\">\n<!-- Left Column: Message List -->\n<div class=\"w-full md:w-5/12 border-r border-slate-800 flex flex-col bg-slate-900/60\">\n<!-- Message Search -->\n<div class=\"p-3 border-b border-slate-800/80\">\n<div class=\"relative\">\n<i class=\"fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs\"></i>\n<input class=\"w-full bg-slate-800/80 border border-slate-700/60 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 outline-none transition\" id=\"msg-search-input\" placeholder=\"Search verified sender, subject, keywords...\" type=\"text\"/>\n</div>\n</div>\n<!-- Message List Container -->\n<div class=\"flex-1 overflow-y-auto divide-y divide-slate-800/60\" id=\"messages-list\">\n<!-- Populated via JavaScript -->\n</div>\n</div>\n<!-- Right Column: Detail View -->\n<div class=\"hidden md:flex flex-1 flex-col bg-slate-950/40 p-6 overflow-y-auto\" id=\"message-detail-pane\">\n<!-- Default placeholder state -->\n<div class=\"m-auto text-center text-slate-500 max-w-sm px-4\" id=\"msg-placeholder\">\n<div class=\"w-14 h-14 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto mb-3 text-slate-400\">\n<i class=\"fas fa-user-shield text-2xl text-rose-400\"></i>\n</div>\n<h3 class=\"text-sm font-semibold text-slate-300\">Secret Messaging Terminal</h3>\n<p class=\"text-xs text-slate-500 mt-1 leading-relaxed\">Select an authenticated encrypted dispatch on the left to review its security fingerprint and decrypted content, or transmit a new secure message.</p>\n</div>\n<!-- Active Message Content Container -->\n<div class=\"hidden flex-col h-full space-y-6\" id=\"msg-content-container\">\n<!-- Detail Header -->\n<div class=\"border-b border-slate-800 pb-4\">\n<!-- Security Verification Banner -->\n<div class=\"mb-3 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-xs\">\n<div class=\"flex items-center gap-2 text-emerald-400 font-semibold\">\n<i class=\"fas fa-shield-check\"></i>\n<span>Authenticated Secret Dispatch • Challenge Handshake Passed</span>\n</div>\n<span class=\"font-mono text-[10px] text-slate-400\" id=\"msg-fingerprint\"></span>\n</div>\n<div class=\"flex items-start justify-between gap-4 mb-3\">\n<h3 class=\"serif-heading text-xl font-bold text-white\" id=\"msg-subject\"></h3>\n<div class=\"flex items-center gap-2 flex-shrink-0\">\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 transition\" id=\"msg-star-btn\" title=\"Star message\">\n<i class=\"far fa-star\"></i>\n</button>\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition\" id=\"msg-delete-btn\" title=\"Shred / Delete\">\n<i class=\"fas fa-trash-alt\"></i>\n</button>\n</div>\n</div>\n<div class=\"flex items-center justify-between text-xs text-slate-400\">\n<div class=\"flex items-center gap-2\">\n<div class=\"w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs uppercase\" id=\"msg-avatar\"></div>\n<div>\n<div class=\"font-bold text-slate-200\" id=\"msg-sender\"></div>\n<div class=\"text-slate-500 text-[11px]\" id=\"msg-email\"></div>\n</div>\n</div>\n<div class=\"text-right\">\n<div class=\"font-mono text-slate-400\" id=\"msg-date\"></div>\n<span class=\"inline-block mt-1 text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-slate-800 text-rose-400 border border-slate-700\" id=\"msg-tag\"></span>\n</div>\n</div>\n</div>\n<!-- Detail Body -->\n<div class=\"text-sm text-slate-300 leading-relaxed flex-1 whitespace-pre-wrap font-sans\" id=\"msg-body\">\n</div>\n<!-- Reply & Shred Bar -->\n<div class=\"pt-4 border-t border-slate-800 flex items-center justify-between\">\n<div class=\"text-xs text-slate-500 flex items-center gap-1.5\">\n<i class=\"fas fa-lock text-emerald-400\"></i> <span>Encrypted Browser Vault</span>\n</div>\n<div class=\"flex items-center gap-2\">\n<button class=\"px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5\" onclick=\"copyCurrentMessageBody()\">\n<i class=\"far fa-copy\"></i> Copy Body\n                                    </button>\n<button class=\"px-4 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex items-center gap-2\" onclick=\"openSecureReplyModal()\" type=\"button\">\n<i class=\"fas fa-paper-plane\"></i> Reply / Send to Email\n                                    </button>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 4: SCRATCHPAD STUDIO & PERSISTENT KNOWLEDGE DATABASE -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6\" id=\"tab-scratchpad\">\n<!-- Header Bar -->\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm\">\n<div>\n<h2 class=\"serif-heading text-2xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-pencil-alt text-amber-400\"></i> Scratchpad Studio &amp; Knowledge Vault\n                    </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Live synchronized scratchpad with Dashboard • Permanent database backend for scratches • Task milestones</p>\n</div>\n<div class=\"flex items-center gap-2\">\n<span class=\"text-xs px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono flex items-center gap-1.5\">\n<span class=\"w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse\"></span> Dashboard Synced\n                    </span>\n</div>\n</div>\n<!-- Card 1: Active Live Scratchpad (Working Memory Buffer) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4\">\n<div class=\"flex items-center justify-between\">\n<div>\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-pen-nib text-amber-400\"></i> Active Working Scratchpad Buffer\n                        </h3>\n<p class=\"text-xs text-slate-400 mt-0.5\">Real-time synchronized with Dashboard scratchpad • Auto-saved to local memory</p>\n</div>\n<div class=\"flex items-center gap-3 text-xs\">\n<span class=\"text-slate-500 font-mono\" id=\"full-scratch-stats\">0 words • 0 chars</span>\n<span class=\"text-emerald-400 font-mono text-[11px]\" id=\"full-scratch-status\">Live Synced</span>\n</div>\n</div>\n<textarea class=\"w-full bg-slate-800/90 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 rounded-xl p-4 text-xs text-slate-200 font-mono outline-none resize-none transition leading-relaxed\" id=\"full-scratchpad\" placeholder=\"Type thoughts, meeting notes, code snippets, or paper outlines here... (instantly mirrored with Dashboard)\" rows=\"8\"></textarea>\n<div class=\"flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800\">\n<div class=\"flex items-center gap-2\">\n<button class=\"px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex items-center gap-1.5\" onclick=\"commitScratchToDb()\">\n<i class=\"fas fa-save\"></i> <span>Commit / Save to Database</span>\n</button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5\" onclick=\"copyScratchBuffer()\">\n<i class=\"far fa-copy\"></i> <span>Copy Buffer</span>\n</button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5\" onclick=\"downloadScratchpad()\">\n<i class=\"fas fa-download\"></i> <span>Export .txt</span>\n</button>\n</div>\n<div>\n<button class=\"px-3.5 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 rounded-xl text-xs font-semibold border border-rose-500/30 transition flex items-center gap-1.5\" onclick=\"clearScratchpad()\" title=\"Clear only active buffer (database entries are preserved)\">\n<i class=\"fas fa-eraser\"></i> <span>Erase Buffer</span>\n</button>\n</div>\n</div>\n</div>\n<!-- Card 2: Persistent Scratches Database (Backend Database for Scratches) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-3\">\n<div>\n<div class=\"flex items-center gap-2\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-database text-sky-400\"></i> Persistent Scratches Database\n                            </h3>\n<span class=\"text-xs bg-sky-500/10 text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full font-mono font-bold\" id=\"scratches-db-count\">\n                                0 Records\n                            </span>\n</div>\n<p class=\"text-xs text-slate-400 mt-1\">Permanent backend database archive for your scratchpad snapshots. Persists forever even when active buffer is erased.</p>\n</div>\n<!-- Search & Filter DB -->\n<div class=\"flex items-center gap-2\">\n<div class=\"relative w-48 sm:w-64\">\n<i class=\"fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs\"></i>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 outline-none transition\" id=\"scratch-db-search\" placeholder=\"Search saved scratches...\" type=\"text\"/>\n</div>\n<button class=\"p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition\" onclick=\"exportScratchesDbJSON()\" title=\"Export Scratches DB to JSON\">\n<i class=\"fas fa-file-export text-xs\"></i>\n</button>\n</div>\n</div>\n<!-- Scratches Database Entries Container -->\n<div class=\"space-y-3 max-h-[480px] overflow-y-auto pr-1\" id=\"scratches-db-container\">\n<!-- Populated dynamically via JS -->\n</div>\n</div>\n<!-- Card 3: Dedicated Tasks & Milestones Card (Located directly below the persistent scratchpad entries) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-3\">\n<div>\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-tasks text-emerald-400\"></i> Immediate Tasks &amp; Milestones\n                        </h3>\n<p class=\"text-xs text-slate-400 mt-0.5\">Organize action items, research goals, and deadlines with persistent local storage</p>\n</div>\n<!-- Filter Pills -->\n<div class=\"flex items-center gap-1.5\" id=\"task-filter-pills\">\n<button class=\"task-filter-pill active px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition\" data-filter=\"all\" onclick=\"setTaskFilter('all')\">All</button>\n<button class=\"task-filter-pill px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition\" data-filter=\"active\" onclick=\"setTaskFilter('active')\">Active</button>\n<button class=\"task-filter-pill px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition\" data-filter=\"completed\" onclick=\"setTaskFilter('completed')\">Completed</button>\n</div>\n</div>\n<!-- Add Task Input Form -->\n<div class=\"flex flex-col sm:flex-row gap-2\">\n<input class=\"flex-1 bg-slate-800 border border-slate-700 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 outline-none transition\" id=\"new-task-input\" placeholder=\"Add a new task or research milestone... (e.g. 'Review ProtGram submission')\" type=\"text\"/>\n<select class=\"bg-slate-800 border border-slate-700 focus:border-emerald-500 rounded-xl px-3 py-2 text-xs text-slate-300 outline-none\" id=\"new-task-priority\">\n<option value=\"normal\">Normal Priority</option>\n<option value=\"high\">High Priority 🔥</option>\n<option value=\"milestone\">Grant Milestone 🎯</option>\n</select>\n<button class=\"px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-emerald-600/20 transition flex items-center justify-center gap-1.5\" onclick=\"addTask()\">\n<i class=\"fas fa-plus\"></i> <span>Add Task</span>\n</button>\n</div>\n<!-- Tasks Container -->\n<ul class=\"space-y-2 max-h-[380px] overflow-y-auto pr-1\" id=\"task-list\">\n<!-- Populated dynamically via JS -->\n</ul>\n<div class=\"pt-3 border-t border-slate-800 text-xs text-slate-500 flex items-center justify-between\">\n<span id=\"task-stats-label\">Tasks automatically persist</span>\n<button class=\"text-rose-400 hover:underline\" onclick=\"clearCompletedTasks()\">Clear Completed</button>\n</div>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 5: SETTINGS & SECURITY -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6\" id=\"tab-settings\">\n<div class=\"bg-slate-900 p-8 rounded-2xl border border-slate-800/80 shadow-sm space-y-6\">\n<div>\n<h2 class=\"serif-heading text-2xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-shield-alt text-sky-400\"></i> Portal Security &amp; Data Configuration\n                    </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Manage portal access credentials, AI semantic search keys, secret messaging authentication, and data backup.</p>\n</div>\n<!-- Card 1: Change Passcode Card -->\n<div class=\"p-6 rounded-xl bg-slate-800/50 border border-slate-700/60 space-y-4\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-key text-amber-400\"></i> Change Master Passcode\n                    </h3>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Update the master passcode required to access your command center on this browser. Default passcode is <code class=\"text-sky-300\">islam2026</code>.\n                    </p>\n<form class=\"space-y-3 max-w-md\" id=\"change-passcode-form\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">New Passcode</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"new-passcode\" minlength=\"6\" placeholder=\"Enter new passcode (min 6 characters)\" required=\"\" type=\"password\"/>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Confirm New Passcode</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"confirm-passcode\" minlength=\"6\" placeholder=\"Re-enter new passcode\" required=\"\" type=\"password\"/>\n</div>\n<div class=\"text-xs hidden font-medium\" id=\"passcode-change-msg\"></div>\n<button class=\"px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition\" type=\"submit\">\n                            Save New Passcode\n                        </button>\n</form>\n</div>\n<!-- Card 2: AI Semantic Intelligence & Google Gemini API Configuration (Merged from Modal) -->\n<div class=\"p-6 rounded-xl bg-indigo-500/5 border border-indigo-500/30 space-y-4\">\n<div class=\"flex items-center justify-between\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-robot text-indigo-400\"></i> AI Semantic Search &amp; Google Gemini API Configuration\n                        </h3>\n<span class=\"text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700\" id=\"gemini-status-badge\">Checking key...</span>\n</div>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Enable semantic natural language bookmark discovery. Provide a Google Gemini API Key from Google AI Studio. Your key is stored securely only in your browser's private local store.\n                    </p>\n<div class=\"space-y-3 max-w-lg\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Gemini API Key</label>\n<div class=\"relative\">\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-indigo-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono pr-10\" id=\"settings-gemini-key\" placeholder=\"AIzaSy...\" type=\"password\"/>\n<button class=\"absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200\" onclick=\"toggleGeminiKeyVisibility()\" type=\"button\">\n<i class=\"fas fa-eye text-xs\" id=\"gemini-eye-icon\"></i>\n</button>\n</div>\n<p class=\"text-[10px] text-slate-500 mt-1\">\n                                Need an API key? <a class=\"text-indigo-400 hover:underline\" href=\"https://aistudio.google.com/app/apikey\" target=\"_blank\">Get a free key from Google AI Studio →</a>\n</p>\n</div>\n<div class=\"text-xs hidden font-medium\" id=\"gemini-save-msg\"></div>\n<div class=\"flex flex-wrap items-center gap-2 pt-1\">\n<button class=\"px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition\" onclick=\"saveGeminiApiKey()\" type=\"button\">\n<i class=\"fas fa-check mr-1\"></i> Save API Key\n                            </button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition\" onclick=\"testGeminiApiKey()\" type=\"button\">\n<i class=\"fas fa-vial mr-1\"></i> Test Connection\n                            </button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-lg text-xs font-semibold border border-slate-700 transition\" onclick=\"clearGeminiApiKey()\" type=\"button\">\n                                Clear Key\n                            </button>\n</div>\n</div>\n</div>\n<!-- Card 3: Secret Messaging Protocol & Shared Handshake Configuration -->\n<div class=\"p-6 rounded-xl bg-rose-500/5 border border-rose-500/30 space-y-4\">\n<div class=\"flex items-center justify-between\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-user-shield text-rose-400\"></i> Secret Messaging System &amp; Handshake Configuration\n                        </h3>\n<span class=\"text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/30\">Zero-Trust Protocol</span>\n</div>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Control who can transmit encrypted dispatches to your Message Hub. Only people who possess both the transmission handshake token and can correctly answer your shared secret challenge question can send you a message.\n                    </p>\n<form class=\"space-y-3 max-w-lg\" id=\"handshake-config-form\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Transmission Handshake Token</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono\" id=\"handshake-passcode-input\" placeholder=\"e.g. islam2026\" type=\"text\"/>\n<p class=\"text-[10px] text-slate-500 mt-1\">Shared secret token that only authorized collaborators know.</p>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Secret Challenge Question</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"handshake-question-input\" placeholder=\"e.g. What is Dr. Islam's primary research lab / institution?\" type=\"text\"/>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Accepted Secret Answer(s)</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"handshake-answer-input\" placeholder=\"e.g. TWU (comma-separated for alternates)\" type=\"text\"/>\n<p class=\"text-[10px] text-slate-500 mt-1\">Case-insensitive matching (e.g. \"TWU, Texas Woman's University, Data2AI4LifeSciences\").</p>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Destination Notification Email Address</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"handshake-email-input\" placeholder=\"e.g. islam.akef@gmail.com\" type=\"email\"/>\n<p class=\"text-[10px] text-slate-500 mt-1\">Inbound authenticated secret dispatches are relayed directly to this email inbox.</p>\n</div>\n<div class=\"text-xs hidden font-medium\" id=\"handshake-save-msg\"></div>\n<div class=\"flex items-center gap-2 pt-1\">\n<button class=\"px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition\" type=\"submit\">\n                                Save Handshake Keys\n                            </button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition\" onclick=\"openSecretDispatchModal()\" type=\"button\">\n                                Test Dispatch Terminal\n                            </button>\n</div>\n</form>\n</div>\n<!-- Card 4: Data Export & Backup -->\n<div class=\"p-6 rounded-xl bg-slate-800/50 border border-slate-700/60 space-y-4\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-file-export text-emerald-400\"></i> Bookmarks Export &amp; Portability\n                    </h3>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Export your organized 415 bookmarks catalog in standard JSON format for offline backup or machine learning integration.\n                    </p>\n<div class=\"flex flex-wrap gap-3\">\n<button class=\"px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition inline-flex items-center gap-1.5\" onclick=\"downloadBookmarksJSON()\">\n<i class=\"fas fa-download\"></i> Download bookmarks.json\n                        </button>\n<a class=\"px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition inline-flex items-center gap-1.5\" href=\"../../sitemap.xml\" target=\"_blank\">\n<i class=\"fas fa-sitemap text-sky-400\"></i> View Public Sitemap.xml\n                        </a>\n</div>\n</div>\n<!-- Card 5: Session Reset -->\n<div class=\"p-6 rounded-xl bg-rose-500/5 border border-rose-500/20 space-y-3\">\n<h3 class=\"text-sm font-bold text-rose-300 flex items-center gap-2\">\n<i class=\"fas fa-trash-alt text-rose-400\"></i> Clear Local Cache &amp; Reset Portal\n                    </h3>\n<p class=\"text-xs text-slate-400\">\n                        Clears your custom pinned bookmarks, custom passcode, scratchpad, scratches database, tasks, and locks session immediately.\n                    </p>\n<button class=\"px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition\" onclick=\"resetPortalData()\">\n                        Reset Local Portal Storage\n                    </button>\n</div>\n</div>\n</main>\n<!-- Footer -->\n<footer class=\"bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500\">\n<p>© 2026 Dr. Islam Akef Ebeid • Private Personal Command Center • All Rights Reserved.</p>\n</footer>\n</div>",
+          "content_html": "<div class=\"hidden flex-1 flex flex-col\" id=\"portal-app\">\n<!-- Top App Bar -->\n<header class=\"bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-40\">\n<div class=\"max-w-7xl mx-auto px-4 sm:px-6 lg:px-8\">\n<div class=\"flex items-center justify-between h-16 gap-4\">\n<!-- Left: Identity & Badge -->\n<div class=\"flex items-center gap-3\">\n<div class=\"w-9 h-9 rounded-full overflow-hidden border border-sky-500/40 p-0.5 flex-shrink-0 bg-slate-800\">\n<img alt=\"Emblem\" class=\"w-full h-full object-cover rounded-full\" src=\"../../images/Islamic-Pattern-08-min.jpg\"/>\n</div>\n<div>\n<div class=\"flex items-center gap-2\">\n<span class=\"serif-heading text-lg font-bold text-white tracking-wide\">Islam Akef Ebeid</span>\n<span class=\"hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/30\">\n<span class=\"w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-pulse\"></span> Personal Portal\n                                </span>\n</div>\n<div class=\"text-[11px] text-slate-400 font-mono\" id=\"live-clock\">Loading time...</div>\n</div>\n</div>\n<!-- Center: Quick Global Search -->\n<div class=\"hidden md:flex flex-1 max-w-md mx-4\">\n<div class=\"relative w-full\">\n<i class=\"fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs\"></i>\n<input class=\"w-full bg-slate-800/80 border border-slate-700/80 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-lg pl-9 pr-8 py-1.5 text-xs text-white placeholder-slate-400 outline-none transition\" id=\"global-search-input\" placeholder=\"Search 415 bookmarks, folders, or messages... (Ctrl+K)\" type=\"text\"/>\n<button class=\"hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs\" id=\"clear-search-btn\">\n<i class=\"fas fa-times-circle\"></i>\n</button>\n</div>\n</div>\n<!-- Right: Quick Actions (Settings button merged into Settings Tab) -->\n<div class=\"flex items-center gap-3\">\n<a class=\"hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition\" href=\"../home/home.html\" target=\"_blank\" title=\"Open Public Website\">\n<i class=\"fas fa-globe text-sky-400\"></i> <span>Website</span>\n</a>\n<button class=\"inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 transition\" id=\"logout-btn\" title=\"Lock Portal\">\n<i class=\"fas fa-lock\"></i> <span>Lock</span>\n</button>\n</div>\n</div>\n</div>\n<!-- Tab Navigation Bar -->\n<div class=\"bg-slate-900 border-t border-slate-800/60 px-4 sm:px-6 lg:px-8\">\n<div class=\"max-w-7xl mx-auto flex items-center gap-2 py-2 overflow-x-auto scrollbar-none\">\n<button class=\"tab-btn active px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-dashboard\">\n<i class=\"fas fa-th-large\"></i> <span>Dashboard &amp; Launchpad</span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-bookmarks\">\n<i class=\"fas fa-bookmark\"></i> <span>Bookmarks Catalog <span class=\"ml-1 text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-sky-400\" id=\"nav-bm-count\">415</span></span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0 relative\" data-tab=\"tab-inbox\">\n<i class=\"fas fa-user-secret\"></i> <span>Secret Message Hub</span>\n<span class=\"ml-1.5 px-1.5 py-0.2 text-[10px] font-bold rounded-full bg-rose-500 text-white hidden\" id=\"unread-badge\">0</span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-scratchpad\">\n<i class=\"fas fa-sticky-note\"></i> <span>Scratchpad Studio &amp; DB</span>\n</button>\n<button class=\"tab-btn px-4 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition flex items-center gap-2 flex-shrink-0\" data-tab=\"tab-settings\">\n<i class=\"fas fa-sliders-h\"></i> <span>Settings &amp; Security</span>\n</button>\n</div>\n</div>\n</header>\n<!-- ============================================================= -->\n<!-- TAB 1: DASHBOARD & LAUNCHPAD -->\n<!-- ============================================================= -->\n<main class=\"tab-content flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-8\" id=\"tab-dashboard\">\n<!-- Hero Stats Grid -->\n<div class=\"grid grid-cols-2 sm:grid-cols-4 gap-4\">\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-bookmark\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-total-bookmarks\">415</div>\n<div class=\"text-xs text-slate-400\">Total Bookmarks</div>\n</div>\n</div>\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-fire\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-total-clicks\">0</div>\n<div class=\"text-xs text-slate-400\">Total Launches</div>\n</div>\n</div>\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-star\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-top-favorites\">10</div>\n<div class=\"text-xs text-slate-400\">Top Favorites</div>\n</div>\n</div>\n<div class=\"bg-slate-900 p-5 rounded-2xl border border-slate-800/80 shadow-sm flex items-center gap-4\">\n<div class=\"w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-xl flex-shrink-0\">\n<i class=\"fas fa-user-secret\"></i>\n</div>\n<div>\n<div class=\"text-2xl font-bold text-white\" id=\"stat-unread-messages\">0 New</div>\n<div class=\"text-xs text-slate-400\">Secret Dispatches</div>\n</div>\n</div>\n</div>\n<!-- Top 10 Favorites Section -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm mb-6\">\n<div class=\"flex items-center justify-between mb-4\">\n<div class=\"flex items-center gap-2.5\">\n<div class=\"w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-base\">\n<i class=\"fas fa-star\"></i>\n</div>\n<div>\n<h2 class=\"serif-heading text-base font-bold text-white flex items-center gap-2\">\n                                Favorites\n                                <span class=\"text-[10px] bg-amber-500/20 text-amber-300 font-semibold px-2 py-0.5 rounded-full border border-amber-500/30\">Top 10 Most Clicked</span>\n</h2>\n<p class=\"text-xs text-slate-400 mt-0.5\">Your most frequently launched links, dynamically re-ranked on every click.</p>\n</div>\n</div>\n<span class=\"text-[11px] text-slate-500 flex items-center gap-1.5 font-mono\">\n<span class=\"w-2 h-2 rounded-full bg-emerald-400 animate-pulse\"></span> Live Updating\n                    </span>\n</div>\n<div class=\"grid grid-cols-2 sm:grid-cols-5 gap-3\" id=\"dashboard-favorites-grid\">\n<!-- Populated dynamically by renderDashboardFavorites() -->\n</div>\n</div>\n<!-- Dashboard Search Section -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6\">\n<div>\n<h2 class=\"serif-heading text-lg font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-search text-indigo-400\"></i> Smart Search\n                        </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Search your bookmarks with real-time similarity &amp; relevance ranking.</p>\n</div>\n<div class=\"flex items-center gap-3 w-full sm:w-auto\">\n<div class=\"relative flex-1 sm:w-96 flex items-center gap-2\">\n<div class=\"relative w-full\">\n<i class=\"fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs\"></i>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 rounded-xl pl-9 pr-14 py-2 text-xs text-white placeholder-slate-400 outline-none transition\" id=\"bm-search-input\" placeholder=\"Search title, URL, domain, folder...\" type=\"text\"/>\n<button class=\"hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs\" id=\"bm-clear-btn\">\n<i class=\"fas fa-times-circle\"></i>\n</button>\n</div>\n<button class=\"px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl shadow-sm text-xs font-bold transition flex items-center gap-1.5 whitespace-nowrap\" id=\"ai-refresh-btn\" onclick=\"refreshAITags()\" title=\"Update AI Tags for all bookmarks\"><i class=\"fas fa-sync-alt\"></i> Update Tags</button>\n</div>\n</div>\n</div>\n<div class=\"text-xs text-slate-400 mb-4 hidden\" id=\"dashboard-results-status\"></div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\" id=\"dashboard-bookmarks-grid\">\n<!-- Search Results Go Here -->\n</div>\n<div class=\"py-12 text-center text-slate-500 hidden\" id=\"dashboard-no-results-msg\">\n<i class=\"fas fa-search text-3xl mb-3 text-slate-600\"></i>\n<h3 class=\"text-sm font-semibold text-slate-400\">No matches found</h3>\n<p class=\"text-xs mt-1\">Try a different AI prompt or text query.</p>\n</div>\n<div class=\"py-12 text-center text-slate-500\" id=\"dashboard-empty-search-msg\">\n<i class=\"fas fa-magic text-3xl mb-3 text-slate-600\"></i>\n<h3 class=\"text-sm font-semibold text-slate-400\">Ready to search</h3>\n<p class=\"text-xs mt-1\">Enter a query above to explore your bookmarks.</p>\n</div>\n</div>\n<!-- Quick Sticky Scratchpad (Synchronized with Scratchpad Studio Tab) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h2 class=\"serif-heading text-lg font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-pen-fancy text-amber-400\"></i> Quick Scratchpad\n                        </h2>\n<span class=\"text-[10px] text-emerald-400 font-mono flex items-center gap-1\" id=\"scratch-save-status\">\n<i class=\"fas fa-sync-alt text-[9px]\"></i> Live Synced\n                        </span>\n</div>\n<p class=\"text-xs text-slate-400 mb-3\">Persistent browser notepad for rapid notes • Fully mirrored with your Scratchpad Studio and backend database.</p>\n<textarea class=\"w-full bg-slate-800 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 rounded-xl p-3 text-xs text-slate-200 placeholder-slate-500 outline-none resize-none transition font-mono\" id=\"dashboard-scratchpad\" placeholder=\"Type temporary notes, reminders, or draft ideas here... (automatically saved to this browser and synced with Scratchpad Studio)\" rows=\"7\"></textarea>\n</div>\n<div class=\"mt-3 flex items-center justify-between text-xs text-slate-500\">\n<div class=\"flex items-center gap-4\">\n<button class=\"text-sky-400 hover:text-sky-300 font-semibold transition flex items-center gap-1\" onclick=\"commitScratchToDb()\" title=\"Save snapshot to Scratches Database\">\n<i class=\"fas fa-save\"></i> Save to DB\n                        </button>\n<button class=\"hover:text-rose-400 transition flex items-center gap-1\" onclick=\"clearScratchpad()\" title=\"Erase active buffer\">\n<i class=\"fas fa-eraser\"></i> Erase\n                        </button>\n<button class=\"hover:text-slate-300 transition flex items-center gap-1\" onclick=\"downloadScratchpad()\">\n<i class=\"fas fa-download\"></i> Export .txt\n                        </button>\n</div>\n<span class=\"text-[10px] text-slate-500 font-mono\">Encrypted LocalStore</span>\n</div>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 2: BOOKMARKS EXPLORER (Interactive 415 Items) -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6\" id=\"tab-bookmarks\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm\">\n<div>\n<h2 class=\"serif-heading text-2xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-bookmark text-sky-400\"></i> Personal Bookmarks Directory\n                    </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Curated links extracted from your browser profile • Fully searchable, editable, and organized</p>\n</div>\n<div class=\"flex items-center gap-3 w-full sm:w-auto\">\n<!-- Add Bookmark Button -->\n<button class=\"inline-flex items-center gap-1.5 px-3.5 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex-shrink-0\" onclick=\"openAddBookmarkModal()\">\n<i class=\"fas fa-plus\"></i> <span>Add Bookmark</span>\n</button>\n</div>\n</div>\n<!-- Category Filter Pills -->\n<div class=\"flex flex-wrap items-center gap-2\" id=\"category-pills\">\n<button class=\"cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition\" data-cat=\"all\">\n                    All Bookmarks (415)\n                </button>\n<button class=\"cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition\" data-cat=\"Bookmarks\">\n<i class=\"fas fa-folder text-sky-400 mr-1.5\"></i> Bookmarks\n                </button>\n</div>\n<!-- Subfolder Filter Chips (Populated dynamically) -->\n<div class=\"flex flex-wrap gap-1.5 pt-1\" id=\"subfolder-chips-container\">\n<!-- Dynamically populated based on active category -->\n</div>\n<!-- Bookmarks Results Grid -->\n<div class=\"flex items-center justify-between text-xs text-slate-400 px-1\">\n<span id=\"results-count-label\">Showing 415 bookmarks</span>\n<span class=\"text-[11px] text-slate-500\">Click star to pin • Click link to launch</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4\" id=\"bookmarks-grid\">\n<!-- Populated dynamically via JS -->\n</div>\n<div class=\"hidden py-16 text-center text-slate-500\" id=\"no-results-msg\">\n<i class=\"fas fa-search text-3xl mb-3 text-slate-600\"></i>\n<p class=\"text-sm\">No bookmarks matching your search query.</p>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 3: SECRET MESSAGE HUB & ENCRYPTED INBOX -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8\" id=\"tab-inbox\">\n<div class=\"bg-slate-900 rounded-2xl border border-slate-800/80 shadow-2xl overflow-hidden flex flex-col h-[760px]\">\n<!-- Inbox Toolbar -->\n<div class=\"p-4 bg-slate-900 border-b border-slate-800 flex items-center justify-between gap-4\">\n<div class=\"flex items-center gap-3\">\n<h2 class=\"serif-heading text-xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-user-secret text-rose-400\"></i> Secret Message Hub\n                        </h2>\n<span class=\"text-xs bg-rose-500/10 text-rose-400 border border-rose-500/20 px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1.5\">\n<i class=\"fas fa-shield-alt text-emerald-400\"></i> Zero-Trust Secret Protocol\n                        </span>\n</div>\n<div class=\"flex items-center gap-2\">\n<button class=\"inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-rose-600 hover:bg-rose-500 text-white shadow-sm shadow-rose-600/30 transition\" onclick=\"openSecretDispatchModal()\">\n<i class=\"fas fa-paper-plane\"></i> <span>Transmit Secret Dispatch</span>\n</button>\n<button class=\"hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition\" onclick=\"switchTab('tab-settings')\" title=\"Security Challenge Keys\">\n<i class=\"fas fa-key text-amber-400\"></i> <span>Handshake Keys</span>\n</button>\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition\" onclick=\"refreshInbox()\" title=\"Refresh Inbox\">\n<i class=\"fas fa-sync-alt text-xs\"></i>\n</button>\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition\" onclick=\"clearAllMessages()\" title=\"Purge &amp; Shred All Messages\">\n<i class=\"fas fa-trash-alt text-xs\"></i>\n</button>\n</div>\n</div>\n<!-- Inbox Split Pane (Left: List, Right: Viewer) -->\n<div class=\"flex-1 flex overflow-hidden\">\n<!-- Left Column: Message List -->\n<div class=\"w-full md:w-5/12 border-r border-slate-800 flex flex-col bg-slate-900/60\">\n<!-- Message Search -->\n<div class=\"p-3 border-b border-slate-800/80\">\n<div class=\"relative\">\n<i class=\"fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs\"></i>\n<input class=\"w-full bg-slate-800/80 border border-slate-700/60 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 outline-none transition\" id=\"msg-search-input\" placeholder=\"Search verified sender, subject, keywords...\" type=\"text\"/>\n</div>\n</div>\n<!-- Message List Container -->\n<div class=\"flex-1 overflow-y-auto divide-y divide-slate-800/60\" id=\"messages-list\">\n<!-- Populated via JavaScript -->\n</div>\n</div>\n<!-- Right Column: Detail View -->\n<div class=\"hidden md:flex flex-1 flex-col bg-slate-950/40 p-6 overflow-y-auto\" id=\"message-detail-pane\">\n<!-- Default placeholder state -->\n<div class=\"m-auto text-center text-slate-500 max-w-sm px-4\" id=\"msg-placeholder\">\n<div class=\"w-14 h-14 rounded-full bg-slate-800/80 border border-slate-700 flex items-center justify-center mx-auto mb-3 text-slate-400\">\n<i class=\"fas fa-user-shield text-2xl text-rose-400\"></i>\n</div>\n<h3 class=\"text-sm font-semibold text-slate-300\">Secret Messaging Terminal</h3>\n<p class=\"text-xs text-slate-500 mt-1 leading-relaxed\">Select an authenticated encrypted dispatch on the left to review its security fingerprint and decrypted content, or transmit a new secure message.</p>\n</div>\n<!-- Active Message Content Container -->\n<div class=\"hidden flex-col h-full space-y-6\" id=\"msg-content-container\">\n<!-- Detail Header -->\n<div class=\"border-b border-slate-800 pb-4\">\n<!-- Security Verification Banner -->\n<div class=\"mb-3 px-3 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-xs\">\n<div class=\"flex items-center gap-2 text-emerald-400 font-semibold\">\n<i class=\"fas fa-shield-check\"></i>\n<span>Authenticated Secret Dispatch • Challenge Handshake Passed</span>\n</div>\n<span class=\"font-mono text-[10px] text-slate-400\" id=\"msg-fingerprint\"></span>\n</div>\n<div class=\"flex items-start justify-between gap-4 mb-3\">\n<h3 class=\"serif-heading text-xl font-bold text-white\" id=\"msg-subject\"></h3>\n<div class=\"flex items-center gap-2 flex-shrink-0\">\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 transition\" id=\"msg-star-btn\" title=\"Star message\">\n<i class=\"far fa-star\"></i>\n</button>\n<button class=\"p-2 rounded-lg bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 transition\" id=\"msg-delete-btn\" title=\"Shred / Delete\">\n<i class=\"fas fa-trash-alt\"></i>\n</button>\n</div>\n</div>\n<div class=\"flex items-center justify-between text-xs text-slate-400\">\n<div class=\"flex items-center gap-2\">\n<div class=\"w-8 h-8 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs uppercase\" id=\"msg-avatar\"></div>\n<div>\n<div class=\"font-bold text-slate-200\" id=\"msg-sender\"></div>\n<div class=\"text-slate-500 text-[11px]\" id=\"msg-email\"></div>\n</div>\n</div>\n<div class=\"text-right\">\n<div class=\"font-mono text-slate-400\" id=\"msg-date\"></div>\n<span class=\"inline-block mt-1 text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-slate-800 text-rose-400 border border-slate-700\" id=\"msg-tag\"></span>\n</div>\n</div>\n</div>\n<!-- Detail Body -->\n<div class=\"text-sm text-slate-300 leading-relaxed flex-1 whitespace-pre-wrap font-sans\" id=\"msg-body\">\n</div>\n<!-- Reply & Shred Bar -->\n<div class=\"pt-4 border-t border-slate-800 flex items-center justify-between\">\n<div class=\"text-xs text-slate-500 flex items-center gap-1.5\">\n<i class=\"fas fa-lock text-emerald-400\"></i> <span>Encrypted Browser Vault</span>\n</div>\n<div class=\"flex items-center gap-2\">\n<button class=\"px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5\" onclick=\"copyCurrentMessageBody()\">\n<i class=\"far fa-copy\"></i> Copy Body\n                                    </button>\n<button class=\"px-4 py-1.5 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex items-center gap-2\" onclick=\"openSecureReplyModal()\" type=\"button\">\n<i class=\"fas fa-paper-plane\"></i> Reply / Send to Email\n                                    </button>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 4: SCRATCHPAD STUDIO & PERSISTENT KNOWLEDGE DATABASE -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6\" id=\"tab-scratchpad\">\n<!-- Header Bar -->\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm\">\n<div>\n<h2 class=\"serif-heading text-2xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-pencil-alt text-amber-400\"></i> Scratchpad Studio &amp; Knowledge Vault\n                    </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Live synchronized scratchpad with Dashboard • Permanent database backend for scratches • Task milestones</p>\n</div>\n<div class=\"flex items-center gap-2\">\n<span class=\"text-xs px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono flex items-center gap-1.5\">\n<span class=\"w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse\"></span> Dashboard Synced\n                    </span>\n</div>\n</div>\n<!-- Card 1: Active Live Scratchpad (Working Memory Buffer) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4\">\n<div class=\"flex items-center justify-between\">\n<div>\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-pen-nib text-amber-400\"></i> Active Working Scratchpad Buffer\n                        </h3>\n<p class=\"text-xs text-slate-400 mt-0.5\">Real-time synchronized with Dashboard scratchpad • Auto-saved to local memory</p>\n</div>\n<div class=\"flex items-center gap-3 text-xs\">\n<span class=\"text-slate-500 font-mono\" id=\"full-scratch-stats\">0 words • 0 chars</span>\n<span class=\"text-emerald-400 font-mono text-[11px]\" id=\"full-scratch-status\">Live Synced</span>\n</div>\n</div>\n<textarea class=\"w-full bg-slate-800/90 border border-slate-700 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 rounded-xl p-4 text-xs text-slate-200 font-mono outline-none resize-none transition leading-relaxed\" id=\"full-scratchpad\" placeholder=\"Type thoughts, meeting notes, code snippets, or paper outlines here... (instantly mirrored with Dashboard)\" rows=\"8\"></textarea>\n<div class=\"flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800\">\n<div class=\"flex items-center gap-2\">\n<button class=\"px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-sky-600/20 transition flex items-center gap-1.5\" onclick=\"commitScratchToDb()\">\n<i class=\"fas fa-save\"></i> <span>Commit / Save to Database</span>\n</button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5\" onclick=\"copyScratchBuffer()\">\n<i class=\"far fa-copy\"></i> <span>Copy Buffer</span>\n</button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold border border-slate-700 transition flex items-center gap-1.5\" onclick=\"downloadScratchpad()\">\n<i class=\"fas fa-download\"></i> <span>Export .txt</span>\n</button>\n</div>\n<div>\n<button class=\"px-3.5 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 rounded-xl text-xs font-semibold border border-rose-500/30 transition flex items-center gap-1.5\" onclick=\"clearScratchpad()\" title=\"Clear only active buffer (database entries are preserved)\">\n<i class=\"fas fa-eraser\"></i> <span>Erase Buffer</span>\n</button>\n</div>\n</div>\n</div>\n<!-- Card 2: Persistent Scratches Database (Backend Database for Scratches) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-3\">\n<div>\n<div class=\"flex items-center gap-2\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-database text-sky-400\"></i> Persistent Scratches Database\n                            </h3>\n<span class=\"text-xs bg-sky-500/10 text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full font-mono font-bold\" id=\"scratches-db-count\">\n                                0 Records\n                            </span>\n</div>\n<p class=\"text-xs text-slate-400 mt-1\">Permanent backend database archive for your scratchpad snapshots. Persists forever even when active buffer is erased.</p>\n</div>\n<!-- Search & Filter DB -->\n<div class=\"flex items-center gap-2\">\n<div class=\"relative w-48 sm:w-64\">\n<i class=\"fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs\"></i>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg pl-8 pr-3 py-1.5 text-xs text-white placeholder-slate-500 outline-none transition\" id=\"scratch-db-search\" placeholder=\"Search saved scratches...\" type=\"text\"/>\n</div>\n<button class=\"p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition\" onclick=\"exportScratchesDbJSON()\" title=\"Export Scratches DB to JSON\">\n<i class=\"fas fa-file-export text-xs\"></i>\n</button>\n</div>\n</div>\n<!-- Scratches Database Entries Container -->\n<div class=\"space-y-3 max-h-[480px] overflow-y-auto pr-1\" id=\"scratches-db-container\">\n<!-- Populated dynamically via JS -->\n</div>\n</div>\n<!-- Card 3: Dedicated Tasks & Milestones Card (Located directly below the persistent scratchpad entries) -->\n<div class=\"bg-slate-900 p-6 rounded-2xl border border-slate-800/80 shadow-sm space-y-4\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-3\">\n<div>\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-tasks text-emerald-400\"></i> Immediate Tasks &amp; Milestones\n                        </h3>\n<p class=\"text-xs text-slate-400 mt-0.5\">Organize action items, research goals, and deadlines with persistent local storage</p>\n</div>\n<!-- Filter Pills -->\n<div class=\"flex items-center gap-1.5\" id=\"task-filter-pills\">\n<button class=\"task-filter-pill active px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition\" data-filter=\"all\" onclick=\"setTaskFilter('all')\">All</button>\n<button class=\"task-filter-pill px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition\" data-filter=\"active\" onclick=\"setTaskFilter('active')\">Active</button>\n<button class=\"task-filter-pill px-3 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition\" data-filter=\"completed\" onclick=\"setTaskFilter('completed')\">Completed</button>\n</div>\n</div>\n<!-- Add Task Input Form -->\n<div class=\"flex flex-col sm:flex-row gap-2\">\n<input class=\"flex-1 bg-slate-800 border border-slate-700 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 outline-none transition\" id=\"new-task-input\" placeholder=\"Add a new task or research milestone... (e.g. 'Review ProtGram submission')\" type=\"text\"/>\n<select class=\"bg-slate-800 border border-slate-700 focus:border-emerald-500 rounded-xl px-3 py-2 text-xs text-slate-300 outline-none\" id=\"new-task-priority\">\n<option value=\"normal\">Normal Priority</option>\n<option value=\"high\">High Priority 🔥</option>\n<option value=\"milestone\">Grant Milestone 🎯</option>\n</select>\n<button class=\"px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold shadow-md shadow-emerald-600/20 transition flex items-center justify-center gap-1.5\" onclick=\"addTask()\">\n<i class=\"fas fa-plus\"></i> <span>Add Task</span>\n</button>\n</div>\n<!-- Tasks Container -->\n<ul class=\"space-y-2 max-h-[380px] overflow-y-auto pr-1\" id=\"task-list\">\n<!-- Populated dynamically via JS -->\n</ul>\n<div class=\"pt-3 border-t border-slate-800 text-xs text-slate-500 flex items-center justify-between\">\n<span id=\"task-stats-label\">Tasks automatically persist</span>\n<button class=\"text-rose-400 hover:underline\" onclick=\"clearCompletedTasks()\">Clear Completed</button>\n</div>\n</div>\n</main>\n<!-- ============================================================= -->\n<!-- TAB 5: SETTINGS & SECURITY -->\n<!-- ============================================================= -->\n<main class=\"tab-content hidden flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6\" id=\"tab-settings\">\n<div class=\"bg-slate-900 p-8 rounded-2xl border border-slate-800/80 shadow-sm space-y-6\">\n<div>\n<h2 class=\"serif-heading text-2xl font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-shield-alt text-sky-400\"></i> Portal Security &amp; Data Configuration\n                    </h2>\n<p class=\"text-xs text-slate-400 mt-1\">Manage portal access credentials, AI semantic search keys, secret messaging authentication, and data backup.</p>\n</div>\n<!-- Card 1: Change Passcode Card -->\n<div class=\"p-6 rounded-xl bg-slate-800/50 border border-slate-700/60 space-y-4\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-key text-amber-400\"></i> Change Master Passcode\n                    </h3>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Update the master passcode required to access your command center on this browser. Default passcode is <code class=\"text-sky-300\">islam2026</code>.\n                    </p>\n<form class=\"space-y-3 max-w-md\" id=\"change-passcode-form\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">New Passcode</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"new-passcode\" minlength=\"6\" placeholder=\"Enter new passcode (min 6 characters)\" required=\"\" type=\"password\"/>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Confirm New Passcode</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"confirm-passcode\" minlength=\"6\" placeholder=\"Re-enter new passcode\" required=\"\" type=\"password\"/>\n</div>\n<div class=\"text-xs hidden font-medium\" id=\"passcode-change-msg\"></div>\n<button class=\"px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition\" type=\"submit\">\n                            Save New Passcode\n                        </button>\n</form>\n</div>\n<!-- Card 2: AI Semantic Intelligence & Google Gemini API Configuration (Merged from Modal) -->\n<div class=\"p-6 rounded-xl bg-indigo-500/5 border border-indigo-500/30 space-y-4\">\n<div class=\"flex items-center justify-between\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-robot text-indigo-400\"></i> AI Semantic Search &amp; Google Gemini API Configuration\n                        </h3>\n<span class=\"text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700\" id=\"gemini-status-badge\">Checking key...</span>\n</div>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Enable semantic natural language bookmark discovery. Provide a Google Gemini API Key from Google AI Studio. Your key is stored securely only in your browser's private local store.\n                    </p>\n<div class=\"space-y-3 max-w-lg\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Gemini API Key</label>\n<div class=\"relative\">\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-indigo-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono pr-10\" id=\"settings-gemini-key\" placeholder=\"AIzaSy...\" type=\"password\"/>\n<button class=\"absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200\" onclick=\"toggleGeminiKeyVisibility()\" type=\"button\">\n<i class=\"fas fa-eye text-xs\" id=\"gemini-eye-icon\"></i>\n</button>\n</div>\n<p class=\"text-[10px] text-slate-500 mt-1\">\n                                Need an API key? <a class=\"text-indigo-400 hover:underline\" href=\"https://aistudio.google.com/app/apikey\" target=\"_blank\">Get a free key from Google AI Studio →</a>\n</p>\n</div>\n<div class=\"text-xs hidden font-medium\" id=\"gemini-save-msg\"></div>\n<div class=\"flex flex-wrap items-center gap-2 pt-1\">\n<button class=\"px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold transition\" onclick=\"saveGeminiApiKey()\" type=\"button\">\n<i class=\"fas fa-check mr-1\"></i> Save API Key\n                            </button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition\" onclick=\"testGeminiApiKey()\" type=\"button\">\n<i class=\"fas fa-vial mr-1\"></i> Test Connection\n                            </button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 rounded-lg text-xs font-semibold border border-slate-700 transition\" onclick=\"clearGeminiApiKey()\" type=\"button\">\n                                Clear Key\n                            </button>\n</div>\n</div>\n</div>\n<!-- Card 3: Secret Messaging Protocol & Shared Handshake Configuration -->\n<div class=\"p-6 rounded-xl bg-rose-500/5 border border-rose-500/30 space-y-4\">\n<div class=\"flex items-center justify-between\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-user-shield text-rose-400\"></i> Secret Messaging System &amp; Handshake Configuration\n                        </h3>\n<span class=\"text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/30\">Zero-Trust Protocol</span>\n</div>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Control who can transmit encrypted dispatches to your Message Hub. Only people who possess both the transmission handshake token and can correctly answer your shared secret challenge question can send you a message.\n                    </p>\n<form class=\"space-y-3 max-w-lg\" id=\"handshake-config-form\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Transmission Handshake Token</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono\" id=\"handshake-passcode-input\" placeholder=\"e.g. islam2026\" type=\"text\"/>\n<p class=\"text-[10px] text-slate-500 mt-1\">Shared secret token that only authorized collaborators know.</p>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Secret Challenge Question</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"handshake-question-input\" placeholder=\"e.g. What is Dr. Islam's primary research lab / institution?\" type=\"text\"/>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Accepted Secret Answer(s)</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"handshake-answer-input\" placeholder=\"e.g. TWU (comma-separated for alternates)\" type=\"text\"/>\n<p class=\"text-[10px] text-slate-500 mt-1\">Case-insensitive matching (e.g. \"TWU, Texas Woman's University, Data2AI4LifeSciences\").</p>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Destination Notification Email Address</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-rose-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"handshake-email-input\" placeholder=\"e.g. islam.akef@gmail.com\" type=\"email\"/>\n<p class=\"text-[10px] text-slate-500 mt-1\">Inbound authenticated secret dispatches are relayed directly to this email inbox.</p>\n</div>\n<div class=\"text-xs hidden font-medium\" id=\"handshake-save-msg\"></div>\n<div class=\"flex items-center gap-2 pt-1\">\n<button class=\"px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition\" type=\"submit\">\n                                Save Handshake Keys\n                            </button>\n<button class=\"px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition\" onclick=\"openSecretDispatchModal()\" type=\"button\">\n                                Test Dispatch Terminal\n                            </button>\n</div>\n</form>\n</div>\n<!-- Card 4: Data Export & Backup -->\n<div class=\"p-6 rounded-xl bg-slate-800/50 border border-slate-700/60 space-y-4\">\n<h3 class=\"text-sm font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-file-export text-emerald-400\"></i> Bookmarks Export &amp; Portability\n                    </h3>\n<p class=\"text-xs text-slate-400 leading-relaxed\">\n                        Export your organized 415 bookmarks catalog in standard JSON format for offline backup or machine learning integration.\n                    </p>\n<div class=\"flex flex-wrap gap-3\">\n<button class=\"px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-semibold transition inline-flex items-center gap-1.5\" onclick=\"downloadBookmarksJSON()\">\n<i class=\"fas fa-download\"></i> Download bookmarks.json\n                        </button>\n<a class=\"px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold border border-slate-700 transition inline-flex items-center gap-1.5\" href=\"../../sitemap.xml\" target=\"_blank\">\n<i class=\"fas fa-sitemap text-sky-400\"></i> View Public Sitemap.xml\n                        </a>\n</div>\n</div>\n<!-- Card 5: Session Reset -->\n<div class=\"p-6 rounded-xl bg-rose-500/5 border border-rose-500/20 space-y-3\">\n<h3 class=\"text-sm font-bold text-rose-300 flex items-center gap-2\">\n<i class=\"fas fa-trash-alt text-rose-400\"></i> Clear Local Cache &amp; Reset Portal\n                    </h3>\n<p class=\"text-xs text-slate-400\">\n                        Clears your custom pinned bookmarks, custom passcode, scratchpad, scratches database, tasks, and locks session immediately.\n                    </p>\n<button class=\"px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-semibold transition\" onclick=\"resetPortalData()\">\n                        Reset Local Portal Storage\n                    </button>\n</div>\n</div>\n</main>\n<!-- Footer -->\n<footer class=\"bg-slate-900 border-t border-slate-800 py-4 text-center text-xs text-slate-500\">\n<p>© 2026 Dr. Islam Akef Ebeid • Private Personal Command Center • All Rights Reserved.</p>\n</footer>\n</div>",
           "content_text": "Islam Akef Ebeid Personal Portal Loading time... Website Lock Dashboard & Launchpad Bookmarks Catalog 415 Secret Message Hub 0 Scratchpad Studio & DB Settings & Security 415 Total Bookmarks 0 Total Launches 10 Top Favorites 0 New Secret Dispatches Favorites Top 10 Most Clicked Your most frequently launched links, dynamically re-ranked on every click. Live Updating Smart Search Search your bookmarks with real-time similarity & relevance ranking. Refresh Tags No matches found Try a different AI prompt or text query. Ready to search Enter a query above to explore your bookmarks. Quick Scratchpad Live Synced Persistent browser notepad for rapid notes • Fully mirrored with your Scratchpad Studio and backend database. Save to DB Erase Export .txt Encrypted LocalStore Personal Bookmarks Directory Curated links extracted from your browser profile • Fully searchable, editable, and organized Add Bookmark All Bookmarks (415) Bookmarks Showing 415 bookmarks Click star to pin • Click link to launch No bookmarks matching your search query. Secret Message Hub Zero-Trust Secret Protocol Transmit Secret Dispatch Handshake Keys Secret Messaging Terminal Select an authenticated encrypted dispatch on the left to review its security fingerprint and decrypted content, or transmit a new secure message. Authenticated Secret Dispatch • Challenge Handshake Passed Encrypted Browser Vault Copy Body Reply / Send to Email Scratchpad Studio & Knowledge Vault Live synchronized scratchpad with Dashboard • Permanent database backend for scratches • Task milestones Dashboard Synced Active Working Scratchpad Buffer Real-time synchronized with Dashboard scratchpad • Auto-saved to local memory 0 words • 0 chars Live Synced Commit / Save to Database Copy Buffer Export .txt Erase Buffer Persistent Scratches Database 0 Records Permanent backend database archive for your scratchpad snapshots. Persists forever even when active buffer is erased. Immediate Tasks & Milestones Organize action items, research goals, and deadlines with persistent local storage All Active Completed Normal Priority High Priority 🔥 Grant Milestone 🎯 Add Task Tasks automatically persist Clear Completed Portal Security & Data Configuration Manage portal access credentials, AI semantic search keys, secret messaging authentication, and data backup. Change Master Passcode Update the master passcode required to access your command center on this browser. Default passcode is islam2026 . New Passcode Confirm New Passcode Save New Passcode AI Semantic Search & Google Gemini API Configuration Checking key... Enable semantic natural language bookmark discovery. Provide a Google Gemini API Key from Google AI Studio. Your key is stored securely only in your browser's private local store. Gemini API Key Need an API key? Get a free key from Google AI Studio → Save API Key Test Connection Clear Key Secret Messaging System & Handshake Configuration Zero-Trust Protocol Control who can transmit encrypted dispatches to your Message Hub. Only people who possess both the transmission handshake token and can correctly answer your shared secret challenge question can send you a message. Transmission Handshake Token Shared secret token that only authorized collaborators know. Secret Challenge Question Accepted Secret Answer(s) Case-insensitive matching (e.g. \"TWU, Texas Woman's University, Data2AI4LifeSciences\"). Destination Notification Email Address Inbound authenticated secret dispatches are relayed directly to this email inbox. Save Handshake Keys Test Dispatch Terminal Bookmarks Export & Portability Export your organized 415 bookmarks catalog in standard JSON format for offline backup or machine learning integration. Download bookmarks.json View Public Sitemap.xml Clear Local Cache & Reset Portal Clears your custom pinned bookmarks, custom passcode, scratchpad, scratches database, tasks, and locks session immediately. Reset Local Portal Storage © 2026 Dr. Islam Akef Ebeid • Private Personal Command Center • All Rights Reserved.",
           "order": 2
         },
@@ -1507,7 +1507,7 @@ window.__SITE_DATABASE = {
           "section_key": "add_bookmark_modal",
           "heading": "Add Bookmark Modal",
           "subheading": null,
-          "content_html": "<div class=\"fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 backdrop-blur-sm\" id=\"add-bookmark-modal\">\n<div class=\"bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative\">\n<div class=\"flex items-center justify-between pb-3 border-b border-slate-800 mb-4\">\n<h3 class=\"serif-heading text-lg font-bold text-white flex items-center gap-2\">\n<i class=\"fas fa-plus-circle text-sky-400\"></i> Add New Bookmark\n                </h3>\n<button class=\"text-slate-400 hover:text-white\" onclick=\"closeAddBookmarkModal()\">\n<i class=\"fas fa-times\"></i>\n</button>\n</div>\n<form class=\"space-y-4\" id=\"add-bookmark-form\">\n<input id=\"bm-edit-id\" type=\"hidden\" value=\"\"/>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Title / Name *</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-name\" placeholder=\"e.g. Canvas LMS, NSF Fastlane, GitHub...\" required=\"\" type=\"text\"/>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Destination URL *</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-url\" placeholder=\"https://...\" required=\"\" type=\"url\"/>\n</div>\n<div class=\"grid grid-cols-2 gap-3\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Top Folder *</label>\n<select class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-cat\">\n<option value=\"Bookmarks\">Bookmarks</option>\n</select>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Subfolder</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-sub\" placeholder=\"e.g. Communication, Research...\" type=\"text\"/>\n</div>\n</div>\n<div class=\"flex justify-end gap-2 pt-4 border-t border-slate-800\">\n<button class=\"px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition\" onclick=\"closeAddBookmarkModal()\" type=\"button\">\n                        Cancel\n                    </button>\n<button class=\"px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5\" type=\"submit\">\n<i class=\"fas fa-check\"></i> Save Bookmark\n                    </button>\n</div>\n</form>\n</div>\n</div>",
+          "content_html": "<div class=\"fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4 backdrop-blur-sm\" id=\"add-bookmark-modal\">\n<div class=\"bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 shadow-2xl relative\">\n<div class=\"flex items-center justify-between pb-3 border-b border-slate-800 mb-4\">\n<h3 class=\"serif-heading text-lg font-bold text-white flex items-center gap-2\" id=\"add-modal-title\">\n<i class=\"fas fa-plus-circle text-sky-400\"></i> Add New Bookmark\n</h3>\n<button class=\"text-slate-400 hover:text-white\" onclick=\"closeAddBookmarkModal()\">\n<i class=\"fas fa-times\"></i>\n</button>\n</div>\n<form class=\"space-y-4\" id=\"add-bookmark-form\">\n<input id=\"bm-edit-id\" type=\"hidden\" value=\"\"/>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Title / Name *</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-name\" placeholder=\"e.g. Canvas LMS, NSF Fastlane, GitHub...\" required=\"\" type=\"text\"/>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Destination URL *</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-url\" placeholder=\"https://...\" required=\"\" type=\"url\"/>\n</div>\n<div class=\"grid grid-cols-2 gap-3\">\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Top Folder *</label>\n<select class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-cat\">\n<option value=\"Dashboard\">Dashboard</option>\n<option value=\"Work\">Work</option>\n<option value=\"Life\">Life</option>\n<option value=\"Tools\">Tools</option>\n<option value=\"Bookmarks\" selected=\"\">Bookmarks</option>\n</select>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Subfolder</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-sub\" placeholder=\"e.g. Research, Courses, Admin...\" type=\"text\"/>\n</div>\n</div>\n<div>\n<label class=\"block text-[11px] font-semibold text-slate-400 uppercase mb-1\">Tags (Comma-Separated for Search)</label>\n<input class=\"w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none\" id=\"bm-new-tags\" placeholder=\"e.g. nsf, grant, ai, genomics...\" type=\"text\"/>\n</div>\n<div class=\"flex items-center gap-2 pt-1\">\n<input class=\"rounded border-slate-700 bg-slate-800 text-sky-500 focus:ring-sky-500 h-4 w-4\" id=\"bm-new-pin\" type=\"checkbox\"/>\n<label class=\"text-xs text-slate-300 cursor-pointer select-none\" for=\"bm-new-pin\">Pin to Quick Access / Top Favorites</label>\n</div>\n<div class=\"flex justify-end gap-2 pt-4 border-t border-slate-800\">\n<button class=\"px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold transition\" onclick=\"closeAddBookmarkModal()\" type=\"button\">\nCancel\n</button>\n<button class=\"px-4 py-2 bg-sky-600 hover:bg-sky-500 text-white rounded-lg text-xs font-semibold transition flex items-center gap-1.5\" type=\"submit\">\n<i class=\"fas fa-check\"></i> Save Bookmark\n</button>\n</div>\n</form>\n</div>\n</div>",
           "content_text": "Add New Bookmark Title / Name * Destination URL * Top Folder * Bookmarks Subfolder Cancel Save Bookmark",
           "order": 4
         }
@@ -3345,7 +3345,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "23andme.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "23andme, 23andme.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3369,7 +3369,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "360absence.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "360absence, 360absence.com, disability",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3393,7 +3393,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aaai.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aaai, aaai.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3411,7 +3411,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aaai.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aaai, aaai.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3435,7 +3435,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aaas.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aaas, aaas.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3459,7 +3459,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aaup.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aaup, aaup.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3483,7 +3483,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "abet.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "abet, abet.org, accrediting, computing, criteria, programs",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3507,7 +3507,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "absenceresources.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "absenceresources, absenceresources.com, compsych, corporation",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3531,7 +3531,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "academia.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academia, academia.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3555,7 +3555,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "access-ci.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "access, access-ci, access-ci.org, allocations",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3579,7 +3579,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aclweb.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acl, aclweb, aclweb.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3603,7 +3603,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "acm.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acm, acm.org, sigai",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3621,7 +3621,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "acm.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acm, acm.org, intelligent, systems, technology, transactions",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3639,7 +3639,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "acm.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acm, acm.org, data, discovery, knowledge, transactions",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3657,7 +3657,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "acm.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acm, acm.org, association, computing, machinery",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3675,7 +3675,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "acm.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acm, acm.org, akef, ebeid, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3699,7 +3699,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "adobe.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "adobe, adobe.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3717,7 +3717,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "adobe.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "adobe, adobe.com, awards, data, research, science",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3741,7 +3741,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "affirm.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "affirm, affirm.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3765,7 +3765,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aicamp.ai"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aicamp, aicamp.ai",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3789,7 +3789,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aikido-international.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aikido, aikido-international, aikido-international.org, federation, international",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3813,7 +3813,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ala.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ala, ala.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3837,7 +3837,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "alahlynet.com.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alahlynet, alahlynet.com.eg, bank, egypt, national",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3861,7 +3861,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aldiwan.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aldiwan, aldiwan.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3885,7 +3885,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "alhuwayni.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alhuwayni, alhuwayni.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3909,7 +3909,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "aliexpress.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aliexpress, aliexpress.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3933,7 +3933,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "allstate.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "allstate, allstate.com, life",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3957,7 +3957,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "alltrails.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alltrails, alltrails.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -3981,7 +3981,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amazon.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amazon, amazon.com, aws, cloud, compute",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4005,7 +4005,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amazon.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amazon, amazon.eg, aws, cloud, compute",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4029,7 +4029,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amberpharmacy.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amber, amberpharmacy, amberpharmacy.com, pharmacy, specialty",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4053,7 +4053,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amia.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amia, amia.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4071,7 +4071,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amia.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amia, amia.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4095,7 +4095,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amnestyusa.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amnesty, amnestyusa, amnestyusa.org, international, opportunities, volunteer",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4119,7 +4119,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ampalestine.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "american, amp, ampalestine, ampalestine.org, muslims, palestine",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4143,7 +4143,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "amsetweb.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "amset, amsetweb, amsetweb.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4167,7 +4167,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "apa.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "apa, apa.org, psychology, speaking",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4191,7 +4191,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "applytexas.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "applytexas, applytexas.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4215,7 +4215,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "arabicpoetry.ac.uk"
                 ],
-                "ai_tags": "",
+                "ai_tags": "arabic, arabicpoetry, arabicpoetry.ac.uk, database, poetry",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4239,7 +4239,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "arthousedallas.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "art, arthousedallas, arthousedallas.com, dallas, house",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4263,7 +4263,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "arxiv.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ai, arxiv, arxiv.org, machine-learning, papers, preprint, research",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4287,7 +4287,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "asist.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "asist, asist.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4305,7 +4305,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "asist.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "asist, asist.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4329,7 +4329,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "asu.edu.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alumni, asu, asu.edu.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4347,7 +4347,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "asu.edu.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ain, asu, asu.edu.eg, engineering, faculty, shams, university",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4365,7 +4365,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "asu.edu.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ain, asu, asu.edu.eg, engineering, faculty, shams, university",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4389,7 +4389,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "atxmuslims.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "atxmuslims, atxmuslims.com, austin, community, muslim",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4413,7 +4413,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "awsacademy.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academy, amazon, aws, awsacademy, awsacademy.com, cloud, compute",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4437,7 +4437,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "azharegypt.edu.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "azhar, azharegypt, azharegypt.edu.eg, learning, university",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4461,7 +4461,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "baitulmaal.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "baitulmaal, baitulmaal.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4485,7 +4485,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bankofamerica.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "america, bank, bankofamerica, bankofamerica.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4509,7 +4509,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "basmah.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "basmah, basmah.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4533,7 +4533,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bcbstx.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bcbs, bcbstx, bcbstx.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4557,7 +4557,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bcm.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "artificial, assistant, baylor, bcm, bcm.edu, college, data, details, intelligence, job, medicine, professor, scientist",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4575,7 +4575,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bcm.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "assistant, baylor, bcm, bcm.edu, care, college, critical, data, details, disparities, healthcare, job, medicine, professor, research, science, trauma",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4599,7 +4599,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "betterimpact.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "betterimpact, betterimpact.com, myimpactpage",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4623,7 +4623,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "biorender.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "biorender, biorender.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4647,7 +4647,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "biorxiv.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bioinformatics, biology, biorxiv, biorxiv.org, medrxiv, preprint",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4671,7 +4671,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bitbucket.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bitbucket, bitbucket.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4695,7 +4695,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bitbybitbook.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "age, bit, bitbybitbook, bitbybitbook.com, digital, research, social",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4719,7 +4719,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "bitly.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bitly, bitly.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4743,7 +4743,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "capitalone.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "capitalone, capitalone.com, capitol, one",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4767,7 +4767,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "carfax.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "carfax, carfax.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4791,7 +4791,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "carvana.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "carvana, carvana.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4815,7 +4815,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "cernerhealth.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cerner, cernerhealth, cernerhealth.com, health, sign",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4839,7 +4839,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "chase.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "chase, chase.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4863,7 +4863,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "chess.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "chess, chess.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4887,7 +4887,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "citiprogram.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "citi, citiprogram, citiprogram.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4911,7 +4911,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "claude.ai"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ai-assistant, anthropic, claude, claude.ai, llm",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4935,7 +4935,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "climaterealitydfw.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "climate, climaterealitydfw, climaterealitydfw.org, involvment, political, project, reality",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4959,7 +4959,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "cloudbank.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloudbank, cloudbank.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -4983,7 +4983,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "coinbase.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "coinbase, coinbase.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5007,7 +5007,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "cointracker.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cointracker, cointracker.io",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5031,7 +5031,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "commoncrawl.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "common, commoncrawl, commoncrawl.org, crawl",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5055,7 +5055,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "computer.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "computer, computer.org, data, engineering, ieee, knowledge, transactions",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5073,7 +5073,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "computer.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "analysis, computer, computer.org, ieee, intelligence, machine, pattern, transactions",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5097,7 +5097,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "comsoc.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "communications, comsoc, comsoc.org, green, ieee, networking, transactions",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5121,7 +5121,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "coursera.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "coursera, coursera.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5145,7 +5145,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "creditkarma.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "credit, creditkarma, creditkarma.com, karma",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5169,7 +5169,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "cvs.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cvs, cvs.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5193,7 +5193,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dallas-ai.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, dallas-ai, dallas-ai.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5217,7 +5217,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dallasinstitute.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "culture, dallas, dallasinstitute, dallasinstitute.org, humanities, institute",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5241,7 +5241,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dallasmakerspace.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "calendar, dallas, dallasmakerspace, dallasmakerspace.org, events, makerspace",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5265,7 +5265,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dallasnews.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, dallasnews, dallasnews.com, news",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5289,7 +5289,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dallaspaleo.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, dallaspaleo, dallaspaleo.org, paleontological, society",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5313,7 +5313,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dallaspoetry.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, dallaspoetry, dallaspoetry.com, poetry, society",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5337,7 +5337,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dbdiagram.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "database, dbdiagram, dbdiagram.io, design, diagrams, relationship, tool",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5361,7 +5361,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "deepai.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, deepai, deepai.org, ebeid, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5385,7 +5385,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "deepvellum.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "deep, deepvellum, deepvellum.com, vellum",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5409,7 +5409,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "deltadentalins.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "deltadentalins, deltadentalins.com, dental",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5433,7 +5433,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dentonrc.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dentonrc, dentonrc.com, editor, letters, march",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5451,7 +5451,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dentonrc.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dentonrc, dentonrc.com, editor, letters, march",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5469,7 +5469,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dentonrc.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dentonrc, dentonrc.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5493,7 +5493,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dfwworld.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "affairs, council, dfwworld, dfwworld.org, world",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5517,7 +5517,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dfwwritersworkshop.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dfw, dfwwritersworkshop, dfwwritersworkshop.org, workshop, writers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5541,7 +5541,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "digitalmeasures.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "digitalmeasures, digitalmeasures.com, watermark",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5565,7 +5565,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "discord.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "discord, discord.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5589,7 +5589,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dma.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "art, dallas, dma, dma.org, museum",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5613,7 +5613,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "dropbox.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dropbox, dropbox.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5637,7 +5637,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "drugbank.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "browsing, drugbank, drugbank.com, drugs",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5661,7 +5661,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "earnin.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "earnin, earnin.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5685,7 +5685,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "easychair.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "easychair, easychair.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5709,7 +5709,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ebay.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ebay, ebay.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5733,7 +5733,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ecva.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "eccv, ecva, ecva.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5757,7 +5757,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "eddiebauer.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bauer, eddie, eddiebauer, eddiebauer.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5781,7 +5781,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "edx.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "edx, edx.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5805,7 +5805,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "eea.org.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "eea, eea.org.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5829,7 +5829,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "eehc.gov.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "eehc, eehc.gov.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5853,7 +5853,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "empower-retirement.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aver, empower-retirement, empower-retirement.com, texa",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5877,7 +5877,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "empower.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "empower, empower.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5901,7 +5901,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "eneba.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "eneba, eneba.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5925,7 +5925,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ensun.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "companies, discovery, drug, egypt, ensun, ensun.io, top",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5949,7 +5949,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "enterprise.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "enterprise, enterprise.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5973,7 +5973,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "epicgames.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "epic, epicgames, epicgames.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -5997,7 +5997,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "equifax.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "equifax, equifax.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6021,7 +6021,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ets.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ets, ets.org, gre",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6045,7 +6045,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "evernote.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "evernote, evernote.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6069,7 +6069,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "exin.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "exin, exin.com, foundation, itil",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6093,7 +6093,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "experian.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "experian, experian.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6117,7 +6117,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "facebook.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "facebook, facebook.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6141,7 +6141,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "fair.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "fair, fair.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6165,7 +6165,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "fidelity.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "fidelity, fidelity.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6189,7 +6189,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "flickr.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "flickr, flickr.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6213,7 +6213,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "frontiersin.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "frontiers, frontiersin, frontiersin.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6231,7 +6231,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "frontiersin.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, ebeid, frontiersin, frontiersin.org, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6255,7 +6255,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "gainpeace.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "gainpeace, gainpeace.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6279,7 +6279,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "gedmatch.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "gedmatch, gedmatch.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6303,7 +6303,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "gemcenters.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academy, career, center, gem, gemcenters, gemcenters.org, join, opportunities, our, plano, team",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6327,7 +6327,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, copilot, developer, git, github, github.com, open-source, repository, software",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6345,7 +6345,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, developer, git, github, github.com, open-source, repository, software",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6363,7 +6363,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alphafold3, biosciences, code, developer, git, github, github.com, implementation, ligo, open, open-source, repository, software, source",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6381,7 +6381,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alphafold3, aqlaboratory, based, biomolecular, code, developer, fully, git, github, github.com, model, open, open-source, openfold, prediction, repository, software, source, structure",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6399,7 +6399,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alphafold, aqlaboratory, code, developer, efficient, friendly, git, github, github.com, gpu, memory, open-source, openfold, pytorch, repository, reproduction, software, trainable",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6417,7 +6417,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "alphafold, alphafold3, code, deepmind, developer, git, github, github.com, google, inference, open-source, pipeline, repository, software",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6441,7 +6441,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, data2ai4lifesciences, developer, git, github, github.io, laboratory, open-source, repository, software, twu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6459,7 +6459,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, data, developer, git, github, github.io, information, introduction, open-source, python, repository, retrieval, software, structures",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6477,7 +6477,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, developer, git, github, github.io, open-source, repository, software, vahaduo",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6495,7 +6495,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "github.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, developer, git, github, github.io, open-source, repository, software, website",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6519,7 +6519,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "glassdoor.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "glassdoor, glassdoor.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6543,7 +6543,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "godaddy.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "godaddy, godaddy.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6567,7 +6567,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "gokickball.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "america, experience, gokickball, gokickball.com, kickball, premier, social",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6591,7 +6591,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, gemini, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6609,7 +6609,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6627,7 +6627,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, studio",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6645,7 +6645,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, console, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6663,7 +6663,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, contacts, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6681,7 +6681,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, developer, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6699,7 +6699,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, drive, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6717,7 +6717,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6735,7 +6735,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, meet",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6753,7 +6753,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, play",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6771,7 +6771,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, scholar",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6789,7 +6789,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, scholar",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6807,7 +6807,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, voice",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6825,7 +6825,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, messages",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6843,7 +6843,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, notebooklm",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6861,7 +6861,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, sitemaps",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6879,7 +6879,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, tasks",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6897,7 +6897,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, todo",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6915,7 +6915,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, gmail, google, google.com, iaebeid",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6933,7 +6933,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, iaebeid, ualr",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6951,7 +6951,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, iaebeid, utexas",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6969,7 +6969,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, google, google.com, iebeid, twu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -6987,7 +6987,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, cloud, ebeid, gmail, google, google.com, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7005,7 +7005,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, cloud, gmail, google, google.com, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7023,7 +7023,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cloud, gmail, google, google.com, ixakef",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7041,7 +7041,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "google.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, cloud, ebeid, google, google.com, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7065,7 +7065,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "grammarly.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "grammarly, grammarly.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7089,7 +7089,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "grants.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "grants, grants.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7113,7 +7113,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "greenteapress.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "greenteapress, greenteapress.com, python, think",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7137,7 +7137,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "hackerrank.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "hackerrank, hackerrank.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7161,7 +7161,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "healthcare.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aca, healthcare, healthcare.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7185,7 +7185,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "hearthousedallas.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, heart, hearthousedallas, hearthousedallas.org, house",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7209,7 +7209,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "hertz.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "hertz, hertz.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7233,7 +7233,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "huggingface.co"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ai, deep-learning, face, hugging, huggingface, huggingface.co, models, nlp, transformers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7257,7 +7257,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "hulu.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "hulu, hulu.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7281,7 +7281,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "iant.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "association, iant, iant.com, islamic, north, texas",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7305,7 +7305,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "iclr.cc"
                 ],
-                "ai_tags": "",
+                "ai_tags": "iclr, iclr.cc",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7329,7 +7329,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "icml.cc"
                 ],
-                "ai_tags": "",
+                "ai_tags": "icml, icml.cc",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7353,7 +7353,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "icna.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "america, circle, icna, icna.org, islamic, north",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7377,7 +7377,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "idealist.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "human, idealist, idealist.org, rights, volunteer",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7401,7 +7401,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ieee.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ieee, ieee.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7419,7 +7419,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ieee.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ebeid, ieee, ieee.org, islam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7443,7 +7443,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ijcai.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ijcai, ijcai.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7467,7 +7467,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ikea.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ikea, ikea.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7491,7 +7491,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "illustrativedna.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dna, illustrative, illustrativedna, illustrativedna.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7515,7 +7515,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "indeed.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "indeed, indeed.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7539,7 +7539,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "infoculturejournal.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "culture, infoculturejournal, infoculturejournal.org, information",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7563,7 +7563,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "intel.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "developer, intel, intel.com, zone",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7587,7 +7587,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "interfolio.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "interfolio, interfolio.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7611,7 +7611,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "irs.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "account, irs, irs.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7635,7 +7635,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ischools.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "iconference, ischools, ischools.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7659,7 +7659,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "islamweb.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "islamweb, islamweb.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7683,7 +7683,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "isna.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "america, islamic, isna, isna.net, north, society",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7707,7 +7707,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "jetbrains.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "jetbrains, jetbrains.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7731,7 +7731,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "joinhandshake.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "handshake, joinhandshake, joinhandshake.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7755,7 +7755,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "jumia.com.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "egypt, electronics, fashion, jumia, jumia.com.eg, phones, shop, top",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7779,7 +7779,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kaggle.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "data-science, datasets, kaggle, kaggle.com, machine-learning, python",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7803,7 +7803,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kanopy.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "kanopy, kanopy.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7827,7 +7827,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kdd.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "kdd, kdd.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7845,7 +7845,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kdd.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "kdd, kdd.org, sigkdd",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7869,7 +7869,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kennethcole.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cole, kenneth, kennethcole, kennethcole.com, new, york",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7893,7 +7893,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "klarna.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "klarna, klarna.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7917,7 +7917,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kotoaiki.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aikido, kotoaiki, kotoaiki.org, kotokai, texas",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7941,7 +7941,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "kroger.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "kroger, kroger.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7965,7 +7965,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "leetcode.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "leetcode, leetcode.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -7989,7 +7989,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "link.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "link, link.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8013,7 +8013,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "linkedin.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "career, ebeid, islam, linkedin, linkedin.com, networking, professional",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8031,7 +8031,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "linkedin.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "career, linkedin, linkedin.com, networking, professional",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8049,7 +8049,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "linkedin.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "career, concepts, consumers, key, learning, linkedin, linkedin.com, networking, power, professional",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8073,7 +8073,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "linktr.ee"
                 ],
-                "ai_tags": "",
+                "ai_tags": "blends, ibz, instagram, linktr, linktr.ee, linktree, tiktok",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8097,7 +8097,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "linuxcommand.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "books, command, line, linux, linuxcommand, linuxcommand.org, shotts, william",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8121,7 +8121,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "live.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "live, live.com, onedrive",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8139,7 +8139,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "live.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, hotmail, islam, live, live.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8163,7 +8163,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "login.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "login.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8187,7 +8187,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "loopnet.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "loopnet, loopnet.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8211,7 +8211,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "loseit.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "loseit, loseit.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8235,7 +8235,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "lowes.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "lowe, lowes, lowes.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8259,7 +8259,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "lyft.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "lyft, lyft.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8283,7 +8283,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mansfieldmasjid.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "center, islamic, mansfield, mansfieldmasjid, mansfieldmasjid.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8307,7 +8307,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "manuscriptcentral.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "manuscriptcentral, manuscriptcentral.com, manuscripts, scholarone",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8331,7 +8331,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "masamts.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "masa, masamts, masamts.com, mts",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8355,7 +8355,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mathcha.io"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mathcha, mathcha.io",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8379,7 +8379,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mathpix.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mathpix, mathpix.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8403,7 +8403,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mcbios.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mcbios, mcbios.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8421,7 +8421,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mcbios.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mcbios, mcbios.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8445,7 +8445,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mcssaustin.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "community, mcssaustin, mcssaustin.org, muslim, services, support",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8469,7 +8469,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "medium.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "medium, medium.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8493,7 +8493,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "meetup.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "meetup, meetup.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8517,7 +8517,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "methodisthealthsystem.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "center, hospital, medical, methodist, methodisthealthsystem, methodisthealthsystem.org, richardson",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8541,7 +8541,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "metlife.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "legal, metlife, metlife.com, plans",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8565,7 +8565,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "metronissandallas.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, metro, metronissandallas, metronissandallas.com, nissan",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8589,7 +8589,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "microsoft.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "azure, cloud, enterprise, microsoft, microsoft.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8607,7 +8607,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "microsoft.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "azure, cloud, enterprise, microsoft, microsoft.com, teams",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8625,7 +8625,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "microsoft.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "azure, cloud, enterprise, microsoft, microsoft.com, whiteboard",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8649,7 +8649,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "mod.gov.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mod, mod.gov.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8673,7 +8673,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "moneymanagement.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mmi, moneymanagement, moneymanagement.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8697,7 +8697,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "monster.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "monster, monster.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8721,7 +8721,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "movementgyms.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "movement, movementgyms, movementgyms.com, plano",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8745,7 +8745,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "msubmit.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "imaging, journal, msubmit, msubmit.net, science, technology",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8769,7 +8769,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "muhsen.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acceptance, accommodation, awareness, donate, muhsen, muhsen.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8793,7 +8793,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "muppies.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "muppies, muppies.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8817,7 +8817,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "muslimcentral.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "central, muslim, muslimcentral, muslimcentral.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8841,7 +8841,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "muslimspace.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "muslim, muslimspace, muslimspace.org, space",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8865,7 +8865,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "myretirementmanager.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "manager, myretirementmanager, myretirementmanager.com, retirement",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8889,7 +8889,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nasa.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "nasa, nasa.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8913,7 +8913,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nationalcasagal.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "casa, nationalcasagal, nationalcasagal.org, opportunities, volunteer",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8937,7 +8937,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "naturalgrocers.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "grocers, natural, naturalgrocers, naturalgrocers.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8961,7 +8961,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nature.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "computational, journal, nature, nature.com, peer-review, publishing, science, scientific-papers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8979,7 +8979,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nature.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "intelligence, journal, machine, nature, nature.com, peer-review, publishing, scientific-papers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -8997,7 +8997,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nature.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "data, journal, nature, nature.com, peer-review, publishing, scientific, scientific-papers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9015,7 +9015,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nature.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "journal, nature, nature.com, peer-review, publishing, reports, scientific, scientific-papers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9039,7 +9039,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nature.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "conservancy, donations, journal, nature, nature.org, peer-review, publishing, scientific-papers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9063,7 +9063,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ncedc.gov.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ncedc, ncedc.gov.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9087,7 +9087,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ncees.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ncees, ncees.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9105,7 +9105,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ncees.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ncees, ncees.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9129,7 +9129,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nih.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bioinformatics, biology, grant, medicine, ncbi, nih, nih.gov, papers, pubmed, research",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9147,7 +9147,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nih.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bioinformatics, biology, grant, grants, medicine, ncbi, nih, nih.gov, papers, pubmed, research",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9165,7 +9165,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nih.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bioinformatics, biology, biomedical, clinical, data, grant, grants, informatics, medicine, ncbi, nih, nih.gov, nlm, optional, papers, par, pubmed, r01, research, science, trial",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9183,7 +9183,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nih.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "allowed, bioinformatics, biology, biomedical, clinical, data, early, grant, knowledgebases, medicine, ncbi, nih, nih.gov, not, papers, par, pubmed, r24, repositories, research, stage, trial",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9201,7 +9201,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nih.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "bioinformatics, biology, grant, medicine, ncbi, nih, nih.gov, papers, pubmed, research, sciencv",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9225,7 +9225,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nips.cc"
                 ],
-                "ai_tags": "",
+                "ai_tags": "neurips, nips, nips.cc",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9249,7 +9249,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "noorart.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "noorart, noorart.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9273,7 +9273,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nsf.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "award, details, fastlane, funding, government, grants, nsf, nsf.gov, proposal, research, search",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9291,7 +9291,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nsf.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "career, fastlane, funding, government, grants, nsf, nsf.gov, proposal, research",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9315,7 +9315,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ntta.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ntta, ntta.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9339,7 +9339,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nvidia.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, grant, nvidia, nvidia.com, program, researchers",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9357,7 +9357,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nvidia.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "nvidia, nvidia.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9375,7 +9375,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "nvidia.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "nvidia, nvidia.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9399,7 +9399,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "office.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "iaebeid, office, office.com, saumag",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9417,7 +9417,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "office.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "iebeid, office, office.com, twu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9441,7 +9441,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "openai.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ai, chatgpt, generative-ai, llm, openai, openai.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9465,7 +9465,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "openreview.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, ebeid, islam, openreview, openreview.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9489,7 +9489,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "orange.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dsl, egypt, fastest, internet, orange, orange.eg, wireless",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9507,7 +9507,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "orange.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "egypt, orange, orange.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9531,7 +9531,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "orcid.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "orcid, orcid.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9555,7 +9555,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "origin.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "origin, origin.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9579,7 +9579,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "overleaf.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, latex, manuscript, overleaf, overleaf.com, paper, publishing, writing",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9603,7 +9603,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "palestinianelegance.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "elegance, palestinian, palestinianelegance, palestinianelegance.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9627,7 +9627,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "palestinianyouthmovement.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "movement, palestinian, palestinianyouthmovement, palestinianyouthmovement.com, youth",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9651,7 +9651,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "paymentworks.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "paymentworks, paymentworks.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9675,7 +9675,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "pbs.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "pbs, pbs.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9699,7 +9699,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "peerj.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "peerj, peerj.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9723,7 +9723,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "planoaikido.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "aikido, center, plano, planoaikido, planoaikido.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9747,7 +9747,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "poetryfoundation.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "foundation, poetry, poetryfoundation, poetryfoundation.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9771,7 +9771,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "pogil.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "pogil, pogil.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9795,7 +9795,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "progressive.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "progressive, progressive.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9819,7 +9819,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "projectzamzam.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "project, projectzamzam, projectzamzam.org, zamzam",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9843,7 +9843,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "proton.me"
                 ],
-                "ai_tags": "",
+                "ai_tags": "proton, proton.me",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9861,7 +9861,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "proton.me"
                 ],
-                "ai_tags": "",
+                "ai_tags": "iaebeid, proton, proton.me",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9885,7 +9885,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "pushkin.fm"
                 ],
-                "ai_tags": "",
+                "ai_tags": "history, podcast, pushkin, pushkin.fm, revisionist",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9909,7 +9909,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "quran.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "quran, quran.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9933,7 +9933,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ratemyprofessors.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "professors, rate, ratemyprofessors, ratemyprofessors.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9957,7 +9957,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "rcsb.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "homepage, pdb, rcsb, rcsb.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -9981,7 +9981,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "rescue.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "committee, double, impact, international, refugees, rescue, rescue.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10005,7 +10005,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "research.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "fastlane, funding, government, grants, nsf, proposal, research, research.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10029,7 +10029,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "researchgate.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, ebeid, islam, researchgate, researchgate.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10053,7 +10053,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "richardsoniq.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "innovation, quarter, richardson, richardsoniq, richardsoniq.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10077,7 +10077,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "riotgames.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "games, riot, riotgames, riotgames.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10101,7 +10101,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "robinhood.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "robinhood, robinhood.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10125,7 +10125,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "sabafarrukh.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "farrukh, paintings, saba, sabafarrukh, sabafarrukh.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10149,7 +10149,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "salamcharityusa.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "salamcharityusa, salamcharityusa.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10173,7 +10173,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "salamfoundation.us"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academy, salam, salamfoundation, salamfoundation.us",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10197,7 +10197,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "salesforce-sites.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "grants, salesforce-sites, salesforce-sites.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10215,7 +10215,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "salesforce-sites.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "research, salesforce-sites, salesforce-sites.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10239,7 +10239,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "samsclub.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "club, sam, samsclub, samsclub.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10263,7 +10263,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "samsung.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "samsung, samsung.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10287,7 +10287,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "scispace.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, austin, authors, citations, ebeid, islam, publications, related, scispace, scispace.com, texas, university",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10311,7 +10311,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "scopus.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "scopus, scopus.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10335,7 +10335,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "scribd.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "scribd, scribd.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10359,7 +10359,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "semanticscholar.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, citations, publications, research, scholar, semantic, semanticscholar, semanticscholar.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10383,7 +10383,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "sharepoint.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "drive, hanover, shared, sharepoint, sharepoint.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10407,7 +10407,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "sigchi.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "acm, sigchi, sigchi.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10431,7 +10431,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "skype.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "skype, skype.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10455,7 +10455,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "slack.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "slack, slack.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10479,7 +10479,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "slideshare.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "slideshare, slideshare.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10503,7 +10503,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "smu.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "events, list, smu, smu.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10527,7 +10527,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "sony.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "award, group, program, research, sony, sony.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10551,7 +10551,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "sonyentertainmentnetwork.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "entertainment, network, sony, sonyentertainmentnetwork, sonyentertainmentnetwork.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10575,7 +10575,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "spotify.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "spotify, spotify.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10599,7 +10599,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "springer.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "scientometrics, springer, springer.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10617,7 +10617,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "springer.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "springer, springer.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10635,7 +10635,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "springer.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "journal, springer, springer.com, supercomputing",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10653,7 +10653,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "springer.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "springer, springer.com, voluntas",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10677,7 +10677,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "springernature.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "journal, nature, peer-review, publishing, scientific-papers, springernature, springernature.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10695,7 +10695,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "springernature.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dashboard, journal, peer-review, publishing, reviewer, scientific-papers, springernature, springernature.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10719,7 +10719,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "stackexchange.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "exchange, stack, stackexchange, stackexchange.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10743,7 +10743,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "stackoverflow.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "code, debugging, overflow, programming, stack, stack-overflow, stackoverflow, stackoverflow.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10767,7 +10767,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "stanford.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "assignments, nifty, stanford, stanford.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10785,7 +10785,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "stanford.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cs149, fall23, gfxcourses, stanford, stanford.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10809,7 +10809,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "state.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "application, center, consular, electronic, state, state.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10827,7 +10827,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "state.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "instructions, nonimmigrant, state, state.gov, visa",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10851,7 +10851,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "steampowered.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "steam, steampowered, steampowered.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10875,7 +10875,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "stripe.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "stripe, stripe.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10899,7 +10899,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "sunnah.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "sunnah, sunnah.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10923,7 +10923,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "supercomputing.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "sc26, supercomputing, supercomputing.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10947,7 +10947,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "tandfonline.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "biomedical, engineering, research, tandfonline, tandfonline.com, technology",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10971,7 +10971,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "target.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "target, target.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -10995,7 +10995,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "taxact.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "taxact, taxact.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11019,7 +11019,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "techjobsforgood.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "good, jobs, tech, techjobsforgood, techjobsforgood.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11043,7 +11043,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "texas.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ers, texas, texas.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11061,7 +11061,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "texas.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "texas, texas.gov, trs",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11085,7 +11085,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "texaslegal.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "affordable, legal, plans, texaslegal, texaslegal.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11109,7 +11109,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "thenorthface.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "face, north, thenorthface, thenorthface.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11133,7 +11133,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "thetexastheatre.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "texas, theatre, thetexastheatre, thetexastheatre.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11157,7 +11157,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "thewilddetectives.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "detectives, thewilddetectives, thewilddetectives.com, wild",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11181,7 +11181,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "thrushpoetryjournal.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "thrush, thrushpoetryjournal, thrushpoetryjournal.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11205,7 +11205,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "tiaa.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "tiaa, tiaa.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11229,7 +11229,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "tmc.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "artificial, associate, biomedical, bradley, center, faculty, houston, informatics, intelligence, mcwilliams, medical, msbmi, physicians, professor, school, states, tenure, tenured, texas, tmc, tmc.edu, track, united, uthealth",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11253,7 +11253,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "toms.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "toms, toms.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11277,7 +11277,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "transunion.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "trans, transunion, transunion.com, union",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11301,7 +11301,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "turkishairlines.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "airlines, turkish, turkishairlines, turkishairlines.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11325,7 +11325,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "twu.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, cim, courses, education, faculty, texas-womans-university, twu, twu.edu, university",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11343,7 +11343,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "twu.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, akef, courses, ebeid, education, faculty, islam, texas-womans-university, twu, twu.edu, university",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11361,7 +11361,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "twu.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, courses, education, enhancement, faculty, program, rep, research, texas, texas-womans-university, twu, twu.edu, university, woman",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11379,7 +11379,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "twu.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "academic, courses, education, faculty, sustainability, texas, texas-womans-university, twu, twu.edu, university, woman",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11403,7 +11403,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "uber.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "uber, uber.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11427,7 +11427,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ubisoft.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ubisoft, ubisoft.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11451,7 +11451,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "udemy.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "udemy, udemy.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11475,7 +11475,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "uhaul.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "haul, uhaul, uhaul.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11499,7 +11499,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "un.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "development, education, sustainable, un.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11523,7 +11523,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unausa.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "chapter, dallas, una, unausa, unausa.org, usa",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11541,7 +11541,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unausa.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "involvment, political, una, unausa, unausa.org, usa",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11565,7 +11565,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unhcr.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "data, unhcr, unhcr.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11589,7 +11589,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "uni-trier.de"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, dblp, ebeid, islam, uni-trier, uni-trier.de",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11613,7 +11613,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "uniprot.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "uniprot, uniprot.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11637,7 +11637,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "united.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "airlines, united, united.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11661,7 +11661,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unitymuslims.net"
                 ],
-                "ai_tags": "",
+                "ai_tags": "muslims, united, unitymuslims, unitymuslims.net",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11685,7 +11685,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unt.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "calendar, events, north, texas, university, unt, unt.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11703,7 +11703,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unt.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "parties, star, unt, unt.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11727,7 +11727,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unu.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "nations, opportunities, united, university, unu, unu.edu, volunteer",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11751,7 +11751,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "unv.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "opportunities, unv, unv.org, volunteer",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11775,7 +11775,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "upstart.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "upstart, upstart.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11799,7 +11799,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "uscis.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "uscis, uscis.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11823,7 +11823,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "usembassy.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "contact, egypt, embassy, find, how, mission, office, usembassy, usembassy.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11841,7 +11841,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "usembassy.gov"
                 ],
-                "ai_tags": "",
+                "ai_tags": "egypt, embassy, usembassy, usembassy.gov",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11865,7 +11865,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "usps.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "usps, usps.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11889,7 +11889,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "ustraveldocs.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "ustraveldocs, ustraveldocs.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11913,7 +11913,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "usvisascheduling.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "application, customer, self, service, usvisascheduling, usvisascheduling.com, visa",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11937,7 +11937,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "uta.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "calendar, events, uta, uta.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11961,7 +11961,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utdallas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "applied, center, learning, machine, utdallas, utdallas.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11979,7 +11979,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utdallas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "calendar, comet, events, utdallas, utdallas.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -11997,7 +11997,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utdallas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "dallas, international, office, scholars, students, utdallas, utdallas.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12021,7 +12021,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utexas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "announcements, calendar, events, texas, today, utexas, utexas.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12039,7 +12039,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utexas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "computing, school, utexas, utexas.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12057,7 +12057,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utexas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "direct, utexas, utexas.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12075,7 +12075,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utexas.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "metorship, opportunities, program, refugee, utexas, utexas.edu, volunteer",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12099,7 +12099,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utsouthwestern.edu"
                 ],
-                "ai_tags": "",
+                "ai_tags": "mychart, utsouthwestern, utsouthwestern.edu",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12123,7 +12123,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utswmed.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "arab, center, medical, mustafa, southwestern, surgery, utswmed, utswmed.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12141,7 +12141,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "utswmed.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "center, clements, dallas, hospital, medical, southwestern, texas, university, utswmed, utswmed.org, william",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12165,7 +12165,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "venmo.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "venmo, venmo.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12189,7 +12189,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "vldb.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "vldb, vldb.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12213,7 +12213,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "volunteermatch.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "volunteermatch, volunteermatch.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12237,7 +12237,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wageworks.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "cobra, wageworks, wageworks.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12261,7 +12261,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "walgreens.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "walgreens, walgreens.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12285,7 +12285,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "walmart.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "walmart, walmart.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12309,7 +12309,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "watchit.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "watch, watchit, watchit.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12333,7 +12333,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wck.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "central, kitchen, wck, wck.org, world",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12357,7 +12357,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "webofscience.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "science, webofscience, webofscience.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12381,7 +12381,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wegreened.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "contact, wegreened, wegreened.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12405,7 +12405,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wenzo.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "case, management, platform, wenzo, wenzo.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12429,7 +12429,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wes.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "wes, wes.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12453,7 +12453,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "westernunion.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "union, western, westernunion, westernunion.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12477,7 +12477,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wgbh.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "gbh, wgbh, wgbh.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12501,7 +12501,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "whatsapp.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "whatsapp, whatsapp.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12525,7 +12525,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wikipedia.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "wikipedia, wikipedia.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12549,7 +12549,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "wrapsnet.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "data, rpc, wrapsnet, wrapsnet.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12573,7 +12573,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "writersgarret.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "garret, writer, writersgarret, writersgarret.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12597,7 +12597,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "yahoo.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "akef, islam, yahoo, yahoo.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12621,7 +12621,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "yellowpages.com.eg"
                 ],
-                "ai_tags": "",
+                "ai_tags": "yellowpages, yellowpages.com.eg",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12645,7 +12645,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "youtube.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "media, streaming, talks, video, youtube, youtube.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12669,7 +12669,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "zellepay.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "zelle, zellepay, zellepay.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12693,7 +12693,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "zillow.com"
                 ],
-                "ai_tags": "",
+                "ai_tags": "zillow, zillow.com",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12717,7 +12717,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "zoom.us"
                 ],
-                "ai_tags": "",
+                "ai_tags": "conference, meeting, video-call, zoom, zoom.us",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12741,7 +12741,7 @@ window.__SITE_DATABASE = {
                   "Bookmarks",
                   "zotero.org"
                 ],
-                "ai_tags": "",
+                "ai_tags": "zotero, zotero.org",
                 "favicon": "",
                 "pinned": false,
                 "clicks": 0
@@ -12765,7 +12765,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "23andme.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "23andme, 23andme.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12783,7 +12783,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "360absence.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "360absence, 360absence.com, disability",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12801,7 +12801,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aaai.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "aaai, aaai.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12819,7 +12819,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aaai.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "aaai, aaai.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12837,7 +12837,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aaas.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "aaas, aaas.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12855,7 +12855,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aaup.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "aaup, aaup.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12873,7 +12873,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "abet.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "abet, abet.org, accrediting, computing, criteria, programs",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12891,7 +12891,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "absenceresources.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "absenceresources, absenceresources.com, compsych, corporation",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12909,7 +12909,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "academia.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "academia, academia.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12927,7 +12927,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "access-ci.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "access, access-ci, access-ci.org, allocations",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12945,7 +12945,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aclweb.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acl, aclweb, aclweb.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12963,7 +12963,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "acm.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acm, acm.org, sigai",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12981,7 +12981,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "acm.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acm, acm.org, intelligent, systems, technology, transactions",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -12999,7 +12999,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "acm.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acm, acm.org, data, discovery, knowledge, transactions",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13017,7 +13017,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "acm.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acm, acm.org, association, computing, machinery",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13035,7 +13035,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "acm.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acm, acm.org, akef, ebeid, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13053,7 +13053,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "adobe.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "adobe, adobe.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13071,7 +13071,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "adobe.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "adobe, adobe.com, awards, data, research, science",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13089,7 +13089,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "affirm.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "affirm, affirm.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13107,7 +13107,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aicamp.ai"
         ],
-        "ai_tags": "",
+        "ai_tags": "aicamp, aicamp.ai",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13125,7 +13125,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aikido-international.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "aikido, aikido-international, aikido-international.org, federation, international",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13143,7 +13143,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ala.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ala, ala.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13161,7 +13161,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "alahlynet.com.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "alahlynet, alahlynet.com.eg, bank, egypt, national",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13179,7 +13179,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aldiwan.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "aldiwan, aldiwan.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13197,7 +13197,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "alhuwayni.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "alhuwayni, alhuwayni.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13215,7 +13215,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "aliexpress.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "aliexpress, aliexpress.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13233,7 +13233,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "allstate.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "allstate, allstate.com, life",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13251,7 +13251,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "alltrails.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "alltrails, alltrails.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13269,7 +13269,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amazon.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "amazon, amazon.com, aws, cloud, compute",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13287,7 +13287,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amazon.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "amazon, amazon.eg, aws, cloud, compute",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13305,7 +13305,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amberpharmacy.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "amber, amberpharmacy, amberpharmacy.com, pharmacy, specialty",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13323,7 +13323,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amia.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "amia, amia.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13341,7 +13341,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amia.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "amia, amia.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13359,7 +13359,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amnestyusa.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "amnesty, amnestyusa, amnestyusa.org, international, opportunities, volunteer",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13377,7 +13377,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ampalestine.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "american, amp, ampalestine, ampalestine.org, muslims, palestine",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13395,7 +13395,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "amsetweb.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "amset, amsetweb, amsetweb.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13413,7 +13413,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "apa.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "apa, apa.org, psychology, speaking",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13431,7 +13431,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "applytexas.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "applytexas, applytexas.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13449,7 +13449,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "arabicpoetry.ac.uk"
         ],
-        "ai_tags": "",
+        "ai_tags": "arabic, arabicpoetry, arabicpoetry.ac.uk, database, poetry",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13467,7 +13467,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "arthousedallas.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "art, arthousedallas, arthousedallas.com, dallas, house",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13485,7 +13485,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "arxiv.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ai, arxiv, arxiv.org, machine-learning, papers, preprint, research",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13503,7 +13503,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "asist.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "asist, asist.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13521,7 +13521,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "asist.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "asist, asist.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13539,7 +13539,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "asu.edu.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "alumni, asu, asu.edu.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13557,7 +13557,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "asu.edu.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "ain, asu, asu.edu.eg, engineering, faculty, shams, university",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13575,7 +13575,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "asu.edu.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "ain, asu, asu.edu.eg, engineering, faculty, shams, university",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13593,7 +13593,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "atxmuslims.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "atxmuslims, atxmuslims.com, austin, community, muslim",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13611,7 +13611,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "awsacademy.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "academy, amazon, aws, awsacademy, awsacademy.com, cloud, compute",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13629,7 +13629,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "azharegypt.edu.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "azhar, azharegypt, azharegypt.edu.eg, learning, university",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13647,7 +13647,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "baitulmaal.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "baitulmaal, baitulmaal.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13665,7 +13665,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bankofamerica.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "america, bank, bankofamerica, bankofamerica.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13683,7 +13683,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "basmah.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "basmah, basmah.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13701,7 +13701,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bcbstx.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "bcbs, bcbstx, bcbstx.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13719,7 +13719,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bcm.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "artificial, assistant, baylor, bcm, bcm.edu, college, data, details, intelligence, job, medicine, professor, scientist",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13737,7 +13737,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bcm.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "assistant, baylor, bcm, bcm.edu, care, college, critical, data, details, disparities, healthcare, job, medicine, professor, research, science, trauma",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13755,7 +13755,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "betterimpact.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "betterimpact, betterimpact.com, myimpactpage",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13773,7 +13773,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "biorender.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "biorender, biorender.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13791,7 +13791,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "biorxiv.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "bioinformatics, biology, biorxiv, biorxiv.org, medrxiv, preprint",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13809,7 +13809,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bitbucket.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "bitbucket, bitbucket.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13827,7 +13827,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bitbybitbook.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "age, bit, bitbybitbook, bitbybitbook.com, digital, research, social",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13845,7 +13845,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "bitly.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "bitly, bitly.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13863,7 +13863,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "capitalone.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "capitalone, capitalone.com, capitol, one",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13881,7 +13881,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "carfax.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "carfax, carfax.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13899,7 +13899,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "carvana.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "carvana, carvana.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13917,7 +13917,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "cernerhealth.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cerner, cernerhealth, cernerhealth.com, health, sign",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13935,7 +13935,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "chase.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "chase, chase.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13953,7 +13953,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "chess.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "chess, chess.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13971,7 +13971,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "citiprogram.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "citi, citiprogram, citiprogram.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -13989,7 +13989,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "claude.ai"
         ],
-        "ai_tags": "",
+        "ai_tags": "ai-assistant, anthropic, claude, claude.ai, llm",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14007,7 +14007,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "climaterealitydfw.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "climate, climaterealitydfw, climaterealitydfw.org, involvment, political, project, reality",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14025,7 +14025,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "cloudbank.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloudbank, cloudbank.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14043,7 +14043,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "coinbase.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "coinbase, coinbase.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14061,7 +14061,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "cointracker.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "cointracker, cointracker.io",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14079,7 +14079,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "commoncrawl.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "common, commoncrawl, commoncrawl.org, crawl",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14097,7 +14097,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "computer.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "computer, computer.org, data, engineering, ieee, knowledge, transactions",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14115,7 +14115,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "computer.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "analysis, computer, computer.org, ieee, intelligence, machine, pattern, transactions",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14133,7 +14133,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "comsoc.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "communications, comsoc, comsoc.org, green, ieee, networking, transactions",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14151,7 +14151,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "coursera.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "coursera, coursera.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14169,7 +14169,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "creditkarma.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "credit, creditkarma, creditkarma.com, karma",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14187,7 +14187,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "cvs.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cvs, cvs.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14205,7 +14205,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dallas-ai.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, dallas-ai, dallas-ai.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14223,7 +14223,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dallasinstitute.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "culture, dallas, dallasinstitute, dallasinstitute.org, humanities, institute",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14241,7 +14241,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dallasmakerspace.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "calendar, dallas, dallasmakerspace, dallasmakerspace.org, events, makerspace",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14259,7 +14259,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dallasnews.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, dallasnews, dallasnews.com, news",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14277,7 +14277,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dallaspaleo.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, dallaspaleo, dallaspaleo.org, paleontological, society",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14295,7 +14295,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dallaspoetry.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, dallaspoetry, dallaspoetry.com, poetry, society",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14313,7 +14313,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dbdiagram.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "database, dbdiagram, dbdiagram.io, design, diagrams, relationship, tool",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14331,7 +14331,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "deepai.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, deepai, deepai.org, ebeid, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14349,7 +14349,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "deepvellum.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "deep, deepvellum, deepvellum.com, vellum",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14367,7 +14367,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "deltadentalins.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "deltadentalins, deltadentalins.com, dental",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14385,7 +14385,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dentonrc.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dentonrc, dentonrc.com, editor, letters, march",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14403,7 +14403,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dentonrc.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dentonrc, dentonrc.com, editor, letters, march",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14421,7 +14421,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dentonrc.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dentonrc, dentonrc.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14439,7 +14439,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dfwworld.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "affairs, council, dfwworld, dfwworld.org, world",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14457,7 +14457,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dfwwritersworkshop.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "dfw, dfwwritersworkshop, dfwwritersworkshop.org, workshop, writers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14475,7 +14475,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "digitalmeasures.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "digitalmeasures, digitalmeasures.com, watermark",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14493,7 +14493,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "discord.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "discord, discord.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14511,7 +14511,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dma.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "art, dallas, dma, dma.org, museum",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14529,7 +14529,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "dropbox.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dropbox, dropbox.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14547,7 +14547,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "drugbank.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "browsing, drugbank, drugbank.com, drugs",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14565,7 +14565,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "earnin.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "earnin, earnin.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14583,7 +14583,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "easychair.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "easychair, easychair.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14601,7 +14601,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ebay.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "ebay, ebay.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14619,7 +14619,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ecva.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "eccv, ecva, ecva.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14637,7 +14637,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "eddiebauer.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "bauer, eddie, eddiebauer, eddiebauer.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14655,7 +14655,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "edx.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "edx, edx.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14673,7 +14673,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "eea.org.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "eea, eea.org.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14691,7 +14691,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "eehc.gov.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "eehc, eehc.gov.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14709,7 +14709,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "empower-retirement.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "aver, empower-retirement, empower-retirement.com, texa",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14727,7 +14727,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "empower.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "empower, empower.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14745,7 +14745,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "eneba.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "eneba, eneba.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14763,7 +14763,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ensun.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "companies, discovery, drug, egypt, ensun, ensun.io, top",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14781,7 +14781,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "enterprise.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "enterprise, enterprise.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14799,7 +14799,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "epicgames.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "epic, epicgames, epicgames.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14817,7 +14817,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "equifax.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "equifax, equifax.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14835,7 +14835,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ets.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ets, ets.org, gre",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14853,7 +14853,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "evernote.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "evernote, evernote.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14871,7 +14871,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "exin.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "exin, exin.com, foundation, itil",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14889,7 +14889,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "experian.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "experian, experian.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14907,7 +14907,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "facebook.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "facebook, facebook.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14925,7 +14925,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "fair.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "fair, fair.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14943,7 +14943,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "fidelity.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "fidelity, fidelity.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14961,7 +14961,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "flickr.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "flickr, flickr.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14979,7 +14979,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "frontiersin.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "frontiers, frontiersin, frontiersin.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -14997,7 +14997,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "frontiersin.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, ebeid, frontiersin, frontiersin.org, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15015,7 +15015,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "gainpeace.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "gainpeace, gainpeace.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15033,7 +15033,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "gedmatch.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "gedmatch, gedmatch.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15051,7 +15051,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "gemcenters.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "academy, career, center, gem, gemcenters, gemcenters.org, join, opportunities, our, plano, team",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15069,7 +15069,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, copilot, developer, git, github, github.com, open-source, repository, software",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15087,7 +15087,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, developer, git, github, github.com, open-source, repository, software",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15105,7 +15105,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "alphafold3, biosciences, code, developer, git, github, github.com, implementation, ligo, open, open-source, repository, software, source",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15123,7 +15123,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "alphafold3, aqlaboratory, based, biomolecular, code, developer, fully, git, github, github.com, model, open, open-source, openfold, prediction, repository, software, source, structure",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15141,7 +15141,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "alphafold, aqlaboratory, code, developer, efficient, friendly, git, github, github.com, gpu, memory, open-source, openfold, pytorch, repository, reproduction, software, trainable",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15159,7 +15159,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "alphafold, alphafold3, code, deepmind, developer, git, github, github.com, google, inference, open-source, pipeline, repository, software",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15177,7 +15177,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, data2ai4lifesciences, developer, git, github, github.io, laboratory, open-source, repository, software, twu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15195,7 +15195,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, data, developer, git, github, github.io, information, introduction, open-source, python, repository, retrieval, software, structures",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15213,7 +15213,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, developer, git, github, github.io, open-source, repository, software, vahaduo",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15231,7 +15231,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "github.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, developer, git, github, github.io, open-source, repository, software, website",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15249,7 +15249,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "glassdoor.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "glassdoor, glassdoor.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15267,7 +15267,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "godaddy.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "godaddy, godaddy.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15285,7 +15285,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "gokickball.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "america, experience, gokickball, gokickball.com, kickball, premier, social",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15303,7 +15303,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, gemini, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15321,7 +15321,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15339,7 +15339,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, studio",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15357,7 +15357,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, console, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15375,7 +15375,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, contacts, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15393,7 +15393,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, developer, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15411,7 +15411,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, drive, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15429,7 +15429,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15447,7 +15447,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, meet",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15465,7 +15465,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, play",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15483,7 +15483,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, scholar",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15501,7 +15501,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, scholar",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15519,7 +15519,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, voice",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15537,7 +15537,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, messages",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15555,7 +15555,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, notebooklm",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15573,7 +15573,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, sitemaps",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15591,7 +15591,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, tasks",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15609,7 +15609,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, todo",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15627,7 +15627,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, gmail, google, google.com, iaebeid",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15645,7 +15645,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, iaebeid, ualr",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15663,7 +15663,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, iaebeid, utexas",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15681,7 +15681,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, google, google.com, iebeid, twu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15699,7 +15699,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, cloud, ebeid, gmail, google, google.com, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15717,7 +15717,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, cloud, gmail, google, google.com, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15735,7 +15735,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cloud, gmail, google, google.com, ixakef",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15753,7 +15753,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "google.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, cloud, ebeid, google, google.com, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15771,7 +15771,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "grammarly.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "grammarly, grammarly.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15789,7 +15789,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "grants.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "grants, grants.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15807,7 +15807,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "greenteapress.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "greenteapress, greenteapress.com, python, think",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15825,7 +15825,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "hackerrank.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "hackerrank, hackerrank.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15843,7 +15843,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "healthcare.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "aca, healthcare, healthcare.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15861,7 +15861,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "hearthousedallas.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, heart, hearthousedallas, hearthousedallas.org, house",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15879,7 +15879,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "hertz.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "hertz, hertz.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15897,7 +15897,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "huggingface.co"
         ],
-        "ai_tags": "",
+        "ai_tags": "ai, deep-learning, face, hugging, huggingface, huggingface.co, models, nlp, transformers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15915,7 +15915,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "hulu.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "hulu, hulu.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15933,7 +15933,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "iant.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "association, iant, iant.com, islamic, north, texas",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15951,7 +15951,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "iclr.cc"
         ],
-        "ai_tags": "",
+        "ai_tags": "iclr, iclr.cc",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15969,7 +15969,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "icml.cc"
         ],
-        "ai_tags": "",
+        "ai_tags": "icml, icml.cc",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -15987,7 +15987,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "icna.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "america, circle, icna, icna.org, islamic, north",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16005,7 +16005,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "idealist.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "human, idealist, idealist.org, rights, volunteer",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16023,7 +16023,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ieee.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ieee, ieee.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16041,7 +16041,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ieee.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ebeid, ieee, ieee.org, islam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16059,7 +16059,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ijcai.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ijcai, ijcai.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16077,7 +16077,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ikea.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "ikea, ikea.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16095,7 +16095,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "illustrativedna.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dna, illustrative, illustrativedna, illustrativedna.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16113,7 +16113,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "indeed.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "indeed, indeed.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16131,7 +16131,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "infoculturejournal.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "culture, infoculturejournal, infoculturejournal.org, information",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16149,7 +16149,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "intel.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "developer, intel, intel.com, zone",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16167,7 +16167,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "interfolio.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "interfolio, interfolio.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16185,7 +16185,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "irs.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "account, irs, irs.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16203,7 +16203,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ischools.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "iconference, ischools, ischools.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16221,7 +16221,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "islamweb.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "islamweb, islamweb.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16239,7 +16239,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "isna.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "america, islamic, isna, isna.net, north, society",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16257,7 +16257,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "jetbrains.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "jetbrains, jetbrains.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16275,7 +16275,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "joinhandshake.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "handshake, joinhandshake, joinhandshake.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16293,7 +16293,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "jumia.com.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "egypt, electronics, fashion, jumia, jumia.com.eg, phones, shop, top",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16311,7 +16311,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kaggle.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "data-science, datasets, kaggle, kaggle.com, machine-learning, python",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16329,7 +16329,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kanopy.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "kanopy, kanopy.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16347,7 +16347,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kdd.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "kdd, kdd.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16365,7 +16365,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kdd.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "kdd, kdd.org, sigkdd",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16383,7 +16383,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kennethcole.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cole, kenneth, kennethcole, kennethcole.com, new, york",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16401,7 +16401,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "klarna.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "klarna, klarna.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16419,7 +16419,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kotoaiki.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "aikido, kotoaiki, kotoaiki.org, kotokai, texas",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16437,7 +16437,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "kroger.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "kroger, kroger.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16455,7 +16455,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "leetcode.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "leetcode, leetcode.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16473,7 +16473,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "link.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "link, link.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16491,7 +16491,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "linkedin.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "career, ebeid, islam, linkedin, linkedin.com, networking, professional",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16509,7 +16509,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "linkedin.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "career, linkedin, linkedin.com, networking, professional",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16527,7 +16527,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "linkedin.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "career, concepts, consumers, key, learning, linkedin, linkedin.com, networking, power, professional",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16545,7 +16545,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "linktr.ee"
         ],
-        "ai_tags": "",
+        "ai_tags": "blends, ibz, instagram, linktr, linktr.ee, linktree, tiktok",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16563,7 +16563,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "linuxcommand.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "books, command, line, linux, linuxcommand, linuxcommand.org, shotts, william",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16581,7 +16581,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "live.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "live, live.com, onedrive",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16599,7 +16599,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "live.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, hotmail, islam, live, live.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16617,7 +16617,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "login.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "login.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16635,7 +16635,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "loopnet.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "loopnet, loopnet.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16653,7 +16653,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "loseit.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "loseit, loseit.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16671,7 +16671,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "lowes.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "lowe, lowes, lowes.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16689,7 +16689,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "lyft.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "lyft, lyft.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16707,7 +16707,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mansfieldmasjid.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "center, islamic, mansfield, mansfieldmasjid, mansfieldmasjid.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16725,7 +16725,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "manuscriptcentral.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "manuscriptcentral, manuscriptcentral.com, manuscripts, scholarone",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16743,7 +16743,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "masamts.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "masa, masamts, masamts.com, mts",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16761,7 +16761,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mathcha.io"
         ],
-        "ai_tags": "",
+        "ai_tags": "mathcha, mathcha.io",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16779,7 +16779,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mathpix.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "mathpix, mathpix.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16797,7 +16797,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mcbios.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "mcbios, mcbios.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16815,7 +16815,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mcbios.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "mcbios, mcbios.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16833,7 +16833,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mcssaustin.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "community, mcssaustin, mcssaustin.org, muslim, services, support",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16851,7 +16851,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "medium.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "medium, medium.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16869,7 +16869,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "meetup.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "meetup, meetup.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16887,7 +16887,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "methodisthealthsystem.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "center, hospital, medical, methodist, methodisthealthsystem, methodisthealthsystem.org, richardson",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16905,7 +16905,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "metlife.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "legal, metlife, metlife.com, plans",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16923,7 +16923,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "metronissandallas.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, metro, metronissandallas, metronissandallas.com, nissan",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16941,7 +16941,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "microsoft.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "azure, cloud, enterprise, microsoft, microsoft.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16959,7 +16959,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "microsoft.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "azure, cloud, enterprise, microsoft, microsoft.com, teams",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16977,7 +16977,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "microsoft.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "azure, cloud, enterprise, microsoft, microsoft.com, whiteboard",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -16995,7 +16995,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "mod.gov.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "mod, mod.gov.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17013,7 +17013,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "moneymanagement.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "mmi, moneymanagement, moneymanagement.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17031,7 +17031,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "monster.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "monster, monster.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17049,7 +17049,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "movementgyms.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "movement, movementgyms, movementgyms.com, plano",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17067,7 +17067,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "msubmit.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "imaging, journal, msubmit, msubmit.net, science, technology",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17085,7 +17085,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "muhsen.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acceptance, accommodation, awareness, donate, muhsen, muhsen.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17103,7 +17103,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "muppies.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "muppies, muppies.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17121,7 +17121,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "muslimcentral.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "central, muslim, muslimcentral, muslimcentral.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17139,7 +17139,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "muslimspace.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "muslim, muslimspace, muslimspace.org, space",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17157,7 +17157,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "myretirementmanager.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "manager, myretirementmanager, myretirementmanager.com, retirement",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17175,7 +17175,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nasa.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "nasa, nasa.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17193,7 +17193,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nationalcasagal.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "casa, nationalcasagal, nationalcasagal.org, opportunities, volunteer",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17211,7 +17211,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "naturalgrocers.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "grocers, natural, naturalgrocers, naturalgrocers.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17229,7 +17229,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nature.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "computational, journal, nature, nature.com, peer-review, publishing, science, scientific-papers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17247,7 +17247,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nature.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "intelligence, journal, machine, nature, nature.com, peer-review, publishing, scientific-papers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17265,7 +17265,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nature.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "data, journal, nature, nature.com, peer-review, publishing, scientific, scientific-papers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17283,7 +17283,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nature.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "journal, nature, nature.com, peer-review, publishing, reports, scientific, scientific-papers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17301,7 +17301,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nature.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "conservancy, donations, journal, nature, nature.org, peer-review, publishing, scientific-papers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17319,7 +17319,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ncedc.gov.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "ncedc, ncedc.gov.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17337,7 +17337,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ncees.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ncees, ncees.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17355,7 +17355,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ncees.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ncees, ncees.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17373,7 +17373,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nih.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "bioinformatics, biology, grant, medicine, ncbi, nih, nih.gov, papers, pubmed, research",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17391,7 +17391,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nih.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "bioinformatics, biology, grant, grants, medicine, ncbi, nih, nih.gov, papers, pubmed, research",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17409,7 +17409,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nih.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "bioinformatics, biology, biomedical, clinical, data, grant, grants, informatics, medicine, ncbi, nih, nih.gov, nlm, optional, papers, par, pubmed, r01, research, science, trial",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17427,7 +17427,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nih.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "allowed, bioinformatics, biology, biomedical, clinical, data, early, grant, knowledgebases, medicine, ncbi, nih, nih.gov, not, papers, par, pubmed, r24, repositories, research, stage, trial",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17445,7 +17445,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nih.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "bioinformatics, biology, grant, medicine, ncbi, nih, nih.gov, papers, pubmed, research, sciencv",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17463,7 +17463,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nips.cc"
         ],
-        "ai_tags": "",
+        "ai_tags": "neurips, nips, nips.cc",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17481,7 +17481,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "noorart.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "noorart, noorart.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17499,7 +17499,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nsf.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "award, details, fastlane, funding, government, grants, nsf, nsf.gov, proposal, research, search",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17517,7 +17517,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nsf.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "career, fastlane, funding, government, grants, nsf, nsf.gov, proposal, research",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17535,7 +17535,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ntta.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "ntta, ntta.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17553,7 +17553,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nvidia.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, grant, nvidia, nvidia.com, program, researchers",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17571,7 +17571,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nvidia.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "nvidia, nvidia.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17589,7 +17589,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "nvidia.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "nvidia, nvidia.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17607,7 +17607,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "office.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "iaebeid, office, office.com, saumag",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17625,7 +17625,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "office.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "iebeid, office, office.com, twu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17643,7 +17643,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "openai.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "ai, chatgpt, generative-ai, llm, openai, openai.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17661,7 +17661,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "openreview.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, ebeid, islam, openreview, openreview.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17679,7 +17679,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "orange.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "dsl, egypt, fastest, internet, orange, orange.eg, wireless",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17697,7 +17697,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "orange.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "egypt, orange, orange.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17715,7 +17715,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "orcid.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "orcid, orcid.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17733,7 +17733,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "origin.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "origin, origin.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17751,7 +17751,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "overleaf.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, latex, manuscript, overleaf, overleaf.com, paper, publishing, writing",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17769,7 +17769,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "palestinianelegance.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "elegance, palestinian, palestinianelegance, palestinianelegance.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17787,7 +17787,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "palestinianyouthmovement.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "movement, palestinian, palestinianyouthmovement, palestinianyouthmovement.com, youth",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17805,7 +17805,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "paymentworks.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "paymentworks, paymentworks.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17823,7 +17823,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "pbs.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "pbs, pbs.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17841,7 +17841,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "peerj.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "peerj, peerj.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17859,7 +17859,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "planoaikido.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "aikido, center, plano, planoaikido, planoaikido.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17877,7 +17877,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "poetryfoundation.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "foundation, poetry, poetryfoundation, poetryfoundation.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17895,7 +17895,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "pogil.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "pogil, pogil.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17913,7 +17913,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "progressive.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "progressive, progressive.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17931,7 +17931,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "projectzamzam.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "project, projectzamzam, projectzamzam.org, zamzam",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17949,7 +17949,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "proton.me"
         ],
-        "ai_tags": "",
+        "ai_tags": "proton, proton.me",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17967,7 +17967,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "proton.me"
         ],
-        "ai_tags": "",
+        "ai_tags": "iaebeid, proton, proton.me",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -17985,7 +17985,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "pushkin.fm"
         ],
-        "ai_tags": "",
+        "ai_tags": "history, podcast, pushkin, pushkin.fm, revisionist",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18003,7 +18003,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "quran.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "quran, quran.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18021,7 +18021,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ratemyprofessors.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "professors, rate, ratemyprofessors, ratemyprofessors.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18039,7 +18039,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "rcsb.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "homepage, pdb, rcsb, rcsb.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18057,7 +18057,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "rescue.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "committee, double, impact, international, refugees, rescue, rescue.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18075,7 +18075,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "research.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "fastlane, funding, government, grants, nsf, proposal, research, research.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18093,7 +18093,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "researchgate.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, ebeid, islam, researchgate, researchgate.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18111,7 +18111,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "richardsoniq.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "innovation, quarter, richardson, richardsoniq, richardsoniq.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18129,7 +18129,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "riotgames.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "games, riot, riotgames, riotgames.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18147,7 +18147,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "robinhood.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "robinhood, robinhood.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18165,7 +18165,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "sabafarrukh.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "farrukh, paintings, saba, sabafarrukh, sabafarrukh.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18183,7 +18183,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "salamcharityusa.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "salamcharityusa, salamcharityusa.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18201,7 +18201,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "salamfoundation.us"
         ],
-        "ai_tags": "",
+        "ai_tags": "academy, salam, salamfoundation, salamfoundation.us",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18219,7 +18219,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "salesforce-sites.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "grants, salesforce-sites, salesforce-sites.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18237,7 +18237,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "salesforce-sites.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "research, salesforce-sites, salesforce-sites.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18255,7 +18255,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "samsclub.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "club, sam, samsclub, samsclub.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18273,7 +18273,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "samsung.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "samsung, samsung.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18291,7 +18291,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "scispace.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, austin, authors, citations, ebeid, islam, publications, related, scispace, scispace.com, texas, university",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18309,7 +18309,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "scopus.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "scopus, scopus.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18327,7 +18327,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "scribd.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "scribd, scribd.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18345,7 +18345,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "semanticscholar.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, citations, publications, research, scholar, semantic, semanticscholar, semanticscholar.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18363,7 +18363,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "sharepoint.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "drive, hanover, shared, sharepoint, sharepoint.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18381,7 +18381,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "sigchi.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "acm, sigchi, sigchi.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18399,7 +18399,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "skype.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "skype, skype.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18417,7 +18417,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "slack.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "slack, slack.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18435,7 +18435,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "slideshare.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "slideshare, slideshare.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18453,7 +18453,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "smu.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "events, list, smu, smu.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18471,7 +18471,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "sony.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "award, group, program, research, sony, sony.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18489,7 +18489,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "sonyentertainmentnetwork.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "entertainment, network, sony, sonyentertainmentnetwork, sonyentertainmentnetwork.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18507,7 +18507,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "spotify.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "spotify, spotify.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18525,7 +18525,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "springer.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "scientometrics, springer, springer.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18543,7 +18543,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "springer.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "springer, springer.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18561,7 +18561,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "springer.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "journal, springer, springer.com, supercomputing",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18579,7 +18579,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "springer.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "springer, springer.com, voluntas",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18597,7 +18597,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "springernature.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "journal, nature, peer-review, publishing, scientific-papers, springernature, springernature.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18615,7 +18615,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "springernature.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "dashboard, journal, peer-review, publishing, reviewer, scientific-papers, springernature, springernature.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18633,7 +18633,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "stackexchange.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "exchange, stack, stackexchange, stackexchange.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18651,7 +18651,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "stackoverflow.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "code, debugging, overflow, programming, stack, stack-overflow, stackoverflow, stackoverflow.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18669,7 +18669,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "stanford.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "assignments, nifty, stanford, stanford.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18687,7 +18687,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "stanford.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "cs149, fall23, gfxcourses, stanford, stanford.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18705,7 +18705,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "state.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "application, center, consular, electronic, state, state.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18723,7 +18723,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "state.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "instructions, nonimmigrant, state, state.gov, visa",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18741,7 +18741,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "steampowered.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "steam, steampowered, steampowered.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18759,7 +18759,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "stripe.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "stripe, stripe.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18777,7 +18777,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "sunnah.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "sunnah, sunnah.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18795,7 +18795,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "supercomputing.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "sc26, supercomputing, supercomputing.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18813,7 +18813,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "tandfonline.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "biomedical, engineering, research, tandfonline, tandfonline.com, technology",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18831,7 +18831,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "target.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "target, target.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18849,7 +18849,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "taxact.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "taxact, taxact.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18867,7 +18867,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "techjobsforgood.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "good, jobs, tech, techjobsforgood, techjobsforgood.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18885,7 +18885,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "texas.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "ers, texas, texas.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18903,7 +18903,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "texas.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "texas, texas.gov, trs",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18921,7 +18921,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "texaslegal.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "affordable, legal, plans, texaslegal, texaslegal.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18939,7 +18939,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "thenorthface.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "face, north, thenorthface, thenorthface.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18957,7 +18957,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "thetexastheatre.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "texas, theatre, thetexastheatre, thetexastheatre.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18975,7 +18975,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "thewilddetectives.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "detectives, thewilddetectives, thewilddetectives.com, wild",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -18993,7 +18993,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "thrushpoetryjournal.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "thrush, thrushpoetryjournal, thrushpoetryjournal.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19011,7 +19011,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "tiaa.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "tiaa, tiaa.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19029,7 +19029,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "tmc.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "artificial, associate, biomedical, bradley, center, faculty, houston, informatics, intelligence, mcwilliams, medical, msbmi, physicians, professor, school, states, tenure, tenured, texas, tmc, tmc.edu, track, united, uthealth",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19047,7 +19047,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "toms.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "toms, toms.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19065,7 +19065,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "transunion.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "trans, transunion, transunion.com, union",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19083,7 +19083,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "turkishairlines.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "airlines, turkish, turkishairlines, turkishairlines.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19101,7 +19101,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "twu.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, cim, courses, education, faculty, texas-womans-university, twu, twu.edu, university",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19119,7 +19119,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "twu.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, akef, courses, ebeid, education, faculty, islam, texas-womans-university, twu, twu.edu, university",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19137,7 +19137,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "twu.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, courses, education, enhancement, faculty, program, rep, research, texas, texas-womans-university, twu, twu.edu, university, woman",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19155,7 +19155,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "twu.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "academic, courses, education, faculty, sustainability, texas, texas-womans-university, twu, twu.edu, university, woman",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19173,7 +19173,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "uber.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "uber, uber.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19191,7 +19191,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ubisoft.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "ubisoft, ubisoft.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19209,7 +19209,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "udemy.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "udemy, udemy.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19227,7 +19227,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "uhaul.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "haul, uhaul, uhaul.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19245,7 +19245,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "un.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "development, education, sustainable, un.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19263,7 +19263,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unausa.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "chapter, dallas, una, unausa, unausa.org, usa",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19281,7 +19281,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unausa.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "involvment, political, una, unausa, unausa.org, usa",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19299,7 +19299,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unhcr.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "data, unhcr, unhcr.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19317,7 +19317,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "uni-trier.de"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, dblp, ebeid, islam, uni-trier, uni-trier.de",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19335,7 +19335,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "uniprot.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "uniprot, uniprot.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19353,7 +19353,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "united.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "airlines, united, united.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19371,7 +19371,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unitymuslims.net"
         ],
-        "ai_tags": "",
+        "ai_tags": "muslims, united, unitymuslims, unitymuslims.net",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19389,7 +19389,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unt.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "calendar, events, north, texas, university, unt, unt.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19407,7 +19407,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unt.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "parties, star, unt, unt.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19425,7 +19425,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unu.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "nations, opportunities, united, university, unu, unu.edu, volunteer",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19443,7 +19443,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "unv.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "opportunities, unv, unv.org, volunteer",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19461,7 +19461,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "upstart.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "upstart, upstart.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19479,7 +19479,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "uscis.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "uscis, uscis.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19497,7 +19497,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "usembassy.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "contact, egypt, embassy, find, how, mission, office, usembassy, usembassy.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19515,7 +19515,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "usembassy.gov"
         ],
-        "ai_tags": "",
+        "ai_tags": "egypt, embassy, usembassy, usembassy.gov",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19533,7 +19533,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "usps.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "usps, usps.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19551,7 +19551,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "ustraveldocs.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "ustraveldocs, ustraveldocs.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19569,7 +19569,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "usvisascheduling.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "application, customer, self, service, usvisascheduling, usvisascheduling.com, visa",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19587,7 +19587,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "uta.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "calendar, events, uta, uta.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19605,7 +19605,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utdallas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "applied, center, learning, machine, utdallas, utdallas.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19623,7 +19623,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utdallas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "calendar, comet, events, utdallas, utdallas.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19641,7 +19641,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utdallas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "dallas, international, office, scholars, students, utdallas, utdallas.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19659,7 +19659,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utexas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "announcements, calendar, events, texas, today, utexas, utexas.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19677,7 +19677,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utexas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "computing, school, utexas, utexas.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19695,7 +19695,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utexas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "direct, utexas, utexas.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19713,7 +19713,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utexas.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "metorship, opportunities, program, refugee, utexas, utexas.edu, volunteer",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19731,7 +19731,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utsouthwestern.edu"
         ],
-        "ai_tags": "",
+        "ai_tags": "mychart, utsouthwestern, utsouthwestern.edu",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19749,7 +19749,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utswmed.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "arab, center, medical, mustafa, southwestern, surgery, utswmed, utswmed.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19767,7 +19767,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "utswmed.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "center, clements, dallas, hospital, medical, southwestern, texas, university, utswmed, utswmed.org, william",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19785,7 +19785,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "venmo.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "venmo, venmo.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19803,7 +19803,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "vldb.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "vldb, vldb.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19821,7 +19821,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "volunteermatch.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "volunteermatch, volunteermatch.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19839,7 +19839,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wageworks.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "cobra, wageworks, wageworks.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19857,7 +19857,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "walgreens.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "walgreens, walgreens.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19875,7 +19875,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "walmart.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "walmart, walmart.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19893,7 +19893,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "watchit.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "watch, watchit, watchit.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19911,7 +19911,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wck.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "central, kitchen, wck, wck.org, world",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19929,7 +19929,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "webofscience.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "science, webofscience, webofscience.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19947,7 +19947,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wegreened.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "contact, wegreened, wegreened.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19965,7 +19965,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wenzo.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "case, management, platform, wenzo, wenzo.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -19983,7 +19983,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wes.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "wes, wes.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20001,7 +20001,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "westernunion.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "union, western, westernunion, westernunion.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20019,7 +20019,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wgbh.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "gbh, wgbh, wgbh.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20037,7 +20037,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "whatsapp.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "whatsapp, whatsapp.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20055,7 +20055,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wikipedia.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "wikipedia, wikipedia.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20073,7 +20073,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "wrapsnet.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "data, rpc, wrapsnet, wrapsnet.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20091,7 +20091,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "writersgarret.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "garret, writer, writersgarret, writersgarret.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20109,7 +20109,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "yahoo.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "akef, islam, yahoo, yahoo.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20127,7 +20127,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "yellowpages.com.eg"
         ],
-        "ai_tags": "",
+        "ai_tags": "yellowpages, yellowpages.com.eg",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20145,7 +20145,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "youtube.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "media, streaming, talks, video, youtube, youtube.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20163,7 +20163,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "zellepay.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "zelle, zellepay, zellepay.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20181,7 +20181,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "zillow.com"
         ],
-        "ai_tags": "",
+        "ai_tags": "zillow, zillow.com",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20199,7 +20199,7 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "zoom.us"
         ],
-        "ai_tags": "",
+        "ai_tags": "conference, meeting, video-call, zoom, zoom.us",
         "favicon": "",
         "pinned": false,
         "clicks": 0
@@ -20217,13 +20217,13 @@ window.__SITE_DATABASE = {
           "Bookmarks",
           "zotero.org"
         ],
-        "ai_tags": "",
+        "ai_tags": "zotero, zotero.org",
         "favicon": "",
         "pinned": false,
         "clicks": 0
       }
     ],
-    "_synced_from_sqlite": "2026-11-07T14:13:56.371824"
+    "_synced_from_sqlite": "2026-11-07T14:23:13.969857"
   },
   "portal_tasks": [
     {
