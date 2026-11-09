@@ -370,7 +370,7 @@
             const icon = btn.querySelector('i');
             if (icon) {
                 if (!exists) {
-                    icon.className = 'fas fa-bookmark text-violet-400';
+                    icon.className = 'fas fa-bookmark text-emerald-400';
                     btn.title = 'Remove from Save for Later';
                 } else {
                     icon.className = 'far fa-bookmark text-slate-400';
@@ -421,20 +421,20 @@
             const domain = bm.domain || 'web';
             const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
             return `
-            <div class="group relative bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-violet-500/50 rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shadow-sm">
+            <div class="group relative bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-500/50 rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shadow-sm">
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-2">
                         <div class="flex items-center gap-2 min-w-0">
                             <div class="w-6 h-6 rounded-lg bg-slate-900 border border-slate-700/80 flex items-center justify-center flex-shrink-0 p-1">
                                 <img src="${faviconUrl}" alt="" class="w-4 h-4 object-contain rounded" onerror="this.onerror=null;this.src='../../images/favicon.png'"/>
                             </div>
-                            <span class="text-[10px] font-mono font-medium text-violet-400 bg-violet-500/10 px-1.5 py-0.5 rounded truncate max-w-[120px]">${escapeHtml(domain)}</span>
+                            <span class="text-[10px] font-mono font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded truncate max-w-[120px]">${escapeHtml(domain)}</span>
                         </div>
                         <button onclick="toggleRemember(${bm.id})" class="text-slate-500 hover:text-rose-400 text-xs transition p-1" title="Remove from Save for Later">
                             <i class="fas fa-times"></i>
                         </button>
                     </div>
-                    <h4 class="text-xs font-semibold text-slate-200 group-hover:text-violet-300 transition line-clamp-2 cursor-pointer leading-snug"
+                    <h4 class="text-xs font-semibold text-slate-200 group-hover:text-emerald-300 transition line-clamp-2 cursor-pointer leading-snug"
                         onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
                         title="${escapeHtml(bm.name)}">
                         ${escapeHtml(bm.name)}
@@ -443,7 +443,7 @@
                 <div class="flex items-center justify-between mt-3 pt-2 border-t border-slate-700/50 text-[11px]">
                     <span class="text-[10px] text-slate-500 truncate max-w-[130px]"><i class="fas fa-folder mr-1 text-slate-600"></i>${escapeHtml(bm.subfolder || bm.category)}</span>
                     <a href="${escapeHtml(bm.url)}" target="_blank" rel="noopener noreferrer" onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
-                       class="text-violet-400 hover:text-violet-300 font-semibold flex items-center gap-1 transition">
+                       class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1 transition">
                         <span>Open</span> <i class="fas fa-external-link-alt text-[9px]"></i>
                     </a>
                 </div>
@@ -985,9 +985,9 @@
                             </span>
                             <div class="flex items-center gap-1">
                                 <button onclick="event.stopPropagation(); toggleRemember(${bm.id});" data-remember-btn="${bm.id}"
-                                    class="w-5 h-5 rounded hover:bg-slate-700/60 text-slate-400 hover:text-violet-400 flex items-center justify-center transition text-[10px]"
+                                    class="w-5 h-5 rounded hover:bg-slate-700/60 text-slate-400 hover:text-emerald-400 flex items-center justify-center transition text-[10px]"
                                     title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}">
-                                    <i class="${getRememberedIds().includes(bm.id) ? 'fas text-violet-400' : 'far'} fa-bookmark"></i>
+                                    <i class="${getRememberedIds().includes(bm.id) ? 'fas text-emerald-400' : 'far'} fa-bookmark"></i>
                                 </button>
                                 <span class="text-[9px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-1.5 py-0.5 rounded-full flex items-center gap-0.5">
                                     <i class="fas fa-fire text-amber-400 text-[8px]"></i> ${count}
@@ -1419,7 +1419,7 @@
                             <button onclick="togglePin(${bm.id})" class="text-xs ${isPinned ? 'text-amber-400 hover:text-amber-300' : 'text-slate-500 hover:text-slate-300'} transition" title="${isPinned ? 'Unpin' : 'Pin to top'}">
                                 <i class="fas fa-star"></i>
                             </button>
-                            <button onclick="toggleRemember(${bm.id})" data-remember-btn="${bm.id}" class="text-xs ${getRememberedIds().includes(bm.id) ? 'text-violet-400 hover:text-violet-300' : 'text-slate-500 hover:text-violet-400'} transition" title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}">
+                            <button onclick="toggleRemember(${bm.id})" data-remember-btn="${bm.id}" class="text-xs ${getRememberedIds().includes(bm.id) ? 'text-emerald-400 hover:text-emerald-300' : 'text-slate-500 hover:text-emerald-400'} transition" title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}">
                                 <i class="${getRememberedIds().includes(bm.id) ? 'fas' : 'far'} fa-bookmark"></i>
                             </button>
                             <button onclick="copyToClipboard('${escapeHtml(bm.url)}', this)" class="text-xs text-slate-500 hover:text-slate-300 transition" title="Copy URL">
@@ -1513,7 +1513,7 @@
                                 </button>
                                 <button onclick="toggleRemember(${bm.id})" title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}"
                                     data-remember-btn="${bm.id}"
-                                    class="text-xs transition ml-1 ${getRememberedIds().includes(bm.id) ? 'text-violet-400' : 'text-slate-600 hover:text-violet-400'}">
+                                    class="text-xs transition ml-1 ${getRememberedIds().includes(bm.id) ? 'text-emerald-400' : 'text-slate-600 hover:text-emerald-400'}">
                                     <i class="${getRememberedIds().includes(bm.id) ? 'fas' : 'far'} fa-bookmark"></i>
                                 </button>
                                 <button onclick="deleteBookmark(${bm.id})" title="Delete Bookmark"
