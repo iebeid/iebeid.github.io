@@ -390,6 +390,271 @@
     }
     window.clearAllRemembered = clearAllRemembered;
 
+    // -------------------------------------------------------------------------
+    // FLOATING TOAST NOTIFICATION UTILITY
+    // -------------------------------------------------------------------------
+    function showPortalToast(message, type = 'success') {
+        let toast = document.getElementById('portal-floating-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'portal-floating-toast';
+            document.body.appendChild(toast);
+        }
+
+        const iconClass = type === 'success' 
+            ? 'fas fa-check-circle text-emerald-400' 
+            : (type === 'info' ? 'fas fa-info-circle text-sky-400' : 'fas fa-exclamation-circle text-amber-400');
+        const borderClass = type === 'success'
+            ? 'border-emerald-500/80 shadow-emerald-950/50 text-emerald-200'
+            : (type === 'info' ? 'border-sky-500/80 shadow-sky-950/50 text-sky-200' : 'border-amber-500/80 text-amber-200');
+
+        toast.className = `fixed bottom-6 right-6 z-[99999] px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold bg-slate-900 border transition-all duration-300 transform translate-y-0 opacity-100 pointer-events-auto ${borderClass}`;
+        toast.innerHTML = `<i class="${iconClass} text-sm"></i> <span>${escapeHtml(message)}</span>`;
+
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+            if (toast) {
+                toast.className = toast.className.replace('translate-y-0 opacity-100', 'translate-y-12 opacity-0 pointer-events-none');
+            }
+        }, 3400);
+    }
+    window.showPortalToast = showPortalToast;
+
+    // -------------------------------------------------------------------------
+    // DRAG AND DROP HANDLERS FOR CHROME BOOKMARKS & PORTAL CARDS
+    // -------------------------------------------------------------------------
+    function handlePortalBookmarkDragStart(e, bmId) {
+        if (!e || !e.dataTransfer) return;
+        const allBms = getAllBookmarks();
+        const bm = allBms.find(b => b.id === Number(bmId));
+        e.dataTransfer.setData('text/x-portal-bookmark-id', String(bmId));
+        if (bm) {
+            e.dataTransfer.setData('text/plain', bm.url);
+            e.dataTransfer.setData('text/uri-list', bm.url);
+            e.dataTransfer.setData('text/html', `<a href="${escapeHtml(bm.url)}">${escapeHtml(bm.name)}</a>`);
+        }
+        e.dataTransfer.effectAllowed = 'copyMove';
+    }
+    window.handlePortalBookmarkDragStart = handlePortalBookmarkDragStart;
+
+    function parseDroppedBookmarkData(e) {
+        if (!e || !e.dataTransfer) return null;
+
+        // 1. Internal bookmark card drag
+        const internalId = e.dataTransfer.getData('text/x-portal-bookmark-id');
+        if (internalId) {
+            return { isInternal: true, id: Number(internalId) };
+        }
+
+        let url = '';
+        let title = '';
+
+        // 2. Chrome Bookmark Bar drag provides rich HTML anchor: <a href="...">Title</a>
+        const htmlData = e.dataTransfer.getData('text/html');
+        if (htmlData) {
+            try {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlData, 'text/html');
+                const aTag = doc.querySelector('a');
+                if (aTag) {
+                    url = (aTag.getAttribute('href') || aTag.href || '').trim();
+                    title = aTag.textContent ? aTag.textContent.trim() : '';
+                }
+            } catch (err) {
+                console.warn('Error parsing drop HTML:', err);
+            }
+        }
+
+        // 3. Fallback: text/uri-list (standard URI list format)
+        if (!url) {
+            const uriList = e.dataTransfer.getData('text/uri-list');
+            if (uriList) {
+                const lines = uriList.split(/\r?\n/).map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+                if (lines.length > 0) {
+                    url = lines[0];
+                }
+            }
+        }
+
+        // 4. Fallback: text/plain
+        const plainText = (e.dataTransfer.getData('text/plain') || '').trim();
+        if (!url && plainText && (plainText.startsWith('http://') || plainText.startsWith('https://') || plainText.includes('.'))) {
+            url = plainText;
+        }
+
+        // 5. Fallback: URL data type
+        if (!url) {
+            url = (e.dataTransfer.getData('URL') || '').trim();
+        }
+
+        if (!url) return null;
+
+        if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url;
+        }
+
+        let domain = 'web';
+        try {
+            domain = new URL(url).hostname.replace(/^www\./, '');
+        } catch (err) {
+            domain = url.split('/')[2] || 'web';
+        }
+
+        if (!title && plainText && plainText !== url && !plainText.startsWith('http')) {
+            title = plainText;
+        }
+
+        if (!title) {
+            try {
+                const u = new URL(url);
+                const pathSeg = u.pathname.split('/').filter(Boolean).pop();
+                if (pathSeg && pathSeg.length > 2 && !pathSeg.includes('.')) {
+                    title = decodeURIComponent(pathSeg).replace(/[-_]/g, ' ');
+                    title = title.charAt(0).toUpperCase() + title.slice(1);
+                } else {
+                    title = domain;
+                }
+            } catch (err) {
+                title = domain;
+            }
+        }
+
+        return {
+            isInternal: false,
+            url: url,
+            title: title,
+            domain: domain
+        };
+    }
+
+    function handleRememberDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const data = parseDroppedBookmarkData(e);
+        if (!data) {
+            showPortalToast('No valid link detected in dropped item.', 'warn');
+            return;
+        }
+
+        // Case A: Dragged from internal portal card
+        if (data.isInternal) {
+            const numId = Number(data.id);
+            const allBms = getAllBookmarks();
+            const bm = allBms.find(b => b.id === numId);
+            if (bm) {
+                let ids = getRememberedIds();
+                if (!ids.includes(numId)) {
+                    ids.unshift(numId);
+                    saveRememberedIds(ids);
+                    showPortalToast(`Saved "${bm.name}" to Remember & Save for Later!`, 'success');
+                } else {
+                    showPortalToast(`"${bm.name}" is already in Remember & Save for Later.`, 'info');
+                }
+                renderDashboardRemember();
+                renderAll();
+            }
+            return;
+        }
+
+        // Case B: Dragged from Chrome's Bookmark Bar or external browser tab
+        const allBms = getAllBookmarks();
+        const norm = (u) => (u || '').toLowerCase().replace(/^https?:\/\/(www\.)?/, '').replace(/\/+$/, '');
+        const targetNorm = norm(data.url);
+        const matched = allBms.find(b => norm(b.url) === targetNorm);
+
+        if (matched) {
+            // Already known in directory: pin it to Remember list
+            let ids = getRememberedIds();
+            if (!ids.includes(matched.id)) {
+                ids.unshift(matched.id);
+                saveRememberedIds(ids);
+                showPortalToast(`Saved "${matched.name}" to Remember & Save for Later!`, 'success');
+            } else {
+                showPortalToast(`"${matched.name}" is already in Remember & Save for Later.`, 'info');
+            }
+            renderDashboardRemember();
+            renderAll();
+            return;
+        }
+
+        // New Bookmark dropped from Chrome: persist into custom bookmarks & remember list
+        const newId = Date.now();
+        const category = 'Bookmarks';
+        const subfolder = 'Chrome Drops';
+        const aiTags = generateSemanticTags(data.title, data.domain, subfolder, category);
+
+        const newBm = {
+            id: newId,
+            name: data.title,
+            url: data.url,
+            category: category,
+            subfolder: subfolder,
+            path: `${category} / ${subfolder}`,
+            path_parts: [category, subfolder],
+            domain: data.domain,
+            ai_tags: aiTags,
+            isCustom: true
+        };
+
+        const custom = getCustomBookmarks();
+        custom.unshift(newBm);
+        saveCustomBookmarks(custom);
+
+        const dynamicTags = JSON.parse(localStorage.getItem('portal_ai_tags_cache') || '{}');
+        dynamicTags[newId] = aiTags;
+        localStorage.setItem('portal_ai_tags_cache', JSON.stringify(dynamicTags));
+
+        let ids = getRememberedIds();
+        ids.unshift(newId);
+        saveRememberedIds(ids);
+
+        const stats = getUsageStats();
+        stats[String(newId)] = { count: 1, lastUsed: Date.now() };
+        saveUsageStats(stats);
+
+        renderDashboardRemember();
+        renderAll();
+        showPortalToast(`Added "${newBm.name}" to Bookmarks & Saved for Later!`, 'success');
+    }
+
+    function initRememberDragAndDrop() {
+        const section = document.getElementById('dashboard-remember-section');
+        const overlay = document.getElementById('remember-drop-overlay');
+        if (!section) return;
+
+        let dragCounter = 0;
+
+        section.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            dragCounter++;
+            section.classList.add('ring-2', 'ring-emerald-500', 'border-emerald-500/80', 'bg-slate-900/95');
+            if (overlay) overlay.classList.remove('hidden');
+        });
+
+        section.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        });
+
+        section.addEventListener('dragleave', (e) => {
+            dragCounter--;
+            if (dragCounter <= 0) {
+                dragCounter = 0;
+                section.classList.remove('ring-2', 'ring-emerald-500', 'border-emerald-500/80', 'bg-slate-900/95');
+                if (overlay) overlay.classList.add('hidden');
+            }
+        });
+
+        section.addEventListener('drop', (e) => {
+            dragCounter = 0;
+            section.classList.remove('ring-2', 'ring-emerald-500', 'border-emerald-500/80', 'bg-slate-900/95');
+            if (overlay) overlay.classList.add('hidden');
+            handleRememberDrop(e);
+        });
+    }
+    window.initRememberDragAndDrop = initRememberDragAndDrop;
+
     function renderDashboardRemember() {
         const grid = document.getElementById('dashboard-remember-grid');
         const empty = document.getElementById('dashboard-remember-empty');
@@ -421,7 +686,7 @@
             const domain = bm.domain || 'web';
             const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
             return `
-            <div class="group relative bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-500/50 rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shadow-sm">
+            <div draggable="true" ondragstart="handlePortalBookmarkDragStart(event, ${bm.id})" class="group relative bg-slate-800/80 hover:bg-slate-800 border border-slate-700/80 hover:border-emerald-500/50 rounded-xl p-3 flex flex-col justify-between transition-all duration-200 shadow-sm cursor-grab active:cursor-grabbing">
                 <div>
                     <div class="flex items-center justify-between gap-2 mb-2">
                         <div class="flex items-center gap-2 min-w-0">
@@ -975,7 +1240,7 @@
             else if (rank === 3) rankBadgeClass = 'bg-amber-700/20 text-amber-400 border-amber-600/40 font-bold';
 
             return `
-                <div onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
+                <div draggable="true" ondragstart="handlePortalBookmarkDragStart(event, ${bm.id})" onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
                     class="group relative bg-slate-900/90 hover:bg-slate-800/90 border border-slate-800 hover:border-sky-500/50 rounded-xl p-3 cursor-pointer transition shadow-sm hover:shadow-md flex flex-col justify-between"
                     title="${escapeHtml(bm.name)} (${count} launches) - Click to launch">
                     <div>
@@ -2701,6 +2966,7 @@
     function renderAll() {
         renderDashboardRemember();
         renderDashboardFavorites();
+        initRememberDragAndDrop();
         renderSubfolderChips();
         renderBookmarks();
         renderInbox();
@@ -2723,6 +2989,7 @@
         initSearch();
         initAddBookmarkForm();
         initSecretDispatchForm();
+        initRememberDragAndDrop();
         if (isAuthenticated()) {
             renderAll();
         }
