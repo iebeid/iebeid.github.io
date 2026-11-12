@@ -11,7 +11,7 @@
  * - Smart frequency & usage tracking (promotes most-used links into Quick Access)
  * - Pinned favorites, search highlighting, messaging hub, scratchpad, tasks
  * - Similarity & Relevance ranking search engine
- * - Top 10 Favorites live-updating section
+ * - Top 20 Favorites live-updating section
  */
 
 (function () {
@@ -1195,7 +1195,7 @@
     }
 
     // -------------------------------------------------------------------------
-    // 7. FAVORITES (TOP 10 MOST CLICKED) & SIMILARITY / RELEVANCE RANKING ENGINE
+    // 7. FAVORITES (TOP 20 MOST CLICKED) & SIMILARITY / RELEVANCE RANKING ENGINE
     // -------------------------------------------------------------------------
     function renderDashboardFavorites() {
         const grid = document.getElementById('dashboard-favorites-grid');
@@ -1226,9 +1226,9 @@
             return a.id - b.id;
         });
 
-        const top10 = sorted.slice(0, 10);
+        const top20 = sorted.slice(0, 20);
 
-        grid.innerHTML = top10.map((bm, index) => {
+        grid.innerHTML = top20.map((bm, index) => {
             const rank = index + 1;
             const domain = bm.domain || 'web';
             const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
@@ -2944,7 +2944,7 @@
 
         if (totalBmEl) totalBmEl.textContent = allBms.length;
         if (totalClicksEl) totalClicksEl.textContent = totalClicks;
-        if (topFavEl) topFavEl.textContent = '10';
+        if (topFavEl) topFavEl.textContent = '20';
         if (unreadEl) unreadEl.textContent = `${unreadCount} New`;
         if (unreadBadge) {
             unreadBadge.textContent = unreadCount;
