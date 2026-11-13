@@ -40,17 +40,11 @@
     function getFallbackNavTree() {
         return [
             { nav_key: 'home', label: 'Home', folder: 'home', rel_path: 'pages/home/home.html', children: [] },
-            {
-                nav_key: 'relations', label: 'Relations', folder: 'relations', rel_path: 'pages/relations/relations.html',
-                children: [
-                    { label: 'Relations & Academic Network', sublabel: 'Contact Directory, Mentors, Students & Family', rel_path: 'pages/relations/relations.html', icon_class: 'fas fa-address-book', badge_text: 'Directory' }
-                ]
-            },
+            { nav_key: 'relations', label: 'Relations', folder: 'relations', rel_path: 'pages/relations/relations.html', children: [] },
             { nav_key: 'education', label: 'Education', folder: 'education', rel_path: 'pages/education/education.html', children: [] },
             {
                 nav_key: 'research', label: 'Research', folder: 'research', rel_path: 'pages/research/research.html',
                 children: [
-                    { label: 'Research Portfolio & Grants', sublabel: 'Biomedical AI, GNNs, Data Quality & VR', rel_path: 'pages/research/research.html', icon_class: 'fas fa-project-diagram', badge_text: 'Portfolio' },
                     { label: 'Data2AI4LifeSciences Lab', sublabel: 'Official TWU Research Laboratory Portal', rel_path: 'pages/research/lab.html', icon_class: 'fas fa-flask', badge_text: 'Lab Site' }
                 ]
             },

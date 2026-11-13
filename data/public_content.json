@@ -1,5 +1,5 @@
 {
-  "_generated_at": "2026-11-13T19:28:03.470331",
+  "_generated_at": "2026-11-13T19:34:34.437154",
   "_source": "data/content.db (SQLite 17-Table Unified Engine)",
   "meta": {
     "author_name": {
@@ -98,19 +98,7 @@
       "icon_class": "fas fa-handshake",
       "badge_text": "",
       "order": 2,
-      "children": [
-        {
-          "nav_key": "relations_main",
-          "parent_key": "relations",
-          "label": "Relations & Academic Network",
-          "sublabel": "Contact Directory, Mentors, Students & Family",
-          "folder": "relations",
-          "rel_path": "pages/relations/relations.html",
-          "icon_class": "fas fa-address-book",
-          "badge_text": "Directory",
-          "order": 1
-        }
-      ]
+      "children": []
     },
     {
       "nav_key": "education",
@@ -135,17 +123,6 @@
       "badge_text": "",
       "order": 4,
       "children": [
-        {
-          "nav_key": "research_main",
-          "parent_key": "research",
-          "label": "Research Portfolio & Grants",
-          "sublabel": "Biomedical AI, GNNs, Data Quality & VR",
-          "folder": "research",
-          "rel_path": "pages/research/research.html",
-          "icon_class": "fas fa-project-diagram",
-          "badge_text": "Portfolio",
-          "order": 1
-        },
         {
           "nav_key": "research_lab",
           "parent_key": "research",
@@ -20930,7 +20907,7 @@
         "description": "Verified web application and executive bookmark for 'Zotero' hosted on zotero.org. Provides direct navigation, authenticated access, digital documentation, and operational tooling."
       }
     ],
-    "_synced_from_sqlite": "2026-11-13T19:28:03.155480"
+    "_synced_from_sqlite": "2026-11-13T19:34:34.142055"
   },
   "portal_tasks": [
     {
