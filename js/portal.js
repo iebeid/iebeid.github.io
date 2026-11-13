@@ -1148,24 +1148,27 @@
         modal.classList.remove('flex');
     };
 
-    window.refreshAITags = async function() {
-        const btn = document.getElementById('ai-refresh-btn');
+    window.refreshPortal = async function() {
+        const btn = document.getElementById('portal-refresh-btn') || document.getElementById('ai-refresh-btn');
         const originalHTML = btn ? btn.innerHTML : '';
         if (btn) {
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-sky-400"></i> Updating Tags...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin text-sky-400"></i> Refreshing...';
             btn.disabled = true;
         }
 
         try {
             const allBms = getAllBookmarks();
             const dynamicTags = JSON.parse(localStorage.getItem('portal_ai_tags_cache') || '{}');
-            let updatedCount = 0;
+            let refreshedCount = 0;
 
             for (const bm of allBms) {
                 const tags = generateSemanticTags(bm.name, bm.domain, bm.subfolder, bm.category);
                 dynamicTags[bm.id] = tags;
                 bm.ai_tags = tags;
-                updatedCount++;
+                if (!bm.description) {
+                    bm.description = generateBookmarkDescription(bm.name, bm.domain, bm.subfolder, bm.category, bm.url);
+                }
+                refreshedCount++;
             }
 
             localStorage.setItem('portal_ai_tags_cache', JSON.stringify(dynamicTags));
@@ -1177,35 +1180,44 @@
                     b.ai_tags = dynamicTags[b.id];
                     customUpdated = true;
                 }
+                if (!b.description) {
+                    b.description = generateBookmarkDescription(b.name, b.domain, b.subfolder, b.category, b.url);
+                    customUpdated = true;
+                }
             });
             if (customUpdated) {
                 saveCustomBookmarks(custom);
             }
 
+            // Full UI re-render: Rankings, Favorites, Save for Later, Directory, Stats & Search
             renderAll();
             if (searchQuery && searchQuery.trim()) {
                 renderDashboardSearchResults();
             }
 
+            showPortalToast(`Refreshed ${refreshedCount} bookmarks & workspace index`);
+
             if (btn) {
-                btn.innerHTML = `<i class="fas fa-check text-emerald-400"></i> Updated ${updatedCount} Tags!`;
+                btn.innerHTML = '<i class="fas fa-check text-emerald-400"></i> Refreshed!';
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
                     btn.disabled = false;
-                }, 2500);
+                }, 2000);
             }
 
         } catch (err) {
-            console.error("Failed to update tags:", err);
+            console.error("Failed to refresh portal:", err);
             if (btn) {
-                btn.innerHTML = '<i class="fas fa-exclamation-circle text-rose-400"></i> Update Failed';
+                btn.innerHTML = '<i class="fas fa-exclamation-circle text-rose-400"></i> Refresh Failed';
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
                     btn.disabled = false;
-                }, 2500);
+                }, 2000);
             }
         }
     };
+    // Backwards compatibility alias
+    window.refreshAITags = window.refreshPortal;
 
     function initAddBookmarkForm() {
         const form = document.getElementById('add-bookmark-form');
