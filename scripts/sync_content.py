@@ -333,6 +333,22 @@ def export_public_content(conn: sqlite3.Connection):
         for r in cur.fetchall()
     }
 
+    portal_passwords = []
+    try:
+        cur.execute("SELECT id, ciphertext, nonce, salt, updated_at FROM portal_passwords ORDER BY updated_at DESC")
+        portal_passwords = [
+            {
+                "id": r[0],
+                "ciphertext": r[1],
+                "nonce": r[2],
+                "salt": r[3],
+                "updated_at": r[4],
+            }
+            for r in cur.fetchall()
+        ]
+    except sqlite3.OperationalError:
+        pass
+
     xlpm_datasets = []
     try:
         cur.execute("SELECT dataset_key, dataset_type, group_name, rel_path, file_size_bytes FROM xlpm_datasets ORDER BY dataset_key")
@@ -370,6 +386,7 @@ def export_public_content(conn: sqlite3.Connection):
         },
         "portal_messages": portal_messages,
         "portal_vault": portal_vault,
+        "portal_passwords": portal_passwords,
         "xlpm_datasets": xlpm_datasets,
     }
 
