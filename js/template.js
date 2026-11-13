@@ -39,19 +39,11 @@
 
     function getFallbackNavTree() {
         return [
-            {
-                nav_key: 'home', label: 'Home', folder: 'home', rel_path: 'pages/home/home.html',
-                children: [
-                    { label: 'Academic Homepage', sublabel: 'Biography, Research & Selected Papers', rel_path: 'pages/home/home.html', icon_class: 'fas fa-user-graduate', badge_text: 'Main' },
-                    { label: 'Executive Personal Portal', sublabel: 'Encrypted Command Center, Bookmarks & Vault', rel_path: 'pages/portal/portal.html', icon_class: 'fas fa-shield-halved', badge_text: 'Private' },
-                    { label: 'Root Entry (index.html)', sublabel: 'Canonical Root Redirect', rel_path: 'index.html', icon_class: 'fas fa-link', badge_text: 'Root' }
-                ]
-            },
+            { nav_key: 'home', label: 'Home', folder: 'home', rel_path: 'pages/home/home.html', children: [] },
             {
                 nav_key: 'relations', label: 'Relations', folder: 'relations', rel_path: 'pages/relations/relations.html',
                 children: [
-                    { label: 'Relations & Academic Network', sublabel: 'Contact Directory, Mentors, Students & Family', rel_path: 'pages/relations/relations.html', icon_class: 'fas fa-address-book', badge_text: 'Directory' },
-                    { label: 'Confidential Secure Drop-Box', sublabel: 'Zero-Trust Handshake & Direct Message Relay', rel_path: 'pages/relations/drop.html', icon_class: 'fas fa-key', badge_text: 'Encrypted' }
+                    { label: 'Relations & Academic Network', sublabel: 'Contact Directory, Mentors, Students & Family', rel_path: 'pages/relations/relations.html', icon_class: 'fas fa-address-book', badge_text: 'Directory' }
                 ]
             },
             { nav_key: 'education', label: 'Education', folder: 'education', rel_path: 'pages/education/education.html', children: [] },
@@ -59,8 +51,7 @@
                 nav_key: 'research', label: 'Research', folder: 'research', rel_path: 'pages/research/research.html',
                 children: [
                     { label: 'Research Portfolio & Grants', sublabel: 'Biomedical AI, GNNs, Data Quality & VR', rel_path: 'pages/research/research.html', icon_class: 'fas fa-project-diagram', badge_text: 'Portfolio' },
-                    { label: 'Data2AI4LifeSciences Lab', sublabel: 'Official TWU Research Laboratory Portal', rel_path: 'pages/research/lab.html', icon_class: 'fas fa-flask', badge_text: 'Lab Site' },
-                    { label: 'XLPM & VisInt-X 3D Viewer', sublabel: 'Interactive WebGL Protein Structure & Contact Map', rel_path: 'pages/research/xlpm/index.html', icon_class: 'fas fa-dna', badge_text: '3D Live App' }
+                    { label: 'Data2AI4LifeSciences Lab', sublabel: 'Official TWU Research Laboratory Portal', rel_path: 'pages/research/lab.html', icon_class: 'fas fa-flask', badge_text: 'Lab Site' }
                 ]
             },
             { nav_key: 'scholarship', label: 'Scholarship', folder: 'scholarship', rel_path: 'pages/scholarship/scholarship.html', children: [] },
@@ -69,20 +60,11 @@
             {
                 nav_key: 'business', label: 'Business', folder: 'business', rel_path: 'pages/business/business.html',
                 children: [
-                    { label: 'Unity Systems & Consulting', sublabel: 'Startup Profile, Telecom & Government Engineering', rel_path: 'pages/business/business.html', icon_class: 'fas fa-building', badge_text: 'Overview' },
                     { label: 'Unity Systems Storefront', sublabel: 'Commercial Software Catalog, SaaS & Licensing', rel_path: 'pages/business/storefront.html', icon_class: 'fas fa-store', badge_text: 'Storefront' }
                 ]
             },
             { nav_key: 'hobbies', label: 'Hobbies', folder: 'hobbies', rel_path: 'pages/hobbies/hobbies.html', children: [] },
-            {
-                nav_key: 'media', label: 'Media', folder: 'media', rel_path: 'pages/media/media.html',
-                children: [
-                    { label: 'Media & Invited Talks', sublabel: 'Seminars, Press Features, Op-Eds & Interviews', rel_path: 'pages/media/media.html', icon_class: 'fas fa-newspaper', badge_text: 'Archive' },
-                    { label: 'Faculty Presentations Portal', sublabel: 'Interactive Slide Decks Hub & Speaker Notes', rel_path: 'pages/media/talk/index.html', icon_class: 'fas fa-tv', badge_text: 'Portal' },
-                    { label: '20-Min Committee Job Talk', sublabel: 'Full Reveal.js Interactive Faculty Slide Deck', rel_path: 'pages/media/talk/talk.html', icon_class: 'fas fa-chalkboard', badge_text: '20-Min Deck' },
-                    { label: '10-Min Executive Brief', sublabel: 'Condensed Reveal.js High-Impact Research Deck', rel_path: 'pages/media/talk/summary.html', icon_class: 'fas fa-bolt', badge_text: '10-Min Brief' }
-                ]
-            },
+            { nav_key: 'media', label: 'Media', folder: 'media', rel_path: 'pages/media/media.html', children: [] },
             { nav_key: 'downloads', label: 'Downloads', folder: 'downloads', rel_path: 'pages/downloads/downloads.html', children: [] }
         ];
     }

@@ -1,5 +1,5 @@
 {
-  "_generated_at": "2026-11-13T15:02:39.757279",
+  "_generated_at": "2026-11-13T19:28:03.470331",
   "_source": "data/content.db (SQLite 17-Table Unified Engine)",
   "meta": {
     "author_name": {
@@ -86,41 +86,7 @@
       "icon_class": "fas fa-home",
       "badge_text": "",
       "order": 1,
-      "children": [
-        {
-          "nav_key": "home_main",
-          "parent_key": "home",
-          "label": "Academic Homepage",
-          "sublabel": "Biography, Research & Selected Papers",
-          "folder": "home",
-          "rel_path": "pages/home/home.html",
-          "icon_class": "fas fa-user-graduate",
-          "badge_text": "Main",
-          "order": 1
-        },
-        {
-          "nav_key": "home_portal",
-          "parent_key": "home",
-          "label": "Executive Personal Portal",
-          "sublabel": "Encrypted Command Center, Bookmarks & Vault",
-          "folder": "portal",
-          "rel_path": "pages/portal/portal.html",
-          "icon_class": "fas fa-shield-halved",
-          "badge_text": "Private",
-          "order": 2
-        },
-        {
-          "nav_key": "home_root",
-          "parent_key": "home",
-          "label": "Root Entry (index.html)",
-          "sublabel": "Canonical Root Redirect",
-          "folder": "home",
-          "rel_path": "index.html",
-          "icon_class": "fas fa-link",
-          "badge_text": "Root",
-          "order": 3
-        }
-      ]
+      "children": []
     },
     {
       "nav_key": "relations",
@@ -143,17 +109,6 @@
           "icon_class": "fas fa-address-book",
           "badge_text": "Directory",
           "order": 1
-        },
-        {
-          "nav_key": "relations_drop",
-          "parent_key": "relations",
-          "label": "Confidential Secure Drop-Box",
-          "sublabel": "Zero-Trust Handshake & Direct Message Relay",
-          "folder": "relations",
-          "rel_path": "pages/relations/drop.html",
-          "icon_class": "fas fa-key",
-          "badge_text": "Encrypted",
-          "order": 2
         }
       ]
     },
@@ -201,17 +156,6 @@
           "icon_class": "fas fa-flask",
           "badge_text": "Lab Site",
           "order": 2
-        },
-        {
-          "nav_key": "research_xlpm",
-          "parent_key": "research",
-          "label": "XLPM & VisInt-X 3D Viewer",
-          "sublabel": "Interactive WebGL Protein Structure & Contact Map",
-          "folder": "research",
-          "rel_path": "pages/research/xlpm/index.html",
-          "icon_class": "fas fa-dna",
-          "badge_text": "3D Live App",
-          "order": 3
         }
       ]
     },
@@ -263,17 +207,6 @@
       "order": 8,
       "children": [
         {
-          "nav_key": "business_main",
-          "parent_key": "business",
-          "label": "Unity Systems & Consulting",
-          "sublabel": "Startup Profile, Telecom & Government Engineering",
-          "folder": "business",
-          "rel_path": "pages/business/business.html",
-          "icon_class": "fas fa-building",
-          "badge_text": "Overview",
-          "order": 1
-        },
-        {
           "nav_key": "business_storefront",
           "parent_key": "business",
           "label": "Unity Systems Storefront",
@@ -308,63 +241,7 @@
       "icon_class": "fas fa-broadcast-tower",
       "badge_text": "",
       "order": 10,
-      "children": [
-        {
-          "nav_key": "media_main",
-          "parent_key": "media",
-          "label": "Media & Invited Talks",
-          "sublabel": "Seminars, Press Features, Op-Eds & Interviews",
-          "folder": "media",
-          "rel_path": "pages/media/media.html",
-          "icon_class": "fas fa-newspaper",
-          "badge_text": "Archive",
-          "order": 1
-        },
-        {
-          "nav_key": "media_talk_hub",
-          "parent_key": "media",
-          "label": "Faculty Presentations Portal",
-          "sublabel": "Interactive Slide Decks Hub & Speaker Notes",
-          "folder": "media",
-          "rel_path": "pages/media/talk/index.html",
-          "icon_class": "fas fa-tv",
-          "badge_text": "Portal",
-          "order": 2
-        },
-        {
-          "nav_key": "media_talk_deck",
-          "parent_key": "media",
-          "label": "20-Min Committee Job Talk",
-          "sublabel": "Full Reveal.js Interactive Faculty Slide Deck",
-          "folder": "media",
-          "rel_path": "pages/media/talk/talk.html",
-          "icon_class": "fas fa-chalkboard",
-          "badge_text": "20-Min Deck",
-          "order": 3
-        },
-        {
-          "nav_key": "media_talk_summary",
-          "parent_key": "media",
-          "label": "10-Min Executive Brief",
-          "sublabel": "Condensed Reveal.js High-Impact Research Deck",
-          "folder": "media",
-          "rel_path": "pages/media/talk/summary.html",
-          "icon_class": "fas fa-bolt",
-          "badge_text": "10-Min Brief",
-          "order": 4
-        },
-        {
-          "nav_key": "sub_talk_notes",
-          "parent_key": "media",
-          "label": "Speaker Notes Console",
-          "sublabel": "Reveal.js Presenter View & Timer",
-          "folder": "media",
-          "rel_path": "pages/media/talk/notes.html",
-          "icon_class": "fas fa-sticky-note",
-          "badge_text": "Notes",
-          "order": 4
-        }
-      ]
+      "children": []
     },
     {
       "nav_key": "downloads",
@@ -21053,7 +20930,7 @@
         "description": "Verified web application and executive bookmark for 'Zotero' hosted on zotero.org. Provides direct navigation, authenticated access, digital documentation, and operational tooling."
       }
     ],
-    "_synced_from_sqlite": "2026-11-13T15:02:39.529145"
+    "_synced_from_sqlite": "2026-11-13T19:28:03.155480"
   },
   "portal_tasks": [
     {
