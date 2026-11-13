@@ -389,7 +389,7 @@ def export_public_content(conn: sqlite3.Connection):
 def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
     """Sync portal_bookmarks table to pages/portal/bookmarks.json and bookmarks_data.js."""
     cur = conn.cursor()
-    for col_name, col_type in [("domain", "TEXT"), ("path", "TEXT"), ("ai_tags", "TEXT")]:
+    for col_name, col_type in [("domain", "TEXT"), ("path", "TEXT"), ("ai_tags", "TEXT"), ("description", "TEXT")]:
         try:
             cur.execute(f"ALTER TABLE portal_bookmarks ADD COLUMN {col_name} {col_type}")
         except sqlite3.OperationalError:
@@ -441,7 +441,7 @@ def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
             print("[OK] Hydrated all 415 portal bookmarks (domains, paths & AI tags) into SQLite.")
 
     cur.execute("""
-        SELECT chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count
+        SELECT chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count, description
         FROM portal_bookmarks
         ORDER BY category, subfolder, title
     """)
@@ -485,6 +485,7 @@ def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
             "favicon": r[8] or "",
             "pinned": bool(r[9]),
             "clicks": r[10] or 0,
+            "description": r[11] or "",
         }
         bookmarks_list.append(bm_entry)
         folders_tree.setdefault(cat, {}).setdefault(sub or "General", []).append(bm_entry)
