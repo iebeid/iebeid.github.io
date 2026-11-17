@@ -1,0 +1,1045 @@
+:root {
+            --bg-main: #ffffff;
+            --bg-surface: #ffffff;
+            --bg-card: #ffffff;
+            --bg-code: #ffffff;
+            --border-color: #4b5563;
+            --border-highlight: #4b5563;
+            --text-main: #4b5563;
+            --text-muted: #6b7280;
+            --accent-cyan: #1e3a8a;
+            --brand-primary: #1e3a8a;
+            --brand-hover: #172554;
+            --accent-green: #047857;
+            --accent-amber: #b45309;
+            --accent-rose: #b91c1c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            padding-bottom: 4rem;
+            overflow-x: hidden;
+        }
+
+        /* Top Portfolio Return Banner */
+        .top-bar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.55rem 1.5rem;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+
+        .top-bar-inner {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .top-bar a {
+            color: var(--brand-primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .top-bar a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(4, 120, 87, 0.08);
+            color: var(--accent-green);
+            border: 1px solid rgba(4, 120, 87, 0.3);
+            padding: 0.15rem 0.65rem;
+            border-radius: 999px;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.72rem;
+        }
+
+        /* Sticky Main Header */
+        header {
+            border-bottom: 1px solid var(--border-color);
+            background-color: #ffffff;
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1360px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.1rem 2rem;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #4b5563;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 2px solid #4b5563;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            box-shadow: none;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .brand-title {
+            font-size: 1.28rem;
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            flex-wrap: nowrap;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .brand-title span.accent {
+            color: #1e3a8a;
+        }
+
+        .brand-divider {
+            color: #334155;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        .brand-arabic {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4b5563;
+            letter-spacing: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        
+
+        .region-tag {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--brand-primary);
+            background: rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(15, 23, 42, 0.28);
+            padding: 0.1rem 0.45rem;
+            border-radius: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        .brand-subtitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.58rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .nav-links a.github-link {
+            background-color: #ffffff;
+            color: #4b5563;
+            padding: 0.45rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            border: 1px solid #4b5563;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a.github-link:hover {
+            background-color: #f9fafb;
+            border-color: #1e3a8a;
+            color: #1e3a8a;
+        }
+
+        main {
+            max-width: 1360px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4.5rem 0 3rem;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3rem;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(15, 23, 42, 0.3);
+            color: var(--brand-primary);
+            font-family: monospace;
+            font-size: 0.78rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 {
+            font-size: 2.85rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: #4b5563;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #1e3a8a, #0f172a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.12rem;
+            margin-bottom: 2rem;
+            max-width: 650px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn-primary {
+            background-color: #ffffff;
+            border: 1px solid #4b5563;
+            color: #4b5563;
+            padding: 0.8rem 1.65rem;
+            border-radius: 6px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #f9fafb;
+            border-color: #1f2937;
+            color: #1f2937;
+            transform: translateY(-1px);
+        }
+
+        .install-cmd {
+            background-color: var(--bg-code);
+            border: 1px solid var(--border-highlight);
+            padding: 0.72rem 1.2rem;
+            border-radius: 6px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.88rem;
+            color: var(--accent-green);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .install-cmd:hover {
+            border-color: var(--brand-primary);
+        }
+
+        .install-cmd::before {
+            content: "$";
+            color: var(--text-muted);
+        }
+
+        /* Flagship Terminal Window in Hero */
+        .code-window {
+            background-color: var(--bg-code);
+            border: 1px solid var(--border-highlight);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-family: monospace;
+        }
+
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .code-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background-color: #334155;
+        }
+
+        .code-dot.red { background-color: #ef4444; }
+        .code-dot.amber { background-color: #b45309; }
+        .code-dot.green { background-color: #10b981; }
+
+        .code-window pre {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.85rem;
+            color: #1f2937;
+            overflow-x: auto;
+            line-height: 1.65;
+        }
+
+        .keyword { color: #b91c1c; }
+        .comment { color: #64748b; font-style: italic; }
+        .string { color: #047857; }
+        .function { color: #1e40af; }
+        .type { color: #1e3a8a; }
+
+        /* Lifecycle Pillars Overview */
+        .model-section {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-heading {
+            margin-bottom: 2rem;
+        }
+
+        .section-heading h2 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #4b5563;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-heading p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 780px;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .pillar-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .pillar-card .pillar-step {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: var(--accent-amber);
+            background: rgba(180, 83, 9, 0.08);
+            border: 1px solid rgba(180, 83, 9, 0.3);
+            padding: 0.15rem 0.55rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 0.75rem;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.15rem;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .pillar-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        /* Catalog Section */
+        .catalog-section {
+            padding: 3.5rem 0;
+        }
+
+        .matrix-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.25rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-muted);
+            padding: 0.55rem 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: #1e3a8a;
+            color: #1e3a8a;
+            background-color: #f9fafb;
+            font-weight: 700;
+        }
+
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(390px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .product-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-highlight);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            border-color: var(--brand-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            background-color: #f9fafb;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tech-tag {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.72rem;
+            padding: 0.15rem 0.55rem;
+            border-radius: 4px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .tech-tag.lifecycle {
+            color: var(--accent-amber);
+            border-color: rgba(180, 83, 9, 0.35);
+        }
+
+        .tech-tag.stack {
+            color: var(--accent-cyan);
+            border-color: rgba(30, 58, 138, 0.35);
+        }
+
+        .product-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            color: #4b5563;
+        }
+
+        .product-card .description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            min-height: 4.2rem;
+        }
+
+        .snippet-container {
+            background-color: var(--bg-code);
+            padding: 1.1rem 1.25rem;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.78rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .snippet-container pre {
+            color: #1f2937;
+            white-space: pre;
+            line-height: 1.55;
+        }
+
+        .card-footer {
+            padding: 1.35rem 1.5rem;
+            margin-top: auto;
+            background-color: #f9fafb;
+        }
+
+        .licensing-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.15rem;
+            gap: 1rem;
+        }
+
+        .license-type {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .license-type strong {
+            color: var(--text-main);
+            font-family: monospace;
+        }
+
+        .price-tag {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            font-family: monospace;
+            white-space: nowrap;
+        }
+
+        .price-tag span {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .action-row {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.65rem 0.75rem;
+            border-radius: 5px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .btn-oss {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+            color: var(--text-main);
+        }
+
+        .btn-oss:hover {
+            background-color: #f9fafb;
+            border-color: #1f2937;
+            color: #1f2937;
+        }
+
+        .btn-commercial {
+            background-color: #ffffff;
+            border: 1px solid #4b5563;
+            color: #1e3a8a;
+            font-weight: 700;
+        }
+
+        .btn-commercial:hover {
+            background-color: #f9fafb;
+            border-color: #1e3a8a;
+            color: #1e3a8a;
+        }
+
+        /* Fair-Code Dual-Licensing Comparison Section */
+        .licensing-section {
+            padding: 4rem 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header-center {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header-center h2 {
+            font-size: 2.15rem;
+            font-weight: 800;
+            color: #4b5563;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header-center p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .license-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+        }
+
+        .license-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-highlight);
+            border-radius: 12px;
+            padding: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .license-card.highlight {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 25px rgba(15, 23, 42, 0.14);
+        }
+
+        .badge {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background-color: rgba(15, 23, 42, 0.12);
+            color: var(--brand-primary);
+            border: 1px solid rgba(15, 23, 42, 0.3);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.65rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .license-card h3 {
+            font-size: 1.35rem;
+            color: #4b5563;
+            margin-bottom: 0.35rem;
+        }
+
+        .price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #4b5563;
+            margin: 0.85rem 0;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            font-family: monospace;
+        }
+
+        .price sub {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .license-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .license-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .license-features li {
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #1f2937;
+        }
+
+        .icon-check { color: var(--accent-green); font-weight: bold; }
+        .icon-cross { color: var(--accent-rose); font-weight: bold; }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border-color);
+            max-width: 920px;
+            margin: 0 auto;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.75rem;
+        }
+
+        .faq-item {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .faq-item h4 {
+            font-size: 1.02rem;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* License Request Modal */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 10, 16, 0.82);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-backdrop.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--brand-primary);
+            border-radius: 12px;
+            max-width: 540px;
+            width: 100%;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            color: #4b5563;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+            font-family: monospace;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: var(--bg-code);
+            border: 1px solid var(--border-highlight);
+            color: #4b5563;
+            padding: 0.65rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            max-width: 1360px;
+            margin: 3rem auto 0;
+            padding: 2.5rem 2rem 0;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0.75rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--brand-primary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 0 2.5rem;
+            }
+            .pillars-grid,
+            .license-grid,
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .solution-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.1rem;
+            }
+        }
+
+        /* ==========================================================================
+           CANONICAL TRADEMARK LOGO SPECIFICATION - UNITY SYSTEMS / الوحدة للأنظمة
+           Isolated, self-contained design block for corporate registration & trademarking
+           ========================================================================== */
+        .unity-systems-trademark-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            background: #ffffff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .unity-systems-trademark-brand .brand-icon {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            min-height: 40px;
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            background: #ffffff;
+            border: 2px solid #4b5563;
+            color: #1e3a8a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            box-shadow: none;
+            box-sizing: border-box;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+
+        .unity-systems-trademark-brand .brand-content {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .unity-systems-trademark-brand .brand-text-column {
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+        }
+
+        .unity-systems-trademark-brand .brand-title {
+            font-size: 1.28rem;
+            line-height: 1.15;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            flex-wrap: nowrap;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .unity-systems-trademark-brand .brand-title .word-unity {
+            color: #4b5563;
+        }
+
+        .unity-systems-trademark-brand .brand-title .word-systems {
+            color: #1e3a8a;
+        }
+
+        .unity-systems-trademark-brand .brand-divider {
+            color: #4b5563;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        .unity-systems-trademark-brand .brand-arabic {
+            font-family: 'Cairo', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #4b5563;
+            letter-spacing: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .unity-systems-trademark-brand .brand-arabic .arabic-systems {
+            color: #1e3a8a;
+        }
+
+        .unity-systems-trademark-brand .region-tag {
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1e3a8a;
+            background: rgba(30, 58, 138, 0.08);
+            border: 1px solid rgba(30, 58, 138, 0.25);
+            padding: 0.12rem 0.45rem;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+        }
+
+        .unity-systems-trademark-brand .brand-subtitle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.58rem;
+            font-family: 'Linux Libertine', 'Linux Libertine O', Georgia, 'Times New Roman', Times, serif;
+            font-weight: 700;
+            color: #6b7280;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+/* Unified Trademark Arabic Logo Colors */
+        .unity-systems-trademark-brand .brand-arabic .arabic-unity,
+        .brand-arabic .arabic-unity {
+            color: #4b5563 !important;
+        }
+
+        .unity-systems-trademark-brand .brand-arabic .arabic-systems,
+        .brand-arabic .arabic-systems {
+            color: #1e3a8a !important;
+        }
