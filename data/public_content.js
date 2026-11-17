@@ -1,5 +1,5 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-16T20:19:32.246053",
+  "_generated_at": "2026-11-17T09:06:56.102015",
   "_source": "data/content.db (SQLite 17-Table Unified Engine)",
   "meta": {
     "author_name": {
@@ -241,7 +241,7 @@ window.__SITE_DATABASE = {
     },
     "global_footer": {
       "category": "footer",
-      "html": "<div class=\"container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm\">\n    <p>&copy; <span id=\"year\">{{YEAR}}</span> Islam Akef Ebeid. All Rights Reserved. <span class=\"mx-2 text-gray-500\">&bull;</span> <a href=\"{{SITEMAP_HREF}}\" target=\"_blank\" class=\"text-gray-400 hover:text-sky-400 transition underline underline-offset-2\">Sitemap</a> <span class=\"mx-2 text-gray-500\">&bull;</span> <a href=\"{{PORTAL_HREF}}\" class=\"text-gray-400 hover:text-sky-400 transition underline underline-offset-2\" title=\"Private Executive Portal\"><i class=\"fas fa-lock text-[10px] mr-0.5\"></i> Portal</a></p>\n</div>",
+      "html": "<div class=\"container mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm\">\n    <p>&copy; <span id=\"year\">{{YEAR}}</span> Islam Akef Ebeid. All Rights Reserved. <span class=\"mx-2 text-gray-500\">&bull;</span> <a href=\"{{SITEMAP_HREF}}\" target=\"_blank\" class=\"text-gray-400 hover:text-sky-400 transition underline underline-offset-2\">Sitemap</a></p>\n</div>",
       "description": "Global academic website footer with Sitemap and Portal links"
     },
     "subpage_global_bar": {
@@ -523,7 +523,7 @@ window.__SITE_DATABASE = {
       "is_public": true,
       "html_classes": "",
       "body_classes": "",
-      "head_html": "<script type=\"application/ld+json\">\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"WebSite\",\n      \"name\": \"Islam Akef Ebeid\",\n      \"url\": \"https://iebeid.github.io/\",\n      \"author\": {\n        \"@type\": \"Person\",\n        \"name\": \"Islam Akef Ebeid\",\n        \"url\": \"https://iebeid.github.io/\"\n      }\n    }\n    </script>",
+      "head_html": "<link rel=\"canonical\" href=\"https://iebeid.github.io/pages/home/home.html\" />\n    <script type=\"application/ld+json\">\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"WebSite\",\n      \"name\": \"Islam Akef Ebeid\",\n      \"url\": \"https://iebeid.github.io/\",\n      \"author\": {\n        \"@type\": \"Person\",\n        \"name\": \"Islam Akef Ebeid\",\n        \"url\": \"https://iebeid.github.io/\"\n      }\n    }\n    </script>",
       "body_template_html": "<div data-db-section=\"index.redirect_notice\"></div>",
       "inline_scripts": "window.location.replace(\"pages/home/home.html\");",
       "use_global_chrome": false,
@@ -548,7 +548,7 @@ window.__SITE_DATABASE = {
       "is_public": true,
       "html_classes": "scroll-smooth",
       "body_classes": "antialiased overflow-x-hidden",
-      "head_html": "<script type=\"application/ld+json\">\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"ProfilePage\",\n      \"mainEntity\": {\n        \"@type\": \"Person\",\n        \"name\": \"Islam Akef Ebeid\",\n        \"alternateName\": [\n          \"Dr. Islam Akef Ebeid\",\n          \"Islam Ebeid\",\n          \"Ø¥Ø³Ù„Ø§Ù… Ø¹Ø§Ø·Ù Ø¹Ø¨ÙŠØ¯\"\n        ],\n        \"jobTitle\": \"Assistant Professor of Computer Science\",\n        \"description\": \"Assistant Professor of Computer Science and AI in Life Sciences researcher specializing in Graph Neural Networks, Neurosymbolic AI, and Biomedical Information Retrieval.\",\n        \"url\": \"https://iebeid.github.io/\",\n        \"image\": \"https://iebeid.github.io/images/image1.jpg\",\n        \"sameAs\": [\n          \"https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en\",\n          \"https://www.researchgate.net/profile/Islam-Ebeid\",\n          \"https://dblp.org/pid/182/4444.html\",\n          \"https://github.com/iebeid\",\n          \"https://linkedin.com/in/iebeid\",\n          \"https://web.facebook.com/iaebeid\"\n        ],\n        \"affiliation\": [\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"Texas Woman's University\"\n          }\n        ],\n        \"alumniOf\": [\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"University of Arkansas at Little Rock\"\n          },\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"The University of Texas at Austin\"\n          },\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"Arkansas Tech University\"\n          }\n        ],\n        \"knowsAbout\": [\n          \"Artificial Intelligence\",\n          \"Graph Neural Networks\",\n          \"Neurosymbolic AI\",\n          \"Bioinformatics\",\n          \"Computational Biology\",\n          \"Biomedical Information Retrieval\",\n          \"Machine Learning\",\n          \"Proteomics\"\n        ]\n      }\n    }\n    </script>",
+      "head_html": "<link rel=\"canonical\" href=\"https://iebeid.github.io/pages/home/home.html\" />\n    <script type=\"application/ld+json\">\n    {\n      \"@context\": \"https://schema.org\",\n      \"@type\": \"ProfilePage\",\n      \"mainEntity\": {\n        \"@type\": \"Person\",\n        \"name\": \"Islam Akef Ebeid\",\n        \"alternateName\": [\n          \"Dr. Islam Akef Ebeid\",\n          \"Islam Ebeid\",\n          \"Ø¥Ø³Ù„Ø§Ù… Ø¹Ø§Ø·Ù Ø¹Ø¨ÙŠØ¯\"\n        ],\n        \"jobTitle\": \"Assistant Professor of Computer Science\",\n        \"description\": \"Assistant Professor of Computer Science and AI in Life Sciences researcher specializing in Graph Neural Networks, Neurosymbolic AI, and Biomedical Information Retrieval.\",\n        \"url\": \"https://iebeid.github.io/\",\n        \"image\": \"https://iebeid.github.io/images/image1.jpg\",\n        \"sameAs\": [\n          \"https://scholar.google.com/citations?user=Qwm3Py8AAAAJ&hl=en\",\n          \"https://www.researchgate.net/profile/Islam-Ebeid\",\n          \"https://dblp.org/pid/182/4444.html\",\n          \"https://github.com/iebeid\",\n          \"https://linkedin.com/in/iebeid\",\n          \"https://web.facebook.com/iaebeid\"\n        ],\n        \"affiliation\": [\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"Texas Woman's University\"\n          }\n        ],\n        \"alumniOf\": [\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"University of Arkansas at Little Rock\"\n          },\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"The University of Texas at Austin\"\n          },\n          {\n            \"@type\": \"CollegeOrUniversity\",\n            \"name\": \"Arkansas Tech University\"\n          }\n        ],\n        \"knowsAbout\": [\n          \"Artificial Intelligence\",\n          \"Graph Neural Networks\",\n          \"Neurosymbolic AI\",\n          \"Bioinformatics\",\n          \"Computational Biology\",\n          \"Biomedical Information Retrieval\",\n          \"Machine Learning\",\n          \"Proteomics\"\n        ]\n      }\n    }\n    </script>",
       "body_template_html": "<header id=\"navbar\"></header>\n<main id=\"main-content\">\n\n<div data-db-section=\"home.home\"></div>\n<div data-db-section=\"home.about\"></div>\n<div data-db-section=\"home.current-research\"></div>\n<div data-db-section=\"home.experience\"></div>\n<div data-db-section=\"home.publications\"></div>\n</main>\n<footer id=\"footer\"></footer>",
       "inline_scripts": "",
       "use_global_chrome": true,
@@ -1312,8 +1312,8 @@ window.__SITE_DATABASE = {
           "section_key": "footer",
           "heading": "Encrypted Dead-Drop Footer",
           "subheading": null,
-          "content_html": "<footer class=\"border-t border-slate-900 py-6 text-center text-xs text-slate-500\">\n    <div class=\"max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2\">\n        <span>&copy; 2026 Dr. Islam Akef Ebeid • Zero-Trust Dead-Drop Protocol</span>\n        <a href=\"../portal/portal.html\" class=\"text-slate-400 hover:text-sky-400 transition\">\n            <i class=\"fas fa-shield-halved mr-1\"></i> Executive Portal Login\n        </a>\n    </div>\n</footer>",
-          "content_text": "© 2026 Dr. Islam Akef Ebeid • Zero-Trust Dead-Drop Protocol Executive Portal Login",
+          "content_html": "<footer class=\"border-t border-slate-900 py-6 text-center text-xs text-slate-500\">\n    <div class=\"max-w-4xl mx-auto px-4 flex items-center justify-center\">\n        <span>&copy; 2026 Dr. Islam Akef Ebeid • Zero-Trust Dead-Drop Protocol</span>\n    </div>\n</footer>",
+          "content_text": "© 2026 Dr. Islam Akef Ebeid • Zero-Trust Dead-Drop Protocol",
           "order": 5
         }
       ]
@@ -20907,7 +20907,7 @@ window.__SITE_DATABASE = {
         "description": "Verified web application and executive bookmark for 'Zotero' hosted on zotero.org. Provides direct navigation, authenticated access, digital documentation, and operational tooling."
       }
     ],
-    "_synced_from_sqlite": "2026-11-16T20:19:32.068072"
+    "_synced_from_sqlite": "2026-11-17T09:06:55.842703"
   },
   "portal_tasks": [
     {
