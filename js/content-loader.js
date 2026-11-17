@@ -181,14 +181,14 @@
         const coursesContainer = document.querySelector('[data-db-container="courses"]');
         if (coursesContainer && db.courses) {
             coursesContainer.innerHTML = db.courses.map(c => `
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-indigo-600 hover:shadow-lg transition">
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-sky-600 hover:shadow-lg transition">
                     <div class="flex items-center justify-between gap-2 mb-2">
-                        <span class="text-xs font-mono font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded border border-indigo-200">${c.code}</span>
+                        <span class="text-xs font-mono font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded border border-sky-200">${c.code}</span>
                         <span class="text-xs text-gray-500 font-medium">${c.institution}</span>
                     </div>
                     <h3 class="text-lg font-bold text-gray-900 mb-2">${c.title}</h3>
                     <p class="text-sm text-gray-600 mb-4">${c.description}</p>
-                    ${c.syllabus_path ? `<a href="${ROOT_PREFIX}${c.syllabus_path}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 hover:text-indigo-800"><i class="fas fa-file-pdf"></i> Download Official Syllabus</a>` : ''}
+                    ${c.syllabus_path ? `<a href="${ROOT_PREFIX}${c.syllabus_path}" target="_blank" class="inline-flex items-center gap-1.5 text-xs font-semibold text-sky-600 hover:text-sky-800"><i class="fas fa-file-pdf"></i> Download Official Syllabus</a>` : ''}
                 </div>
             `).join('');
         }
