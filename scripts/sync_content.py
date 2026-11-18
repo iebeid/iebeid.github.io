@@ -366,9 +366,99 @@ def export_public_content(conn: sqlite3.Connection):
     except sqlite3.OperationalError:
         pass
 
+    # Normalized Master Project Backbone (Phase 2 Export)
+    projects_payload = []
+    try:
+        cur.execute("""
+            SELECT id, slug, title, tagline, short_summary, full_description,
+                   category, domain_stage, status, year_start, year_end,
+                   institution_or_org, grant_award, tech_stack, code_snippet,
+                   license_model, price_display, storefront_category,
+                   is_featured, is_storefront, display_order
+            FROM projects
+            WHERE is_public = 1
+            ORDER BY display_order, id
+        """)
+        for pr in cur.fetchall():
+            pid = pr[0]
+            try:
+                tech_list = json.loads(pr[13]) if pr[13] else []
+            except Exception:
+                tech_list = [t.strip() for t in (pr[13] or "").split(",") if t.strip()]
+
+            cur.execute("""
+                SELECT artifact_type, label, url_or_rel_path, format_badge, document_id
+                FROM project_artifacts
+                WHERE project_id = ?
+                ORDER BY display_order, id
+            """, (pid,))
+            artifacts = [
+                {
+                    "type": ar[0],
+                    "label": ar[1],
+                    "url": ar[2],
+                    "badge": ar[3] or "",
+                    "document_id": ar[4],
+                }
+                for ar in cur.fetchall()
+            ]
+
+            cur.execute("SELECT tag FROM project_tags WHERE project_id = ? ORDER BY tag", (pid,))
+            tags = [tr[0] for tr in cur.fetchall()]
+
+            cur.execute("""
+                SELECT pub.id, pub.title, pub.authors, pub.venue, pub.year, pub.doi, pub.url, pub.pdf_path
+                FROM publications pub
+                JOIN project_publications pp ON pub.id = pp.publication_id
+                WHERE pp.project_id = ?
+                ORDER BY pub.year DESC, pub.id
+            """, (pid,))
+            linked_pubs = [
+                {
+                    "id": pbr[0],
+                    "title": pbr[1],
+                    "authors": pbr[2],
+                    "venue": pbr[3],
+                    "year": pbr[4],
+                    "doi": pbr[5] or "",
+                    "url": pbr[6] or "",
+                    "pdf_path": pbr[7] or "",
+                }
+                for pbr in cur.fetchall()
+            ]
+
+            projects_payload.append({
+                "id": pid,
+                "slug": pr[1],
+                "title": pr[2],
+                "tagline": pr[3] or "",
+                "short_summary": pr[4] or "",
+                "full_description": pr[5] or "",
+                "category": pr[6],
+                "domain_stage": pr[7] or "foundational",
+                "status": pr[8] or "",
+                "year_start": pr[9],
+                "year_end": pr[10],
+                "institution_or_org": pr[11] or "",
+                "grant_award": pr[12] or "",
+                "tech_stack": tech_list,
+                "code_snippet": pr[14] or "",
+                "license_model": pr[15] or "",
+                "price_display": pr[16] or "",
+                "storefront_category": pr[17] or "",
+                "is_featured": bool(pr[18]),
+                "is_storefront": bool(pr[19]),
+                "display_order": pr[20] or 0,
+                "artifacts": artifacts,
+                "tags": tags,
+                "publications": linked_pubs,
+            })
+    except sqlite3.OperationalError:
+        pass
+
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
-        "_source": "data/content.db (SQLite 18-Table Unified Engine - Public Slice)",
+        "_source": "data/content.db (SQLite Normalized Project Backbone Engine)",
         "meta": meta,
         "navigation_menu": top_nav,
         "html_templates": html_templates,
@@ -377,6 +467,7 @@ def export_public_content(conn: sqlite3.Connection):
         "documents": documents,
         "images": images,
         "publications": publications,
+        "projects": projects_payload,
         "courses": courses,
         "contacts": contacts,
         "xlpm_datasets": xlpm_datasets,

@@ -17736,6 +17736,6 @@ window.PORTAL_BOOKMARKS = {
       "description": "Verified web application and executive bookmark for 'Zotero' hosted on zotero.org. Provides direct navigation, authenticated access, digital documentation, and operational tooling."
     }
   ],
-  "_synced_from_sqlite": "2026-11-18T17:41:45.271680"
+  "_synced_from_sqlite": "2026-11-18T19:39:12.105987"
 };
 window.PORTAL_BOOKMARKS_DATA = window.PORTAL_BOOKMARKS;

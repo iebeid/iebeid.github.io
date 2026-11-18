@@ -84,13 +84,33 @@ def main():
 
         print(f"  * {rel_path}: shell={has_shell_attr} | db_js={has_db_js} | loader={has_loader_js} | [{status}]")
 
-    # 4. Check JSON export artifact
+    # 4. Check Normalized Projects Backbone & Local Artifact Paths
+    try:
+        proj_count = cur.execute("SELECT COUNT(*) FROM projects").fetchone()[0]
+        art_rows = cur.execute("SELECT id, label, url_or_rel_path FROM project_artifacts").fetchall()
+        missing_arts = []
+        for aid, alabel, apath in art_rows:
+            if apath.startswith(("http://", "https://", "pip ", "mailto:")):
+                continue
+            if not (REPO_ROOT / apath).exists():
+                missing_arts.append((aid, alabel, apath))
+        if missing_arts:
+            print(f"[ERROR] {len(missing_arts)} broken local project_artifacts paths:")
+            for aid, alabel, apath in missing_arts:
+                print(f"   Artifact #{aid} ({alabel}): {apath}")
+            return 1
+        print(f"[OK] Project backbone verified: {proj_count} canonical projects, {len(art_rows)} verified artifacts.")
+    except sqlite3.OperationalError:
+        pass
+
+    # 5. Check JSON export artifact
     if JSON_PATH.exists():
         with open(JSON_PATH, "r", encoding="utf-8") as f:
             public_data = json.load(f)
         total_public_pages = len(public_data.get("pages", []))
         total_public_styles = len(public_data.get("stylesheets", {}))
-        print(f"\n[OK] Public JSON artifact verified: {total_public_pages} pages, {total_public_styles} stylesheets.")
+        total_public_projects = len(public_data.get("projects", []))
+        print(f"\n[OK] Public JSON artifact verified: {total_public_pages} pages, {total_public_styles} stylesheets, {total_public_projects} projects.")
     else:
         print(f"\n[WARN] Public JSON bundle not found at {JSON_PATH}. Run sync_content.py to generate.")
 

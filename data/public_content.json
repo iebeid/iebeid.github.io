@@ -1,6 +1,6 @@
 {
-  "_generated_at": "2026-11-18T17:41:45.481539",
-  "_source": "data/content.db (SQLite 18-Table Unified Engine - Public Slice)",
+  "_generated_at": "2026-11-18T19:39:12.310773",
+  "_source": "data/content.db (SQLite Normalized Project Backbone Engine)",
   "meta": {
     "author_name": {
       "value": "Islam Akef Ebeid, Ph.D.",
@@ -573,7 +573,7 @@
           "section_key": "current-research",
           "heading": "Current Research",
           "subheading": null,
-          "content_html": "<section class=\"py-16 bg-white border-y border-gray-100\" id=\"current-research\">\n<div class=\"container mx-auto px-4 sm:px-6 lg:px-8\">\n<div class=\"max-w-4xl mx-auto\">\n<div class=\"flex items-center gap-3 mb-8\">\n<div class=\"w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600\">\n<i class=\"fas fa-flask text-lg\"></i>\n</div>\n<h2 class=\"text-2xl font-bold text-gray-900\">Current Research</h2>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- Project 1: ProtGram-DirectGCN -->\n<div class=\"bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center gap-3 mb-3\">\n<div class=\"w-10 h-10 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center\">\n<i class=\"fas fa-project-diagram\"></i>\n</div>\n<div>\n<span class=\"tag\">Proteomics &amp; GCN</span>\n<h3 class=\"text-xl font-bold text-gray-900\">ProtGram-DirectGCN</h3>\n</div>\n</div>\n<p class=\"text-gray-700 text-sm leading-relaxed mb-4\">\n                                    A novel method for protein-protein interaction (PPI) prediction using directed graph convolutional neural networks. This work infers global dense residue transition graphs directly from primary sequence tokens, bypassing computationally heavy 3D folding while achieving state-of-the-art predictive performance.\n                                </p>\n</div>\n<div class=\"pt-4 border-t border-slate-200 flex items-center justify-between\">\n<a class=\"text-xs font-semibold text-sky-600 hover:underline\" href=\"https://doi.org/10.3389/fbinf.2025.1651623\" target=\"_blank\">\n<i class=\"fas fa-external-link-alt mr-1\"></i> Read Publication (Frontiers 2025)\n                                </a>\n</div>\n</div>\n<!-- Project 2: Data2AI4LifeSciences Lab Thrusts -->\n<div class=\"bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center gap-3 mb-3\">\n<div class=\"w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center\">\n<i class=\"fas fa-dna\"></i>\n</div>\n<div>\n<span class=\"tag bg-emerald-100 text-emerald-800\">Neuro-Symbolic AI</span>\n<h3 class=\"text-xl font-bold text-gray-900\">Multimodal Biomedical AI</h3>\n</div>\n</div>\n<p class=\"text-gray-700 text-sm leading-relaxed mb-4\">\n                                    Investigating data quality, parameter scaling, and interpretability in biological foundation models. Integrating neuro-symbolic reasoning to resolve exponential parameter explosion while infusing physical chemical priors into biomedical discovery workflows.\n                                </p>\n</div>\n<div class=\"pt-4 border-t border-slate-200 flex items-center justify-between\">\n<a class=\"text-xs font-semibold text-emerald-700 hover:underline\" href=\"../research/lab.html\">\n<i class=\"fas fa-arrow-right mr-1\"></i> Explore the Lab Page\n                                </a>\n</div>\n</div>\n</div>\n</div>\n</div>\n</section>",
+          "content_html": "<section class=\"py-16 bg-white border-y border-gray-100\" id=\"current-research\">\n<div class=\"container mx-auto px-4 sm:px-6 lg:px-8\">\n<div class=\"max-w-4xl mx-auto\">\n<div class=\"flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8\">\n<div class=\"flex items-center gap-3\">\n<div class=\"w-10 h-10 rounded-lg bg-sky-100 flex items-center justify-center text-sky-600\">\n<i class=\"fas fa-flask text-lg\"></i>\n</div>\n<h2 class=\"text-2xl font-bold text-gray-900\">Current Research &amp; Flagship Systems</h2>\n</div>\n<a class=\"text-xs font-semibold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1.5\" href=\"../research/research.html\">\nView All 23 Projects <i class=\"fas fa-arrow-right\"></i>\n</a>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\" data-db-projects=\"featured\" data-view=\"home-compact\" data-limit=\"4\"></div>\n</div>\n</div>\n</section>",
           "content_text": "Current Research Proteomics & GCN ProtGram-DirectGCN A novel method for protein-protein interaction (PPI) prediction using directed graph convolutional neural networks. This work infers global dense residue transition graphs directly from primary sequence tokens, bypassing computationally heavy 3D folding while achieving state-of-the-art predictive performance. Read Publication (Frontiers 2025) Neuro-Symbolic AI Multimodal Biomedical AI Investigating data quality, parameter scaling, and interpretability in biological foundation models. Integrating neuro-symbolic reasoning to resolve exponential parameter explosion while infusing physical chemical priors into biomedical discovery workflows. Explore the Lab Page",
           "order": 3
         },
@@ -744,7 +744,7 @@
           "section_key": "section_1",
           "heading": "AI for Life Sciences, Proteomics & Biomedical Imaging",
           "subheading": null,
-          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-dna text-sky-600 mr-3\"></i> AI for Life Sciences, Proteomics &amp; Biomedical Imaging\n                    </h2>\n<span class=\"text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-1 rounded-full\">Current &amp; Recent</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- ProtGram-DirectGCN -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">ProtGram-DirectGCN</h3>\n<span class=\"tag\">Frontiers 2025</span>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                A novel method for protein-protein interaction prediction using directed graph convolutional neural networks. This work infers global dense residue transition graphs directly from primary amino acid sequences, enabling accurate interaction screening without requiring physical 3D crystallographic coordinates.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-2 text-sm\">\n<a class=\"text-sky-600 hover:underline font-medium\" href=\"https://doi.org/10.3389/fbinf.2025.1651623\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> Paper (Front. Bioinform.)</a>\n</div>\n</div>\n<!-- NSF Grant Medical Segmentation -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Multimodal Medical Segmentation</h3>\n<span class=\"tag bg-emerald-100 text-emerald-800\">NSF Award #2523786</span>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Collaborative Research: CISE-MSI project ($600K total / $210K Lead PI) developing auto-prompt textual annotations with domain knowledge for medical image segmentation foundation models. Introduces Spatially Localized Channel Attention (SLCA) validated across clinical imaging benchmarks.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-2 text-sm\">\n<span class=\"text-gray-500 font-medium\"><i class=\"fas fa-award mr-1 text-emerald-600\"></i> NSF CISE/CCF</span>\n<span class=\"text-gray-400\">•</span>\n<span class=\"text-gray-500\">IEEE CBMS 2025</span>\n</div>\n</div>\n<!-- VisInt-X & XLPM Map Viewer -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between border-2 border-sky-200\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">VisInt-X &amp; XLPM: Cross-Linked Proteomics Suite</h3>\n<span class=\"tag\">Electronic Imaging / JIST</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-2\">\n<img alt=\"Protein Cross-linking Visualization\" class=\"h-28 object-contain\" src=\"../../images/protein.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-3\">\n                                An end-to-end chemical cross-linking mass spectrometry (XL-MS) curation and visual analytics platform. Raw Orbitrap MS/MS spectra undergo heavy relational curation (15-table <code>xlpmwebv1</code> schema &amp; Perl engine with 5 ppm precursor / 0.8 Da <code>b/y</code> fragment matching, <code>14N/15N</code> isotopic filtering, and C-Score ranking) and are explored through a 3-tier D3.js matrix/treemap synchronized with a 3Dmol.js WebGL dual-protein viewer.\n                            </p>\n<div class=\"mb-4\">\n<a class=\"w-full inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-2.5 px-4 rounded-lg shadow transition\" href=\"xlpm/index.html\">\n<i class=\"fas fa-play-circle text-sm\"></i> Launch Live Interactive XLPM / VisInt-X Demo (6 Curated Presets)\n                                </a>\n</div>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-emerald-700 font-bold hover:underline\" href=\"xlpm/index.html\"><i class=\"fas fa-laptop-code mr-1\"></i> Live Demo</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/XLPM Map.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Abstract</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/xlpm-nofigures-final.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Final Article</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/XLPM-SPIE-IST-submission.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Conference Paper</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/IAE_VISINTX.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Poster 1</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/visintx_presentation.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Poster 2</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/VisInt-X.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://www.youtube.com/watch?v=yVLHPw4s47k\" target=\"_blank\"><i class=\"fab fa-youtube mr-1\"></i> Video</a>\n</div>\n</div>\n<!-- XLPMOL -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">XLPMOL: OpenGL Protein Model Viewer</h3>\n<span class=\"tag\">OpenGL / PDB</span>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                An OpenGL visualization of 2 Protein Models simultaneously based on Protein Data Bank (PDB) data files, allowing comparative structural inspection of protein interactions.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/xlpmol.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://youtu.be/YdO3IQsTDq4\" target=\"_blank\"><i class=\"fab fa-youtube mr-1\"></i> Video</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/XLPMol3DViewer.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Paper</a>\n</div>\n</div>\n<!-- PubMed KG & MedGraph -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">PubMed Knowledge Graph &amp; MedGraph</h3>\n<span class=\"tag\">Nature Sci Data</span>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Construction of a comprehensive PubMed Knowledge Graph with fine-tuned BERT entity extraction, author disambiguation, and NIH grant linkage. MedGraph uses graph representation embeddings (TransE, RotatE) for semantic biomedical search.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://doi.org/10.1038/s41597-020-0583-0\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> Scientific Data (Nature)</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://doi.org/10.3389/fdata.2022.1028994\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> Frontiers in Big Data</a>\n</div>\n</div>\n</div>\n</section>",
+          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-dna text-sky-600 mr-3\"></i> AI for Life Sciences, Proteomics &amp; Biomedical Imaging\n</h2>\n<span class=\"text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-1 rounded-full\">Current &amp; Recent</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\" data-db-projects=\"all\" data-view=\"research-cards\" data-filter-category=\"AI &amp; Life Sciences|Bioinformatics &amp; 3D Visualization\" data-border-class=\"border-sky-600\"></div>\n</section>",
           "content_text": "AI for Life Sciences, Proteomics & Biomedical Imaging Current & Recent ProtGram-DirectGCN Frontiers 2025 A novel method for protein-protein interaction prediction using directed graph convolutional neural networks. This work infers global dense residue transition graphs directly from primary amino acid sequences, enabling accurate interaction screening without requiring physical 3D crystallographic coordinates. Paper (Front. Bioinform.) Multimodal Medical Segmentation NSF Award #2523786 Collaborative Research: CISE-MSI project ($600K total / $210K Lead PI) developing auto-prompt textual annotations with domain knowledge for medical image segmentation foundation models. Introduces Spatially Localized Channel Attention (SLCA) validated across clinical imaging benchmarks. NSF CISE/CCF • IEEE CBMS 2025 VisInt-X & XLPM: Cross-Linked Proteomics Suite Electronic Imaging / JIST An end-to-end chemical cross-linking mass spectrometry (XL-MS) curation and visual analytics platform. Raw Orbitrap MS/MS spectra undergo heavy relational curation (15-table xlpmwebv1 schema & Perl engine with 5 ppm precursor / 0.8 Da b/y fragment matching, 14N/15N isotopic filtering, and C-Score ranking) and are explored through a 3-tier D3.js matrix/treemap synchronized with a 3Dmol.js WebGL dual-protein viewer. Launch Live Interactive XLPM / VisInt-X Demo (6 Curated Presets) Live Demo Abstract Final Article Conference Paper Poster 1 Poster 2 GitHub Video XLPMOL: OpenGL Protein Model Viewer OpenGL / PDB An OpenGL visualization of 2 Protein Models simultaneously based on Protein Data Bank (PDB) data files, allowing comparative structural inspection of protein interactions. GitHub Video Paper PubMed Knowledge Graph & MedGraph Nature Sci Data Construction of a comprehensive PubMed Knowledge Graph with fine-tuned BERT entity extraction, author disambiguation, and NIH grant linkage. MedGraph uses graph representation embeddings (TransE, RotatE) for semantic biomedical search. Scientific Data (Nature) Frontiers in Big Data",
           "order": 1
         },
@@ -752,7 +752,7 @@
           "section_key": "section_2",
           "heading": "Data Quality, Engineering & Natural Language Processing",
           "subheading": null,
-          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-database text-sky-600 mr-3\"></i> Data Quality, Engineering &amp; Natural Language Processing\n                    </h2>\n<span class=\"text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-1 rounded-full\">Entity Resolution, NLP &amp; Governance</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- TransER -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-700 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">TransER: Unsupervised Entity Resolution</h3>\n<span class=\"tag\">KDD Draft</span>\n</div>\n<p class=\"text-sm font-semibold text-sky-700 mb-3\">Transformational Embeddings for Data Quality</p>\n<p class=\"text-sm text-gray-600 leading-relaxed mb-4\">\n                                TransER introduces an unsupervised entity resolution approach via transformational embeddings, mitigating the quadratic complexity of traditional pairwise comparisons. It leverages graph neural network concepts and transformational embeddings analogous to TransE to automate data cleaning, curation, and integration without handcrafting syntactic rules.\n                            </p>\n</div>\n<div class=\"mt-4 pt-4 border-t border-gray-100 flex flex-wrap gap-2 text-xs\">\n<span class=\"bg-gray-100 text-gray-600 px-2 py-1 rounded\">Entity Resolution</span>\n<span class=\"bg-gray-100 text-gray-600 px-2 py-1 rounded\">Unsupervised Learning</span>\n<span class=\"bg-gray-100 text-gray-600 px-2 py-1 rounded\">Data Curation</span>\n</div>\n</div>\n<!-- MedGCN -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-700 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">MedGCN: Biomedical NER</h3>\n<span class=\"tag\">MCBIOS 2024</span>\n</div>\n<p class=\"text-sm font-semibold text-sky-700 mb-3\">Query-time Character Level Embedding via Bidirectional GCNs</p>\n<p class=\"text-sm text-gray-600 leading-relaxed mb-4\">\n                                A novel approach to Biomedical Named Entity Recognition (NER) that recasts the problem as a character-level representation of tokens in a directed graph. Trained via a Bidirectional Graph Convolutional Neural Network, MedGCN operates on the fly without the overhead or carbon footprint of fine-tuning large language models.\n                            </p>\n</div>\n<div class=\"mt-4 pt-4 border-t border-gray-100 flex flex-wrap gap-2 text-xs\">\n<span class=\"bg-gray-100 text-gray-600 px-2 py-1 rounded\">Biomedical NER</span>\n<span class=\"bg-gray-100 text-gray-600 px-2 py-1 rounded\">Graph Convolutional Networks</span>\n<span class=\"bg-gray-100 text-gray-600 px-2 py-1 rounded\">NLP</span>\n</div>\n</div>\n<!-- ModER Entity Resolution -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">ModER: Unsupervised Entity Resolution</h3>\n<span class=\"tag\">Graph ER</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"ModER Unsupervised Entity Resolution Graph Clustering\" class=\"h-28 object-contain\" src=\"../../images/graph.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Graph-based unsupervised entity resolution using Composite Modularity Optimization and Locality-Sensitive Hashing (LSH) for resolving ambiguous records in large-scale knowledge graphs.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://doi.org/10.14569/IJACSA.2022.0130901\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> IJACSA 2022</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://link.springer.com/chapter/10.1007/978-3-030-98974-5_8\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> ITNG 2022 (Springer)</a>\n</div>\n</div>\n<!-- Topic Modeling -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">LDA Topic Modeling: Mallet vs. Gensim</h3>\n<div class=\"flex items-center gap-2\">\n<span class=\"inline-flex items-center gap-1 bg-emerald-50 text-sky-800 border border-emerald-200 text-xs px-2 py-0.5 rounded font-medium\">\n<img alt=\"Python\" class=\"w-3.5 h-3.5 object-contain\" src=\"../../images/python.png\"/> Python\n                                    </span>\n<span class=\"tag\">NLP / Topic Modeling</span>\n</div>\n</div>\n<div class=\"grid grid-cols-2 gap-2 mb-3\">\n<img alt=\"LDA Topic Modeling Visualization\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/topic.png\"/>\n<img alt=\"LDA Word Cloud\" class=\"h-28 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/cloudword.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Comparative evaluation of Latent Dirichlet Allocation (LDA) topic modeling packages on the 20 Newsgroups benchmark dataset.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/FinalReportInfoSci.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Final Report</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/gensim-topic-modelling.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Big Data Governance -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Data Governance in Healthcare Information Systems</h3>\n<span class=\"tag\">Data Quality &amp; Policy</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Healthcare Data Governance and Security Architecture\" class=\"h-28 object-contain\" src=\"../../images/datasecurity1.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Big Data governance strategies in hospital environments, presented at UALR Research Expo. Analyzes policy, lifecycle management, and privacy requirements.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/Ebeid_Final_Paper.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Final Paper</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/data-governance.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Security Policies National Lab & E-Discovery Standards -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">IT Security Policies, E-Discovery &amp; National Lab Governance</h3>\n<span class=\"tag\">Information Governance</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"National Lab IT Infrastructure and Security Policy Architecture\" class=\"h-28 object-contain\" src=\"../../images/design.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Legal compliance, electronically stored information (ESI) E-Discovery standards, and digital security operational policies drafted for higher education institutional administration and the National Visualization Laboratory.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/IT Policies.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> IT Policies &amp; E-Discovery PDF</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/The-National-Visualization-Lab.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> National Vis Lab Policy PDF</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/data-security.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Enterprise DB & GA Timesheets -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Enterprise Database Architecture &amp; Data Warehousing</h3>\n<span class=\"tag\">Data Engineering</span>\n</div>\n<div class=\"grid grid-cols-3 gap-2 mb-3\">\n<img alt=\"Relational Database Schema Design\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/db1.png\"/>\n<img alt=\"ER Schema and Stored Procedures\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/db2.png\"/>\n<img alt=\"Pet Store Retail OLAP Cube\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/petstore.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Relational data models, SQL Server triggers/views, a Pet Store Data Warehouse in Microsoft BI Studio, and an interactive GA timesheet management system for Arkansas Tech University.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/GA_timesheets.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Timesheets Document</a>\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"https://github.com/iebeid/petstore-dataware-house.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> Data Warehouse</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/cisdatabase.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> SQL Scripts</a>\n</div>\n</div>\n<!-- Conference Paper Review System -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Conference Paper Submission &amp; Review Application</h3>\n<span class=\"tag\">Relational Systems</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Conference Paper Peer Review System Web Interface\" class=\"h-28 object-contain\" src=\"../../images/paper-submission.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                A web-based peer review workflow system for submitting and reviewing conference papers built with PHP, MySQL, and HTML.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/design-document.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Design Document</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/paper-submission-application.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub Code</a>\n</div>\n</div>\n</div>\n</section>",
+          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-700 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-layer-group text-sky-700 mr-3\"></i> Data Quality, Engineering &amp; Natural Language Processing\n</h2>\n<span class=\"text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-1 rounded-full\">Data Pipelines &amp; ER</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\" data-db-projects=\"all\" data-view=\"research-cards\" data-filter-category=\"Data Engineering &amp; Entity Resolution\" data-border-class=\"border-sky-700\"></div>\n</section>",
           "content_text": "Data Quality, Engineering & Natural Language Processing Entity Resolution, NLP & Governance TransER: Unsupervised Entity Resolution KDD Draft Transformational Embeddings for Data Quality TransER introduces an unsupervised entity resolution approach via transformational embeddings, mitigating the quadratic complexity of traditional pairwise comparisons. It leverages graph neural network concepts and transformational embeddings analogous to TransE to automate data cleaning, curation, and integration without handcrafting syntactic rules. Entity Resolution Unsupervised Learning Data Curation MedGCN: Biomedical NER MCBIOS 2024 Query-time Character Level Embedding via Bidirectional GCNs A novel approach to Biomedical Named Entity Recognition (NER) that recasts the problem as a character-level representation of tokens in a directed graph. Trained via a Bidirectional Graph Convolutional Neural Network, MedGCN operates on the fly without the overhead or carbon footprint of fine-tuning large language models. Biomedical NER Graph Convolutional Networks NLP ModER: Unsupervised Entity Resolution Graph ER Graph-based unsupervised entity resolution using Composite Modularity Optimization and Locality-Sensitive Hashing (LSH) for resolving ambiguous records in large-scale knowledge graphs. IJACSA 2022 ITNG 2022 (Springer) LDA Topic Modeling: Mallet vs. Gensim Python NLP / Topic Modeling Comparative evaluation of Latent Dirichlet Allocation (LDA) topic modeling packages on the 20 Newsgroups benchmark dataset. Final Report GitHub Data Governance in Healthcare Information Systems Data Quality & Policy Big Data governance strategies in hospital environments, presented at UALR Research Expo. Analyzes policy, lifecycle management, and privacy requirements. Final Paper GitHub IT Security Policies, E-Discovery & National Lab Governance Information Governance Legal compliance, electronically stored information (ESI) E-Discovery standards, and digital security operational policies drafted for higher education institutional administration and the National Visualization Laboratory. IT Policies & E-Discovery PDF National Vis Lab Policy PDF GitHub Enterprise Database Architecture & Data Warehousing Data Engineering Relational data models, SQL Server triggers/views, a Pet Store Data Warehouse in Microsoft BI Studio, and an interactive GA timesheet management system for Arkansas Tech University. Timesheets Document Data Warehouse SQL Scripts Conference Paper Submission & Review Application Relational Systems A web-based peer review workflow system for submitting and reviewing conference papers built with PHP, MySQL, and HTML. Design Document GitHub Code",
           "order": 2
         },
@@ -760,7 +760,7 @@
           "section_key": "section_3",
           "heading": "Scientific Visualization & Human-Computer Interaction",
           "subheading": null,
-          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-vr-cardboard text-sky-600 mr-3\"></i> Scientific Visualization &amp; Human-Computer Interaction\n                    </h2>\n<span class=\"text-xs bg-sky-100 text-sky-800 font-semibold px-2.5 py-1 rounded-full\">Eye Tracking, TACC, EAC &amp; Graphics</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- Eye Tracking Project 1: Bayesian Mixed Effects Markov Models -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Bayesian Mixed-Effects Markov Models for Gaze Transition Behavior</h3>\n<span class=\"tag bg-emerald-100 text-emerald-800\">ACM ETRA 2019 Best Short Paper</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Emotiv EPOC EEG Headset for Cognitive Load Telemetry\" class=\"h-28 object-contain\" src=\"../../images/emotiv_epoc.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Funded by Lockheed Martin at The University of Texas at Austin. Developed semi-parametric Bayesian mixed-effects Markov models to analyze human scanpaths, Area-of-Interest (AOI) gaze transitions, reading comprehension dynamics, and operator cognitive load in high-situational-awareness environments.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline font-medium\" href=\"https://doi.org/10.1145/3317956.3318151\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> ACM SIGCHI ETRA 2019</a>\n<span class=\"text-gray-400\">•</span>\n<span class=\"text-emerald-700 font-semibold\"><i class=\"fas fa-trophy mr-1\"></i> Best Short Paper Award</span>\n</div>\n</div>\n<!-- Eye Tracking Project 2: Real-Time Gaze Transition Entropy & Tiled Display Calibration -->\n<div class=\"bg-white p-6 rounded-lg shadow-md border-t-4 border-sky-600 flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Real-Time Gaze Transition Entropy &amp; Tiled Display Wall Eye Tracking</h3>\n<span class=\"tag\">ACM ETRA 2018 / TACC</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Real-Time Gaze Transition Entropy and Scanpath Telemetry\" class=\"h-28 object-contain\" src=\"../../images/datavis.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Conducted at UT Austin Information eXperience Lab &amp; Texas Advanced Computing Center (TACC, funded by Intel). Formulated real-time Shannon gaze transition entropy algorithms for continuous cognitive load assessment alongside multi-screen eye-tracker calibration for large-scale Tiled Display Walls.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline font-medium\" href=\"https://doi.org/10.1145/3204493.3208340\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> ACM SIGCHI ETRA 2018</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://doi.org/10.21900/iconf.2019.103363\" target=\"_blank\"><i class=\"fas fa-external-link-alt mr-1\"></i> iConference 2019 (HCI Review)</a>\n</div>\n</div>\n<!-- CAVE Object Scanner -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">CAVE Real-Time Object Scanner</h3>\n<span class=\"tag\">VR-Juggler / RealSense</span>\n</div>\n<div class=\"grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3\">\n<img alt=\"CAVE Virtual Reality Facility\" class=\"h-24 w-full object-cover rounded border\" src=\"../../images/cave.jpg\"/>\n<img alt=\"Intel RealSense 3D Scanner\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/realsense.png\"/>\n<img alt=\"CAVE 3D Object Reconstruction\" class=\"h-24 w-full object-cover rounded border\" src=\"../../images/caveobj.jpg\"/>\n<img alt=\"Turntable Point Cloud Mesh\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/bunny_points.PNG\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Real-time application inside the CAVE environment allowing scanning small objects on a custom-made turntable using a RealSense camera to capture mesh data (OBJ), rendered instantly inside the CAVE with Leap Motion manipulation.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/Real.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Progress Report</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/vr-project-proposal.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Proposal</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/vr-project-final-paper.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Final Paper</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/realtime-cave-scanner.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Intel Visual SLAM -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Intel RealSense Visual SLAM GPU</h3>\n<span class=\"tag\">Intel R&amp;D</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Visual SLAM GPU Feature Pipeline and Neural Odometry\" class=\"h-28 object-contain\" src=\"../../images/neural_network.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Implemented GPU-accelerated visual Simultaneous Localization and Mapping (vSLAM) using Intel's graphics architecture during my software engineering internship at Intel.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/RealSense_CM_VIVE_SLAM.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Intel RealSense Head & Marker Tracker -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Intel RealSense Head &amp; Marker Tracker</h3>\n<span class=\"tag\">VRPN / Head Tracking</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Infrared Marker Ball Configuration for Perspective Head Tracking\" class=\"h-28 object-contain\" src=\"../../images/ir.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                A VRPN tracker for reflective marker ball configurations on glasses enabling real-time perspective head tracking in immersive environments.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/realsense-tracking.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub Code</a>\n</div>\n</div>\n<!-- Unity VR Info Viz -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Info-Viz in Virtual Environments (Unity)</h3>\n<span class=\"tag\">Unity 3D / VR</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"Unity Immersive 3D Information Visualization Graph\" class=\"h-28 object-contain\" src=\"../../images/2.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Creating basic graph elements in Unity game engine to visualize complex relational networks in immersive mobile and head-mounted display (HMD) environments.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/info-viz-unity.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- DICOM Isosurface -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Isosurface Extraction from DICOM Volumes</h3>\n<span class=\"tag\">Medical Imaging</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"DICOM Volumetric Isosurface Extraction 3D Mesh\" class=\"h-28 object-contain\" src=\"../../images/screenshot3.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Evaluating algorithms to extract and render isosurfaces from volumetric medical imaging datasets (DICOM) for interactive 3D inspection.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/dicom-to-isosurface.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- RaymarcherVR -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">RaymarcherVR</h3>\n<span class=\"tag\">Procedural Shaders</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"RaymarcherVR Procedural 3D Shader Rendering\" class=\"h-28 object-contain\" src=\"../../images/raymarcher.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Porting raymarching shader techniques inspired by ShaderToy to desktop VR environments for procedural 3D visual exploration.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/RaymarcherVR.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Quad Buffered Stereo -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Quad Buffered Stereo on Nvidia Quadro</h3>\n<span class=\"tag\">OpenGL / Stereo</span>\n</div>\n<div class=\"grid grid-cols-2 gap-2 mb-3\">\n<img alt=\"OpenGL Quad-Buffered Stereo Rendering\" class=\"h-28 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/quad.png\"/>\n<img alt=\"Nvidia Quadro Architecture\" class=\"h-28 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/nvidia.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                An OpenGL renderer to explore hardware-accelerated quad-buffered stereo rendering on Nvidia Quadro 6000 for immersive stereoscopic displays.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/quad-buffered-stereo.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Photosphere & Google Earth in CAVE -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Photosphere &amp; Google Earth in the CAVE</h3>\n<span class=\"tag\">Liquid Galaxy / KML</span>\n</div>\n<div class=\"grid grid-cols-2 gap-2 mb-3\">\n<img alt=\"Panoramic Photosphere Visualization in CAVE\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/photosphere-topic.png\"/>\n<img alt=\"Google Earth KML Geospatial Data Display\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/earth-data.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Rendering panoramic images to photospheres and adapting Liquid Galaxy Google Earth KML data visualization within the immersive CAVE environment.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"https://github.com/iebeid/Photo-sphere-CAVE-Viewer.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> Photosphere GitHub</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/cave-google-earth.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> Google Earth GitHub</a>\n</div>\n</div>\n<!-- VRJuggler Interactivity & PointCloud -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">VRJuggler CAVE Interactivity &amp; Point Cloud</h3>\n<span class=\"tag\">Point Cloud Rendering</span>\n</div>\n<div class=\"grid grid-cols-2 gap-2 mb-3\">\n<img alt=\"Stanford Bunny Scanalyze 3D Mesh in VRJuggler\" class=\"h-28 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/bunny-scanalyze-sh.jpg\"/>\n<img alt=\"High-Density 3D Point Cloud Inspection\" class=\"h-28 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/bunny_points.PNG\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Applications demonstrating VRJuggler interactivity with objects and large point cloud rendering inside the CAVE facility.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"https://github.com/iebeid/cave-vrjuggler-interactivity.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> VRJuggler GitHub</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/cave-vrjuggler-pointcloud-viewer.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> PointCloud GitHub</a>\n</div>\n</div>\n<!-- CUDA Particles in OpenGL -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">CUDA Particles in OpenGL</h3>\n<span class=\"tag\">CUDA / GPGPU</span>\n</div>\n<div class=\"mb-3 rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-1\">\n<img alt=\"200,000 CUDA Particle Physics Simulation in OpenGL\" class=\"h-28 object-contain\" src=\"../../images/200Kparticles.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                A high-performance simulation and visualization of massive particle systems calculated via CUDA and rendered in real time using OpenGL.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/cuda-particles.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Synchronized WebGL Rendering -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Synchronized Multi-View WebGL Rendering</h3>\n<span class=\"tag\">WebGL / Multi-View</span>\n</div>\n<div class=\"grid grid-cols-2 gap-2 mb-3\">\n<img alt=\"Multi-Panel WebGL Cluster Synchronization\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/cluster.png\"/>\n<img alt=\"WebGL Synchronized Graphics Demo Video Preview\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/hqdefault.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Synchronizing 3D graphics rendering across several HTML document divs for multi-panel interactive scientific visualization.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"https://github.com/iebeid/cluster-webgl.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://youtu.be/TkIpVOf5Kmc\" target=\"_blank\"><i class=\"fab fa-youtube mr-1\"></i> Video</a>\n</div>\n</div>\n<!-- Leap Motion & Kinect -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Sensor Tracking: Leap Motion &amp; Kinect</h3>\n<span class=\"tag\">Spatial Sensors</span>\n</div>\n<div class=\"grid grid-cols-2 gap-2 mb-3\">\n<img alt=\"Leap Motion Gesture Control Interaction\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/leap.jpg\"/>\n<img alt=\"Microsoft Kinect Depth Sensor &amp; Calibration\" class=\"h-28 w-full object-cover rounded border\" src=\"../../images/kinect.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Integrating Leap Motion gesture control for CAVE manipulation and presentations, alongside OpenCV-based Kinect calibration and point-cloud generation.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"https://github.com/iebeid/cave-leapmotion.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> Leap Motion CAVE</a>\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"https://github.com/iebeid/leap-motion-presentations.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> Slide Control</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/kinect-explore.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> Kinect GitHub</a>\n</div>\n</div>\n</div>\n</section>",
+          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-emerald-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-vr-cardboard text-emerald-600 mr-3\"></i> Scientific Visualization, GPU Compute &amp; Human-Computer Interaction\n</h2>\n<span class=\"text-xs bg-emerald-100 text-emerald-800 font-semibold px-2.5 py-1 rounded-full\">Graphics, VR &amp; Eye Tracking</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\" data-db-projects=\"all\" data-view=\"research-cards\" data-filter-category=\"Scientific Visualization &amp; HCI\" data-border-class=\"border-emerald-600\"></div>\n</section>",
           "content_text": "Scientific Visualization & Human-Computer Interaction Eye Tracking, TACC, EAC & Graphics Bayesian Mixed-Effects Markov Models for Gaze Transition Behavior ACM ETRA 2019 Best Short Paper Funded by Lockheed Martin at The University of Texas at Austin. Developed semi-parametric Bayesian mixed-effects Markov models to analyze human scanpaths, Area-of-Interest (AOI) gaze transitions, reading comprehension dynamics, and operator cognitive load in high-situational-awareness environments. ACM SIGCHI ETRA 2019 • Best Short Paper Award Real-Time Gaze Transition Entropy & Tiled Display Wall Eye Tracking ACM ETRA 2018 / TACC Conducted at UT Austin Information eXperience Lab & Texas Advanced Computing Center (TACC, funded by Intel). Formulated real-time Shannon gaze transition entropy algorithms for continuous cognitive load assessment alongside multi-screen eye-tracker calibration for large-scale Tiled Display Walls. ACM SIGCHI ETRA 2018 iConference 2019 (HCI Review) CAVE Real-Time Object Scanner VR-Juggler / RealSense Real-time application inside the CAVE environment allowing scanning small objects on a custom-made turntable using a RealSense camera to capture mesh data (OBJ), rendered instantly inside the CAVE with Leap Motion manipulation. Progress Report Proposal Final Paper GitHub Intel RealSense Visual SLAM GPU Intel R&D Implemented GPU-accelerated visual Simultaneous Localization and Mapping (vSLAM) using Intel's graphics architecture during my software engineering internship at Intel. GitHub Intel RealSense Head & Marker Tracker VRPN / Head Tracking A VRPN tracker for reflective marker ball configurations on glasses enabling real-time perspective head tracking in immersive environments. GitHub Code Info-Viz in Virtual Environments (Unity) Unity 3D / VR Creating basic graph elements in Unity game engine to visualize complex relational networks in immersive mobile and head-mounted display (HMD) environments. GitHub Isosurface Extraction from DICOM Volumes Medical Imaging Evaluating algorithms to extract and render isosurfaces from volumetric medical imaging datasets (DICOM) for interactive 3D inspection. GitHub RaymarcherVR Procedural Shaders Porting raymarching shader techniques inspired by ShaderToy to desktop VR environments for procedural 3D visual exploration. GitHub Quad Buffered Stereo on Nvidia Quadro OpenGL / Stereo An OpenGL renderer to explore hardware-accelerated quad-buffered stereo rendering on Nvidia Quadro 6000 for immersive stereoscopic displays. GitHub Photosphere & Google Earth in the CAVE Liquid Galaxy / KML Rendering panoramic images to photospheres and adapting Liquid Galaxy Google Earth KML data visualization within the immersive CAVE environment. Photosphere GitHub Google Earth GitHub VRJuggler CAVE Interactivity & Point Cloud Point Cloud Rendering Applications demonstrating VRJuggler interactivity with objects and large point cloud rendering inside the CAVE facility. VRJuggler GitHub PointCloud GitHub CUDA Particles in OpenGL CUDA / GPGPU A high-performance simulation and visualization of massive particle systems calculated via CUDA and rendered in real time using OpenGL. GitHub Synchronized Multi-View WebGL Rendering WebGL / Multi-View Synchronizing 3D graphics rendering across several HTML document divs for multi-panel interactive scientific visualization. GitHub Video Sensor Tracking: Leap Motion & Kinect Spatial Sensors Integrating Leap Motion gesture control for CAVE manipulation and presentations, alongside OpenCV-based Kinect calibration and point-cloud generation. Leap Motion CAVE Slide Control Kinect GitHub",
           "order": 3
         },
@@ -768,7 +768,7 @@
           "section_key": "section_4",
           "heading": "Legacy Research",
           "subheading": null,
-          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-history text-sky-600 mr-3\"></i> Legacy Research\n                    </h2>\n<span class=\"text-xs bg-gray-200 text-gray-700 font-semibold px-2.5 py-1 rounded-full\">Foundational Thesis &amp; Capstone Systems</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- Master's Thesis GDE -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Genesis Development Environment (GDE)</h3>\n<div class=\"flex items-center gap-2\">\n<span class=\"inline-flex items-center gap-1 bg-slate-50 text-emerald-800 border border-slate-200 text-xs px-2 py-0.5 rounded font-medium\">\n<img alt=\"Eclipse\" class=\"w-3.5 h-3.5 rounded object-cover\" src=\"../../images/eclipse.jpg\"/> Eclipse RCP\n                                    </span>\n<span class=\"tag\">MSc Project</span>\n</div>\n</div>\n<div class=\"grid grid-cols-3 gap-2 mb-3\">\n<img alt=\"Genesis Development Environment UI\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/thesis1.png\"/>\n<img alt=\"GDE Algorithm Animation &amp; Dynamic Memory Model\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/thesis2.jpg\"/>\n<img alt=\"Genesis Visual Code Generation\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/thesis3.jpg\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                A graphical environment for algorithm animation and visual programming in the Genesis language, displaying dynamic data structures and generating executable code.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/Genesis Development Environment Design Document.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Design Document</a>\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/ThesisParagraph.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Abstract</a>\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/ThesisProposal.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Proposal</a>\n<a class=\"text-sky-600 hover:underline\" href=\"https://github.com/iebeid/genesis-visual-programming.git\" target=\"_blank\"><i class=\"fab fa-github mr-1\"></i> GitHub</a>\n</div>\n</div>\n<!-- Bachelor's Thesis ICAS -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Intersection Collision Avoidance System (ICAS)</h3>\n<span class=\"tag\">Ain Shams Capstone</span>\n</div>\n<div class=\"grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3\">\n<img alt=\"Intersection Collision Avoidance Architecture\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/icas.png\"/>\n<img alt=\"Vehicle-to-Infrastructure GPS Telemetry Interface\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/icas2.png\"/>\n<img alt=\"Real-Time Collision Trajectory Detection Map\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/icas3.png\"/>\n<img alt=\"In-Vehicle Emergency Warning Alert Console\" class=\"h-24 w-full object-contain rounded border bg-slate-50 p-1\" src=\"../../images/icas4.png\"/>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Vehicle Infrastructure Integration (VII) client-server application combining Java, GPS, and microcontrollers to link road vehicles to infrastructure and automate collision avoidance.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-3 text-sm\">\n<a class=\"text-sky-600 hover:underline mr-3\" href=\"../../documents/The-VII-propject-V3.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Thesis</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/Graduation_Project_Presentation.pdf\" target=\"_blank\"><i class=\"fas fa-file-powerpoint mr-1\"></i> Slides</a>\n</div>\n</div>\n<!-- Academic Department Web Architecture & Student Affairs -->\n<div class=\"bg-white p-6 rounded-lg shadow-md flex flex-col justify-between md:col-span-2\">\n<div>\n<div class=\"flex items-center justify-between mb-2\">\n<h3 class=\"text-xl font-bold text-gray-900\">Academic Department Web Architecture &amp; Student Affairs</h3>\n<span class=\"tag\">ATU Systems &amp; Portals</span>\n</div>\n<div class=\"grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4\">\n<div class=\"rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-2\">\n<img alt=\"Arkansas Tech University Institutional Logo\" class=\"h-24 object-contain\" src=\"../../images/atu-logo.png\"/>\n</div>\n<div class=\"rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-2\">\n<img alt=\"International Student Services Portal Architecture\" class=\"h-24 object-contain\" src=\"../../images/imsso1.png\"/>\n</div>\n<div class=\"rounded overflow-hidden border border-gray-100 bg-slate-50 flex items-center justify-center p-2\">\n<img alt=\"Student Affairs Information System Dashboard\" class=\"h-24 object-contain\" src=\"../../images/imsso2.png\"/>\n</div>\n</div>\n<p class=\"text-gray-600 text-sm leading-relaxed mb-4\">\n                                Comprehensive architecture specifications for university departmental portals, ABET accreditation tracking, and international student service operations developed at Arkansas Tech University.\n                            </p>\n</div>\n<div class=\"pt-3 border-t border-gray-100 flex flex-wrap gap-4 text-sm\">\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/department_website.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Department Portal Specification</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/Arkansas Tech University.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> ATU CIS Department Outline</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/Arkansas_Tech_University_Profile.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> Institutional Profile</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/RFsingaporefinal_compact_2_edited.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> International Services Guide</a>\n<a class=\"text-sky-600 hover:underline\" href=\"../../documents/English Language Institute.pdf\" target=\"_blank\"><i class=\"fas fa-file-pdf mr-1\"></i> English Language Institute Curriculum</a>\n</div>\n</div>\n</div>\n</section>",
+          "content_html": "<section>\n<div class=\"flex items-center justify-between border-b-2 border-sky-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-history text-sky-600 mr-3\"></i> Legacy Research &amp; Industry Systems\n</h2>\n<span class=\"text-xs bg-gray-200 text-gray-700 font-semibold px-2.5 py-1 rounded-full\">Foundational Theses &amp; Applied Systems</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\" data-db-projects=\"all\" data-view=\"research-cards\" data-filter-category=\"Legacy &amp; Foundational Systems|Industry &amp; Enterprise Systems\" data-border-class=\"border-slate-500\"></div>\n</section>",
           "content_text": "Legacy Research Foundational Thesis & Capstone Systems Genesis Development Environment (GDE) Eclipse RCP MSc Project A graphical environment for algorithm animation and visual programming in the Genesis language, displaying dynamic data structures and generating executable code. Design Document Abstract Proposal GitHub Intersection Collision Avoidance System (ICAS) Ain Shams Capstone Vehicle Infrastructure Integration (VII) client-server application combining Java, GPS, and microcontrollers to link road vehicles to infrastructure and automate collision avoidance. Thesis Slides Academic Department Web Architecture & Student Affairs ATU Systems & Portals Comprehensive architecture specifications for university departmental portals, ABET accreditation tracking, and international student service operations developed at Arkansas Tech University. Department Portal Specification ATU CIS Department Outline Institutional Profile International Services Guide English Language Institute Curriculum",
           "order": 4
         },
@@ -816,7 +816,7 @@
           "section_key": "section_10",
           "heading": "Code Repositories & Software",
           "subheading": null,
-          "content_html": "<section class=\"mt-8\">\n<div class=\"flex items-center justify-between border-b-2 border-slate-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-code text-slate-600 mr-3\"></i> Code Repositories &amp; Software\n                    </h2>\n<span class=\"text-xs bg-slate-200 text-slate-800 font-semibold px-2.5 py-1 rounded-full\">Source Code</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-3 gap-6\">\n<!-- DiGCN -->\n<div class=\"bg-slate-50 p-5 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center gap-3 mb-2\">\n<i class=\"fab fa-python text-2xl text-slate-700\"></i>\n<h3 class=\"font-bold text-gray-900 text-base\">DiGCN</h3>\n</div>\n<p class=\"text-xs text-gray-600 mb-4\">Implementation of Directed Graph Convolutional Networks (DiGCN) for feature extraction from directed biological networks.</p>\n</div>\n<a class=\"inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-bold text-xs uppercase tracking-wider\" href=\"../../code/DiGCN.zip\">\n<i class=\"fas fa-download\"></i> Download Source (.zip)\n                        </a>\n</div>\n<!-- EarthViz -->\n<div class=\"bg-slate-50 p-5 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center gap-3 mb-2\">\n<i class=\"fas fa-globe text-2xl text-slate-700\"></i>\n<h3 class=\"font-bold text-gray-900 text-base\">EarthViz</h3>\n</div>\n<p class=\"text-xs text-gray-600 mb-4\">A high-performance geospatial data visualization toolkit utilizing Java and Google Earth API.</p>\n</div>\n<a class=\"inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-bold text-xs uppercase tracking-wider\" href=\"../../code/EarthViz.zip\">\n<i class=\"fas fa-download\"></i> Download Source (.zip)\n                        </a>\n</div>\n<!-- EyeAdaptEngine -->\n<div class=\"bg-slate-50 p-5 rounded-lg border border-slate-200 shadow-sm flex flex-col justify-between\">\n<div>\n<div class=\"flex items-center gap-3 mb-2\">\n<i class=\"fas fa-eye text-2xl text-slate-700\"></i>\n<h3 class=\"font-bold text-gray-900 text-base\">EyeAdaptEngine</h3>\n</div>\n<p class=\"text-xs text-gray-600 mb-4\">A cognitive ergonomic engine for real-time gaze tracking and adaptive user interfaces, used in flight simulator research.</p>\n</div>\n<a class=\"inline-flex items-center gap-2 text-slate-700 hover:text-slate-900 font-bold text-xs uppercase tracking-wider\" href=\"../../code/EyeAdaptEngine.zip\">\n<i class=\"fas fa-download\"></i> Download Source (.zip)\n                        </a>\n</div>\n</div>\n</section>",
+          "content_html": "<section class=\"mt-8\">\n<div class=\"flex items-center justify-between border-b-2 border-slate-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-code text-slate-600 mr-3\"></i> Code Repositories &amp; Downloadable Source Archives\n</h2>\n<span class=\"text-xs bg-slate-200 text-slate-800 font-semibold px-2.5 py-1 rounded-full\">Source Code</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6\" data-db-projects=\"all\" data-view=\"research-code-zips\"></div>\n</section>",
           "content_text": "Code Repositories & Software Source Code DiGCN Implementation of Directed Graph Convolutional Networks (DiGCN) for feature extraction from directed biological networks. Download Source (.zip) EarthViz A high-performance geospatial data visualization toolkit utilizing Java and Google Earth API. Download Source (.zip) EyeAdaptEngine A cognitive ergonomic engine for real-time gaze tracking and adaptive user interfaces, used in flight simulator research. Download Source (.zip)",
           "order": 10
         }
@@ -1588,7 +1588,7 @@
           "section_key": "catalog",
           "heading": "Core Software Component Catalog",
           "subheading": null,
-          "content_html": "<section class=\"catalog-section\" id=\"catalog\">\n<div class=\"section-heading\">\n<h2>Core Software Component Catalog</h2>\n<p>Filter production-ready packages by AI &amp; data lifecycle stage. Our core niche is translating published academic research into robust enterprise libraries and innovating novel frameworks—delivering seamless data engineering and preparation pipelines right before data scientists operate. Built by academically trained graduate engineers adhering to ITIL certification standards.</p>\n</div>\n<div class=\"matrix-controls\">\n<button class=\"filter-btn active\" onclick=\"filterSystem('ALL_SYSTEMS', this)\">ALL_SYSTEMS (8)</button>\n<button class=\"filter-btn\" onclick=\"filterSystem('DATA_CURATION', this)\">DATA_CURATION (4)</button>\n<button class=\"filter-btn\" onclick=\"filterSystem('MODELING_ENGINES', this)\">MODELING_ENGINES (3)</button>\n<button class=\"filter-btn\" onclick=\"filterSystem('VISUALIZATION_REPORTING', this)\">VISUALIZATION_REPORTING (3)</button>\n</div>\n<div class=\"solution-grid\">\n<!-- PRODUCT 1: AILifecycleKit -->\n<article class=\"product-card\" data-category=\"DATA_CURATION\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">DATA_CURATION</span>\n<span class=\"tech-tag stack\">Python / Parquet / Lineage</span>\n</div>\n<h3>AILifecycleKit</h3>\n<p class=\"description\">\n                            Lightweight Python SDK engineered to automate local dataset curation, data preprocessing, deterministic lineage versioning, and real-time tensor drift evaluation in production AI pipelines.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"keyword\">import</span> ailifecyclekit <span class=\"keyword\">as</span> alk\ntracker = alk.<span class=\"function\">DriftTracker</span>(baseline_dataset=<span class=\"string\">\"v1_clean.parquet\"</span>)\nanomalies = tracker.<span class=\"function\">evaluate_stream</span>(incoming_tensor, threshold=<span class=\"string\">0.85</span>)\ntracker.<span class=\"function\">commit_lineage</span>(export_path=<span class=\"string\">\"./metadata/\"</span>)</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\">$499<span>/dev seat</span></div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" onclick=\"openLicenseModal('AILifecycleKit ($499 / dev seat)')\" type=\"button\"><i class=\"fas fa-key\"></i> License Codebase</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 2: DataIntegrationToolkit (DITK) -->\n<article class=\"product-card\" data-category=\"DATA_CURATION MODELING_ENGINES\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">DATA_CURATION &amp; PREPARATION</span>\n<span class=\"tech-tag stack\">Python / Medallion Lakehouse / Entity Resolution / ML Feature Prep</span>\n</div>\n<h3>DataIntegrationToolkit (DITK)</h3>\n<p class=\"description\">\n    Generalized, high-performance Lakehouse &amp; Data Preparation Engine built to streamline the critical data engineering pipeline right before data scientists operate. Implements a tiered Medallion storage model (Bronze &rarr; Silver &rarr; Gold) with automated ingestion, fuzzy blocking, and scalable Entity Resolution (ER)—transforming disparate, messy data across any domain into deterministic, model-ready feature stores for downstream machine learning and AI modeling.\n</p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"keyword\">import</span> dataintegrationtoolkit <span class=\"keyword\">as</span> ditk\nlakehouse = ditk.<span class=\"function\">Lakehouse</span>(storage_root=<span class=\"string\">\"./lakehouse\"</span>)\n<span class=\"comment\"># 1. Multi-source ingestion into Bronze tier</span>\nbronze = lakehouse.<span class=\"function\">ingest</span>(source=<span class=\"string\">\"records_stream.parquet\"</span>, tier=<span class=\"string\">\"bronze\"</span>)\n<span class=\"comment\"># 2. Automated blocking, matching &amp; Entity Resolution (Silver tier)</span>\nsilver = lakehouse.<span class=\"function\">resolve_entities</span>(bronze, blocker=<span class=\"string\">\"minhash_lsh\"</span>, matcher=<span class=\"string\">\"dwm\"</span>)\n<span class=\"comment\"># 3. Clean feature export right before data science modeling</span>\ngold = lakehouse.<span class=\"function\">export_feature_store</span>(silver, format=<span class=\"string\">\"parquet\"</span>, split=<span class=\"string\">\"train_val_test\"</span>)</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\">$999<span>/dev seat</span></div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid/DataIntegrationToolkit\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" onclick=\"openLicenseModal('DataIntegrationToolkit ($999 / dev seat)')\" type=\"button\"><i class=\"fas fa-key\"></i> License Codebase</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 3: ProtGram-DirectGCN -->\n<article class=\"product-card\" data-category=\"MODELING_ENGINES\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">MODELING_ENGINES</span>\n<span class=\"tech-tag stack\">Python / PyTorch / GCN</span>\n</div>\n<h3>ProtGram-DirectGCN</h3>\n<p class=\"description\">\n                            Deep learning optimization pipeline engineered for structural protein-protein interaction (PPI) forecasting using hierarchical n-gram tokenization structures mapped directly to Graph Convolutional Networks.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"keyword\">import</span> protgram_gcn <span class=\"keyword\">as</span> pgg\npipeline = pgg.<span class=\"function\">Pipeline</span>(mode=<span class=\"string\">\"direct\"</span>)\nmatrix = pipeline.<span class=\"function\">compute_ngrams</span>(sequence_tensor)\npredictions = pipeline.<span class=\"function\">eval_interaction</span>(matrix)</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\" style=\"font-size:0.9em;color:#888;\">Past Demo</div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" disabled=\"\" style=\"opacity: 0.7; cursor: not-allowed;\" type=\"button\"><i class=\"fas fa-info-circle\"></i> Not for Sale - Past Work Demo</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 4: EyeArt Engine -->\n<article class=\"product-card\" data-category=\"DATA_CURATION\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">DATA_CURATION</span>\n<span class=\"tech-tag stack\">Python / PyTorch / Vision</span>\n</div>\n<h3>EyeArt Engine</h3>\n<p class=\"description\">\n                            Production-ready eye-tracking and behavioral visual telemetry processing array. Compiles high-frequency gaze and spatial video streams into localized feature vectors for neurological and HCI analytics.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"keyword\">import</span> eyeart <span class=\"keyword\">as</span> ea\ntracker = ea.<span class=\"function\">SpatialTracker</span>(precision=<span class=\"string\">\"high\"</span>)\nframe_stream = ea.<span class=\"function\">load_video_pipeline</span>(<span class=\"string\">\"./raw_data/\"</span>)\ntelemetry = tracker.<span class=\"function\">extract_vector_array</span>(frame_stream)</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>MIT</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\" style=\"font-size:0.9em;color:#888;\">Past Demo</div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" disabled=\"\" style=\"opacity: 0.7; cursor: not-allowed;\" type=\"button\"><i class=\"fas fa-info-circle\"></i> Not for Sale - Past Work Demo</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 5: RaymarcherVR Engine -->\n<article class=\"product-card\" data-category=\"VISUALIZATION_REPORTING\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">VISUALIZATION_REPORTING</span>\n<span class=\"tech-tag stack\">C++ / CUDA / OpenGL</span>\n</div>\n<h3>RaymarcherVR Engine</h3>\n<p class=\"description\">\n                            Ultra-low-latency C++ pipeline delivering direct raymarching shader computations inside virtual environments, CAVE projection rooms, quad-buffered stereo workstations, or head-mounted arrays.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"keyword\">#include</span> <span class=\"string\">&lt;raymarch_vr.h&gt;</span>\nVRRenderer* runtime = <span class=\"keyword\">new</span> VRRenderer();\nruntime-&gt;<span class=\"function\">initializeContext</span>(QUAD_BUFFERED_STEREO);\nruntime-&gt;<span class=\"function\">injectComputeKernels</span>(cuda_particles);</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\" style=\"font-size:0.9em;color:#888;\">Past Demo</div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid/RaymarcherVR.git\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" disabled=\"\" style=\"opacity: 0.7; cursor: not-allowed;\" type=\"button\"><i class=\"fas fa-info-circle\"></i> Not for Sale - Past Work Demo</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 6: CudaParticles Engine -->\n<article class=\"product-card\" data-category=\"VISUALIZATION_REPORTING\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">VISUALIZATION_REPORTING</span>\n<span class=\"tech-tag stack\">C++ / CUDA / OpenGL</span>\n</div>\n<h3>CudaParticles Engine</h3>\n<p class=\"description\">\n                            High-performance particle interaction framework offloading multi-million point array physics calculations directly to NVIDIA CUDA compute units with zero-copy OpenGL pipeline integration.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"type\">void</span> <span class=\"function\">computeStream</span>() {\n    cudaMemcpy(d_data, h_data, size, cudaMemcpyHostToDevice);\n    runParticleKernel&lt;&lt;&lt;blocks, threads&gt;&gt;&gt;(d_data);\n}</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\" style=\"font-size:0.9em;color:#888;\">Past Demo</div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid/cuda-particles.git\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" disabled=\"\" style=\"opacity: 0.7; cursor: not-allowed;\" type=\"button\"><i class=\"fas fa-info-circle\"></i> Not for Sale - Past Work Demo</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 7: ModER-GraphER -->\n<article class=\"product-card\" data-category=\"MODELING_ENGINES\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">MODELING_ENGINES</span>\n<span class=\"tech-tag stack\">Python / Graph ER / LSH</span>\n</div>\n<h3>ModER-GraphER</h3>\n<p class=\"description\">\n                            Unsupervised graph entity resolution engine combining Locality-Sensitive Hashing (LSH) with Composite Modularity Optimization to deduplicate and link records across massive heterogeneous knowledge graphs.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"keyword\">import</span> moder_er <span class=\"keyword\">as</span> mer\nresolver = mer.<span class=\"function\">ModularityResolver</span>(lsh_bands=<span class=\"string\">16</span>)\nbipartite_graph = resolver.<span class=\"function\">build_similarity_graph</span>(records_df)\nclusters = resolver.<span class=\"function\">optimize_communities</span>(bipartite_graph)</pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\" style=\"font-size:0.9em;color:#888;\">Past Demo</div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"https://github.com/iebeid\" target=\"_blank\"><i class=\"fab fa-github\"></i> Source Code</a>\n<button class=\"btn btn-commercial\" disabled=\"\" style=\"opacity: 0.7; cursor: not-allowed;\" type=\"button\"><i class=\"fas fa-info-circle\"></i> Not for Sale - Past Work Demo</button>\n</div>\n</div>\n</article>\n<!-- PRODUCT 8: XLPM-VisIntX Suite (Featured Live Interactive Demo) -->\n<article class=\"product-card\" data-category=\"DATA_CURATION VISUALIZATION_REPORTING\" id=\"xlpm-product\" style=\"border-color: #4b5563; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);\">\n<div class=\"card-header\">\n<div class=\"tag-container\">\n<span class=\"tech-tag lifecycle\">DATA_CURATION + VISUALIZATION_REPORTING</span>\n<span class=\"tech-tag stack\">Perl / MySQL / D3.js / 3Dmol.js</span>\n</div>\n<h3>XLPM-VisIntX Suite</h3>\n<p class=\"description\">\n                            End-to-end chemical cross-linking mass spectrometry (XL-MS) relational curation pipeline (15-table <code>xlpmwebv1</code> schema, 5 ppm / 0.8 Da <code>b/y</code> ion matcher, <code>14N/15N</code> isotope engine) paired with a 3-tier D3.js &amp; 3Dmol.js WebGL dual-protein viewer.\n                        </p>\n</div>\n<div class=\"snippet-container\">\n<pre><span class=\"comment\">// Launch 3-level D3 matrix + 3Dmol.js PDB viewer on curated MS/MS</span>\n<span class=\"keyword\">var</span> seqTable = <span class=\"function\">createSequenceTable</span>(preset.fasta);\n<span class=\"keyword\">var</span> msBlocks = <span class=\"function\">createBlockTable</span>(preset.tandem_ms_cscore);\n<span class=\"function\">main</span>(preset.fasta, preset.tandem_ms_cscore); <span class=\"comment\">// Syncs 3PGZ / 3R4G</span></pre>\n</div>\n<div class=\"card-footer\">\n<div class=\"licensing-box\">\n<div class=\"license-type\">Dual-Licensed: <br/><strong>AGPLv3</strong> / <strong>Proprietary Commercial</strong></div>\n<div class=\"price-tag\" style=\"font-size:0.9em;color:#888;\">Past Demo</div>\n</div>\n<div class=\"action-row\">\n<a class=\"btn btn-oss\" href=\"../research/xlpm/index.html\" style=\"border-color: var(--accent-green); color: var(--accent-green);\"><i class=\"fas fa-play-circle\"></i> Live Demo (6 Presets)</a>\n<button class=\"btn btn-commercial\" disabled=\"\" style=\"opacity: 0.7; cursor: not-allowed;\" type=\"button\"><i class=\"fas fa-info-circle\"></i> Not for Sale - Past Work Demo</button>\n</div>\n</div>\n</article>\n</div>\n</section>",
+          "content_html": "<section class=\"catalog-section\" id=\"catalog\">\n<div class=\"section-heading\">\n<h2>Core Software Component Catalog</h2>\n<p>Filter production-ready packages by AI &amp; data lifecycle stage. Our core niche is translating published academic research into robust enterprise libraries and innovating novel frameworks—delivering seamless data engineering and preparation pipelines right before data scientists operate. Built by academically trained graduate engineers adhering to ITIL certification standards.</p>\n</div>\n<div data-db-projects=\"storefront\" data-view=\"storefront-catalog\"></div>\n</section>",
           "content_text": "Core Software Component Catalog Filter production-ready packages by AI & data lifecycle stage. Inspect API usage, open-source repositories, and commercial node/seat licensing. ALL_SYSTEMS (7) DATA_CURATION (3) MODELING_ENGINES (2) VISUALIZATION_REPORTING (3) DATA_CURATION Python / Parquet / Lineage AILifecycleKit Lightweight Python SDK engineered to automate local dataset curation, data preprocessing, deterministic lineage versioning, and real-time tensor drift evaluation in production AI pipelines. import ailifecyclekit as alk\ntracker = alk. DriftTracker (baseline_dataset= \"v1_clean.parquet\" )\nanomalies = tracker. evaluate_stream (incoming_tensor, threshold= 0.85 )\ntracker. commit_lineage (export_path= \"./metadata/\" ) Dual-Licensed: AGPLv3 / Proprietary Commercial $499 /dev seat Source Code License Codebase MODELING_ENGINES Python / PyTorch / GCN ProtGram-DirectGCN Deep learning optimization pipeline engineered for structural protein-protein interaction (PPI) forecasting using hierarchical n-gram tokenization structures mapped directly to Graph Convolutional Networks. import protgram_gcn as pgg\npipeline = pgg. Pipeline (mode= \"direct\" )\nmatrix = pipeline. compute_ngrams (sequence_tensor)\npredictions = pipeline. eval_interaction (matrix) Dual-Licensed: AGPLv3 / Proprietary Commercial Past Demo Source Code Not for Sale - Past Work Demo DATA_CURATION Python / PyTorch / Vision EyeArt Engine Production-ready eye-tracking and behavioral visual telemetry processing array. Compiles high-frequency gaze and spatial video streams into localized feature vectors for neurological and HCI analytics. import eyeart as ea\ntracker = ea. SpatialTracker (precision= \"high\" )\nframe_stream = ea. load_video_pipeline ( \"./raw_data/\" )\ntelemetry = tracker. extract_vector_array (frame_stream) Dual-Licensed: MIT / Proprietary Commercial Past Demo Source Code Not for Sale - Past Work Demo VISUALIZATION_REPORTING C++ / CUDA / OpenGL RaymarcherVR Engine Ultra-low-latency C++ pipeline delivering direct raymarching shader computations inside virtual environments, CAVE projection rooms, quad-buffered stereo workstations, or head-mounted arrays. #include <raymarch_vr.h> VRRenderer* runtime = new VRRenderer();\nruntime-> initializeContext (QUAD_BUFFERED_STEREO);\nruntime-> injectComputeKernels (cuda_particles); Dual-Licensed: AGPLv3 / Proprietary Commercial Past Demo Source Code Not for Sale - Past Work Demo VISUALIZATION_REPORTING C++ / CUDA / OpenGL CudaParticles Engine High-performance particle interaction framework offloading multi-million point array physics calculations directly to NVIDIA CUDA compute units with zero-copy OpenGL pipeline integration. void computeStream () {\n    cudaMemcpy(d_data, h_data, size, cudaMemcpyHostToDevice);\n    runParticleKernel<<<blocks, threads>>>(d_data);\n} Dual-Licensed: AGPLv3 / Proprietary Commercial Past Demo Source Code Not for Sale - Past Work Demo MODELING_ENGINES Python / Graph ER / LSH ModER-GraphER Unsupervised graph entity resolution engine combining Locality-Sensitive Hashing (LSH) with Composite Modularity Optimization to deduplicate and link records across massive heterogeneous knowledge graphs. import moder_er as mer\nresolver = mer. ModularityResolver (lsh_bands= 16 )\nbipartite_graph = resolver. build_similarity_graph (records_df)\nclusters = resolver. optimize_communities (bipartite_graph) Dual-Licensed: AGPLv3 / Proprietary Commercial Past Demo Source Code Not for Sale - Past Work Demo DATA_CURATION + VISUALIZATION_REPORTING Perl / MySQL / D3.js / 3Dmol.js XLPM-VisIntX Suite End-to-end chemical cross-linking mass spectrometry (XL-MS) relational curation pipeline (15-table xlpmwebv1 schema, 5 ppm / 0.8 Da b/y ion matcher, 14N/15N isotope engine) paired with a 3-tier D3.js & 3Dmol.js WebGL dual-protein viewer. // Launch 3-level D3 matrix + 3Dmol.js PDB viewer on curated MS/MS var seqTable = createSequenceTable (preset.fasta); var msBlocks = createBlockTable (preset.tandem_ms_cscore); main (preset.fasta, preset.tandem_ms_cscore); // Syncs 3PGZ / 3R4G Dual-Licensed: AGPLv3 / Proprietary Commercial Past Demo Live Demo (6 Presets) Not for Sale - Past Work Demo",
           "order": 5
         },
@@ -3035,6 +3035,1630 @@
       "url": "https://doi.org/10.21900/iconf.2019.103363",
       "pdf_path": "",
       "bibtex": null
+    }
+  ],
+  "projects": [
+    {
+      "id": 23,
+      "slug": "protgram-directgcn",
+      "title": "ProtGram-DirectGCN",
+      "tagline": "Directed Graph Convolutional Networks on Dense Residue Transition Graphs for PPI Prediction",
+      "short_summary": "End-to-end deep learning pipeline inferring global dense residue transition graphs from primary protein sequences via hierarchical n-gram tokenization for directed GCN interaction prediction.",
+      "full_description": "Translates protein amino acid sequences directly into weighted, directed n-gram transition graphs, enabling Directed Graph Convolutional Networks (Dir-GCN) to predict protein-protein interactions (PPI) across species with strong generalization and physical interpretability without requiring 3D structures.",
+      "category": "AI & Life Sciences",
+      "domain_stage": "02_ai_modeling",
+      "status": "Published",
+      "year_start": 2023,
+      "year_end": 2025,
+      "institution_or_org": "Texas Woman's University (Data2AI4LifeSciences Lab)",
+      "grant_award": "TWU Startup Fund ($66K)",
+      "tech_stack": [
+        "Python",
+        "PyTorch",
+        "PyG / Dir-GCN",
+        "Bioinformatics"
+      ],
+      "code_snippet": "from protgram import DirectGCNModel\nmodel = DirectGCNModel(ngram=3, directed=True)\nprob = model.predict_ppi(seq_a, seq_b)",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "Custom Seat / Enterprise",
+      "storefront_category": "MODELING_ENGINES",
+      "is_featured": true,
+      "is_storefront": true,
+      "display_order": 1,
+      "artifacts": [
+        {
+          "type": "source_zip",
+          "label": "DiGCN Implementation Archive",
+          "url": "code/DiGCN.zip",
+          "badge": "ZIP",
+          "document_id": null
+        },
+        {
+          "type": "source_zip",
+          "label": "MultivariateGCN Benchmark Suite",
+          "url": "code/multivariategcn.zip",
+          "badge": "ZIP",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "GitHub Organization",
+          "url": "https://github.com/iebeid",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Bioinformatics",
+        "Graph Neural Networks",
+        "PPI Prediction",
+        "Proteomics",
+        "PyTorch"
+      ],
+      "publications": [
+        {
+          "id": 11,
+          "title": "Deep Learning and Graph Neural Networks for Protein-Protein Interaction Prediction: Cross-Species Benchmarking",
+          "authors": "Islam Akef Ebeid, et al.",
+          "venue": "Frontiers in Bioinformatics",
+          "year": 2025,
+          "doi": "10.3389/fbinf.2025.1651623",
+          "url": "https://doi.org/10.3389/fbinf.2025.1651623",
+          "pdf_path": "documents/Ebeid_Final_Paper.pdf"
+        }
+      ]
+    },
+    {
+      "id": 24,
+      "slug": "multimodal-med-seg",
+      "title": "Multimodal Medical Image Segmentation & Auto-Prompting",
+      "tagline": "Domain-Knowledge Auto-Prompting & Spatial Channel Attention for Clinical Imaging",
+      "short_summary": "NSF CISE/CCF collaborative project ($600K total / $210K TWU) integrating domain knowledge graphs with foundation segmentation models and Spatially Localized Channel Attention (SLCA).",
+      "full_description": "Collaborative research between Texas Woman's University and UT Rio Grande Valley developing automated textual auto-prompt generation grounded in biomedical domain knowledge alongside Spatially Localized Channel Attention (SLCA) over vision foundation models for medical image segmentation and classification.",
+      "category": "AI & Life Sciences",
+      "domain_stage": "02_ai_modeling",
+      "status": "Active Research",
+      "year_start": 2024,
+      "year_end": 2028,
+      "institution_or_org": "Texas Woman's University & UTRGV",
+      "grant_award": "NSF CISE-MSI #2523786 ($600K Total / $210K TWU)",
+      "tech_stack": [
+        "Python",
+        "PyTorch",
+        "Foundation Models",
+        "SLCA",
+        "Vision-Language"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic / NSF Open Science",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": true,
+      "is_storefront": false,
+      "display_order": 2,
+      "artifacts": [
+        {
+          "type": "lab_portal",
+          "label": "Data2AI4LifeSciences Lab",
+          "url": "pages/research/lab.html",
+          "badge": "Lab",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Data Quality",
+        "Foundation Models",
+        "Medical Imaging",
+        "NSF Grant",
+        "Neuro-Symbolic AI"
+      ],
+      "publications": []
+    },
+    {
+      "id": 25,
+      "slug": "xlpm-visintx",
+      "title": "XLPM & VisInt-X Proteomics Suite",
+      "tagline": "Cross-Linking Mass Spectrometry Curation & Interactive 3D WebGL Protein-Contact Viewer",
+      "short_summary": "End-to-end chemical cross-linking mass spectrometry (XL-MS) relational pipeline paired with a synchronized 3-tier D3.js contact heatmap/treemap and 3Dmol.js WebGL structural viewer.",
+      "full_description": "Combines the X-Link Peptide Mapping (XLPM) analysis algorithm (15-table xlpmwebv1 MySQL/Perl pipeline with 5 ppm / 0.8 Da b/y ion matcher and 14N/15N isotope engine) with VisInt-X, an interactive browser application coupling protein-level heatmaps, peptide treemaps, residue contact maps, and 3D WebGL tertiary structures.",
+      "category": "Bioinformatics & 3D Visualization",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Commercial / Published",
+      "year_start": 2015,
+      "year_end": 2023,
+      "institution_or_org": "UA Little Rock (EAC) & UAMS",
+      "grant_award": "EAC / UAMS Collaborative Research",
+      "tech_stack": [
+        "JavaScript",
+        "D3.js",
+        "3Dmol.js",
+        "WebGL",
+        "Perl",
+        "MySQL"
+      ],
+      "code_snippet": "visintx.mountViewer({\n  pdbId: '1AON', heatmapLevel: 3,\n  sync3DContacts: true\n});",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "Custom Seat / Enterprise",
+      "storefront_category": "DATA_CURATION VISUALIZATION_REPORTING",
+      "is_featured": true,
+      "is_storefront": true,
+      "display_order": 3,
+      "artifacts": [
+        {
+          "type": "live_demo",
+          "label": "Launch Live Interactive 3D Viewer",
+          "url": "pages/research/xlpm/index.html",
+          "badge": "Live WebGL",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "VisInt-X Repository",
+          "url": "https://github.com/iebeid/VisInt-X.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "video",
+          "label": "XLPM Action Demo Video",
+          "url": "videos/XLPM-Action.mp4",
+          "badge": "MP4",
+          "document_id": null
+        },
+        {
+          "type": "video",
+          "label": "XLPM Demo Video (YouTube)",
+          "url": "https://www.youtube.com/watch?v=yVLHPw4s47k",
+          "badge": "YouTube",
+          "document_id": null
+        },
+        {
+          "type": "video",
+          "label": "VisInt-X Walkthrough (YouTube)",
+          "url": "https://youtu.be/YdO3IQsTDq4",
+          "badge": "YouTube",
+          "document_id": null
+        },
+        {
+          "type": "paper_pdf",
+          "label": "VisInt-X Research Paper",
+          "url": "documents/IAE_VISINTX.pdf",
+          "badge": "PDF",
+          "document_id": 25
+        },
+        {
+          "type": "paper_pdf",
+          "label": "XLPM SPIE/IS&T Paper",
+          "url": "documents/XLPM-SPIE-IST-submission.pdf",
+          "badge": "PDF",
+          "document_id": 15
+        },
+        {
+          "type": "paper_pdf",
+          "label": "XLPM Perception Manuscript",
+          "url": "documents/XLPM-SPIE-IST-Manuscript.pdf",
+          "badge": "PDF",
+          "document_id": 58
+        },
+        {
+          "type": "paper_pdf",
+          "label": "XLPM Spatial Auto-Calibration",
+          "url": "documents/XLPM Map.pdf",
+          "badge": "PDF",
+          "document_id": 19
+        },
+        {
+          "type": "paper_pdf",
+          "label": "XLPM Extended Abstract",
+          "url": "documents/xlpm-nofigures-final.pdf",
+          "badge": "PDF",
+          "document_id": 2
+        },
+        {
+          "type": "slides",
+          "label": "VisInt-X MCBIOS Presentation",
+          "url": "documents/visintx_presentation.pdf",
+          "badge": "PDF",
+          "document_id": 3
+        },
+        {
+          "type": "slides",
+          "label": "XLPM Map Viewer Deck",
+          "url": "documents/XLPM-Map-Viewer-Final.pptx",
+          "badge": "PPTX",
+          "document_id": 61
+        }
+      ],
+      "tags": [
+        "3D Visualization",
+        "D3.js",
+        "Interactive Demo",
+        "Proteomics",
+        "WebGL",
+        "XL-MS"
+      ],
+      "publications": [
+        {
+          "id": 12,
+          "title": "XLPM: Cross-Linking Mass Spectrometry 3D Molecular Visualization and Structural Analysis",
+          "authors": "Islam Akef Ebeid, John R. Talburt",
+          "venue": "SPIE / IS&T Electronic Imaging",
+          "year": 2023,
+          "doi": "",
+          "url": "",
+          "pdf_path": "documents/XLPM-SPIE-IST-submission.pdf"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "slug": "xlpmol-viewer",
+      "title": "XLPMOL: OpenGL Protein Model Viewer",
+      "tagline": "Native Desktop 3D Molecular Interaction & Cross-Link Structure Visualizer",
+      "short_summary": "Standalone C++/OpenGL desktop molecular structure and cross-linking mass spectrometry (CXMS) contact viewer with real-time residue highlighting.",
+      "full_description": "Desktop molecular visualization companion to XLPM engineered in C++ and OpenGL for inspecting cross-linked peptide spectra mapped onto three-dimensional PDB protein geometries.",
+      "category": "Bioinformatics & 3D Visualization",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Published",
+      "year_start": 2016,
+      "year_end": 2022,
+      "institution_or_org": "UA Little Rock (Emerging Analytics Center)",
+      "grant_award": "",
+      "tech_stack": [
+        "C++",
+        "OpenGL",
+        "PDB / FASTA"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic / Open Source",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 4,
+      "artifacts": [
+        {
+          "type": "github_repo",
+          "label": "XLPMOL Repository",
+          "url": "https://github.com/iebeid/xlpmol.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "paper_pdf",
+          "label": "XLPMol3DViewer Paper",
+          "url": "documents/XLPMol3DViewer.pdf",
+          "badge": "PDF",
+          "document_id": 23
+        }
+      ],
+      "tags": [
+        "C++",
+        "Molecular Visualization",
+        "OpenGL",
+        "Proteomics"
+      ],
+      "publications": [
+        {
+          "id": 13,
+          "title": "XLPMol3DViewer: An Interactive WebGL-Based Biomolecular 3D Structure and Contact Map Viewer",
+          "authors": "Islam Akef Ebeid, et al.",
+          "venue": "Journal of Molecular Graphics & Modelling",
+          "year": 2022,
+          "doi": "",
+          "url": "",
+          "pdf_path": "documents/XLPMol3DViewer.pdf"
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "slug": "dataintegrationtoolkit",
+      "title": "DataIntegrationToolkit (DITK)",
+      "tagline": "Medallion Lakehouse & Generalized ML Data Preparation Pipeline",
+      "short_summary": "Generalized Lakehouse and Data Preparation Engine (Bronze -> Silver -> Gold) with automated ingestion, fuzzy blocking, and scalable Entity Resolution prior to AI/ML modeling.",
+      "full_description": "High-performance data engineering toolkit eliminating the pre-modeling bottleneck right before data scientists operate. Implements tiered Medallion Lakehouse storage, deterministic schema mapping, and scalable entity resolution generalized for any downstream machine learning or AI modeling pipeline.",
+      "category": "Data Engineering & Entity Resolution",
+      "domain_stage": "01_data_prep",
+      "status": "Commercial / OSS",
+      "year_start": 2023,
+      "year_end": 2026,
+      "institution_or_org": "Unity Systems",
+      "grant_award": "",
+      "tech_stack": [
+        "Python",
+        "Medallion Lakehouse",
+        "Parquet",
+        "Entity Resolution"
+      ],
+      "code_snippet": "import dataintegrationtoolkit as ditk\nlake = ditk.Lakehouse('./lakehouse')\nclean = lake.prepare_ml_dataset('records.parquet')",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "$999/dev seat",
+      "storefront_category": "DATA_CURATION MODELING_ENGINES",
+      "is_featured": true,
+      "is_storefront": true,
+      "display_order": 5,
+      "artifacts": [
+        {
+          "type": "github_repo",
+          "label": "DITK Repository",
+          "url": "https://github.com/iebeid/DataIntegrationToolkit",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Data Engineering",
+        "Entity Resolution",
+        "Feature Prep",
+        "ML Pipeline",
+        "Medallion Lakehouse"
+      ],
+      "publications": []
+    },
+    {
+      "id": 28,
+      "slug": "ailifecyclekit",
+      "title": "AILifecycleKit",
+      "tagline": "Deterministic Dataset Lineage, Curation & Real-Time Tensor Drift SDK",
+      "short_summary": "Lightweight Python SDK automating local dataset curation, deterministic lineage versioning, and real-time tensor drift evaluation across production AI pipelines.",
+      "full_description": "Built for production ML engineering teams and ITIL-governed AI lifecycles to track training dataset provenance, detect feature/tensor distribution drift prior to inference degradation, and export reproducible lineage manifests.",
+      "category": "Data Engineering & Entity Resolution",
+      "domain_stage": "01_data_prep",
+      "status": "Commercial / OSS",
+      "year_start": 2024,
+      "year_end": 2026,
+      "institution_or_org": "Unity Systems",
+      "grant_award": "",
+      "tech_stack": [
+        "Python",
+        "Parquet",
+        "Lineage",
+        "Drift Detection"
+      ],
+      "code_snippet": "import ailifecyclekit as alk\ntracker = alk.DriftTracker(baseline_dataset='v1_clean.parquet')\nanomalies = tracker.evaluate_stream(incoming_tensor, threshold=0.85)",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "$499/dev seat",
+      "storefront_category": "DATA_CURATION",
+      "is_featured": true,
+      "is_storefront": true,
+      "display_order": 6,
+      "artifacts": [
+        {
+          "type": "pip_command",
+          "label": "PyPI Install Command",
+          "url": "pip install ailifecyclekit",
+          "badge": "pip",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Source Repository",
+          "url": "https://github.com/iebeid",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "AI Lifecycle",
+        "Data Quality",
+        "Drift Detection",
+        "Lineage",
+        "Python SDK"
+      ],
+      "publications": []
+    },
+    {
+      "id": 29,
+      "slug": "moder-grapher",
+      "title": "ModER & ModER-GraphER",
+      "tagline": "Unsupervised Graph-Based Entity Resolution via Composite Modularity Optimization & LSH",
+      "short_summary": "Doctoral dissertation and unsupervised graph entity resolution engine combining Locality-Sensitive Hashing (LSH) with Composite Modularity Optimization to resolve ambiguous records.",
+      "full_description": "Addresses identity ambiguity across heterogeneous data sources without labeled training pairs by constructing similarity graphs over blocked candidate pairs via LSH and partitioning clusters via composite graph modularity optimization. Also includes TransER (hierarchical record clustering).",
+      "category": "Data Engineering & Entity Resolution",
+      "domain_stage": "02_ai_modeling",
+      "status": "Published / Commercial",
+      "year_start": 2020,
+      "year_end": 2025,
+      "institution_or_org": "UA Little Rock & Unity Systems",
+      "grant_award": "NSF Sponsored Ph.D. Research",
+      "tech_stack": [
+        "Python",
+        "Graph ER",
+        "LSH",
+        "Modularity Optimization",
+        "NLP"
+      ],
+      "code_snippet": "from moder import GraphEREngine\ner = GraphEREngine(lsh_bands=16, resolution=1.0)\nclusters = er.resolve_entities(heterogeneous_records)",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "Custom Seat / Enterprise",
+      "storefront_category": "MODELING_ENGINES",
+      "is_featured": true,
+      "is_storefront": true,
+      "display_order": 7,
+      "artifacts": [
+        {
+          "type": "publisher_url",
+          "label": "IJACSA Journal Paper",
+          "url": "https://doi.org/10.14569/IJACSA.2022.0130901",
+          "badge": "DOI",
+          "document_id": null
+        },
+        {
+          "type": "publisher_url",
+          "label": "ITNG 2022 Springer Chapter (TransER)",
+          "url": "https://link.springer.com/chapter/10.1007/978-3-030-98974-5_8",
+          "badge": "Springer",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Source Registry",
+          "url": "https://github.com/iebeid",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Data Quality",
+        "Entity Resolution",
+        "Graph Clustering",
+        "LSH",
+        "PhD Dissertation"
+      ],
+      "publications": [
+        {
+          "id": 15,
+          "title": "Information Quality and Entity Resolution in Healthcare Information Exchange Systems",
+          "authors": "Islam Akef Ebeid, John R. Talburt",
+          "venue": "iConference Proceedings",
+          "year": 2019,
+          "doi": "10.21900/iconf.2019.103363",
+          "url": "https://doi.org/10.21900/iconf.2019.103363",
+          "pdf_path": ""
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "slug": "medgraph-pubmed-kg",
+      "title": "PubMed Knowledge Graph & MedGraph",
+      "tagline": "Semantic Biomedical Information Retrieval via Knowledge Graph Embeddings",
+      "short_summary": "Integrates PubMed biomedical literature entities, NIH grants, and author disambiguation into a Knowledge Graph with Node2Vec embeddings for semantic literature search.",
+      "full_description": "Constructed bio-entity knowledge graphs over millions of PubMed abstracts using fine-tuned BERT NER and author disambiguation (Scientific Data 2020), then engineered MedGraph—a semantic search and document-ranking engine using Node2Vec/Skip-gram graph embeddings (Frontiers in Big Data 2022).",
+      "category": "AI & Life Sciences",
+      "domain_stage": "02_ai_modeling",
+      "status": "Published",
+      "year_start": 2019,
+      "year_end": 2022,
+      "institution_or_org": "UT Austin & UA Little Rock",
+      "grant_award": "",
+      "tech_stack": [
+        "Python",
+        "Node2Vec",
+        "BERT NER",
+        "Knowledge Graphs",
+        "Information Retrieval"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic / Open Science",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 8,
+      "artifacts": [
+        {
+          "type": "publisher_url",
+          "label": "MedGraph Paper (Frontiers in Big Data)",
+          "url": "https://doi.org/10.3389/fdata.2022.1028994",
+          "badge": "DOI",
+          "document_id": null
+        },
+        {
+          "type": "publisher_url",
+          "label": "PubMed KG Paper (Nature Scientific Data)",
+          "url": "https://doi.org/10.1038/s41597-020-0583-0",
+          "badge": "DOI",
+          "document_id": null
+        },
+        {
+          "type": "slides",
+          "label": "MedGraph MSc Defense Deck",
+          "url": "documents/MedGraph-Final-Presentation.pptx",
+          "badge": "PPTX",
+          "document_id": 60
+        },
+        {
+          "type": "paper_pdf",
+          "label": "KG Mining Qualifying Paper",
+          "url": "documents/UT-Qualifying-Paper.pdf",
+          "badge": "PDF",
+          "document_id": 57
+        }
+      ],
+      "tags": [
+        "BERT",
+        "Information Retrieval",
+        "Knowledge Graphs",
+        "Node2Vec",
+        "PubMed"
+      ],
+      "publications": []
+    },
+    {
+      "id": 31,
+      "slug": "chem2bio2rdf-drug-repurposing",
+      "title": "Chem2Bio2RDF Knowledge Graph Drug-Target Prediction",
+      "tagline": "Metapath2Vec, Edge2Vec & GraphSage Embeddings for Computational Drug Repurposing",
+      "short_summary": "AbbVie & UT Austin collaboration evaluating heterogeneous graph embedding models across 30,000 compound-protein pairs extracted from Chem2Bio2RDF.",
+      "full_description": "Systematically benchmarked Node2Vec, Edge2Vec, Metapath2Vec (49 biomedical metapaths), and GraphSage with Top-K similarity refinement for drug-target interaction and drug repurposing candidate prediction (iConference 2021).",
+      "category": "AI & Life Sciences",
+      "domain_stage": "02_ai_modeling",
+      "status": "Published",
+      "year_start": 2020,
+      "year_end": 2021,
+      "institution_or_org": "AbbVie Inc. & UT Austin",
+      "grant_award": "",
+      "tech_stack": [
+        "Python",
+        "Metapath2Vec",
+        "GraphSage",
+        "RDF / Chem2Bio2RDF",
+        "Link Prediction"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 9,
+      "artifacts": [
+        {
+          "type": "poster",
+          "label": "KG Mining Poster (AbbVie 2020)",
+          "url": "documents/Bioinformatics_Poster_2020.pptx",
+          "badge": "PPTX",
+          "document_id": 63
+        }
+      ],
+      "tags": [
+        "AbbVie",
+        "Chem2Bio2RDF",
+        "Drug Discovery",
+        "Knowledge Graphs",
+        "Metapath2Vec"
+      ],
+      "publications": []
+    },
+    {
+      "id": 32,
+      "slug": "covidnlpgraph",
+      "title": "CovidNLPGraph & Scientometric Entity Networks",
+      "tagline": "Open Biomedical Entity & Paper-Entity Citation Graph Dataset",
+      "short_summary": "Extracted COVID-19 biomedical entities, MeSH/chemical relations, and citation network samples supporting Scientometrics & ACM KDD knowledge graph studies.",
+      "full_description": "Provides open sample datasets and entity-metric citation networks uniting COVID-19 literature entities across drugs, diseases, genes, and authors for bibliometric and computational social science research (Scientometrics 2021/2022, KDD 2020).",
+      "category": "Data Engineering & Entity Resolution",
+      "domain_stage": "01_data_prep",
+      "status": "Published Dataset",
+      "year_start": 2020,
+      "year_end": 2022,
+      "institution_or_org": "UT Austin",
+      "grant_award": "",
+      "tech_stack": [
+        "Python",
+        "NLP",
+        "Knowledge Graphs",
+        "Scientometrics"
+      ],
+      "code_snippet": "",
+      "license_model": "Open Dataset",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 10,
+      "artifacts": [
+        {
+          "type": "dataset",
+          "label": "CovidNLPGraph Sample Dataset (.zip)",
+          "url": "data/CovidNLPGraph_Sample.zip",
+          "badge": "ZIP",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "COVID-19",
+        "Knowledge Graphs",
+        "NLP",
+        "Open Dataset",
+        "Scientometrics"
+      ],
+      "publications": []
+    },
+    {
+      "id": 33,
+      "slug": "eyeadapt-gdwm",
+      "title": "EyeArt / EyeAdapt Engine & GDWM",
+      "tagline": "Real-Time Gaze Transition Entropy, Markov Cognitive Modeling & Adaptive UIs",
+      "short_summary": "Eye-tracking & biometric cognitive-load engine using Bayesian mixed-effects Markov models and real-time gaze transition entropy, sponsored by Lockheed Martin (ACM ETRA Best Short Paper).",
+      "full_description": "Includes real-time gaze entropy estimation, Bayesian semi-parametric mixed-effects Markov scanpath modeling, Gaze Directed Window Management (GDWM) simulation harness, and adaptive C4ISR UI prototypes developed at UT Austin.",
+      "category": "Scientific Visualization & HCI",
+      "domain_stage": "01_data_prep",
+      "status": "Published / Commercial",
+      "year_start": 2017,
+      "year_end": 2020,
+      "institution_or_org": "UT Austin & Lockheed Martin RMS",
+      "grant_award": "Lockheed Martin Sponsored R&D",
+      "tech_stack": [
+        "Python",
+        "PyTorch",
+        "Eye Tracking",
+        "Bayesian Markov Models",
+        "OpenCV"
+      ],
+      "code_snippet": "from eyeart import TelemetryStream\nstream = TelemetryStream(hz=120)\nentropy = stream.compute_transition_entropy()",
+      "license_model": "Dual-Licensed: MIT / Proprietary Commercial",
+      "price_display": "Custom Seat / Enterprise",
+      "storefront_category": "DATA_CURATION",
+      "is_featured": true,
+      "is_storefront": true,
+      "display_order": 11,
+      "artifacts": [
+        {
+          "type": "source_zip",
+          "label": "EyeAdaptEngine Source & Eval Suite (.zip)",
+          "url": "code/EyeAdaptEngine.zip",
+          "badge": "ZIP",
+          "document_id": null
+        },
+        {
+          "type": "video",
+          "label": "Eye-Tracking Simulation Video",
+          "url": "videos/Eye-Tracking-Sim.mp4",
+          "badge": "MP4",
+          "document_id": null
+        },
+        {
+          "type": "slides",
+          "label": "Lockheed Martin / UTA Eye-Tracking Deck",
+          "url": "documents/UTA-Eye-Tracking-2018.pptx",
+          "badge": "PPTX",
+          "document_id": 62
+        },
+        {
+          "type": "publisher_url",
+          "label": "ETRA 2019 Paper (Best Short Paper)",
+          "url": "https://doi.org/10.1145/3317956.3318151",
+          "badge": "DOI",
+          "document_id": null
+        },
+        {
+          "type": "publisher_url",
+          "label": "ETRA 2018 Paper (Real-time Entropy)",
+          "url": "https://doi.org/10.1145/3204493.3208340",
+          "badge": "DOI",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Bayesian Markov",
+        "Best Paper Award",
+        "Cognitive Load",
+        "Eye Tracking",
+        "HCI"
+      ],
+      "publications": []
+    },
+    {
+      "id": 34,
+      "slug": "raymarchervr",
+      "title": "RaymarcherVR Engine",
+      "tagline": "Stereoscopic C++ / CUDA / OpenGL Direct Raymarching Shader Engine",
+      "short_summary": "Ultra-low-latency C++ and GLSL/CUDA pipeline delivering direct stereoscopic raymarching shaders inside CAVE projection rooms, quad-buffered workstations, and HMDs.",
+      "full_description": "Engineered for real-time volumetric and signed-distance-field rendering across synchronized multi-wall CAVE VR clusters and desktop stereo displays.",
+      "category": "Scientific Visualization & HCI",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Commercial / OSS",
+      "year_start": 2015,
+      "year_end": 2018,
+      "institution_or_org": "UA Little Rock (EAC) & Unity Systems",
+      "grant_award": "",
+      "tech_stack": [
+        "C++",
+        "CUDA",
+        "OpenGL",
+        "GLSL",
+        "VR / Stereo"
+      ],
+      "code_snippet": "RaymarcherVR::Context ctx(StereoMode::QUAD_BUFFERED);\nctx.compileShader(\"volumetric_sdf.glsl\");\nctx.renderFrame();",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "Custom Seat / Enterprise",
+      "storefront_category": "VISUALIZATION_REPORTING",
+      "is_featured": false,
+      "is_storefront": true,
+      "display_order": 12,
+      "artifacts": [
+        {
+          "type": "github_repo",
+          "label": "RaymarcherVR Repository",
+          "url": "https://github.com/iebeid/RaymarcherVR.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Quad Buffered Stereo Repo",
+          "url": "https://github.com/iebeid/quad-buffered-stereo.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "DICOM to Isosurface Repo",
+          "url": "https://github.com/iebeid/dicom-to-isosurface.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "C++",
+        "CUDA",
+        "OpenGL",
+        "Raymarching",
+        "Stereoscopic 3D",
+        "VR"
+      ],
+      "publications": []
+    },
+    {
+      "id": 35,
+      "slug": "cudaparticles",
+      "title": "CudaParticles Engine",
+      "tagline": "Zero-Copy Multi-Million Particle Simulation & GPU Rendering Engine",
+      "short_summary": "High-performance particle physics framework offloading multi-million point array computations to NVIDIA CUDA cores with zero-copy OpenGL interop rendering.",
+      "full_description": "Parallel GPU compute engine written in C++, CUDA, and OpenGL using shared VBO memory buffers for interactive fluid, molecular, and astrophysics particle simulations.",
+      "category": "Scientific Visualization & HCI",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Commercial / OSS",
+      "year_start": 2015,
+      "year_end": 2017,
+      "institution_or_org": "UA Little Rock (EAC) & Unity Systems",
+      "grant_award": "",
+      "tech_stack": [
+        "C++",
+        "CUDA",
+        "OpenGL",
+        "GPU Interop"
+      ],
+      "code_snippet": "CudaParticleSystem sys(2_000_000);\nsys.stepPhysicsCUDA(dt);\nsys.renderZeroCopyGL();",
+      "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
+      "price_display": "Custom Seat / Enterprise",
+      "storefront_category": "VISUALIZATION_REPORTING",
+      "is_featured": false,
+      "is_storefront": true,
+      "display_order": 13,
+      "artifacts": [
+        {
+          "type": "github_repo",
+          "label": "CudaParticles Repository",
+          "url": "https://github.com/iebeid/cuda-particles.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "C++",
+        "CUDA",
+        "GPU Compute",
+        "OpenGL",
+        "Particle Simulation"
+      ],
+      "publications": []
+    },
+    {
+      "id": 36,
+      "slug": "cave-realtime-scanner",
+      "title": "CAVE Real-Time 3D Object Scanner & Sensor Tracking",
+      "tagline": "Intel RealSense RGB-D Turntable Mesh Reconstruction & CAVE Manipulation",
+      "short_summary": "Real-time RGB-D object scanning, Marching Cubes mesh generation, and Leap Motion / Kinect gesture interaction inside a cluster-driven VR-Juggler CAVE.",
+      "full_description": "Combines Intel RealSense depth cameras, custom turntable scanning, Visual SLAM GPU tracking, and VR-Juggler C++ stereo rendering to capture physical objects and manipulate their 3D meshes interactively inside immersive CAVE rooms.",
+      "category": "Scientific Visualization & HCI",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Published",
+      "year_start": 2015,
+      "year_end": 2018,
+      "institution_or_org": "UA Little Rock (EAC) & TACC / Intel",
+      "grant_award": "ACM ETRA / VR-Juggler Project",
+      "tech_stack": [
+        "C++",
+        "Intel RealSense SDK",
+        "VR-Juggler",
+        "OpenGL",
+        "Leap Motion",
+        "Kinect"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic / Open Source",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 14,
+      "artifacts": [
+        {
+          "type": "paper_pdf",
+          "label": "CAVE Real-Time Scanner Paper",
+          "url": "documents/vr-project-final-paper.pdf",
+          "badge": "PDF",
+          "document_id": 1
+        },
+        {
+          "type": "paper_pdf",
+          "label": "Scanner Technical Report",
+          "url": "documents/Real.pdf",
+          "badge": "PDF",
+          "document_id": 18
+        },
+        {
+          "type": "paper_pdf",
+          "label": "VR Project Proposal",
+          "url": "documents/vr-project-proposal.pdf",
+          "badge": "PDF",
+          "document_id": 5
+        },
+        {
+          "type": "video",
+          "label": "CAVE-in-a-Box VR Demo",
+          "url": "videos/CaveInABox.webm",
+          "badge": "WebM",
+          "document_id": null
+        },
+        {
+          "type": "video",
+          "label": "RealSense Turntable Demo (YouTube)",
+          "url": "https://youtu.be/TkIpVOf5Kmc",
+          "badge": "YouTube",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Real-time CAVE Scanner Repo",
+          "url": "https://github.com/iebeid/realtime-cave-scanner.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "RealSense CM VIVE SLAM Repo",
+          "url": "https://github.com/iebeid/RealSense_CM_VIVE_SLAM.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "RealSense Tracking Repo",
+          "url": "https://github.com/iebeid/realsense-tracking.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "CAVE LeapMotion Repo",
+          "url": "https://github.com/iebeid/cave-leapmotion.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "CAVE VR-Juggler Interactivity",
+          "url": "https://github.com/iebeid/cave-vrjuggler-interactivity.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "CAVE Point Cloud Viewer",
+          "url": "https://github.com/iebeid/cave-vrjuggler-pointcloud-viewer.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "3D Scanning",
+        "CAVE VR",
+        "Intel RealSense",
+        "Leap Motion",
+        "SLAM",
+        "VR-Juggler"
+      ],
+      "publications": [
+        {
+          "id": 14,
+          "title": "Immersive Virtual Reality for Protein Structure Exploration in CAVE Environments",
+          "authors": "Islam Akef Ebeid, Dirk Reiners, Carolina Cruz-Neira",
+          "venue": "ACM Symposium on Eye Tracking Research & Applications (ETRA)",
+          "year": 2019,
+          "doi": "10.1145/3314111.3319832",
+          "url": "https://doi.org/10.1145/3314111.3319832",
+          "pdf_path": "documents/vr-project-final-paper.pdf"
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "slug": "cluster-webgl-earthviz",
+      "title": "ClusterWebGL, EarthViz & CAVE Geovisualization",
+      "tagline": "Synchronized Multi-View WebGL Tiled Walls & Geospatial Visualization",
+      "short_summary": "Synchronized cluster WebGL rendering for high-resolution tiled display walls alongside EarthViz KML geospatial analytics and Google Earth / Photosphere CAVE viewers.",
+      "full_description": "Spanning synchronized camera transforms across tiled wall displays using WebGL/Three.js, KML-driven geographic store & supply-chain telemetry (EarthViz), and immersive Google Earth CAVE environments.",
+      "category": "Scientific Visualization & HCI",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Published",
+      "year_start": 2014,
+      "year_end": 2018,
+      "institution_or_org": "UA Little Rock (EAC) & UT Austin (TACC)",
+      "grant_award": "",
+      "tech_stack": [
+        "WebGL",
+        "Three.js",
+        "Python",
+        "KML",
+        "Unity",
+        "OpenGL"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic / Open Source",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 15,
+      "artifacts": [
+        {
+          "type": "source_zip",
+          "label": "EarthViz Source Archive (.zip)",
+          "url": "code/EarthViz.zip",
+          "badge": "ZIP",
+          "document_id": null
+        },
+        {
+          "type": "video",
+          "label": "Retail Geography Visualization Demo",
+          "url": "videos/Walmart-Vis.webm",
+          "badge": "WebM",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Cluster WebGL Repo",
+          "url": "https://github.com/iebeid/cluster-webgl.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "CAVE Google Earth Repo",
+          "url": "https://github.com/iebeid/cave-google-earth.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Photo-sphere CAVE Viewer Repo",
+          "url": "https://github.com/iebeid/Photo-sphere-CAVE-Viewer.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Info-Viz Unity VR Repo",
+          "url": "https://github.com/iebeid/info-viz-unity.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Geovisualization",
+        "KML",
+        "Tiled Display Wall",
+        "Unity VR",
+        "WebGL"
+      ],
+      "publications": []
+    },
+    {
+      "id": 38,
+      "slug": "lda-topic-modeling",
+      "title": "LDA Topic Modeling: Mallet vs. Gensim Benchmark",
+      "tagline": "Empirical Evaluation of Latent Dirichlet Allocation Frameworks on 20 Newsgroups",
+      "short_summary": "Comparative study of Mallet and Gensim LDA topic modeling pipelines across preprocessing, stop-word tuning, topic coherence, and execution speed.",
+      "full_description": "Evaluates statistical word co-occurrence topic extraction using Latent Dirichlet Allocation (LDA) across 20,000 Usenet documents (20 Newsgroups corpus), comparing Java Mallet Gibbs sampling against Python Gensim.",
+      "category": "Data Engineering & Entity Resolution",
+      "domain_stage": "01_data_prep",
+      "status": "Published Report",
+      "year_start": 2016,
+      "year_end": 2016,
+      "institution_or_org": "UA Little Rock",
+      "grant_award": "",
+      "tech_stack": [
+        "Python",
+        "Gensim",
+        "Mallet",
+        "LDA",
+        "NLP"
+      ],
+      "code_snippet": "",
+      "license_model": "Open Source",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 16,
+      "artifacts": [
+        {
+          "type": "paper_pdf",
+          "label": "Final Benchmark Report",
+          "url": "documents/FinalReportInfoSci.pdf",
+          "badge": "PDF",
+          "document_id": 24
+        },
+        {
+          "type": "github_repo",
+          "label": "Gensim Topic Modelling Repo",
+          "url": "https://github.com/iebeid/gensim-topic-modelling.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Gensim",
+        "LDA",
+        "Mallet",
+        "NLP",
+        "Topic Modeling"
+      ],
+      "publications": []
+    },
+    {
+      "id": 39,
+      "slug": "healthcare-data-governance",
+      "title": "Healthcare Big Data Governance & National Lab IT Security Policy",
+      "tagline": "Information Quality Governance, E-Discovery & Laboratory Security Frameworks",
+      "short_summary": "Architectural frameworks for clinical Big Data governance alongside formal IT Security Policies, Data Stewardship, and E-Discovery standards for research laboratories.",
+      "full_description": "Combines graduate research on Healthcare Information Systems governance (clinical, billing, EHR data stewardship) with formal security policy engineering authored for the National Visualization Laboratory.",
+      "category": "Data Engineering & Entity Resolution",
+      "domain_stage": "01_data_prep",
+      "status": "Published Report",
+      "year_start": 2014,
+      "year_end": 2016,
+      "institution_or_org": "UA Little Rock",
+      "grant_award": "",
+      "tech_stack": [
+        "Information Governance",
+        "ITIL",
+        "HIPAA / Security Policies",
+        "Data Quality"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 17,
+      "artifacts": [
+        {
+          "type": "paper_pdf",
+          "label": "Healthcare Big Data Governance Paper",
+          "url": "documents/Ebeid_Final_Paper.pdf",
+          "badge": "PDF",
+          "document_id": 36
+        },
+        {
+          "type": "paper_pdf",
+          "label": "National Visualization Lab Security Policies",
+          "url": "documents/The-National-Visualization-Lab.pdf",
+          "badge": "PDF",
+          "document_id": 7
+        },
+        {
+          "type": "paper_pdf",
+          "label": "IT Security & E-Discovery Policies",
+          "url": "documents/IT Policies.pdf",
+          "badge": "PDF",
+          "document_id": 6
+        },
+        {
+          "type": "github_repo",
+          "label": "Data Governance Repo",
+          "url": "https://github.com/iebeid/data-governance.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Data Security Repo",
+          "url": "https://github.com/iebeid/data-security.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Data Governance",
+        "E-Discovery",
+        "Healthcare Systems",
+        "IT Security",
+        "ITIL"
+      ],
+      "publications": []
+    },
+    {
+      "id": 40,
+      "slug": "smart-promotion-tool",
+      "title": "Smart Promotion Tool (Smart Promo / SPT)",
+      "tagline": "Enterprise Telecom Campaign Automation & Tariff Rule Engine",
+      "short_summary": "Commercial campaign configuration and promotion engine built for Maroc Telecom to slash time-to-market for subscriber promotional tariffs and billing rules.",
+      "full_description": "Engineered during telecom consulting delivery to replace error-prone manual billing configuration with an automated rule validation, promotion templating, and campaign deployment suite.",
+      "category": "Industry & Enterprise Systems",
+      "domain_stage": "01_data_prep",
+      "status": "Production Delivered",
+      "year_start": 2010,
+      "year_end": 2011,
+      "institution_or_org": "Maroc Telecom / Telecom Delivery",
+      "grant_award": "",
+      "tech_stack": [
+        "Java",
+        "Enterprise Billing",
+        "BSCS",
+        "SQL"
+      ],
+      "code_snippet": "",
+      "license_model": "Enterprise Consulting Case Study",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 18,
+      "artifacts": [
+        {
+          "type": "paper_pdf",
+          "label": "Smart Promotion Tool Portfolio Spec",
+          "url": "documents/Smart Promotion Tool.pdf",
+          "badge": "PDF",
+          "document_id": 42
+        },
+        {
+          "type": "github_repo",
+          "label": "Smart Promotion Tool Repo",
+          "url": "https://github.com/iebeid/smart-promotion-tool.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Billing Systems",
+        "Enterprise Software",
+        "Maroc Telecom",
+        "Telecom"
+      ],
+      "publications": []
+    },
+    {
+      "id": 41,
+      "slug": "contract-print-bscs",
+      "title": "Contract Print Suite & BSCS iX R2 Billing Migration",
+      "tagline": "Automated Subscriber Contract Rendering & Telecom Billing UAT (Tunisie Telecom)",
+      "short_summary": "Enterprise billing contract printing application (Impression Contrat Client) and BSCS iX R2 migration UAT suite delivered for Tunisie Telecom & telecom carriers.",
+      "full_description": "Delivered bilingual French/Arabic commercial contract generation and high-volume telecom billing User Acceptance Testing (UAT) alongside RAID Revenue Assurance and EAI WebMethods integrations.",
+      "category": "Industry & Enterprise Systems",
+      "domain_stage": "03_visualization_kpi",
+      "status": "Production Delivered",
+      "year_start": 2009,
+      "year_end": 2011,
+      "institution_or_org": "Tunisie Telecom / Orange / WeDo Technologies",
+      "grant_award": "",
+      "tech_stack": [
+        "Java",
+        "WebMethods EAI",
+        "Oracle SQL",
+        "BSCS iX R2",
+        "RAID"
+      ],
+      "code_snippet": "",
+      "license_model": "Enterprise Consulting Case Study",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 19,
+      "artifacts": [
+        {
+          "type": "paper_pdf",
+          "label": "User Guide (French Edition)",
+          "url": "documents/Application_du_contrat_d_impression_guide_de_l_utilisateur.pdf",
+          "badge": "PDF",
+          "document_id": 43
+        },
+        {
+          "type": "github_repo",
+          "label": "Contract Print Layout Repo",
+          "url": "https://github.com/iebeid/contract-print-layout.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "BSCS Migration Repo",
+          "url": "https://github.com/iebeid/bscs-migration.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "WebMethods EAI Suite Repo",
+          "url": "https://github.com/iebeid/webmethods.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "RAID Revenue Assurance Tutorial",
+          "url": "https://github.com/iebeid/raid-tutorial.git",
+          "badge": "GitHub",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "BSCS",
+        "EAI",
+        "Enterprise",
+        "Revenue Assurance",
+        "Tunisie Telecom"
+      ],
+      "publications": []
+    },
+    {
+      "id": 42,
+      "slug": "arkansas-gov-enterprise-suite",
+      "title": "Arkansas.gov Civic Portal & Enterprise Data Warehousing Suite",
+      "tagline": "State Government Web Services, OLAP Data Warehousing & Review Workflows",
+      "short_summary": "Public-sector software engineering for Arkansas.gov (INA/NIC) alongside OLAP Retail Data Warehouses, HR management, inventory systems, and conference paper review platforms.",
+      "full_description": "Covers full-stack web engineering for the State of Arkansas Information Network (INA) plus enterprise data warehouse modeling (Pet Store OLAP), Smart-HRM, Jupiter Inventory, CIS Department database, GA Timesheets, and academic peer-review web applications.",
+      "category": "Industry & Enterprise Systems",
+      "domain_stage": "01_data_prep",
+      "status": "Production / Archived",
+      "year_start": 2011,
+      "year_end": 2014,
+      "institution_or_org": "Information Network of Arkansas (Arkansas.gov) & ATU",
+      "grant_award": "",
+      "tech_stack": [
+        "Java",
+        "C#",
+        "PHP",
+        "SQL / OLAP",
+        "Web Engineering"
+      ],
+      "code_snippet": "",
+      "license_model": "Open Source / Portfolio",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 20,
+      "artifacts": [
+        {
+          "type": "github_repo",
+          "label": "Information Network of Arkansas Repo",
+          "url": "https://github.com/iebeid/information-network-of-arkansas.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "PetStore Data Warehouse Repo",
+          "url": "https://github.com/iebeid/petstore-dataware-house.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Paper Submission & Review App Repo",
+          "url": "https://github.com/iebeid/paper-submission-application.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Smart-HRM Repo",
+          "url": "https://github.com/iebeid/human-resources-management-tool.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "github_repo",
+          "label": "Jupiter Inventory System Repo",
+          "url": "https://github.com/iebeid/jupiter-inventory-system.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "design_doc",
+          "label": "Paper Review System Design Doc",
+          "url": "documents/design-document.pdf",
+          "badge": "PDF",
+          "document_id": 8
+        },
+        {
+          "type": "design_doc",
+          "label": "GA Timesheets System Spec",
+          "url": "documents/GA_timesheets.pdf",
+          "badge": "PDF",
+          "document_id": 21
+        },
+        {
+          "type": "design_doc",
+          "label": "TakolEih Dining Guide Spec",
+          "url": "documents/takol-eh.pdf",
+          "badge": "PDF",
+          "document_id": 4
+        }
+      ],
+      "tags": [
+        "Arkansas.gov",
+        "Data Warehousing",
+        "Databases",
+        "Full-Stack",
+        "Government"
+      ],
+      "publications": []
+    },
+    {
+      "id": 43,
+      "slug": "genesis-gde",
+      "title": "Genesis Development Environment (GDE)",
+      "tagline": "MSc Thesis: Visual Drag-and-Drop Programming IDE & Algorithm Animator",
+      "short_summary": "Master's thesis engineering a JavaFX integrated development environment enabling bidirectional translation between visual drag-and-drop list objects and Genesis runtime code.",
+      "full_description": "Designed to help novice CS students visualize live data structures (nested heterogeneous lists) and bidirectional execution: dragging graphical sticky notes generates live Genesis source code, while code execution animates memory state transitions in JavaFX.",
+      "category": "Legacy & Foundational Systems",
+      "domain_stage": "foundational",
+      "status": "MSc Thesis (Completed)",
+      "year_start": 2012,
+      "year_end": 2013,
+      "institution_or_org": "Arkansas Tech University",
+      "grant_award": "",
+      "tech_stack": [
+        "Java",
+        "JavaFX 2.0",
+        "Compilers / AST",
+        "Algorithm Visualization"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic Thesis",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 21,
+      "artifacts": [
+        {
+          "type": "design_doc",
+          "label": "GDE Software Design Document",
+          "url": "documents/Genesis Development Environment Design Document.pdf",
+          "badge": "PDF",
+          "document_id": 30
+        },
+        {
+          "type": "paper_pdf",
+          "label": "MSc Thesis Proposal",
+          "url": "documents/ThesisProposal.pdf",
+          "badge": "PDF",
+          "document_id": 28
+        },
+        {
+          "type": "paper_pdf",
+          "label": "Thesis Abstract Brief",
+          "url": "documents/ThesisParagraph.pdf",
+          "badge": "PDF",
+          "document_id": 20
+        },
+        {
+          "type": "github_repo",
+          "label": "Genesis Visual Programming Repo",
+          "url": "https://github.com/iebeid/genesis-visual-programming.git",
+          "badge": "GitHub",
+          "document_id": null
+        },
+        {
+          "type": "screenshot",
+          "label": "Genesis IDE UI",
+          "url": "images/thesis1.png",
+          "badge": "PNG",
+          "document_id": null
+        },
+        {
+          "type": "screenshot",
+          "label": "GDE Algorithm Animation",
+          "url": "images/thesis2.jpg",
+          "badge": "JPG",
+          "document_id": null
+        },
+        {
+          "type": "screenshot",
+          "label": "Genesis Visual Code Generation",
+          "url": "images/thesis3.jpg",
+          "badge": "JPG",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Algorithms",
+        "CS Education",
+        "JavaFX",
+        "MSc Thesis",
+        "Visual Programming"
+      ],
+      "publications": []
+    },
+    {
+      "id": 44,
+      "slug": "icas-vii",
+      "title": "Intersection Collision Avoidance System (ICAS / VII)",
+      "tagline": "Distinctive BSc Capstone: Vehicle-to-Infrastructure Automated Traffic Safety",
+      "short_summary": "Distinctive Bachelor's Capstone Project (Ain Shams University, 2008) designing an automated Vehicle-Infrastructure Integration (VII) system for real-time intersection collision avoidance.",
+      "full_description": "Recognized with Distinction at Ain Shams University Faculty of Engineering; integrates wireless vehicular telemetry, embedded hardware sensors, and real-time intersection kinematic collision prediction.",
+      "category": "Legacy & Foundational Systems",
+      "domain_stage": "foundational",
+      "status": "BSc Capstone (Distinction)",
+      "year_start": 2007,
+      "year_end": 2008,
+      "institution_or_org": "Ain Shams University",
+      "grant_award": "Distinctive Capstone Project Award (2008)",
+      "tech_stack": [
+        "Embedded Systems",
+        "C / C++",
+        "V2I Communications",
+        "Real-Time Control"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic Capstone",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 22,
+      "artifacts": [
+        {
+          "type": "paper_pdf",
+          "label": "VII / ICAS Final Thesis",
+          "url": "documents/The-VII-propject-V3.pdf",
+          "badge": "PDF",
+          "document_id": 13
+        },
+        {
+          "type": "slides",
+          "label": "Capstone Defense Presentation",
+          "url": "documents/Graduation_Project_Presentation.pdf",
+          "badge": "PDF",
+          "document_id": 17
+        },
+        {
+          "type": "screenshot",
+          "label": "ICAS Architecture",
+          "url": "images/icas.png",
+          "badge": "PNG",
+          "document_id": null
+        },
+        {
+          "type": "screenshot",
+          "label": "V2I GPS Telemetry Interface",
+          "url": "images/icas2.png",
+          "badge": "PNG",
+          "document_id": null
+        },
+        {
+          "type": "screenshot",
+          "label": "Trajectory Detection Map",
+          "url": "images/icas3.png",
+          "badge": "PNG",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "Autonomous Safety",
+        "Award",
+        "BSc Capstone",
+        "Embedded Systems",
+        "V2I"
+      ],
+      "publications": []
+    },
+    {
+      "id": 45,
+      "slug": "atu-cis-web",
+      "title": "Academic Department Web Architecture & Student Affairs",
+      "tagline": "University Portal Engineering, ABET Tracking & International Student Systems",
+      "short_summary": "Comprehensive architecture specifications for university departmental portals, ABET accreditation tracking, and international student service operations developed at Arkansas Tech University.",
+      "full_description": "Engineered department information portals (INFT5303), curriculum guides for the English Language Institute, and international student exchange operational systems at Arkansas Tech University.",
+      "category": "Legacy & Foundational Systems",
+      "domain_stage": "foundational",
+      "status": "Academic Systems",
+      "year_start": 2011,
+      "year_end": 2013,
+      "institution_or_org": "Arkansas Tech University",
+      "grant_award": "",
+      "tech_stack": [
+        "Web Architecture",
+        "HTML / CSS",
+        "Information Systems",
+        "ABET"
+      ],
+      "code_snippet": "",
+      "license_model": "Academic",
+      "price_display": "",
+      "storefront_category": "",
+      "is_featured": false,
+      "is_storefront": false,
+      "display_order": 23,
+      "artifacts": [
+        {
+          "type": "design_doc",
+          "label": "Department Portal Specification",
+          "url": "documents/department_website.pdf",
+          "badge": "PDF",
+          "document_id": 11
+        },
+        {
+          "type": "paper_pdf",
+          "label": "ATU CIS Department Outline",
+          "url": "documents/Arkansas Tech University.pdf",
+          "badge": "PDF",
+          "document_id": 31
+        },
+        {
+          "type": "paper_pdf",
+          "label": "Institutional Profile",
+          "url": "documents/Arkansas_Tech_University_Profile.pdf",
+          "badge": "PDF",
+          "document_id": 33
+        },
+        {
+          "type": "paper_pdf",
+          "label": "International Services Guide",
+          "url": "documents/RFsingaporefinal_compact_2_edited.pdf",
+          "badge": "PDF",
+          "document_id": 14
+        },
+        {
+          "type": "paper_pdf",
+          "label": "ELI Curriculum Architecture",
+          "url": "documents/English Language Institute.pdf",
+          "badge": "PDF",
+          "document_id": 34
+        },
+        {
+          "type": "screenshot",
+          "label": "IMSSO Portal Architecture",
+          "url": "images/imsso1.png",
+          "badge": "PNG",
+          "document_id": null
+        },
+        {
+          "type": "screenshot",
+          "label": "Student Affairs Dashboard",
+          "url": "images/imsso2.png",
+          "badge": "PNG",
+          "document_id": null
+        }
+      ],
+      "tags": [
+        "ABET",
+        "Arkansas Tech",
+        "Student Affairs",
+        "Web Architecture"
+      ],
+      "publications": []
     }
   ],
   "courses": [
