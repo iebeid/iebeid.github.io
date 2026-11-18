@@ -22,6 +22,7 @@ PUBLIC_JSON_PATH = DATA_DIR / "public_content.json"
 PUBLIC_JS_PATH = DATA_DIR / "public_content.js"
 PORTAL_BOOKMARKS_JSON = DATA_DIR / "bookmarks.json"
 PORTAL_BOOKMARKS_JS = REPO_ROOT / "js" / "bookmarks_data.js"
+PORTAL_DATA_JS = REPO_ROOT / "js" / "portal_data.js"
 
 
 def check_git_safety():
@@ -367,7 +368,7 @@ def export_public_content(conn: sqlite3.Connection):
 
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
-        "_source": "data/content.db (SQLite 17-Table Unified Engine)",
+        "_source": "data/content.db (SQLite 18-Table Unified Engine - Public Slice)",
         "meta": meta,
         "navigation_menu": top_nav,
         "html_templates": html_templates,
@@ -378,7 +379,10 @@ def export_public_content(conn: sqlite3.Connection):
         "publications": publications,
         "courses": courses,
         "contacts": contacts,
-        "portal_bookmarks": portal_bookmarks_payload,
+        "xlpm_datasets": xlpm_datasets,
+    }
+
+    portal_bundle = {
         "portal_tasks": portal_tasks,
         "portal_scratches": {
             "active_buffer": active_scratch_buffer,
@@ -387,7 +391,6 @@ def export_public_content(conn: sqlite3.Connection):
         "portal_messages": portal_messages,
         "portal_vault": portal_vault,
         "portal_passwords": portal_passwords,
-        "xlpm_datasets": xlpm_datasets,
     }
 
     PUBLIC_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -397,10 +400,19 @@ def export_public_content(conn: sqlite3.Connection):
     with open(PUBLIC_JS_PATH, "w", encoding="utf-8") as f:
         f.write("window.__SITE_DATABASE = " + json.dumps(export_bundle, indent=2, ensure_ascii=False) + ";\n")
 
+    with open(PORTAL_DATA_JS, "w", encoding="utf-8") as f:
+        f.write(
+            "window.__PORTAL_DATABASE = "
+            + json.dumps(portal_bundle, indent=2, ensure_ascii=False)
+            + ";\n"
+            + "if (window.__SITE_DATABASE) { Object.assign(window.__SITE_DATABASE, window.__PORTAL_DATABASE); }\n"
+        )
+
     print(
         f"[OK] Generated SQLite runtime bundle: {PUBLIC_JSON_PATH.name} & {PUBLIC_JS_PATH.name} "
         f"({len(pages)} pages, {len(stylesheets)} stylesheets, {len(top_nav)} top nav menus, {len(documents)} docs)"
     )
+    print(f"[OK] Generated portal-only private slice: {PORTAL_DATA_JS.name}")
 
 
 def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:

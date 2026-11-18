@@ -15,11 +15,16 @@
  */
 
 (function () {
+    // Hydrate private portal slices if loaded separately via js/portal_data.js
+    if (window.__PORTAL_DATABASE && typeof window.__PORTAL_DATABASE === 'object') {
+        window.__SITE_DATABASE = Object.assign(window.__SITE_DATABASE || {}, window.__PORTAL_DATABASE);
+    }
+
     // -------------------------------------------------------------------------
     // 1. STATE & CONSTANTS
     // -------------------------------------------------------------------------
-    const DEFAULT_PASSCODE = 'islam2026';
-    const PASSCODE_STORAGE_KEY = 'portal_master_passcode';
+    const PASSCODE_STORAGE_KEY = 'portal_master_passcode'; // legacy key cleared on upgrade
+    const PASSCODE_VERIFIER_KEY = 'portal_master_verifier_v2';
     const AUTH_SESSION_KEY = 'portal_auth_token';
     const PINNED_STORAGE_KEY = 'portal_pinned_bookmarks';
     const SCRATCHPAD_KEY = 'portal_scratchpad_content';
@@ -33,7 +38,7 @@
     const HANDSHAKE_CONFIG_KEY = 'portal_handshake_config';
 
     const DEFAULT_HANDSHAKE_CONFIG = {
-        passcode: 'islam2026',
+        passcode: '',
         question: "What is Dr. Islam's primary research lab / institution?",
         answers: ["TWU", "Texas Woman's University", "Data2AI4LifeSciences", "Data2AI4LifeSciences Lab"],
         destinationEmail: 'islam.akef@gmail.com'
@@ -119,8 +124,32 @@
         return true;
     }
 
-    function getStoredPasscode() {
-        return localStorage.getItem(PASSCODE_STORAGE_KEY) || unlockedVaultSecrets.master_passcode || DEFAULT_PASSCODE;
+    async function createLocalPasscodeVerifier(passcode) {
+        const payload = { verified: true, createdAt: Date.now() };
+        const enc = new TextEncoder();
+        const salt = window.crypto.getRandomValues(new Uint8Array(16));
+        const iv = window.crypto.getRandomValues(new Uint8Array(12));
+        const keyMaterial = await window.crypto.subtle.importKey(
+            'raw', enc.encode(passcode), { name: 'PBKDF2' }, false, ['deriveKey']
+        );
+        const aesKey = await window.crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: salt, iterations: 100000, hash: 'SHA-256' },
+            keyMaterial,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt']
+        );
+        const encrypted = await window.crypto.subtle.encrypt(
+            { name: 'AES-GCM', iv: iv },
+            aesKey,
+            enc.encode(JSON.stringify(payload))
+        );
+        const toB64 = (arr) => btoa(String.fromCharCode(...arr));
+        return {
+            ciphertext: toB64(new Uint8Array(encrypted)),
+            nonce: toB64(iv),
+            salt: toB64(salt)
+        };
     }
 
     function isAuthenticated() {
@@ -129,17 +158,41 @@
     }
 
     async function authenticate(passcode, remember) {
-        const localOverride = localStorage.getItem(PASSCODE_STORAGE_KEY);
+        if (!passcode) return false;
         let verified = false;
-        if (localOverride) {
-            verified = (passcode === localOverride);
-        } else {
-            verified = await unlockSqliteVault(passcode);
-            if (!verified && passcode === getStoredPasscode()) {
+
+        // Migrate or purge any legacy plaintext override cleanly
+        const legacyOverride = localStorage.getItem(PASSCODE_STORAGE_KEY);
+        if (legacyOverride) {
+            if (passcode === legacyOverride) {
+                const verifier = await createLocalPasscodeVerifier(passcode);
+                localStorage.setItem(PASSCODE_VERIFIER_KEY, JSON.stringify(verifier));
                 verified = true;
             }
+            localStorage.removeItem(PASSCODE_STORAGE_KEY);
         }
+
+        if (!verified) {
+            const verifierRaw = localStorage.getItem(PASSCODE_VERIFIER_KEY);
+            if (verifierRaw) {
+                try {
+                    const verifierEntry = JSON.parse(verifierRaw);
+                    const dec = await decryptSqliteVaultEntry(verifierEntry, passcode);
+                    verified = (dec !== null);
+                } catch (e) {
+                    verified = false;
+                }
+            } else {
+                // Strictly verify by decrypting the SQLite AES-256-GCM vault entry
+                verified = await unlockSqliteVault(passcode);
+            }
+        }
+
         if (verified) {
+            // Best-effort hydration of vault secrets if local override matched
+            if (!unlockedVaultSecrets.master_passcode) {
+                await unlockSqliteVault(passcode);
+            }
             if (remember) {
                 localStorage.setItem(AUTH_SESSION_KEY, 'authenticated');
             } else {
@@ -222,7 +275,7 @@
         const changeMsg = document.getElementById('passcode-change-msg');
 
         if (changePassForm) {
-            changePassForm.addEventListener('submit', (e) => {
+            changePassForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 if (newPass.value !== confirmPass.value) {
                     changeMsg.className = 'text-xs text-rose-400 block';
@@ -234,9 +287,11 @@
                     changeMsg.textContent = 'Passcode must be at least 6 characters.';
                     return;
                 }
-                localStorage.setItem(PASSCODE_STORAGE_KEY, newPass.value);
+                const verifier = await createLocalPasscodeVerifier(newPass.value);
+                localStorage.setItem(PASSCODE_VERIFIER_KEY, JSON.stringify(verifier));
+                localStorage.removeItem(PASSCODE_STORAGE_KEY);
                 changeMsg.className = 'text-xs text-emerald-400 block';
-                changeMsg.textContent = 'Master passcode updated successfully! Remember your new passcode.';
+                changeMsg.textContent = 'Master passcode encrypted & updated locally! Remember your new passcode.';
                 newPass.value = '';
                 confirmPass.value = '';
             });
@@ -3088,6 +3143,7 @@
     window.resetPortalData = function () {
         if (confirm('Warning: This will clear your custom passcode, custom added bookmarks, pinned favorites, tasks, scratches database, secret messages, and logout. Reset now?')) {
             localStorage.removeItem(PASSCODE_STORAGE_KEY);
+            localStorage.removeItem(PASSCODE_VERIFIER_KEY);
             localStorage.removeItem(PINNED_STORAGE_KEY);
             localStorage.removeItem(SCRATCHPAD_KEY);
             localStorage.removeItem(SCRATCHES_DB_KEY);
