@@ -24,6 +24,7 @@ import os
 import sqlite3
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -41,34 +42,63 @@ from discover_drive_projects import peek_gdrive_text  # noqa: E402
 
 def gemini_post(endpoint: str, payload: Dict[str, Any], api_key: str, timeout: int = 90) -> Dict[str, Any]:
     url = f"https://generativelanguage.googleapis.com/v1beta/{endpoint}?key={api_key}"
-    req = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        body = exc.read().decode("utf-8", errors="ignore")
-        raise RuntimeError(f"Gemini API error ({exc.code}): {body[:400]}") from exc
+    last_err: Exception | None = None
+    for attempt in range(1, 4):
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="ignore")
+            last_err = RuntimeError(f"Gemini API error ({exc.code}): {body[:400]}")
+            if exc.code in (429, 500, 502, 503, 504) and attempt < 3:
+                time.sleep(1.5 * (2 ** (attempt - 1)))
+                continue
+            raise last_err from exc
+    raise last_err or RuntimeError("Gemini API request failed")
 
 
 def gemini_generate_json(prompt: str, api_key: str, model: str = "gemini-3.8-flash") -> Any:
-    data = gemini_post(
-        f"models/{model}:generateContent",
-        {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {"temperature": 0.15, "responseMimeType": "application/json"},
-        },
-        api_key,
-    )
-    txt = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
-    txt = txt.strip().strip("`")
-    if txt.startswith("json"):
-        txt = txt[4:].strip()
-    return json.loads(txt)
+    candidates = [
+        model,
+        "gemini-3.8-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash",
+        "gemini-3-flash-preview",
+        "gemini-3-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-2.5-flash",
+    ]
+    seen: set[str] = set()
+    ordered = [m for m in candidates if m and not (m in seen or seen.add(m))]
+    last_err: Exception | None = None
+    for mdl in ordered:
+        try:
+            data = gemini_post(
+                f"models/{mdl}:generateContent",
+                {
+                    "contents": [{"parts": [{"text": prompt}]}],
+                    "generationConfig": {"responseMimeType": "application/json"},
+                },
+                api_key,
+            )
+            txt = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
+            txt = txt.strip().strip("`")
+            if txt.startswith("json"):
+                txt = txt[4:].strip()
+            return json.loads(txt)
+        except Exception as exc:
+            last_err = exc
+            msg = str(exc)
+            if any(code in msg for code in ("(404)", "(429)", "(500)", "(502)", "(503)", "(504)", "not found", "no longer available")):
+                continue
+            raise
+    raise last_err or RuntimeError("Gemini generateContent failed across all candidate models")
 
 
 def cosine_dense(a: List[float], b: List[float]) -> float:

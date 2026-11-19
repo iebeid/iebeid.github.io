@@ -3482,43 +3482,7 @@ ${JSON.stringify(minimizedBms)}
 
 Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantically match the query. Do not wrap in markdown blocks, just return the raw JSON array. If no matches, return [].`;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: prompt }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.1
-                    }
-                })
-            });
-
-            if (!response.ok) {
-                const errText = await response.text();
-                throw new Error(`API Error ${response.status}: ${errText}`);
-            }
-
-            const data = await response.json();
-            const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
-            
-            if (!textResponse) throw new Error("No valid response from Gemini");
-            
-            let cleanText = textResponse.replace(/^\s*```(json)?\s*|\s*```\s*$/g, '').trim();
-            let matchedIds = [];
-            try {
-                const startIdx = cleanText.indexOf('[');
-                const endIdx = cleanText.lastIndexOf(']');
-                if (startIdx !== -1 && endIdx !== -1 && endIdx >= startIdx) {
-                    cleanText = cleanText.substring(startIdx, endIdx + 1);
-                }
-                matchedIds = JSON.parse(cleanText);
-            } catch (e) {
-                console.error("Failed to parse Gemini response as JSON:", textResponse);
-                throw new Error("Could not parse AI response as JSON: " + textResponse.substring(0, 50) + "...");
-            }
-
+            let matchedIds = await callGeminiJson(apiKey, prompt);
             if (!Array.isArray(matchedIds)) {
                 throw new Error("Response is not an array");
             }
@@ -5915,30 +5879,121 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         };
     }
 
-    async function callGeminiJson(apiKey, promptText, model = 'gemini-3.8-flash') {
-        const candidates = Array.from(new Set([model, 'gemini-3.8-flash', 'gemini-3-flash', 'gemini-2.5-flash']));
+    const sleepMs = ms => new Promise(resolve => setTimeout(resolve, ms));
+    let _cachedGeminiFlashModels = null;
+
+    async function discoverGeminiFlashModels(apiKey, preferred = 'gemini-3.8-flash') {
+        const defaults = [
+            preferred,
+            'gemini-3.8-flash',
+            'gemini-3.6-flash',
+            'gemini-3.5-flash',
+            'gemini-3-flash-preview',
+            'gemini-3-flash',
+            'gemini-3.5-flash-lite',
+            'gemini-2.5-flash',
+            'gemini-2.5-flash-lite',
+        ];
+        if (!_cachedGeminiFlashModels) {
+            try {
+                const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${encodeURIComponent(apiKey)}`);
+                if (resp.ok) {
+                    const data = await resp.json();
+                    const available = (data.models || [])
+                        .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes('generateContent'))
+                        .map(m => String(m.name || '').replace(/^models\//, ''))
+                        .filter(n => /flash/i.test(n) && !/image|audio|tts|live|thinking-exp/i.test(n));
+                    if (available.length) {
+                        _cachedGeminiFlashModels = available;
+                    }
+                }
+            } catch (e) { /* keep defaults */ }
+        }
+        const availSet = _cachedGeminiFlashModels ? new Set(_cachedGeminiFlashModels) : null;
+        const prioritized = defaults.filter(m => m && (!availSet || availSet.has(m)));
+        const extra = (_cachedGeminiFlashModels || []).filter(m => !prioritized.includes(m));
+        const merged = Array.from(new Set([...prioritized, ...extra]));
+        return merged.length ? merged : Array.from(new Set(defaults.filter(Boolean)));
+    }
+
+    async function callGeminiJson(apiKey, promptText, model = 'gemini-3.8-flash', onStatus = null) {
+        const candidates = await discoverGeminiFlashModels(apiKey, model);
         let lastErr = null;
-        for (const mdl of candidates) {
-            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: promptText }] }],
-                    generationConfig: { temperature: 0.15, responseMimeType: 'application/json' },
-                }),
-            });
-            const data = await resp.json();
-            if (resp.ok) {
-                const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
-                return JSON.parse(txt);
-            }
-            const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
-            lastErr = new Error(msg);
-            if (!(resp.status === 404 || /no longer available|not found|not supported/i.test(msg))) {
-                throw lastErr;
+        for (let mIdx = 0; mIdx < candidates.length; mIdx++) {
+            const mdl = candidates[mIdx];
+            const maxAttempts = 3;
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    const includeTemp = attempt === 1;
+                    const genCfg = includeTemp
+                        ? { temperature: 0.15, responseMimeType: 'application/json' }
+                        : { responseMimeType: 'application/json' };
+                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{ parts: [{ text: promptText }] }],
+                            generationConfig: genCfg,
+                        }),
+                    });
+                    const rawText = await resp.text();
+                    let data = {};
+                    try { data = JSON.parse(rawText); } catch (e) { data = {}; }
+                    if (resp.ok) {
+                        const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
+                        return JSON.parse(txt);
+                    }
+                    const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
+                    lastErr = new Error(msg);
+
+                    // Auth / permission errors are non-retryable
+                    if (resp.status === 401 || resp.status === 403 || /api key not valid|permission denied|has not been used/i.test(msg)) {
+                        throw lastErr;
+                    }
+                    // Parameter incompatibility on newer models (e.g. temperature unsupported) -> retry immediately without temp
+                    if (resp.status === 400 && includeTemp && /temperature|generationConfig/i.test(msg)) {
+                        continue;
+                    }
+                    // Model retired/not found -> skip straight to next fallback model
+                    if (resp.status === 404 || /no longer available|not found|not supported/i.test(msg)) {
+                        break;
+                    }
+                    // Transient server overload / rate limit -> exponential backoff retry, then try fallback model
+                    const isTransient = [429, 500, 502, 503, 504].includes(resp.status) || /unavailable|overloaded|high demand|resource exhausted|try again/i.test(msg);
+                    if (isTransient) {
+                        if (attempt < maxAttempts) {
+                            const waitMs = (1400 * Math.pow(2, attempt - 1)) + Math.floor(Math.random() * 400);
+                            if (onStatus) onStatus(`Gemini ${mdl} returned ${resp.status} — retrying (${attempt}/${maxAttempts}) in ${(waitMs / 1000).toFixed(1)}s...`);
+                            await sleepMs(waitMs);
+                            continue;
+                        }
+                        if (mIdx + 1 < candidates.length) {
+                            if (onStatus) onStatus(`Gemini ${mdl} busy (${resp.status}) — switching to fallback model ${candidates[mIdx + 1]}...`);
+                            break;
+                        }
+                    }
+                    throw lastErr;
+                } catch (err) {
+                    lastErr = err;
+                    const msg = String(err?.message || err);
+                    if (/api key not valid|permission denied|has not been used/i.test(msg)) {
+                        throw err;
+                    }
+                    const isNetwork = err?.name === 'TypeError' || /failed to fetch|network|timeout/i.test(msg);
+                    if (isNetwork && attempt < maxAttempts) {
+                        const waitMs = 1500 * attempt;
+                        if (onStatus) onStatus(`Network hiccup on ${mdl} — retrying (${attempt}/${maxAttempts})...`);
+                        await sleepMs(waitMs);
+                        continue;
+                    }
+                    if (attempt >= maxAttempts && mIdx + 1 < candidates.length) break;
+                    if (!isNetwork && !/unavailable|overloaded|high demand|429|503|500|502|504/i.test(msg)) {
+                        throw err;
+                    }
+                }
             }
         }
-        throw lastErr || new Error('Gemini API call failed');
+        throw lastErr || new Error('Gemini API call failed across all candidate Flash models');
     }
 
     window.aiDescribeSingleProject = async function () {
@@ -5996,7 +6051,9 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 setErProgressBanner(`Generating LLM semantic descriptions & keywords: ${i} / ${targets.length} projects...`);
                 const snaps = batch.map(buildProjectPromptSnapshot);
                 const prompt = `You are curating Dr. Islam Akef Ebeid's academic, software, and creative portfolio. For each project below, infer what it is from its title, kind, Google Drive path, and artifact filenames (do not invent fake metrics or grants). Return a JSON array of objects matching each input id: [{"id": number, "short_summary": "1-2 clear factual sentences", "tagline": "short 5-9 word subtitle", "tags": ["3-5 tags"], "keywords": ["acronyms, aliases, key domain concepts"]}].\n\n${JSON.stringify(snaps)}`;
-                const results = await callGeminiJson(apiKey, prompt);
+                const results = await callGeminiJson(apiKey, prompt, 'gemini-3.8-flash', msg => {
+                    setErProgressBanner(`[${i}/${targets.length}] ${msg}`);
+                });
                 const byId = new Map((Array.isArray(results) ? results : []).map(r => [String(r.id), r]));
 
                 for (const p of batch) {
@@ -6025,6 +6082,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     Object.assign(p, updated);
                     enrichedCount++;
                 }
+                if (i + BATCH_SIZE < targets.length) await sleepMs(350);
             }
             if (!portalProjectsState.liveMode) {
                 portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
@@ -6033,8 +6091,13 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             setErProgressBanner(`Enriched ${enrichedCount} project descriptions & keywords! Now click "2. AI Semantic Match" to run embedding + LLM duplicate detection.`);
             showPortalToast(`Enriched ${enrichedCount} projects with Gemini semantic descriptions`);
         } catch (err) {
-            setErProgressBanner(`Enrichment paused after ${enrichedCount} projects: ${err.message}`);
-            showPortalToast(`AI enrichment error: ${err.message}`, 'error');
+            if (!portalProjectsState.liveMode && enrichedCount > 0) {
+                portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+                renderPortalProjectsHub();
+            }
+            const remaining = Math.max(0, targets.length - enrichedCount);
+            setErProgressBanner(`Enriched ${enrichedCount} projects before pause (${remaining} left): ${err.message}. Click "1. AI Enrich Descriptions" to resume remaining.`);
+            showPortalToast(`AI enrichment paused (${enrichedCount} saved): ${err.message}`, 'error');
         } finally {
             if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-magic mr-1"></i> 1. AI Enrich Descriptions'; }
         }
@@ -6083,22 +6146,37 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                             taskType: 'SEMANTIC_SIMILARITY',
                         };
                     });
-                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${em}:batchEmbedContents?key=${encodeURIComponent(apiKey)}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ requests }),
-                    });
-                    const parsed = await resp.json();
-                    if (resp.ok) {
-                        data = parsed;
-                        activeEmbModel = em;
+                    let modelDone = false;
+                    for (let attempt = 1; attempt <= 3; attempt++) {
+                        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${em}:batchEmbedContents?key=${encodeURIComponent(apiKey)}`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ requests }),
+                        });
+                        const parsed = await resp.json().catch(() => ({}));
+                        if (resp.ok) {
+                            data = parsed;
+                            activeEmbModel = em;
+                            modelDone = true;
+                            break;
+                        }
+                        const msg = parsed.error?.message || `Embedding HTTP ${resp.status}`;
+                        lastErr = new Error(msg);
+                        if (resp.status === 401 || resp.status === 403 || /api key not valid|permission denied|has not been used/i.test(msg)) {
+                            throw lastErr;
+                        }
+                        if (resp.status === 404 || /no longer available|not found|not supported/i.test(msg)) {
+                            break;
+                        }
+                        if ([429, 500, 502, 503, 504].includes(resp.status) && attempt < 3) {
+                            const waitMs = 1500 * Math.pow(2, attempt - 1);
+                            setErProgressBanner(`Embedding ${em} returned ${resp.status} — retrying (${attempt}/3)...`);
+                            await sleepMs(waitMs);
+                            continue;
+                        }
                         break;
                     }
-                    const msg = parsed.error?.message || `Embedding HTTP ${resp.status}`;
-                    lastErr = new Error(msg);
-                    if (!(resp.status === 404 || /no longer available|not found|not supported/i.test(msg))) {
-                        throw lastErr;
-                    }
+                    if (modelDone) break;
                 }
                 if (!data) throw lastErr || new Error('Embedding call failed');
                 (data.embeddings || []).forEach(e => embeddings.push(e.values || []));
