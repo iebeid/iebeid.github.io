@@ -1,5 +1,5 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-19T10:16:02.149601",
+  "_generated_at": "2026-11-19T10:22:32.019479",
   "_source": "data/content.db (SQLite Normalized Project Backbone Engine)",
   "meta": {
     "author_name": {

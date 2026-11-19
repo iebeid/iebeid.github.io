@@ -6464,6 +6464,29 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         return (na > 0 && nb > 0) ? dot / (Math.sqrt(na) * Math.sqrt(nb)) : 0;
     }
 
+    const EMB_CACHE_KEY = 'portal_project_embeddings_v1';
+
+    function hashString32(str) {
+        let h = 2166136261;
+        for (let i = 0; i < str.length; i++) {
+            h ^= str.charCodeAt(i);
+            h = Math.imul(h, 16777619);
+        }
+        return (h >>> 0).toString(36);
+    }
+
+    function buildProjectEmbeddingText(p) {
+        const artPaths = (p.artifacts || []).slice(0, 6).map(a => a.gdrive_path || a.label).join('; ');
+        return `${p.title} (${p.slug}) | Kind: ${p.project_kind || ''} | Category: ${p.category || ''} | ${p.tagline || ''} | ${p.short_summary || ''} | Tags: ${(p.tags || []).join(', ')} | Keywords: ${(p.keywords || []).join(', ')} | Artifacts: ${artPaths}`.slice(0, 1800);
+    }
+
+    async function waitWithErCountdown(totalSeconds, prefixMsg) {
+        for (let s = Math.max(1, Math.ceil(totalSeconds)); s > 0; s--) {
+            setErProgressBanner(`${prefixMsg} (${s}s)...`);
+            await sleepMs(1000);
+        }
+    }
+
     window.aiRunFullSemanticEntityResolution = async function () {
         const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
         if (!apiKey) {
@@ -6478,27 +6501,57 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
         try {
             const dismissed = getDismissedErSet();
-            const embeddings = [];
-            const EMB_BATCH = 80;
+            let embCache = {};
+            try { embCache = JSON.parse(localStorage.getItem(EMB_CACHE_KEY) || '{}') || {}; } catch (e) { embCache = {}; }
+
+            const embeddings = new Array(projects.length);
+            const missingIndices = [];
+            const texts = projects.map(buildProjectEmbeddingText);
+            const hashes = texts.map(hashString32);
+
+            projects.forEach((p, idx) => {
+                const key = p.slug || String(p.id);
+                const cached = embCache[key];
+                if (cached && cached.h === hashes[idx] && Array.isArray(cached.v) && cached.v.length) {
+                    embeddings[idx] = cached.v;
+                } else {
+                    missingIndices.push(idx);
+                }
+            });
+
+            const EMB_BATCH = 45; // Stay comfortably under Free Tier 100 embed requests/min limit
+            const FREE_TIER_SAFE_RPM = 90;
             const embModels = ['gemini-embedding-001', 'gemini-embedding-2'];
             let activeEmbModel = embModels[0];
-            for (let i = 0; i < projects.length; i += EMB_BATCH) {
-                const slice = projects.slice(i, i + EMB_BATCH);
-                setErProgressBanner(`Computing Gemini semantic embeddings (${i}/${projects.length})...`);
+            let windowStart = Date.now();
+            let sentInWindow = 0;
+
+            for (let m = 0; m < missingIndices.length; m += EMB_BATCH) {
+                const batchIndices = missingIndices.slice(m, m + EMB_BATCH);
+                if (sentInWindow > 0 && sentInWindow + batchIndices.length > FREE_TIER_SAFE_RPM) {
+                    const elapsedMs = Date.now() - windowStart;
+                    if (elapsedMs < 62000) {
+                        const waitSec = Math.ceil((62000 - elapsedMs) / 1000);
+                        await waitWithErCountdown(waitSec, `Free Tier quota pause (${projects.length - missingIndices.length + m}/${projects.length} embedded) — auto-resuming in`);
+                    }
+                    windowStart = Date.now();
+                    sentInWindow = 0;
+                }
+
+                const cachedDone = projects.length - missingIndices.length + m;
+                setErProgressBanner(`Computing Gemini semantic embeddings (${cachedDone}/${projects.length}, ${missingIndices.length - m} uncached left)...`);
+
                 let data = null;
                 let lastErr = null;
-                for (const em of (i === 0 ? embModels : [activeEmbModel])) {
-                    const requests = slice.map(p => {
-                        const artPaths = (p.artifacts || []).slice(0, 6).map(a => a.gdrive_path || a.label).join('; ');
-                        const txt = `${p.title} (${p.slug}) | Kind: ${p.project_kind || ''} | Category: ${p.category || ''} | ${p.tagline || ''} | ${p.short_summary || ''} | Tags: ${(p.tags || []).join(', ')} | Keywords: ${(p.keywords || []).join(', ')} | Artifacts: ${artPaths}`;
-                        return {
-                            model: `models/${em}`,
-                            content: { parts: [{ text: txt.slice(0, 1800) }] },
-                            taskType: 'SEMANTIC_SIMILARITY',
-                        };
-                    });
+                for (const em of (m === 0 ? embModels : [activeEmbModel])) {
+                    const requests = batchIndices.map(idx => ({
+                        model: `models/${em}`,
+                        content: { parts: [{ text: texts[idx] }] },
+                        taskType: 'SEMANTIC_SIMILARITY',
+                        outputDimensionality: 256,
+                    }));
                     let modelDone = false;
-                    for (let attempt = 1; attempt <= 3; attempt++) {
+                    for (let attempt = 1; attempt <= 6; attempt++) {
                         const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${em}:batchEmbedContents?key=${encodeURIComponent(apiKey)}`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -6509,6 +6562,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                             data = parsed;
                             activeEmbModel = em;
                             modelDone = true;
+                            sentInWindow += batchIndices.length;
                             break;
                         }
                         const msg = parsed.error?.message || `Embedding HTTP ${resp.status}`;
@@ -6519,10 +6573,18 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                         if (resp.status === 404 || /no longer available|not found|not supported/i.test(msg)) {
                             break;
                         }
-                        if ([429, 500, 502, 503, 504].includes(resp.status) && attempt < 3) {
-                            const waitMs = 1500 * Math.pow(2, attempt - 1);
-                            setErProgressBanner(`Embedding ${em} returned ${resp.status} — retrying (${attempt}/3)...`);
-                            await sleepMs(waitMs);
+                        if ([429, 500, 502, 503, 504].includes(resp.status) && attempt < 6) {
+                            const retryMatch = msg.match(/retry in\s*([\d.]+)\s*s/i);
+                            if (resp.status === 429) {
+                                const waitSec = retryMatch ? (Math.ceil(Number(retryMatch[1])) + 2) : Math.min(62, 15 * attempt);
+                                await waitWithErCountdown(waitSec, `Free Tier embedding limit (100/min) at ${cachedDone}/${projects.length} — auto-retrying in`);
+                                windowStart = Date.now();
+                                sentInWindow = 0;
+                            } else {
+                                const waitMs = 1500 * Math.pow(2, attempt - 1);
+                                setErProgressBanner(`Embedding ${em} returned ${resp.status} — retrying (${attempt}/6)...`);
+                                await sleepMs(waitMs);
+                            }
                             continue;
                         }
                         break;
@@ -6530,7 +6592,15 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     if (modelDone) break;
                 }
                 if (!data) throw lastErr || new Error('Embedding call failed');
-                (data.embeddings || []).forEach(e => embeddings.push(e.values || []));
+
+                const vecs = data.embeddings || [];
+                batchIndices.forEach((projIdx, k) => {
+                    const vals = (vecs[k]?.values || []).map(v => Math.round(v * 10000) / 10000);
+                    embeddings[projIdx] = vals;
+                    const pKey = projects[projIdx].slug || String(projects[projIdx].id);
+                    embCache[pKey] = { h: hashes[projIdx], v: vals };
+                });
+                try { localStorage.setItem(EMB_CACHE_KEY, JSON.stringify(embCache)); } catch (e) { }
             }
 
             // Compute all-pairs semantic embedding cosine similarity + keep top 40 pairs

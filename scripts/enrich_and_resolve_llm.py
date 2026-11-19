@@ -228,8 +228,16 @@ def run_enrich(conn: sqlite3.Connection, api_key: str, peek_docs: bool = False, 
 def run_semantic_resolve(conn: sqlite3.Connection, api_key: str, min_emb: float = 0.72, top_k: int = 30) -> List[Dict[str, Any]]:
     projects = load_all_projects(conn)
     embeddings: List[List[float]] = []
-    for i in range(0, len(projects), 80):
-        slice_p = projects[i:i + 80]
+    sent_in_win = 0
+    win_start = time.time()
+    for i in range(0, len(projects), 45):
+        slice_p = projects[i:i + 45]
+        if sent_in_win > 0 and sent_in_win + len(slice_p) > 90:
+            elapsed = time.time() - win_start
+            if elapsed < 62:
+                time.sleep(62 - elapsed)
+            win_start = time.time()
+            sent_in_win = 0
         requests = []
         for p in slice_p:
             art_paths = "; ".join((a.get("gdrive_path") or a["label"]) for a in p["artifacts"][:6])
@@ -242,8 +250,19 @@ def run_semantic_resolve(conn: sqlite3.Connection, api_key: str, min_emb: float 
                 "model": "models/gemini-embedding-001",
                 "content": {"parts": [{"text": txt}]},
                 "taskType": "SEMANTIC_SIMILARITY",
+                "outputDimensionality": 256,
             })
-        resp = gemini_post("models/gemini-embedding-001:batchEmbedContents", {"requests": requests}, api_key)
+        try:
+            resp = gemini_post("models/gemini-embedding-001:batchEmbedContents", {"requests": requests}, api_key)
+        except RuntimeError as exc:
+            if "(429)" in str(exc):
+                time.sleep(62)
+                win_start = time.time()
+                sent_in_win = 0
+                resp = gemini_post("models/gemini-embedding-001:batchEmbedContents", {"requests": requests}, api_key)
+            else:
+                raise
+        sent_in_win += len(slice_p)
         for item in resp.get("embeddings", []):
             embeddings.append(item.get("values", []))
 
