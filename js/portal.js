@@ -4611,11 +4611,15 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 if (plain) {
                     hydrateBundleState(JSON.parse(plain));
                 }
-            } else if (!enc && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
-                hydrateBundleState({
-                    projects: window.__SITE_DATABASE.projects,
-                    placement_slots: window.__SITE_DATABASE.site_placement_slots || [],
-                });
+            }
+            if (!portalProjectsState.unlocked && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
+                // Show public projects immediately as a preview while keeping the full encrypted catalog locked
+                portalProjectsState.projects = applyLocalPatchOpsToMemory(
+                    window.__SITE_DATABASE.projects.map(p => ({ ...p, is_public: true, discovery_status: p.discovery_status || 'canonical' }))
+                );
+                portalProjectsState.placementSlots = window.__SITE_DATABASE.site_placement_slots || [];
+                if (!enc) portalProjectsState.unlocked = true;
+                populatePlacementDropdown();
             }
         }
         updateProjectsModeUI();
@@ -4691,7 +4695,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         setTxt('proj-stat-gdrive', gdriveCnt);
         setTxt('proj-stat-placements', placeCnt);
 
-        if (!portalProjectsState.unlocked && !portalProjectsState.liveMode) {
+        if (!portalProjectsState.unlocked && !portalProjectsState.liveMode && all.length === 0) {
             listEl.innerHTML = '';
             if (pagEl) pagEl.innerHTML = '';
             return;
@@ -5398,6 +5402,14 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             }
             hydrateBundleState(JSON.parse(plain));
             portalSessionPasscode = passcode;
+        }
+        if (!portalProjectsState.unlocked && !portalProjectsState.liveMode && window.__SITE_DATABASE?.portal_projects_encrypted) {
+            showPortalToast('Unlock the encrypted master portfolio before publishing.', 'error');
+            return;
+        }
+        if ((portalProjectsState.projects || []).length === 0) {
+            showPortalToast('Refusing to publish an empty project catalog.', 'error');
+            return;
         }
 
         const btn = document.getElementById('projects-github-publish-btn');
