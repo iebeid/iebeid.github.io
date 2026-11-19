@@ -6224,7 +6224,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         for (let mIdx = 0; mIdx < candidates.length; mIdx++) {
             const mdl = candidates[mIdx];
             const hasMoreModels = mIdx + 1 < candidates.length;
-            const maxAttempts = hasMoreModels ? 2 : 3;
+            const maxAttempts = hasMoreModels ? 1 : 3;
             for (let attempt = 1; attempt <= maxAttempts; attempt++) {
                 try {
                     const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
@@ -6344,7 +6344,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
         let enrichedCount = 0;
         let completedBatches = 0;
-        const BATCH_SIZE = 25;
+        const BATCH_SIZE = 18;
         const batches = [];
         for (let i = 0; i < targets.length; i += BATCH_SIZE) {
             batches.push(targets.slice(i, i + BATCH_SIZE));
