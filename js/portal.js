@@ -4541,6 +4541,14 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             if (src.slug) kw.push(src.slug);
         }
         tgt.keywords = Array.from(new Set(kw.filter(Boolean)));
+        const seenPubs = new Set((tgt.publications || []).map(pb => pb.id || pb.title));
+        tgt.publications = [...(tgt.publications || [])];
+        (src.publications || []).forEach(pb => {
+            const k = pb.id || pb.title;
+            if (!seenPubs.has(k)) { tgt.publications.push(pb); seenPubs.add(k); }
+        });
+        const years = [tgt.year_start, tgt.year_end, src.year_start, src.year_end].filter(y => Number.isFinite(Number(y)) && Number(y) > 1900).map(Number);
+        if (years.length) { tgt.year_start = Math.min(...years); tgt.year_end = Math.max(...years); }
         if (opts.append_summary && src.short_summary && !(tgt.full_description || '').includes(src.short_summary)) {
             tgt.full_description = `${tgt.full_description || tgt.short_summary || ''}\n\n[Merged from ${src.title}]: ${src.short_summary}`.trim();
         }
@@ -5875,6 +5883,274 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         if (ok) runAndRenderErDuplicates();
     };
 
+    function setErProgressBanner(msg) {
+        const el = document.getElementById('er-progress-banner');
+        if (!el) return;
+        if (!msg) {
+            el.classList.add('hidden');
+            el.textContent = '';
+        } else {
+            el.classList.remove('hidden');
+            el.textContent = msg;
+        }
+    }
+
+    function needsSemanticDescription(proj) {
+        const s = (proj.short_summary || '').trim();
+        return !s || s.startsWith('Discovered ') || s.length < 40;
+    }
+
+    function buildProjectPromptSnapshot(p) {
+        const arts = (p.artifacts || []).slice(0, 8).map(a => `${a.type}: ${a.label}${a.gdrive_path ? ' [' + a.gdrive_path + ']' : ''}`);
+        return {
+            id: p.id,
+            title: p.title,
+            slug: p.slug,
+            kind: p.project_kind || 'research',
+            category: p.category || '',
+            tagline: p.tagline || '',
+            artifacts: arts,
+        };
+    }
+
+    async function callGeminiJson(apiKey, promptText, model = 'gemini-2.5-flash') {
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: promptText }] }],
+                generationConfig: { temperature: 0.15, responseMimeType: 'application/json' },
+            }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) throw new Error(data.error?.message || `Gemini HTTP ${resp.status}`);
+        const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
+        return JSON.parse(txt);
+    }
+
+    window.aiDescribeSingleProject = async function () {
+        const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+        if (!apiKey) {
+            showPortalToast('Add your Gemini API Key in Settings & Security first.', 'warn');
+            return;
+        }
+        const title = document.getElementById('pe-title')?.value.trim();
+        if (!title) return;
+        const proj = portalProjectsState.projects.find(p => p.id === portalProjectsState.editingProjectId) || {
+            id: 0,
+            title,
+            slug: document.getElementById('pe-slug')?.value.trim() || '',
+            project_kind: document.getElementById('pe-kind')?.value || 'research',
+            category: document.getElementById('pe-category')?.value || '',
+            artifacts: [],
+        };
+        const btn = document.getElementById('pe-ai-describe-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Generating...'; }
+        try {
+            const snap = buildProjectPromptSnapshot({ ...proj, title });
+            const prompt = `Generate a crisp, factual portfolio description for this project based strictly on its title, domain kind, Drive folder paths, and artifact filenames. Return JSON object: {"short_summary": "1-2 factual sentences", "tagline": "short 5-9 word subtitle", "tags": ["3-5 domain tags"], "keywords": ["acronyms, aliases, key concepts"]}.\n\n${JSON.stringify(snap)}`;
+            const res = await callGeminiJson(apiKey, prompt);
+            if (res.short_summary) document.getElementById('pe-summary').value = res.short_summary;
+            if (res.tagline && !document.getElementById('pe-tagline').value.trim()) document.getElementById('pe-tagline').value = res.tagline;
+            if (Array.isArray(res.tags) && !document.getElementById('pe-tags').value.trim()) document.getElementById('pe-tags').value = res.tags.join(', ');
+            showPortalToast('Generated semantic summary via Gemini');
+        } catch (err) {
+            showPortalToast(`AI Describe failed: ${err.message}`, 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-magic mr-1"></i> AI Describe'; }
+        }
+    };
+
+    window.aiEnrichPortalProjects = async function () {
+        const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+        if (!apiKey) {
+            showPortalToast('Add your Gemini API Key in Settings & Security first.', 'warn');
+            return;
+        }
+        const targets = (portalProjectsState.projects || []).filter(needsSemanticDescription);
+        if (!targets.length) {
+            showPortalToast('All projects already have semantic descriptions!');
+            return;
+        }
+        const btn = document.getElementById('er-ai-enrich-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Enriching...'; }
+
+        let enrichedCount = 0;
+        const BATCH_SIZE = 12;
+        try {
+            for (let i = 0; i < targets.length; i += BATCH_SIZE) {
+                const batch = targets.slice(i, i + BATCH_SIZE);
+                setErProgressBanner(`Generating LLM semantic descriptions & keywords: ${i} / ${targets.length} projects...`);
+                const snaps = batch.map(buildProjectPromptSnapshot);
+                const prompt = `You are curating Dr. Islam Akef Ebeid's academic, software, and creative portfolio. For each project below, infer what it is from its title, kind, Google Drive path, and artifact filenames (do not invent fake metrics or grants). Return a JSON array of objects matching each input id: [{"id": number, "short_summary": "1-2 clear factual sentences", "tagline": "short 5-9 word subtitle", "tags": ["3-5 tags"], "keywords": ["acronyms, aliases, key domain concepts"]}].\n\n${JSON.stringify(snaps)}`;
+                const results = await callGeminiJson(apiKey, prompt);
+                const byId = new Map((Array.isArray(results) ? results : []).map(r => [String(r.id), r]));
+
+                for (const p of batch) {
+                    const r = byId.get(String(p.id));
+                    if (!r || !r.short_summary) continue;
+                    const mergedTags = Array.from(new Set([...(p.tags || []), ...(r.tags || [])].filter(Boolean)));
+                    const mergedKw = Array.from(new Set([...(p.keywords || []), ...(r.keywords || [])].filter(Boolean)));
+                    const updated = {
+                        ...p,
+                        short_summary: r.short_summary,
+                        full_description: (!p.full_description || p.full_description.startsWith('Discovered ')) ? r.short_summary : p.full_description,
+                        tagline: (!p.tagline || p.tagline.startsWith('Drive Source:')) ? (r.tagline || p.tagline) : p.tagline,
+                        tags: mergedTags,
+                        keywords: mergedKw,
+                        updated_at: new Date().toISOString(),
+                    };
+                    if (portalProjectsState.liveMode) {
+                        await fetch('/api/projects/save', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(updated),
+                        });
+                    } else {
+                        pushStagedPatchOp('save_project', updated);
+                    }
+                    Object.assign(p, updated);
+                    enrichedCount++;
+                }
+            }
+            if (!portalProjectsState.liveMode) {
+                portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+            }
+            renderPortalProjectsHub();
+            setErProgressBanner(`Enriched ${enrichedCount} project descriptions & keywords! Now click "2. AI Semantic Match" to run embedding + LLM duplicate detection.`);
+            showPortalToast(`Enriched ${enrichedCount} projects with Gemini semantic descriptions`);
+        } catch (err) {
+            setErProgressBanner(`Enrichment paused after ${enrichedCount} projects: ${err.message}`);
+            showPortalToast(`AI enrichment error: ${err.message}`, 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-magic mr-1"></i> 1. AI Enrich Descriptions'; }
+        }
+    };
+
+    function cosineDense(a, b) {
+        let dot = 0, na = 0, nb = 0;
+        for (let i = 0; i < a.length; i++) {
+            dot += a[i] * b[i];
+            na += a[i] * a[i];
+            nb += b[i] * b[i];
+        }
+        return (na > 0 && nb > 0) ? dot / (Math.sqrt(na) * Math.sqrt(nb)) : 0;
+    }
+
+    window.aiRunFullSemanticEntityResolution = async function () {
+        const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+        if (!apiKey) {
+            showPortalToast('Add your Gemini API Key in Settings & Security first.', 'warn');
+            return;
+        }
+        const projects = portalProjectsState.projects || [];
+        if (projects.length < 2) return;
+
+        const btn = document.getElementById('er-ai-embed-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Embedding...'; }
+
+        try {
+            const dismissed = getDismissedErSet();
+            const embeddings = [];
+            const EMB_BATCH = 80;
+            for (let i = 0; i < projects.length; i += EMB_BATCH) {
+                const slice = projects.slice(i, i + EMB_BATCH);
+                setErProgressBanner(`Computing Gemini semantic embeddings (${i}/${projects.length})...`);
+                const requests = slice.map(p => {
+                    const artPaths = (p.artifacts || []).slice(0, 6).map(a => a.gdrive_path || a.label).join('; ');
+                    const txt = `${p.title} (${p.slug}) | Kind: ${p.project_kind || ''} | Category: ${p.category || ''} | ${p.tagline || ''} | ${p.short_summary || ''} | Tags: ${(p.tags || []).join(', ')} | Keywords: ${(p.keywords || []).join(', ')} | Artifacts: ${artPaths}`;
+                    return {
+                        model: 'models/gemini-embedding-001',
+                        content: { parts: [{ text: txt.slice(0, 1800) }] },
+                        taskType: 'SEMANTIC_SIMILARITY',
+                    };
+                });
+                const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents?key=${encodeURIComponent(apiKey)}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ requests }),
+                });
+                const data = await resp.json();
+                if (!resp.ok) throw new Error(data.error?.message || `Embedding HTTP ${resp.status}`);
+                (data.embeddings || []).forEach(e => embeddings.push(e.values || []));
+            }
+
+            // Compute all-pairs semantic embedding cosine similarity + keep top 40 pairs
+            setErProgressBanner('Scoring all pairs by Gemini embedding similarity & verifying top candidates with Gemini LLM...');
+            const heuristicMap = new Map();
+            runSemanticEntityResolution(0.20, 400).forEach(c => {
+                heuristicMap.set(erPairKey(c.source.id, c.target.id), c);
+            });
+
+            const semPairs = [];
+            for (let i = 0; i < projects.length; i++) {
+                const va = embeddings[i];
+                if (!va || !va.length) continue;
+                for (let j = i + 1; j < projects.length; j++) {
+                    const vb = embeddings[j];
+                    if (!vb || !vb.length) continue;
+                    const a = projects[i], b = projects[j];
+                    if (dismissed.has(erPairKey(a.id, b.id))) continue;
+                    const embSim = cosineDense(va, vb);
+                    if (embSim < 0.68) continue;
+                    const h = heuristicMap.get(erPairKey(a.id, b.id));
+                    const blended = h ? (0.65 * embSim + 0.35 * h.score) : embSim;
+                    const keepA = ((a.is_public ? 1000 : 0) + (a.discovery_status === 'canonical' ? 500 : 0) + (a.artifacts || []).length)
+                        >= ((b.is_public ? 1000 : 0) + (b.discovery_status === 'canonical' ? 500 : 0) + (b.artifacts || []).length);
+                    semPairs.push({
+                        score: Math.min(0.99, blended),
+                        embSim,
+                        source: keepA ? b : a,
+                        target: keepA ? a : b,
+                        reasons: [`gemini_emb:${embSim.toFixed(2)}`, ...(h ? h.reasons : [])],
+                        aiVerdict: null,
+                    });
+                }
+            }
+            semPairs.sort((x, y) => y.score - x.score);
+            currentErCandidates = semPairs.slice(0, 40);
+            renderErDuplicatesList();
+
+            // Automatically run LLM verification on top 25 embedding pairs
+            const toVerify = currentErCandidates.slice(0, 25);
+            if (toVerify.length) {
+                const promptPairs = toVerify.map((c, idx) => ({
+                    idx,
+                    a: buildProjectPromptSnapshot(c.source),
+                    b: buildProjectPromptSnapshot(c.target),
+                    a_summary: (c.source.short_summary || '').slice(0, 220),
+                    b_summary: (c.target.short_summary || '').slice(0, 220),
+                }));
+                const prompt = `Judge whether each pair of projects refers to the SAME underlying project (e.g. code folder + paper + slides + renamed version of the exact same work) vs a RELATED_SERIES (separate projects/courses/poems in a series) vs DISTINCT. For each pair, return JSON array: [{"idx": number, "verdict": "SAME_PROJECT" | "RELATED_SERIES" | "DISTINCT", "recommended_target": "a" | "b", "reason": "concise 6-12 word explanation"}].\n\n${JSON.stringify(promptPairs)}`;
+                const verdicts = await callGeminiJson(apiKey, prompt);
+                (Array.isArray(verdicts) ? verdicts : []).forEach(v => {
+                    const c = currentErCandidates[v.idx];
+                    if (!c) return;
+                    c.aiVerdict = v;
+                    if (v.recommended_target === 'a') {
+                        const tmp = c.source; c.source = c.target; c.target = tmp;
+                    }
+                });
+                const order = { SAME_PROJECT: 0, RELATED_SERIES: 1, DISTINCT: 2 };
+                currentErCandidates.sort((x, y) => {
+                    const ox = x.aiVerdict ? (order[x.aiVerdict.verdict] ?? 3) : 3;
+                    const oy = y.aiVerdict ? (order[y.aiVerdict.verdict] ?? 3) : 3;
+                    return (ox - oy) || (y.score - x.score);
+                });
+                renderErDuplicatesList();
+            }
+
+            const sameCnt = currentErCandidates.filter(c => c.aiVerdict?.verdict === 'SAME_PROJECT').length;
+            setErProgressBanner(`Semantic Match complete: ${sameCnt} SAME_PROJECT duplicate(s) highlighted out of ${currentErCandidates.length} semantic pairs.`);
+            showPortalToast(`Found ${sameCnt} AI-confirmed duplicate project pairs!`);
+        } catch (err) {
+            setErProgressBanner(`Semantic Match error: ${err.message}`);
+            showPortalToast(`AI Semantic Match failed: ${err.message}`, 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-brain mr-1"></i> 2. AI Semantic Match (Embeddings + LLM)'; }
+        }
+    };
+
     window.aiVerifyTopErDuplicates = async function () {
         const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
         if (!apiKey) {
@@ -5889,20 +6165,12 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         try {
             const promptPairs = slice.map((c, idx) => ({
                 idx,
-                a: { title: c.source.title, slug: c.source.slug, kind: c.source.project_kind, summary: (c.source.short_summary || '').slice(0, 180) },
-                b: { title: c.target.title, slug: c.target.slug, kind: c.target.project_kind, summary: (c.target.short_summary || '').slice(0, 180) },
+                a: { title: c.source.title, slug: c.source.slug, kind: c.source.project_kind, summary: (c.source.short_summary || '').slice(0, 220) },
+                b: { title: c.target.title, slug: c.target.slug, kind: c.target.project_kind, summary: (c.target.short_summary || '').slice(0, 220) },
             }));
             const prompt = `Evaluate these project pairs from an academic/software portfolio. For each pair, return JSON array of objects: {"idx": number, "verdict": "SAME_PROJECT" | "RELATED_SERIES" | "DISTINCT", "reason": "short 6-10 word reason"}. Return ONLY raw JSON.\n\n${JSON.stringify(promptPairs)}`;
-
-            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.1 } }),
-            });
-            const data = await resp.json();
-            const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
-            const verdicts = JSON.parse(txt);
-            verdicts.forEach(v => {
+            const verdicts = await callGeminiJson(apiKey, prompt);
+            (Array.isArray(verdicts) ? verdicts : []).forEach(v => {
                 if (currentErCandidates[v.idx]) currentErCandidates[v.idx].aiVerdict = v;
             });
             renderErDuplicatesList();
@@ -5910,7 +6178,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         } catch (err) {
             showPortalToast(`AI verify failed: ${err.message}`, 'error');
         } finally {
-            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sparkles mr-1"></i> AI Semantic Verify (Gemini)'; }
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-check-double mr-1"></i> Verify Listed Pairs'; }
         }
     };
 

@@ -279,7 +279,10 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
       </div>
 
       <div>
-        <label class="block text-[11px] font-semibold text-slate-300 mb-1">Short Summary *</label>
+        <div class="flex items-center justify-between mb-1">
+          <label class="block text-[11px] font-semibold text-slate-300">Short Summary *</label>
+          <button type="button" id="pe-ai-describe-btn" onclick="aiDescribeSingleProject()" class="px-2.5 py-0.5 rounded-lg bg-purple-600/80 hover:bg-purple-500 text-white text-[10px] font-bold"><i class="fas fa-magic mr-1"></i> AI Describe</button>
+        </div>
         <textarea id="pe-summary" rows="2" required class="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white"></textarea>
       </div>
 
@@ -358,16 +361,20 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
       <button type="button" onclick="closeDuplicateResolverModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 self-end sm:self-center"><i class="fas fa-times"></i></button>
     </div>
 
-    <div class="flex flex-wrap items-center gap-3 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs">
+    <div class="flex flex-wrap items-center gap-2 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs">
+      <button type="button" id="er-ai-enrich-btn" onclick="aiEnrichPortalProjects()" class="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold"><i class="fas fa-magic mr-1"></i> 1. AI Enrich Descriptions</button>
+      <button type="button" id="er-ai-embed-btn" onclick="aiRunFullSemanticEntityResolution()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold"><i class="fas fa-brain mr-1"></i> 2. AI Semantic Match (Embeddings + LLM)</button>
+      <span class="text-slate-700">|</span>
       <label class="flex items-center gap-2 text-slate-300">
-        <span>Min Similarity: <strong id="er-threshold-label" class="text-sky-300 font-mono">45%</strong></span>
+        <span>Min Score: <strong id="er-threshold-label" class="text-sky-300 font-mono">45%</strong></span>
         <input type="range" id="er-threshold-slider" min="30" max="85" value="45" oninput="onErThresholdChange()" class="accent-purple-500" />
       </label>
-      <button type="button" onclick="runAndRenderErDuplicates()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold"><i class="fas fa-sync-alt mr-1"></i> Re-Scan</button>
-      <button type="button" id="er-ai-verify-btn" onclick="aiVerifyTopErDuplicates()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold"><i class="fas fa-sparkles mr-1"></i> AI Semantic Verify (Gemini)</button>
-      <button type="button" onclick="clearDismissedErPairs()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[11px]">Reset Dismissed</button>
+      <button type="button" onclick="runAndRenderErDuplicates()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold"><i class="fas fa-sync-alt mr-1"></i> Heuristic Scan</button>
+      <button type="button" id="er-ai-verify-btn" onclick="aiVerifyTopErDuplicates()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-purple-600/80 text-purple-300 hover:text-white border border-purple-500/30 font-semibold"><i class="fas fa-check-double mr-1"></i> Verify Listed Pairs</button>
+      <button type="button" onclick="clearDismissedErPairs()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[11px]">Reset Dismissed</button>
       <span id="er-candidate-count" class="ml-auto font-mono text-slate-400"></span>
     </div>
+    <div id="er-progress-banner" class="hidden text-xs font-mono bg-sky-500/10 border border-sky-500/30 text-sky-300 rounded-xl px-4 py-2"></div>
 
     <div id="er-duplicates-list" class="space-y-3 overflow-y-auto flex-1 pr-1"></div>
   </div>
