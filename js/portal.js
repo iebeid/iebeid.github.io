@@ -5105,7 +5105,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const badge = document.getElementById('github-pat-status-badge');
 
         const savedRepo = localStorage.getItem(GITHUB_REPO_KEY) || 'iebeid/iebeid.github.io';
-        const savedBranch = localStorage.getItem(GITHUB_BRANCH_KEY) || 'main';
+        const savedBranch = localStorage.getItem(GITHUB_BRANCH_KEY) || 'master';
         const savedPat = localStorage.getItem(GITHUB_PAT_KEY) || '';
 
         if (repoEl) repoEl.value = savedRepo;
@@ -5138,7 +5138,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
     window.saveGithubPublishSettings = function () {
         const repo = (document.getElementById('settings-github-repo')?.value || 'iebeid/iebeid.github.io').trim();
-        const branch = (document.getElementById('settings-github-branch')?.value || 'main').trim();
+        const branch = (document.getElementById('settings-github-branch')?.value || 'master').trim();
         const pat = (document.getElementById('settings-github-pat')?.value || '').trim();
         const msg = document.getElementById('github-pat-msg');
 
@@ -5377,7 +5377,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     window.publishPortalToGithub = async function () {
         const pat = (localStorage.getItem(GITHUB_PAT_KEY) || '').trim();
         const repo = (localStorage.getItem(GITHUB_REPO_KEY) || 'iebeid/iebeid.github.io').trim();
-        const branch = (localStorage.getItem(GITHUB_BRANCH_KEY) || 'main').trim();
+        const branch = (localStorage.getItem(GITHUB_BRANCH_KEY) || 'master').trim();
 
         if (!pat) {
             showPortalToast('Configure your GitHub Fine-Grained PAT in Settings & Security first.', 'warn');

@@ -45,7 +45,7 @@ GITHUB_SETTINGS_CARD_HTML = """<!-- PORTAL_GITHUB_SETTINGS_START -->
     </div>
     <div>
       <label class="block text-[11px] font-semibold text-slate-400 uppercase mb-1">Branch</label>
-      <input id="settings-github-branch" type="text" value="main" class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono" />
+      <input id="settings-github-branch" type="text" value="master" class="w-full bg-slate-800 border border-slate-700 focus:border-sky-500 rounded-lg px-3 py-2 text-xs text-white outline-none font-mono" />
     </div>
   </div>
   <div class="space-y-2 max-w-2xl">
