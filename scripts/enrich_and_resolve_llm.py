@@ -55,7 +55,7 @@ def gemini_post(endpoint: str, payload: Dict[str, Any], api_key: str, timeout: i
         raise RuntimeError(f"Gemini API error ({exc.code}): {body[:400]}") from exc
 
 
-def gemini_generate_json(prompt: str, api_key: str, model: str = "gemini-2.5-flash") -> Any:
+def gemini_generate_json(prompt: str, api_key: str, model: str = "gemini-3.8-flash") -> Any:
     data = gemini_post(
         f"models/{model}:generateContent",
         {

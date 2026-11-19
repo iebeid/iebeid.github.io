@@ -142,8 +142,8 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
   <section id="projects-unlock-card" class="hidden bg-slate-900 border border-amber-500/40 rounded-2xl p-6 shadow-xl">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
       <div>
-        <h3 class="text-sm font-bold text-amber-300 flex items-center gap-2"><i class="fas fa-lock"></i> Unlock Encrypted Master Portfolio</h3>
-        <p class="text-xs text-slate-400 mt-1">Your full Drive project catalog in static mode is AES-256-GCM encrypted. Enter your portal passcode to decrypt all private &amp; discovered projects locally.</p>
+        <h3 class="text-sm font-bold text-amber-300 flex items-center gap-2"><i class="fas fa-lock"></i> Unlock Encrypted Master Portfolio (205 Private &amp; Drive Projects Hidden)</h3>
+        <p class="text-xs text-slate-400 mt-1">Showing only public projects right now. Enter your portal passcode to decrypt all private &amp; Drive-discovered projects locally.</p>
       </div>
       <form onsubmit="unlockPortalProjectsBundle(event)" class="flex items-center gap-2">
         <input type="password" id="projects-unlock-pass" placeholder="Master passcode" class="px-3 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white focus:outline-none focus:border-sky-500" required />
@@ -183,7 +183,14 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
       <button type="button" data-pfilter="discovered" onclick="setPortalProjectsStatusFilter('discovered')" class="proj-pill px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">Discovered Drafts</button>
       <button type="button" data-pfilter="public" onclick="setPortalProjectsStatusFilter('public')" class="proj-pill px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">Public</button>
       <button type="button" data-pfilter="private" onclick="setPortalProjectsStatusFilter('private')" class="proj-pill px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700">Private</button>
-      <span id="projects-result-count" class="ml-auto text-[11px] font-mono text-slate-400"></span>
+      <div class="ml-auto flex items-center gap-3">
+        <select id="projects-page-size" onchange="onPortalProjectsFilterChange()" class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-700 text-[11px] font-mono text-slate-300">
+          <option value="all" selected>Show: All</option>
+          <option value="50">Show: 50 / page</option>
+          <option value="20">Show: 20 / page</option>
+        </select>
+        <span id="projects-result-count" class="text-[11px] font-mono text-slate-400"></span>
+      </div>
     </div>
   </section>
 

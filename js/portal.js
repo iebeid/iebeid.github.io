@@ -3482,7 +3482,7 @@ ${JSON.stringify(minimizedBms)}
 
 Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantically match the query. Do not wrap in markdown blocks, just return the raw JSON array. If no matches, return [].`;
 
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -4755,12 +4755,14 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         }
 
         const filtered = getFilteredPortalProjects();
-        setTxt('projects-result-count', `Showing ${filtered.length} of ${all.length}`);
+        const sizeVal = document.getElementById('projects-page-size')?.value || 'all';
+        const pageSize = (sizeVal === 'all') ? Math.max(1, filtered.length) : Math.max(1, Number(sizeVal) || 50);
 
-        const totalPages = Math.max(1, Math.ceil(filtered.length / PROJECTS_PAGE_SIZE));
+        const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
         if (portalProjectsState.page > totalPages) portalProjectsState.page = totalPages;
-        const start = (portalProjectsState.page - 1) * PROJECTS_PAGE_SIZE;
-        const slice = filtered.slice(start, start + PROJECTS_PAGE_SIZE);
+        const start = (portalProjectsState.page - 1) * pageSize;
+        const slice = filtered.slice(start, start + pageSize);
+        setTxt('projects-result-count', filtered.length ? `Showing ${start + 1}–${start + slice.length} of ${filtered.length} (${all.length} total)` : `Showing 0 of ${all.length}`);
 
         if (slice.length === 0) {
             listEl.innerHTML = '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-xs text-slate-400">No projects match the current filter.</div>';
@@ -5913,19 +5915,30 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         };
     }
 
-    async function callGeminiJson(apiKey, promptText, model = 'gemini-2.5-flash') {
-        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{ parts: [{ text: promptText }] }],
-                generationConfig: { temperature: 0.15, responseMimeType: 'application/json' },
-            }),
-        });
-        const data = await resp.json();
-        if (!resp.ok) throw new Error(data.error?.message || `Gemini HTTP ${resp.status}`);
-        const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
-        return JSON.parse(txt);
+    async function callGeminiJson(apiKey, promptText, model = 'gemini-3.8-flash') {
+        const candidates = Array.from(new Set([model, 'gemini-3.8-flash', 'gemini-3-flash', 'gemini-2.5-flash']));
+        let lastErr = null;
+        for (const mdl of candidates) {
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: promptText }] }],
+                    generationConfig: { temperature: 0.15, responseMimeType: 'application/json' },
+                }),
+            });
+            const data = await resp.json();
+            if (resp.ok) {
+                const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
+                return JSON.parse(txt);
+            }
+            const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
+            lastErr = new Error(msg);
+            if (!(resp.status === 404 || /no longer available|not found|not supported/i.test(msg))) {
+                throw lastErr;
+            }
+        }
+        throw lastErr || new Error('Gemini API call failed');
     }
 
     window.aiDescribeSingleProject = async function () {
@@ -6053,25 +6066,41 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             const dismissed = getDismissedErSet();
             const embeddings = [];
             const EMB_BATCH = 80;
+            const embModels = ['gemini-embedding-001', 'gemini-embedding-2'];
+            let activeEmbModel = embModels[0];
             for (let i = 0; i < projects.length; i += EMB_BATCH) {
                 const slice = projects.slice(i, i + EMB_BATCH);
                 setErProgressBanner(`Computing Gemini semantic embeddings (${i}/${projects.length})...`);
-                const requests = slice.map(p => {
-                    const artPaths = (p.artifacts || []).slice(0, 6).map(a => a.gdrive_path || a.label).join('; ');
-                    const txt = `${p.title} (${p.slug}) | Kind: ${p.project_kind || ''} | Category: ${p.category || ''} | ${p.tagline || ''} | ${p.short_summary || ''} | Tags: ${(p.tags || []).join(', ')} | Keywords: ${(p.keywords || []).join(', ')} | Artifacts: ${artPaths}`;
-                    return {
-                        model: 'models/gemini-embedding-001',
-                        content: { parts: [{ text: txt.slice(0, 1800) }] },
-                        taskType: 'SEMANTIC_SIMILARITY',
-                    };
-                });
-                const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-001:batchEmbedContents?key=${encodeURIComponent(apiKey)}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ requests }),
-                });
-                const data = await resp.json();
-                if (!resp.ok) throw new Error(data.error?.message || `Embedding HTTP ${resp.status}`);
+                let data = null;
+                let lastErr = null;
+                for (const em of (i === 0 ? embModels : [activeEmbModel])) {
+                    const requests = slice.map(p => {
+                        const artPaths = (p.artifacts || []).slice(0, 6).map(a => a.gdrive_path || a.label).join('; ');
+                        const txt = `${p.title} (${p.slug}) | Kind: ${p.project_kind || ''} | Category: ${p.category || ''} | ${p.tagline || ''} | ${p.short_summary || ''} | Tags: ${(p.tags || []).join(', ')} | Keywords: ${(p.keywords || []).join(', ')} | Artifacts: ${artPaths}`;
+                        return {
+                            model: `models/${em}`,
+                            content: { parts: [{ text: txt.slice(0, 1800) }] },
+                            taskType: 'SEMANTIC_SIMILARITY',
+                        };
+                    });
+                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${em}:batchEmbedContents?key=${encodeURIComponent(apiKey)}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ requests }),
+                    });
+                    const parsed = await resp.json();
+                    if (resp.ok) {
+                        data = parsed;
+                        activeEmbModel = em;
+                        break;
+                    }
+                    const msg = parsed.error?.message || `Embedding HTTP ${resp.status}`;
+                    lastErr = new Error(msg);
+                    if (!(resp.status === 404 || /no longer available|not found|not supported/i.test(msg))) {
+                        throw lastErr;
+                    }
+                }
+                if (!data) throw lastErr || new Error('Embedding call failed');
                 (data.embeddings || []).forEach(e => embeddings.push(e.values || []));
             }
 
