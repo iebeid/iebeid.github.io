@@ -4728,9 +4728,43 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const slice = filtered.slice(start, start + pageSize);
         setTxt('projects-result-count', filtered.length ? `Showing ${start + 1}–${start + slice.length} of ${filtered.length} (${all.length} total)` : `Showing 0 of ${all.length}`);
 
+        const hubSelectedIds = (portalProjectsState.selectedIds ||= new Set());
+        const existingSet = new Set(all.map(p => String(p.id)));
+        Array.from(hubSelectedIds).forEach(idStr => {
+            if (!existingSet.has(idStr)) hubSelectedIds.delete(idStr);
+        });
+
+        window.updateHubBulkBar = function () {
+            const bar = document.getElementById('projects-bulk-bar');
+            const cnt = document.getElementById('projects-bulk-count');
+            const n = (portalProjectsState.selectedIds || new Set()).size;
+            if (cnt) cnt.textContent = String(n);
+            if (bar) bar.classList.toggle('hidden', n < 1);
+        };
+
+        window.toggleHubProjectSelection = function (id, checked) {
+            const set = (portalProjectsState.selectedIds ||= new Set());
+            const key = String(id);
+            if (checked) set.add(key);
+            else set.delete(key);
+            updateHubBulkBar();
+        };
+
+        window.clearHubProjectSelection = function () {
+            if (portalProjectsState.selectedIds) portalProjectsState.selectedIds.clear();
+            updateHubBulkBar();
+            renderPortalProjectsHub();
+        };
+
+        window.openBulkManualMerge = function () {
+            const ids = Array.from(portalProjectsState.selectedIds || []).map(Number).filter(Boolean);
+            openManualMergeModal(ids[0] || null, ids);
+        };
+
         if (slice.length === 0) {
             listEl.innerHTML = '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-xs text-slate-400">No projects match the current filter.</div>';
             if (pagEl) pagEl.innerHTML = '';
+            updateHubBulkBar();
             return;
         }
 
@@ -4750,10 +4784,14 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
             const driveLink = p.gdrive_primary_url || ((p.artifacts || []).find(a => a.storage_source === 'gdrive') || {}).url || '';
             const safeId = JSON.stringify(p.id);
+            const isChecked = hubSelectedIds.has(String(p.id)) ? 'checked' : '';
 
             return `
                 <article class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 shadow transition">
                     <div class="flex flex-col md:flex-row md:items-start justify-between gap-3">
+                        <div class="pt-1 flex-shrink-0">
+                            <input type="checkbox" ${isChecked} onchange='toggleHubProjectSelection(${safeId}, this.checked)' class="w-4 h-4 accent-purple-500 rounded cursor-pointer" title="Select for multi-project merge" />
+                        </div>
                         <div class="space-y-1.5 min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
                                 ${pubBadge}
@@ -4780,6 +4818,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 </article>
             `;
         }).join('');
+        updateHubBulkBar();
 
         if (pagEl) {
             if (totalPages <= 1) {
@@ -5764,89 +5803,333 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         renderErDuplicatesList();
     };
 
+    let currentErClusters = [];
+
+    function canonicalPriorityScore(p) {
+        return (p.is_public ? 1000 : 0)
+            + (p.discovery_status === 'canonical' ? 500 : 0)
+            + ((p.placements || []).length * 15)
+            + ((p.artifacts || []).length * 2)
+            + ((p.short_summary || '').length > 50 ? 20 : 0);
+    }
+
+    function buildErDuplicateClusters(candidates) {
+        const active = (candidates || []).filter(c => c.aiVerdict?.verdict !== 'DISTINCT');
+        const projMap = new Map();
+        const pairEdges = [];
+        active.forEach(c => {
+            if (!c.source || !c.target) return;
+            projMap.set(String(c.source.id), c.source);
+            projMap.set(String(c.target.id), c.target);
+            pairEdges.push(c);
+        });
+
+        // Sort strongest edges first (AI SAME_PROJECT first, then score) so union-find builds clean core clusters
+        pairEdges.sort((x, y) => {
+            const ax = x.aiVerdict?.verdict === 'SAME_PROJECT' ? 1 : 0;
+            const ay = y.aiVerdict?.verdict === 'SAME_PROJECT' ? 1 : 0;
+            return (ay - ax) || (y.score - x.score);
+        });
+
+        const parent = new Map();
+        const sizeMap = new Map();
+        projMap.forEach((_, k) => { parent.set(k, k); sizeMap.set(k, 1); });
+        const find = k => {
+            while (parent.get(k) !== k) {
+                parent.set(k, parent.get(parent.get(k)));
+                k = parent.get(k);
+            }
+            return k;
+        };
+        const union = (a, b) => {
+            const ra = find(a), rb = find(b);
+            if (ra === rb) return;
+            const totalSize = (sizeMap.get(ra) || 1) + (sizeMap.get(rb) || 1);
+            if (totalSize > 10) return; // guard against mega-chaining unrelated groups
+            parent.set(rb, ra);
+            sizeMap.set(ra, totalSize);
+        };
+
+        pairEdges.forEach(e => {
+            union(String(e.source.id), String(e.target.id));
+        });
+
+        const groups = new Map();
+        projMap.forEach((p, k) => {
+            const root = find(k);
+            if (!groups.has(root)) groups.set(root, { members: [], edges: [] });
+            groups.get(root).members.push(p);
+        });
+        pairEdges.forEach(e => {
+            const r1 = find(String(e.source.id));
+            const r2 = find(String(e.target.id));
+            if (r1 === r2 && groups.has(r1)) groups.get(r1).edges.push(e);
+        });
+
+        const clusters = [];
+        groups.forEach(g => {
+            if (g.members.length < 2) return;
+            g.members.sort((a, b) => canonicalPriorityScore(b) - canonicalPriorityScore(a));
+            const targetId = g.members[0].id;
+            const maxScore = g.edges.reduce((mx, e) => Math.max(mx, e.score || 0), 0);
+            const hasSameAi = g.edges.some(e => e.aiVerdict?.verdict === 'SAME_PROJECT');
+            const reasonSet = new Set();
+            g.edges.forEach(e => (e.reasons || []).forEach(r => reasonSet.add(r)));
+            const aiNotes = g.edges.filter(e => e.aiVerdict).map(e => `${e.aiVerdict.verdict}: ${e.aiVerdict.reason || ''}`);
+            clusters.push({
+                members: g.members,
+                edges: g.edges,
+                targetId,
+                checkedSourceIds: new Set(g.members.filter(m => m.id !== targetId).map(m => String(m.id))),
+                maxScore,
+                hasSameAi,
+                reasons: Array.from(reasonSet).slice(0, 5),
+                aiNote: aiNotes[0] || '',
+            });
+        });
+
+        clusters.sort((a, b) => ((b.hasSameAi ? 1 : 0) - (a.hasSameAi ? 1 : 0)) || (b.members.length - a.members.length) || (b.maxScore - a.maxScore));
+        return clusters;
+    }
+
     function renderErDuplicatesList() {
+        currentErClusters = buildErDuplicateClusters(currentErCandidates);
         const listEl = document.getElementById('er-duplicates-list');
         const cntEl = document.getElementById('er-candidate-count');
-        if (cntEl) cntEl.textContent = `${currentErCandidates.length} candidate pair(s)`;
+        const multiCount = currentErClusters.filter(cl => cl.members.length > 2).length;
+        if (cntEl) cntEl.textContent = `${currentErClusters.length} cluster(s) (${currentErCandidates.length} pairs${multiCount ? `, ${multiCount} multi-way` : ''})`;
         if (!listEl) return;
 
-        if (!currentErCandidates.length) {
-            listEl.innerHTML = '<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-8 text-center text-xs text-slate-400">No duplicate candidates above this similarity threshold.</div>';
+        if (!currentErClusters.length) {
+            listEl.innerHTML = '<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-8 text-center text-xs text-slate-400">No duplicate clusters above this similarity threshold.</div>';
             return;
         }
 
-        listEl.innerHTML = currentErCandidates.map((c, idx) => {
-            const pctStr = `${(c.score * 100).toFixed(1)}%`;
-            const scoreCls = c.score >= 0.70 ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-                : c.score >= 0.55 ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
+        listEl.innerHTML = currentErClusters.map((cl, cIdx) => {
+            const pctStr = `${(cl.maxScore * 100).toFixed(1)}%`;
+            const scoreCls = cl.maxScore >= 0.70 ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                : cl.maxScore >= 0.55 ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
                 : 'bg-amber-500/20 text-amber-300 border-amber-500/40';
-            const aiBadge = c.aiVerdict
-                ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${c.aiVerdict.verdict === 'SAME_PROJECT' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${escapeHtml(c.aiVerdict.verdict)}: ${escapeHtml(c.aiVerdict.reason || '')}</span>`
+            const clusterBadge = cl.members.length > 2
+                ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">${cl.members.length}-Way Cluster</span>`
+                : `<span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-800 text-slate-300">2-Way Pair</span>`;
+            const aiBadge = cl.aiNote
+                ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${cl.hasSameAi ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${escapeHtml(cl.aiNote)}</span>`
                 : '';
 
+            const checkedCount = Array.from(cl.checkedSourceIds).filter(id => id !== String(cl.targetId)).length;
+
+            const memberRows = cl.members.map(m => {
+                const isTarget = String(m.id) === String(cl.targetId);
+                const isFoldChecked = !isTarget && cl.checkedSourceIds.has(String(m.id));
+                const safeMid = escapeHtml(String(m.id));
+                const roleBadge = isTarget
+                    ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">KEEP TARGET</span>'
+                    : (isFoldChecked
+                        ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">FOLD INTO TARGET</span>'
+                        : '<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-400">EXCLUDED</span>');
+
+                return `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-900/90 border ${isTarget ? 'border-emerald-500/40' : (isFoldChecked ? 'border-rose-500/25' : 'border-slate-800 opacity-60')} rounded-lg p-3 text-xs">
+                        <div class="flex items-start gap-2.5 min-w-0 flex-1">
+                            <input type="checkbox" ${isFoldChecked ? 'checked' : ''} ${isTarget ? 'disabled' : ''} onchange="toggleErClusterSource(${cIdx}, '${safeMid}', this.checked)" class="mt-0.5 accent-rose-500 w-4 h-4 cursor-pointer flex-shrink-0" title="Include this duplicate in merge" />
+                            <div class="min-w-0 flex-1 space-y-0.5">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    ${roleBadge}
+                                    <span class="font-bold text-white">${escapeHtml(m.title)}</span>
+                                    <span class="font-mono text-[10px] text-slate-500">${escapeHtml(m.slug)}</span>
+                                    <span class="text-[10px] text-slate-400">&bull; ${escapeHtml(m.discovery_status || 'canonical')} &bull; ${(m.artifacts || []).length} artifacts</span>
+                                </div>
+                                <p class="text-slate-400 text-[11px] line-clamp-1">${escapeHtml(m.short_summary || m.tagline || '')}</p>
+                            </div>
+                        </div>
+                        <label class="inline-flex items-center gap-1.5 text-[11px] font-semibold ${isTarget ? 'text-emerald-300' : 'text-slate-400 hover:text-white'} cursor-pointer flex-shrink-0">
+                            <input type="radio" name="er-target-c${cIdx}" ${isTarget ? 'checked' : ''} onchange="setErClusterTarget(${cIdx}, '${safeMid}')" class="accent-emerald-500" />
+                            Keep as Target
+                        </label>
+                    </div>
+                `;
+            }).join('');
+
             return `
-                <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4 space-y-3">
+                <div class="bg-slate-950/80 border ${cl.members.length > 2 ? 'border-purple-500/40' : 'border-slate-800'} rounded-xl p-4 space-y-2.5">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex flex-wrap items-center gap-2">
+                            ${clusterBadge}
                             <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border ${scoreCls}">${pctStr} Match</span>
-                            <span class="text-[11px] font-mono text-slate-400">${escapeHtml(c.reasons.join(' | '))}</span>
+                            <span class="text-[11px] font-mono text-slate-400">${escapeHtml(cl.reasons.join(' | '))}</span>
                             ${aiBadge}
                         </div>
                         <div class="flex items-center gap-1.5">
-                            <button type="button" onclick="swapErCandidatePair(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold"><i class="fas fa-exchange-alt mr-1"></i> Swap</button>
-                            <button type="button" onclick="mergeErCandidatePair(${idx})" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold"><i class="fas fa-compress-arrows-alt mr-1"></i> Merge into Target</button>
-                            <button type="button" onclick="dismissErPair(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-rose-600/70 text-slate-400 hover:text-white text-[11px]">Dismiss</button>
+                            <button type="button" onclick="mergeErCluster(${cIdx})" ${checkedCount < 1 ? 'disabled' : ''} class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white text-[11px] font-bold"><i class="fas fa-compress-arrows-alt mr-1"></i> Merge ${checkedCount} into Target</button>
+                            <button type="button" onclick="dismissErCluster(${cIdx})" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-rose-600/70 text-slate-400 hover:text-white text-[11px]">Dismiss</button>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                        <div class="bg-slate-900/90 border border-rose-500/25 rounded-lg p-3 space-y-1">
-                            <div class="text-[10px] font-bold uppercase text-rose-300">Fold Source (${escapeHtml(c.source.discovery_status || 'discovered')} &bull; ${(c.source.artifacts || []).length} artifacts)</div>
-                            <div class="font-bold text-white">${escapeHtml(c.source.title)}</div>
-                            <div class="font-mono text-[10px] text-slate-500">${escapeHtml(c.source.slug)}</div>
-                            <p class="text-slate-400 text-[11px] line-clamp-2">${escapeHtml(c.source.short_summary || c.source.tagline || '')}</p>
-                        </div>
-                        <div class="bg-slate-900/90 border border-emerald-500/25 rounded-lg p-3 space-y-1">
-                            <div class="text-[10px] font-bold uppercase text-emerald-300">Keep Target (${escapeHtml(c.target.discovery_status || 'canonical')} &bull; ${(c.target.artifacts || []).length} artifacts)</div>
-                            <div class="font-bold text-white">${escapeHtml(c.target.title)}</div>
-                            <div class="font-mono text-[10px] text-slate-500">${escapeHtml(c.target.slug)}</div>
-                            <p class="text-slate-400 text-[11px] line-clamp-2">${escapeHtml(c.target.short_summary || c.target.tagline || '')}</p>
-                        </div>
-                    </div>
+                    <div class="space-y-2">${memberRows}</div>
                 </div>
             `;
         }).join('');
     }
 
-    window.swapErCandidatePair = function (idx) {
-        const c = currentErCandidates[idx];
-        if (!c) return;
-        const tmp = c.source;
-        c.source = c.target;
-        c.target = tmp;
+    window.toggleErClusterSource = function (cIdx, idStr, checked) {
+        const cl = currentErClusters[cIdx];
+        if (!cl) return;
+        if (checked) cl.checkedSourceIds.add(String(idStr));
+        else cl.checkedSourceIds.delete(String(idStr));
+        // Update button/row visually without wiping cluster state
+        renderErClustersPreservingState();
+    };
+
+    window.setErClusterTarget = function (cIdx, idStr) {
+        const cl = currentErClusters[cIdx];
+        if (!cl) return;
+        const oldTarget = String(cl.targetId);
+        cl.targetId = cl.members.find(m => String(m.id) === String(idStr))?.id || cl.targetId;
+        cl.checkedSourceIds.delete(String(cl.targetId));
+        if (oldTarget !== String(cl.targetId)) cl.checkedSourceIds.add(oldTarget);
+        renderErClustersPreservingState();
+    };
+
+    function renderErClustersPreservingState() {
+        // Re-render in-place without rebuilding clusters from scratch so user target/checkbox toggles persist
+        const listEl = document.getElementById('er-duplicates-list');
+        if (!listEl) return;
+        const saved = currentErClusters.map(cl => ({
+            targetId: cl.targetId,
+            checkedSourceIds: new Set(cl.checkedSourceIds),
+        }));
+        renderErDuplicatesList();
+        currentErClusters.forEach((cl, idx) => {
+            if (saved[idx]) {
+                const memberSet = new Set(cl.members.map(m => String(m.id)));
+                if (memberSet.has(String(saved[idx].targetId))) cl.targetId = saved[idx].targetId;
+                cl.checkedSourceIds = new Set(Array.from(saved[idx].checkedSourceIds).filter(id => id !== String(cl.targetId)));
+            }
+        });
+        // Update HTML with restored selections directly by delegating to helper loop
+        const cardsHtml = currentErClusters.map((cl, cIdx) => {
+            const pctStr = `${(cl.maxScore * 100).toFixed(1)}%`;
+            const scoreCls = cl.maxScore >= 0.70 ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                : cl.maxScore >= 0.55 ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
+                : 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+            const clusterBadge = cl.members.length > 2
+                ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">${cl.members.length}-Way Cluster</span>`
+                : `<span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-800 text-slate-300">2-Way Pair</span>`;
+            const aiBadge = cl.aiNote
+                ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${cl.hasSameAi ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${escapeHtml(cl.aiNote)}</span>`
+                : '';
+            const checkedCount = Array.from(cl.checkedSourceIds).filter(id => id !== String(cl.targetId)).length;
+            const memberRows = cl.members.map(m => {
+                const isTarget = String(m.id) === String(cl.targetId);
+                const isFoldChecked = !isTarget && cl.checkedSourceIds.has(String(m.id));
+                const safeMid = escapeHtml(String(m.id));
+                const roleBadge = isTarget
+                    ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">KEEP TARGET</span>'
+                    : (isFoldChecked
+                        ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/15 text-rose-300 border border-rose-500/30">FOLD INTO TARGET</span>'
+                        : '<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-slate-800 text-slate-400">EXCLUDED</span>');
+                return `
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-900/90 border ${isTarget ? 'border-emerald-500/40' : (isFoldChecked ? 'border-rose-500/25' : 'border-slate-800 opacity-60')} rounded-lg p-3 text-xs">
+                        <div class="flex items-start gap-2.5 min-w-0 flex-1">
+                            <input type="checkbox" ${isFoldChecked ? 'checked' : ''} ${isTarget ? 'disabled' : ''} onchange="toggleErClusterSource(${cIdx}, '${safeMid}', this.checked)" class="mt-0.5 accent-rose-500 w-4 h-4 cursor-pointer flex-shrink-0" title="Include this duplicate in merge" />
+                            <div class="min-w-0 flex-1 space-y-0.5">
+                                <div class="flex flex-wrap items-center gap-1.5">
+                                    ${roleBadge}
+                                    <span class="font-bold text-white">${escapeHtml(m.title)}</span>
+                                    <span class="font-mono text-[10px] text-slate-500">${escapeHtml(m.slug)}</span>
+                                    <span class="text-[10px] text-slate-400">&bull; ${escapeHtml(m.discovery_status || 'canonical')} &bull; ${(m.artifacts || []).length} artifacts</span>
+                                </div>
+                                <p class="text-slate-400 text-[11px] line-clamp-1">${escapeHtml(m.short_summary || m.tagline || '')}</p>
+                            </div>
+                        </div>
+                        <label class="inline-flex items-center gap-1.5 text-[11px] font-semibold ${isTarget ? 'text-emerald-300' : 'text-slate-400 hover:text-white'} cursor-pointer flex-shrink-0">
+                            <input type="radio" name="er-target-c${cIdx}" ${isTarget ? 'checked' : ''} onchange="setErClusterTarget(${cIdx}, '${safeMid}')" class="accent-emerald-500" />
+                            Keep as Target
+                        </label>
+                    </div>
+                `;
+            }).join('');
+            return `
+                <div class="bg-slate-950/80 border ${cl.members.length > 2 ? 'border-purple-500/40' : 'border-slate-800'} rounded-xl p-4 space-y-2.5">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center gap-2">
+                            ${clusterBadge}
+                            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border ${scoreCls}">${pctStr} Match</span>
+                            <span class="text-[11px] font-mono text-slate-400">${escapeHtml(cl.reasons.join(' | '))}</span>
+                            ${aiBadge}
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="mergeErCluster(${cIdx})" ${checkedCount < 1 ? 'disabled' : ''} class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white text-[11px] font-bold"><i class="fas fa-compress-arrows-alt mr-1"></i> Merge ${checkedCount} into Target</button>
+                            <button type="button" onclick="dismissErCluster(${cIdx})" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-rose-600/70 text-slate-400 hover:text-white text-[11px]">Dismiss</button>
+                        </div>
+                    </div>
+                    <div class="space-y-2">${memberRows}</div>
+                </div>
+            `;
+        }).join('');
+        listEl.innerHTML = cardsHtml;
+    }
+
+    window.dismissErCluster = function (cIdx) {
+        const cl = currentErClusters[cIdx];
+        if (!cl) return;
+        const set = getDismissedErSet();
+        for (let i = 0; i < cl.members.length; i++) {
+            for (let j = i + 1; j < cl.members.length; j++) {
+                set.add(erPairKey(cl.members[i].id, cl.members[j].id));
+            }
+        }
+        localStorage.setItem(ER_DISMISSED_KEY, JSON.stringify(Array.from(set)));
+        const ids = new Set(cl.members.map(m => String(m.id)));
+        currentErCandidates = currentErCandidates.filter(c => !(ids.has(String(c.source.id)) && ids.has(String(c.target.id))));
         renderErDuplicatesList();
     };
 
-    window.dismissErPair = function (idx) {
-        const c = currentErCandidates[idx];
-        if (!c) return;
-        const set = getDismissedErSet();
-        set.add(erPairKey(c.source.id, c.target.id));
-        localStorage.setItem(ER_DISMISSED_KEY, JSON.stringify(Array.from(set)));
-        currentErCandidates.splice(idx, 1);
-        renderErDuplicatesList();
+    window.mergeErCluster = async function (cIdx) {
+        const cl = currentErClusters[cIdx];
+        if (!cl) return;
+        const sourcesToMerge = cl.members.filter(m => String(m.id) !== String(cl.targetId) && cl.checkedSourceIds.has(String(m.id)));
+        if (!sourcesToMerge.length) {
+            showPortalToast('Check at least one source duplicate to fold into the target.', 'warn');
+            return;
+        }
+        let mergedCount = 0;
+        const removedIds = new Set();
+        for (let i = 0; i < sourcesToMerge.length; i++) {
+            const isLast = i === sourcesToMerge.length - 1;
+            const ok = await mergePortalProjects(sourcesToMerge[i].id, cl.targetId, {
+                appendSummary: false,
+                addAlias: true,
+                deferRender: !isLast,
+                silentToast: sourcesToMerge.length > 1,
+            });
+            if (ok) {
+                mergedCount++;
+                removedIds.add(String(sourcesToMerge[i].id));
+            }
+        }
+        if (mergedCount > 0) {
+            // Rebind project references in remaining candidates & drop deleted IDs while keeping existing AI verdicts
+            const liveById = new Map((portalProjectsState.projects || []).map(p => [String(p.id), p]));
+            currentErCandidates = currentErCandidates
+                .filter(c => !removedIds.has(String(c.source.id)) && !removedIds.has(String(c.target.id)))
+                .map(c => ({
+                    ...c,
+                    source: liveById.get(String(c.source.id)) || c.source,
+                    target: liveById.get(String(c.target.id)) || c.target,
+                }));
+            renderErDuplicatesList();
+            if (sourcesToMerge.length > 1) {
+                const tgtTitle = liveById.get(String(cl.targetId))?.title || 'Target';
+                showPortalToast(`Merged ${mergedCount} duplicate projects into "${tgtTitle}"!`);
+            }
+        }
     };
 
     window.clearDismissedErPairs = function () {
         localStorage.removeItem(ER_DISMISSED_KEY);
         runAndRenderErDuplicates();
         showPortalToast('Cleared dismissed duplicate pairs');
-    };
-
-    window.mergeErCandidatePair = async function (idx) {
-        const c = currentErCandidates[idx];
-        if (!c) return;
-        const ok = await mergePortalProjects(c.source.id, c.target.id, { appendSummary: false, addAlias: true });
-        if (ok) runAndRenderErDuplicates();
     };
 
     function setErProgressBanner(msg) {
@@ -5881,17 +6164,20 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
     const sleepMs = ms => new Promise(resolve => setTimeout(resolve, ms));
     let _cachedGeminiFlashModels = null;
+    let _stickyWorkingFlashModel = null;
+    const _deprioritizedGeminiModels = new Set();
 
     async function discoverGeminiFlashModels(apiKey, preferred = 'gemini-3.8-flash') {
         const defaults = [
+            _stickyWorkingFlashModel,
             preferred,
             'gemini-3.8-flash',
             'gemini-3.6-flash',
             'gemini-3.5-flash',
             'gemini-3-flash-preview',
             'gemini-3-flash',
-            'gemini-3.5-flash-lite',
             'gemini-2.5-flash',
+            'gemini-3.5-flash-lite',
             'gemini-2.5-flash-lite',
         ];
         if (!_cachedGeminiFlashModels) {
@@ -5902,7 +6188,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     const available = (data.models || [])
                         .filter(m => Array.isArray(m.supportedGenerationMethods) && m.supportedGenerationMethods.includes('generateContent'))
                         .map(m => String(m.name || '').replace(/^models\//, ''))
-                        .filter(n => /flash/i.test(n) && !/image|audio|tts|live|thinking-exp/i.test(n));
+                        .filter(n => /flash/i.test(n) && !/image|audio|tts|live|thinking-exp|customtools|robotics|computer-use/i.test(n));
                     if (available.length) {
                         _cachedGeminiFlashModels = available;
                     }
@@ -5913,7 +6199,23 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const prioritized = defaults.filter(m => m && (!availSet || availSet.has(m)));
         const extra = (_cachedGeminiFlashModels || []).filter(m => !prioritized.includes(m));
         const merged = Array.from(new Set([...prioritized, ...extra]));
-        return merged.length ? merged : Array.from(new Set(defaults.filter(Boolean)));
+        const list = merged.length ? merged : Array.from(new Set(defaults.filter(Boolean)));
+        // Put models that failed earlier in this session at the end so subsequent batches don't repeat 503/404s
+        return [
+            ...list.filter(m => !_deprioritizedGeminiModels.has(m)),
+            ...list.filter(m => _deprioritizedGeminiModels.has(m)),
+        ];
+    }
+
+    function parseGeminiJsonPayload(txt) {
+        const clean = String(txt || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
+        try {
+            return JSON.parse(clean);
+        } catch (e) {
+            const m = clean.match(/(\[[\s\S]*\]|\{[\s\S]*\})/);
+            if (m) return JSON.parse(m[1]);
+            throw e;
+        }
     }
 
     async function callGeminiJson(apiKey, promptText, model = 'gemini-3.8-flash', onStatus = null) {
@@ -5921,27 +6223,27 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         let lastErr = null;
         for (let mIdx = 0; mIdx < candidates.length; mIdx++) {
             const mdl = candidates[mIdx];
-            const maxAttempts = 3;
+            const hasMoreModels = mIdx + 1 < candidates.length;
+            const maxAttempts = hasMoreModels ? 2 : 3;
             for (let attempt = 1; attempt <= maxAttempts; attempt++) {
                 try {
-                    const includeTemp = attempt === 1;
-                    const genCfg = includeTemp
-                        ? { temperature: 0.15, responseMimeType: 'application/json' }
-                        : { responseMimeType: 'application/json' };
                     const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             contents: [{ parts: [{ text: promptText }] }],
-                            generationConfig: genCfg,
+                            generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 8192 },
                         }),
                     });
                     const rawText = await resp.text();
                     let data = {};
                     try { data = JSON.parse(rawText); } catch (e) { data = {}; }
                     if (resp.ok) {
-                        const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
-                        return JSON.parse(txt);
+                        const txt = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+                        const parsed = parseGeminiJsonPayload(txt);
+                        _stickyWorkingFlashModel = mdl;
+                        _deprioritizedGeminiModels.delete(mdl);
+                        return parsed;
                     }
                     const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
                     lastErr = new Error(msg);
@@ -5950,25 +6252,23 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     if (resp.status === 401 || resp.status === 403 || /api key not valid|permission denied|has not been used/i.test(msg)) {
                         throw lastErr;
                     }
-                    // Parameter incompatibility on newer models (e.g. temperature unsupported) -> retry immediately without temp
-                    if (resp.status === 400 && includeTemp && /temperature|generationConfig/i.test(msg)) {
-                        continue;
-                    }
-                    // Model retired/not found -> skip straight to next fallback model
+                    // Model retired/not found -> mark deprioritized & move straight to next fallback model
                     if (resp.status === 404 || /no longer available|not found|not supported/i.test(msg)) {
+                        _deprioritizedGeminiModels.add(mdl);
                         break;
                     }
-                    // Transient server overload / rate limit -> exponential backoff retry, then try fallback model
+                    // Transient server overload / rate limit -> quick failover when fallback exists
                     const isTransient = [429, 500, 502, 503, 504].includes(resp.status) || /unavailable|overloaded|high demand|resource exhausted|try again/i.test(msg);
                     if (isTransient) {
                         if (attempt < maxAttempts) {
-                            const waitMs = (1400 * Math.pow(2, attempt - 1)) + Math.floor(Math.random() * 400);
-                            if (onStatus) onStatus(`Gemini ${mdl} returned ${resp.status} — retrying (${attempt}/${maxAttempts}) in ${(waitMs / 1000).toFixed(1)}s...`);
+                            const waitMs = hasMoreModels ? 650 : (1400 * Math.pow(2, attempt - 1));
+                            if (onStatus) onStatus(`Gemini ${mdl} returned ${resp.status} — ${hasMoreModels ? 'quick retry' : 'retrying'}...`);
                             await sleepMs(waitMs);
                             continue;
                         }
-                        if (mIdx + 1 < candidates.length) {
-                            if (onStatus) onStatus(`Gemini ${mdl} busy (${resp.status}) — switching to fallback model ${candidates[mIdx + 1]}...`);
+                        _deprioritizedGeminiModels.add(mdl);
+                        if (hasMoreModels) {
+                            if (onStatus) onStatus(`Switching from ${mdl} (${resp.status}) to ${candidates[mIdx + 1]}...`);
                             break;
                         }
                     }
@@ -5979,17 +6279,16 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     if (/api key not valid|permission denied|has not been used/i.test(msg)) {
                         throw err;
                     }
-                    const isNetwork = err?.name === 'TypeError' || /failed to fetch|network|timeout/i.test(msg);
-                    if (isNetwork && attempt < maxAttempts) {
-                        const waitMs = 1500 * attempt;
-                        if (onStatus) onStatus(`Network hiccup on ${mdl} — retrying (${attempt}/${maxAttempts})...`);
-                        await sleepMs(waitMs);
+                    const isRetryable = err?.name === 'TypeError' || err?.name === 'SyntaxError' || /failed to fetch|network|timeout|json|unexpected|unavailable|overloaded|high demand|429|503|500|502|504/i.test(msg);
+                    if (isRetryable && attempt < maxAttempts) {
+                        await sleepMs(700 * attempt);
                         continue;
                     }
-                    if (attempt >= maxAttempts && mIdx + 1 < candidates.length) break;
-                    if (!isNetwork && !/unavailable|overloaded|high demand|429|503|500|502|504/i.test(msg)) {
-                        throw err;
+                    if (hasMoreModels) {
+                        _deprioritizedGeminiModels.add(mdl);
+                        break;
                     }
+                    if (!isRetryable) throw err;
                 }
             }
         }
@@ -6044,51 +6343,71 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Enriching...'; }
 
         let enrichedCount = 0;
-        const BATCH_SIZE = 12;
-        try {
-            for (let i = 0; i < targets.length; i += BATCH_SIZE) {
-                const batch = targets.slice(i, i + BATCH_SIZE);
-                setErProgressBanner(`Generating LLM semantic descriptions & keywords: ${i} / ${targets.length} projects...`);
-                const snaps = batch.map(buildProjectPromptSnapshot);
-                const prompt = `You are curating Dr. Islam Akef Ebeid's academic, software, and creative portfolio. For each project below, infer what it is from its title, kind, Google Drive path, and artifact filenames (do not invent fake metrics or grants). Return a JSON array of objects matching each input id: [{"id": number, "short_summary": "1-2 clear factual sentences", "tagline": "short 5-9 word subtitle", "tags": ["3-5 tags"], "keywords": ["acronyms, aliases, key domain concepts"]}].\n\n${JSON.stringify(snaps)}`;
-                const results = await callGeminiJson(apiKey, prompt, 'gemini-3.8-flash', msg => {
-                    setErProgressBanner(`[${i}/${targets.length}] ${msg}`);
-                });
-                const byId = new Map((Array.isArray(results) ? results : []).map(r => [String(r.id), r]));
+        let completedBatches = 0;
+        const BATCH_SIZE = 25;
+        const batches = [];
+        for (let i = 0; i < targets.length; i += BATCH_SIZE) {
+            batches.push(targets.slice(i, i + BATCH_SIZE));
+        }
 
-                for (const p of batch) {
-                    const r = byId.get(String(p.id));
-                    if (!r || !r.short_summary) continue;
-                    const mergedTags = Array.from(new Set([...(p.tags || []), ...(r.tags || [])].filter(Boolean)));
-                    const mergedKw = Array.from(new Set([...(p.keywords || []), ...(r.keywords || [])].filter(Boolean)));
-                    const updated = {
-                        ...p,
-                        short_summary: r.short_summary,
-                        full_description: (!p.full_description || p.full_description.startsWith('Discovered ')) ? r.short_summary : p.full_description,
-                        tagline: (!p.tagline || p.tagline.startsWith('Drive Source:')) ? (r.tagline || p.tagline) : p.tagline,
-                        tags: mergedTags,
-                        keywords: mergedKw,
-                        updated_at: new Date().toISOString(),
-                    };
-                    if (portalProjectsState.liveMode) {
-                        await fetch('/api/projects/save', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(updated),
-                        });
-                    } else {
-                        pushStagedPatchOp('save_project', updated);
-                    }
-                    Object.assign(p, updated);
-                    enrichedCount++;
+        async function processEnrichBatch(batch, bIdx) {
+            const snaps = batch.map(buildProjectPromptSnapshot);
+            const prompt = `You are curating Dr. Islam Akef Ebeid's academic, software, and creative portfolio. For each project below, infer what it is from its title, kind, Google Drive path, and artifact filenames (do not invent fake metrics or grants). Return a JSON array matching every input id: [{"id": number, "short_summary": "1-2 clear factual sentences", "tagline": "short 5-9 word subtitle", "tags": ["3-5 tags"], "keywords": ["acronyms, aliases, key domain concepts"]}].\n\n${JSON.stringify(snaps)}`;
+            const raw = await callGeminiJson(apiKey, prompt, 'gemini-3.8-flash', msg => {
+                setErProgressBanner(`Batch ${bIdx + 1}/${batches.length}: ${msg}`);
+            });
+            const arr = Array.isArray(raw)
+                ? raw
+                : (raw && typeof raw === 'object' ? (raw.projects || raw.items || raw.results || Object.values(raw).find(Array.isArray) || []) : []);
+            const byId = new Map(arr.map(r => [String(r.id), r]));
+
+            for (const p of batch) {
+                const r = byId.get(String(p.id));
+                if (!r || !r.short_summary) continue;
+                const mergedTags = Array.from(new Set([...(p.tags || []), ...(r.tags || [])].filter(Boolean)));
+                const mergedKw = Array.from(new Set([...(p.keywords || []), ...(r.keywords || [])].filter(Boolean)));
+                const updated = {
+                    ...p,
+                    short_summary: r.short_summary,
+                    full_description: (!p.full_description || p.full_description.startsWith('Discovered ')) ? r.short_summary : p.full_description,
+                    tagline: (!p.tagline || p.tagline.startsWith('Drive Source:')) ? (r.tagline || p.tagline) : p.tagline,
+                    tags: mergedTags,
+                    keywords: mergedKw,
+                    updated_at: new Date().toISOString(),
+                };
+                if (portalProjectsState.liveMode) {
+                    await fetch('/api/projects/save', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updated),
+                    });
+                } else {
+                    pushStagedPatchOp('save_project', updated);
                 }
-                if (i + BATCH_SIZE < targets.length) await sleepMs(350);
+                Object.assign(p, updated);
+                enrichedCount++;
+            }
+            completedBatches++;
+            setErProgressBanner(`Enriching via ${_stickyWorkingFlashModel || 'Gemini Flash'}: ${enrichedCount} / ${targets.length} projects (${completedBatches}/${batches.length} batches)...`);
+        }
+
+        try {
+            setErProgressBanner(`Starting fast batch enrichment (${targets.length} projects in ${batches.length} batches)...`);
+            // Warm batch 0 first so _stickyWorkingFlashModel locks onto the fastest healthy model
+            if (batches.length > 0) {
+                await processEnrichBatch(batches[0], 0);
+            }
+            // Process remaining batches 2 at a time
+            for (let b = 1; b < batches.length; b += 2) {
+                const pair = [processEnrichBatch(batches[b], b)];
+                if (b + 1 < batches.length) pair.push(processEnrichBatch(batches[b + 1], b + 1));
+                await Promise.all(pair);
             }
             if (!portalProjectsState.liveMode) {
                 portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
             }
             renderPortalProjectsHub();
-            setErProgressBanner(`Enriched ${enrichedCount} project descriptions & keywords! Now click "2. AI Semantic Match" to run embedding + LLM duplicate detection.`);
+            setErProgressBanner(`Enriched ${enrichedCount} project descriptions & keywords via ${_stickyWorkingFlashModel || 'Gemini'}! Now click "2. AI Semantic Match".`);
             showPortalToast(`Enriched ${enrichedCount} projects with Gemini semantic descriptions`);
         } catch (err) {
             if (!portalProjectsState.liveMode && enrichedCount > 0) {
@@ -6289,13 +6608,33 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         }
     };
 
-    // Manual Merge Modal Controls
-    window.openManualMergeModal = function (preselectedSourceId = null) {
+    // Multi-Project Manual Merge Modal Controls
+    const manualMergeSelectedSources = new Set();
+
+    window.openManualMergeModal = function (preselectedSourceId = null, extraSourceIds = null) {
         const modal = document.getElementById('manual-merge-modal');
         if (!modal) return;
         document.getElementById('mm-source-filter').value = '';
         document.getElementById('mm-target-filter').value = '';
-        populateManualMergeSelects(preselectedSourceId);
+        manualMergeSelectedSources.clear();
+
+        let seedIds = Array.isArray(extraSourceIds) && extraSourceIds.length
+            ? extraSourceIds.map(String)
+            : (preselectedSourceId != null ? [String(preselectedSourceId)] : []);
+
+        // If 2+ items came from Hub checkboxes, auto-pick best canonical item as Target and others as Sources
+        let suggestedTargetId = null;
+        if (seedIds.length >= 2) {
+            const byId = new Map((portalProjectsState.projects || []).map(p => [String(p.id), p]));
+            const seededProjects = seedIds.map(id => byId.get(id)).filter(Boolean);
+            if (seededProjects.length >= 2) {
+                seededProjects.sort((a, b) => canonicalPriorityScore(b) - canonicalPriorityScore(a));
+                suggestedTargetId = String(seededProjects[0].id);
+                seedIds = seededProjects.slice(1).map(p => String(p.id));
+            }
+        }
+        seedIds.forEach(id => manualMergeSelectedSources.add(String(id)));
+        populateManualMergeSelects(suggestedTargetId);
         modal.classList.remove('hidden');
         modal.classList.add('flex');
     };
@@ -6305,69 +6644,154 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
     };
 
-    window.populateManualMergeSelects = function (preselectedSourceId = null) {
+    window.toggleManualMergeSource = function (idStr, checked) {
+        const tgtVal = document.getElementById('mm-target-select')?.value || '';
+        if (checked && idStr === tgtVal) {
+            showPortalToast('A project cannot be both a source and the target.', 'warn');
+            renderManualMergeSourceList();
+            return;
+        }
+        if (checked) manualMergeSelectedSources.add(String(idStr));
+        else manualMergeSelectedSources.delete(String(idStr));
+        renderManualMergePreview();
+    };
+
+    window.selectAllFilteredManualSources = function () {
+        const tgtVal = document.getElementById('mm-target-select')?.value || '';
+        const srcQ = (document.getElementById('mm-source-filter')?.value || '').toLowerCase();
+        (portalProjectsState.projects || []).forEach(p => {
+            if (`${p.title} ${p.slug} ${p.category} ${p.project_kind}`.toLowerCase().includes(srcQ) && String(p.id) !== tgtVal) {
+                manualMergeSelectedSources.add(String(p.id));
+            }
+        });
+        renderManualMergeSourceList();
+        renderManualMergePreview();
+    };
+
+    window.clearManualMergeSources = function () {
+        manualMergeSelectedSources.clear();
+        renderManualMergeSourceList();
+        renderManualMergePreview();
+    };
+
+    function renderManualMergeSourceList() {
+        const listEl = document.getElementById('mm-source-list');
+        if (!listEl) return;
         const projects = [...(portalProjectsState.projects || [])].sort((a, b) => (a.title || '').localeCompare(b.title || ''));
         const srcQ = (document.getElementById('mm-source-filter')?.value || '').toLowerCase();
-        const tgtQ = (document.getElementById('mm-target-filter')?.value || '').toLowerCase();
-        const srcSel = document.getElementById('mm-source-select');
-        const tgtSel = document.getElementById('mm-target-select');
-        if (!srcSel || !tgtSel) return;
+        const tgtVal = document.getElementById('mm-target-select')?.value || '';
+        const filtered = projects.filter(p => !srcQ || `${p.title} ${p.slug} ${p.category} ${p.project_kind}`.toLowerCase().includes(srcQ));
 
-        const prevSrc = preselectedSourceId != null ? String(preselectedSourceId) : srcSel.value;
-        const prevTgt = tgtSel.value;
+        listEl.innerHTML = filtered.map(p => {
+            const idStr = String(p.id);
+            const isTarget = idStr === tgtVal;
+            const checked = !isTarget && manualMergeSelectedSources.has(idStr);
+            if (isTarget && manualMergeSelectedSources.has(idStr)) manualMergeSelectedSources.delete(idStr);
+            return `
+                <label class="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-slate-800/80 text-xs cursor-pointer ${isTarget ? 'opacity-40' : ''}">
+                    <input type="checkbox" ${checked ? 'checked' : ''} ${isTarget ? 'disabled' : ''} onchange="toggleManualMergeSource('${escapeHtml(idStr)}', this.checked)" class="accent-rose-500 w-3.5 h-3.5 flex-shrink-0" />
+                    <span class="truncate text-white font-medium flex-1">${escapeHtml(p.title)}</span>
+                    <span class="font-mono text-[10px] text-slate-500 flex-shrink-0">${(p.artifacts || []).length} art</span>
+                </label>
+            `;
+        }).join('') || '<div class="text-[11px] text-slate-500 p-2">No matching projects.</div>';
+    }
+
+    window.populateManualMergeSelects = function (preferredTargetId = null) {
+        const projects = [...(portalProjectsState.projects || [])].sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+        const tgtQ = (document.getElementById('mm-target-filter')?.value || '').toLowerCase();
+        const tgtSel = document.getElementById('mm-target-select');
+        if (!tgtSel) return;
+
+        const prevTgt = preferredTargetId != null ? String(preferredTargetId) : tgtSel.value;
         const filterFn = (p, q) => !q || `${p.title} ${p.slug} ${p.category} ${p.project_kind}`.toLowerCase().includes(q);
 
-        srcSel.innerHTML = projects.filter(p => filterFn(p, srcQ)).map(p =>
-            `<option value="${escapeHtml(String(p.id))}">${escapeHtml(p.title)} [${escapeHtml(p.slug)}] (${(p.artifacts || []).length} art)</option>`
-        ).join('');
         tgtSel.innerHTML = projects.filter(p => filterFn(p, tgtQ)).map(p =>
             `<option value="${escapeHtml(String(p.id))}">${escapeHtml(p.title)} [${escapeHtml(p.slug)}] (${p.is_public ? 'PUBLIC' : 'private'}, ${(p.artifacts || []).length} art)</option>`
         ).join('');
 
-        if (prevSrc && Array.from(srcSel.options).some(o => o.value === prevSrc)) srcSel.value = prevSrc;
-        if (prevTgt && Array.from(tgtSel.options).some(o => o.value === prevTgt)) tgtSel.value = prevTgt;
-        if (srcSel.value === tgtSel.value && tgtSel.options.length > 1) {
-            tgtSel.selectedIndex = srcSel.selectedIndex === 0 ? 1 : 0;
+        if (prevTgt && Array.from(tgtSel.options).some(o => o.value === prevTgt)) {
+            tgtSel.value = prevTgt;
+        } else {
+            const firstNonSource = Array.from(tgtSel.options).find(o => !manualMergeSelectedSources.has(o.value));
+            if (firstNonSource) tgtSel.value = firstNonSource.value;
         }
+        renderManualMergeSourceList();
         renderManualMergePreview();
     };
 
     window.renderManualMergePreview = function () {
-        const srcId = Number(document.getElementById('mm-source-select')?.value);
         const tgtId = Number(document.getElementById('mm-target-select')?.value);
-        const src = (portalProjectsState.projects || []).find(p => p.id === srcId);
-        const tgt = (portalProjectsState.projects || []).find(p => p.id === tgtId);
-        const fmt = p => p
-            ? `<div><strong>${escapeHtml(p.title)}</strong> (${escapeHtml(p.discovery_status || 'canonical')})</div><div>${(p.artifacts || []).length} artifacts &bull; ${(p.placements || []).length} placements</div><div class="truncate text-slate-500 mt-1">${escapeHtml(p.short_summary || '')}</div>`
-            : 'Select a project';
+        const byId = new Map((portalProjectsState.projects || []).map(p => [String(p.id), p]));
+        const srcs = Array.from(manualMergeSelectedSources).filter(id => id !== String(tgtId)).map(id => byId.get(id)).filter(Boolean);
+        const tgt = byId.get(String(tgtId));
+
+        const cntEl = document.getElementById('mm-selected-count');
+        if (cntEl) cntEl.textContent = String(srcs.length);
+
         const sEl = document.getElementById('mm-source-preview');
+        if (sEl) {
+            if (!srcs.length) {
+                sEl.innerHTML = '<span class="text-slate-500">Check one or more duplicate source projects above.</span>';
+            } else {
+                const totalArt = srcs.reduce((acc, p) => acc + (p.artifacts || []).length, 0);
+                const listHtml = srcs.slice(0, 6).map(p => `<div class="truncate">&bull; <strong class="text-white">${escapeHtml(p.title)}</strong> (${(p.artifacts || []).length} art)</div>`).join('');
+                const moreHtml = srcs.length > 6 ? `<div class="text-slate-500">+ ${srcs.length - 6} more...</div>` : '';
+                sEl.innerHTML = `<div class="text-rose-300 font-semibold mb-1">${srcs.length} source(s) &bull; ${totalArt} artifacts moving to Target:</div>${listHtml}${moreHtml}`;
+            }
+        }
         const tEl = document.getElementById('mm-target-preview');
-        if (sEl) sEl.innerHTML = fmt(src);
-        if (tEl) tEl.innerHTML = fmt(tgt);
+        if (tEl) {
+            tEl.innerHTML = tgt
+                ? `<div><strong>${escapeHtml(tgt.title)}</strong> (${escapeHtml(tgt.discovery_status || 'canonical')})</div><div>${(tgt.artifacts || []).length} artifacts &bull; ${(tgt.placements || []).length} placements</div><div class="truncate text-slate-500 mt-1">${escapeHtml(tgt.short_summary || '')}</div>`
+                : 'Select a target project';
+        }
     };
 
     window.swapManualMergeSides = function () {
-        const srcSel = document.getElementById('mm-source-select');
         const tgtSel = document.getElementById('mm-target-select');
-        if (!srcSel || !tgtSel) return;
-        const sVal = srcSel.value;
-        const tVal = tgtSel.value;
-        if (Array.from(srcSel.options).some(o => o.value === tVal)) srcSel.value = tVal;
-        if (Array.from(tgtSel.options).some(o => o.value === sVal)) tgtSel.value = sVal;
-        renderManualMergePreview();
+        if (!tgtSel) return;
+        const firstSrc = Array.from(manualMergeSelectedSources)[0];
+        const curTgt = tgtSel.value;
+        if (!firstSrc || !curTgt || firstSrc === curTgt) return;
+        if (Array.from(tgtSel.options).some(o => o.value === firstSrc)) {
+            manualMergeSelectedSources.delete(firstSrc);
+            manualMergeSelectedSources.add(curTgt);
+            tgtSel.value = firstSrc;
+            renderManualMergeSourceList();
+            renderManualMergePreview();
+        }
     };
 
     window.executeManualMerge = async function () {
-        const srcId = Number(document.getElementById('mm-source-select')?.value);
         const tgtId = Number(document.getElementById('mm-target-select')?.value);
-        if (!srcId || !tgtId || srcId === tgtId) {
-            showPortalToast('Choose two different projects to merge.', 'warn');
+        const srcIds = Array.from(manualMergeSelectedSources).map(Number).filter(id => id && id !== tgtId);
+        if (!tgtId || !srcIds.length) {
+            showPortalToast('Check at least one Source project (different from Target).', 'warn');
             return;
         }
         const appendSummary = Boolean(document.getElementById('mm-append-summary')?.checked);
         const addAlias = Boolean(document.getElementById('mm-add-alias')?.checked);
-        const ok = await mergePortalProjects(srcId, tgtId, { appendSummary, addAlias });
-        if (ok) closeManualMergeModal();
+
+        let mergedCount = 0;
+        for (let i = 0; i < srcIds.length; i++) {
+            const isLast = i === srcIds.length - 1;
+            const ok = await mergePortalProjects(srcIds[i], tgtId, {
+                appendSummary,
+                addAlias,
+                deferRender: !isLast,
+                silentToast: srcIds.length > 1,
+            });
+            if (ok) mergedCount++;
+        }
+        if (mergedCount > 0) {
+            if (portalProjectsState.selectedIds) portalProjectsState.selectedIds.clear();
+            closeManualMergeModal();
+            if (srcIds.length > 1) {
+                const tgtTitle = (portalProjectsState.projects || []).find(p => p.id === tgtId)?.title || 'Target';
+                showPortalToast(`Merged ${mergedCount} source projects into "${tgtTitle}"`);
+            }
+        }
     };
 
     async function mergePortalProjects(sourceId, targetId, opts = {}) {
@@ -6391,7 +6815,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 showPortalToast(data.error || 'Merge failed', 'error');
                 return false;
             }
-            hydrateBundleState(data);
+            if (!opts.deferRender) {
+                hydrateBundleState(data);
+            } else {
+                portalProjectsState.projects = data.projects || portalProjectsState.projects;
+            }
         } else {
             if (src.slug) {
                 try {
@@ -6409,9 +6837,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 add_alias: opts.addAlias !== false,
             });
             portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
-            renderPortalProjectsHub();
+            if (!opts.deferRender) renderPortalProjectsHub();
         }
-        showPortalToast(`Merged "${src.title}" -> "${tgt.title}"`);
+        if (!opts.silentToast) {
+            showPortalToast(`Merged "${src.title}" -> "${tgt.title}"`);
+        }
         return true;
     }
 

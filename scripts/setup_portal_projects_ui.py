@@ -194,6 +194,15 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
     </div>
   </section>
 
+  <!-- Bulk Multi-Select Bar (appears when 1+ projects checked) -->
+  <div id="projects-bulk-bar" class="hidden sticky top-16 z-20 bg-slate-900/95 backdrop-blur border border-purple-500/40 rounded-2xl px-4 py-2.5 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+    <span class="text-xs font-semibold text-purple-200"><i class="fas fa-check-square mr-1.5 text-purple-400"></i><span id="projects-bulk-count">0</span> project(s) selected</span>
+    <div class="flex items-center gap-2">
+      <button type="button" onclick="openBulkManualMerge()" class="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow"><i class="fas fa-compress-arrows-alt mr-1"></i> Merge Selected into One Target...</button>
+      <button type="button" onclick="clearHubProjectSelection()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Clear</button>
+    </div>
+  </div>
+
   <!-- Projects List Container -->
   <section id="projects-list-container" class="space-y-3"></section>
   <div id="projects-pagination-bar" class="flex items-center justify-center gap-2 pt-2"></div>
@@ -387,26 +396,33 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
   </div>
 </div>
 
-<!-- Modal: Manual Project Merge -->
+<!-- Modal: Manual Project Merge (Single or Multi-Source Cluster Fold) -->
 <div id="manual-merge-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-4 overflow-y-auto">
-  <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full p-6 shadow-2xl space-y-4 my-8">
+  <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-5xl w-full p-6 shadow-2xl space-y-4 my-8 max-h-[90vh] flex flex-col">
     <div class="flex items-center justify-between border-b border-slate-800 pb-3">
       <div>
-        <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fas fa-code-branch text-sky-400"></i> Manual Project Merge</h3>
-        <p class="text-xs text-slate-400">Fold any Source project into a Target canonical project. All Drive artifacts, tags, keywords, and website placements transfer cleanly.</p>
+        <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fas fa-code-branch text-sky-400"></i> Multi-Project Merge</h3>
+        <p class="text-xs text-slate-400">Check one or multiple Source duplicate projects (left) to fold into one Target canonical project (right). All Drive artifacts, tags, keywords, and website placements combine without loss.</p>
       </div>
       <button type="button" onclick="closeManualMergeModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"><i class="fas fa-times"></i></button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-slate-950/70 border border-rose-500/30 rounded-xl p-4 space-y-2">
-        <label class="block text-[11px] font-bold uppercase text-rose-300">Source Project (Fold &amp; Delete)</label>
-        <input type="text" id="mm-source-filter" oninput="populateManualMergeSelects()" placeholder="Filter source projects..." class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
-        <select id="mm-source-select" onchange="renderManualMergePreview()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white"></select>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto flex-1 pr-1">
+      <div class="bg-slate-950/70 border border-rose-500/30 rounded-xl p-4 space-y-2 flex flex-col">
+        <div class="flex items-center justify-between gap-2">
+          <label class="block text-[11px] font-bold uppercase text-rose-300">Source Projects to Fold &amp; Delete (<span id="mm-selected-count">0</span>)</label>
+          <div class="flex items-center gap-2 text-[10px]">
+            <button type="button" onclick="selectAllFilteredManualSources()" class="text-sky-400 hover:underline font-semibold">Check Filtered</button>
+            <span class="text-slate-700">|</span>
+            <button type="button" onclick="clearManualMergeSources()" class="text-slate-400 hover:text-white">Clear</button>
+          </div>
+        </div>
+        <input type="text" id="mm-source-filter" oninput="populateManualMergeSelects()" placeholder="Filter source projects to check multiple duplicates..." class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
+        <div id="mm-source-list" class="max-h-60 overflow-y-auto space-y-1 bg-slate-900/70 border border-slate-800 rounded-lg p-2"></div>
         <div id="mm-source-preview" class="text-[11px] text-slate-400 pt-1"></div>
       </div>
 
-      <div class="bg-slate-950/70 border border-emerald-500/30 rounded-xl p-4 space-y-2">
+      <div class="bg-slate-950/70 border border-emerald-500/30 rounded-xl p-4 space-y-2 flex flex-col">
         <label class="block text-[11px] font-bold uppercase text-emerald-300">Target Project (Keep &amp; Enrich)</label>
         <input type="text" id="mm-target-filter" oninput="populateManualMergeSelects()" placeholder="Filter target projects..." class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
         <select id="mm-target-select" onchange="renderManualMergePreview()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white"></select>
@@ -418,19 +434,19 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
       <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300">
         <label class="inline-flex items-center gap-2 cursor-pointer">
           <input type="checkbox" id="mm-append-summary" class="accent-sky-500" />
-          Append source summary to target description
+          Append source summaries to target description
         </label>
         <label class="inline-flex items-center gap-2 cursor-pointer">
           <input type="checkbox" id="mm-add-alias" checked class="accent-emerald-500" />
-          Save source title/slug as permanent alias (prevents Drive re-splitting)
+          Save all source titles/slugs as permanent aliases
         </label>
       </div>
-      <button type="button" onclick="swapManualMergeSides()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"><i class="fas fa-exchange-alt mr-1"></i> Swap Sides</button>
+      <button type="button" onclick="swapManualMergeSides()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"><i class="fas fa-exchange-alt mr-1"></i> Swap Target with First Source</button>
     </div>
 
     <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
       <button type="button" onclick="closeManualMergeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Cancel</button>
-      <button type="button" onclick="executeManualMerge()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow"><i class="fas fa-compress-arrows-alt mr-1.5"></i> Merge Source into Target</button>
+      <button type="button" onclick="executeManualMerge()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow"><i class="fas fa-compress-arrows-alt mr-1.5"></i> Merge Checked Sources into Target</button>
     </div>
   </div>
 </div>
