@@ -1,6 +1,6 @@
 {
-  "_generated_at": "2026-11-19T08:33:22.232Z",
-  "_source": "portal.html (Direct GitHub Publish)",
+  "_generated_at": "2026-11-19T11:09:58.665025",
+  "_source": "data/content.db (SQLite Normalized Project Backbone Engine)",
   "meta": {
     "author_name": {
       "value": "Islam Akef Ebeid, Ph.D.",
@@ -73,6 +73,10 @@
     "footer_rights": {
       "value": "Islam Akef Ebeid. All Rights Reserved.",
       "description": "Footer copyright notice"
+    },
+    "last_portal_publish_seen": {
+      "value": "2026-11-19T08:33:22.232Z",
+      "description": "Timestamp of last live GitHub portal state reconciled into content.db"
     }
   },
   "navigation_menu": [
@@ -824,8 +828,8 @@
           "section_key": "section_9",
           "heading": "Open Research Datasets",
           "subheading": null,
-          "content_html": "<section class=\"mt-8\">\n<div class=\"flex items-center justify-between border-b-2 border-emerald-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-database text-emerald-600 mr-3\"></i> Open Research Datasets\n                    </h2>\n<span class=\"text-xs bg-emerald-100 text-teal-800 font-semibold px-2.5 py-1 rounded-full\">Data &amp; Assets</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- CovidNLPGraph -->\n<div class=\"bg-emerald-50/30 p-5 rounded-lg border border-emerald-100 shadow-sm flex items-start gap-4\">\n<div class=\"w-12 h-12 bg-white rounded-lg border border-emerald-200 flex items-center justify-center text-teal-600 flex-shrink-0\">\n<i class=\"fas fa-project-diagram text-2xl\"></i>\n</div>\n<div>\n<h3 class=\"font-bold text-gray-900 text-base mb-1\">CovidNLPGraph Sample Data</h3>\n<p class=\"text-xs text-gray-600 mb-3\">Extracted biomedical entities and network relations from COVID-19 literature datasets.</p>\n<a class=\"text-teal-700 hover:text-teal-900 font-bold text-xs uppercase tracking-wider\" href=\"../../data/CovidNLPGraph_Sample.zip\">\n                                Download Dataset (.zip) <i class=\"fas fa-download ml-1\"></i>\n</a>\n</div>\n</div>\n<!-- GDWM Results -->\n<div class=\"bg-emerald-50/30 p-5 rounded-lg border border-emerald-100 shadow-sm flex items-start gap-4\">\n<div class=\"w-12 h-12 bg-white rounded-lg border border-emerald-200 flex items-center justify-center text-teal-600 flex-shrink-0\">\n<i class=\"fas fa-table text-2xl\"></i>\n</div>\n<div>\n<h3 class=\"font-bold text-gray-900 text-base mb-1\">GDWM Evaluation Results</h3>\n<p class=\"text-xs text-gray-600 mb-3\">Aggregated simulation results and source harness for the Gaze Directed Window Management (GDWM) / EyeAdapt experiments.</p>\n<a class=\"text-teal-700 hover:text-teal-900 font-bold text-xs uppercase tracking-wider\" href=\"../../code/EyeAdaptEngine.zip\">\n                                Download Source &amp; Eval Suite (.zip) <i class=\"fas fa-download ml-1\"></i>\n</a>\n</div>\n</div>\n<!-- Chem2Bio2RDF (Placeholder/Link) -->\n<div class=\"bg-emerald-50/30 p-5 rounded-lg border border-emerald-100 shadow-sm flex items-start gap-4 md:col-span-2\">\n<div class=\"w-12 h-12 bg-white rounded-lg border border-emerald-200 flex items-center justify-center text-teal-600 flex-shrink-0\">\n<i class=\"fas fa-network-wired text-2xl\"></i>\n</div>\n<div>\n<h3 class=\"font-bold text-gray-900 text-base mb-1\">Chem2Bio2RDF Graph Data</h3>\n<p class=\"text-xs text-gray-600 mb-3\">Due to the large size (8GB+) of the comprehensive Chem2Bio2RDF biological network data, including MEDLINE relationships, full graph dumps and node/edge mappings are available upon request for research reproducibility.</p>\n</div>\n</div>\n</div>\n</section>",
-          "content_text": "Open Research Datasets Data & Assets CovidNLPGraph Sample Data Extracted biomedical entities and network relations from COVID-19 literature datasets. Download Dataset (.zip) GDWM Evaluation Results Aggregated simulation results and tabular data from the Gaze Directed Window Management (GDWM) experiments. Download Source & Eval Suite (.zip) Chem2Bio2RDF Graph Data Due to the large size (8GB+) of the comprehensive Chem2Bio2RDF biological network data, including MEDLINE relationships, full graph dumps and node/edge mappings are available upon request for research reproducibility.",
+          "content_html": "<section class=\"mt-8\">\n<div class=\"flex items-center justify-between border-b-2 border-emerald-600 pb-2 mb-6\">\n<h2 class=\"text-2xl font-bold text-gray-800 flex items-center\">\n<i class=\"fas fa-database text-emerald-600 mr-3\"></i> Open Research Datasets\n                    </h2>\n<span class=\"text-xs bg-emerald-100 text-teal-800 font-semibold px-2.5 py-1 rounded-full\">Data &amp; Assets</span>\n</div>\n<div class=\"grid grid-cols-1 md:grid-cols-2 gap-6\">\n<!-- CovidNLPGraph -->\n<div class=\"bg-emerald-50/30 p-5 rounded-lg border border-emerald-100 shadow-sm flex items-start gap-4\">\n<div class=\"w-12 h-12 bg-white rounded-lg border border-emerald-200 flex items-center justify-center text-teal-600 flex-shrink-0\">\n<i class=\"fas fa-project-diagram text-2xl\"></i>\n</div>\n<div>\n<h3 class=\"font-bold text-gray-900 text-base mb-1\">CovidNLPGraph Sample Data</h3>\n<p class=\"text-xs text-gray-600 mb-3\">Extracted biomedical entities and network relations from COVID-19 literature datasets.</p>\n<a class=\"text-teal-700 hover:text-teal-900 font-bold text-xs uppercase tracking-wider\" href=\"../../data/CovidNLPGraph_Sample.zip\">\n                                Download Dataset (.zip) <i class=\"fas fa-download ml-1\"></i>\n</a>\n</div>\n</div>\n<!-- EyeAdaptEngine Results -->\n<div class=\"bg-emerald-50/30 p-5 rounded-lg border border-emerald-100 shadow-sm flex items-start gap-4\">\n<div class=\"w-12 h-12 bg-white rounded-lg border border-emerald-200 flex items-center justify-center text-teal-600 flex-shrink-0\">\n<i class=\"fas fa-table text-2xl\"></i>\n</div>\n<div>\n<h3 class=\"font-bold text-gray-900 text-base mb-1\">EyeAdaptEngine Evaluation Suite</h3>\n<p class=\"text-xs text-gray-600 mb-3\">Aggregated simulation results and source harness for the EyeAdaptEngine real-time gaze analysis experiments.</p>\n<a class=\"text-teal-700 hover:text-teal-900 font-bold text-xs uppercase tracking-wider\" href=\"../../code/EyeAdaptEngine.zip\">\n                                Download Source &amp; Eval Suite (.zip) <i class=\"fas fa-download ml-1\"></i>\n</a>\n</div>\n</div>\n<!-- Chem2Bio2RDF (Placeholder/Link) -->\n<div class=\"bg-emerald-50/30 p-5 rounded-lg border border-emerald-100 shadow-sm flex items-start gap-4 md:col-span-2\">\n<div class=\"w-12 h-12 bg-white rounded-lg border border-emerald-200 flex items-center justify-center text-teal-600 flex-shrink-0\">\n<i class=\"fas fa-network-wired text-2xl\"></i>\n</div>\n<div>\n<h3 class=\"font-bold text-gray-900 text-base mb-1\">Chem2Bio2RDF Graph Data</h3>\n<p class=\"text-xs text-gray-600 mb-3\">Due to the large size (8GB+) of the comprehensive Chem2Bio2RDF biological network data, including MEDLINE relationships, full graph dumps and node/edge mappings are available upon request for research reproducibility.</p>\n</div>\n</div>\n</div>\n</section>",
+          "content_text": "Open Research Datasets Data & Assets CovidNLPGraph Sample Data Extracted biomedical entities and network relations from COVID-19 literature datasets. Download Dataset (.zip) EyeAdaptEngine Evaluation Suite Aggregated simulation results and source harness for the EyeAdaptEngine real-time gaze analysis experiments. Download Source & Eval Suite (.zip) Chem2Bio2RDF Graph Data Due to the large size (8GB+) of the comprehensive Chem2Bio2RDF biological network data, including MEDLINE relationships, full graph dumps and node/edge mappings are available upon request for research reproducibility.",
           "order": 9
         },
         {
@@ -3133,365 +3137,6 @@
       "bibtex": null
     }
   ],
-  "site_placement_slots": [
-    {
-      "page_slug": "home",
-      "section_slot": "featured",
-      "label": "Home — Current Research & Flagship Systems"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "ai_life_sciences",
-      "label": "Research — AI & Life Sciences / Bioinformatics"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "data_engineering",
-      "label": "Research — Data Quality, Engineering & NLP"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "visualization_hci",
-      "label": "Research — Scientific Visualization & HCI"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "legacy_industry",
-      "label": "Research — Legacy & Industry Systems"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "projects",
-      "label": "Research — Additional Cross-Disciplinary Projects"
-    },
-    {
-      "page_slug": "storefront",
-      "section_slot": "catalog",
-      "label": "Storefront — Commercial Software Catalog"
-    },
-    {
-      "page_slug": "education",
-      "section_slot": "projects",
-      "label": "Education — Academic Milestones & Projects"
-    },
-    {
-      "page_slug": "scholarship",
-      "section_slot": "projects",
-      "label": "Scholarship — Writings, Essays, Lectures & Poetry"
-    },
-    {
-      "page_slug": "teaching",
-      "section_slot": "projects",
-      "label": "Teaching — Courseware & Teaching Portfolio"
-    },
-    {
-      "page_slug": "service",
-      "section_slot": "projects",
-      "label": "Service — Leadership & Outreach Initiatives"
-    },
-    {
-      "page_slug": "business",
-      "section_slot": "projects",
-      "label": "Business — Applied Consulting & Commercial"
-    },
-    {
-      "page_slug": "hobbies",
-      "section_slot": "projects",
-      "label": "Hobbies — Creative Works, Travel & Personal"
-    },
-    {
-      "page_slug": "media",
-      "section_slot": "projects",
-      "label": "Media — Talks, Podcasts & Featured Media"
-    },
-    {
-      "page_slug": "relations",
-      "section_slot": "projects",
-      "label": "Relations — Collaborations & Mentorship"
-    },
-    {
-      "page_slug": "downloads",
-      "section_slot": "projects",
-      "label": "Downloads — Shared Project Bundles"
-    },
-    {
-      "page_slug": "lab",
-      "section_slot": "projects",
-      "label": "Lab — Data2AI4LifeSciences Lab Projects"
-    },
-    {
-      "page_slug": "talk-index",
-      "section_slot": "projects",
-      "label": "Talks — Related Presentation Projects"
-    }
-  ],
-  "courses": [
-    {
-      "code": "CSCI 3603 / 5173",
-      "title": "Human-Computer Interaction & Advanced HCI",
-      "institution": "Texas Woman's University",
-      "term": "Fall / Spring",
-      "syllabus_path": "documents/CSCI-3603-2-Syllabus.pdf",
-      "description": "UI/UX engineering, user study paradigms, usability metrics, accessibility, cognitive load frameworks."
-    },
-    {
-      "code": "CSCI 5103",
-      "title": "Advanced Database Systems",
-      "institution": "Texas Woman's University",
-      "term": "Graduate Core",
-      "syllabus_path": "documents/CSCI-5103-Syllabus.pdf",
-      "description": "Relational database internals, query optimization, ACID transactions, distributed databases, NoSQL engines."
-    },
-    {
-      "code": "CSCI 4513 / 5803",
-      "title": "Artificial Intelligence & Intelligent Systems",
-      "institution": "Texas Woman's University",
-      "term": "Advanced CS",
-      "syllabus_path": "documents/CSCI-5803-Syllabus.pdf",
-      "description": "Heuristic search, knowledge representation, reinforcement learning, NLP, computer vision, ethical AI."
-    },
-    {
-      "code": "CSCI 5663",
-      "title": "Deep Learning & Neural Architectures",
-      "institution": "Texas Woman's University",
-      "term": "Graduate Elective",
-      "syllabus_path": "documents/CSCI-5663-Syllabus.pdf",
-      "description": "Backpropagation, CNNs, RNNs/Transformers, Graph Neural Networks (GNNs), biological sequence modeling."
-    },
-    {
-      "code": "CSCI 5001",
-      "title": "Graduate Computer Science Seminar",
-      "institution": "Texas Woman's University",
-      "term": "Master's Core",
-      "syllabus_path": "documents/CSCI-5001-Syllabus-HB2504.pdf",
-      "description": "Research methods, peer review ethics, literature synthesis, conference presentation, proposal writing."
-    },
-    {
-      "code": "CSCI 4623",
-      "title": "Big Data Analytics & Principles of Data Mining",
-      "institution": "Texas Woman's University",
-      "term": "Undergraduate",
-      "syllabus_path": "",
-      "description": "Data warehousing, ETL pipelines, clustering, classification, association rules, scalable cloud analytics."
-    },
-    {
-      "code": "CSCI 2111 / 2113",
-      "title": "Data Structures & Algorithms Laboratory",
-      "institution": "Southern Arkansas University",
-      "term": "Undergraduate Core",
-      "syllabus_path": "documents/CSCI-2111-2113-Syllabus-Ebeid.pdf",
-      "description": "Object-oriented implementation of linked lists, trees, graphs, sorting algorithms, asymptotic analysis."
-    },
-    {
-      "code": "MCIS 5133",
-      "title": "Database Architecture & Information Systems",
-      "institution": "Southern Arkansas University",
-      "term": "Graduate Core",
-      "syllabus_path": "documents/MCIS-5133-Syllabus.pdf",
-      "description": "Relational calculus, database design, normalization, stored procedures, enterprise data governance."
-    },
-    {
-      "code": "MCIS 5013",
-      "title": "Advanced Operating Systems & Kernel Architecture",
-      "institution": "Southern Arkansas University",
-      "term": "Graduate Core",
-      "syllabus_path": "documents/MCIS-5013-Syllabus.pdf",
-      "description": "Concurrency, process synchronization, virtual memory management, file system architectures."
-    },
-    {
-      "code": "PAISE",
-      "title": "Physics, AI, and Simulation Engineering Seminar",
-      "institution": "The University of Texas at Austin",
-      "term": "Alumni / Fellowship",
-      "syllabus_path": "documents/PAISE-2019-Syllabus.pdf",
-      "description": "High-performance computing, scientific ML simulations, AI-accelerated physics calculations."
-    }
-  ],
-  "contacts": [
-    {
-      "name": "Dr. John R. Talburt",
-      "role": "Professor, Department of Information Science",
-      "organization": "University of Arkansas at Little Rock",
-      "email": "jrtalburt@ualr.edu",
-      "phone": "(501) 916-5228",
-      "category": "mentor"
-    },
-    {
-      "name": "Dr. Elizabeth Pierce",
-      "role": "Associate Professor, Department of Information Science",
-      "organization": "University of Arkansas at Little Rock",
-      "email": "expierce@ualr.edu",
-      "phone": "(501) 916-5223",
-      "category": "mentor"
-    },
-    {
-      "name": "Majdi Hassan",
-      "role": "Data Scientist, AbbVie Innovation Center",
-      "organization": "AbbVie Inc.",
-      "email": "majdi.hassan@abbvie.com",
-      "phone": "(847) 937-0316",
-      "category": "mentor"
-    },
-    {
-      "name": "Dr. Pengfei Gu",
-      "role": "Assistant Professor",
-      "organization": "University of Texas at Rio Grande Valley",
-      "email": "",
-      "phone": "(956) 435-1098",
-      "category": "mentor"
-    },
-    {
-      "name": "Dr. Dirk Reiners",
-      "role": "Professor",
-      "organization": "University of Central Florida",
-      "email": "Dirk.Reiners@ucf.edu",
-      "phone": "",
-      "category": "mentor"
-    },
-    {
-      "name": "Nicholas Hagan",
-      "role": "PhD Candidate",
-      "organization": "University of Arkansas at Little Rock",
-      "email": "nkhagan@ualr.edu",
-      "phone": "",
-      "category": "mentor"
-    }
-  ],
-  "xlpm_datasets": [
-    {
-      "dataset_key": "pdb/2DHB.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/2DHB.pdb",
-      "file_size_bytes": 266409
-    },
-    {
-      "dataset_key": "pdb/3PGZ.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/3PGZ.pdb",
-      "file_size_bytes": 380781
-    },
-    {
-      "dataset_key": "pdb/3R4G.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/3R4G.pdb",
-      "file_size_bytes": 326835
-    },
-    {
-      "dataset_key": "pdb/4x3e.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/4x3e.pdb",
-      "file_size_bytes": 287064
-    },
-    {
-      "dataset_key": "xlpm/group1/bsa.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group1",
-      "rel_path": "data/xlpm/group1/bsa.fasta",
-      "file_size_bytes": 1390
-    },
-    {
-      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group1",
-      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
-      "file_size_bytes": 32351
-    },
-    {
-      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group1",
-      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
-      "file_size_bytes": 31587
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1.fasta",
-      "file_size_bytes": 330
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
-      "file_size_bytes": 55605
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
-      "file_size_bytes": 18348
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
-      "file_size_bytes": 76396
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1_rev.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1_rev.fasta",
-      "file_size_bytes": 324
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
-      "file_size_bytes": 2914
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
-      "file_size_bytes": 13178
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
-      "file_size_bytes": 5054
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
-      "file_size_bytes": 24269
-    },
-    {
-      "dataset_key": "xlpm/group4/rim1pif1.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group4",
-      "rel_path": "data/xlpm/group4/rim1pif1.fasta",
-      "file_size_bytes": 809
-    },
-    {
-      "dataset_key": "xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group4",
-      "rel_path": "data/xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
-      "file_size_bytes": 33869
-    },
-    {
-      "dataset_key": "xlpm/group4/rimpifn14hc1_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group4",
-      "rel_path": "data/xlpm/group4/rimpifn14hc1_tandemresult.txt",
-      "file_size_bytes": 36584
-    }
-  ],
   "projects": [
     {
       "id": 23,
@@ -4052,11 +3697,11 @@
       ],
       "tags": [
         "AI Lifecycle",
+        "Artificial Intelligence",
         "Data Quality",
         "Drift Detection",
         "Lineage",
         "Python SDK",
-        "Artificial Intelligence",
         "Research"
       ],
       "publications": []
@@ -4222,6 +3867,14 @@
           "storage_source": "external"
         },
         {
+          "type": "poster",
+          "label": "KG Mining Poster (AbbVie 2020)",
+          "url": "documents/Bioinformatics_Poster_2020.pptx",
+          "badge": "PPTX",
+          "document_id": null,
+          "storage_source": "repo"
+        },
+        {
           "type": "publisher_url",
           "label": "PubMed KG Paper (Nature Scientific Data)",
           "url": "https://doi.org/10.1038/s41597-020-0583-0",
@@ -4244,14 +3897,6 @@
           "badge": "PDF",
           "document_id": 57,
           "storage_source": "repo"
-        },
-        {
-          "type": "poster",
-          "label": "KG Mining Poster (AbbVie 2020)",
-          "url": "documents/Bioinformatics_Poster_2020.pptx",
-          "badge": "PPTX",
-          "document_id": 63,
-          "storage_source": "repo"
         }
       ],
       "placements": [
@@ -4264,21 +3909,21 @@
         }
       ],
       "tags": [
-        "BERT",
-        "Information Retrieval",
-        "Knowledge Graphs",
-        "Node2Vec",
-        "PubMed",
         "AbbVie",
+        "BERT",
+        "Bioinformatics",
         "Chem2Bio2RDF",
         "Drug Discovery",
-        "Metapath2Vec",
-        "Research",
-        "Bioinformatics",
-        "Graph Embeddings",
         "Drug-Target Interaction",
-        "Text Mining",
-        "Network Biology"
+        "Graph Embeddings",
+        "Information Retrieval",
+        "Knowledge Graphs",
+        "Metapath2Vec",
+        "Network Biology",
+        "Node2Vec",
+        "PubMed",
+        "Research",
+        "Text Mining"
       ],
       "publications": []
     },
@@ -4341,11 +3986,11 @@
     },
     {
       "id": 33,
-      "slug": "eyeadapt-gdwm",
-      "title": "EyeArt / EyeAdapt Engine & GDWM",
-      "tagline": "Real-Time Gaze Transition Entropy, Markov Cognitive Modeling & Adaptive UIs",
-      "short_summary": "Eye-tracking & biometric cognitive-load engine using Bayesian mixed-effects Markov models and real-time gaze transition entropy, sponsored by Lockheed Martin (ACM ETRA Best Short Paper).",
-      "full_description": "Includes real-time gaze entropy estimation, Bayesian semi-parametric mixed-effects Markov scanpath modeling, Gaze Directed Window Management (GDWM) simulation harness, and adaptive C4ISR UI prototypes developed at UT Austin.",
+      "slug": "eyeadapt-engine",
+      "title": "EyeAdapt Engine",
+      "tagline": "Real-Time Gaze Transition Entropy, Bayesian Markov Modeling & Adaptive C4ISR UIs",
+      "short_summary": "Real-time eye-tracking and cognitive-load engine using Bayesian mixed-effects Markov models and gaze transition entropy, developed at UT Austin with Lockheed Martin RMS (ACM ETRA 2018 & 2019 Best Short Paper).",
+      "full_description": "Includes real-time gaze transition entropy estimation, Bayesian semi-parametric mixed-effects Markov scanpath modeling, EyeAdaptEngine online analysis harness, and adaptive C4ISR UI prototypes developed at UT Austin with Lockheed Martin.",
       "category": "Scientific Visualization & HCI",
       "domain_stage": "01_data_prep",
       "status": "Published / Commercial",
@@ -4360,7 +4005,7 @@
         "Bayesian Markov Models",
         "OpenCV"
       ],
-      "code_snippet": "from eyeart import TelemetryStream\nstream = TelemetryStream(hz=120)\nentropy = stream.compute_transition_entropy()",
+      "code_snippet": "from eyeadapt import TelemetryStream\nstream = TelemetryStream(hz=120)\nentropy = stream.compute_transition_entropy()",
       "license_model": "Dual-Licensed: MIT / Proprietary Commercial",
       "price_display": "Custom Seat / Enterprise",
       "storefront_category": "DATA_CURATION",
@@ -4368,7 +4013,14 @@
       "is_storefront": true,
       "display_order": 11,
       "project_kind": "research",
-      "keywords": [],
+      "keywords": [
+        "EyeAdapt",
+        "EyeAdaptUI",
+        "EyeAdaptEngine",
+        "UT Austin",
+        "Lockheed Martin",
+        "ETRA"
+      ],
       "artifacts": [
         {
           "type": "source_zip",
@@ -5559,6 +5211,365 @@
         "Web Architecture"
       ],
       "publications": []
+    }
+  ],
+  "site_placement_slots": [
+    {
+      "page_slug": "home",
+      "section_slot": "featured",
+      "label": "Home — Current Research & Flagship Systems"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "ai_life_sciences",
+      "label": "Research — AI & Life Sciences / Bioinformatics"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "data_engineering",
+      "label": "Research — Data Quality, Engineering & NLP"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "visualization_hci",
+      "label": "Research — Scientific Visualization & HCI"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "legacy_industry",
+      "label": "Research — Legacy & Industry Systems"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "projects",
+      "label": "Research — Additional Cross-Disciplinary Projects"
+    },
+    {
+      "page_slug": "storefront",
+      "section_slot": "catalog",
+      "label": "Storefront — Commercial Software Catalog"
+    },
+    {
+      "page_slug": "education",
+      "section_slot": "projects",
+      "label": "Education — Academic Milestones & Projects"
+    },
+    {
+      "page_slug": "scholarship",
+      "section_slot": "projects",
+      "label": "Scholarship — Writings, Essays, Lectures & Poetry"
+    },
+    {
+      "page_slug": "teaching",
+      "section_slot": "projects",
+      "label": "Teaching — Courseware & Teaching Portfolio"
+    },
+    {
+      "page_slug": "service",
+      "section_slot": "projects",
+      "label": "Service — Leadership & Outreach Initiatives"
+    },
+    {
+      "page_slug": "business",
+      "section_slot": "projects",
+      "label": "Business — Applied Consulting & Commercial"
+    },
+    {
+      "page_slug": "hobbies",
+      "section_slot": "projects",
+      "label": "Hobbies — Creative Works, Travel & Personal"
+    },
+    {
+      "page_slug": "media",
+      "section_slot": "projects",
+      "label": "Media — Talks, Podcasts & Featured Media"
+    },
+    {
+      "page_slug": "relations",
+      "section_slot": "projects",
+      "label": "Relations — Collaborations & Mentorship"
+    },
+    {
+      "page_slug": "downloads",
+      "section_slot": "projects",
+      "label": "Downloads — Shared Project Bundles"
+    },
+    {
+      "page_slug": "lab",
+      "section_slot": "projects",
+      "label": "Lab — Data2AI4LifeSciences Lab Projects"
+    },
+    {
+      "page_slug": "talk-index",
+      "section_slot": "projects",
+      "label": "Talks — Related Presentation Projects"
+    }
+  ],
+  "courses": [
+    {
+      "code": "CSCI 3603 / 5173",
+      "title": "Human-Computer Interaction & Advanced HCI",
+      "institution": "Texas Woman's University",
+      "term": "Fall / Spring",
+      "syllabus_path": "documents/CSCI-3603-2-Syllabus.pdf",
+      "description": "UI/UX engineering, user study paradigms, usability metrics, accessibility, cognitive load frameworks."
+    },
+    {
+      "code": "CSCI 5103",
+      "title": "Advanced Database Systems",
+      "institution": "Texas Woman's University",
+      "term": "Graduate Core",
+      "syllabus_path": "documents/CSCI-5103-Syllabus.pdf",
+      "description": "Relational database internals, query optimization, ACID transactions, distributed databases, NoSQL engines."
+    },
+    {
+      "code": "CSCI 4513 / 5803",
+      "title": "Artificial Intelligence & Intelligent Systems",
+      "institution": "Texas Woman's University",
+      "term": "Advanced CS",
+      "syllabus_path": "documents/CSCI-5803-Syllabus.pdf",
+      "description": "Heuristic search, knowledge representation, reinforcement learning, NLP, computer vision, ethical AI."
+    },
+    {
+      "code": "CSCI 5663",
+      "title": "Deep Learning & Neural Architectures",
+      "institution": "Texas Woman's University",
+      "term": "Graduate Elective",
+      "syllabus_path": "documents/CSCI-5663-Syllabus.pdf",
+      "description": "Backpropagation, CNNs, RNNs/Transformers, Graph Neural Networks (GNNs), biological sequence modeling."
+    },
+    {
+      "code": "CSCI 5001",
+      "title": "Graduate Computer Science Seminar",
+      "institution": "Texas Woman's University",
+      "term": "Master's Core",
+      "syllabus_path": "documents/CSCI-5001-Syllabus-HB2504.pdf",
+      "description": "Research methods, peer review ethics, literature synthesis, conference presentation, proposal writing."
+    },
+    {
+      "code": "CSCI 4623",
+      "title": "Big Data Analytics & Principles of Data Mining",
+      "institution": "Texas Woman's University",
+      "term": "Undergraduate",
+      "syllabus_path": "",
+      "description": "Data warehousing, ETL pipelines, clustering, classification, association rules, scalable cloud analytics."
+    },
+    {
+      "code": "CSCI 2111 / 2113",
+      "title": "Data Structures & Algorithms Laboratory",
+      "institution": "Southern Arkansas University",
+      "term": "Undergraduate Core",
+      "syllabus_path": "documents/CSCI-2111-2113-Syllabus-Ebeid.pdf",
+      "description": "Object-oriented implementation of linked lists, trees, graphs, sorting algorithms, asymptotic analysis."
+    },
+    {
+      "code": "MCIS 5133",
+      "title": "Database Architecture & Information Systems",
+      "institution": "Southern Arkansas University",
+      "term": "Graduate Core",
+      "syllabus_path": "documents/MCIS-5133-Syllabus.pdf",
+      "description": "Relational calculus, database design, normalization, stored procedures, enterprise data governance."
+    },
+    {
+      "code": "MCIS 5013",
+      "title": "Advanced Operating Systems & Kernel Architecture",
+      "institution": "Southern Arkansas University",
+      "term": "Graduate Core",
+      "syllabus_path": "documents/MCIS-5013-Syllabus.pdf",
+      "description": "Concurrency, process synchronization, virtual memory management, file system architectures."
+    },
+    {
+      "code": "PAISE",
+      "title": "Physics, AI, and Simulation Engineering Seminar",
+      "institution": "The University of Texas at Austin",
+      "term": "Alumni / Fellowship",
+      "syllabus_path": "documents/PAISE-2019-Syllabus.pdf",
+      "description": "High-performance computing, scientific ML simulations, AI-accelerated physics calculations."
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Dr. John R. Talburt",
+      "role": "Professor, Department of Information Science",
+      "organization": "University of Arkansas at Little Rock",
+      "email": "jrtalburt@ualr.edu",
+      "phone": "(501) 916-5228",
+      "category": "mentor"
+    },
+    {
+      "name": "Dr. Elizabeth Pierce",
+      "role": "Associate Professor, Department of Information Science",
+      "organization": "University of Arkansas at Little Rock",
+      "email": "expierce@ualr.edu",
+      "phone": "(501) 916-5223",
+      "category": "mentor"
+    },
+    {
+      "name": "Majdi Hassan",
+      "role": "Data Scientist, AbbVie Innovation Center",
+      "organization": "AbbVie Inc.",
+      "email": "majdi.hassan@abbvie.com",
+      "phone": "(847) 937-0316",
+      "category": "mentor"
+    },
+    {
+      "name": "Dr. Pengfei Gu",
+      "role": "Assistant Professor",
+      "organization": "University of Texas at Rio Grande Valley",
+      "email": "",
+      "phone": "(956) 435-1098",
+      "category": "mentor"
+    },
+    {
+      "name": "Dr. Dirk Reiners",
+      "role": "Professor",
+      "organization": "University of Central Florida",
+      "email": "Dirk.Reiners@ucf.edu",
+      "phone": "",
+      "category": "mentor"
+    },
+    {
+      "name": "Nicholas Hagan",
+      "role": "PhD Candidate",
+      "organization": "University of Arkansas at Little Rock",
+      "email": "nkhagan@ualr.edu",
+      "phone": "",
+      "category": "mentor"
+    }
+  ],
+  "xlpm_datasets": [
+    {
+      "dataset_key": "pdb/2DHB.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/2DHB.pdb",
+      "file_size_bytes": 266409
+    },
+    {
+      "dataset_key": "pdb/3PGZ.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/3PGZ.pdb",
+      "file_size_bytes": 380781
+    },
+    {
+      "dataset_key": "pdb/3R4G.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/3R4G.pdb",
+      "file_size_bytes": 326835
+    },
+    {
+      "dataset_key": "pdb/4x3e.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/4x3e.pdb",
+      "file_size_bytes": 287064
+    },
+    {
+      "dataset_key": "xlpm/group1/bsa.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group1",
+      "rel_path": "data/xlpm/group1/bsa.fasta",
+      "file_size_bytes": 1390
+    },
+    {
+      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group1",
+      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
+      "file_size_bytes": 32351
+    },
+    {
+      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group1",
+      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
+      "file_size_bytes": 31587
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1.fasta",
+      "file_size_bytes": 330
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
+      "file_size_bytes": 55605
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
+      "file_size_bytes": 18348
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
+      "file_size_bytes": 76396
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1_rev.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1_rev.fasta",
+      "file_size_bytes": 324
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
+      "file_size_bytes": 2914
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
+      "file_size_bytes": 13178
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
+      "file_size_bytes": 5054
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
+      "file_size_bytes": 24269
+    },
+    {
+      "dataset_key": "xlpm/group4/rim1pif1.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group4",
+      "rel_path": "data/xlpm/group4/rim1pif1.fasta",
+      "file_size_bytes": 809
+    },
+    {
+      "dataset_key": "xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group4",
+      "rel_path": "data/xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
+      "file_size_bytes": 33869
+    },
+    {
+      "dataset_key": "xlpm/group4/rimpifn14hc1_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group4",
+      "rel_path": "data/xlpm/group4/rimpifn14hc1_tandemresult.txt",
+      "file_size_bytes": 36584
     }
   ]
 }

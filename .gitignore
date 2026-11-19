@@ -32,3 +32,4 @@ content.db
 data/*.db
 data/*.sqlite
 data/*.sqlite3
+data/ai_discovery_cache.json

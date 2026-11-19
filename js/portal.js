@@ -5603,7 +5603,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         gcn: 'gnn', digcn: 'gnn', directgcn: 'gnn', grapher: 'entityresolution', moder: 'entityresolution',
         ditk: 'dataintegration', kit: 'toolkit', realsense: 'rgbd', kinect: 'rgbd',
         odometry: 'slam', localization: 'slam', eyetracking: 'gaze', eye: 'gaze',
-        eyeadapt: 'gaze', eyeart: 'gaze', gdwm: 'gaze', ge: 'googleearth', earthviz: 'googleearth',
+        ge: 'googleearth', earthviz: 'googleearth',
         cv: 'curriculumvitae', resume: 'curriculumvitae', llms: 'llm', biomedical: 'medical',
         med: 'medical', medgraph: 'pubmed', vrjuggler: 'vrj', vrj: 'vr',
     };

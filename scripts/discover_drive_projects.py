@@ -16,13 +16,18 @@ Usage:
 """
 
 import argparse
+import hashlib
 import json
+import os
 import re
 import shutil
 import sqlite3
 import subprocess
 import sys
 import tempfile
+import time
+import urllib.error
+import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from difflib import SequenceMatcher
@@ -31,6 +36,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "data" / "content.db"
+AI_CACHE_PATH = REPO_ROOT / "data" / "ai_discovery_cache.json"
 SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
@@ -175,10 +181,11 @@ KNOWN_ALIASES = {
     "moder": "moder-grapher",
     "medgraph": "medgraph-pubmed-kg",
     "chem2bio2rdf": "chem2bio2rdf-drug-repurposing",
-    "eyeart": "eyeadapt-gdwm",
-    "eyeadapt": "eyeadapt-gdwm",
-    "eyeadaptui": "eyeadapt-gdwm",
-    "gdwm": "eyeadapt-gdwm",
+    "eyeart": "eyeart",
+    "eyeadapt": "eyeadapt-engine",
+    "eyeadaptui": "eyeadapt-engine",
+    "eyeadaptengine": "eyeadapt-engine",
+    "gdwm": "gdwm",
     "caveinabox": "cave-realtime-scanner",
     "caveobjectscanner": "cave-realtime-scanner",
     "clusterwebgl": "cluster-webgl-earthviz",
@@ -400,13 +407,282 @@ def infer_domain_metadata(rel_parts: List[str], root_default_kind: str) -> Tuple
     return "General Portfolio", root_default_kind or "research", tags
 
 
+class SemanticDiscoveryValidator:
+    """
+    AI-model-based semantic validator & project matcher injected into Drive discovery.
+
+    Because the `gdrive` CLI only provides raw folder/file metadata and exports,
+    this validator uses Gemini Flash to:
+      1. Cross-Link Guard (Stage A): Verify heuristic/alias matches before linking so
+         unrelated projects (e.g. acronym collisions like GDWM vs EyeAdapt) are VETOED
+         and kept as separate projects.
+      2. Semantic Discovery (Stage B): Match unmatched Drive folders to existing projects
+         when folder names differ semantically (acronyms, sub-projects, renamed repos).
+      3. Semantic Enrichment (Stage C): Generate factual summaries, taglines, tags, and
+         keywords for newly discovered projects from folder paths, filenames, and excerpts.
+    """
+
+    DEFAULT_MODELS = [
+        "gemini-3.8-flash",
+        "gemini-3.6-flash",
+        "gemini-3.5-flash",
+        "gemini-3-flash-preview",
+        "gemini-3-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+    ]
+
+    def __init__(self, api_key: str, cache_path: Path = AI_CACHE_PATH, model: str = "gemini-3.8-flash"):
+        self.api_key = (api_key or "").strip()
+        self.cache_path = cache_path
+        self.preferred_model = model
+        self.sticky_model: Optional[str] = None
+        self.deprioritized: set[str] = set()
+        self.cache: Dict[str, Any] = self._load_cache()
+
+    def _load_cache(self) -> Dict[str, Any]:
+        if self.cache_path.exists():
+            try:
+                return json.loads(self.cache_path.read_text(encoding="utf-8")) or {}
+            except Exception:
+                return {}
+        return {}
+
+    def save_cache(self):
+        try:
+            self.cache_path.parent.mkdir(parents=True, exist_ok=True)
+            self.cache_path.write_text(json.dumps(self.cache, indent=2, ensure_ascii=False), encoding="utf-8")
+        except Exception:
+            pass
+
+    @staticmethod
+    def _fingerprint(obj: Any) -> str:
+        raw = json.dumps(obj, sort_keys=True, ensure_ascii=False)
+        return hashlib.sha256(raw.encode("utf-8")).hexdigest()[:24]
+
+    def _call_gemini_json(self, prompt: str) -> Any:
+        ordered = []
+        for m in [self.sticky_model, self.preferred_model, *self.DEFAULT_MODELS]:
+            if m and m not in ordered:
+                ordered.append(m)
+        ordered = [m for m in ordered if m not in self.deprioritized] + [m for m in ordered if m in self.deprioritized]
+
+        last_err: Optional[Exception] = None
+        for idx, mdl in enumerate(ordered):
+            has_more = idx + 1 < len(ordered)
+            max_attempts = 1 if has_more else 3
+            use_thinking = True
+            attempt = 0
+            while attempt < max_attempts:
+                attempt += 1
+                gen_cfg: Dict[str, Any] = {"responseMimeType": "application/json", "maxOutputTokens": 8192}
+                if use_thinking:
+                    if mdl.startswith(("gemini-3", "gemini-4")):
+                        gen_cfg["thinkingConfig"] = {"thinkingLevel": "low"}
+                    elif mdl.startswith("gemini-2.5") and "lite" not in mdl:
+                        gen_cfg["thinkingConfig"] = {"thinkingBudget": 0}
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{mdl}:generateContent?key={self.api_key}"
+                req = urllib.request.Request(
+                    url,
+                    data=json.dumps({
+                        "contents": [{"parts": [{"text": prompt}]}],
+                        "generationConfig": gen_cfg,
+                    }).encode("utf-8"),
+                    headers={"Content-Type": "application/json"},
+                    method="POST",
+                )
+                try:
+                    with urllib.request.urlopen(req, timeout=30) as resp:
+                        data = json.loads(resp.read().decode("utf-8"))
+                    txt = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
+                    txt = re.sub(r"^\s*```(?:json)?\s*|\s*```\s*$", "", txt).strip()
+                    parsed = json.loads(txt)
+                    self.sticky_model = mdl
+                    self.deprioritized.discard(mdl)
+                    return parsed
+                except urllib.error.HTTPError as exc:
+                    body = exc.read().decode("utf-8", errors="ignore")
+                    last_err = RuntimeError(f"Gemini {mdl} HTTP {exc.code}: {body[:260]}")
+                    if exc.code == 400 and use_thinking and "thinking" in body.lower():
+                        use_thinking = False
+                        attempt -= 1
+                        continue
+                    if exc.code in (401, 403):
+                        raise last_err from exc
+                    if exc.code == 404 or "not found" in body.lower() or "no longer available" in body.lower():
+                        self.deprioritized.add(mdl)
+                        break
+                    if exc.code in (429, 500, 502, 503, 504):
+                        if attempt < max_attempts:
+                            time.sleep(1.5 * (2 ** (attempt - 1)))
+                            continue
+                        self.deprioritized.add(mdl)
+                        if has_more:
+                            break
+                    raise last_err from exc
+                except Exception as exc:
+                    last_err = exc
+                    if attempt < max_attempts:
+                        time.sleep(1.0 * attempt)
+                        continue
+                    if has_more:
+                        self.deprioritized.add(mdl)
+                        break
+                    raise
+        raise last_err or RuntimeError("Gemini semantic discovery call failed")
+
+    def validate_proposed_links(self, proposals: List[Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+        """
+        Stage A: Validate candidate-to-project cross-links in batches.
+        Returns map[proposal_id] -> {"same_project": bool, "confidence": float, "reason": str}
+        """
+        results: Dict[str, Dict[str, Any]] = {}
+        to_query: List[Dict[str, Any]] = []
+        fp_map: Dict[str, str] = {}
+
+        for prop in proposals:
+            pid = prop["proposal_id"]
+            fp = "link:" + self._fingerprint({
+                "cand_name": prop["cand_name"],
+                "rel_path": prop["rel_path"],
+                "files": prop["sample_files"],
+                "target_slug": prop["target_slug"],
+                "target_title": prop["target_title"],
+                "target_summary": prop["target_summary"][:200],
+            })
+            fp_map[pid] = fp
+            if fp in self.cache:
+                results[pid] = self.cache[fp]
+            else:
+                to_query.append(prop)
+
+        for i in range(0, len(to_query), 15):
+            batch = to_query[i:i + 15]
+            prompt = (
+                "You are a strict semantic entity-resolution validator for Dr. Islam Akef Ebeid's research, "
+                "software, and academic Google Drive portfolio.\n"
+                "For each proposed folder-to-project link below, judge whether the Drive folder truly belongs "
+                "to the EXACT SAME underlying project as the target project.\n"
+                "CRITICAL RULES:\n"
+                "- Do NOT conflate unrelated projects that merely share a broad topic or an ambiguous acronym "
+                "(for example: EyeAdapt/EyeAdaptUI eye-tracking vs EyeArt poster vs GDWM entity-resolution/ITNG paper "
+                "are THREE SEPARATE projects).\n"
+                "- Look closely at the candidate filenames, Drive path, and excerpt vs target title, summary, and existing artifacts.\n"
+                "- Return ONLY a JSON array: "
+                '[{"proposal_id": str, "same_project": true|false, "confidence": 0.0-1.0, "reason": "concise 6-14 word reason"}].\n\n'
+                + json.dumps(batch, ensure_ascii=False)
+            )
+            try:
+                raw = self._call_gemini_json(prompt)
+                arr = raw if isinstance(raw, list) else (raw.get("results") or raw.get("items") or [] if isinstance(raw, dict) else [])
+                for item in arr:
+                    pid = str(item.get("proposal_id") or "")
+                    if not pid or pid not in fp_map:
+                        continue
+                    verdict = {
+                        "same_project": bool(item.get("same_project", True)),
+                        "confidence": float(item.get("confidence", 0.5)),
+                        "reason": str(item.get("reason") or ""),
+                    }
+                    results[pid] = verdict
+                    self.cache[fp_map[pid]] = verdict
+                self.save_cache()
+            except Exception as exc:
+                print(f"  [AI-VALIDATOR WARN] Link validation batch failed (keeping heuristic): {exc}")
+        return results
+
+    def discover_semantic_matches(
+        self,
+        unmatched: List[Dict[str, Any]],
+        project_catalog: List[Dict[str, Any]],
+    ) -> Dict[str, Dict[str, Any]]:
+        """
+        Stage B & C: For Drive candidates with no heuristic match, ask Gemini whether they
+        semantically match any existing project in the catalog (by acronym/topic/filenames),
+        or if genuinely new, generate factual title/summary/tags/keywords.
+        """
+        results: Dict[str, Dict[str, Any]] = {}
+        to_query: List[Dict[str, Any]] = []
+        fp_map: Dict[str, str] = {}
+
+        compact_catalog = [
+            {
+                "slug": e["slug"],
+                "title": e["title"],
+                "category": e.get("category") or "",
+                "summary": (e.get("short_summary") or "")[:140],
+            }
+            for e in project_catalog
+        ]
+        cat_fp = self._fingerprint([c["slug"] for c in compact_catalog])
+
+        for item in unmatched:
+            cid = item["cand_id"]
+            fp = "disc:" + self._fingerprint({
+                "cand_name": item["cand_name"],
+                "rel_path": item["rel_path"],
+                "files": item["sample_files"],
+                "cat_fp": cat_fp,
+            })
+            fp_map[cid] = fp
+            if fp in self.cache:
+                results[cid] = self.cache[fp]
+            else:
+                to_query.append(item)
+
+        for i in range(0, len(to_query), 15):
+            batch = to_query[i:i + 15]
+            prompt = (
+                "You are performing semantic project discovery on Dr. Islam Akef Ebeid's Google Drive.\n"
+                "Given EXISTING_PROJECTS and NEW_DRIVE_CANDIDATES, decide for each candidate whether it is:\n"
+                "1. An exact/semantic continuation of ONE existing project (matched_slug != null, confidence >= 0.80), OR\n"
+                "2. A genuinely separate project (matched_slug = null), in which case generate a factual short_summary, tagline, tags, and keywords.\n"
+                "Be conservative: never merge distinct projects just because they are in the same broad field.\n"
+                "Return ONLY a JSON array: "
+                '[{"cand_id": str, "matched_slug": str|null, "confidence": 0.0-1.0, "reason": str, '
+                '"short_summary": "1-2 factual sentences", "tagline": "5-9 word subtitle", "tags": ["2-4 tags"], "keywords": ["2-5 keywords"]}].\n\n'
+                + json.dumps({"EXISTING_PROJECTS": compact_catalog, "NEW_DRIVE_CANDIDATES": batch}, ensure_ascii=False)
+            )
+            try:
+                raw = self._call_gemini_json(prompt)
+                arr = raw if isinstance(raw, list) else (raw.get("results") or raw.get("items") or [] if isinstance(raw, dict) else [])
+                for item in arr:
+                    cid = str(item.get("cand_id") or "")
+                    if not cid or cid not in fp_map:
+                        continue
+                    verdict = {
+                        "matched_slug": item.get("matched_slug") or None,
+                        "confidence": float(item.get("confidence", 0.0)),
+                        "reason": str(item.get("reason") or ""),
+                        "short_summary": str(item.get("short_summary") or "").strip(),
+                        "tagline": str(item.get("tagline") or "").strip(),
+                        "tags": [str(t).strip() for t in (item.get("tags") or []) if str(t).strip()],
+                        "keywords": [str(k).strip() for k in (item.get("keywords") or []) if str(k).strip()],
+                    }
+                    results[cid] = verdict
+                    self.cache[fp_map[cid]] = verdict
+                self.save_cache()
+            except Exception as exc:
+                print(f"  [AI-VALIDATOR WARN] Semantic discovery batch failed (falling back to draft): {exc}")
+        return results
+
+
 class DriveProjectScanner:
-    def __init__(self, conn: sqlite3.Connection, dry_run: bool = False, peek_docs: bool = False, workers: int = 4):
+    def __init__(
+        self,
+        conn: sqlite3.Connection,
+        dry_run: bool = False,
+        peek_docs: bool = False,
+        workers: int = 4,
+        ai_validator: Optional[SemanticDiscoveryValidator] = None,
+    ):
         self.conn = conn
         self.cur = conn.cursor()
         self.dry_run = dry_run
         self.peek_docs = peek_docs
         self.workers = max(1, workers)
+        self.ai_validator = ai_validator
 
         # In-memory index of canonical & discovered projects for cross-folder linking
         self.project_index: List[Dict[str, Any]] = []
@@ -416,26 +692,28 @@ class DriveProjectScanner:
 
     def _load_existing_projects(self):
         rows = self.cur.execute("""
-            SELECT id, slug, title, tagline, grant_award, keywords, discovery_status, gdrive_primary_folder_id
+            SELECT id, slug, title, tagline, short_summary, category, grant_award, keywords, discovery_status, gdrive_primary_folder_id
             FROM projects
             ORDER BY id
         """).fetchall()
-        for pid, slug, title, tagline, grant_award, kw_raw, dstatus, primary_fid in rows:
+        for pid, slug, title, tagline, short_summary, category, grant_award, kw_raw, dstatus, primary_fid in rows:
             try:
                 kw = json.loads(kw_raw) if kw_raw else []
             except Exception:
                 kw = []
             tags = [r[0] for r in self.cur.execute("SELECT tag FROM project_tags WHERE project_id = ?", (pid,)).fetchall()]
             arts = self.cur.execute(
-                "SELECT label, url_or_rel_path, gdrive_file_id FROM project_artifacts WHERE project_id = ?",
+                "SELECT label, url_or_rel_path, gdrive_file_id, gdrive_path FROM project_artifacts WHERE project_id = ?",
                 (pid,),
             ).fetchall()
             art_terms = []
-            for label, url_val, gfid in arts:
+            sample_arts = []
+            for label, url_val, gfid, gpath in arts:
                 if gfid:
                     self.known_artifact_ids.add(gfid)
                 if label:
                     art_terms.append(label)
+                    sample_arts.append(gpath or label)
                 if url_val and not url_val.startswith("http"):
                     art_terms.append(Path(url_val).stem)
 
@@ -443,6 +721,9 @@ class DriveProjectScanner:
                 "id": pid,
                 "slug": slug,
                 "title": title,
+                "short_summary": short_summary or tagline or "",
+                "category": category or "",
+                "sample_artifacts": sample_arts[:6],
                 "compact_title": normalize_compact(title),
                 "compact_slug": normalize_compact(slug),
                 "core_tokens": set(normalize_core_tokens(title) + normalize_core_tokens(slug)),
@@ -743,10 +1024,17 @@ class DriveProjectScanner:
             "projects_discovered": 0,
             "artifacts_linked": 0,
             "cross_links_matched": 0,
+            "ai_vetoed_links": 0,
+            "ai_semantic_matches": 0,
             "actions": [],
         }
 
-        for cand in candidates:
+        # Pre-pass: gather peek text, key artifacts, and initial heuristic proposals
+        prepared: List[Dict[str, Any]] = []
+        link_proposals: List[Dict[str, Any]] = []
+        unmatched_for_ai: List[Dict[str, Any]] = []
+
+        for idx, cand in enumerate(candidates):
             cand_name = cand["candidate_name"]
             rel_parts = cand["rel_parts"]
             rel_path_str = "/".join(rel_parts)
@@ -761,8 +1049,101 @@ class DriveProjectScanner:
                             break
 
             matched_entry, score, reason = self.match_candidate_to_project(cand_name, rel_parts, peek_text)
-            category, proj_kind, extra_tags = infer_domain_metadata(rel_parts, cand["default_kind"])
             key_artifacts = self.select_key_artifacts(cand)
+            sample_files = [it.get("name", "") for it in key_artifacts[:8] if it.get("name")]
+            folder_item = cand.get("folder_item")
+            folder_fid = folder_item["id"] if folder_item else ""
+
+            rec = {
+                "idx": idx,
+                "cand": cand,
+                "cand_name": cand_name,
+                "rel_parts": rel_parts,
+                "rel_path_str": rel_path_str,
+                "peek_text": peek_text,
+                "matched_entry": matched_entry,
+                "score": score,
+                "reason": reason,
+                "key_artifacts": key_artifacts,
+                "sample_files": sample_files,
+                "ai_meta": None,
+            }
+            prepared.append(rec)
+
+            if self.ai_validator:
+                # Stage A: Validate heuristic/alias links (skip only when exact Drive folder ID already belongs to target)
+                if matched_entry and not (folder_fid and folder_fid == matched_entry.get("primary_fid")):
+                    link_proposals.append({
+                        "proposal_id": f"p{idx}",
+                        "cand_name": cand_name,
+                        "rel_path": rel_path_str,
+                        "sample_files": sample_files,
+                        "peek_excerpt": peek_text[:300],
+                        "heuristic_reason": reason,
+                        "target_slug": matched_entry["slug"],
+                        "target_title": matched_entry["title"],
+                        "target_category": matched_entry.get("category") or "",
+                        "target_summary": (matched_entry.get("short_summary") or "")[:240],
+                        "target_artifacts": matched_entry.get("sample_artifacts") or [],
+                    })
+                elif not matched_entry:
+                    unmatched_for_ai.append({
+                        "cand_id": f"c{idx}",
+                        "cand_name": cand_name,
+                        "rel_path": rel_path_str,
+                        "sample_files": sample_files,
+                        "peek_excerpt": peek_text[:300],
+                    })
+
+        # Run batch AI Semantic Validation (Stage A) and Semantic Discovery (Stage B & C)
+        if self.ai_validator:
+            if link_proposals:
+                verdicts = self.ai_validator.validate_proposed_links(link_proposals)
+                for rec in prepared:
+                    pid = f"p{rec['idx']}"
+                    v = verdicts.get(pid)
+                    if v and (not v.get("same_project")) and float(v.get("confidence", 0.0)) >= 0.65:
+                        old_slug = rec["matched_entry"]["slug"] if rec["matched_entry"] else ""
+                        rec["matched_entry"] = None
+                        rec["reason"] = f"ai_vetoed:{old_slug}({v.get('reason', '')})"
+                        stats["ai_vetoed_links"] += 1
+                        unmatched_for_ai.append({
+                            "cand_id": f"c{rec['idx']}",
+                            "cand_name": rec["cand_name"],
+                            "rel_path": rec["rel_path_str"],
+                            "sample_files": rec["sample_files"],
+                            "peek_excerpt": rec["peek_text"][:300],
+                        })
+                    elif v and v.get("same_project"):
+                        rec["reason"] = f"{rec['reason']}|ai_verified({v.get('confidence', 0):.2f})"
+
+            if unmatched_for_ai:
+                disc_verdicts = self.ai_validator.discover_semantic_matches(unmatched_for_ai, self.project_index)
+                for rec in prepared:
+                    cid = f"c{rec['idx']}"
+                    dv = disc_verdicts.get(cid)
+                    if not dv:
+                        continue
+                    rec["ai_meta"] = dv
+                    mslug = dv.get("matched_slug")
+                    if mslug and float(dv.get("confidence", 0.0)) >= 0.80 and mslug in self.slug_to_entry:
+                        rec["matched_entry"] = self.slug_to_entry[mslug]
+                        rec["score"] = float(dv.get("confidence", 0.85))
+                        rec["reason"] = f"ai_semantic_match:{mslug}({dv.get('reason', '')})"
+                        stats["ai_semantic_matches"] += 1
+
+        for rec in prepared:
+            cand = rec["cand"]
+            cand_name = rec["cand_name"]
+            rel_parts = rec["rel_parts"]
+            rel_path_str = rec["rel_path_str"]
+            peek_text = rec["peek_text"]
+            matched_entry = rec["matched_entry"]
+            reason = rec["reason"]
+            key_artifacts = rec["key_artifacts"]
+            ai_meta = rec["ai_meta"] or {}
+
+            category, proj_kind, extra_tags = infer_domain_metadata(rel_parts, cand["default_kind"])
 
             # Extract year span from modified/created timestamps
             years = []
@@ -784,7 +1165,11 @@ class DriveProjectScanner:
                 base_slug = slugify(cand_name)
                 slug = self.ensure_unique_slug(base_slug)
                 title = humanize_title(cand_name)
-                summary = (
+                ai_summary = ai_meta.get("short_summary") or ""
+                ai_tagline = ai_meta.get("tagline") or f"Drive Source: {rel_path_str}"
+                merged_tags = list(dict.fromkeys([*extra_tags, *(ai_meta.get("tags") or [])]))
+                merged_kw = list(dict.fromkeys([cand_name, title, *merged_tags, *(ai_meta.get("keywords") or [])]))
+                summary = ai_summary or (
                     peek_text[:280].rsplit(" ", 1)[0] + "..."
                     if len(peek_text) > 280
                     else (peek_text or f"Discovered {proj_kind} project located at Google Drive `{rel_path_str}`.")
@@ -805,13 +1190,13 @@ class DriveProjectScanner:
                             gdrive_primary_folder_id, gdrive_primary_url, updated_at
                         ) VALUES (?, ?, ?, ?, ?, ?, 'discovered', 'Discovered (Draft)', ?, ?, '', '[]', 0, 0, 0, 500, ?, ?, 'discovered', 'gdrive_discovery', ?, ?, ?, ?)
                     """, (
-                        slug, title, f"Drive Source: {rel_path_str}", summary, summary,
+                        slug, title, ai_tagline, summary, summary,
                         category, year_start, year_end, proj_kind,
-                        json.dumps(list({cand_name, title, *extra_tags})),
-                        0.85, primary_fid, primary_url, now_iso,
+                        json.dumps(merged_kw),
+                        0.90 if ai_summary else 0.85, primary_fid, primary_url, now_iso,
                     ))
                     pid = self.cur.lastrowid
-                    for t in extra_tags:
+                    for t in merged_tags:
                         self.cur.execute("INSERT OR IGNORE INTO project_tags (project_id, tag) VALUES (?, ?)", (pid, t))
                 else:
                     pid = -1
@@ -820,20 +1205,23 @@ class DriveProjectScanner:
                     "id": pid,
                     "slug": slug,
                     "title": title,
+                    "short_summary": summary,
+                    "category": category,
+                    "sample_artifacts": rec["sample_files"][:6],
                     "compact_title": normalize_compact(title),
                     "compact_slug": normalize_compact(slug),
                     "core_tokens": set(normalize_core_tokens(title) + normalize_core_tokens(slug)),
                     "aliases": set([normalize_compact(title), normalize_compact(slug), normalize_compact(cand_name)]),
                     "grant_numbers": set(),
-                    "tags": set(extra_tags),
+                    "tags": set(merged_tags),
                     "discovery_status": "discovered",
                     "primary_fid": primary_fid,
                 }
                 self.project_index.append(new_entry)
                 self.slug_to_entry[slug] = new_entry
                 stats["projects_discovered"] += 1
-                match_tag = "new_discovery"
-                target_label = f"NEW -> [{slug}] '{title}' ({proj_kind})"
+                match_tag = reason if reason.startswith("ai_vetoed:") else "new_discovery"
+                target_label = f"NEW -> [{slug}] '{title}' ({proj_kind})" + (f" [{reason}]" if reason.startswith("ai_vetoed:") else "")
 
             linked_here = 0
             for order_idx, it in enumerate(key_artifacts, 1):
@@ -893,6 +1281,9 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Simulate discovery and print planned links without writing to content.db")
     parser.add_argument("--reset-discovered", action="store_true", help="Clear previously auto-discovered projects/Drive artifacts before re-scanning (preserves canonical projects)")
     parser.add_argument("--skip-reconcile", action="store_true", help="Skip reconciling live portal GitHub commits before scanning Drive")
+    parser.add_argument("--ai-validate", action="store_true", help="Require Gemini AI semantic validator during discovery (auto-enabled when GEMINI_API_KEY is set)")
+    parser.add_argument("--no-ai-validate", action="store_true", help="Disable Gemini AI semantic validator even if GEMINI_API_KEY is set")
+    parser.add_argument("--gemini-key", default=None, help="Gemini API key override (defaults to GEMINI_API_KEY env var)")
     parser.add_argument("--sync", action="store_true", help="Run sync_content.py --export-only after updating content.db")
     args = parser.parse_args()
 
@@ -942,15 +1333,35 @@ def main():
         conn.close()
         return 0
 
-    scanner = DriveProjectScanner(conn, dry_run=args.dry_run, peek_docs=args.peek_docs, workers=args.workers)
+    api_key = (args.gemini_key or os.environ.get("GEMINI_API_KEY") or "").strip()
+    ai_validator: Optional[SemanticDiscoveryValidator] = None
+    if not args.no_ai_validate and api_key:
+        ai_validator = SemanticDiscoveryValidator(api_key=api_key)
+    elif args.ai_validate and not api_key:
+        print("[ERROR] --ai-validate requested, but GEMINI_API_KEY is not set.")
+        conn.close()
+        return 1
+
+    scanner = DriveProjectScanner(
+        conn,
+        dry_run=args.dry_run,
+        peek_docs=args.peek_docs,
+        workers=args.workers,
+        ai_validator=ai_validator,
+    )
     started_at = datetime.now(timezone.utc).isoformat()
     total_files = 0
     total_new_projects = 0
     total_linked = 0
     total_cross = 0
+    total_ai_vetoed = 0
+    total_ai_semantic = 0
 
     print("=" * 72)
-    print(f"Google Drive Project Discovery (mode={args.mode}, dry_run={args.dry_run}, peek_docs={args.peek_docs})")
+    print(
+        f"Google Drive Project Discovery (mode={args.mode}, dry_run={args.dry_run}, "
+        f"peek_docs={args.peek_docs}, ai_validator={'ON' if ai_validator else 'OFF (set GEMINI_API_KEY)'})"
+    )
     print("=" * 72)
 
     for root_id, root_name, folder_id, prio, default_kind, last_scanned in roots:
@@ -971,10 +1382,13 @@ def main():
         total_new_projects += res["projects_discovered"]
         total_linked += res["artifacts_linked"]
         total_cross += res["cross_links_matched"]
+        total_ai_vetoed += res.get("ai_vetoed_links", 0)
+        total_ai_semantic += res.get("ai_semantic_matches", 0)
 
         print(
             f"  -> scanned={fcount} entries, candidates={len(candidates)}, "
             f"new_projects={res['projects_discovered']}, cross_linked={res['cross_links_matched']}, "
+            f"ai_vetoed={res.get('ai_vetoed_links', 0)}, ai_semantic={res.get('ai_semantic_matches', 0)}, "
             f"new_artifacts={res['artifacts_linked']}"
         )
         for line in res["actions"][:25]:
