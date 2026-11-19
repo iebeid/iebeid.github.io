@@ -4397,8 +4397,16 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     }
 
     function pushStagedPatchOp(op, payload) {
+        pushStagedPatchOpsBatch([{ op, payload }]);
+    }
+
+    function pushStagedPatchOpsBatch(items) {
+        if (!Array.isArray(items) || !items.length) return;
         const ops = getStagedPatchOps();
-        ops.push({ op, payload, ts: new Date().toISOString() });
+        const ts = new Date().toISOString();
+        for (const it of items) {
+            ops.push({ op: it.op, payload: it.payload, ts });
+        }
         localStorage.setItem(PROJECT_PATCH_OPS_KEY, JSON.stringify(ops));
         updatePatchBadge();
     }
@@ -6225,16 +6233,29 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             const mdl = candidates[mIdx];
             const hasMoreModels = mIdx + 1 < candidates.length;
             const maxAttempts = hasMoreModels ? 1 : 3;
+            let useThinkingCfg = true;
             for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(new Error(`Gemini ${mdl} timed out after 22s`)), 22000);
                 try {
+                    const genCfg = { responseMimeType: 'application/json', maxOutputTokens: 8192 };
+                    if (useThinkingCfg) {
+                        if (/^gemini-[34]/i.test(mdl)) {
+                            genCfg.thinkingConfig = { thinkingLevel: 'low' };
+                        } else if (/^gemini-2\.5/i.test(mdl) && !/lite/i.test(mdl)) {
+                            genCfg.thinkingConfig = { thinkingBudget: 0 };
+                        }
+                    }
                     const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
+                        signal: ctrl.signal,
                         body: JSON.stringify({
                             contents: [{ parts: [{ text: promptText }] }],
-                            generationConfig: { responseMimeType: 'application/json', maxOutputTokens: 8192 },
+                            generationConfig: genCfg,
                         }),
                     });
+                    clearTimeout(timer);
                     const rawText = await resp.text();
                     let data = {};
                     try { data = JSON.parse(rawText); } catch (e) { data = {}; }
@@ -6248,6 +6269,12 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
                     lastErr = new Error(msg);
 
+                    // If model rejects thinkingConfig, retry this same model immediately without thinkingConfig
+                    if (resp.status === 400 && useThinkingCfg && /thinking/i.test(msg)) {
+                        useThinkingCfg = false;
+                        attempt--;
+                        continue;
+                    }
                     // Auth / permission errors are non-retryable
                     if (resp.status === 401 || resp.status === 403 || /api key not valid|permission denied|has not been used/i.test(msg)) {
                         throw lastErr;
@@ -6274,12 +6301,13 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     }
                     throw lastErr;
                 } catch (err) {
+                    clearTimeout(timer);
                     lastErr = err;
                     const msg = String(err?.message || err);
                     if (/api key not valid|permission denied|has not been used/i.test(msg)) {
                         throw err;
                     }
-                    const isRetryable = err?.name === 'TypeError' || err?.name === 'SyntaxError' || /failed to fetch|network|timeout|json|unexpected|unavailable|overloaded|high demand|429|503|500|502|504/i.test(msg);
+                    const isRetryable = err?.name === 'AbortError' || err?.name === 'TypeError' || err?.name === 'SyntaxError' || /timed out|failed to fetch|network|timeout|json|unexpected|unavailable|overloaded|high demand|429|503|500|502|504/i.test(msg);
                     if (isRetryable && attempt < maxAttempts) {
                         await sleepMs(700 * attempt);
                         continue;
@@ -6360,6 +6388,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 ? raw
                 : (raw && typeof raw === 'object' ? (raw.projects || raw.items || raw.results || Object.values(raw).find(Array.isArray) || []) : []);
             const byId = new Map(arr.map(r => [String(r.id), r]));
+            const stagedBatch = [];
 
             for (const p of batch) {
                 const r = byId.get(String(p.id));
@@ -6382,10 +6411,14 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                         body: JSON.stringify(updated),
                     });
                 } else {
-                    pushStagedPatchOp('save_project', updated);
+                    const { artifacts: _a, placements: _pl, publications: _pb, ...compactPayload } = updated;
+                    stagedBatch.push({ op: 'save_project', payload: compactPayload });
                 }
                 Object.assign(p, updated);
                 enrichedCount++;
+            }
+            if (!portalProjectsState.liveMode && stagedBatch.length) {
+                pushStagedPatchOpsBatch(stagedBatch);
             }
             completedBatches++;
             setErProgressBanner(`Enriching via ${_stickyWorkingFlashModel || 'Gemini Flash'}: ${enrichedCount} / ${targets.length} projects (${completedBatches}/${batches.length} batches)...`);
@@ -6397,11 +6430,10 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             if (batches.length > 0) {
                 await processEnrichBatch(batches[0], 0);
             }
-            // Process remaining batches 2 at a time
-            for (let b = 1; b < batches.length; b += 2) {
-                const pair = [processEnrichBatch(batches[b], b)];
-                if (b + 1 < batches.length) pair.push(processEnrichBatch(batches[b + 1], b + 1));
-                await Promise.all(pair);
+            // Process remaining batches 4 at a time cleanly
+            for (let b = 1; b < batches.length; b += 4) {
+                const chunk = batches.slice(b, b + 4).map((bt, idx) => processEnrichBatch(bt, b + idx));
+                await Promise.all(chunk);
             }
             if (!portalProjectsState.liveMode) {
                 portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
