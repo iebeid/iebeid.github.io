@@ -92,6 +92,12 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
         <button type="button" onclick="openProjectEditorModal()" class="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1.5 shadow">
           <i class="fas fa-plus"></i> New Project
         </button>
+        <button type="button" onclick="openDuplicateResolverModal()" class="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5 shadow">
+          <i class="fas fa-project-diagram"></i> Find Duplicates (ER)
+        </button>
+        <button type="button" onclick="openManualMergeModal()" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-sky-300 border border-sky-500/30 text-xs font-semibold flex items-center gap-1.5">
+          <i class="fas fa-code-branch"></i> Manual Merge
+        </button>
         <button type="button" id="projects-github-publish-btn" onclick="publishPortalToGithub()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow">
           <i class="fab fa-github"></i> Publish to GitHub <span id="projects-pending-badge" class="hidden px-1.5 py-0.5 rounded bg-slate-950/40 text-[10px] font-mono">0</span>
         </button>
@@ -338,6 +344,80 @@ TAB_MAIN_HTML = """<!-- PORTAL_PROJECTS_TAB_START -->
         <button type="submit" class="px-5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold shadow">Save Project &amp; Placements</button>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- Modal: Smart Semantic Entity Resolution (Find & Merge Duplicates) -->
+<div id="er-duplicates-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-5xl w-full p-6 shadow-2xl space-y-4 my-8 max-h-[90vh] flex flex-col">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+      <div>
+        <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fas fa-project-diagram text-purple-400"></i> Smart Semantic Entity Resolution</h3>
+        <p class="text-xs text-slate-400">Detects non-matching duplicate projects via acronym expansion, domain synonyms, TF-IDF cosine, and char 3-gram similarity.</p>
+      </div>
+      <button type="button" onclick="closeDuplicateResolverModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 self-end sm:self-center"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3 bg-slate-950/70 border border-slate-800 rounded-xl p-3 text-xs">
+      <label class="flex items-center gap-2 text-slate-300">
+        <span>Min Similarity: <strong id="er-threshold-label" class="text-sky-300 font-mono">45%</strong></span>
+        <input type="range" id="er-threshold-slider" min="30" max="85" value="45" oninput="onErThresholdChange()" class="accent-purple-500" />
+      </label>
+      <button type="button" onclick="runAndRenderErDuplicates()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold"><i class="fas fa-sync-alt mr-1"></i> Re-Scan</button>
+      <button type="button" id="er-ai-verify-btn" onclick="aiVerifyTopErDuplicates()" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold"><i class="fas fa-sparkles mr-1"></i> AI Semantic Verify (Gemini)</button>
+      <button type="button" onclick="clearDismissedErPairs()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 text-[11px]">Reset Dismissed</button>
+      <span id="er-candidate-count" class="ml-auto font-mono text-slate-400"></span>
+    </div>
+
+    <div id="er-duplicates-list" class="space-y-3 overflow-y-auto flex-1 pr-1"></div>
+  </div>
+</div>
+
+<!-- Modal: Manual Project Merge -->
+<div id="manual-merge-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/85 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-4xl w-full p-6 shadow-2xl space-y-4 my-8">
+    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div>
+        <h3 class="text-lg font-bold text-white flex items-center gap-2"><i class="fas fa-code-branch text-sky-400"></i> Manual Project Merge</h3>
+        <p class="text-xs text-slate-400">Fold any Source project into a Target canonical project. All Drive artifacts, tags, keywords, and website placements transfer cleanly.</p>
+      </div>
+      <button type="button" onclick="closeManualMergeModal()" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-slate-950/70 border border-rose-500/30 rounded-xl p-4 space-y-2">
+        <label class="block text-[11px] font-bold uppercase text-rose-300">Source Project (Fold &amp; Delete)</label>
+        <input type="text" id="mm-source-filter" oninput="populateManualMergeSelects()" placeholder="Filter source projects..." class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
+        <select id="mm-source-select" onchange="renderManualMergePreview()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white"></select>
+        <div id="mm-source-preview" class="text-[11px] text-slate-400 pt-1"></div>
+      </div>
+
+      <div class="bg-slate-950/70 border border-emerald-500/30 rounded-xl p-4 space-y-2">
+        <label class="block text-[11px] font-bold uppercase text-emerald-300">Target Project (Keep &amp; Enrich)</label>
+        <input type="text" id="mm-target-filter" oninput="populateManualMergeSelects()" placeholder="Filter target projects..." class="w-full px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white" />
+        <select id="mm-target-select" onchange="renderManualMergePreview()" class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-700 text-xs text-white"></select>
+        <div id="mm-target-preview" class="text-[11px] text-slate-400 pt-1"></div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+      <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300">
+        <label class="inline-flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="mm-append-summary" class="accent-sky-500" />
+          Append source summary to target description
+        </label>
+        <label class="inline-flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="mm-add-alias" checked class="accent-emerald-500" />
+          Save source title/slug as permanent alias (prevents Drive re-splitting)
+        </label>
+      </div>
+      <button type="button" onclick="swapManualMergeSides()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"><i class="fas fa-exchange-alt mr-1"></i> Swap Sides</button>
+    </div>
+
+    <div class="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+      <button type="button" onclick="closeManualMergeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold">Cancel</button>
+      <button type="button" onclick="executeManualMerge()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow"><i class="fas fa-compress-arrows-alt mr-1.5"></i> Merge Source into Target</button>
+    </div>
   </div>
 </div>
 <!-- PORTAL_PROJECTS_TAB_END -->"""

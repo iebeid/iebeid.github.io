@@ -4499,9 +4499,54 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                         proj.is_public = true;
                     }
                 }
+            } else if (item.op === 'merge_projects') {
+                applyInMemoryMerge(list, pl.source_id, pl.source_slug, pl.target_id, pl.target_slug, pl);
             }
         }
         return list;
+    }
+
+    function applyInMemoryMerge(list, srcId, srcSlug, tgtId, tgtSlug, opts = {}) {
+        const sIdx = list.findIndex(x => (srcId && x.id === srcId) || (srcSlug && x.slug === srcSlug));
+        const tIdx = list.findIndex(x => (tgtId && x.id === tgtId) || (tgtSlug && x.slug === tgtSlug));
+        if (sIdx < 0 || tIdx < 0 || sIdx === tIdx) return false;
+        const src = list[sIdx];
+        const tgt = list[tIdx];
+
+        const seenUrls = new Set((tgt.artifacts || []).map(a => a.url).filter(Boolean));
+        const seenGfids = new Set((tgt.artifacts || []).map(a => a.gdrive_file_id).filter(Boolean));
+        tgt.artifacts = [...(tgt.artifacts || [])];
+        (src.artifacts || []).forEach(a => {
+            if (seenUrls.has(a.url) || (a.gdrive_file_id && seenGfids.has(a.gdrive_file_id))) return;
+            tgt.artifacts.push(a);
+            if (a.url) seenUrls.add(a.url);
+            if (a.gdrive_file_id) seenGfids.add(a.gdrive_file_id);
+        });
+
+        const seenSlots = new Set((tgt.placements || []).map(p => `${p.page_slug}.${p.section_slot}`));
+        tgt.placements = [...(tgt.placements || [])];
+        (src.placements || []).forEach(p => {
+            const key = `${p.page_slug}.${p.section_slot}`;
+            if (!seenSlots.has(key)) {
+                tgt.placements.push(p);
+                seenSlots.add(key);
+            }
+        });
+
+        tgt.tags = Array.from(new Set([...(tgt.tags || []), ...(src.tags || [])]));
+        tgt.tech_stack = Array.from(new Set([...(tgt.tech_stack || []), ...(src.tech_stack || [])]));
+        const kw = [...(tgt.keywords || []), ...(src.keywords || [])];
+        if (opts.add_alias !== false) {
+            if (src.title) kw.push(src.title);
+            if (src.slug) kw.push(src.slug);
+        }
+        tgt.keywords = Array.from(new Set(kw.filter(Boolean)));
+        if (opts.append_summary && src.short_summary && !(tgt.full_description || '').includes(src.short_summary)) {
+            tgt.full_description = `${tgt.full_description || tgt.short_summary || ''}\n\n[Merged from ${src.title}]: ${src.short_summary}`.trim();
+        }
+        tgt.updated_at = new Date().toISOString();
+        list.splice(sIdx, 1);
+        return true;
     }
 
     async function probeLiveProjectsServer() {
@@ -4753,6 +4798,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                             <div class="flex items-center gap-1.5">
                                 ${driveLink ? `<a href="${escapeHtml(driveLink)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 text-xs font-semibold flex items-center gap-1"><i class="fab fa-google-drive"></i> Drive (${(p.artifacts || []).length})</a>` : `<span class="px-2.5 py-1.5 rounded-lg bg-slate-950 text-slate-500 text-xs">${(p.artifacts || []).length} artifacts</span>`}
                                 <button type="button" onclick='openProjectEditorModal(${safeId})' class="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1"><i class="fas fa-edit"></i> Edit / Place</button>
+                                <button type="button" onclick='openManualMergeModal(${safeId})' class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-purple-600/80 text-slate-300 hover:text-white text-xs font-semibold" title="Merge into another project"><i class="fas fa-code-branch"></i></button>
                                 <button type="button" onclick='deletePortalProject(${safeId})' class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600/80 text-slate-300 hover:text-white text-xs" title="Delete project"><i class="fas fa-trash"></i></button>
                             </div>
                         </div>
@@ -5513,5 +5559,485 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             }
         }
     };
+
+    // -------------------------------------------------------------------------
+    // 20. SMART SEMANTIC ENTITY RESOLUTION & MANUAL MERGE ENGINE
+    // -------------------------------------------------------------------------
+    const ER_DISMISSED_KEY = 'portal_er_dismissed_pairs_v1';
+    const ER_STOP_WORDS = new Set([
+        'the', 'and', 'for', 'with', 'from', 'into', 'using', 'via', 'over', 'under',
+        'project', 'projects', 'system', 'systems', 'tool', 'toolkit', 'engine', 'app',
+        'application', 'web', 'website', 'suite', 'model', 'models', 'modeling',
+        'discovered', 'workspace', 'drive', 'source', 'research', 'scholarship',
+        'internal', 'manuscripts', 'presentations', 'images', 'videos', 'code', 'data',
+        'artifacts', 'artifact', 'located', 'google', 'draft', 'final', 'old', 'new',
+        'test', 'demo', 'exp', 'in', 'on', 'of', 'to', 'a', 'an',
+        'computer', 'vision', 'graphics', 'human', 'interaction', 'career',
+        'statement', 'relations', 'society', 'class', 'learning', 'dallas',
+        'teaching', 'service', 'business', 'hobbies', 'education', 'artificial',
+        'intelligence', 'software', 'engineering', 'science', 'sciences',
+    ]);
+    const ER_SYNONYMS = {
+        coronavirus: 'covid', sarscov2: 'covid', kg: 'knowledgegraph', kge: 'knowledgegraph',
+        gcn: 'gnn', digcn: 'gnn', directgcn: 'gnn', grapher: 'entityresolution', moder: 'entityresolution',
+        ditk: 'dataintegration', kit: 'toolkit', realsense: 'rgbd', kinect: 'rgbd',
+        odometry: 'slam', localization: 'slam', eyetracking: 'gaze', eye: 'gaze',
+        eyeadapt: 'gaze', eyeart: 'gaze', gdwm: 'gaze', ge: 'googleearth', earthviz: 'googleearth',
+        cv: 'curriculumvitae', resume: 'curriculumvitae', llms: 'llm', biomedical: 'medical',
+        med: 'medical', medgraph: 'pubmed', vrjuggler: 'vrj', vrj: 'vr',
+    };
+
+    let currentErCandidates = [];
+
+    function erTokenizeCamel(text) {
+        const s = String(text || '')
+            .replace(/\.[A-Za-z0-9]{1,5}$/g, ' ')
+            .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+            .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+            .replace(/[^A-Za-z0-9]+/g, ' ')
+            .toLowerCase()
+            .trim();
+        return s ? s.split(/\s+/).filter(Boolean) : [];
+    }
+
+    function erCanonicalTokens(text) {
+        const raw = erTokenizeCamel(text);
+        const out = [];
+        for (let i = 0; i < raw.length; i++) {
+            if (i + 1 < raw.length) {
+                const pair = raw[i] + raw[i + 1];
+                if (pair === 'knowledgegraph' || pair === 'entityresolution' || pair === 'dataintegration' || pair === 'eyetracking' || pair === 'curriculumvitae' || pair === 'googleearth') {
+                    out.push(pair);
+                    i++;
+                    continue;
+                }
+            }
+            const mapped = ER_SYNONYMS[raw[i]] || raw[i];
+            if (!ER_STOP_WORDS.has(mapped) && mapped.length >= 2) out.push(mapped);
+        }
+        return out;
+    }
+
+    function erCharNgrams(text, n = 3) {
+        const clean = String(text || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const counts = {};
+        if (!clean) return counts;
+        if (clean.length < n) { counts[clean] = 1; return counts; }
+        for (let i = 0; i <= clean.length - n; i++) {
+            const g = clean.slice(i, i + n);
+            counts[g] = (counts[g] || 0) + 1;
+        }
+        return counts;
+    }
+
+    function erExtractAcronyms(rawTitle) {
+        const explicit = new Set();
+        const matches = String(rawTitle || '').match(/\b[A-Z][A-Z0-9]{1,7}\b/g) || [];
+        matches.forEach(m => explicit.add(m.toLowerCase()));
+        const toks = erTokenizeCamel(rawTitle).filter(t => !['the', 'and', 'of', 'for', 'in', 'to'].includes(t));
+        const initials = new Set();
+        if (toks.length >= 2 && toks.length <= 6) {
+            initials.add(toks.map(t => t[0]).join(''));
+        }
+        return { explicit, initials };
+    }
+
+    function erCosine(vecA, vecB) {
+        const keysA = Object.keys(vecA);
+        const keysB = Object.keys(vecB);
+        if (!keysA.length || !keysB.length) return 0;
+        let dot = 0, normA = 0, normB = 0;
+        for (const k of keysA) {
+            const va = vecA[k];
+            normA += va * va;
+            if (vecB[k]) dot += va * vecB[k];
+        }
+        if (dot <= 0) return 0;
+        for (const k of keysB) normB += vecB[k] * vecB[k];
+        return (normA > 0 && normB > 0) ? dot / (Math.sqrt(normA) * Math.sqrt(normB)) : 0;
+    }
+
+    function getDismissedErSet() {
+        try { return new Set(JSON.parse(localStorage.getItem(ER_DISMISSED_KEY) || '[]')); }
+        catch (e) { return new Set(); }
+    }
+
+    function erPairKey(idA, idB) {
+        const a = String(idA), b = String(idB);
+        return a < b ? `${a}|${b}` : `${b}|${a}`;
+    }
+
+    function runSemanticEntityResolution(minScore = 0.45, topK = 50) {
+        const projects = portalProjectsState.projects || [];
+        const dismissed = getDismissedErSet();
+        const nDocs = Math.max(1, projects.length);
+        const df = {};
+
+        const profiles = projects.map(p => {
+            const artText = (p.artifacts || []).map(a => `${a.label || ''} ${a.gdrive_path || ''}`).join(' ');
+            const urls = new Set((p.artifacts || []).map(a => a.url).filter(u => u && u.startsWith('http') && !u.includes('drive.google.com')));
+            const titleToks = erCanonicalTokens(`${p.title} ${p.slug} ${(p.keywords || []).join(' ')}`);
+            const bodyToks = erCanonicalTokens(`${p.tagline || ''} ${p.short_summary || ''} ${(p.tags || []).join(' ')} ${artText}`);
+            const fullToks = [...titleToks, ...titleToks, ...titleToks, ...bodyToks];
+            const tf = {};
+            fullToks.forEach(t => { tf[t] = (tf[t] || 0) + 1; });
+            Object.keys(tf).forEach(t => { df[t] = (df[t] || 0) + 1; });
+            const acr = erExtractAcronyms(p.title);
+            const keepPriority =
+                (p.is_public ? 1000 : 0) +
+                (p.discovery_status === 'canonical' ? 500 : p.discovery_status === 'reviewed' ? 100 : 0) +
+                ((p.placements || []).filter(pl => pl.is_visible !== false).length * 50) +
+                (p.artifacts || []).length;
+
+            return {
+                proj: p,
+                titleTokSet: new Set(titleToks),
+                gramVec: erCharNgrams(`${p.title} ${p.slug}`, 3),
+                explicitAcr: acr.explicit,
+                phraseInit: acr.initials,
+                tf,
+                urls,
+                keepPriority,
+            };
+        });
+
+        const idf = {};
+        Object.keys(df).forEach(t => { idf[t] = Math.log((nDocs + 1) / (df[t] + 1)) + 1.0; });
+        profiles.forEach(pr => {
+            const vec = {};
+            Object.keys(pr.tf).forEach(t => { vec[t] = pr.tf[t] * (idf[t] || 1.0); });
+            pr.tfidf = vec;
+        });
+
+        const cands = [];
+        for (let i = 0; i < profiles.length; i++) {
+            const a = profiles[i];
+            for (let j = i + 1; j < profiles.length; j++) {
+                const b = profiles[j];
+                if (dismissed.has(erPairKey(a.proj.id, b.proj.id))) continue;
+                if (a.proj.project_kind === 'poetry' && b.proj.project_kind === 'poetry') {
+                    if (erCosine(a.gramVec, b.gramVec) < 0.72) continue;
+                }
+
+                const tfidfSim = erCosine(a.tfidf, b.tfidf);
+                const gramSim = erCosine(a.gramVec, b.gramVec);
+                const sharedTitle = Array.from(a.titleTokSet).filter(t => b.titleTokSet.has(t));
+                const unionSize = new Set([...a.titleTokSet, ...b.titleTokSet]).size;
+                const titleJaccard = unionSize ? sharedTitle.length / unionSize : 0;
+
+                const acrMatches = [
+                    ...Array.from(a.explicitAcr).filter(x => b.phraseInit.has(x) || b.explicitAcr.has(x)),
+                    ...Array.from(b.explicitAcr).filter(x => a.phraseInit.has(x)),
+                ];
+                const uniqueAcr = Array.from(new Set(acrMatches));
+                const strongAcr = uniqueAcr.some(x => x.length >= 3);
+                const sharedUrls = Array.from(a.urls).filter(u => b.urls.has(u));
+
+                let score = 0.42 * tfidfSim + 0.28 * gramSim + 0.30 * titleJaccard;
+                const reasons = [];
+                if (strongAcr) {
+                    score += 0.16;
+                    reasons.push(`acronym:${uniqueAcr[0]}`);
+                } else if (uniqueAcr.length && gramSim >= 0.35) {
+                    score += 0.08;
+                    reasons.push(`acronym:${uniqueAcr[0]}`);
+                }
+                if (sharedUrls.length) {
+                    score += 0.25;
+                    reasons.push('shared_external_url');
+                }
+                score = Math.min(0.99, score);
+                if (score < minScore) continue;
+
+                if (sharedTitle.length) reasons.push(`tokens:${sharedTitle.slice(0, 4).join(',')}`);
+                if (gramSim >= 0.45) reasons.push(`char3:${gramSim.toFixed(2)}`);
+                if (tfidfSim >= 0.35) reasons.push(`tfidf:${tfidfSim.toFixed(2)}`);
+
+                const target = (a.keepPriority >= b.keepPriority) ? a.proj : b.proj;
+                const source = (a.keepPriority >= b.keepPriority) ? b.proj : a.proj;
+                cands.push({ score, source, target, reasons, aiVerdict: null });
+            }
+        }
+
+        cands.sort((x, y) => (y.score - x.score) || ((y.target.artifacts || []).length - (x.target.artifacts || []).length));
+        return cands.slice(0, topK);
+    }
+
+    window.openDuplicateResolverModal = function () {
+        if (!portalProjectsState.unlocked && !portalProjectsState.liveMode && window.__SITE_DATABASE?.portal_projects_encrypted) {
+            showPortalToast('Unlock the encrypted master portfolio first to scan all 228 projects.', 'warn');
+        }
+        const modal = document.getElementById('er-duplicates-modal');
+        if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+        runAndRenderErDuplicates();
+    };
+
+    window.closeDuplicateResolverModal = function () {
+        const modal = document.getElementById('er-duplicates-modal');
+        if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+    };
+
+    window.onErThresholdChange = function () {
+        const val = document.getElementById('er-threshold-slider')?.value || '45';
+        const lbl = document.getElementById('er-threshold-label');
+        if (lbl) lbl.textContent = `${val}%`;
+        runAndRenderErDuplicates();
+    };
+
+    window.runAndRenderErDuplicates = function () {
+        const pct = Number(document.getElementById('er-threshold-slider')?.value || 45);
+        currentErCandidates = runSemanticEntityResolution(pct / 100, 60);
+        renderErDuplicatesList();
+    };
+
+    function renderErDuplicatesList() {
+        const listEl = document.getElementById('er-duplicates-list');
+        const cntEl = document.getElementById('er-candidate-count');
+        if (cntEl) cntEl.textContent = `${currentErCandidates.length} candidate pair(s)`;
+        if (!listEl) return;
+
+        if (!currentErCandidates.length) {
+            listEl.innerHTML = '<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-8 text-center text-xs text-slate-400">No duplicate candidates above this similarity threshold.</div>';
+            return;
+        }
+
+        listEl.innerHTML = currentErCandidates.map((c, idx) => {
+            const pctStr = `${(c.score * 100).toFixed(1)}%`;
+            const scoreCls = c.score >= 0.70 ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
+                : c.score >= 0.55 ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
+                : 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+            const aiBadge = c.aiVerdict
+                ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${c.aiVerdict.verdict === 'SAME_PROJECT' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${escapeHtml(c.aiVerdict.verdict)}: ${escapeHtml(c.aiVerdict.reason || '')}</span>`
+                : '';
+
+            return `
+                <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-4 space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border ${scoreCls}">${pctStr} Match</span>
+                            <span class="text-[11px] font-mono text-slate-400">${escapeHtml(c.reasons.join(' | '))}</span>
+                            ${aiBadge}
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <button type="button" onclick="swapErCandidatePair(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold"><i class="fas fa-exchange-alt mr-1"></i> Swap</button>
+                            <button type="button" onclick="mergeErCandidatePair(${idx})" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold"><i class="fas fa-compress-arrows-alt mr-1"></i> Merge into Target</button>
+                            <button type="button" onclick="dismissErPair(${idx})" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-rose-600/70 text-slate-400 hover:text-white text-[11px]">Dismiss</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-slate-900/90 border border-rose-500/25 rounded-lg p-3 space-y-1">
+                            <div class="text-[10px] font-bold uppercase text-rose-300">Fold Source (${escapeHtml(c.source.discovery_status || 'discovered')} &bull; ${(c.source.artifacts || []).length} artifacts)</div>
+                            <div class="font-bold text-white">${escapeHtml(c.source.title)}</div>
+                            <div class="font-mono text-[10px] text-slate-500">${escapeHtml(c.source.slug)}</div>
+                            <p class="text-slate-400 text-[11px] line-clamp-2">${escapeHtml(c.source.short_summary || c.source.tagline || '')}</p>
+                        </div>
+                        <div class="bg-slate-900/90 border border-emerald-500/25 rounded-lg p-3 space-y-1">
+                            <div class="text-[10px] font-bold uppercase text-emerald-300">Keep Target (${escapeHtml(c.target.discovery_status || 'canonical')} &bull; ${(c.target.artifacts || []).length} artifacts)</div>
+                            <div class="font-bold text-white">${escapeHtml(c.target.title)}</div>
+                            <div class="font-mono text-[10px] text-slate-500">${escapeHtml(c.target.slug)}</div>
+                            <p class="text-slate-400 text-[11px] line-clamp-2">${escapeHtml(c.target.short_summary || c.target.tagline || '')}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    window.swapErCandidatePair = function (idx) {
+        const c = currentErCandidates[idx];
+        if (!c) return;
+        const tmp = c.source;
+        c.source = c.target;
+        c.target = tmp;
+        renderErDuplicatesList();
+    };
+
+    window.dismissErPair = function (idx) {
+        const c = currentErCandidates[idx];
+        if (!c) return;
+        const set = getDismissedErSet();
+        set.add(erPairKey(c.source.id, c.target.id));
+        localStorage.setItem(ER_DISMISSED_KEY, JSON.stringify(Array.from(set)));
+        currentErCandidates.splice(idx, 1);
+        renderErDuplicatesList();
+    };
+
+    window.clearDismissedErPairs = function () {
+        localStorage.removeItem(ER_DISMISSED_KEY);
+        runAndRenderErDuplicates();
+        showPortalToast('Cleared dismissed duplicate pairs');
+    };
+
+    window.mergeErCandidatePair = async function (idx) {
+        const c = currentErCandidates[idx];
+        if (!c) return;
+        const ok = await mergePortalProjects(c.source.id, c.target.id, { appendSummary: false, addAlias: true });
+        if (ok) runAndRenderErDuplicates();
+    };
+
+    window.aiVerifyTopErDuplicates = async function () {
+        const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+        if (!apiKey) {
+            showPortalToast('Add your Gemini API Key in Settings & Security to run AI semantic verification.', 'warn');
+            return;
+        }
+        const slice = currentErCandidates.slice(0, 15);
+        if (!slice.length) return;
+        const btn = document.getElementById('er-ai-verify-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> Verifying...'; }
+
+        try {
+            const promptPairs = slice.map((c, idx) => ({
+                idx,
+                a: { title: c.source.title, slug: c.source.slug, kind: c.source.project_kind, summary: (c.source.short_summary || '').slice(0, 180) },
+                b: { title: c.target.title, slug: c.target.slug, kind: c.target.project_kind, summary: (c.target.short_summary || '').slice(0, 180) },
+            }));
+            const prompt = `Evaluate these project pairs from an academic/software portfolio. For each pair, return JSON array of objects: {"idx": number, "verdict": "SAME_PROJECT" | "RELATED_SERIES" | "DISTINCT", "reason": "short 6-10 word reason"}. Return ONLY raw JSON.\n\n${JSON.stringify(promptPairs)}`;
+
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.1 } }),
+            });
+            const data = await resp.json();
+            const txt = (data.candidates?.[0]?.content?.parts?.[0]?.text || '').replace(/^\s*```(?:json)?\s*|\s*```\s*$/g, '').trim();
+            const verdicts = JSON.parse(txt);
+            verdicts.forEach(v => {
+                if (currentErCandidates[v.idx]) currentErCandidates[v.idx].aiVerdict = v;
+            });
+            renderErDuplicatesList();
+            showPortalToast(`AI verified top ${verdicts.length} pairs`);
+        } catch (err) {
+            showPortalToast(`AI verify failed: ${err.message}`, 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sparkles mr-1"></i> AI Semantic Verify (Gemini)'; }
+        }
+    };
+
+    // Manual Merge Modal Controls
+    window.openManualMergeModal = function (preselectedSourceId = null) {
+        const modal = document.getElementById('manual-merge-modal');
+        if (!modal) return;
+        document.getElementById('mm-source-filter').value = '';
+        document.getElementById('mm-target-filter').value = '';
+        populateManualMergeSelects(preselectedSourceId);
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    };
+
+    window.closeManualMergeModal = function () {
+        const modal = document.getElementById('manual-merge-modal');
+        if (modal) { modal.classList.add('hidden'); modal.classList.remove('flex'); }
+    };
+
+    window.populateManualMergeSelects = function (preselectedSourceId = null) {
+        const projects = [...(portalProjectsState.projects || [])].sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+        const srcQ = (document.getElementById('mm-source-filter')?.value || '').toLowerCase();
+        const tgtQ = (document.getElementById('mm-target-filter')?.value || '').toLowerCase();
+        const srcSel = document.getElementById('mm-source-select');
+        const tgtSel = document.getElementById('mm-target-select');
+        if (!srcSel || !tgtSel) return;
+
+        const prevSrc = preselectedSourceId != null ? String(preselectedSourceId) : srcSel.value;
+        const prevTgt = tgtSel.value;
+        const filterFn = (p, q) => !q || `${p.title} ${p.slug} ${p.category} ${p.project_kind}`.toLowerCase().includes(q);
+
+        srcSel.innerHTML = projects.filter(p => filterFn(p, srcQ)).map(p =>
+            `<option value="${escapeHtml(String(p.id))}">${escapeHtml(p.title)} [${escapeHtml(p.slug)}] (${(p.artifacts || []).length} art)</option>`
+        ).join('');
+        tgtSel.innerHTML = projects.filter(p => filterFn(p, tgtQ)).map(p =>
+            `<option value="${escapeHtml(String(p.id))}">${escapeHtml(p.title)} [${escapeHtml(p.slug)}] (${p.is_public ? 'PUBLIC' : 'private'}, ${(p.artifacts || []).length} art)</option>`
+        ).join('');
+
+        if (prevSrc && Array.from(srcSel.options).some(o => o.value === prevSrc)) srcSel.value = prevSrc;
+        if (prevTgt && Array.from(tgtSel.options).some(o => o.value === prevTgt)) tgtSel.value = prevTgt;
+        if (srcSel.value === tgtSel.value && tgtSel.options.length > 1) {
+            tgtSel.selectedIndex = srcSel.selectedIndex === 0 ? 1 : 0;
+        }
+        renderManualMergePreview();
+    };
+
+    window.renderManualMergePreview = function () {
+        const srcId = Number(document.getElementById('mm-source-select')?.value);
+        const tgtId = Number(document.getElementById('mm-target-select')?.value);
+        const src = (portalProjectsState.projects || []).find(p => p.id === srcId);
+        const tgt = (portalProjectsState.projects || []).find(p => p.id === tgtId);
+        const fmt = p => p
+            ? `<div><strong>${escapeHtml(p.title)}</strong> (${escapeHtml(p.discovery_status || 'canonical')})</div><div>${(p.artifacts || []).length} artifacts &bull; ${(p.placements || []).length} placements</div><div class="truncate text-slate-500 mt-1">${escapeHtml(p.short_summary || '')}</div>`
+            : 'Select a project';
+        const sEl = document.getElementById('mm-source-preview');
+        const tEl = document.getElementById('mm-target-preview');
+        if (sEl) sEl.innerHTML = fmt(src);
+        if (tEl) tEl.innerHTML = fmt(tgt);
+    };
+
+    window.swapManualMergeSides = function () {
+        const srcSel = document.getElementById('mm-source-select');
+        const tgtSel = document.getElementById('mm-target-select');
+        if (!srcSel || !tgtSel) return;
+        const sVal = srcSel.value;
+        const tVal = tgtSel.value;
+        if (Array.from(srcSel.options).some(o => o.value === tVal)) srcSel.value = tVal;
+        if (Array.from(tgtSel.options).some(o => o.value === sVal)) tgtSel.value = sVal;
+        renderManualMergePreview();
+    };
+
+    window.executeManualMerge = async function () {
+        const srcId = Number(document.getElementById('mm-source-select')?.value);
+        const tgtId = Number(document.getElementById('mm-target-select')?.value);
+        if (!srcId || !tgtId || srcId === tgtId) {
+            showPortalToast('Choose two different projects to merge.', 'warn');
+            return;
+        }
+        const appendSummary = Boolean(document.getElementById('mm-append-summary')?.checked);
+        const addAlias = Boolean(document.getElementById('mm-add-alias')?.checked);
+        const ok = await mergePortalProjects(srcId, tgtId, { appendSummary, addAlias });
+        if (ok) closeManualMergeModal();
+    };
+
+    async function mergePortalProjects(sourceId, targetId, opts = {}) {
+        const src = (portalProjectsState.projects || []).find(p => p.id === sourceId);
+        const tgt = (portalProjectsState.projects || []).find(p => p.id === targetId);
+        if (!src || !tgt || src.id === tgt.id) return false;
+
+        if (portalProjectsState.liveMode) {
+            const resp = await fetch('/api/projects/merge', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    source_id: src.id,
+                    target_id: tgt.id,
+                    append_summary: Boolean(opts.appendSummary),
+                    add_alias: opts.addAlias !== false,
+                }),
+            });
+            const data = await resp.json();
+            if (!data.ok) {
+                showPortalToast(data.error || 'Merge failed', 'error');
+                return false;
+            }
+            hydrateBundleState(data);
+        } else {
+            if (src.slug) {
+                try {
+                    const delSlugs = JSON.parse(localStorage.getItem(DELETED_PROJ_SLUGS_KEY) || '[]');
+                    if (!delSlugs.includes(src.slug)) delSlugs.push(src.slug);
+                    localStorage.setItem(DELETED_PROJ_SLUGS_KEY, JSON.stringify(delSlugs));
+                } catch (e) { }
+            }
+            pushStagedPatchOp('merge_projects', {
+                source_id: src.id,
+                source_slug: src.slug,
+                target_id: tgt.id,
+                target_slug: tgt.slug,
+                append_summary: Boolean(opts.appendSummary),
+                add_alias: opts.addAlias !== false,
+            });
+            portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+            renderPortalProjectsHub();
+        }
+        showPortalToast(`Merged "${src.title}" -> "${tgt.title}"`);
+        return true;
+    }
 
 })();

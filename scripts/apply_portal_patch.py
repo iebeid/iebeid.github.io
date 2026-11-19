@@ -299,10 +299,129 @@ def set_project_placements(
     return len(visible_slots)
 
 
+def _resolve_project_id(cur: sqlite3.Cursor, id_or_slug: Any) -> Optional[int]:
+    if id_or_slug is None:
+        return None
+    if isinstance(id_or_slug, int) and id_or_slug > 0:
+        row = cur.execute("SELECT id FROM projects WHERE id = ?", (id_or_slug,)).fetchone()
+        return row[0] if row else None
+    s = str(id_or_slug).strip()
+    if s.isdigit() and int(s) > 0:
+        row = cur.execute("SELECT id FROM projects WHERE id = ?", (int(s),)).fetchone()
+        if row:
+            return row[0]
+    row = cur.execute("SELECT id FROM projects WHERE slug = ?", (s,)).fetchone()
+    return row[0] if row else None
+
+
+def merge_projects_in_db(
+    conn: sqlite3.Connection,
+    source: Any,
+    target: Any,
+    append_summary: bool = False,
+    add_alias: bool = True,
+) -> Dict[str, Any]:
+    """Fold `source` project (artifacts, placements, tags, keywords, pubs) into `target` and delete `source`."""
+    cur = conn.cursor()
+    src_id = _resolve_project_id(cur, source)
+    tgt_id = _resolve_project_id(cur, target)
+    if not src_id or not tgt_id:
+        raise ValueError(f"Could not resolve source ({source}) or target ({target}) project.")
+    if src_id == tgt_id:
+        raise ValueError("Source and target projects must be different.")
+
+    src_row = cur.execute(
+        "SELECT slug, title, short_summary, full_description, tech_stack, keywords, year_start, year_end FROM projects WHERE id = ?",
+        (src_id,),
+    ).fetchone()
+    tgt_row = cur.execute(
+        "SELECT slug, title, short_summary, full_description, tech_stack, keywords, year_start, year_end FROM projects WHERE id = ?",
+        (tgt_id,),
+    ).fetchone()
+    src_slug, src_title, src_sum, src_desc, src_tech, src_kw, src_ys, src_ye = src_row
+    tgt_slug, tgt_title, tgt_sum, tgt_desc, tgt_tech, tgt_kw, tgt_ys, tgt_ye = tgt_row
+
+    # 1. Move artifacts (skip duplicates by url_or_rel_path or gdrive_file_id)
+    existing_urls = {
+        r[0] for r in cur.execute("SELECT url_or_rel_path FROM project_artifacts WHERE project_id = ?", (tgt_id,)).fetchall()
+    }
+    existing_gfids = {
+        r[0] for r in cur.execute("SELECT gdrive_file_id FROM project_artifacts WHERE project_id = ? AND gdrive_file_id IS NOT NULL", (tgt_id,)).fetchall()
+    }
+    moved_artifacts = 0
+    for aid, url_val, gfid in cur.execute(
+        "SELECT id, url_or_rel_path, gdrive_file_id FROM project_artifacts WHERE project_id = ?", (src_id,)
+    ).fetchall():
+        if url_val in existing_urls or (gfid and gfid in existing_gfids):
+            cur.execute("DELETE FROM project_artifacts WHERE id = ?", (aid,))
+        else:
+            cur.execute("UPDATE project_artifacts SET project_id = ? WHERE id = ?", (tgt_id, aid))
+            existing_urls.add(url_val)
+            if gfid:
+                existing_gfids.add(gfid)
+            moved_artifacts += 1
+
+    # 2. Move placements
+    existing_slots = {
+        (r[0], r[1]) for r in cur.execute("SELECT page_slug, section_slot FROM project_placements WHERE project_id = ?", (tgt_id,)).fetchall()
+    }
+    moved_placements = 0
+    for pl_id, p_slug, s_slot in cur.execute(
+        "SELECT id, page_slug, section_slot FROM project_placements WHERE project_id = ?", (src_id,)
+    ).fetchall():
+        if (p_slug, s_slot) in existing_slots:
+            cur.execute("DELETE FROM project_placements WHERE id = ?", (pl_id,))
+        else:
+            cur.execute("UPDATE project_placements SET project_id = ? WHERE id = ?", (tgt_id, pl_id))
+            existing_slots.add((p_slug, s_slot))
+            moved_placements += 1
+
+    # 3. Move tags, publications, courses
+    for (tag,) in cur.execute("SELECT tag FROM project_tags WHERE project_id = ?", (src_id,)).fetchall():
+        cur.execute("INSERT OR IGNORE INTO project_tags (project_id, tag) VALUES (?, ?)", (tgt_id, tag))
+    for (pub_id,) in cur.execute("SELECT publication_id FROM project_publications WHERE project_id = ?", (src_id,)).fetchall():
+        cur.execute("INSERT OR IGNORE INTO project_publications (project_id, publication_id) VALUES (?, ?)", (tgt_id, pub_id))
+    for (crs_id,) in cur.execute("SELECT course_id FROM project_courses WHERE project_id = ?", (src_id,)).fetchall():
+        cur.execute("INSERT OR IGNORE INTO project_courses (project_id, course_id) VALUES (?, ?)", (tgt_id, crs_id))
+
+    # 4. Merge tech_stack, keywords (recording source title/slug as permanent alias), years, optional summary
+    merged_tech = list(dict.fromkeys(_parse_list(tgt_tech) + _parse_list(src_tech)))
+    merged_kw = _parse_list(tgt_kw) + _parse_list(src_kw)
+    if add_alias:
+        for alias in (src_title, src_slug):
+            if alias and alias not in merged_kw:
+                merged_kw.append(alias)
+    merged_kw = list(dict.fromkeys(merged_kw))
+
+    years = [y for y in (tgt_ys, tgt_ye, src_ys, src_ye) if isinstance(y, int)]
+    new_ys = min(years) if years else tgt_ys
+    new_ye = max(years) if years else tgt_ye
+    new_desc = tgt_desc or tgt_sum or ""
+    if append_summary and src_sum and src_sum not in new_desc:
+        new_desc = f"{new_desc}\n\n[Merged from {src_title}]: {src_sum}".strip()
+
+    now_iso = datetime.now(timezone.utc).isoformat()
+    cur.execute("""
+        UPDATE projects
+        SET tech_stack = ?, keywords = ?, year_start = ?, year_end = ?, full_description = ?, updated_at = ?
+        WHERE id = ?
+    """, (json.dumps(merged_tech), json.dumps(merged_kw), new_ys, new_ye, new_desc, now_iso, tgt_id))
+
+    # 5. Delete source project
+    cur.execute("DELETE FROM projects WHERE id = ?", (src_id,))
+    conn.commit()
+    return {
+        "source_slug": src_slug,
+        "target_slug": tgt_slug,
+        "moved_artifacts": moved_artifacts,
+        "moved_placements": moved_placements,
+    }
+
+
 def apply_patch_payload(conn: sqlite3.Connection, patch: Dict[str, Any]) -> Dict[str, int]:
     """Apply an ordered operations patch exported from static portal.html."""
     ensure_schema(conn.cursor())
-    counts = {"saved": 0, "deleted": 0, "artifacts": 0, "placements": 0}
+    counts = {"saved": 0, "deleted": 0, "artifacts": 0, "placements": 0, "merged": 0}
     for op in patch.get("operations", []):
         kind = op.get("op")
         payload = op.get("payload") or {}
@@ -327,6 +446,15 @@ def apply_patch_payload(conn: sqlite3.Connection, patch: Dict[str, Any]) -> Dict
                 project_slug=payload.get("project_slug"),
             )
             counts["placements"] += 1
+        elif kind == "merge_projects":
+            merge_projects_in_db(
+                conn,
+                payload.get("source") or payload.get("source_slug") or payload.get("source_id"),
+                payload.get("target") or payload.get("target_slug") or payload.get("target_id"),
+                append_summary=bool(payload.get("append_summary", False)),
+                add_alias=bool(payload.get("add_alias", True)),
+            )
+            counts["merged"] += 1
     return counts
 
 

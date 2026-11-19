@@ -33,6 +33,7 @@ from apply_portal_patch import (  # noqa: E402
     apply_patch_payload,
     delete_artifact_record,
     delete_project_record,
+    merge_projects_in_db,
     save_artifact_record,
     save_project_record,
     set_project_placements,
@@ -278,6 +279,24 @@ class PortalRequestHandler(http.server.SimpleHTTPRequestHandler):
                 deleted = delete_project_record(conn, body.get("id"), body.get("slug"))
                 bundle = fetch_master_bundle(conn)
                 self._send_json({"ok": True, "deleted": deleted, **bundle})
+            finally:
+                conn.close()
+            return
+
+        if path == "/api/projects/merge":
+            conn = sqlite3.connect(DB_PATH)
+            try:
+                info = merge_projects_in_db(
+                    conn,
+                    body.get("source") or body.get("source_id") or body.get("source_slug"),
+                    body.get("target") or body.get("target_id") or body.get("target_slug"),
+                    append_summary=bool(body.get("append_summary", False)),
+                    add_alias=bool(body.get("add_alias", True)),
+                )
+                bundle = fetch_master_bundle(conn)
+                self._send_json({"ok": True, "merge": info, **bundle})
+            except Exception as exc:
+                self._send_json({"ok": False, "error": str(exc)}, 400)
             finally:
                 conn.close()
             return
