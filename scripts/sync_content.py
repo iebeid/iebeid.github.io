@@ -14,6 +14,13 @@ import argparse
 from pathlib import Path
 from datetime import datetime
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from database_manager import DEFAULT_PORTAL_PASSCODE, encrypt_secret, read_vault_secret
+from reconcile_live_to_db import reconcile_live_to_db
+
 # Paths
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
@@ -366,45 +373,174 @@ def export_public_content(conn: sqlite3.Connection):
     except sqlite3.OperationalError:
         pass
 
-    # Normalized Master Project Backbone (Phase 2 Export)
+    # Normalized Master Project Backbone (Public Export + Encrypted Portal Master Export)
     projects_payload = []
+    portal_projects_all = []
+    site_placement_slots = [
+        {"page_slug": "home", "section_slot": "featured", "label": "Home — Current Research & Flagship Systems"},
+        {"page_slug": "research", "section_slot": "ai_life_sciences", "label": "Research — AI & Life Sciences / Bioinformatics"},
+        {"page_slug": "research", "section_slot": "data_engineering", "label": "Research — Data Quality, Engineering & NLP"},
+        {"page_slug": "research", "section_slot": "visualization_hci", "label": "Research — Scientific Visualization & HCI"},
+        {"page_slug": "research", "section_slot": "legacy_industry", "label": "Research — Legacy & Industry Systems"},
+        {"page_slug": "research", "section_slot": "projects", "label": "Research — Additional Cross-Disciplinary Projects"},
+        {"page_slug": "storefront", "section_slot": "catalog", "label": "Storefront — Commercial Software Catalog"},
+        {"page_slug": "education", "section_slot": "projects", "label": "Education — Academic Milestones & Projects"},
+        {"page_slug": "scholarship", "section_slot": "projects", "label": "Scholarship — Writings, Essays, Lectures & Poetry"},
+        {"page_slug": "teaching", "section_slot": "projects", "label": "Teaching — Courseware & Teaching Portfolio"},
+        {"page_slug": "service", "section_slot": "projects", "label": "Service — Leadership & Outreach Initiatives"},
+        {"page_slug": "business", "section_slot": "projects", "label": "Business — Applied Consulting & Commercial"},
+        {"page_slug": "hobbies", "section_slot": "projects", "label": "Hobbies — Creative Works, Travel & Personal"},
+        {"page_slug": "media", "section_slot": "projects", "label": "Media — Talks, Podcasts & Featured Media"},
+        {"page_slug": "relations", "section_slot": "projects", "label": "Relations — Collaborations & Mentorship"},
+        {"page_slug": "downloads", "section_slot": "projects", "label": "Downloads — Shared Project Bundles"},
+        {"page_slug": "lab", "section_slot": "projects", "label": "Lab — Data2AI4LifeSciences Lab Projects"},
+        {"page_slug": "talk-index", "section_slot": "projects", "label": "Talks — Related Presentation Projects"},
+    ]
+
+    def _parse_json_list(raw_val):
+        try:
+            parsed = json.loads(raw_val) if raw_val else []
+            return parsed if isinstance(parsed, list) else []
+        except Exception:
+            return [t.strip() for t in (raw_val or "").split(",") if t.strip()]
+
     try:
-        cur.execute("""
-            SELECT id, slug, title, tagline, short_summary, full_description,
-                   category, domain_stage, status, year_start, year_end,
-                   institution_or_org, grant_award, tech_stack, code_snippet,
-                   license_model, price_display, storefront_category,
-                   is_featured, is_storefront, display_order
-            FROM projects
-            WHERE is_public = 1
-            ORDER BY display_order, id
-        """)
+        proj_cols = {r[1] for r in cur.execute("PRAGMA table_info(projects)").fetchall()}
+        has_extended_proj = "project_kind" in proj_cols
+        art_cols = {r[1] for r in cur.execute("PRAGMA table_info(project_artifacts)").fetchall()}
+        has_extended_art = "storage_source" in art_cols
+        has_placements_tbl = cur.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='project_placements'"
+        ).fetchone() is not None
+
+        if has_extended_proj:
+            cur.execute("""
+                SELECT id, slug, title, tagline, short_summary, full_description,
+                       category, domain_stage, status, year_start, year_end,
+                       institution_or_org, grant_award, tech_stack, code_snippet,
+                       license_model, price_display, storefront_category,
+                       is_featured, is_storefront, is_public, display_order,
+                       project_kind, keywords, discovery_status, source_origin,
+                       confidence_score, gdrive_primary_folder_id, gdrive_primary_url, updated_at
+                FROM projects
+                ORDER BY display_order, id
+            """)
+        else:
+            cur.execute("""
+                SELECT id, slug, title, tagline, short_summary, full_description,
+                       category, domain_stage, status, year_start, year_end,
+                       institution_or_org, grant_award, tech_stack, code_snippet,
+                       license_model, price_display, storefront_category,
+                       is_featured, is_storefront, is_public, display_order
+                FROM projects
+                ORDER BY display_order, id
+            """)
+
         for pr in cur.fetchall():
             pid = pr[0]
-            try:
-                tech_list = json.loads(pr[13]) if pr[13] else []
-            except Exception:
-                tech_list = [t.strip() for t in (pr[13] or "").split(",") if t.strip()]
+            tech_list = _parse_json_list(pr[13])
+            is_proj_public = bool(pr[20])
 
-            cur.execute("""
-                SELECT artifact_type, label, url_or_rel_path, format_badge, document_id
-                FROM project_artifacts
-                WHERE project_id = ?
-                ORDER BY display_order, id
-            """, (pid,))
-            artifacts = [
+            if has_extended_art:
+                cur.execute("""
+                    SELECT id, artifact_type, label, url_or_rel_path, format_badge, document_id,
+                           display_order, storage_source, gdrive_file_id, gdrive_url, gdrive_path,
+                           mime_type, gdrive_modified_at, md5_checksum, sharing_status,
+                           COALESCE(is_public, 1), match_reason
+                    FROM project_artifacts
+                    WHERE project_id = ?
+                    ORDER BY display_order, id
+                """, (pid,))
+                all_artifacts = [
+                    {
+                        "id": ar[0],
+                        "type": ar[1],
+                        "label": ar[2],
+                        "url": ar[3],
+                        "badge": ar[4] or "",
+                        "document_id": ar[5],
+                        "display_order": ar[6] or 0,
+                        "storage_source": ar[7] or "repo",
+                        "gdrive_file_id": ar[8] or "",
+                        "gdrive_url": ar[9] or "",
+                        "gdrive_path": ar[10] or "",
+                        "mime_type": ar[11] or "",
+                        "gdrive_modified_at": ar[12] or "",
+                        "md5_checksum": ar[13] or "",
+                        "sharing_status": ar[14] or "unknown",
+                        "is_public": bool(ar[15]),
+                        "match_reason": ar[16] or "",
+                    }
+                    for ar in cur.fetchall()
+                ]
+            else:
+                cur.execute("""
+                    SELECT id, artifact_type, label, url_or_rel_path, format_badge, document_id, display_order
+                    FROM project_artifacts
+                    WHERE project_id = ?
+                    ORDER BY display_order, id
+                """, (pid,))
+                all_artifacts = [
+                    {
+                        "id": ar[0],
+                        "type": ar[1],
+                        "label": ar[2],
+                        "url": ar[3],
+                        "badge": ar[4] or "",
+                        "document_id": ar[5],
+                        "display_order": ar[6] or 0,
+                        "storage_source": "repo",
+                        "is_public": True,
+                    }
+                    for ar in cur.fetchall()
+                ]
+
+            public_artifacts = [
                 {
-                    "type": ar[0],
-                    "label": ar[1],
-                    "url": ar[2],
-                    "badge": ar[3] or "",
-                    "document_id": ar[4],
+                    "type": a["type"],
+                    "label": a["label"],
+                    "url": a["url"],
+                    "badge": a["badge"],
+                    "document_id": a["document_id"],
+                    "storage_source": a["storage_source"],
                 }
-                for ar in cur.fetchall()
+                for a in all_artifacts
+                if a.get("is_public", True)
             ]
 
             cur.execute("SELECT tag FROM project_tags WHERE project_id = ? ORDER BY tag", (pid,))
             tags = [tr[0] for tr in cur.fetchall()]
+
+            all_placements = []
+            if has_placements_tbl:
+                cur.execute("""
+                    SELECT id, page_slug, section_slot, card_variant, display_order, is_visible
+                    FROM project_placements
+                    WHERE project_id = ?
+                    ORDER BY display_order, id
+                """, (pid,))
+                all_placements = [
+                    {
+                        "id": pl[0],
+                        "page_slug": pl[1],
+                        "section_slot": pl[2],
+                        "card_variant": pl[3] or "research-cards",
+                        "display_order": pl[4] or 0,
+                        "is_visible": bool(pl[5]),
+                    }
+                    for pl in cur.fetchall()
+                ]
+            public_placements = [
+                {
+                    "page_slug": pl["page_slug"],
+                    "section_slot": pl["section_slot"],
+                    "card_variant": pl["card_variant"],
+                    "display_order": pl["display_order"],
+                    "is_visible": True,
+                }
+                for pl in all_placements
+                if pl["is_visible"]
+            ]
 
             cur.execute("""
                 SELECT pub.id, pub.title, pub.authors, pub.venue, pub.year, pub.doi, pub.url, pub.pdf_path
@@ -427,7 +563,16 @@ def export_public_content(conn: sqlite3.Connection):
                 for pbr in cur.fetchall()
             ]
 
-            projects_payload.append({
+            project_kind = pr[22] if has_extended_proj else "research"
+            keywords = _parse_json_list(pr[23]) if has_extended_proj else []
+            discovery_status = pr[24] if has_extended_proj else "canonical"
+            source_origin = pr[25] if has_extended_proj else "manual"
+            confidence_score = pr[26] if has_extended_proj else 1.0
+            gdrive_primary_folder_id = pr[27] if has_extended_proj else ""
+            gdrive_primary_url = pr[28] if has_extended_proj else ""
+            updated_at = pr[29] if has_extended_proj else ""
+
+            portal_projects_all.append({
                 "id": pid,
                 "slug": pr[1],
                 "title": pr[2],
@@ -448,13 +593,120 @@ def export_public_content(conn: sqlite3.Connection):
                 "storefront_category": pr[17] or "",
                 "is_featured": bool(pr[18]),
                 "is_storefront": bool(pr[19]),
-                "display_order": pr[20] or 0,
-                "artifacts": artifacts,
+                "is_public": is_proj_public,
+                "display_order": pr[21] or 0,
+                "project_kind": project_kind or "research",
+                "keywords": keywords,
+                "discovery_status": discovery_status or "canonical",
+                "source_origin": source_origin or "manual",
+                "confidence_score": confidence_score if confidence_score is not None else 1.0,
+                "gdrive_primary_folder_id": gdrive_primary_folder_id or "",
+                "gdrive_primary_url": gdrive_primary_url or "",
+                "updated_at": updated_at or "",
+                "artifacts": all_artifacts,
+                "placements": all_placements,
                 "tags": tags,
                 "publications": linked_pubs,
             })
+
+            if is_proj_public:
+                projects_payload.append({
+                    "id": pid,
+                    "slug": pr[1],
+                    "title": pr[2],
+                    "tagline": pr[3] or "",
+                    "short_summary": pr[4] or "",
+                    "full_description": pr[5] or "",
+                    "category": pr[6],
+                    "domain_stage": pr[7] or "foundational",
+                    "status": pr[8] or "",
+                    "year_start": pr[9],
+                    "year_end": pr[10],
+                    "institution_or_org": pr[11] or "",
+                    "grant_award": pr[12] or "",
+                    "tech_stack": tech_list,
+                    "code_snippet": pr[14] or "",
+                    "license_model": pr[15] or "",
+                    "price_display": pr[16] or "",
+                    "storefront_category": pr[17] or "",
+                    "is_featured": bool(pr[18]),
+                    "is_storefront": bool(pr[19]),
+                    "display_order": pr[21] or 0,
+                    "project_kind": project_kind or "research",
+                    "keywords": keywords,
+                    "artifacts": public_artifacts,
+                    "placements": public_placements,
+                    "tags": tags,
+                    "publications": linked_pubs,
+                })
     except sqlite3.OperationalError:
         pass
+
+    drive_roots = []
+    drive_runs = []
+    try:
+        cur.execute("""
+            SELECT id, root_name, gdrive_folder_id, priority, default_kind, default_page_slug, is_excluded, last_scanned_at
+            FROM drive_scan_roots
+            ORDER BY priority, root_name
+        """)
+        drive_roots = [
+            {
+                "id": r[0],
+                "root_name": r[1],
+                "gdrive_folder_id": r[2],
+                "priority": r[3],
+                "default_kind": r[4],
+                "default_page_slug": r[5] or "",
+                "is_excluded": bool(r[6]),
+                "last_scanned_at": r[7] or "",
+            }
+            for r in cur.fetchall()
+        ]
+    except sqlite3.OperationalError:
+        pass
+
+    try:
+        cur.execute("""
+            SELECT id, started_at, finished_at, mode, root_name, files_scanned, projects_discovered, artifacts_linked, notes
+            FROM drive_scan_runs
+            ORDER BY id DESC LIMIT 20
+        """)
+        drive_runs = [
+            {
+                "id": r[0],
+                "started_at": r[1],
+                "finished_at": r[2] or "",
+                "mode": r[3],
+                "root_name": r[4] or "",
+                "files_scanned": r[5] or 0,
+                "projects_discovered": r[6] or 0,
+                "artifacts_linked": r[7] or 0,
+                "notes": r[8] or "",
+            }
+            for r in cur.fetchall()
+        ]
+    except sqlite3.OperationalError:
+        pass
+
+    portal_master_passcode = DEFAULT_PORTAL_PASSCODE
+    try:
+        vault_secret = read_vault_secret("master_passcode", DEFAULT_PORTAL_PASSCODE, DB_PATH)
+        if vault_secret:
+            portal_master_passcode = vault_secret
+    except Exception:
+        pass
+
+    portal_projects_bundle_json = json.dumps(
+        {
+            "projects": portal_projects_all,
+            "placement_slots": site_placement_slots,
+            "drive_scan_roots": drive_roots,
+            "drive_scan_runs": drive_runs,
+        },
+        ensure_ascii=False,
+    )
+    portal_projects_encrypted = encrypt_secret(portal_projects_bundle_json, portal_master_passcode)
 
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
@@ -468,6 +720,7 @@ def export_public_content(conn: sqlite3.Connection):
         "images": images,
         "publications": publications,
         "projects": projects_payload,
+        "site_placement_slots": site_placement_slots,
         "courses": courses,
         "contacts": contacts,
         "xlpm_datasets": xlpm_datasets,
@@ -482,6 +735,8 @@ def export_public_content(conn: sqlite3.Connection):
         "portal_messages": portal_messages,
         "portal_vault": portal_vault,
         "portal_passwords": portal_passwords,
+        "portal_projects_encrypted": portal_projects_encrypted,
+        "site_placement_slots": site_placement_slots,
     }
 
     PUBLIC_JSON_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -509,7 +764,7 @@ def export_public_content(conn: sqlite3.Connection):
 def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
     """Sync portal_bookmarks table to pages/portal/bookmarks.json and bookmarks_data.js."""
     cur = conn.cursor()
-    for col_name, col_type in [("domain", "TEXT"), ("path", "TEXT"), ("ai_tags", "TEXT"), ("description", "TEXT")]:
+    for col_name, col_type in [("domain", "TEXT"), ("path", "TEXT"), ("ai_tags", "TEXT"), ("description", "TEXT"), ("remembered", "INTEGER DEFAULT 0")]:
         try:
             cur.execute(f"ALTER TABLE portal_bookmarks ADD COLUMN {col_name} {col_type}")
         except sqlite3.OperationalError:
@@ -561,7 +816,7 @@ def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
             print("[OK] Hydrated all 415 portal bookmarks (domains, paths & AI tags) into SQLite.")
 
     cur.execute("""
-        SELECT chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count, description
+        SELECT chrome_id, title, url, domain, category, subfolder, path, ai_tags, favicon, pinned, click_count, description, COALESCE(remembered, 0)
         FROM portal_bookmarks
         ORDER BY category, subfolder, title
     """)
@@ -606,6 +861,7 @@ def sync_portal_bookmarks(conn: sqlite3.Connection) -> dict:
             "pinned": bool(r[9]),
             "clicks": r[10] or 0,
             "description": r[11] or "",
+            "remembered": bool(r[12]),
         }
         bookmarks_list.append(bm_entry)
         folders_tree.setdefault(cat, {}).setdefault(sub or "General", []).append(bm_entry)
@@ -725,6 +981,7 @@ def main():
     parser.add_argument("--export-only", action="store_true", help="Export SQLite tables to JSON/JS bundles without git commit or push")
     parser.add_argument("--no-push", action="store_true", help="Stage and commit changes locally, but skip pushing to remote origin")
     parser.add_argument("--dry-run", action="store_true", help="Inspect and validate database tables without writing files or git changes")
+    parser.add_argument("--skip-reconcile", action="store_true", help="Skip importing newer GitHub-published portal state into content.db before export")
     parser.add_argument("-m", "--message", dest="commit_msg", type=str, default=None, help="Custom git commit message")
 
     args = parser.parse_args()
@@ -757,6 +1014,10 @@ def main():
         return
 
     conn = sqlite3.connect(str(DB_PATH))
+    if not args.skip_reconcile:
+        rec = reconcile_live_to_db(conn, DB_PATH)
+        if rec.get("reconciled"):
+            print(f"[RECONCILE] Absorbed live portal edits into content.db: {rec}")
     export_public_content(conn)
     conn.close()
 

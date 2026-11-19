@@ -84,13 +84,18 @@ def main():
 
         print(f"  * {rel_path}: shell={has_shell_attr} | db_js={has_db_js} | loader={has_loader_js} | [{status}]")
 
-    # 4. Check Normalized Projects Backbone & Local Artifact Paths
+    # 4. Check Normalized Projects Backbone, Placements & Local Artifact Paths
     try:
         proj_count = cur.execute("SELECT COUNT(*) FROM projects").fetchone()[0]
-        art_rows = cur.execute("SELECT id, label, url_or_rel_path FROM project_artifacts").fetchall()
+        art_cols = {r[1] for r in cur.execute("PRAGMA table_info(project_artifacts)").fetchall()}
+        if "storage_source" in art_cols:
+            art_rows = cur.execute("SELECT id, label, url_or_rel_path, COALESCE(storage_source, 'repo') FROM project_artifacts").fetchall()
+        else:
+            art_rows = [(r[0], r[1], r[2], "repo") for r in cur.execute("SELECT id, label, url_or_rel_path FROM project_artifacts").fetchall()]
+
         missing_arts = []
-        for aid, alabel, apath in art_rows:
-            if apath.startswith(("http://", "https://", "pip ", "mailto:")):
+        for aid, alabel, apath, src in art_rows:
+            if src != "repo" or apath.startswith(("http://", "https://", "pip ", "mailto:")):
                 continue
             if not (REPO_ROOT / apath).exists():
                 missing_arts.append((aid, alabel, apath))
@@ -99,7 +104,20 @@ def main():
             for aid, alabel, apath in missing_arts:
                 print(f"   Artifact #{aid} ({alabel}): {apath}")
             return 1
-        print(f"[OK] Project backbone verified: {proj_count} canonical projects, {len(art_rows)} verified artifacts.")
+
+        plc_count = 0
+        has_plc = cur.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='project_placements'").fetchone()
+        if has_plc:
+            plc_count = cur.execute("SELECT COUNT(*) FROM project_placements").fetchone()[0]
+            bad_pages = cur.execute("""
+                SELECT DISTINCT page_slug FROM project_placements
+                WHERE page_slug NOT IN (SELECT slug FROM pages)
+            """).fetchall()
+            if bad_pages:
+                print(f"[ERROR] project_placements reference unknown page_slug(s): {[r[0] for r in bad_pages]}")
+                return 1
+
+        print(f"[OK] Project backbone verified: {proj_count} projects, {len(art_rows)} verified artifacts, {plc_count} placements.")
     except sqlite3.OperationalError:
         pass
 

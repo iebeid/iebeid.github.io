@@ -57,6 +57,7 @@
     // 2. AUTHENTICATION & SECURITY (SQLite AES-256-GCM Vault + Local Override)
     // -------------------------------------------------------------------------
     let unlockedVaultSecrets = {};
+    let portalSessionPasscode = null; // Volatile memory only while tab is open
 
     function base64ToUint8Array(b64) {
         const bin = atob(b64);
@@ -189,6 +190,7 @@
         }
 
         if (verified) {
+            portalSessionPasscode = passcode;
             // Best-effort hydration of vault secrets if local override matched
             if (!unlockedVaultSecrets.master_passcode) {
                 await unlockSqliteVault(passcode);
@@ -204,6 +206,7 @@
     }
 
     function logout() {
+        portalSessionPasscode = null;
         sessionStorage.removeItem(AUTH_SESSION_KEY);
         localStorage.removeItem(AUTH_SESSION_KEY);
         document.getElementById('portal-app').classList.add('hidden');
@@ -376,11 +379,19 @@
     }
 
     function getUsageStats() {
-        try {
-            return JSON.parse(localStorage.getItem(USAGE_STATS_KEY) || '{}');
-        } catch (e) {
-            return {};
+        const stored = localStorage.getItem(USAGE_STATS_KEY);
+        if (stored) {
+            try { return JSON.parse(stored); } catch (e) { }
         }
+        // Hydrate baseline click counts from SQLite bookmarks_data.js if localStorage is empty
+        const base = (window.PORTAL_BOOKMARKS && window.PORTAL_BOOKMARKS.bookmarks) || [];
+        const seeded = {};
+        base.forEach(b => {
+            if (b.clicks && Number(b.clicks) > 0) {
+                seeded[String(b.id)] = { count: Number(b.clicks), lastUsed: 0 };
+            }
+        });
+        return seeded;
     }
 
     function saveUsageStats(stats) {
@@ -401,7 +412,8 @@
         if (stored) {
             try { return JSON.parse(stored); } catch (e) { }
         }
-        return [];
+        const base = (window.PORTAL_BOOKMARKS && window.PORTAL_BOOKMARKS.bookmarks) || [];
+        return base.filter(b => b.remembered).map(b => b.id);
     }
 
     function saveRememberedIds(ids) {
@@ -1019,8 +1031,13 @@
         if (stored) {
             try { return JSON.parse(stored); } catch (e) { }
         }
-        // Default: first 8 bookmarks from Dashboard folder
         const allBms = getAllBookmarks();
+        const dbPinned = allBms.filter(b => b.pinned).map(b => b.id);
+        if (dbPinned.length > 0) {
+            localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(dbPinned));
+            return dbPinned;
+        }
+        // Default: first 8 bookmarks from Dashboard folder
         const dashBms = allBms.filter(b => b.category === 'Dashboard').slice(0, 8);
         const initial = dashBms.map(b => b.id);
         localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(initial));
@@ -3140,6 +3157,90 @@
         URL.revokeObjectURL(url);
     };
 
+    window.exportFullPortalState = function () {
+        const allBms = getAllBookmarks();
+        const state = {
+            _format: 'portal_full_state_v1',
+            exported_at: new Date().toISOString(),
+            origin: window.location.origin,
+            total_bookmarks: allBms.length,
+            all_bookmarks: allBms,
+            custom_bookmarks: getCustomBookmarks(),
+            deleted_ids: getDeletedBookmarkIds(),
+            pinned_ids: getPinnedIds(),
+            remembered_ids: getRememberedIds(),
+            usage_stats: getUsageStats(),
+            tasks: JSON.parse(localStorage.getItem(TASKS_KEY) || '[]'),
+            scratches: JSON.parse(localStorage.getItem(SCRATCHES_DB_KEY) || '[]'),
+            active_scratch: localStorage.getItem(SCRATCHPAD_KEY) || '',
+        };
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `portal_full_state_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showPortalToast(`Exported Full Portal State (${allBms.length} bookmarks, ${state.pinned_ids.length} pinned, ${state.remembered_ids.length} remembered)`);
+    };
+
+    window.triggerImportPortalState = function () {
+        const input = document.getElementById('portal-state-import-file');
+        if (input) {
+            input.value = '';
+            input.click();
+        }
+    };
+
+    window.handleImportPortalStateFile = async function (event) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        try {
+            const payload = JSON.parse(await file.text());
+
+            // 1. Restore browser localStorage state on the current origin
+            const baseUrls = new Set(((window.PORTAL_BOOKMARKS && window.PORTAL_BOOKMARKS.bookmarks) || []).map(b => String(b.url || '').trim()));
+            const baseIds = new Set(((window.PORTAL_BOOKMARKS && window.PORTAL_BOOKMARKS.bookmarks) || []).map(b => String(b.id)));
+            const incomingAll = Array.isArray(payload.all_bookmarks) ? payload.all_bookmarks : (Array.isArray(payload.bookmarks) ? payload.bookmarks : []);
+            const incomingCustom = Array.isArray(payload.custom_bookmarks)
+                ? payload.custom_bookmarks
+                : incomingAll.filter(b => !baseIds.has(String(b.id)) && !baseUrls.has(String(b.url || '').trim()));
+
+            if (incomingCustom.length > 0) saveCustomBookmarks(incomingCustom);
+            if (Array.isArray(payload.deleted_ids || payload.deleted)) saveDeletedBookmarkIds(payload.deleted_ids || payload.deleted);
+            if (Array.isArray(payload.pinned_ids || payload.pinned)) localStorage.setItem(PINNED_STORAGE_KEY, JSON.stringify(payload.pinned_ids || payload.pinned));
+            if (Array.isArray(payload.remembered_ids || payload.remember)) saveRememberedIds(payload.remembered_ids || payload.remember);
+            if (payload.usage_stats || payload.usage) saveUsageStats(payload.usage_stats || payload.usage);
+            if (Array.isArray(payload.tasks)) localStorage.setItem(TASKS_KEY, JSON.stringify(payload.tasks));
+            if (Array.isArray(payload.scratches)) localStorage.setItem(SCRATCHES_DB_KEY, JSON.stringify(payload.scratches));
+            if (typeof payload.active_scratch === 'string' && payload.active_scratch) localStorage.setItem(SCRATCHPAD_KEY, payload.active_scratch);
+
+            // 2. If running via local portal_server.py, also persist permanently into content.db
+            let dbNote = 'browser localStorage restored';
+            try {
+                const health = await fetch('/api/health', { cache: 'no-store' });
+                if (health.ok) {
+                    const resp = await fetch('/api/portal-state/import', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                    });
+                    const resData = await resp.json();
+                    if (resData.ok && resData.stats) {
+                        dbNote = `saved ${resData.stats.total_bookmarks} bookmarks to content.db`;
+                    }
+                }
+            } catch (e) { /* static mode */ }
+
+            renderAll();
+            showPortalToast(`Imported Portal State (${dbNote})!`);
+        } catch (err) {
+            showPortalToast(`Import failed: ${err.message || err}`, 'error');
+        }
+    };
+
     window.resetPortalData = function () {
         if (confirm('Warning: This will clear your custom passcode, custom added bookmarks, pinned favorites, tasks, scratches database, secret messages, and logout. Reset now?')) {
             localStorage.removeItem(PASSCODE_STORAGE_KEY);
@@ -3207,8 +3308,12 @@
         initScratchpad();
         renderScratchesDb();
         initGeminiSettings();
+        initGithubPublishSettings();
         initHandshakeSettings();
         updateStats();
+        if (typeof window.__initPortalProjectsHub === 'function') {
+            window.__initPortalProjectsHub();
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -4290,6 +4395,1111 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         showPortalToast(`Downloaded ${blobs.length} encrypted blobs (run import_vault_to_db.py to save to content.db)`);
+    };
+
+    // -------------------------------------------------------------------------
+    // 18. MASTER PROJECTS, DRIVE ARTIFACTS & WEBSITE PLACEMENTS HUB
+    // -------------------------------------------------------------------------
+    const PROJECT_PATCH_OPS_KEY = 'portal_project_patch_ops_v1';
+    const DELETED_PROJ_SLUGS_KEY = 'portal_deleted_project_slugs_v1';
+    const GITHUB_PAT_KEY = 'portal_github_pat_v1';
+    const GITHUB_REPO_KEY = 'portal_github_repo_v1';
+    const GITHUB_BRANCH_KEY = 'portal_github_branch_v1';
+    const PROJECTS_PAGE_SIZE = 20;
+
+    const portalProjectsState = {
+        liveMode: false,
+        backendChecked: false,
+        unlocked: false,
+        projects: [],
+        placementSlots: [],
+        driveRoots: [],
+        driveRuns: [],
+        statusFilter: 'all',
+        slotFilter: '',
+        kindFilter: '',
+        search: '',
+        page: 1,
+        editingProjectId: null,
+        pendingDraftArtifacts: [],
+    };
+
+    function getStagedPatchOps() {
+        try {
+            return JSON.parse(localStorage.getItem(PROJECT_PATCH_OPS_KEY) || '[]');
+        } catch (e) {
+            return [];
+        }
+    }
+
+    function pushStagedPatchOp(op, payload) {
+        const ops = getStagedPatchOps();
+        ops.push({ op, payload, ts: new Date().toISOString() });
+        localStorage.setItem(PROJECT_PATCH_OPS_KEY, JSON.stringify(ops));
+        updatePatchBadge();
+    }
+
+    function updatePatchBadge() {
+        const ops = getStagedPatchOps();
+        const badge = document.getElementById('projects-patch-count');
+        const pendingBadge = document.getElementById('projects-pending-badge');
+        if (badge) {
+            if (ops.length > 0 && !portalProjectsState.liveMode) {
+                badge.textContent = String(ops.length);
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+        if (pendingBadge) {
+            const customBmCnt = getCustomBookmarks().length;
+            const totalPending = ops.length + customBmCnt;
+            if (totalPending > 0 && !portalProjectsState.liveMode) {
+                pendingBadge.textContent = String(totalPending);
+                pendingBadge.classList.remove('hidden');
+            } else {
+                pendingBadge.classList.add('hidden');
+            }
+        }
+    }
+
+    function applyLocalPatchOpsToMemory(projects) {
+        const ops = getStagedPatchOps();
+        if (!ops.length) return projects;
+        const list = projects.map(p => ({ ...p, artifacts: [...(p.artifacts || [])], placements: [...(p.placements || [])], tags: [...(p.tags || [])] }));
+        for (const item of ops) {
+            const pl = item.payload || {};
+            if (item.op === 'save_project') {
+                const idx = list.findIndex(x => (pl.id && x.id === pl.id) || (pl.slug && x.slug === pl.slug));
+                if (idx >= 0) {
+                    list[idx] = { ...list[idx], ...pl };
+                } else {
+                    list.unshift({ id: pl.id || -Date.now(), artifacts: [], placements: [], ...pl });
+                }
+            } else if (item.op === 'delete_project') {
+                const idx = list.findIndex(x => (pl.id && x.id === pl.id) || (pl.slug && x.slug === pl.slug));
+                if (idx >= 0) list.splice(idx, 1);
+            } else if (item.op === 'save_artifact') {
+                const proj = list.find(x => (pl.project_id && x.id === pl.project_id) || (pl.project_slug && x.slug === pl.project_slug));
+                if (proj) {
+                    const art = { id: pl.id || -Date.now(), ...pl };
+                    const aIdx = proj.artifacts.findIndex(a => a.id === art.id);
+                    if (aIdx >= 0) proj.artifacts[aIdx] = art;
+                    else proj.artifacts.push(art);
+                }
+            } else if (item.op === 'delete_artifact') {
+                list.forEach(p => {
+                    p.artifacts = p.artifacts.filter(a => a.id !== pl.id);
+                });
+            } else if (item.op === 'set_placements') {
+                const proj = list.find(x => (pl.project_id && x.id === pl.project_id) || (pl.project_slug && x.slug === pl.project_slug));
+                if (proj) {
+                    proj.placements = pl.placements || [];
+                    if (pl.auto_public && proj.placements.some(x => x.is_visible !== false)) {
+                        proj.is_public = true;
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    async function probeLiveProjectsServer() {
+        const host = window.location.hostname;
+        if (host !== '127.0.0.1' && host !== 'localhost') return false;
+        try {
+            const resp = await fetch('/api/health', { cache: 'no-store' });
+            if (!resp.ok) return false;
+            const data = await resp.json();
+            return Boolean(data && data.ok);
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function populatePlacementDropdown() {
+        const sel = document.getElementById('projects-slot-filter');
+        if (!sel) return;
+        const current = sel.value;
+        const slots = portalProjectsState.placementSlots || [];
+        sel.innerHTML = '<option value="">All Website Placement Slots</option>' + slots.map(s => {
+            const val = `${s.page_slug}.${s.section_slot}`;
+            return `<option value="${escapeHtml(val)}">${escapeHtml(s.label)}</option>`;
+        }).join('');
+        if (current) sel.value = current;
+    }
+
+    function updateProjectsModeUI() {
+        const badge = document.getElementById('projects-mode-badge');
+        const watchBtn = document.getElementById('projects-watch-btn');
+        const syncBtn = document.getElementById('projects-sync-btn');
+        const unlockCard = document.getElementById('projects-unlock-card');
+        const hasGhPat = Boolean((localStorage.getItem(GITHUB_PAT_KEY) || '').trim());
+        const repoName = localStorage.getItem(GITHUB_REPO_KEY) || 'iebeid/iebeid.github.io';
+        if (badge) {
+            if (portalProjectsState.liveMode) {
+                badge.textContent = 'SQLite Live Mode (localhost)';
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/40';
+            } else if (hasGhPat) {
+                badge.textContent = `GitHub Direct Publish (${repoName})`;
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/40';
+            } else {
+                badge.textContent = 'Static Mode (Add GitHub PAT in Settings)';
+                badge.className = 'px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/40';
+            }
+        }
+        if (watchBtn) watchBtn.classList.toggle('hidden', !portalProjectsState.liveMode);
+        if (syncBtn) syncBtn.classList.toggle('hidden', !portalProjectsState.liveMode);
+        if (unlockCard) unlockCard.classList.toggle('hidden', portalProjectsState.liveMode || portalProjectsState.unlocked);
+        updatePatchBadge();
+    }
+
+    function hydrateBundleState(bundle) {
+        portalProjectsState.projects = portalProjectsState.liveMode
+            ? (bundle.projects || [])
+            : applyLocalPatchOpsToMemory(bundle.projects || []);
+        portalProjectsState.placementSlots = bundle.placement_slots || (window.__SITE_DATABASE && window.__SITE_DATABASE.site_placement_slots) || [];
+        portalProjectsState.driveRoots = bundle.drive_scan_roots || [];
+        portalProjectsState.driveRuns = bundle.drive_scan_runs || [];
+        portalProjectsState.unlocked = true;
+        populatePlacementDropdown();
+        renderPortalProjectsHub();
+    }
+
+    window.unlockPortalProjectsBundle = async function (event) {
+        if (event) event.preventDefault();
+        const passEl = document.getElementById('projects-unlock-pass');
+        const pass = (passEl && passEl.value.trim()) || portalSessionPasscode || vaultMasterPassword;
+        if (!pass) return;
+        const enc = window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted;
+        if (!enc) {
+            showPortalToast('Encrypted project bundle not found in portal_data.js.', 'error');
+            return;
+        }
+        const plain = await decryptSqliteVaultEntry(enc, pass);
+        if (!plain) {
+            showPortalToast('Invalid passcode for encrypted project catalog.', 'error');
+            return;
+        }
+        portalSessionPasscode = pass;
+        if (passEl) passEl.value = '';
+        hydrateBundleState(JSON.parse(plain));
+        updateProjectsModeUI();
+        showPortalToast(`Unlocked ${portalProjectsState.projects.length} master projects`);
+    };
+
+    window.__initPortalProjectsHub = async function () {
+        if (!portalProjectsState.backendChecked) {
+            portalProjectsState.backendChecked = true;
+            portalProjectsState.liveMode = await probeLiveProjectsServer();
+        }
+        if (portalProjectsState.liveMode) {
+            try {
+                const resp = await fetch('/api/projects', { cache: 'no-store' });
+                const data = await resp.json();
+                if (data && data.ok) {
+                    hydrateBundleState(data);
+                }
+            } catch (e) {
+                portalProjectsState.liveMode = false;
+            }
+        } else {
+            const enc = window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted;
+            const autoPass = portalSessionPasscode || vaultMasterPassword;
+            if (enc && autoPass) {
+                const plain = await decryptSqliteVaultEntry(enc, autoPass);
+                if (plain) {
+                    hydrateBundleState(JSON.parse(plain));
+                }
+            } else if (!enc && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
+                hydrateBundleState({
+                    projects: window.__SITE_DATABASE.projects,
+                    placement_slots: window.__SITE_DATABASE.site_placement_slots || [],
+                });
+            }
+        }
+        updateProjectsModeUI();
+        renderPortalProjectsHub();
+    };
+
+    window.setPortalProjectsStatusFilter = function (statusKey) {
+        portalProjectsState.statusFilter = statusKey;
+        portalProjectsState.page = 1;
+        document.querySelectorAll('#projects-status-pills .proj-pill').forEach(btn => {
+            const active = btn.getAttribute('data-pfilter') === statusKey;
+            btn.className = active
+                ? 'proj-pill active px-3 py-1 rounded-full bg-sky-600 text-white font-semibold'
+                : 'proj-pill px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:bg-slate-700';
+        });
+        renderPortalProjectsHub();
+    };
+
+    window.onPortalProjectsFilterChange = function () {
+        portalProjectsState.search = (document.getElementById('projects-search-input')?.value || '').trim().toLowerCase();
+        portalProjectsState.slotFilter = document.getElementById('projects-slot-filter')?.value || '';
+        portalProjectsState.kindFilter = document.getElementById('projects-kind-filter')?.value || '';
+        portalProjectsState.page = 1;
+        renderPortalProjectsHub();
+    };
+
+    window.goToProjectsPage = function (pageNum) {
+        portalProjectsState.page = Math.max(1, pageNum);
+        renderPortalProjectsHub();
+    };
+
+    function getFilteredPortalProjects() {
+        const q = portalProjectsState.search;
+        const sf = portalProjectsState.statusFilter;
+        const slotF = portalProjectsState.slotFilter;
+        const kindF = portalProjectsState.kindFilter;
+
+        return portalProjectsState.projects.filter(p => {
+            const visiblePlacements = (p.placements || []).filter(pl => pl.is_visible !== false);
+            if (sf === 'placed' && visiblePlacements.length === 0) return false;
+            if (sf === 'discovered' && p.discovery_status !== 'discovered') return false;
+            if (sf === 'public' && !p.is_public) return false;
+            if (sf === 'private' && p.is_public) return false;
+            if (kindF && (p.project_kind || '').toLowerCase() !== kindF.toLowerCase()) return false;
+            if (slotF && !visiblePlacements.some(pl => `${pl.page_slug}.${pl.section_slot}` === slotF)) return false;
+            if (q) {
+                const hay = [
+                    p.title, p.slug, p.tagline, p.short_summary, p.category, p.project_kind,
+                    ...(p.tags || []),
+                    ...(p.artifacts || []).map(a => `${a.label} ${a.gdrive_path || ''} ${a.url || ''}`),
+                ].join(' ').toLowerCase();
+                if (!hay.includes(q)) return false;
+            }
+            return true;
+        });
+    }
+
+    function renderPortalProjectsHub() {
+        const listEl = document.getElementById('projects-list-container');
+        const pagEl = document.getElementById('projects-pagination-bar');
+        if (!listEl) return;
+
+        const all = portalProjectsState.projects || [];
+        const publicCnt = all.filter(p => p.is_public).length;
+        const discCnt = all.filter(p => p.discovery_status === 'discovered').length;
+        const gdriveCnt = all.reduce((acc, p) => acc + (p.artifacts || []).filter(a => a.storage_source === 'gdrive').length, 0);
+        const placeCnt = all.reduce((acc, p) => acc + (p.placements || []).filter(pl => pl.is_visible !== false).length, 0);
+
+        const setTxt = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = String(v); };
+        setTxt('proj-stat-total', all.length);
+        setTxt('proj-stat-public', publicCnt);
+        setTxt('proj-stat-discovered', discCnt);
+        setTxt('proj-stat-gdrive', gdriveCnt);
+        setTxt('proj-stat-placements', placeCnt);
+
+        if (!portalProjectsState.unlocked && !portalProjectsState.liveMode) {
+            listEl.innerHTML = '';
+            if (pagEl) pagEl.innerHTML = '';
+            return;
+        }
+
+        const filtered = getFilteredPortalProjects();
+        setTxt('projects-result-count', `Showing ${filtered.length} of ${all.length}`);
+
+        const totalPages = Math.max(1, Math.ceil(filtered.length / PROJECTS_PAGE_SIZE));
+        if (portalProjectsState.page > totalPages) portalProjectsState.page = totalPages;
+        const start = (portalProjectsState.page - 1) * PROJECTS_PAGE_SIZE;
+        const slice = filtered.slice(start, start + PROJECTS_PAGE_SIZE);
+
+        if (slice.length === 0) {
+            listEl.innerHTML = '<div class="bg-slate-900 border border-slate-800 rounded-2xl p-8 text-center text-xs text-slate-400">No projects match the current filter.</div>';
+            if (pagEl) pagEl.innerHTML = '';
+            return;
+        }
+
+        listEl.innerHTML = slice.map(p => {
+            const visSlots = (p.placements || []).filter(pl => pl.is_visible !== false);
+            const slotPills = visSlots.length
+                ? visSlots.map(pl => `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-sky-500/15 text-sky-300 border border-sky-500/30">${escapeHtml(pl.page_slug)}.${escapeHtml(pl.section_slot)}</span>`).join('')
+                : '<span class="text-[11px] text-slate-500 italic">Not placed on website yet</span>';
+
+            const pubBadge = p.is_public
+                ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">PUBLIC</span>'
+                : '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700">PRIVATE</span>';
+
+            const statusBadge = p.discovery_status === 'discovered'
+                ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30">discovered</span>'
+                : `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-slate-800 text-slate-300">${escapeHtml(p.discovery_status || 'canonical')}</span>`;
+
+            const driveLink = p.gdrive_primary_url || ((p.artifacts || []).find(a => a.storage_source === 'gdrive') || {}).url || '';
+            const safeId = JSON.stringify(p.id);
+
+            return `
+                <article class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 shadow transition">
+                    <div class="flex flex-col md:flex-row md:items-start justify-between gap-3">
+                        <div class="space-y-1.5 min-w-0 flex-1">
+                            <div class="flex flex-wrap items-center gap-2">
+                                ${pubBadge}
+                                ${statusBadge}
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/30">${escapeHtml(p.project_kind || 'research')}</span>
+                                <span class="text-[11px] font-mono text-slate-500">${escapeHtml(p.slug)}</span>
+                            </div>
+                            <h3 class="text-base font-bold text-white truncate">${escapeHtml(p.title)}</h3>
+                            <p class="text-xs text-slate-400 line-clamp-2">${escapeHtml(p.short_summary || p.tagline || '')}</p>
+                            <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 mr-1">Website Cards:</span>
+                                ${slotPills}
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap md:flex-col items-end gap-2 flex-shrink-0">
+                            <div class="flex items-center gap-1.5">
+                                ${driveLink ? `<a href="${escapeHtml(driveLink)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 text-xs font-semibold flex items-center gap-1"><i class="fab fa-google-drive"></i> Drive (${(p.artifacts || []).length})</a>` : `<span class="px-2.5 py-1.5 rounded-lg bg-slate-950 text-slate-500 text-xs">${(p.artifacts || []).length} artifacts</span>`}
+                                <button type="button" onclick='openProjectEditorModal(${safeId})' class="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1"><i class="fas fa-edit"></i> Edit / Place</button>
+                                <button type="button" onclick='deletePortalProject(${safeId})' class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600/80 text-slate-300 hover:text-white text-xs" title="Delete project"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }).join('');
+
+        if (pagEl) {
+            if (totalPages <= 1) {
+                pagEl.innerHTML = '';
+            } else {
+                pagEl.innerHTML = `
+                    <button type="button" onclick="goToProjectsPage(${portalProjectsState.page - 1})" ${portalProjectsState.page <= 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 disabled:opacity-40">Prev</button>
+                    <span class="text-xs font-mono text-slate-400">Page ${portalProjectsState.page} / ${totalPages}</span>
+                    <button type="button" onclick="goToProjectsPage(${portalProjectsState.page + 1})" ${portalProjectsState.page >= totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-300 disabled:opacity-40">Next</button>
+                `;
+            }
+        }
+    }
+
+    function renderEditorPlacementCheckboxes(proj) {
+        const grid = document.getElementById('pe-placements-grid');
+        if (!grid) return;
+        const activeSet = new Set(
+            ((proj && proj.placements) || [])
+                .filter(pl => pl.is_visible !== false)
+                .map(pl => `${pl.page_slug}.${pl.section_slot}`)
+        );
+        const slots = portalProjectsState.placementSlots || [];
+        grid.innerHTML = slots.map(s => {
+            const key = `${s.page_slug}.${s.section_slot}`;
+            const checked = activeSet.has(key) ? 'checked' : '';
+            return `
+                <label class="flex items-start gap-2 p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-sky-500/40 cursor-pointer text-[11px] text-slate-300">
+                    <input type="checkbox" class="pe-placement-cb accent-sky-500 mt-0.5" data-page="${escapeHtml(s.page_slug)}" data-slot="${escapeHtml(s.section_slot)}" ${checked} />
+                    <span><strong class="text-white">${escapeHtml(s.page_slug)}.${escapeHtml(s.section_slot)}</strong><br/><span class="text-slate-400 text-[10px]">${escapeHtml(s.label)}</span></span>
+                </label>
+            `;
+        }).join('');
+    }
+
+    function renderEditorArtifactsList(proj) {
+        const listEl = document.getElementById('pe-artifacts-list');
+        if (!listEl) return;
+        const arts = (proj && proj.artifacts) || [];
+        if (!arts.length) {
+            listEl.innerHTML = '<div class="text-xs text-slate-500 italic">No artifacts linked yet.</div>';
+            return;
+        }
+        listEl.innerHTML = arts.map((a, idx) => {
+            const safeArtId = JSON.stringify(a.id != null ? a.id : idx);
+            const srcBadge = a.storage_source === 'gdrive'
+                ? '<span class="px-1.5 py-0.5 rounded text-[10px] bg-sky-500/15 text-sky-300 font-mono">gdrive</span>'
+                : `<span class="px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-400 font-mono">${escapeHtml(a.storage_source || 'repo')}</span>`;
+            const pubChecked = a.is_public !== false ? 'checked' : '';
+            return `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-xs">
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2">
+                            ${srcBadge}
+                            <span class="font-semibold text-white truncate">${escapeHtml(a.label)}</span>
+                            <span class="text-[10px] font-mono text-slate-500">${escapeHtml(a.type)}</span>
+                        </div>
+                        <a href="${escapeHtml(a.url)}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-sky-400 hover:underline truncate block">${escapeHtml(a.gdrive_path || a.url)}</a>
+                    </div>
+                    <div class="flex items-center gap-2 flex-shrink-0">
+                        <label class="inline-flex items-center gap-1 text-[11px] text-emerald-300 cursor-pointer">
+                            <input type="checkbox" ${pubChecked} onchange='toggleArtifactPublic(${safeArtId}, this.checked)' class="accent-emerald-500" /> Public
+                        </label>
+                        <button type="button" onclick='deleteArtifactFromEditor(${safeArtId})' class="px-2 py-1 rounded bg-slate-800 hover:bg-rose-600/80 text-slate-300 hover:text-white text-[11px]"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    window.openProjectEditorModal = function (projectId) {
+        const proj = projectId != null ? portalProjectsState.projects.find(p => p.id === projectId) : null;
+        portalProjectsState.editingProjectId = proj ? proj.id : null;
+
+        document.getElementById('proj-modal-heading').textContent = proj ? `Edit: ${proj.title}` : 'Create New Project';
+        document.getElementById('pe-id').value = proj ? String(proj.id) : '';
+        document.getElementById('pe-title').value = proj ? proj.title : '';
+        document.getElementById('pe-slug').value = proj ? proj.slug : '';
+        document.getElementById('pe-kind').value = (proj && proj.project_kind) || 'research';
+        document.getElementById('pe-category').value = (proj && proj.category) || 'AI & Life Sciences';
+        document.getElementById('pe-status').value = (proj && proj.status) || 'Active';
+        document.getElementById('pe-discovery').value = (proj && proj.discovery_status) || 'canonical';
+        document.getElementById('pe-year-start').value = (proj && proj.year_start) || '';
+        document.getElementById('pe-year-end').value = (proj && proj.year_end) || '';
+        document.getElementById('pe-order').value = (proj && proj.display_order != null) ? proj.display_order : 50;
+        document.getElementById('pe-public').checked = proj ? Boolean(proj.is_public) : false;
+        document.getElementById('pe-tagline').value = (proj && proj.tagline) || '';
+        document.getElementById('pe-summary').value = (proj && proj.short_summary) || '';
+        document.getElementById('pe-description').value = (proj && proj.full_description) || '';
+        document.getElementById('pe-tech').value = ((proj && proj.tech_stack) || []).join(', ');
+        document.getElementById('pe-tags').value = ((proj && proj.tags) || []).join(', ');
+        document.getElementById('pe-org').value = (proj && (proj.grant_award || proj.institution_or_org)) || '';
+
+        renderEditorPlacementCheckboxes(proj);
+        const artSec = document.getElementById('pe-artifacts-section');
+        if (artSec) artSec.classList.toggle('hidden', !proj);
+        if (proj) renderEditorArtifactsList(proj);
+
+        const modal = document.getElementById('project-editor-modal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+    };
+
+    window.closeProjectEditorModal = function () {
+        const modal = document.getElementById('project-editor-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    };
+
+    window.submitProjectEditorForm = async function (event) {
+        event.preventDefault();
+        const idRaw = document.getElementById('pe-id').value;
+        const placements = [];
+        document.querySelectorAll('#pe-placements-grid .pe-placement-cb:checked').forEach((cb, idx) => {
+            placements.push({
+                page_slug: cb.getAttribute('data-page'),
+                section_slot: cb.getAttribute('data-slot'),
+                display_order: (idx + 1) * 10,
+                is_visible: true,
+            });
+        });
+
+        const payload = {
+            id: idRaw ? Number(idRaw) : null,
+            title: document.getElementById('pe-title').value.trim(),
+            slug: document.getElementById('pe-slug').value.trim(),
+            project_kind: document.getElementById('pe-kind').value,
+            category: document.getElementById('pe-category').value.trim() || 'General Portfolio',
+            status: document.getElementById('pe-status').value.trim(),
+            discovery_status: document.getElementById('pe-discovery').value,
+            year_start: document.getElementById('pe-year-start').value || null,
+            year_end: document.getElementById('pe-year-end').value || null,
+            display_order: Number(document.getElementById('pe-order').value || 50),
+            is_public: document.getElementById('pe-public').checked || placements.length > 0,
+            tagline: document.getElementById('pe-tagline').value.trim(),
+            short_summary: document.getElementById('pe-summary').value.trim(),
+            full_description: document.getElementById('pe-description').value.trim(),
+            tech_stack: document.getElementById('pe-tech').value.split(',').map(s => s.trim()).filter(Boolean),
+            tags: document.getElementById('pe-tags').value.split(',').map(s => s.trim()).filter(Boolean),
+            institution_or_org: document.getElementById('pe-org').value.trim(),
+            placements,
+            auto_public: true,
+        };
+
+        if (portalProjectsState.liveMode) {
+            const resp = await fetch('/api/projects/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await resp.json();
+            if (!data.ok) {
+                showPortalToast(data.error || 'Failed to save project', 'error');
+                return;
+            }
+            hydrateBundleState(data);
+            showPortalToast(`Saved "${payload.title}" to SQLite content.db`);
+        } else {
+            if (!payload.id) payload.id = -Date.now();
+            if (!payload.slug) payload.slug = payload.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            pushStagedPatchOp('save_project', payload);
+            pushStagedPatchOp('set_placements', { project_id: payload.id, project_slug: payload.slug, placements, auto_public: true });
+            portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+            renderPortalProjectsHub();
+            showPortalToast(`Staged "${payload.title}" locally (Export Patch JSON to apply to content.db)`);
+        }
+        closeProjectEditorModal();
+    };
+
+    window.deletePortalProject = async function (projectId) {
+        const proj = portalProjectsState.projects.find(p => p.id === projectId);
+        if (!proj || !confirm(`Delete "${proj.title}" from the master projects database?`)) return;
+        if (portalProjectsState.liveMode) {
+            const resp = await fetch('/api/projects/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: proj.id, slug: proj.slug }),
+            });
+            const data = await resp.json();
+            if (data.ok) hydrateBundleState(data);
+            showPortalToast(`Deleted "${proj.title}" from content.db`);
+        } else {
+            if (proj.slug) {
+                try {
+                    const delSlugs = JSON.parse(localStorage.getItem(DELETED_PROJ_SLUGS_KEY) || '[]');
+                    if (!delSlugs.includes(proj.slug)) delSlugs.push(proj.slug);
+                    localStorage.setItem(DELETED_PROJ_SLUGS_KEY, JSON.stringify(delSlugs));
+                } catch (e) { }
+            }
+            pushStagedPatchOp('delete_project', { id: proj.id, slug: proj.slug });
+            portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+            renderPortalProjectsHub();
+            showPortalToast(`Staged deletion of "${proj.title}"`);
+        }
+    };
+
+    window.addArtifactFromEditor = async function () {
+        const proj = portalProjectsState.projects.find(p => p.id === portalProjectsState.editingProjectId);
+        if (!proj) return;
+        const type = document.getElementById('pa-type').value;
+        const label = document.getElementById('pa-label').value.trim();
+        const url = document.getElementById('pa-url').value.trim();
+        if (!label || !url) {
+            showPortalToast('Provide both an artifact label and Drive/URL/path.', 'warn');
+            return;
+        }
+        const payload = {
+            project_id: proj.id,
+            project_slug: proj.slug,
+            type,
+            label,
+            url,
+            is_public: Boolean(proj.is_public),
+        };
+        if (portalProjectsState.liveMode) {
+            const resp = await fetch('/api/artifacts/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await resp.json();
+            if (data.ok) {
+                hydrateBundleState(data);
+                const updated = portalProjectsState.projects.find(p => p.id === proj.id);
+                renderEditorArtifactsList(updated);
+            }
+        } else {
+            payload.id = -Date.now();
+            pushStagedPatchOp('save_artifact', payload);
+            portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+            const updated = portalProjectsState.projects.find(p => p.id === proj.id);
+            renderEditorArtifactsList(updated);
+        }
+        document.getElementById('pa-label').value = '';
+        document.getElementById('pa-url').value = '';
+        showPortalToast(`Linked artifact "${label}"`);
+    };
+
+    window.toggleArtifactPublic = async function (artifactId, isPublic) {
+        const proj = portalProjectsState.projects.find(p => p.id === portalProjectsState.editingProjectId);
+        if (!proj) return;
+        const art = (proj.artifacts || []).find(a => a.id === artifactId);
+        if (!art) return;
+        const payload = { ...art, project_id: proj.id, project_slug: proj.slug, is_public: isPublic };
+        if (portalProjectsState.liveMode) {
+            const resp = await fetch('/api/artifacts/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+            const data = await resp.json();
+            if (data.ok) hydrateBundleState(data);
+        } else {
+            pushStagedPatchOp('save_artifact', payload);
+            portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+        }
+        showPortalToast(`Artifact "${art.label}" marked ${isPublic ? 'PUBLIC' : 'PRIVATE'}`);
+    };
+
+    window.deleteArtifactFromEditor = async function (artifactId) {
+        const proj = portalProjectsState.projects.find(p => p.id === portalProjectsState.editingProjectId);
+        if (!proj) return;
+        if (portalProjectsState.liveMode) {
+            const resp = await fetch('/api/artifacts/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: artifactId }),
+            });
+            const data = await resp.json();
+            if (data.ok) {
+                hydrateBundleState(data);
+                const updated = portalProjectsState.projects.find(p => p.id === proj.id);
+                renderEditorArtifactsList(updated);
+            }
+        } else {
+            pushStagedPatchOp('delete_artifact', { id: artifactId });
+            portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
+            const updated = portalProjectsState.projects.find(p => p.id === proj.id);
+            renderEditorArtifactsList(updated);
+        }
+        showPortalToast('Removed artifact');
+    };
+
+    window.exportPortalProjectPatch = function () {
+        const ops = getStagedPatchOps();
+        const payload = {
+            _format: 'portal_project_patch_v1',
+            _exported_at: new Date().toISOString(),
+            operations: ops,
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'portal_project_patch.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showPortalToast(`Exported ${ops.length} change(s) -> run apply_portal_patch.py`);
+    };
+
+    window.triggerPortalSiteSync = async function () {
+        if (!portalProjectsState.liveMode) return;
+        const btn = document.getElementById('projects-sync-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...'; }
+        try {
+            const resp = await fetch('/api/sync', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ export_only: true }),
+            });
+            const data = await resp.json();
+            showPortalToast(data.ok ? 'Website bundles synced & verified!' : 'Sync reported errors (check terminal)', data.ok ? 'success' : 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-sync-alt"></i> Sync &amp; Build Site'; }
+        }
+    };
+
+    window.triggerPortalDriveWatch = async function () {
+        if (!portalProjectsState.liveMode) return;
+        const btn = document.getElementById('projects-watch-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scanning Drive...'; }
+        try {
+            const resp = await fetch('/api/discover', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode: 'watch' }),
+            });
+            const data = await resp.json();
+            if (data.ok) hydrateBundleState(data);
+            showPortalToast(data.ok ? 'Drive watch scan complete & synced!' : 'Drive scan failed (check terminal)', data.ok ? 'success' : 'error');
+        } finally {
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fab fa-google-drive"></i> Scan Drive Updates'; }
+        }
+    };
+
+    // -------------------------------------------------------------------------
+    // 19. GITHUB DIRECT PUBLISH (ZERO-SERVER ATOMIC COMMIT + AES-256-GCM)
+    // -------------------------------------------------------------------------
+    function initGithubPublishSettings() {
+        const repoEl = document.getElementById('settings-github-repo');
+        const branchEl = document.getElementById('settings-github-branch');
+        const patEl = document.getElementById('settings-github-pat');
+        const badge = document.getElementById('github-pat-status-badge');
+
+        const savedRepo = localStorage.getItem(GITHUB_REPO_KEY) || 'iebeid/iebeid.github.io';
+        const savedBranch = localStorage.getItem(GITHUB_BRANCH_KEY) || 'main';
+        const savedPat = localStorage.getItem(GITHUB_PAT_KEY) || '';
+
+        if (repoEl) repoEl.value = savedRepo;
+        if (branchEl) branchEl.value = savedBranch;
+        if (patEl) patEl.value = savedPat;
+        if (badge) {
+            if (savedPat) {
+                badge.textContent = 'Token Stored ✓';
+                badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/40';
+            } else {
+                badge.textContent = 'Not Configured';
+                badge.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700';
+            }
+        }
+        updateProjectsModeUI();
+    }
+
+    window.toggleGithubPatVisibility = function () {
+        const input = document.getElementById('settings-github-pat');
+        const icon = document.getElementById('github-pat-eye-icon');
+        if (!input) return;
+        if (input.type === 'password') {
+            input.type = 'text';
+            if (icon) { icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); }
+        } else {
+            input.type = 'password';
+            if (icon) { icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }
+        }
+    };
+
+    window.saveGithubPublishSettings = function () {
+        const repo = (document.getElementById('settings-github-repo')?.value || 'iebeid/iebeid.github.io').trim();
+        const branch = (document.getElementById('settings-github-branch')?.value || 'main').trim();
+        const pat = (document.getElementById('settings-github-pat')?.value || '').trim();
+        const msg = document.getElementById('github-pat-msg');
+
+        localStorage.setItem(GITHUB_REPO_KEY, repo);
+        localStorage.setItem(GITHUB_BRANCH_KEY, branch);
+        if (pat) localStorage.setItem(GITHUB_PAT_KEY, pat);
+        else localStorage.removeItem(GITHUB_PAT_KEY);
+
+        initGithubPublishSettings();
+        if (msg) {
+            msg.className = 'text-xs text-emerald-400 block';
+            msg.textContent = pat ? `GitHub Direct Publish configured for ${repo} (${branch}).` : 'GitHub token cleared.';
+        }
+    };
+
+    window.clearGithubPublishSettings = function () {
+        localStorage.removeItem(GITHUB_PAT_KEY);
+        const patEl = document.getElementById('settings-github-pat');
+        if (patEl) patEl.value = '';
+        initGithubPublishSettings();
+        const msg = document.getElementById('github-pat-msg');
+        if (msg) {
+            msg.className = 'text-xs text-slate-400 block';
+            msg.textContent = 'GitHub token removed from browser storage.';
+        }
+    };
+
+    window.testGithubPublishConnection = async function () {
+        const repo = (document.getElementById('settings-github-repo')?.value || localStorage.getItem(GITHUB_REPO_KEY) || 'iebeid/iebeid.github.io').trim();
+        const pat = (document.getElementById('settings-github-pat')?.value || localStorage.getItem(GITHUB_PAT_KEY) || '').trim();
+        const msg = document.getElementById('github-pat-msg');
+        if (!pat) {
+            if (msg) { msg.className = 'text-xs text-amber-400 block'; msg.textContent = 'Enter a Fine-Grained GitHub PAT first.'; }
+            return;
+        }
+        try {
+            const resp = await fetch(`https://api.github.com/repos/${repo}`, {
+                headers: { Authorization: `Bearer ${pat}`, Accept: 'application/vnd.github+json' },
+            });
+            const data = await resp.json();
+            if (!resp.ok) throw new Error(data.message || `HTTP ${resp.status}`);
+            const canPush = Boolean(data.permissions && data.permissions.push);
+            if (msg) {
+                msg.className = canPush ? 'text-xs text-emerald-400 block' : 'text-xs text-amber-400 block';
+                msg.textContent = canPush
+                    ? `Connected to ${data.full_name} (push permission verified ✓)`
+                    : `Connected to ${data.full_name}, but push permission is missing.`;
+            }
+        } catch (err) {
+            if (msg) { msg.className = 'text-xs text-rose-400 block'; msg.textContent = `Connection failed: ${err.message}`; }
+        }
+    };
+
+    async function encryptSqliteVaultEntry(plaintextStr, passcode) {
+        const enc = new TextEncoder();
+        const salt = window.crypto.getRandomValues(new Uint8Array(16));
+        const iv = window.crypto.getRandomValues(new Uint8Array(12));
+        const keyMaterial = await window.crypto.subtle.importKey(
+            'raw', enc.encode(passcode), { name: 'PBKDF2' }, false, ['deriveKey']
+        );
+        const aesKey = await window.crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+            keyMaterial,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['encrypt']
+        );
+        const encrypted = await window.crypto.subtle.encrypt(
+            { name: 'AES-GCM', iv },
+            aesKey,
+            enc.encode(plaintextStr)
+        );
+        return {
+            ciphertext: uint8ArrayToBase64(new Uint8Array(encrypted)),
+            nonce: uint8ArrayToBase64(iv),
+            salt: uint8ArrayToBase64(salt),
+        };
+    }
+
+    function utf8ToBase64(str) {
+        const bytes = new TextEncoder().encode(str);
+        const chunk = 0x8000;
+        let bin = '';
+        for (let i = 0; i < bytes.length; i += chunk) {
+            bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+        }
+        return btoa(bin);
+    }
+
+    function buildBookmarksPublishPayload(nowIso) {
+        const pinnedSet = new Set(getPinnedIds().map(String));
+        const remSet = new Set(getRememberedIds().map(String));
+        const usage = getUsageStats();
+
+        const bookmarksList = getAllBookmarks().map(b => {
+            const idStr = String(b.id);
+            const cat = b.category || 'Bookmarks';
+            const sub = b.subfolder || '';
+            const clicks = (usage[idStr] && usage[idStr].count) ? Number(usage[idStr].count) : Number(b.clicks || 0);
+            return {
+                id: b.id,
+                name: b.name,
+                type: 'bookmark',
+                url: b.url,
+                domain: b.domain || sub || 'web',
+                category: cat,
+                subfolder: sub,
+                path: b.path || (sub ? `${cat} > ${sub}` : cat),
+                path_parts: sub ? [cat, sub] : [cat],
+                ai_tags: b.ai_tags || '',
+                favicon: b.favicon || '',
+                pinned: pinnedSet.has(idStr),
+                clicks,
+                description: b.description || '',
+                remembered: remSet.has(idStr),
+            };
+        });
+
+        const categories = Array.from(new Set(bookmarksList.map(b => b.category))).sort();
+        const categoryCounts = {};
+        const foldersTree = {};
+        bookmarksList.forEach(b => {
+            categoryCounts[b.category] = (categoryCounts[b.category] || 0) + 1;
+            const sub = b.subfolder || 'General';
+            if (!foldersTree[b.category]) foldersTree[b.category] = {};
+            if (!foldersTree[b.category][sub]) foldersTree[b.category][sub] = [];
+            foldersTree[b.category][sub].push(b);
+        });
+        const topFolders = Object.keys(foldersTree).sort().map(catName => ({
+            name: catName,
+            type: 'folder',
+            children: Object.keys(foldersTree[catName]).sort().map(subName => ({
+                name: subName,
+                type: 'folder',
+                children: foldersTree[catName][subName],
+            })),
+        }));
+
+        return {
+            total_bookmarks: bookmarksList.length,
+            categories,
+            category_counts: categoryCounts,
+            top_folders: topFolders,
+            bookmarks: bookmarksList,
+            _synced_from_sqlite: nowIso,
+        };
+    }
+
+    function buildPublicContentPayload(nowIso) {
+        const base = window.__SITE_DATABASE || {};
+        const publicKeys = [
+            'meta', 'navigation_menu', 'html_templates', 'stylesheets', 'pages',
+            'documents', 'images', 'publications', 'site_placement_slots',
+            'courses', 'contacts', 'xlpm_datasets',
+        ];
+        const out = {
+            _generated_at: nowIso,
+            _source: 'portal.html (Direct GitHub Publish)',
+        };
+        publicKeys.forEach(k => {
+            if (base[k] !== undefined) out[k] = base[k];
+        });
+
+        out.projects = (portalProjectsState.projects || [])
+            .filter(p => p.is_public)
+            .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
+            .map(p => ({
+                id: p.id,
+                slug: p.slug,
+                title: p.title,
+                tagline: p.tagline || '',
+                short_summary: p.short_summary || '',
+                full_description: p.full_description || '',
+                category: p.category || 'General Portfolio',
+                domain_stage: p.domain_stage || 'foundational',
+                status: p.status || '',
+                year_start: p.year_start || null,
+                year_end: p.year_end || null,
+                institution_or_org: p.institution_or_org || '',
+                grant_award: p.grant_award || '',
+                tech_stack: p.tech_stack || [],
+                code_snippet: p.code_snippet || '',
+                license_model: p.license_model || '',
+                price_display: p.price_display || '',
+                storefront_category: p.storefront_category || '',
+                is_featured: Boolean(p.is_featured),
+                is_storefront: Boolean(p.is_storefront),
+                display_order: p.display_order || 0,
+                project_kind: p.project_kind || 'research',
+                keywords: p.keywords || [],
+                artifacts: (p.artifacts || [])
+                    .filter(a => a.is_public !== false)
+                    .map(a => ({
+                        type: a.type,
+                        label: a.label,
+                        url: a.url,
+                        badge: a.badge || '',
+                        document_id: a.document_id ?? null,
+                        storage_source: a.storage_source || 'repo',
+                    })),
+                placements: (p.placements || [])
+                    .filter(pl => pl.is_visible !== false)
+                    .map(pl => ({
+                        page_slug: pl.page_slug,
+                        section_slot: pl.section_slot,
+                        card_variant: pl.card_variant || 'research-cards',
+                        display_order: pl.display_order || 0,
+                        is_visible: true,
+                    })),
+                tags: p.tags || [],
+                publications: p.publications || [],
+            }));
+        return out;
+    }
+
+    async function githubApiRequest(repo, pat, path, method = 'GET', bodyObj = null) {
+        const opts = {
+            method,
+            headers: {
+                Authorization: `Bearer ${pat}`,
+                Accept: 'application/vnd.github+json',
+            },
+        };
+        if (bodyObj !== null) {
+            opts.headers['Content-Type'] = 'application/json';
+            opts.body = JSON.stringify(bodyObj);
+        }
+        const resp = await fetch(`https://api.github.com/repos/${repo}/${path}`, opts);
+        const data = await resp.json().catch(() => ({}));
+        if (!resp.ok) {
+            throw new Error(data.message || `GitHub API ${method} ${path} failed (${resp.status})`);
+        }
+        return data;
+    }
+
+    window.publishPortalToGithub = async function () {
+        const pat = (localStorage.getItem(GITHUB_PAT_KEY) || '').trim();
+        const repo = (localStorage.getItem(GITHUB_REPO_KEY) || 'iebeid/iebeid.github.io').trim();
+        const branch = (localStorage.getItem(GITHUB_BRANCH_KEY) || 'main').trim();
+
+        if (!pat) {
+            showPortalToast('Configure your GitHub Fine-Grained PAT in Settings & Security first.', 'warn');
+            switchTab('tab-settings');
+            return;
+        }
+
+        let passcode = portalSessionPasscode || vaultMasterPassword;
+        if (!passcode) {
+            passcode = prompt('Enter your portal master passcode to re-encrypt the private project catalog:') || '';
+            if (!passcode) return;
+        }
+        if (!portalProjectsState.unlocked && window.__SITE_DATABASE?.portal_projects_encrypted) {
+            const plain = await decryptSqliteVaultEntry(window.__SITE_DATABASE.portal_projects_encrypted, passcode);
+            if (!plain) {
+                showPortalToast('Passcode could not verify encrypted project catalog.', 'error');
+                return;
+            }
+            hydrateBundleState(JSON.parse(plain));
+            portalSessionPasscode = passcode;
+        }
+
+        const btn = document.getElementById('projects-github-publish-btn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...'; }
+
+        try {
+            const nowIso = new Date().toISOString();
+            const deletedSlugs = JSON.parse(localStorage.getItem(DELETED_PROJ_SLUGS_KEY) || '[]');
+
+            // 1. Build public_content.json & public_content.js
+            const publicPayload = buildPublicContentPayload(nowIso);
+            const publicJsonStr = JSON.stringify(publicPayload, null, 2);
+            const publicJsStr = `window.__SITE_DATABASE = ${publicJsonStr};\n`;
+
+            // 2. Build AES-256-GCM encrypted portal_data.js
+            const masterBundle = {
+                _published_from: 'portal_github_api',
+                _generated_at: nowIso,
+                projects: portalProjectsState.projects || [],
+                placement_slots: portalProjectsState.placementSlots || [],
+                drive_scan_roots: portalProjectsState.driveRoots || [],
+                drive_scan_runs: portalProjectsState.driveRuns || [],
+                deleted_project_slugs: deletedSlugs,
+            };
+            const encryptedProjBlob = await encryptSqliteVaultEntry(JSON.stringify(masterBundle), passcode);
+            const baseSite = window.__SITE_DATABASE || {};
+            const portalBundle = {
+                portal_tasks: baseSite.portal_tasks || [],
+                portal_scratches: baseSite.portal_scratches || { active_buffer: '', archive: [] },
+                portal_messages: baseSite.portal_messages || [],
+                portal_vault: baseSite.portal_vault || {},
+                portal_passwords: getEncryptedVaultBlobs ? getEncryptedVaultBlobs() : (baseSite.portal_passwords || []),
+                portal_projects_encrypted: encryptedProjBlob,
+                site_placement_slots: portalProjectsState.placementSlots || baseSite.site_placement_slots || [],
+            };
+            const portalJsStr =
+                `window.__PORTAL_DATABASE = ${JSON.stringify(portalBundle, null, 2)};\n` +
+                `if (window.__SITE_DATABASE) { Object.assign(window.__SITE_DATABASE, window.__PORTAL_DATABASE); }\n`;
+
+            // 3. Build bookmarks.json & bookmarks_data.js
+            const bmPayload = buildBookmarksPublishPayload(nowIso);
+            const bmJsonStr = JSON.stringify(bmPayload, null, 2);
+            const bmJsStr = `window.PORTAL_BOOKMARKS = ${bmJsonStr};\nwindow.PORTAL_BOOKMARKS_DATA = window.PORTAL_BOOKMARKS;\n`;
+
+            const files = [
+                { path: 'data/public_content.json', content: publicJsonStr },
+                { path: 'data/public_content.js', content: publicJsStr },
+                { path: 'js/portal_data.js', content: portalJsStr },
+                { path: 'data/bookmarks.json', content: bmJsonStr },
+                { path: 'js/bookmarks_data.js', content: bmJsStr },
+            ];
+
+            // 4. Atomic multi-file commit via GitHub Git Data API
+            const refData = await githubApiRequest(repo, pat, `git/ref/heads/${branch}`);
+            const latestCommitSha = refData.object.sha;
+            const commitData = await githubApiRequest(repo, pat, `git/commits/${latestCommitSha}`);
+            const baseTreeSha = commitData.tree.sha;
+
+            const blobResults = await Promise.all(
+                files.map(f =>
+                    githubApiRequest(repo, pat, 'git/blobs', 'POST', {
+                        content: utf8ToBase64(f.content),
+                        encoding: 'base64',
+                    }).then(res => ({ path: f.path, mode: '100644', type: 'blob', sha: res.sha }))
+                )
+            );
+
+            const treeData = await githubApiRequest(repo, pat, 'git/trees', 'POST', {
+                base_tree: baseTreeSha,
+                tree: blobResults,
+            });
+            const newCommit = await githubApiRequest(repo, pat, 'git/commits', 'POST', {
+                message: `Portal Direct Publish: ${publicPayload.projects.length} public projects, ${bmPayload.total_bookmarks} bookmarks (${nowIso.slice(0, 19)}Z)`,
+                tree: treeData.sha,
+                parents: [latestCommitSha],
+            });
+            await githubApiRequest(repo, pat, `git/refs/heads/${branch}`, 'PATCH', {
+                sha: newCommit.sha,
+                force: false,
+            });
+
+            // 5. Update local in-memory caches and clear pending diffs
+            window.PORTAL_BOOKMARKS = bmPayload;
+            window.PORTAL_BOOKMARKS_DATA = bmPayload;
+            Object.assign(window.__SITE_DATABASE, publicPayload, portalBundle);
+            localStorage.removeItem(PROJECT_PATCH_OPS_KEY);
+            localStorage.removeItem(DELETED_PROJ_SLUGS_KEY);
+            localStorage.removeItem(CUSTOM_BM_KEY);
+            localStorage.removeItem(DELETED_BM_KEY);
+            updatePatchBadge();
+
+            showPortalToast(`Published to GitHub (${newCommit.sha.slice(0, 7)}) — Pages deploys in ~30s!`);
+        } catch (err) {
+            console.error('[GitHub Publish Error]', err);
+            showPortalToast(`GitHub publish failed: ${err.message}`, 'error');
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fab fa-github"></i> Publish to GitHub <span id="projects-pending-badge" class="hidden px-1.5 py-0.5 rounded bg-slate-950/40 text-[10px] font-mono">0</span>';
+                updatePatchBadge();
+            }
+        }
     };
 
 })();

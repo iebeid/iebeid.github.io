@@ -224,13 +224,30 @@
         return `${rootPrefix}${url.replace(/^\.\//, '')}`;
     }
 
-    function getArtifactIcon(type) {
+    function getArtifactIcon(type, artUrl, storageSource) {
+        if (storageSource === 'gdrive' || /drive\.google\.com|docs\.google\.com/i.test(artUrl || '')) {
+            if (type === 'gdrive_folder' || type === 'folder') return 'fab fa-google-drive';
+        }
         const map = {
             live_demo: 'fas fa-cube',
             github_repo: 'fab fa-github',
+            code_repo: 'fas fa-code',
             source_zip: 'fas fa-file-archive',
             dataset: 'fas fa-database',
             paper_pdf: 'fas fa-file-pdf',
+            manuscript: 'fas fa-file-alt',
+            poem_draft: 'fas fa-feather-alt',
+            essay: 'fas fa-pen-nib',
+            note: 'fas fa-sticky-note',
+            doc: 'fas fa-file-word',
+            spreadsheet: 'fas fa-table',
+            presentation: 'fas fa-chalkboard',
+            lecture: 'fas fa-chalkboard-teacher',
+            syllabus: 'fas fa-book',
+            book: 'fas fa-book-open',
+            audio: 'fas fa-headphones',
+            gdrive_folder: 'fab fa-google-drive',
+            folder: 'fas fa-folder-open',
             publisher_url: 'fas fa-external-link-alt',
             slides: 'fas fa-chalkboard',
             poster: 'fas fa-image',
@@ -239,7 +256,7 @@
             lab_portal: 'fas fa-flask',
             pip_command: 'fas fa-terminal'
         };
-        return map[type] || 'fas fa-link';
+        return map[type] || (storageSource === 'gdrive' ? 'fab fa-google-drive' : 'fas fa-link');
     }
 
     function formatArtifactLinksHTML(proj, rootPrefix, maxLinks) {
@@ -260,11 +277,14 @@
                 return;
             }
             const href = resolveArtifactHref(art.url, rootPrefix);
-            const isExt = /^https?:\/\//i.test(art.url) || art.type === 'paper_pdf' || art.type === 'slides' || art.type === 'poster';
+            const isExt = /^https?:\/\//i.test(art.url) || art.type === 'paper_pdf' || art.type === 'slides' || art.type === 'poster' || art.storage_source === 'gdrive';
             const cls = art.type === 'live_demo'
                 ? 'inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition'
                 : 'inline-flex items-center gap-1 text-xs font-semibold text-sky-700 hover:underline';
-            links.push(`<a href="${escapeProjectHtml(href)}" ${isExt ? 'target="_blank" rel="noopener noreferrer"' : ''} class="${cls}"><i class="${getArtifactIcon(art.type)}"></i> ${escapeProjectHtml(art.label)}</a>`);
+            const iconCls = getArtifactIcon(art.type, art.url, art.storage_source);
+            const isDrive = art.storage_source === 'gdrive' || /drive\.google\.com|docs\.google\.com/i.test(art.url || '');
+            const driveSuffix = (isDrive && !iconCls.includes('google-drive')) ? ' <i class="fab fa-google-drive text-[10px] opacity-70" title="Hosted on Google Drive"></i>' : '';
+            links.push(`<a href="${escapeProjectHtml(href)}" ${isExt ? 'target="_blank" rel="noopener noreferrer"' : ''} class="${cls}"><i class="${iconCls}"></i> ${escapeProjectHtml(art.label)}${driveSuffix}</a>`);
         });
         const sliced = maxLinks ? links.slice(0, maxLinks) : links;
         return sliced.join('<span class="text-gray-300">&bull;</span>');
@@ -305,8 +325,9 @@
     function renderResearchCards(projects, rootPrefix, borderColorClass) {
         const bCls = borderColorClass || 'border-sky-600';
         return projects.map(p => {
-            const techPills = (p.tech_stack || []).slice(0, 4).map(t => `<span class="text-[10px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">${escapeProjectHtml(t)}</span>`).join('');
-            const yearRange = p.year_start ? (p.year_end && p.year_end !== p.year_start ? `${p.year_start}–${p.year_end}` : `${p.year_start}`) : p.status;
+            const pillList = (p.tech_stack && p.tech_stack.length > 0) ? p.tech_stack : (p.tags || []);
+            const techPills = pillList.slice(0, 4).map(t => `<span class="text-[10px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">${escapeProjectHtml(t)}</span>`).join('');
+            const yearRange = p.year_start ? (p.year_end && p.year_end !== p.year_start ? `${p.year_start}–${p.year_end}` : `${p.year_start}`) : (p.status || p.project_kind || 'Project');
             const badgeCls = (p.grant_award && p.grant_award.includes('NSF')) ? 'tag tag-emerald' : 'tag';
             const shots = (p.artifacts || []).filter(a => a.type === 'screenshot' || a.type === 'thumbnail').slice(0, 3);
             const shotsHTML = shots.length > 0
@@ -361,7 +382,7 @@
     }
 
     function renderStorefrontCatalog(projects, rootPrefix) {
-        const sfList = projects.filter(p => p.is_storefront);
+        const sfList = projects.filter(p => p.is_storefront || (p.placements || []).some(pl => pl.page_slug === 'storefront' && pl.section_slot === 'catalog' && pl.is_visible !== false));
         const catCounts = { ALL_SYSTEMS: sfList.length, DATA_CURATION: 0, MODELING_ENGINES: 0, VISUALIZATION_REPORTING: 0 };
         sfList.forEach(p => {
             const cats = (p.storefront_category || '').split(/\s+/).filter(Boolean);
@@ -437,26 +458,47 @@
 
     function renderProjectContainers(db, rootPrefix) {
         const projects = (db && Array.isArray(db.projects)) ? db.projects : [];
-        if (projects.length === 0) return;
 
         document.querySelectorAll('[data-db-projects]').forEach(container => {
             const mode = (container.getAttribute('data-db-projects') || 'all').trim();
             const view = (container.getAttribute('data-view') || 'research-cards').trim();
+            const placePage = (container.getAttribute('data-placement-page') || '').trim().toLowerCase();
+            const placeSlot = (container.getAttribute('data-placement-slot') || '').trim().toLowerCase();
             const filterCat = (container.getAttribute('data-filter-category') || '').trim();
             const filterSlugs = (container.getAttribute('data-filter-slugs') || '').trim();
             const borderCls = container.getAttribute('data-border-class') || 'border-sky-600';
             const limit = parseInt(container.getAttribute('data-limit') || '0', 10);
 
             let list = [...projects];
-            if (mode === 'featured') {
-                list = list.filter(p => p.is_featured);
-            } else if (mode === 'storefront') {
-                list = list.filter(p => p.is_storefront);
+            const hasExplicitPlacements = list.some(p => Array.isArray(p.placements));
+
+            if (placePage && placeSlot && (mode === 'placed' || hasExplicitPlacements)) {
+                list = list
+                    .map(p => {
+                        const match = (p.placements || []).find(
+                            pl => (pl.page_slug || '').toLowerCase() === placePage
+                                && (pl.section_slot || '').toLowerCase() === placeSlot
+                                && pl.is_visible !== false
+                        );
+                        return match ? { proj: p, plOrder: match.display_order || 0 } : null;
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) => (a.plOrder - b.plOrder) || ((a.proj.display_order || 0) - (b.proj.display_order || 0)))
+                    .map(x => x.proj);
+            } else {
+                if (mode === 'featured') {
+                    list = list.filter(p => p.is_featured);
+                } else if (mode === 'storefront') {
+                    list = list.filter(p => p.is_storefront);
+                } else if (mode === 'placed') {
+                    list = [];
+                }
+                if (filterCat) {
+                    const allowedCats = filterCat.split('|').map(c => c.trim().toLowerCase());
+                    list = list.filter(p => allowedCats.includes((p.category || '').toLowerCase()));
+                }
             }
-            if (filterCat) {
-                const allowedCats = filterCat.split('|').map(c => c.trim().toLowerCase());
-                list = list.filter(p => allowedCats.includes((p.category || '').toLowerCase()));
-            }
+
             if (filterSlugs) {
                 const slugs = filterSlugs.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
                 list = list.filter(p => slugs.includes(p.slug.toLowerCase()));
@@ -466,12 +508,24 @@
                 list = list.slice(0, limit);
             }
 
+            const wrapperSection = container.closest('[data-projects-section]');
+            if (wrapperSection) {
+                if (list.length === 0) {
+                    wrapperSection.classList.add('hidden');
+                    wrapperSection.style.display = 'none';
+                    container.innerHTML = '';
+                    return;
+                }
+                wrapperSection.classList.remove('hidden');
+                wrapperSection.style.display = '';
+            }
+
             if (view === 'home-compact') {
                 container.innerHTML = renderHomeCompactProjects(list, rootPrefix);
             } else if (view === 'research-code-zips') {
                 container.innerHTML = renderResearchCodeZips(projects, rootPrefix);
             } else if (view === 'storefront-catalog') {
-                container.innerHTML = renderStorefrontCatalog(projects, rootPrefix);
+                container.innerHTML = renderStorefrontCatalog(list, rootPrefix);
             } else {
                 container.innerHTML = renderResearchCards(list, rootPrefix, borderCls);
             }

@@ -7,8 +7,10 @@ atomic, non-duplicated project records extracted from CV, documents, code, data,
 videos, publications, and portfolio pages.
 """
 
+import argparse
 import json
 import sqlite3
+from datetime import datetime
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -78,7 +80,187 @@ def ensure_schema(cur):
         course_id INTEGER NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
         PRIMARY KEY (project_id, course_id)
     );
+
+    CREATE TABLE IF NOT EXISTS project_placements (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        project_id INTEGER NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+        page_slug TEXT NOT NULL,
+        section_slot TEXT NOT NULL DEFAULT 'projects',
+        card_variant TEXT DEFAULT 'research-cards',
+        display_order INTEGER DEFAULT 0,
+        is_visible INTEGER DEFAULT 1,
+        UNIQUE(project_id, page_slug, section_slot)
+    );
+
+    CREATE TABLE IF NOT EXISTS drive_scan_roots (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        root_name TEXT NOT NULL,
+        gdrive_folder_id TEXT UNIQUE NOT NULL,
+        priority INTEGER DEFAULT 10,
+        default_kind TEXT DEFAULT 'research',
+        default_page_slug TEXT,
+        is_excluded INTEGER DEFAULT 0,
+        last_scanned_at TEXT
+    );
+
+    CREATE TABLE IF NOT EXISTS drive_scan_runs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        started_at TEXT NOT NULL,
+        finished_at TEXT,
+        mode TEXT NOT NULL,
+        root_name TEXT,
+        files_scanned INTEGER DEFAULT 0,
+        projects_discovered INTEGER DEFAULT 0,
+        artifacts_linked INTEGER DEFAULT 0,
+        notes TEXT
+    );
     """)
+    migrate_schema(cur)
+
+
+def _add_column_if_missing(cur, table: str, column: str, col_def: str):
+    existing = {r[1] for r in cur.execute(f"PRAGMA table_info({table})").fetchall()}
+    if column not in existing:
+        cur.execute(f"ALTER TABLE {table} ADD COLUMN {column} {col_def}")
+
+
+def migrate_schema(cur):
+    """Idempotently add Phase 1+ Drive provenance and universal project columns."""
+    project_cols = [
+        ("project_kind", "TEXT DEFAULT 'research'"),
+        ("keywords", "TEXT DEFAULT '[]'"),
+        ("discovery_status", "TEXT DEFAULT 'canonical'"),
+        ("source_origin", "TEXT DEFAULT 'manual'"),
+        ("confidence_score", "REAL DEFAULT 1.0"),
+        ("gdrive_primary_folder_id", "TEXT"),
+        ("gdrive_primary_url", "TEXT"),
+        ("updated_at", "TEXT"),
+    ]
+    for col, col_def in project_cols:
+        _add_column_if_missing(cur, "projects", col, col_def)
+
+    artifact_cols = [
+        ("storage_source", "TEXT DEFAULT 'repo'"),
+        ("gdrive_file_id", "TEXT"),
+        ("gdrive_url", "TEXT"),
+        ("gdrive_path", "TEXT"),
+        ("mime_type", "TEXT"),
+        ("gdrive_modified_at", "TEXT"),
+        ("md5_checksum", "TEXT"),
+        ("sharing_status", "TEXT DEFAULT 'unknown'"),
+        ("is_public", "INTEGER DEFAULT 1"),
+        ("match_reason", "TEXT"),
+    ]
+    for col, col_def in artifact_cols:
+        _add_column_if_missing(cur, "project_artifacts", col, col_def)
+
+
+def infer_storage_source(url_or_rel_path: str) -> str:
+    val = (url_or_rel_path or "").strip().lower()
+    if "drive.google.com" in val or "docs.google.com" in val:
+        return "gdrive"
+    if "github.com" in val:
+        return "github"
+    if val.startswith(("http://", "https://", "pip ", "mailto:")):
+        return "external"
+    return "repo"
+
+
+def infer_project_kind(category: str) -> str:
+    cat = (category or "").lower()
+    if "bioinformatics" in cat or "ai" in cat or "data" in cat or "visualization" in cat:
+        return "research"
+    if "industry" in cat:
+        return "business"
+    if "legacy" in cat:
+        return "software"
+    return "research"
+
+
+def backfill_placements_and_sources(cur):
+    """Populate project_placements and storage_source/project_kind for existing projects idempotently."""
+    now_iso = datetime.now().isoformat()
+
+    # Backfill project_kind and updated_at where unset
+    for pid, cat, kind, upd in cur.execute("SELECT id, category, project_kind, updated_at FROM projects").fetchall():
+        new_kind = kind or infer_project_kind(cat)
+        new_upd = upd or now_iso
+        cur.execute(
+            "UPDATE projects SET project_kind = ?, updated_at = ? WHERE id = ?",
+            (new_kind, new_upd, pid),
+        )
+
+    # Backfill artifact storage_source
+    for aid, url_val, src in cur.execute("SELECT id, url_or_rel_path, storage_source FROM project_artifacts").fetchall():
+        inferred = infer_storage_source(url_val)
+        if not src or (src == "repo" and inferred != "repo"):
+            cur.execute("UPDATE project_artifacts SET storage_source = ? WHERE id = ?", (inferred, aid))
+
+    # Backfill project_placements ONLY for projects that have zero placements yet
+    rows = cur.execute("""
+        SELECT id, category, is_featured, is_storefront, display_order
+        FROM projects
+    """).fetchall()
+    for pid, cat, is_feat, is_sf, order_val in rows:
+        existing_cnt = cur.execute("SELECT COUNT(*) FROM project_placements WHERE project_id = ?", (pid,)).fetchone()[0]
+        if existing_cnt > 0:
+            continue
+
+        if is_feat:
+            cur.execute("""
+                INSERT OR IGNORE INTO project_placements (project_id, page_slug, section_slot, card_variant, display_order, is_visible)
+                VALUES (?, 'home', 'featured', 'home-compact', ?, 1)
+            """, (pid, order_val or 0))
+
+        research_slot = None
+        if cat in ("AI & Life Sciences", "Bioinformatics & 3D Visualization"):
+            research_slot = "ai_life_sciences"
+        elif cat == "Data Engineering & Entity Resolution":
+            research_slot = "data_engineering"
+        elif cat == "Scientific Visualization & HCI":
+            research_slot = "visualization_hci"
+        elif cat in ("Legacy & Foundational Systems", "Industry & Enterprise Systems"):
+            research_slot = "legacy_industry"
+
+        if research_slot:
+            cur.execute("""
+                INSERT OR IGNORE INTO project_placements (project_id, page_slug, section_slot, card_variant, display_order, is_visible)
+                VALUES (?, 'research', ?, 'research-cards', ?, 1)
+            """, (pid, research_slot, order_val or 0))
+
+        if is_sf:
+            cur.execute("""
+                INSERT OR IGNORE INTO project_placements (project_id, page_slug, section_slot, card_variant, display_order, is_visible)
+                VALUES (?, 'storefront', 'catalog', 'storefront-catalog', ?, 1)
+            """, (pid, order_val or 0))
+
+
+DEFAULT_DRIVE_SCAN_ROOTS = [
+    ("Workspace", "1HLKfPmSvqeJJ2Orhrk2wfcYeYCK9WffX", 1, "research", None, 0),
+    ("Workspace/Research", "1y-0TUkm2zETLA2syxbN4pDX3nUr-Q03E", 1, "research", "research", 0),
+    ("Workspace/Scholarship", "1G_CL1eouDpNiP815LylqCDgUw4jdShsk", 2, "scholarship", "scholarship", 0),
+    ("Workspace/Teaching", "1awMq8_R9zesMcHWJWmW9S3wNLF03OFCJ", 3, "teaching", "teaching", 0),
+    ("Workspace/Business", "1slSZalOTvdpe8d85veKm5WFhAdSN4QsY", 3, "business", "business", 0),
+    ("Workspace/Service", "10YoFoB6fTeDsgWbm_5uo_02cfZoXziu9", 4, "service", "service", 0),
+    ("Workspace/Hobbies", "1-YSRz_ncEbCTnToOK4zsEwk-La82y3wv", 5, "hobby", "hobbies", 0),
+    ("Workspace/Education", "1qorTg3M_qXmjQUf8snOWCStPnlhzbC5s", 5, "education", "education", 0),
+    ("Workspace/Career", "1GPFPBCIBPZ1v0UJQRmhnTojiBApOkQWS", 6, "career", None, 0),
+    ("Workspace/Relations", "1bV1TA9g1SjXDO5xGrvUovwqAvo6UjvR5", 7, "relations", "relations", 0),
+    ("Workspace/Financial", "18n36wVidCnxL1h9HmHVsQz2YlQsMs3qW", 99, "private", None, 1),
+    ("Workspace/Health", "1rvJO9lrr4Lb3hEXopuqNzCsBuB0a_kqw", 99, "private", None, 1),
+    ("Workspace/Infrastructure", "1-b6JJs8y7FL3mJwH9vBFIkMZnZBpd4Uz", 99, "private", None, 1),
+    ("Workspace/Legal", "1UYFUEKbWdSl2VLKgY4jh30FdLth9rGgt", 99, "private", None, 1),
+    ("Workspace/Security", "1ka1XtjExtEgpUd_qwwunzKXP7XlE6xZi", 99, "private", None, 1),
+]
+
+
+def seed_drive_scan_roots(cur):
+    for root_name, fid, prio, kind, page_slug, excl in DEFAULT_DRIVE_SCAN_ROOTS:
+        cur.execute("""
+            INSERT OR IGNORE INTO drive_scan_roots (
+                root_name, gdrive_folder_id, priority, default_kind, default_page_slug, is_excluded
+            ) VALUES (?, ?, ?, ?, ?, ?)
+        """, (root_name, fid, prio, kind, page_slug, excl))
 
 
 PROJECTS = [
@@ -765,109 +947,124 @@ PROJECTS = [
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Normalized Project Backbone Schema Builder & Migrator")
+    parser.add_argument("--migrate-only", action="store_true", help="Non-destructively migrate schema, placements, and Drive scan roots")
+    parser.add_argument("--rebuild-seed", action="store_true", help="Wipe and re-seed the canonical seed PROJECTS list")
+    args = parser.parse_args()
+
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
     ensure_schema(cur)
-    doc_map = get_doc_id_map(cur)
+    existing_count = cur.execute("SELECT COUNT(*) FROM projects").fetchone()[0]
+    should_seed = args.rebuild_seed or (existing_count == 0 and not args.migrate_only)
 
-    # Clear existing normalized project tables cleanly so re-runs are idempotent
-    cur.execute("DELETE FROM project_courses")
-    cur.execute("DELETE FROM project_tags")
-    cur.execute("DELETE FROM project_publications")
-    cur.execute("DELETE FROM project_artifacts")
-    cur.execute("DELETE FROM projects")
+    if should_seed:
+        doc_map = get_doc_id_map(cur)
 
-    # Fetch publications index
-    cur.execute("SELECT id, title, doi FROM publications")
-    pubs = cur.fetchall()
+        # Clear existing normalized project tables cleanly so re-runs are idempotent
+        cur.execute("DELETE FROM project_placements")
+        cur.execute("DELETE FROM project_courses")
+        cur.execute("DELETE FROM project_tags")
+        cur.execute("DELETE FROM project_publications")
+        cur.execute("DELETE FROM project_artifacts")
+        cur.execute("DELETE FROM projects")
 
-    for p in PROJECTS:
-        cur.execute("""
-            INSERT INTO projects (
-                slug, title, tagline, short_summary, full_description,
-                category, domain_stage, status, year_start, year_end,
-                institution_or_org, grant_award, tech_stack, code_snippet,
-                license_model, price_display, storefront_category,
-                is_featured, is_storefront, is_public, display_order
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)
-        """, (
-            p["slug"],
-            p["title"],
-            p["tagline"],
-            p["short_summary"],
-            p["full_description"],
-            p["category"],
-            p["domain_stage"],
-            p["status"],
-            p["year_start"],
-            p["year_end"],
-            p["institution_or_org"],
-            p["grant_award"],
-            json.dumps(p["tech_stack"]),
-            p["code_snippet"],
-            p["license_model"],
-            p["price_display"],
-            p["storefront_category"],
-            p["is_featured"],
-            p["is_storefront"],
-            p["display_order"],
-        ))
-        project_id = cur.lastrowid
+        # Fetch publications index
+        cur.execute("SELECT id, title, doi FROM publications")
+        pubs = cur.fetchall()
 
-        # Insert artifacts
-        for order_idx, (a_type, label, url_path, badge, doc_filename) in enumerate(p.get("artifacts", []), 1):
-            doc_id = doc_map.get(doc_filename) if doc_filename else None
+        for p in PROJECTS:
             cur.execute("""
-                INSERT OR IGNORE INTO project_artifacts (
-                    project_id, artifact_type, label, url_or_rel_path, format_badge, document_id, display_order
-                ) VALUES (?, ?, ?, ?, ?, ?, ?)
-            """, (project_id, a_type, label, url_path, badge, doc_id, order_idx))
+                INSERT INTO projects (
+                    slug, title, tagline, short_summary, full_description,
+                    category, domain_stage, status, year_start, year_end,
+                    institution_or_org, grant_award, tech_stack, code_snippet,
+                    license_model, price_display, storefront_category,
+                    is_featured, is_storefront, is_public, display_order,
+                    project_kind, discovery_status, source_origin
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, 'canonical', 'manual')
+            """, (
+                p["slug"],
+                p["title"],
+                p["tagline"],
+                p["short_summary"],
+                p["full_description"],
+                p["category"],
+                p["domain_stage"],
+                p["status"],
+                p["year_start"],
+                p["year_end"],
+                p["institution_or_org"],
+                p["grant_award"],
+                json.dumps(p["tech_stack"]),
+                p["code_snippet"],
+                p["license_model"],
+                p["price_display"],
+                p["storefront_category"],
+                p["is_featured"],
+                p["is_storefront"],
+                p["display_order"],
+                infer_project_kind(p["category"]),
+            ))
+            project_id = cur.lastrowid
 
-        # Insert tags
-        for tag in p.get("tags", []):
-            cur.execute("INSERT OR IGNORE INTO project_tags (project_id, tag) VALUES (?, ?)", (project_id, tag))
+            # Insert artifacts
+            for order_idx, (a_type, label, url_path, badge, doc_filename) in enumerate(p.get("artifacts", []), 1):
+                doc_id = doc_map.get(doc_filename) if doc_filename else None
+                cur.execute("""
+                    INSERT OR IGNORE INTO project_artifacts (
+                        project_id, artifact_type, label, url_or_rel_path, format_badge, document_id, display_order, storage_source, is_public
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1)
+                """, (project_id, a_type, label, url_path, badge, doc_id, order_idx, infer_storage_source(url_path)))
 
-        # Link publications by DOI or title prefix
-        for doi in p.get("pub_dois", []):
-            for pub_id, pub_title, pub_doi in pubs:
-                if pub_doi and doi.lower() in pub_doi.lower():
-                    cur.execute("INSERT OR IGNORE INTO project_publications (project_id, publication_id) VALUES (?, ?)", (project_id, pub_id))
-        for tmatch in p.get("pub_title_matches", []):
-            for pub_id, pub_title, pub_doi in pubs:
-                if pub_title and tmatch.lower() in pub_title.lower():
-                    cur.execute("INSERT OR IGNORE INTO project_publications (project_id, publication_id) VALUES (?, ?)", (project_id, pub_id))
+            # Insert tags
+            for tag in p.get("tags", []):
+                cur.execute("INSERT OR IGNORE INTO project_tags (project_id, tag) VALUES (?, ?)", (project_id, tag))
 
+            # Link publications by DOI or title prefix
+            for doi in p.get("pub_dois", []):
+                for pub_id, pub_title, pub_doi in pubs:
+                    if pub_doi and doi.lower() in pub_doi.lower():
+                        cur.execute("INSERT OR IGNORE INTO project_publications (project_id, publication_id) VALUES (?, ?)", (project_id, pub_id))
+            for tmatch in p.get("pub_title_matches", []):
+                for pub_id, pub_title, pub_doi in pubs:
+                    if pub_title and tmatch.lower() in pub_title.lower():
+                        cur.execute("INSERT OR IGNORE INTO project_publications (project_id, publication_id) VALUES (?, ?)", (project_id, pub_id))
+
+    backfill_placements_and_sources(cur)
+    seed_drive_scan_roots(cur)
     conn.commit()
 
     # Summary audit printout
-    cur.execute("SELECT COUNT(*) FROM projects")
-    n_proj = cur.fetchone()[0]
-    cur.execute("SELECT COUNT(*) FROM project_artifacts")
-    n_art = cur.fetchone()[0]
-    cur.execute("SELECT COUNT(*) FROM project_publications")
-    n_pub = cur.fetchone()[0]
-    cur.execute("SELECT COUNT(*) FROM project_tags")
-    n_tag = cur.fetchone()[0]
+    n_proj = cur.execute("SELECT COUNT(*) FROM projects").fetchone()[0]
+    n_art = cur.execute("SELECT COUNT(*) FROM project_artifacts").fetchone()[0]
+    n_pub = cur.execute("SELECT COUNT(*) FROM project_publications").fetchone()[0]
+    n_tag = cur.execute("SELECT COUNT(*) FROM project_tags").fetchone()[0]
+    n_plc = cur.execute("SELECT COUNT(*) FROM project_placements").fetchone()[0]
+    n_roots = cur.execute("SELECT COUNT(*) FROM drive_scan_roots").fetchone()[0]
 
     print("=" * 72)
-    print(f"PHASE 1 COMPLETE: Normalized Project Backbone Populated in {DB_PATH.name}")
+    print(f"PROJECT BACKBONE READY in {DB_PATH.name} (mode={'rebuild-seed' if should_seed else 'migrate-only'})")
     print("=" * 72)
-    print(f"  projects             : {n_proj} canonical projects")
-    print(f"  project_artifacts    : {n_art} linked codebases / demos / datasets / PDFs / videos")
+    print(f"  projects             : {n_proj} projects")
+    print(f"  project_artifacts    : {n_art} linked artifacts")
+    print(f"  project_placements   : {n_plc} website slot placements")
     print(f"  project_publications : {n_pub} publication links")
     print(f"  project_tags         : {n_tag} normalized tags")
+    print(f"  drive_scan_roots     : {n_roots} configured Drive scan roots")
     print("\nProject Inventory:")
     cur.execute("""
         SELECT p.display_order, p.slug, p.category, p.is_featured, p.is_storefront,
-               (SELECT COUNT(*) FROM project_artifacts a WHERE a.project_id = p.id) AS art_cnt
-        FROM projects p ORDER BY p.display_order
+               (SELECT COUNT(*) FROM project_artifacts a WHERE a.project_id = p.id) AS art_cnt,
+               (SELECT COUNT(*) FROM project_placements pl WHERE pl.project_id = p.id AND pl.is_visible = 1) AS plc_cnt
+        FROM projects p ORDER BY p.display_order, p.id
     """)
-    for order, slug, cat, feat, sf, acnt in cur.fetchall():
+    for order, slug, cat, feat, sf, acnt, pcnt in cur.fetchall():
         flags = []
         if feat: flags.append("FEATURED")
         if sf: flags.append("STOREFRONT")
-        print(f"  {order:2d}. {slug:<30} | {cat:<36} | artifacts={acnt:2d} | {','.join(flags)}")
+        print(f"  {order:2d}. {slug:<30} | {cat:<36} | art={acnt:2d} | slots={pcnt} | {','.join(flags)}")
 
     conn.close()
 
