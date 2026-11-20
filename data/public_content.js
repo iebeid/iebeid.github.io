@@ -1,6 +1,6 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-19T11:09:58.665025",
-  "_source": "data/content.db (SQLite Normalized Project Backbone Engine)",
+  "_generated_at": "2026-11-20T09:41:50.262Z",
+  "_source": "portal.html (Direct GitHub Publish)",
   "meta": {
     "author_name": {
       "value": "Islam Akef Ebeid, Ph.D.",
@@ -3137,6 +3137,365 @@ window.__SITE_DATABASE = {
       "bibtex": null
     }
   ],
+  "site_placement_slots": [
+    {
+      "page_slug": "home",
+      "section_slot": "featured",
+      "label": "Home — Current Research & Flagship Systems"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "ai_life_sciences",
+      "label": "Research — AI & Life Sciences / Bioinformatics"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "data_engineering",
+      "label": "Research — Data Quality, Engineering & NLP"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "visualization_hci",
+      "label": "Research — Scientific Visualization & HCI"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "legacy_industry",
+      "label": "Research — Legacy & Industry Systems"
+    },
+    {
+      "page_slug": "research",
+      "section_slot": "projects",
+      "label": "Research — Additional Cross-Disciplinary Projects"
+    },
+    {
+      "page_slug": "storefront",
+      "section_slot": "catalog",
+      "label": "Storefront — Commercial Software Catalog"
+    },
+    {
+      "page_slug": "education",
+      "section_slot": "projects",
+      "label": "Education — Academic Milestones & Projects"
+    },
+    {
+      "page_slug": "scholarship",
+      "section_slot": "projects",
+      "label": "Scholarship — Writings, Essays, Lectures & Poetry"
+    },
+    {
+      "page_slug": "teaching",
+      "section_slot": "projects",
+      "label": "Teaching — Courseware & Teaching Portfolio"
+    },
+    {
+      "page_slug": "service",
+      "section_slot": "projects",
+      "label": "Service — Leadership & Outreach Initiatives"
+    },
+    {
+      "page_slug": "business",
+      "section_slot": "projects",
+      "label": "Business — Applied Consulting & Commercial"
+    },
+    {
+      "page_slug": "hobbies",
+      "section_slot": "projects",
+      "label": "Hobbies — Creative Works, Travel & Personal"
+    },
+    {
+      "page_slug": "media",
+      "section_slot": "projects",
+      "label": "Media — Talks, Podcasts & Featured Media"
+    },
+    {
+      "page_slug": "relations",
+      "section_slot": "projects",
+      "label": "Relations — Collaborations & Mentorship"
+    },
+    {
+      "page_slug": "downloads",
+      "section_slot": "projects",
+      "label": "Downloads — Shared Project Bundles"
+    },
+    {
+      "page_slug": "lab",
+      "section_slot": "projects",
+      "label": "Lab — Data2AI4LifeSciences Lab Projects"
+    },
+    {
+      "page_slug": "talk-index",
+      "section_slot": "projects",
+      "label": "Talks — Related Presentation Projects"
+    }
+  ],
+  "courses": [
+    {
+      "code": "CSCI 3603 / 5173",
+      "title": "Human-Computer Interaction & Advanced HCI",
+      "institution": "Texas Woman's University",
+      "term": "Fall / Spring",
+      "syllabus_path": "documents/CSCI-3603-2-Syllabus.pdf",
+      "description": "UI/UX engineering, user study paradigms, usability metrics, accessibility, cognitive load frameworks."
+    },
+    {
+      "code": "CSCI 5103",
+      "title": "Advanced Database Systems",
+      "institution": "Texas Woman's University",
+      "term": "Graduate Core",
+      "syllabus_path": "documents/CSCI-5103-Syllabus.pdf",
+      "description": "Relational database internals, query optimization, ACID transactions, distributed databases, NoSQL engines."
+    },
+    {
+      "code": "CSCI 4513 / 5803",
+      "title": "Artificial Intelligence & Intelligent Systems",
+      "institution": "Texas Woman's University",
+      "term": "Advanced CS",
+      "syllabus_path": "documents/CSCI-5803-Syllabus.pdf",
+      "description": "Heuristic search, knowledge representation, reinforcement learning, NLP, computer vision, ethical AI."
+    },
+    {
+      "code": "CSCI 5663",
+      "title": "Deep Learning & Neural Architectures",
+      "institution": "Texas Woman's University",
+      "term": "Graduate Elective",
+      "syllabus_path": "documents/CSCI-5663-Syllabus.pdf",
+      "description": "Backpropagation, CNNs, RNNs/Transformers, Graph Neural Networks (GNNs), biological sequence modeling."
+    },
+    {
+      "code": "CSCI 5001",
+      "title": "Graduate Computer Science Seminar",
+      "institution": "Texas Woman's University",
+      "term": "Master's Core",
+      "syllabus_path": "documents/CSCI-5001-Syllabus-HB2504.pdf",
+      "description": "Research methods, peer review ethics, literature synthesis, conference presentation, proposal writing."
+    },
+    {
+      "code": "CSCI 4623",
+      "title": "Big Data Analytics & Principles of Data Mining",
+      "institution": "Texas Woman's University",
+      "term": "Undergraduate",
+      "syllabus_path": "",
+      "description": "Data warehousing, ETL pipelines, clustering, classification, association rules, scalable cloud analytics."
+    },
+    {
+      "code": "CSCI 2111 / 2113",
+      "title": "Data Structures & Algorithms Laboratory",
+      "institution": "Southern Arkansas University",
+      "term": "Undergraduate Core",
+      "syllabus_path": "documents/CSCI-2111-2113-Syllabus-Ebeid.pdf",
+      "description": "Object-oriented implementation of linked lists, trees, graphs, sorting algorithms, asymptotic analysis."
+    },
+    {
+      "code": "MCIS 5133",
+      "title": "Database Architecture & Information Systems",
+      "institution": "Southern Arkansas University",
+      "term": "Graduate Core",
+      "syllabus_path": "documents/MCIS-5133-Syllabus.pdf",
+      "description": "Relational calculus, database design, normalization, stored procedures, enterprise data governance."
+    },
+    {
+      "code": "MCIS 5013",
+      "title": "Advanced Operating Systems & Kernel Architecture",
+      "institution": "Southern Arkansas University",
+      "term": "Graduate Core",
+      "syllabus_path": "documents/MCIS-5013-Syllabus.pdf",
+      "description": "Concurrency, process synchronization, virtual memory management, file system architectures."
+    },
+    {
+      "code": "PAISE",
+      "title": "Physics, AI, and Simulation Engineering Seminar",
+      "institution": "The University of Texas at Austin",
+      "term": "Alumni / Fellowship",
+      "syllabus_path": "documents/PAISE-2019-Syllabus.pdf",
+      "description": "High-performance computing, scientific ML simulations, AI-accelerated physics calculations."
+    }
+  ],
+  "contacts": [
+    {
+      "name": "Dr. John R. Talburt",
+      "role": "Professor, Department of Information Science",
+      "organization": "University of Arkansas at Little Rock",
+      "email": "jrtalburt@ualr.edu",
+      "phone": "(501) 916-5228",
+      "category": "mentor"
+    },
+    {
+      "name": "Dr. Elizabeth Pierce",
+      "role": "Associate Professor, Department of Information Science",
+      "organization": "University of Arkansas at Little Rock",
+      "email": "expierce@ualr.edu",
+      "phone": "(501) 916-5223",
+      "category": "mentor"
+    },
+    {
+      "name": "Majdi Hassan",
+      "role": "Data Scientist, AbbVie Innovation Center",
+      "organization": "AbbVie Inc.",
+      "email": "majdi.hassan@abbvie.com",
+      "phone": "(847) 937-0316",
+      "category": "mentor"
+    },
+    {
+      "name": "Dr. Pengfei Gu",
+      "role": "Assistant Professor",
+      "organization": "University of Texas at Rio Grande Valley",
+      "email": "",
+      "phone": "(956) 435-1098",
+      "category": "mentor"
+    },
+    {
+      "name": "Dr. Dirk Reiners",
+      "role": "Professor",
+      "organization": "University of Central Florida",
+      "email": "Dirk.Reiners@ucf.edu",
+      "phone": "",
+      "category": "mentor"
+    },
+    {
+      "name": "Nicholas Hagan",
+      "role": "PhD Candidate",
+      "organization": "University of Arkansas at Little Rock",
+      "email": "nkhagan@ualr.edu",
+      "phone": "",
+      "category": "mentor"
+    }
+  ],
+  "xlpm_datasets": [
+    {
+      "dataset_key": "pdb/2DHB.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/2DHB.pdb",
+      "file_size_bytes": 266409
+    },
+    {
+      "dataset_key": "pdb/3PGZ.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/3PGZ.pdb",
+      "file_size_bytes": 380781
+    },
+    {
+      "dataset_key": "pdb/3R4G.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/3R4G.pdb",
+      "file_size_bytes": 326835
+    },
+    {
+      "dataset_key": "pdb/4x3e.pdb",
+      "dataset_type": "pdb",
+      "group_name": "pdb",
+      "rel_path": "data/pdb/4x3e.pdb",
+      "file_size_bytes": 287064
+    },
+    {
+      "dataset_key": "xlpm/group1/bsa.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group1",
+      "rel_path": "data/xlpm/group1/bsa.fasta",
+      "file_size_bytes": 1390
+    },
+    {
+      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group1",
+      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
+      "file_size_bytes": 32351
+    },
+    {
+      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group1",
+      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
+      "file_size_bytes": 31587
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1.fasta",
+      "file_size_bytes": 330
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
+      "file_size_bytes": 55605
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
+      "file_size_bytes": 18348
+    },
+    {
+      "dataset_key": "xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group2",
+      "rel_path": "data/xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
+      "file_size_bytes": 76396
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1_rev.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1_rev.fasta",
+      "file_size_bytes": 324
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
+      "file_size_bytes": 2914
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
+      "file_size_bytes": 13178
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
+      "file_size_bytes": 5054
+    },
+    {
+      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group3",
+      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
+      "file_size_bytes": 24269
+    },
+    {
+      "dataset_key": "xlpm/group4/rim1pif1.fasta",
+      "dataset_type": "xlpm",
+      "group_name": "group4",
+      "rel_path": "data/xlpm/group4/rim1pif1.fasta",
+      "file_size_bytes": 809
+    },
+    {
+      "dataset_key": "xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group4",
+      "rel_path": "data/xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
+      "file_size_bytes": 33869
+    },
+    {
+      "dataset_key": "xlpm/group4/rimpifn14hc1_tandemresult.txt",
+      "dataset_type": "xlpm",
+      "group_name": "group4",
+      "rel_path": "data/xlpm/group4/rimpifn14hc1_tandemresult.txt",
+      "file_size_bytes": 36584
+    }
+  ],
   "projects": [
     {
       "id": 23,
@@ -3307,13 +3666,13 @@ window.__SITE_DATABASE = {
       "title": "XLPM & VisInt-X Proteomics Suite",
       "tagline": "Cross-Linking Mass Spectrometry Curation & Interactive 3D WebGL Protein-Contact Viewer",
       "short_summary": "End-to-end chemical cross-linking mass spectrometry (XL-MS) relational pipeline paired with a synchronized 3-tier D3.js contact heatmap/treemap and 3Dmol.js WebGL structural viewer.",
-      "full_description": "Combines the X-Link Peptide Mapping (XLPM) analysis algorithm (15-table xlpmwebv1 MySQL/Perl pipeline with 5 ppm / 0.8 Da b/y ion matcher and 14N/15N isotope engine) with VisInt-X, an interactive browser application coupling protein-level heatmaps, peptide treemaps, residue contact maps, and 3D WebGL tertiary structures.",
+      "full_description": "Combines the X-Link Peptide Mapping (XLPM) analysis algorithm (15-table xlpmwebv1 MySQL/Perl pipeline with 5 ppm / 0.8 Da b/y ion matcher and 14N/15N isotope engine) with VisInt-X, an interactive browser application coupling protein-level heatmaps, peptide treemaps, residue contact maps, and 3D WebGL tertiary structures.\n\n[Merged from XLPMOL: OpenGL Protein Model Viewer]: Standalone C++/OpenGL desktop molecular structure and cross-linking mass spectrometry (CXMS) contact viewer with real-time residue highlighting.",
       "category": "Bioinformatics & 3D Visualization",
       "domain_stage": "03_visualization_kpi",
       "status": "Commercial / Published",
-      "year_start": 2015,
-      "year_end": 2023,
-      "institution_or_org": "UA Little Rock (EAC) & UAMS",
+      "year_start": "2015",
+      "year_end": "2023",
+      "institution_or_org": "EAC / UAMS Collaborative Research",
       "grant_award": "EAC / UAMS Collaborative Research",
       "tech_stack": [
         "JavaScript",
@@ -3321,7 +3680,10 @@ window.__SITE_DATABASE = {
         "3Dmol.js",
         "WebGL",
         "Perl",
-        "MySQL"
+        "MySQL",
+        "C++",
+        "OpenGL",
+        "PDB / FASTA"
       ],
       "code_snippet": "visintx.mountViewer({\n  pdbId: '1AON', heatmapLevel: 3,\n  sync3DContacts: true\n});",
       "license_model": "Dual-Licensed: AGPLv3 / Proprietary Commercial",
@@ -3331,7 +3693,10 @@ window.__SITE_DATABASE = {
       "is_storefront": true,
       "display_order": 3,
       "project_kind": "research",
-      "keywords": [],
+      "keywords": [
+        "XLPMOL: OpenGL Protein Model Viewer",
+        "xlpmol-viewer"
+      ],
       "artifacts": [
         {
           "type": "live_demo",
@@ -3428,81 +3793,7 @@ window.__SITE_DATABASE = {
           "badge": "PPTX",
           "document_id": 61,
           "storage_source": "repo"
-        }
-      ],
-      "placements": [
-        {
-          "page_slug": "home",
-          "section_slot": "featured",
-          "card_variant": "home-compact",
-          "display_order": 3,
-          "is_visible": true
         },
-        {
-          "page_slug": "research",
-          "section_slot": "ai_life_sciences",
-          "card_variant": "research-cards",
-          "display_order": 3,
-          "is_visible": true
-        },
-        {
-          "page_slug": "storefront",
-          "section_slot": "catalog",
-          "card_variant": "storefront-catalog",
-          "display_order": 3,
-          "is_visible": true
-        }
-      ],
-      "tags": [
-        "3D Visualization",
-        "D3.js",
-        "Interactive Demo",
-        "Proteomics",
-        "WebGL",
-        "XL-MS"
-      ],
-      "publications": [
-        {
-          "id": 12,
-          "title": "XLPM: Cross-Linking Mass Spectrometry 3D Molecular Visualization and Structural Analysis",
-          "authors": "Islam Akef Ebeid, John R. Talburt",
-          "venue": "SPIE / IS&T Electronic Imaging",
-          "year": 2023,
-          "doi": "",
-          "url": "",
-          "pdf_path": "documents/XLPM-SPIE-IST-submission.pdf"
-        }
-      ]
-    },
-    {
-      "id": 26,
-      "slug": "xlpmol-viewer",
-      "title": "XLPMOL: OpenGL Protein Model Viewer",
-      "tagline": "Native Desktop 3D Molecular Interaction & Cross-Link Structure Visualizer",
-      "short_summary": "Standalone C++/OpenGL desktop molecular structure and cross-linking mass spectrometry (CXMS) contact viewer with real-time residue highlighting.",
-      "full_description": "Desktop molecular visualization companion to XLPM engineered in C++ and OpenGL for inspecting cross-linked peptide spectra mapped onto three-dimensional PDB protein geometries.",
-      "category": "Bioinformatics & 3D Visualization",
-      "domain_stage": "03_visualization_kpi",
-      "status": "Published",
-      "year_start": 2016,
-      "year_end": 2022,
-      "institution_or_org": "UA Little Rock (Emerging Analytics Center)",
-      "grant_award": "",
-      "tech_stack": [
-        "C++",
-        "OpenGL",
-        "PDB / FASTA"
-      ],
-      "code_snippet": "",
-      "license_model": "Academic / Open Source",
-      "price_display": "",
-      "storefront_category": "",
-      "is_featured": false,
-      "is_storefront": false,
-      "display_order": 4,
-      "project_kind": "research",
-      "keywords": [],
-      "artifacts": [
         {
           "type": "github_repo",
           "label": "XLPMOL Repository",
@@ -3525,17 +3816,39 @@ window.__SITE_DATABASE = {
           "page_slug": "research",
           "section_slot": "ai_life_sciences",
           "card_variant": "research-cards",
-          "display_order": 4,
+          "display_order": 10,
+          "is_visible": true
+        },
+        {
+          "page_slug": "storefront",
+          "section_slot": "catalog",
+          "card_variant": "research-cards",
+          "display_order": 20,
           "is_visible": true
         }
       ],
       "tags": [
+        "3D Visualization",
+        "D3.js",
+        "Interactive Demo",
+        "Proteomics",
+        "WebGL",
+        "XL-MS",
         "C++",
         "Molecular Visualization",
-        "OpenGL",
-        "Proteomics"
+        "OpenGL"
       ],
       "publications": [
+        {
+          "id": 12,
+          "title": "XLPM: Cross-Linking Mass Spectrometry 3D Molecular Visualization and Structural Analysis",
+          "authors": "Islam Akef Ebeid, John R. Talburt",
+          "venue": "SPIE / IS&T Electronic Imaging",
+          "year": 2023,
+          "doi": "",
+          "url": "",
+          "pdf_path": "documents/XLPM-SPIE-IST-submission.pdf"
+        },
         {
           "id": 13,
           "title": "XLPMol3DViewer: An Interactive WebGL-Based Biomolecular 3D Structure and Contact Map Viewer",
@@ -5211,365 +5524,6 @@ window.__SITE_DATABASE = {
         "Web Architecture"
       ],
       "publications": []
-    }
-  ],
-  "site_placement_slots": [
-    {
-      "page_slug": "home",
-      "section_slot": "featured",
-      "label": "Home — Current Research & Flagship Systems"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "ai_life_sciences",
-      "label": "Research — AI & Life Sciences / Bioinformatics"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "data_engineering",
-      "label": "Research — Data Quality, Engineering & NLP"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "visualization_hci",
-      "label": "Research — Scientific Visualization & HCI"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "legacy_industry",
-      "label": "Research — Legacy & Industry Systems"
-    },
-    {
-      "page_slug": "research",
-      "section_slot": "projects",
-      "label": "Research — Additional Cross-Disciplinary Projects"
-    },
-    {
-      "page_slug": "storefront",
-      "section_slot": "catalog",
-      "label": "Storefront — Commercial Software Catalog"
-    },
-    {
-      "page_slug": "education",
-      "section_slot": "projects",
-      "label": "Education — Academic Milestones & Projects"
-    },
-    {
-      "page_slug": "scholarship",
-      "section_slot": "projects",
-      "label": "Scholarship — Writings, Essays, Lectures & Poetry"
-    },
-    {
-      "page_slug": "teaching",
-      "section_slot": "projects",
-      "label": "Teaching — Courseware & Teaching Portfolio"
-    },
-    {
-      "page_slug": "service",
-      "section_slot": "projects",
-      "label": "Service — Leadership & Outreach Initiatives"
-    },
-    {
-      "page_slug": "business",
-      "section_slot": "projects",
-      "label": "Business — Applied Consulting & Commercial"
-    },
-    {
-      "page_slug": "hobbies",
-      "section_slot": "projects",
-      "label": "Hobbies — Creative Works, Travel & Personal"
-    },
-    {
-      "page_slug": "media",
-      "section_slot": "projects",
-      "label": "Media — Talks, Podcasts & Featured Media"
-    },
-    {
-      "page_slug": "relations",
-      "section_slot": "projects",
-      "label": "Relations — Collaborations & Mentorship"
-    },
-    {
-      "page_slug": "downloads",
-      "section_slot": "projects",
-      "label": "Downloads — Shared Project Bundles"
-    },
-    {
-      "page_slug": "lab",
-      "section_slot": "projects",
-      "label": "Lab — Data2AI4LifeSciences Lab Projects"
-    },
-    {
-      "page_slug": "talk-index",
-      "section_slot": "projects",
-      "label": "Talks — Related Presentation Projects"
-    }
-  ],
-  "courses": [
-    {
-      "code": "CSCI 3603 / 5173",
-      "title": "Human-Computer Interaction & Advanced HCI",
-      "institution": "Texas Woman's University",
-      "term": "Fall / Spring",
-      "syllabus_path": "documents/CSCI-3603-2-Syllabus.pdf",
-      "description": "UI/UX engineering, user study paradigms, usability metrics, accessibility, cognitive load frameworks."
-    },
-    {
-      "code": "CSCI 5103",
-      "title": "Advanced Database Systems",
-      "institution": "Texas Woman's University",
-      "term": "Graduate Core",
-      "syllabus_path": "documents/CSCI-5103-Syllabus.pdf",
-      "description": "Relational database internals, query optimization, ACID transactions, distributed databases, NoSQL engines."
-    },
-    {
-      "code": "CSCI 4513 / 5803",
-      "title": "Artificial Intelligence & Intelligent Systems",
-      "institution": "Texas Woman's University",
-      "term": "Advanced CS",
-      "syllabus_path": "documents/CSCI-5803-Syllabus.pdf",
-      "description": "Heuristic search, knowledge representation, reinforcement learning, NLP, computer vision, ethical AI."
-    },
-    {
-      "code": "CSCI 5663",
-      "title": "Deep Learning & Neural Architectures",
-      "institution": "Texas Woman's University",
-      "term": "Graduate Elective",
-      "syllabus_path": "documents/CSCI-5663-Syllabus.pdf",
-      "description": "Backpropagation, CNNs, RNNs/Transformers, Graph Neural Networks (GNNs), biological sequence modeling."
-    },
-    {
-      "code": "CSCI 5001",
-      "title": "Graduate Computer Science Seminar",
-      "institution": "Texas Woman's University",
-      "term": "Master's Core",
-      "syllabus_path": "documents/CSCI-5001-Syllabus-HB2504.pdf",
-      "description": "Research methods, peer review ethics, literature synthesis, conference presentation, proposal writing."
-    },
-    {
-      "code": "CSCI 4623",
-      "title": "Big Data Analytics & Principles of Data Mining",
-      "institution": "Texas Woman's University",
-      "term": "Undergraduate",
-      "syllabus_path": "",
-      "description": "Data warehousing, ETL pipelines, clustering, classification, association rules, scalable cloud analytics."
-    },
-    {
-      "code": "CSCI 2111 / 2113",
-      "title": "Data Structures & Algorithms Laboratory",
-      "institution": "Southern Arkansas University",
-      "term": "Undergraduate Core",
-      "syllabus_path": "documents/CSCI-2111-2113-Syllabus-Ebeid.pdf",
-      "description": "Object-oriented implementation of linked lists, trees, graphs, sorting algorithms, asymptotic analysis."
-    },
-    {
-      "code": "MCIS 5133",
-      "title": "Database Architecture & Information Systems",
-      "institution": "Southern Arkansas University",
-      "term": "Graduate Core",
-      "syllabus_path": "documents/MCIS-5133-Syllabus.pdf",
-      "description": "Relational calculus, database design, normalization, stored procedures, enterprise data governance."
-    },
-    {
-      "code": "MCIS 5013",
-      "title": "Advanced Operating Systems & Kernel Architecture",
-      "institution": "Southern Arkansas University",
-      "term": "Graduate Core",
-      "syllabus_path": "documents/MCIS-5013-Syllabus.pdf",
-      "description": "Concurrency, process synchronization, virtual memory management, file system architectures."
-    },
-    {
-      "code": "PAISE",
-      "title": "Physics, AI, and Simulation Engineering Seminar",
-      "institution": "The University of Texas at Austin",
-      "term": "Alumni / Fellowship",
-      "syllabus_path": "documents/PAISE-2019-Syllabus.pdf",
-      "description": "High-performance computing, scientific ML simulations, AI-accelerated physics calculations."
-    }
-  ],
-  "contacts": [
-    {
-      "name": "Dr. John R. Talburt",
-      "role": "Professor, Department of Information Science",
-      "organization": "University of Arkansas at Little Rock",
-      "email": "jrtalburt@ualr.edu",
-      "phone": "(501) 916-5228",
-      "category": "mentor"
-    },
-    {
-      "name": "Dr. Elizabeth Pierce",
-      "role": "Associate Professor, Department of Information Science",
-      "organization": "University of Arkansas at Little Rock",
-      "email": "expierce@ualr.edu",
-      "phone": "(501) 916-5223",
-      "category": "mentor"
-    },
-    {
-      "name": "Majdi Hassan",
-      "role": "Data Scientist, AbbVie Innovation Center",
-      "organization": "AbbVie Inc.",
-      "email": "majdi.hassan@abbvie.com",
-      "phone": "(847) 937-0316",
-      "category": "mentor"
-    },
-    {
-      "name": "Dr. Pengfei Gu",
-      "role": "Assistant Professor",
-      "organization": "University of Texas at Rio Grande Valley",
-      "email": "",
-      "phone": "(956) 435-1098",
-      "category": "mentor"
-    },
-    {
-      "name": "Dr. Dirk Reiners",
-      "role": "Professor",
-      "organization": "University of Central Florida",
-      "email": "Dirk.Reiners@ucf.edu",
-      "phone": "",
-      "category": "mentor"
-    },
-    {
-      "name": "Nicholas Hagan",
-      "role": "PhD Candidate",
-      "organization": "University of Arkansas at Little Rock",
-      "email": "nkhagan@ualr.edu",
-      "phone": "",
-      "category": "mentor"
-    }
-  ],
-  "xlpm_datasets": [
-    {
-      "dataset_key": "pdb/2DHB.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/2DHB.pdb",
-      "file_size_bytes": 266409
-    },
-    {
-      "dataset_key": "pdb/3PGZ.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/3PGZ.pdb",
-      "file_size_bytes": 380781
-    },
-    {
-      "dataset_key": "pdb/3R4G.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/3R4G.pdb",
-      "file_size_bytes": 326835
-    },
-    {
-      "dataset_key": "pdb/4x3e.pdb",
-      "dataset_type": "pdb",
-      "group_name": "pdb",
-      "rel_path": "data/pdb/4x3e.pdb",
-      "file_size_bytes": 287064
-    },
-    {
-      "dataset_key": "xlpm/group1/bsa.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group1",
-      "rel_path": "data/xlpm/group1/bsa.fasta",
-      "file_size_bytes": 1390
-    },
-    {
-      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group1",
-      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_cscore_n4XvaGdyw9_tandemresult.txt",
-      "file_size_bytes": 32351
-    },
-    {
-      "dataset_key": "xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group1",
-      "rel_path": "data/xlpm/group1/bsaox_high_060314_5ppm08da_prifO6WKq9_tandemresult.txt",
-      "file_size_bytes": 31587
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1.fasta",
-      "file_size_bytes": 330
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1dimer_060914_pseudo_5p08d_zGCKGCFYDT_tandemresult.txt",
-      "file_size_bytes": 55605
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1tetramer_060614_5p08d_nocsc_gSx7TP8Fgl_tandemresult.txt",
-      "file_size_bytes": 18348
-    },
-    {
-      "dataset_key": "xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group2",
-      "rel_path": "data/xlpm/group2/rim1tetramer_060914_pseudo_5p08d_zIycIR7H0F_tandemresult.txt",
-      "file_size_bytes": 76396
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1_rev.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1_rev.fasta",
-      "file_size_bytes": 324
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060614_5p08d_nocsc_oF5xvuUikX_tandemresult.txt",
-      "file_size_bytes": 2914
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1dimer_decoy_060914_pseudo_5p08d_i3gC3bUg3F_tandemresult.txt",
-      "file_size_bytes": 13178
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060614_5p08d_nocsc_DJDsQugCoU_tandemresult.txt",
-      "file_size_bytes": 5054
-    },
-    {
-      "dataset_key": "xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group3",
-      "rel_path": "data/xlpm/group3/rim1tetramer_decoy_060914_pseudo_5p08d_2jSHA2xEvZ_tandemresult.txt",
-      "file_size_bytes": 24269
-    },
-    {
-      "dataset_key": "xlpm/group4/rim1pif1.fasta",
-      "dataset_type": "xlpm",
-      "group_name": "group4",
-      "rel_path": "data/xlpm/group4/rim1pif1.fasta",
-      "file_size_bytes": 809
-    },
-    {
-      "dataset_key": "xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group4",
-      "rel_path": "data/xlpm/group4/rim1pif1_hc01_060614_5p08d_nocsc_8xs0nxpk1v_tandemresult.txt",
-      "file_size_bytes": 33869
-    },
-    {
-      "dataset_key": "xlpm/group4/rimpifn14hc1_tandemresult.txt",
-      "dataset_type": "xlpm",
-      "group_name": "group4",
-      "rel_path": "data/xlpm/group4/rimpifn14hc1_tandemresult.txt",
-      "file_size_bytes": 36584
     }
   ]
 };

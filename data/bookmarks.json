@@ -983,7 +983,7 @@
               "ai_tags": "amazon.eg, amazon, aws, cloud, compute",
               "favicon": "",
               "pinned": false,
-              "clicks": 13,
+              "clicks": 15,
               "description": "Verified web application and executive bookmark for 'Amazon.eg' hosted on amazon.eg. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
               "remembered": false
             }
@@ -3327,7 +3327,7 @@
               "ai_tags": "fidelity.com, fidelity",
               "favicon": "",
               "pinned": false,
-              "clicks": 5,
+              "clicks": 6,
               "description": "Fidelity Investments brokerage and financial services portal. Trade stocks, ETFs, mutual funds, manage 401(k) and IRA retirement plans, financial advisory, market research, and wealth asset management.",
               "remembered": true
             }
@@ -4233,7 +4233,7 @@
               "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, google.com, google, islam, akef, gmail",
               "favicon": "",
               "pinned": true,
-              "clicks": 46,
+              "clicks": 49,
               "description": "Personal and professional email communications inbox for islam.akef@gmail.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on google.com.",
               "remembered": true
             },
@@ -10001,7 +10001,7 @@
               "ai_tags": "watchit.com, watchit, watch",
               "favicon": "",
               "pinned": false,
-              "clicks": 68,
+              "clicks": 73,
               "description": "Verified web application and executive bookmark for 'WATCH IT' hosted on watchit.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
               "remembered": false
             }
@@ -10365,7 +10365,7 @@
               "ai_tags": "youtube.com, youtube, video, streaming, talks, media",
               "favicon": "",
               "pinned": false,
-              "clicks": 63,
+              "clicks": 65,
               "description": "YouTube digital video streaming and presentations channel for YouTube. Watch recorded technical seminars, academic conference talks, and educational tutorials.",
               "remembered": false
             }
@@ -10540,7 +10540,7 @@
               ],
               "ai_tags": "google.com, google, developer",
               "favicon": "",
-              "pinned": true,
+              "pinned": false,
               "clicks": 1,
               "description": "Verified web application and executive bookmark for 'Google Developers Program' hosted on developers.google.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
               "remembered": false
@@ -11427,7 +11427,7 @@
       "ai_tags": "amazon.eg, amazon, aws, cloud, compute",
       "favicon": "",
       "pinned": false,
-      "clicks": 13,
+      "clicks": 15,
       "description": "Verified web application and executive bookmark for 'Amazon.eg' hosted on amazon.eg. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
       "remembered": false
     },
@@ -13267,7 +13267,7 @@
       "ai_tags": "fidelity.com, fidelity",
       "favicon": "",
       "pinned": false,
-      "clicks": 5,
+      "clicks": 6,
       "description": "Fidelity Investments brokerage and financial services portal. Trade stocks, ETFs, mutual funds, manage 401(k) and IRA retirement plans, financial advisory, market research, and wealth asset management.",
       "remembered": true
     },
@@ -14107,7 +14107,7 @@
       "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, google.com, google, islam, akef, gmail",
       "favicon": "",
       "pinned": true,
-      "clicks": 46,
+      "clicks": 49,
       "description": "Personal and professional email communications inbox for islam.akef@gmail.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on google.com.",
       "remembered": true
     },
@@ -18747,7 +18747,7 @@
       "ai_tags": "watchit.com, watchit, watch",
       "favicon": "",
       "pinned": false,
-      "clicks": 68,
+      "clicks": 73,
       "description": "Verified web application and executive bookmark for 'WATCH IT' hosted on watchit.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
       "remembered": false
     },
@@ -19027,7 +19027,7 @@
       "ai_tags": "youtube.com, youtube, video, streaming, talks, media",
       "favicon": "",
       "pinned": false,
-      "clicks": 63,
+      "clicks": 65,
       "description": "YouTube digital video streaming and presentations channel for YouTube. Watch recorded technical seminars, academic conference talks, and educational tutorials.",
       "remembered": false
     },
@@ -19166,7 +19166,7 @@
       ],
       "ai_tags": "google.com, google, developer",
       "favicon": "",
-      "pinned": true,
+      "pinned": false,
       "clicks": 1,
       "description": "Verified web application and executive bookmark for 'Google Developers Program' hosted on developers.google.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
       "remembered": false
@@ -19232,5 +19232,5 @@
       "remembered": false
     }
   ],
-  "_synced_from_sqlite": "2026-11-19T11:09:56.473986"
+  "_synced_from_sqlite": "2026-11-20T09:41:50.262Z"
 }
