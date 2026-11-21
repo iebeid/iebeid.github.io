@@ -983,7 +983,7 @@
               "ai_tags": "amazon.eg, amazon, aws, cloud, compute",
               "favicon": "",
               "pinned": false,
-              "clicks": 15,
+              "clicks": 17,
               "description": "Verified web application and executive bookmark for 'Amazon.eg' hosted on amazon.eg. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
               "remembered": false
             }
@@ -3275,7 +3275,7 @@
               "ai_tags": "facebook.com, facebook",
               "favicon": "",
               "pinned": false,
-              "clicks": 2,
+              "clicks": 4,
               "description": "Verified web application and executive bookmark for 'Facebook' hosted on facebook.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
               "remembered": false
             }
@@ -4233,7 +4233,7 @@
               "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, google.com, google, islam, akef, gmail",
               "favicon": "",
               "pinned": true,
-              "clicks": 49,
+              "clicks": 50,
               "description": "Personal and professional email communications inbox for islam.akef@gmail.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on google.com.",
               "remembered": true
             },
@@ -5465,7 +5465,7 @@
               "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, live.com, live, islam, akef, hotmail",
               "favicon": "",
               "pinned": true,
-              "clicks": 28,
+              "clicks": 29,
               "description": "Personal and professional email communications inbox for islam.akef@hotmail.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on live.com.",
               "remembered": false
             }
@@ -7339,7 +7339,7 @@
               "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, proton.me, proton, iaebeid",
               "favicon": "",
               "pinned": false,
-              "clicks": 25,
+              "clicks": 26,
               "description": "Personal and professional email communications inbox for iaebeid@proton.me. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on proton.me.",
               "remembered": false
             }
@@ -7521,7 +7521,7 @@
               "ai_tags": "researchgate.net, researchgate, islam, akef, ebeid",
               "favicon": "",
               "pinned": false,
-              "clicks": 2,
+              "clicks": 3,
               "description": "ResearchGate scientific networking profile for Islam Akef Ebeid. Track research paper citations, full-text preprints, academic collaborations, and impact metrics.",
               "remembered": false
             }
@@ -10001,7 +10001,7 @@
               "ai_tags": "watchit.com, watchit, watch",
               "favicon": "",
               "pinned": false,
-              "clicks": 73,
+              "clicks": 77,
               "description": "Verified web application and executive bookmark for 'WATCH IT' hosted on watchit.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
               "remembered": false
             }
@@ -10313,7 +10313,7 @@
               "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, yahoo.com, yahoo, islam, akef",
               "favicon": "",
               "pinned": false,
-              "clicks": 26,
+              "clicks": 27,
               "description": "Personal and professional email communications inbox for islam.akef@yahoo.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on yahoo.com.",
               "remembered": false
             }
@@ -10365,7 +10365,7 @@
               "ai_tags": "youtube.com, youtube, video, streaming, talks, media",
               "favicon": "",
               "pinned": false,
-              "clicks": 65,
+              "clicks": 67,
               "description": "YouTube digital video streaming and presentations channel for YouTube. Watch recorded technical seminars, academic conference talks, and educational tutorials.",
               "remembered": false
             }
@@ -11427,7 +11427,7 @@
       "ai_tags": "amazon.eg, amazon, aws, cloud, compute",
       "favicon": "",
       "pinned": false,
-      "clicks": 15,
+      "clicks": 17,
       "description": "Verified web application and executive bookmark for 'Amazon.eg' hosted on amazon.eg. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
       "remembered": false
     },
@@ -13227,7 +13227,7 @@
       "ai_tags": "facebook.com, facebook",
       "favicon": "",
       "pinned": false,
-      "clicks": 2,
+      "clicks": 4,
       "description": "Verified web application and executive bookmark for 'Facebook' hosted on facebook.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
       "remembered": false
     },
@@ -14107,7 +14107,7 @@
       "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, google.com, google, islam, akef, gmail",
       "favicon": "",
       "pinned": true,
-      "clicks": 49,
+      "clicks": 50,
       "description": "Personal and professional email communications inbox for islam.akef@gmail.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on google.com.",
       "remembered": true
     },
@@ -15087,7 +15087,7 @@
       "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, live.com, live, islam, akef, hotmail",
       "favicon": "",
       "pinned": true,
-      "clicks": 28,
+      "clicks": 29,
       "description": "Personal and professional email communications inbox for islam.akef@hotmail.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on live.com.",
       "remembered": false
     },
@@ -16607,7 +16607,7 @@
       "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, proton.me, proton, iaebeid",
       "favicon": "",
       "pinned": false,
-      "clicks": 25,
+      "clicks": 26,
       "description": "Personal and professional email communications inbox for iaebeid@proton.me. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on proton.me.",
       "remembered": false
     },
@@ -16747,7 +16747,7 @@
       "ai_tags": "researchgate.net, researchgate, islam, akef, ebeid",
       "favicon": "",
       "pinned": false,
-      "clicks": 2,
+      "clicks": 3,
       "description": "ResearchGate scientific networking profile for Islam Akef Ebeid. Track research paper citations, full-text preprints, academic collaborations, and impact metrics.",
       "remembered": false
     },
@@ -18747,7 +18747,7 @@
       "ai_tags": "watchit.com, watchit, watch",
       "favicon": "",
       "pinned": false,
-      "clicks": 73,
+      "clicks": 77,
       "description": "Verified web application and executive bookmark for 'WATCH IT' hosted on watchit.com. Provides direct navigation, authenticated access, digital documentation, and operational tooling.",
       "remembered": false
     },
@@ -18987,7 +18987,7 @@
       "ai_tags": "email, mail, inbox, webmail, messages, communication, account, email-account, yahoo.com, yahoo, islam, akef",
       "favicon": "",
       "pinned": false,
-      "clicks": 26,
+      "clicks": 27,
       "description": "Personal and professional email communications inbox for islam.akef@yahoo.com. Read, compose, and manage messages, calendar invites, attachments, threads, mail filters, and directory correspondence on yahoo.com.",
       "remembered": false
     },
@@ -19027,7 +19027,7 @@
       "ai_tags": "youtube.com, youtube, video, streaming, talks, media",
       "favicon": "",
       "pinned": false,
-      "clicks": 65,
+      "clicks": 67,
       "description": "YouTube digital video streaming and presentations channel for YouTube. Watch recorded technical seminars, academic conference talks, and educational tutorials.",
       "remembered": false
     },
@@ -19232,5 +19232,5 @@
       "remembered": false
     }
   ],
-  "_synced_from_sqlite": "2026-11-20T09:41:50.262Z"
+  "_synced_from_sqlite": "2026-11-21T08:03:59.228Z"
 }
