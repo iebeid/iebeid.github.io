@@ -7327,12 +7327,43 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         }
     }
 
+    function buildLocalFallbackInterestProfile(corpus) {
+        const db = window.__SITE_DATABASE || {};
+        const projList = (portalProjectsState.unlocked && portalProjectsState.projects.length)
+            ? portalProjectsState.projects
+            : (Array.isArray(db.projects) ? db.projects : []);
+        const cats = new Map();
+        const tagCounts = new Map();
+        projList.forEach(p => {
+            const c = (p.category || p.project_kind || '').trim();
+            if (c) cats.set(c, (cats.get(c) || 0) + 1);
+            (p.tags || []).forEach(t => tagCounts.set(t, (tagCounts.get(t) || 0) + 1));
+            (p.keywords || []).slice(0, 4).forEach(k => tagCounts.set(k, (tagCounts.get(k) || 0) + 1));
+        });
+        const topCats = Array.from(cats.entries()).sort((a, b) => b[1] - a[1]).slice(0, 5).map(x => x[0]);
+        const topKw = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 14).map(x => x[0]);
+        const coreThemes = topCats.length
+            ? topCats.map(c => ({ topic: c, focus: `Latest research, breakthroughs, and industry developments in ${c}` }))
+            : [
+                { topic: 'AI for Life Sciences & Bioinformatics', focus: 'Protein GNNs, structural biology, biomedical foundation models' },
+                { topic: 'Knowledge Graphs & Entity Resolution', focus: 'Biomedical NLP, graph ML, LLMs, data curation' },
+                { topic: 'Scientific Visualization & HCI', focus: 'WebGL, VR, eye-tracking, interactive analytics' },
+                { topic: 'Higher-Ed CS & NSF Research', focus: 'Computer science education, NSF grants, academic computing' },
+            ];
+        return {
+            semantic_summary: `Parsed locally from ${corpus.pagesParsed} website pages and ${corpus.projectsParsed} portfolio projects spanning ${coreThemes.map(t => t.topic).join(', ')}. (Click "Rebuild" once Gemini API quota resets to regenerate the full LLM prose summary.)`,
+            core_themes: coreThemes,
+            keywords: topKw.length ? topKw : ['AI', 'Bioinformatics', 'Protein', 'Graph Neural Networks', 'Knowledge Graphs', 'Entity Resolution', 'LLM', 'Visualization', 'NSF'],
+            fallbackLocal: true,
+        };
+    }
+
     async function ensureSemanticInterestProfile(apiKey, forceRebuild = false) {
         const corpus = collectWebsiteCorpusForProfile();
         if (!forceRebuild) {
             try {
                 const cached = JSON.parse(localStorage.getItem(NEWS_PROFILE_KEY) || 'null');
-                if (cached && cached.corpusHash === corpus.corpusHash && cached.profile?.semantic_summary) {
+                if (cached && cached.corpusHash === corpus.corpusHash && cached.profile?.semantic_summary && !cached.profile.fallbackLocal) {
                     renderSemanticInterestProfileUI(cached);
                     return cached;
                 }
@@ -7340,168 +7371,200 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         }
 
         setNewsStatusBanner(`Stage 1/2: Parsing ${corpus.pagesParsed} website pages & ${corpus.projectsParsed} projects to build Gemini semantic interest profile...`);
-        const prompt = `Analyze ALL of the following parsed personal website content (research, publications, software, teaching, business, scholarship, poetry, hobbies, and projects) for Dr. Islam Akef Ebeid. Create a rich semantic understanding and description of their core professional, scientific, academic, technological, entrepreneurial, and cultural/personal interests so it can be used to curate daily top news updates.
+        const compactCorpus = corpus.corpusText.slice(0, 6800);
+        const prompt = `Analyze this parsed personal website corpus (pages, projects, publications, courses) for Dr. Islam Akef Ebeid and synthesize a rich semantic description of their research, engineering, academic, entrepreneurial, and cultural interests for curating daily top news.
 
 Return ONLY a JSON object:
 {
-  "semantic_summary": "3-4 rich sentences capturing the full breadth of their research domains, technical stack, higher-ed/funding focus, and cultural/personal interests.",
+  "semantic_summary": "3-4 rich sentences capturing the full breadth of their domains, tech stack, higher-ed/funding focus, and personal interests.",
   "core_themes": [
-    {"topic": "Short Theme Name (3-5 words)", "focus": "Specific angles/subtopics to watch in today's news"}
+    {"topic": "Short Theme Name (3-5 words)", "focus": "Specific angles to watch in today's news", "search_query": "2-4 crisp search terms"}
   ],
-  "keywords": ["10-15 high-signal domain keywords"]
+  "keywords": ["10-14 high-signal domain keywords"]
 }
 
-Website Content Corpus:
-${corpus.corpusText}`;
+Website Corpus:
+${compactCorpus}`;
 
-        const profile = await callGeminiJson(apiKey, prompt, 'gemini-3.8-flash', msg => {
-            setNewsStatusBanner(`Stage 1/2 (Interest Profile): ${msg}`);
-        });
+        let profileObj = null;
+        try {
+            const raw = await callGeminiJson(apiKey, prompt, 'gemini-3.8-flash', msg => {
+                setNewsStatusBanner(`Stage 1/2 (Interest Profile): ${msg}`);
+            });
+            profileObj = {
+                semantic_summary: raw?.semantic_summary || '',
+                core_themes: Array.isArray(raw?.core_themes) ? raw.core_themes.slice(0, 6) : [],
+                keywords: Array.isArray(raw?.keywords) ? raw.keywords.slice(0, 14) : [],
+                fallbackLocal: false,
+            };
+        } catch (err) {
+            if (/quota|429|rate.?limit|billing/i.test(String(err?.message || ''))) {
+                profileObj = buildLocalFallbackInterestProfile(corpus);
+            } else {
+                throw err;
+            }
+        }
+
         const stored = {
             corpusHash: corpus.corpusHash,
             generatedAt: new Date().toISOString(),
             pagesParsed: corpus.pagesParsed,
             projectsParsed: corpus.projectsParsed,
-            profile: {
-                semantic_summary: profile?.semantic_summary || '',
-                core_themes: Array.isArray(profile?.core_themes) ? profile.core_themes.slice(0, 7) : [],
-                keywords: Array.isArray(profile?.keywords) ? profile.keywords.slice(0, 15) : [],
-            },
+            profile: profileObj,
         };
         try { localStorage.setItem(NEWS_PROFILE_KEY, JSON.stringify(stored)); } catch (e) { }
         renderSemanticInterestProfileUI(stored);
         return stored;
     }
 
-    async function callGeminiGroundedNews(apiKey, promptText, onStatus = null) {
-        const candidates = await discoverGeminiFlashModels(apiKey, 'gemini-3.8-flash');
-        let lastErr = null;
+    async function fetchLiveOpenNewsPool(prof) {
+        const themes = Array.isArray(prof?.core_themes) ? prof.core_themes : [];
+        const q1 = (themes[0]?.search_query || themes[0]?.topic || 'AI bioinformatics protein').split(/[^A-Za-z0-9]+/).filter(w => w.length > 2).slice(0, 3).join(' ');
+        const q2 = (themes[1]?.search_query || themes[1]?.topic || 'LLM knowledge graph').split(/[^A-Za-z0-9]+/).filter(w => w.length > 2).slice(0, 3).join(' ');
 
-        for (let mIdx = 0; mIdx < candidates.length; mIdx++) {
-            const mdl = candidates[mIdx];
-            const hasMore = mIdx + 1 < candidates.length;
-            let useGrounding = true;
-            let useThinking = true;
-
-            for (let attempt = 1; attempt <= (hasMore ? 2 : 3); attempt++) {
-                const ctrl = new AbortController();
-                const timer = setTimeout(() => ctrl.abort(new Error(`Gemini ${mdl} timed out after 30s`)), 30000);
-                try {
-                    const genCfg = { maxOutputTokens: 4096 };
-                    if (useThinking) {
-                        if (/^gemini-[34]/i.test(mdl)) genCfg.thinkingConfig = { thinkingLevel: 'low' };
-                        else if (/^gemini-2\.5/i.test(mdl) && !/lite/i.test(mdl)) genCfg.thinkingConfig = { thinkingBudget: 0 };
-                    }
-                    const body = {
-                        contents: [{ parts: [{ text: promptText }] }],
-                        generationConfig: genCfg,
-                    };
-                    if (useGrounding) {
-                        body.tools = [{ google_search: {} }];
-                    } else {
-                        genCfg.responseMimeType = 'application/json';
-                    }
-
-                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        signal: ctrl.signal,
-                        body: JSON.stringify(body),
-                    });
-                    clearTimeout(timer);
-                    const rawText = await resp.text();
-                    let data = {};
-                    try { data = JSON.parse(rawText); } catch (e) { data = {}; }
-
-                    if (resp.ok) {
-                        const cand = data.candidates?.[0] || {};
-                        const txt = (cand.content?.parts || []).map(pt => pt.text || '').join('\n').trim();
-                        const parsed = parseGeminiJsonPayload(txt);
-                        const stories = Array.isArray(parsed)
-                            ? parsed
-                            : (parsed?.stories || parsed?.news || parsed?.items || Object.values(parsed || {}).find(Array.isArray) || []);
-                        const gm = cand.groundingMetadata || {};
-                        const groundingSources = (gm.groundingChunks || [])
-                            .map(ch => ch?.web ? { title: ch.web.title || '', uri: ch.web.uri || '' } : null)
-                            .filter(x => x && x.uri);
-                        _stickyWorkingFlashModel = mdl;
-                        _deprioritizedGeminiModels.delete(mdl);
-                        return {
-                            model: mdl,
-                            grounded: useGrounding && groundingSources.length > 0,
-                            stories,
-                            groundingSources,
-                            searchQueries: gm.webSearchQueries || [],
-                        };
-                    }
-
-                    const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
-                    lastErr = new Error(msg);
-                    if (resp.status === 401 || resp.status === 403 || /api key not valid|permission denied|has not been used/i.test(msg)) {
-                        throw lastErr;
-                    }
-                    if (resp.status === 400 && useThinking && /thinking/i.test(msg)) {
-                        useThinking = false;
-                        attempt--;
-                        continue;
-                    }
-                    if (resp.status === 400 && useGrounding && /google_search|search|tool/i.test(msg)) {
-                        if (hasMore) break; // try another model that supports google_search first
-                        useGrounding = false;
-                        continue;
-                    }
-                    if (resp.status === 404 || /no longer available|not found|not supported/i.test(msg)) {
-                        _deprioritizedGeminiModels.add(mdl);
-                        break;
-                    }
-                    if ([429, 500, 502, 503, 504].includes(resp.status)) {
-                        _deprioritizedGeminiModels.add(mdl);
-                        if (hasMore) {
-                            if (onStatus) onStatus(`Switching from ${mdl} (${resp.status}) to ${candidates[mIdx + 1]}...`);
-                            break;
-                        }
-                        await sleepMs(1500 * attempt);
-                        continue;
-                    }
-                    throw lastErr;
-                } catch (err) {
-                    clearTimeout(timer);
-                    lastErr = err;
-                    const msg = String(err?.message || err);
-                    if (/api key not valid|permission denied|has not been used/i.test(msg)) throw err;
-                    if (hasMore) {
-                        _deprioritizedGeminiModels.add(mdl);
-                        break;
-                    }
-                    if (attempt < 3) await sleepMs(1000 * attempt);
-                }
+        const safeJson = async (url, timeoutMs = 8000) => {
+            const ctrl = new AbortController();
+            const t = setTimeout(() => ctrl.abort(), timeoutMs);
+            try {
+                const r = await fetch(url, { signal: ctrl.signal });
+                if (!r.ok) return null;
+                return await r.json();
+            } catch (e) {
+                return null;
+            } finally {
+                clearTimeout(t);
             }
+        };
+
+        const stripHtml = s => String(s || '').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+        const fmtDate = iso => {
+            if (!iso) return 'Recent';
+            const d = new Date(iso);
+            return Number.isNaN(d.getTime()) ? String(iso).slice(0, 10) : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        };
+
+        const rssFeeds = [
+            { source: 'Nature', url: 'https://www.nature.com/nature.rss' },
+            { source: 'ScienceDaily AI', url: 'https://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml' },
+            { source: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index' },
+            { source: 'BBC World', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
+        ];
+
+        const [rssResults, hn1, hn2, oa] = await Promise.all([
+            Promise.all(rssFeeds.map(f => safeJson(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`).then(d => ({ source: f.source, data: d })))),
+            safeJson(`https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(q1 || 'AI')}&tags=story&hitsPerPage=8`),
+            safeJson(`https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(q2 || 'machine learning')}&tags=story&hitsPerPage=6`),
+            safeJson(`https://api.openalex.org/works?search=${encodeURIComponent(q1 || 'protein graph neural network')}&sort=publication_date:desc&per-page=5`),
+        ]);
+
+        const items = [];
+        const seenUrls = new Set();
+        const pushItem = (it) => {
+            const url = (it.url || '').trim();
+            const headline = stripHtml(it.headline);
+            if (!url || !headline || seenUrls.has(url)) return;
+            seenUrls.add(url);
+            items.push({
+                id: items.length,
+                headline: headline.slice(0, 180),
+                snippet: stripHtml(it.snippet).slice(0, 220),
+                source_name: it.source_name || 'News',
+                published: fmtDate(it.published),
+                url,
+            });
+        };
+
+        rssResults.forEach(({ source, data }) => {
+            ((data && data.items) || []).slice(0, 7).forEach(entry => {
+                pushItem({
+                    headline: entry.title,
+                    snippet: entry.description || entry.content,
+                    source_name: source,
+                    published: entry.pubDate,
+                    url: entry.link,
+                });
+            });
+        });
+
+        [...(hn1?.hits || []), ...(hn2?.hits || [])].forEach(h => {
+            if (!h.title) return;
+            pushItem({
+                headline: h.title,
+                snippet: `Hacker News discussion (${h.points || 0} pts, ${h.num_comments || 0} comments).`,
+                source_name: 'Hacker News',
+                published: h.created_at,
+                url: h.url || `https://news.ycombinator.com/item?id=${h.objectID}`,
+            });
+        });
+
+        ((oa && oa.results) || []).forEach(w => {
+            const url = w.doi || w.primary_location?.landing_page_url || w.id;
+            pushItem({
+                headline: w.display_name || w.title,
+                snippet: `New paper${w.primary_location?.source?.display_name ? ' in ' + w.primary_location.source.display_name : ''}.`,
+                source_name: w.primary_location?.source?.display_name || 'OpenAlex Research',
+                published: w.publication_date,
+                url,
+            });
+        });
+
+        return items;
+    }
+
+    function rankLiveNewsLocally(pool, prof) {
+        const kwList = [
+            ...(prof?.keywords || []),
+            ...(prof?.core_themes || []).map(t => typeof t === 'string' ? t : `${t.topic || ''} ${t.focus || ''}`),
+        ].join(' ').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 3);
+        const kwSet = new Set(kwList);
+        const themes = Array.isArray(prof?.core_themes) ? prof.core_themes : [];
+
+        const scored = pool.map(it => {
+            const txt = `${it.headline} ${it.snippet} ${it.source_name}`.toLowerCase();
+            let score = 0;
+            const matched = [];
+            kwSet.forEach(w => {
+                if (txt.includes(w)) {
+                    score += 2;
+                    if (matched.length < 3) matched.push(w);
+                }
+            });
+            if (/nature|sciencedaily|openalex/i.test(it.source_name)) score += 1.5;
+            const bestTheme = themes.find(t => {
+                const toks = `${t.topic || ''} ${t.focus || ''}`.toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 3);
+                return toks.some(tk => txt.includes(tk));
+            });
+            return {
+                ...it,
+                _score: score,
+                topic: bestTheme?.topic || it.source_name,
+                summary: it.snippet || `Top update from ${it.source_name}.`,
+                why_relevant: matched.length ? `Matches website interests: ${matched.join(', ')}` : `Curated from ${it.source_name} live feed`,
+            };
+        });
+
+        scored.sort((a, b) => b._score - a._score);
+        // Diversify across sources (max 2 per source in top 7)
+        const picked = [];
+        const srcCounts = {};
+        for (const s of scored) {
+            const c = srcCounts[s.source_name] || 0;
+            if (c >= 2) continue;
+            srcCounts[s.source_name] = c + 1;
+            picked.push(s);
+            if (picked.length >= 7) break;
         }
-        throw lastErr || new Error('Gemini curated news request failed');
+        return picked;
     }
 
     function matchStoryToGroundedSource(story, groundingSources) {
-        if (!Array.isArray(groundingSources) || !groundingSources.length) return story.url || '';
         const directUrl = (story.url || '').trim();
-        if (directUrl && groundingSources.some(g => g.uri === directUrl)) return directUrl;
-        const hay = `${story.headline || ''} ${story.source_name || ''} ${story.summary || ''}`.toLowerCase();
-        const words = hay.split(/[^a-z0-9]+/).filter(w => w.length > 3);
-        let best = null;
-        let bestScore = 0;
-        for (const src of groundingSources) {
-            const st = `${src.title || ''} ${src.uri || ''}`.toLowerCase();
-            let score = 0;
-            if (story.source_name && st.includes(story.source_name.toLowerCase().split(/\s+/)[0])) score += 3;
-            for (const w of words) {
-                if (st.includes(w)) score += 1;
-            }
-            if (score > bestScore) {
-                bestScore = score;
-                best = src;
-            }
-        }
-        if (best && bestScore >= 2) return best.uri;
         if (directUrl && /^https?:\/\//i.test(directUrl)) return directUrl;
+        if (Array.isArray(groundingSources) && groundingSources.length) {
+            const hay = `${story.headline || ''} ${story.source_name || ''}`.toLowerCase();
+            const hit = groundingSources.find(s => s.uri && hay.includes(String(s.title || '').toLowerCase().slice(0, 18)));
+            if (hit) return hit.uri;
+        }
         return `https://news.google.com/search?q=${encodeURIComponent(story.headline || story.topic || '')}`;
     }
 
@@ -7518,7 +7581,7 @@ ${corpus.corpusText}`;
             const dt = bundle?.generatedAt
                 ? new Date(bundle.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
                 : 'Today';
-            badgeEl.textContent = `${dt} • ${bundle?.grounded ? 'Live Google Search' : (bundle?.model || 'Gemini')}`;
+            badgeEl.textContent = `${dt} • ${bundle?.modeLabel || bundle?.model || 'Gemini Semantic'}`;
         }
 
         if (!stories.length) {
@@ -7560,7 +7623,7 @@ ${corpus.corpusText}`;
                 for (const s of sources) {
                     if (!seenUri.has(s.uri)) { seenUri.add(s.uri); dedup.push(s); }
                 }
-                srcBar.innerHTML = `<span class="font-bold uppercase tracking-wider text-slate-500 mr-1">Grounded Sources:</span>` +
+                srcBar.innerHTML = `<span class="font-bold uppercase tracking-wider text-slate-500 mr-1">Live Feeds:</span>` +
                     dedup.slice(0, 8).map(s => `<a href="${escapeHtml(s.uri)}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 truncate max-w-[180px]" title="${escapeHtml(s.title || s.uri)}">${escapeHtml(s.title || s.uri)}</a>`).join('');
             } else {
                 srcBar.classList.add('hidden');
@@ -7576,7 +7639,7 @@ ${corpus.corpusText}`;
             if (listEl) {
                 listEl.innerHTML = `
                     <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-5 text-center space-y-2.5">
-                        <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> to parse your website interests and curate today&apos;s grounded top news.</p>
+                        <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> to parse your website interests and curate today&apos;s top news.</p>
                         <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
                     </div>
                 `;
@@ -7596,48 +7659,91 @@ ${corpus.corpusText}`;
             const todayISO = new Date().toISOString().slice(0, 10);
             const todayHuman = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-            setNewsStatusBanner(`Stage 2/2: Searching today's top news (${todayHuman}) via Gemini grounded search using your semantic interest profile...`);
-            const newsPrompt = `Today is ${todayHuman}. Using Google Search, curate 6 to 7 of TODAY'S (or the most recent 72 hours') top real news stories tailored specifically to the semantic interest profile below.
+            setNewsStatusBanner(`Stage 2/2: Fetching today's live headlines (Nature, ScienceDaily AI, Ars Technica, BBC, HN, OpenAlex)...`);
+            const livePool = await fetchLiveOpenNewsPool(prof);
+            if (!livePool.length) {
+                throw new Error('Could not reach live news feeds right now. Check your internet connection.');
+            }
 
-SEMANTIC INTEREST PROFILE (parsed from the user's personal website):
-Summary: ${prof.semantic_summary || ''}
-Core Themes: ${JSON.stringify(prof.core_themes || [])}
+            let curatedStories = [];
+            let modeLabel = 'Gemini Semantic';
+            let quotaFallbackNote = '';
+
+            setNewsStatusBanner(`Stage 2/2: Prompting Gemini to semantically curate top stories from ${livePool.length} live headlines...`);
+            const compactPool = livePool.slice(0, 34).map(it => ({
+                id: it.id,
+                headline: it.headline,
+                snippet: it.snippet.slice(0, 140),
+                source: it.source_name,
+                date: it.published,
+            }));
+
+            const curatePrompt = `Today is ${todayHuman}. Using the SEMANTIC INTEREST PROFILE below (parsed from Dr. Islam Akef Ebeid's website), select and rank the 6 to 7 MOST RELEVANT stories from LIVE_NEWS_CANDIDATES.
+
+SEMANTIC INTEREST PROFILE:
+${prof.semantic_summary || ''}
+Themes: ${(prof.core_themes || []).map(t => typeof t === 'string' ? t : t.topic).join(' | ')}
 Keywords: ${(prof.keywords || []).join(', ')}
 
-Requirements:
-- Cover a balanced mix across the user's core themes (AI for life sciences/bioinformatics, knowledge graphs/NLP/LLMs, higher-ed/NSF/research computing, visualization/HCI, and broader tech/science/culture).
-- Every item must be a real, current news development found via Google Search — never invent fake stories.
-- Return ONLY a raw JSON array (no prose before or after):
-[
-  {
-    "headline": "Crisp factual headline",
-    "summary": "1-2 concise sentences summarizing what happened today/this week",
-    "why_relevant": "Short 6-12 word tie-in to the user's interest profile",
-    "topic": "Short theme tag",
-    "source_name": "Publisher name",
-    "published": "Today or Month Day",
-    "url": "Direct article URL from search results if available"
-  }
-]`;
+LIVE_NEWS_CANDIDATES:
+${JSON.stringify(compactPool)}
 
-            const res = await callGeminiGroundedNews(apiKey, newsPrompt, msg => {
-                setNewsStatusBanner(`Stage 2/2 (Curated News): ${msg}`);
-            });
+Return ONLY a JSON array referencing real candidate ids:
+[{"id": number, "topic": "Short theme badge (2-4 words)", "summary": "1-2 crisp factual sentences based on headline/snippet", "why_relevant": "6-12 word tie-in to the user's interest profile"}]`;
 
+            try {
+                const raw = await callGeminiJson(apiKey, curatePrompt, 'gemini-3.8-flash', msg => {
+                    setNewsStatusBanner(`Stage 2/2 (Gemini Curation): ${msg}`);
+                });
+                const picks = Array.isArray(raw)
+                    ? raw
+                    : (raw && typeof raw === 'object' ? (raw.stories || raw.news || raw.items || Object.values(raw).find(Array.isArray) || []) : []);
+                const byId = new Map(livePool.map(it => [String(it.id), it]));
+                curatedStories = picks.map(pk => {
+                    const orig = byId.get(String(pk.id));
+                    if (!orig) return null;
+                    return {
+                        headline: orig.headline,
+                        summary: pk.summary || orig.snippet || orig.headline,
+                        why_relevant: pk.why_relevant || '',
+                        topic: pk.topic || orig.source_name,
+                        source_name: orig.source_name,
+                        published: orig.published,
+                        url: orig.url,
+                    };
+                }).filter(Boolean);
+                modeLabel = `${_stickyWorkingFlashModel || 'Gemini'} Semantic`;
+            } catch (gemErr) {
+                if (/quota|429|rate.?limit|billing/i.test(String(gemErr?.message || ''))) {
+                    curatedStories = rankLiveNewsLocally(livePool, prof);
+                    modeLabel = 'Live Feeds (Local Semantic Rank)';
+                    quotaFallbackNote = 'Gemini API Free-Tier quota is currently reached on your key — showing live headlines ranked locally against your website profile. Click Refresh once quota resets.';
+                } else {
+                    throw gemErr;
+                }
+            }
+
+            if (!curatedStories.length) {
+                curatedStories = rankLiveNewsLocally(livePool, prof);
+                modeLabel = 'Live Feeds (Semantic Fallback)';
+            }
+
+            const groundingSources = curatedStories.map(s => ({ title: `${s.source_name}: ${s.headline.slice(0, 32)}`, uri: s.url }));
             const bundle = {
                 dateKey: todayISO,
                 profileHash: profileRecord.corpusHash,
                 generatedAt: new Date().toISOString(),
-                model: res.model,
-                grounded: res.grounded,
-                stories: res.stories,
-                groundingSources: res.groundingSources,
-                searchQueries: res.searchQueries,
+                model: _stickyWorkingFlashModel || 'local',
+                modeLabel,
+                stories: curatedStories,
+                groundingSources,
             };
             try { localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(bundle)); } catch (e) { }
             renderDashboardCuratedNews(bundle);
-            setNewsStatusBanner('');
-            showPortalToast(`Curated ${bundle.stories.length} news stories for ${todayHuman}`);
+            setNewsStatusBanner(quotaFallbackNote);
+            showPortalToast(quotaFallbackNote
+                ? `Loaded ${curatedStories.length} live stories (local semantic fallback — Gemini quota limit reached)`
+                : `Curated ${curatedStories.length} news stories via ${modeLabel}`);
         } catch (err) {
             setNewsStatusBanner(`Curated news error: ${err.message}`);
             showPortalToast(`Curated news failed: ${err.message}`, 'error');
