@@ -26,6 +26,7 @@
     const PASSCODE_STORAGE_KEY = 'portal_master_passcode'; // legacy key cleared on upgrade
     const PASSCODE_VERIFIER_KEY = 'portal_master_verifier_v2';
     const AUTH_SESSION_KEY = 'portal_auth_token';
+    const SESSION_PASS_KEY = 'portal_session_pass_v1'; // Tab-scoped volatile sessionStorage only
     const PINNED_STORAGE_KEY = 'portal_pinned_bookmarks';
     const SCRATCHPAD_KEY = 'portal_scratchpad_content';
     const SCRATCHES_DB_KEY = 'portal_scratches_database';
@@ -57,7 +58,15 @@
     // 2. AUTHENTICATION & SECURITY (SQLite AES-256-GCM Vault + Local Override)
     // -------------------------------------------------------------------------
     let unlockedVaultSecrets = {};
-    let portalSessionPasscode = null; // Volatile memory only while tab is open
+    let portalSessionPasscode = (() => {
+        try { return sessionStorage.getItem(SESSION_PASS_KEY) || null; } catch (e) { return null; }
+    })();
+
+    function getEncryptedProjectsBlob() {
+        return (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted)
+            || (window.__PORTAL_DATABASE && window.__PORTAL_DATABASE.portal_projects_encrypted)
+            || null;
+    }
 
     function base64ToUint8Array(b64) {
         const bin = atob(b64);
@@ -154,8 +163,15 @@
     }
 
     function isAuthenticated() {
-        return sessionStorage.getItem(AUTH_SESSION_KEY) === 'authenticated' ||
-               localStorage.getItem(AUTH_SESSION_KEY) === 'authenticated';
+        const hasToken = sessionStorage.getItem(AUTH_SESSION_KEY) === 'authenticated' ||
+                         localStorage.getItem(AUTH_SESSION_KEY) === 'authenticated';
+        if (!hasToken) return false;
+        // Require active tab session passcode whenever the encrypted master catalog is present,
+        // preventing half-unlocked logins where only the 21 public projects appear.
+        if (getEncryptedProjectsBlob() && !portalSessionPasscode) {
+            return false;
+        }
+        return true;
     }
 
     async function authenticate(passcode, remember) {
@@ -191,6 +207,7 @@
 
         if (verified) {
             portalSessionPasscode = passcode;
+            try { sessionStorage.setItem(SESSION_PASS_KEY, passcode); } catch (e) { }
             // Best-effort hydration of vault secrets if local override matched
             if (!unlockedVaultSecrets.master_passcode) {
                 await unlockSqliteVault(passcode);
@@ -207,8 +224,14 @@
 
     function logout() {
         portalSessionPasscode = null;
+        unlockedVaultSecrets = {};
+        try { sessionStorage.removeItem(SESSION_PASS_KEY); } catch (e) { }
         sessionStorage.removeItem(AUTH_SESSION_KEY);
         localStorage.removeItem(AUTH_SESSION_KEY);
+        if (typeof portalProjectsState !== 'undefined') {
+            portalProjectsState.unlocked = false;
+            portalProjectsState.projects = [];
+        }
         document.getElementById('portal-app').classList.add('hidden');
         document.getElementById('login-screen').classList.remove('hidden');
         document.getElementById('passcode-input').value = '';
@@ -339,6 +362,11 @@
                 content.classList.add('hidden');
             }
         });
+        if (tabId === 'tab-projects' && typeof window.__initPortalProjectsHub === 'function') {
+            if (!portalProjectsState.unlocked || !portalProjectsState.projects.length) {
+                window.__initPortalProjectsHub();
+            }
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
@@ -3330,6 +3358,9 @@
         initRememberDragAndDrop();
         initPasswordVault();
         if (isAuthenticated()) {
+            if (portalSessionPasscode && !unlockedVaultSecrets.master_passcode) {
+                unlockSqliteVault(portalSessionPasscode);
+            }
             renderAll();
         }
     });
@@ -4596,7 +4627,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const passEl = document.getElementById('projects-unlock-pass');
         const pass = (passEl && passEl.value.trim()) || portalSessionPasscode || vaultMasterPassword;
         if (!pass) return;
-        const enc = window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted;
+        const enc = getEncryptedProjectsBlob();
         if (!enc) {
             showPortalToast('Encrypted project bundle not found in portal_data.js.', 'error');
             return;
@@ -4607,6 +4638,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             return;
         }
         portalSessionPasscode = pass;
+        try { sessionStorage.setItem(SESSION_PASS_KEY, pass); } catch (e) { }
         if (passEl) passEl.value = '';
         hydrateBundleState(JSON.parse(plain));
         updateProjectsModeUI();
@@ -4629,11 +4661,15 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 portalProjectsState.liveMode = false;
             }
         } else {
-            const enc = window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted;
-            const autoPass = portalSessionPasscode || vaultMasterPassword;
+            const enc = getEncryptedProjectsBlob();
+            const storedSessionPass = (() => {
+                try { return sessionStorage.getItem(SESSION_PASS_KEY) || ''; } catch (e) { return ''; }
+            })();
+            const autoPass = portalSessionPasscode || storedSessionPass || vaultMasterPassword;
             if (enc && autoPass) {
                 const plain = await decryptSqliteVaultEntry(enc, autoPass);
                 if (plain) {
+                    portalSessionPasscode = autoPass;
                     hydrateBundleState(JSON.parse(plain));
                 }
             }
