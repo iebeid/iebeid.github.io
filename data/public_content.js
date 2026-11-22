@@ -1,5 +1,5 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-21T08:03:59.228Z",
+  "_generated_at": "2026-11-22T11:24:10.971Z",
   "_source": "portal.html (Direct GitHub Publish)",
   "meta": {
     "author_name": {
@@ -3949,8 +3949,8 @@ window.__SITE_DATABASE = {
       "category": "Data Engineering & Entity Resolution",
       "domain_stage": "01_data_prep",
       "status": "Commercial / OSS",
-      "year_start": 2024,
-      "year_end": 2026,
+      "year_start": "2024",
+      "year_end": "2026",
       "institution_or_org": "Unity Systems",
       "grant_award": "",
       "tech_stack": [
@@ -3994,24 +3994,17 @@ window.__SITE_DATABASE = {
       ],
       "placements": [
         {
-          "page_slug": "home",
-          "section_slot": "featured",
-          "card_variant": "home-compact",
-          "display_order": 6,
-          "is_visible": true
-        },
-        {
           "page_slug": "research",
           "section_slot": "data_engineering",
           "card_variant": "research-cards",
-          "display_order": 6,
+          "display_order": 10,
           "is_visible": true
         },
         {
           "page_slug": "storefront",
           "section_slot": "catalog",
-          "card_variant": "storefront-catalog",
-          "display_order": 6,
+          "card_variant": "research-cards",
+          "display_order": 20,
           "is_visible": true
         }
       ],
@@ -4314,9 +4307,9 @@ window.__SITE_DATABASE = {
       "category": "Scientific Visualization & HCI",
       "domain_stage": "01_data_prep",
       "status": "Published / Commercial",
-      "year_start": 2017,
-      "year_end": 2020,
-      "institution_or_org": "UT Austin & Lockheed Martin RMS",
+      "year_start": "2017",
+      "year_end": "2020",
+      "institution_or_org": "Lockheed Martin Sponsored R&D",
       "grant_award": "Lockheed Martin Sponsored R&D",
       "tech_stack": [
         "Python",
@@ -4385,24 +4378,17 @@ window.__SITE_DATABASE = {
       ],
       "placements": [
         {
-          "page_slug": "home",
-          "section_slot": "featured",
-          "card_variant": "home-compact",
-          "display_order": 11,
-          "is_visible": true
-        },
-        {
           "page_slug": "research",
           "section_slot": "visualization_hci",
           "card_variant": "research-cards",
-          "display_order": 11,
+          "display_order": 10,
           "is_visible": true
         },
         {
           "page_slug": "storefront",
           "section_slot": "catalog",
-          "card_variant": "storefront-catalog",
-          "display_order": 11,
+          "card_variant": "research-cards",
+          "display_order": 20,
           "is_visible": true
         }
       ],
