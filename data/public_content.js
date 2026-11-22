@@ -1,5 +1,5 @@
 window.__SITE_DATABASE = {
-  "_generated_at": "2026-11-22T11:24:10.971Z",
+  "_generated_at": "2026-11-22T11:25:50.537Z",
   "_source": "portal.html (Direct GitHub Publish)",
   "meta": {
     "author_name": {
@@ -4029,9 +4029,9 @@ window.__SITE_DATABASE = {
       "category": "Data Engineering & Entity Resolution",
       "domain_stage": "02_ai_modeling",
       "status": "Published / Commercial",
-      "year_start": 2020,
-      "year_end": 2025,
-      "institution_or_org": "UA Little Rock & Unity Systems",
+      "year_start": "2020",
+      "year_end": "2025",
+      "institution_or_org": "NSF Sponsored Ph.D. Research",
       "grant_award": "NSF Sponsored Ph.D. Research",
       "tech_stack": [
         "Python",
@@ -4077,24 +4077,17 @@ window.__SITE_DATABASE = {
       ],
       "placements": [
         {
-          "page_slug": "home",
-          "section_slot": "featured",
-          "card_variant": "home-compact",
-          "display_order": 7,
-          "is_visible": true
-        },
-        {
           "page_slug": "research",
           "section_slot": "data_engineering",
           "card_variant": "research-cards",
-          "display_order": 7,
+          "display_order": 10,
           "is_visible": true
         },
         {
           "page_slug": "storefront",
           "section_slot": "catalog",
-          "card_variant": "storefront-catalog",
-          "display_order": 7,
+          "card_variant": "research-cards",
+          "display_order": 20,
           "is_visible": true
         }
       ],
