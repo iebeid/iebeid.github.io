@@ -3342,6 +3342,9 @@
         if (typeof window.__initPortalProjectsHub === 'function') {
             window.__initPortalProjectsHub();
         }
+        if (typeof window.__initDashboardIntelWidgets === 'function') {
+            window.__initDashboardIntelWidgets();
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -6982,5 +6985,702 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         }
         return true;
     }
+
+    // -------------------------------------------------------------------------
+    // 21. DASHBOARD INTELLIGENCE WIDGETS: WEATHER/FORECAST & GEMINI CURATED NEWS
+    // -------------------------------------------------------------------------
+    const WEATHER_LOC_KEY = 'portal_weather_location_v1';
+    const WEATHER_UNIT_KEY = 'portal_weather_unit_v1';
+    const WEATHER_CACHE_KEY = 'portal_weather_cache_v1';
+    const NEWS_PROFILE_KEY = 'portal_semantic_interest_profile_v1';
+    const NEWS_CACHE_KEY = 'portal_curated_news_cache_v1';
+
+    let _dashboardWeatherBusy = false;
+    let _dashboardNewsBusy = false;
+
+    function mapWmoWeather(code, isDay = 1) {
+        const c = Number(code);
+        if (c === 0) return { label: 'Clear Sky', icon: isDay ? 'fa-sun text-amber-400' : 'fa-moon text-sky-300' };
+        if (c === 1) return { label: 'Mainly Clear', icon: isDay ? 'fa-sun text-amber-300' : 'fa-moon text-sky-300' };
+        if (c === 2) return { label: 'Partly Cloudy', icon: isDay ? 'fa-cloud-sun text-amber-300' : 'fa-cloud-moon text-sky-300' };
+        if (c === 3) return { label: 'Overcast', icon: 'fa-cloud text-slate-300' };
+        if (c === 45 || c === 48) return { label: 'Foggy', icon: 'fa-smog text-slate-400' };
+        if (c >= 51 && c <= 57) return { label: 'Drizzle', icon: 'fa-cloud-rain text-sky-400' };
+        if (c >= 61 && c <= 67) return { label: 'Rain', icon: 'fa-cloud-showers-heavy text-sky-400' };
+        if (c >= 71 && c <= 77) return { label: 'Snow', icon: 'fa-snowflake text-cyan-200' };
+        if (c >= 80 && c <= 82) return { label: 'Rain Showers', icon: 'fa-cloud-rain text-sky-300' };
+        if (c === 85 || c === 86) return { label: 'Snow Showers', icon: 'fa-snowflake text-cyan-200' };
+        if (c >= 95) return { label: 'Thunderstorm', icon: 'fa-bolt text-amber-400' };
+        return { label: 'Conditions', icon: 'fa-cloud-sun text-sky-300' };
+    }
+
+    function getWeatherUnit() {
+        return localStorage.getItem(WEATHER_UNIT_KEY) === 'celsius' ? 'celsius' : 'fahrenheit';
+    }
+
+    function getSavedWeatherLocation() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(WEATHER_LOC_KEY) || 'null');
+            if (parsed && Number.isFinite(Number(parsed.lat)) && Number.isFinite(Number(parsed.lon)) && parsed.name) {
+                return parsed;
+            }
+        } catch (e) { }
+        return null;
+    }
+
+    function saveWeatherLocation(loc) {
+        try { localStorage.setItem(WEATHER_LOC_KEY, JSON.stringify(loc)); } catch (e) { }
+    }
+
+    async function reverseGeocodeCoords(lat, lon) {
+        try {
+            const resp = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=en`);
+            if (resp.ok) {
+                const d = await resp.json();
+                const parts = [d.city || d.locality, d.principalSubdivisionCode ? d.principalSubdivisionCode.split('-').pop() : d.principalSubdivision, d.countryCode].filter(Boolean);
+                if (parts.length) return parts.join(', ');
+            }
+        } catch (e) { }
+        return `${Number(lat).toFixed(2)}, ${Number(lon).toFixed(2)}`;
+    }
+
+    async function detectIpLocationFallback() {
+        const endpoints = [
+            {
+                url: 'https://get.geojs.io/v1/ip/geo.json',
+                parse: d => ({
+                    lat: Number(d.latitude),
+                    lon: Number(d.longitude),
+                    name: [d.city, d.region, d.country_code].filter(Boolean).join(', '),
+                }),
+            },
+            {
+                url: 'https://ipwho.is/',
+                parse: d => ({
+                    lat: Number(d.latitude),
+                    lon: Number(d.longitude),
+                    name: [d.city, d.region_code || d.region, d.country_code].filter(Boolean).join(', '),
+                }),
+            },
+        ];
+        for (const ep of endpoints) {
+            try {
+                const resp = await fetch(ep.url);
+                if (!resp.ok) continue;
+                const d = await resp.json();
+                const loc = ep.parse(d);
+                if (Number.isFinite(loc.lat) && Number.isFinite(loc.lon) && loc.name) {
+                    return { ...loc, source: 'IP' };
+                }
+            } catch (e) { }
+        }
+        return { name: 'Denton, TX, US', lat: 33.2148, lon: -97.1331, source: 'Default' };
+    }
+
+    window.detectDashboardWeatherLocation = async function (forceFresh = false) {
+        if (!forceFresh) {
+            const saved = getSavedWeatherLocation();
+            if (saved) {
+                await refreshDashboardWeather(false, saved);
+                return;
+            }
+        }
+        const locEl = document.getElementById('weather-location-label');
+        if (locEl) locEl.textContent = 'Detecting your location...';
+
+        let resolved = null;
+        if (navigator.geolocation) {
+            resolved = await new Promise(resolve => {
+                navigator.geolocation.getCurrentPosition(
+                    async pos => {
+                        const lat = pos.coords.latitude;
+                        const lon = pos.coords.longitude;
+                        const name = await reverseGeocodeCoords(lat, lon);
+                        resolve({ name, lat, lon, source: 'GPS' });
+                    },
+                    () => resolve(null),
+                    { enableHighAccuracy: false, timeout: 5500, maximumAge: 600000 }
+                );
+            });
+        }
+        if (!resolved) {
+            resolved = await detectIpLocationFallback();
+        }
+        saveWeatherLocation(resolved);
+        await refreshDashboardWeather(true, resolved);
+    };
+
+    window.searchDashboardWeatherCity = async function (event) {
+        if (event) event.preventDefault();
+        const input = document.getElementById('weather-city-input');
+        const q = (input?.value || '').trim();
+        if (!q) return;
+        try {
+            const resp = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`);
+            const data = await resp.json();
+            const hit = (data.results || [])[0];
+            if (!hit) {
+                showPortalToast(`Could not find city "${q}". Try "City, State" or "City".`, 'warn');
+                return;
+            }
+            const name = [hit.name, hit.admin1, hit.country_code].filter(Boolean).join(', ');
+            const loc = { name, lat: hit.latitude, lon: hit.longitude, source: 'Manual' };
+            saveWeatherLocation(loc);
+            if (input) input.value = '';
+            await refreshDashboardWeather(true, loc);
+            showPortalToast(`Weather location updated to ${name}`);
+        } catch (err) {
+            showPortalToast(`City lookup failed: ${err.message}`, 'error');
+        }
+    };
+
+    window.toggleDashboardWeatherUnit = function () {
+        const next = getWeatherUnit() === 'fahrenheit' ? 'celsius' : 'fahrenheit';
+        localStorage.setItem(WEATHER_UNIT_KEY, next);
+        const btn = document.getElementById('weather-unit-btn');
+        if (btn) btn.textContent = next === 'fahrenheit' ? '°F' : '°C';
+        refreshDashboardWeather(true);
+    };
+
+    function renderDashboardWeatherData(loc, data, unit) {
+        const unitSym = unit === 'fahrenheit' ? '°F' : '°C';
+        const windUnit = unit === 'fahrenheit' ? 'mph' : 'km/h';
+        const locEl = document.getElementById('weather-location-label');
+        const srcEl = document.getElementById('weather-loc-source');
+        const unitBtn = document.getElementById('weather-unit-btn');
+        if (locEl) locEl.textContent = `${loc.name}${data.timezone_abbreviation ? ` (${data.timezone_abbreviation})` : ''}`;
+        if (srcEl) srcEl.textContent = loc.source || 'Auto';
+        if (unitBtn) unitBtn.textContent = unitSym;
+
+        const cur = data.current || {};
+        const wInfo = mapWmoWeather(cur.weather_code, cur.is_day ?? 1);
+        const iconEl = document.getElementById('weather-current-icon');
+        const tempEl = document.getElementById('weather-current-temp');
+        const descEl = document.getElementById('weather-current-desc');
+        const metaEl = document.getElementById('weather-current-meta');
+        if (iconEl) iconEl.innerHTML = `<i class="fas ${wInfo.icon}"></i>`;
+        if (tempEl) tempEl.textContent = cur.temperature_2m != null ? `${Math.round(cur.temperature_2m)}${unitSym}` : '--°';
+        if (descEl) descEl.textContent = wInfo.label;
+        if (metaEl) {
+            metaEl.innerHTML = `
+                <div>Feels <strong class="text-slate-200">${cur.apparent_temperature != null ? Math.round(cur.apparent_temperature) + '°' : '--'}</strong></div>
+                <div>Humidity <strong class="text-slate-200">${cur.relative_humidity_2m != null ? Math.round(cur.relative_humidity_2m) + '%' : '--'}</strong></div>
+                <div>Wind <strong class="text-slate-200">${cur.wind_speed_10m != null ? Math.round(cur.wind_speed_10m) + ' ' + windUnit : '--'}</strong></div>
+            `;
+        }
+
+        const daily = data.daily || {};
+        const times = daily.time || [];
+        const gridEl = document.getElementById('weather-forecast-grid');
+        if (gridEl && times.length) {
+            gridEl.innerHTML = times.slice(0, 5).map((iso, idx) => {
+                const dt = new Date(`${iso}T12:00:00`);
+                const dayLbl = idx === 0 ? 'Today' : dt.toLocaleDateString('en-US', { weekday: 'short' });
+                const dInfo = mapWmoWeather(daily.weather_code?.[idx], 1);
+                const hi = daily.temperature_2m_max?.[idx] != null ? Math.round(daily.temperature_2m_max[idx]) : '--';
+                const lo = daily.temperature_2m_min?.[idx] != null ? Math.round(daily.temperature_2m_min[idx]) : '--';
+                const pop = daily.precipitation_probability_max?.[idx];
+                return `
+                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-2.5 text-center space-y-1">
+                        <div class="text-[10px] font-bold uppercase text-slate-400">${escapeHtml(dayLbl)}</div>
+                        <div class="text-base py-0.5"><i class="fas ${dInfo.icon}" title="${escapeHtml(dInfo.label)}"></i></div>
+                        <div class="text-[11px] font-mono text-white font-bold">${hi}° <span class="text-slate-500 font-normal">${lo}°</span></div>
+                        <div class="text-[9px] font-mono ${pop > 30 ? 'text-sky-300' : 'text-slate-500'}"><i class="fas fa-tint mr-0.5"></i>${pop != null ? pop : 0}%</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        const updEl = document.getElementById('weather-updated-at');
+        if (updEl) updEl.textContent = `Updated ${new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+    }
+
+    window.refreshDashboardWeather = async function (force = false, explicitLoc = null) {
+        if (!document.getElementById('dashboard-weather-widget') || _dashboardWeatherBusy) return;
+        const loc = explicitLoc || getSavedWeatherLocation();
+        if (!loc) {
+            await detectDashboardWeatherLocation(false);
+            return;
+        }
+        const unit = getWeatherUnit();
+        const windUnit = unit === 'fahrenheit' ? 'mph' : 'kmh';
+        const cacheKey = `${Number(loc.lat).toFixed(2)},${Number(loc.lon).toFixed(2)}:${unit}`;
+
+        if (!force) {
+            try {
+                const cached = JSON.parse(localStorage.getItem(WEATHER_CACHE_KEY) || 'null');
+                if (cached && cached.key === cacheKey && (Date.now() - cached.ts) < 20 * 60 * 1000 && cached.data) {
+                    renderDashboardWeatherData(loc, cached.data, unit);
+                    return;
+                }
+            } catch (e) { }
+        }
+
+        _dashboardWeatherBusy = true;
+        try {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${encodeURIComponent(loc.lat)}&longitude=${encodeURIComponent(loc.lon)}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&temperature_unit=${unit}&wind_speed_unit=${windUnit}&timezone=auto&forecast_days=5`;
+            const resp = await fetch(url);
+            if (!resp.ok) throw new Error(`Open-Meteo HTTP ${resp.status}`);
+            const data = await resp.json();
+            try { localStorage.setItem(WEATHER_CACHE_KEY, JSON.stringify({ key: cacheKey, ts: Date.now(), data })); } catch (e) { }
+            renderDashboardWeatherData(loc, data, unit);
+        } catch (err) {
+            const descEl = document.getElementById('weather-current-desc');
+            if (descEl) descEl.textContent = `Weather unavailable: ${err.message}`;
+        } finally {
+            _dashboardWeatherBusy = false;
+        }
+    };
+
+    // --- Curated Daily News via Website Corpus Parsing + Gemini Semantic Profile + Search Grounding ---
+    window.toggleSemanticInterestDrawer = function () {
+        const el = document.getElementById('news-profile-drawer');
+        if (el) el.classList.toggle('hidden');
+    };
+
+    function setNewsStatusBanner(msg) {
+        const el = document.getElementById('news-status-banner');
+        if (!el) return;
+        if (!msg) {
+            el.classList.add('hidden');
+            el.textContent = '';
+        } else {
+            el.classList.remove('hidden');
+            el.textContent = msg;
+        }
+    }
+
+    function collectWebsiteCorpusForProfile() {
+        const db = window.__SITE_DATABASE || {};
+        const rawPages = db.pages || [];
+        const pageList = Array.isArray(rawPages)
+            ? rawPages
+            : Object.entries(rawPages).map(([k, v]) => ({ slug: k, ...(v || {}) }));
+        const excludedPages = new Set(['portal', 'drop', 'index', 'talk-notes']);
+        const pageChunks = [];
+        let pagesParsed = 0;
+
+        pageList.forEach(pageObj => {
+            if (!pageObj) return;
+            const slug = String(pageObj.slug || '').trim();
+            if (!slug || excludedPages.has(slug)) return;
+            const secs = Array.isArray(pageObj.sections) ? pageObj.sections : [];
+            const secTexts = [];
+            secs.forEach(s => {
+                const heading = (s.heading || '').trim();
+                const txt = String(s.content_text || '').replace(/\s+/g, ' ').trim();
+                if (!txt || txt.length < 25) return;
+                secTexts.push(`${heading ? heading + ': ' : ''}${txt.slice(0, 420)}`);
+            });
+            if (secTexts.length) {
+                pagesParsed++;
+                pageChunks.push(`[PAGE ${slug} | ${pageObj.title || slug}]\n${secTexts.slice(0, 6).join(' | ').slice(0, 1100)}`);
+            }
+        });
+
+        const projList = (portalProjectsState.unlocked && portalProjectsState.projects.length)
+            ? portalProjectsState.projects
+            : (Array.isArray(db.projects) ? db.projects : []);
+        const projectSummaryLines = projList.slice(0, 60).map(p =>
+            `${p.title} (${p.project_kind || p.category || 'project'}): ${(p.short_summary || p.tagline || '').slice(0, 140)}`
+        );
+
+        const pubLines = (Array.isArray(db.publications) ? db.publications : []).slice(0, 20).map(pub =>
+            `${pub.year || ''} ${pub.title || ''} (${pub.venue || ''})`.trim()
+        );
+        const courseLines = (Array.isArray(db.courses) ? db.courses : []).slice(0, 20).map(c =>
+            `${c.code || ''} ${c.title || ''}`.trim()
+        );
+
+        const corpusText = [
+            '=== WEBSITE PAGES ===',
+            pageChunks.join('\n').slice(0, 9500),
+            '=== PORTFOLIO PROJECTS ===',
+            projectSummaryLines.join('\n').slice(0, 4200),
+            pubLines.length ? '=== PUBLICATIONS ===\n' + pubLines.join('\n').slice(0, 1500) : '',
+            courseLines.length ? '=== COURSES ===\n' + courseLines.join('\n').slice(0, 1000) : '',
+        ].filter(Boolean).join('\n\n');
+
+        return {
+            corpusText,
+            corpusHash: hashString32(corpusText),
+            pagesParsed,
+            projectsParsed: projList.length,
+        };
+    }
+
+    function renderSemanticInterestProfileUI(stored) {
+        if (!stored || !stored.profile) return;
+        const sumEl = document.getElementById('news-profile-summary');
+        const metaEl = document.getElementById('news-profile-meta');
+        const themesEl = document.getElementById('news-profile-themes');
+        if (sumEl) sumEl.textContent = stored.profile.semantic_summary || '';
+        if (metaEl) {
+            const dt = stored.generatedAt ? new Date(stored.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+            metaEl.textContent = `Parsed ${stored.pagesParsed || 0} pages & ${stored.projectsParsed || 0} projects${dt ? ` • ${dt}` : ''}`;
+        }
+        if (themesEl) {
+            const themes = Array.isArray(stored.profile.core_themes) ? stored.profile.core_themes : [];
+            themesEl.innerHTML = themes.map(t => {
+                const label = typeof t === 'string' ? t : (t.topic || '');
+                return label ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/15 text-purple-200 border border-purple-500/30">${escapeHtml(label)}</span>` : '';
+            }).join('');
+        }
+    }
+
+    async function ensureSemanticInterestProfile(apiKey, forceRebuild = false) {
+        const corpus = collectWebsiteCorpusForProfile();
+        if (!forceRebuild) {
+            try {
+                const cached = JSON.parse(localStorage.getItem(NEWS_PROFILE_KEY) || 'null');
+                if (cached && cached.corpusHash === corpus.corpusHash && cached.profile?.semantic_summary) {
+                    renderSemanticInterestProfileUI(cached);
+                    return cached;
+                }
+            } catch (e) { }
+        }
+
+        setNewsStatusBanner(`Stage 1/2: Parsing ${corpus.pagesParsed} website pages & ${corpus.projectsParsed} projects to build Gemini semantic interest profile...`);
+        const prompt = `Analyze ALL of the following parsed personal website content (research, publications, software, teaching, business, scholarship, poetry, hobbies, and projects) for Dr. Islam Akef Ebeid. Create a rich semantic understanding and description of their core professional, scientific, academic, technological, entrepreneurial, and cultural/personal interests so it can be used to curate daily top news updates.
+
+Return ONLY a JSON object:
+{
+  "semantic_summary": "3-4 rich sentences capturing the full breadth of their research domains, technical stack, higher-ed/funding focus, and cultural/personal interests.",
+  "core_themes": [
+    {"topic": "Short Theme Name (3-5 words)", "focus": "Specific angles/subtopics to watch in today's news"}
+  ],
+  "keywords": ["10-15 high-signal domain keywords"]
+}
+
+Website Content Corpus:
+${corpus.corpusText}`;
+
+        const profile = await callGeminiJson(apiKey, prompt, 'gemini-3.8-flash', msg => {
+            setNewsStatusBanner(`Stage 1/2 (Interest Profile): ${msg}`);
+        });
+        const stored = {
+            corpusHash: corpus.corpusHash,
+            generatedAt: new Date().toISOString(),
+            pagesParsed: corpus.pagesParsed,
+            projectsParsed: corpus.projectsParsed,
+            profile: {
+                semantic_summary: profile?.semantic_summary || '',
+                core_themes: Array.isArray(profile?.core_themes) ? profile.core_themes.slice(0, 7) : [],
+                keywords: Array.isArray(profile?.keywords) ? profile.keywords.slice(0, 15) : [],
+            },
+        };
+        try { localStorage.setItem(NEWS_PROFILE_KEY, JSON.stringify(stored)); } catch (e) { }
+        renderSemanticInterestProfileUI(stored);
+        return stored;
+    }
+
+    async function callGeminiGroundedNews(apiKey, promptText, onStatus = null) {
+        const candidates = await discoverGeminiFlashModels(apiKey, 'gemini-3.8-flash');
+        let lastErr = null;
+
+        for (let mIdx = 0; mIdx < candidates.length; mIdx++) {
+            const mdl = candidates[mIdx];
+            const hasMore = mIdx + 1 < candidates.length;
+            let useGrounding = true;
+            let useThinking = true;
+
+            for (let attempt = 1; attempt <= (hasMore ? 2 : 3); attempt++) {
+                const ctrl = new AbortController();
+                const timer = setTimeout(() => ctrl.abort(new Error(`Gemini ${mdl} timed out after 30s`)), 30000);
+                try {
+                    const genCfg = { maxOutputTokens: 4096 };
+                    if (useThinking) {
+                        if (/^gemini-[34]/i.test(mdl)) genCfg.thinkingConfig = { thinkingLevel: 'low' };
+                        else if (/^gemini-2\.5/i.test(mdl) && !/lite/i.test(mdl)) genCfg.thinkingConfig = { thinkingBudget: 0 };
+                    }
+                    const body = {
+                        contents: [{ parts: [{ text: promptText }] }],
+                        generationConfig: genCfg,
+                    };
+                    if (useGrounding) {
+                        body.tools = [{ google_search: {} }];
+                    } else {
+                        genCfg.responseMimeType = 'application/json';
+                    }
+
+                    const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${mdl}:generateContent?key=${encodeURIComponent(apiKey)}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        signal: ctrl.signal,
+                        body: JSON.stringify(body),
+                    });
+                    clearTimeout(timer);
+                    const rawText = await resp.text();
+                    let data = {};
+                    try { data = JSON.parse(rawText); } catch (e) { data = {}; }
+
+                    if (resp.ok) {
+                        const cand = data.candidates?.[0] || {};
+                        const txt = (cand.content?.parts || []).map(pt => pt.text || '').join('\n').trim();
+                        const parsed = parseGeminiJsonPayload(txt);
+                        const stories = Array.isArray(parsed)
+                            ? parsed
+                            : (parsed?.stories || parsed?.news || parsed?.items || Object.values(parsed || {}).find(Array.isArray) || []);
+                        const gm = cand.groundingMetadata || {};
+                        const groundingSources = (gm.groundingChunks || [])
+                            .map(ch => ch?.web ? { title: ch.web.title || '', uri: ch.web.uri || '' } : null)
+                            .filter(x => x && x.uri);
+                        _stickyWorkingFlashModel = mdl;
+                        _deprioritizedGeminiModels.delete(mdl);
+                        return {
+                            model: mdl,
+                            grounded: useGrounding && groundingSources.length > 0,
+                            stories,
+                            groundingSources,
+                            searchQueries: gm.webSearchQueries || [],
+                        };
+                    }
+
+                    const msg = data.error?.message || `Gemini HTTP ${resp.status}`;
+                    lastErr = new Error(msg);
+                    if (resp.status === 401 || resp.status === 403 || /api key not valid|permission denied|has not been used/i.test(msg)) {
+                        throw lastErr;
+                    }
+                    if (resp.status === 400 && useThinking && /thinking/i.test(msg)) {
+                        useThinking = false;
+                        attempt--;
+                        continue;
+                    }
+                    if (resp.status === 400 && useGrounding && /google_search|search|tool/i.test(msg)) {
+                        if (hasMore) break; // try another model that supports google_search first
+                        useGrounding = false;
+                        continue;
+                    }
+                    if (resp.status === 404 || /no longer available|not found|not supported/i.test(msg)) {
+                        _deprioritizedGeminiModels.add(mdl);
+                        break;
+                    }
+                    if ([429, 500, 502, 503, 504].includes(resp.status)) {
+                        _deprioritizedGeminiModels.add(mdl);
+                        if (hasMore) {
+                            if (onStatus) onStatus(`Switching from ${mdl} (${resp.status}) to ${candidates[mIdx + 1]}...`);
+                            break;
+                        }
+                        await sleepMs(1500 * attempt);
+                        continue;
+                    }
+                    throw lastErr;
+                } catch (err) {
+                    clearTimeout(timer);
+                    lastErr = err;
+                    const msg = String(err?.message || err);
+                    if (/api key not valid|permission denied|has not been used/i.test(msg)) throw err;
+                    if (hasMore) {
+                        _deprioritizedGeminiModels.add(mdl);
+                        break;
+                    }
+                    if (attempt < 3) await sleepMs(1000 * attempt);
+                }
+            }
+        }
+        throw lastErr || new Error('Gemini curated news request failed');
+    }
+
+    function matchStoryToGroundedSource(story, groundingSources) {
+        if (!Array.isArray(groundingSources) || !groundingSources.length) return story.url || '';
+        const directUrl = (story.url || '').trim();
+        if (directUrl && groundingSources.some(g => g.uri === directUrl)) return directUrl;
+        const hay = `${story.headline || ''} ${story.source_name || ''} ${story.summary || ''}`.toLowerCase();
+        const words = hay.split(/[^a-z0-9]+/).filter(w => w.length > 3);
+        let best = null;
+        let bestScore = 0;
+        for (const src of groundingSources) {
+            const st = `${src.title || ''} ${src.uri || ''}`.toLowerCase();
+            let score = 0;
+            if (story.source_name && st.includes(story.source_name.toLowerCase().split(/\s+/)[0])) score += 3;
+            for (const w of words) {
+                if (st.includes(w)) score += 1;
+            }
+            if (score > bestScore) {
+                bestScore = score;
+                best = src;
+            }
+        }
+        if (best && bestScore >= 2) return best.uri;
+        if (directUrl && /^https?:\/\//i.test(directUrl)) return directUrl;
+        return `https://news.google.com/search?q=${encodeURIComponent(story.headline || story.topic || '')}`;
+    }
+
+    function renderDashboardCuratedNews(bundle) {
+        const listEl = document.getElementById('dashboard-news-list');
+        const badgeEl = document.getElementById('news-date-badge');
+        const srcBar = document.getElementById('news-sources-bar');
+        if (!listEl) return;
+
+        const stories = Array.isArray(bundle?.stories) ? bundle.stories : [];
+        const sources = Array.isArray(bundle?.groundingSources) ? bundle.groundingSources : [];
+
+        if (badgeEl) {
+            const dt = bundle?.generatedAt
+                ? new Date(bundle.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+                : 'Today';
+            badgeEl.textContent = `${dt} • ${bundle?.grounded ? 'Live Google Search' : (bundle?.model || 'Gemini')}`;
+        }
+
+        if (!stories.length) {
+            listEl.innerHTML = '<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center text-xs text-slate-400">No stories returned. Click <strong>Refresh News</strong> to try again.</div>';
+            if (srcBar) srcBar.classList.add('hidden');
+            return;
+        }
+
+        listEl.innerHTML = stories.map(st => {
+            const href = matchStoryToGroundedSource(st, sources);
+            const topic = st.topic || 'Briefing';
+            const srcName = st.source_name || 'News';
+            const pub = st.published || 'Today';
+            return `
+                <article class="bg-slate-950/70 hover:bg-slate-950 border border-slate-800/80 hover:border-purple-500/40 rounded-xl p-3.5 transition space-y-1.5">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">${escapeHtml(topic)}</span>
+                            <span class="text-[10px] font-mono text-slate-400">${escapeHtml(srcName)} &bull; ${escapeHtml(pub)}</span>
+                        </div>
+                        <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-sky-400 hover:text-sky-300 inline-flex items-center gap-1 flex-shrink-0">
+                            Read <i class="fas fa-external-link-alt text-[9px]"></i>
+                        </a>
+                    </div>
+                    <h3 class="text-xs sm:text-sm font-bold text-white leading-snug">
+                        <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition">${escapeHtml(st.headline || '')}</a>
+                    </h3>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">${escapeHtml(st.summary || '')}</p>
+                    ${st.why_relevant ? `<div class="text-[10px] text-emerald-300/90 flex items-center gap-1.5 pt-0.5"><i class="fas fa-sparkles text-[9px]"></i><span>${escapeHtml(st.why_relevant)}</span></div>` : ''}
+                </article>
+            `;
+        }).join('');
+
+        if (srcBar) {
+            if (sources.length) {
+                srcBar.classList.remove('hidden');
+                const dedup = [];
+                const seenUri = new Set();
+                for (const s of sources) {
+                    if (!seenUri.has(s.uri)) { seenUri.add(s.uri); dedup.push(s); }
+                }
+                srcBar.innerHTML = `<span class="font-bold uppercase tracking-wider text-slate-500 mr-1">Grounded Sources:</span>` +
+                    dedup.slice(0, 8).map(s => `<a href="${escapeHtml(s.uri)}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 truncate max-w-[180px]" title="${escapeHtml(s.title || s.uri)}">${escapeHtml(s.title || s.uri)}</a>`).join('');
+            } else {
+                srcBar.classList.add('hidden');
+            }
+        }
+    }
+
+    window.refreshDashboardCuratedNews = async function (forceRebuildProfile = false) {
+        if (!document.getElementById('dashboard-news-widget') || _dashboardNewsBusy) return;
+        const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+        const listEl = document.getElementById('dashboard-news-list');
+        if (!apiKey) {
+            if (listEl) {
+                listEl.innerHTML = `
+                    <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-5 text-center space-y-2.5">
+                        <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> to parse your website interests and curate today&apos;s grounded top news.</p>
+                        <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        _dashboardNewsBusy = true;
+        const refreshBtn = document.getElementById('news-refresh-btn');
+        const rebuildBtn = document.getElementById('news-rebuild-profile-btn');
+        if (refreshBtn) { refreshBtn.disabled = true; refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Curating...</span>'; }
+        if (rebuildBtn) rebuildBtn.disabled = true;
+
+        try {
+            const profileRecord = await ensureSemanticInterestProfile(apiKey, forceRebuildProfile);
+            const prof = profileRecord.profile || {};
+            const todayISO = new Date().toISOString().slice(0, 10);
+            const todayHuman = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            setNewsStatusBanner(`Stage 2/2: Searching today's top news (${todayHuman}) via Gemini grounded search using your semantic interest profile...`);
+            const newsPrompt = `Today is ${todayHuman}. Using Google Search, curate 6 to 7 of TODAY'S (or the most recent 72 hours') top real news stories tailored specifically to the semantic interest profile below.
+
+SEMANTIC INTEREST PROFILE (parsed from the user's personal website):
+Summary: ${prof.semantic_summary || ''}
+Core Themes: ${JSON.stringify(prof.core_themes || [])}
+Keywords: ${(prof.keywords || []).join(', ')}
+
+Requirements:
+- Cover a balanced mix across the user's core themes (AI for life sciences/bioinformatics, knowledge graphs/NLP/LLMs, higher-ed/NSF/research computing, visualization/HCI, and broader tech/science/culture).
+- Every item must be a real, current news development found via Google Search — never invent fake stories.
+- Return ONLY a raw JSON array (no prose before or after):
+[
+  {
+    "headline": "Crisp factual headline",
+    "summary": "1-2 concise sentences summarizing what happened today/this week",
+    "why_relevant": "Short 6-12 word tie-in to the user's interest profile",
+    "topic": "Short theme tag",
+    "source_name": "Publisher name",
+    "published": "Today or Month Day",
+    "url": "Direct article URL from search results if available"
+  }
+]`;
+
+            const res = await callGeminiGroundedNews(apiKey, newsPrompt, msg => {
+                setNewsStatusBanner(`Stage 2/2 (Curated News): ${msg}`);
+            });
+
+            const bundle = {
+                dateKey: todayISO,
+                profileHash: profileRecord.corpusHash,
+                generatedAt: new Date().toISOString(),
+                model: res.model,
+                grounded: res.grounded,
+                stories: res.stories,
+                groundingSources: res.groundingSources,
+                searchQueries: res.searchQueries,
+            };
+            try { localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(bundle)); } catch (e) { }
+            renderDashboardCuratedNews(bundle);
+            setNewsStatusBanner('');
+            showPortalToast(`Curated ${bundle.stories.length} news stories for ${todayHuman}`);
+        } catch (err) {
+            setNewsStatusBanner(`Curated news error: ${err.message}`);
+            showPortalToast(`Curated news failed: ${err.message}`, 'error');
+        } finally {
+            _dashboardNewsBusy = false;
+            if (refreshBtn) { refreshBtn.disabled = false; refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Refresh News</span>'; }
+            if (rebuildBtn) rebuildBtn.disabled = false;
+        }
+    };
+
+    window.__initDashboardIntelWidgets = function () {
+        // 1. Weather, Forecast & Location
+        detectDashboardWeatherLocation(false);
+
+        // 2. Semantic Curated News
+        try {
+            const prof = JSON.parse(localStorage.getItem(NEWS_PROFILE_KEY) || 'null');
+            if (prof) renderSemanticInterestProfileUI(prof);
+        } catch (e) { }
+
+        const todayISO = new Date().toISOString().slice(0, 10);
+        try {
+            const cachedNews = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY) || 'null');
+            if (cachedNews && cachedNews.dateKey === todayISO && Array.isArray(cachedNews.stories) && cachedNews.stories.length) {
+                renderDashboardCuratedNews(cachedNews);
+                return;
+            }
+        } catch (e) { }
+
+        const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+        if (apiKey) {
+            refreshDashboardCuratedNews(false);
+        } else {
+            const listEl = document.getElementById('dashboard-news-list');
+            if (listEl) {
+                listEl.innerHTML = `
+                    <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-5 text-center space-y-2.5">
+                        <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> in Settings &amp; Security to parse your website content and generate today&apos;s semantic news briefing.</p>
+                        <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
+                    </div>
+                `;
+            }
+        }
+    };
 
 })();
