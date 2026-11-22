@@ -6992,8 +6992,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     const WEATHER_LOC_KEY = 'portal_weather_location_v1';
     const WEATHER_UNIT_KEY = 'portal_weather_unit_v1';
     const WEATHER_CACHE_KEY = 'portal_weather_cache_v1';
-    const NEWS_PROFILE_KEY = 'portal_semantic_interest_profile_v1';
-    const NEWS_CACHE_KEY = 'portal_curated_news_cache_v1';
+    const NEWS_PROFILE_KEY = 'portal_semantic_interest_profile_v2';
+    const NEWS_CACHE_KEY = 'portal_curated_news_cache_v2';
+    const NEWS_ARC_HISTORY_KEY = 'portal_news_arc_history_v1';
+    const NEWS_DIGEST_EMAIL = 'islam.akef@gmail.com';
+    const NEWS_DIGEST_SUBJECT = 'Daily Investigative News Digest';
 
     let _dashboardWeatherBusy = false;
     let _dashboardNewsBusy = false;
@@ -7271,6 +7274,52 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         }
     }
 
+    function extractBookmarksProfileDigest() {
+        const allBms = (typeof getAllBookmarks === 'function' ? getAllBookmarks() : (window.PORTAL_BOOKMARKS?.bookmarks || [])) || [];
+        const usage = (typeof getUsageStats === 'function' ? getUsageStats() : {}) || {};
+        const domainMap = new Map();
+        const subfolderCounts = new Map();
+
+        allBms.forEach(bm => {
+            if (!bm || !bm.url) return;
+            let host = '';
+            try {
+                host = new URL(bm.url).hostname.replace(/^www\./i, '').toLowerCase();
+            } catch (e) {
+                host = String(bm.domain || '').replace(/^www\./i, '').toLowerCase();
+            }
+            if (!host || /^(localhost|127\.|192\.168\.|10\.|172\.)/.test(host)) return;
+            const weight = 1 + (bm.pinned ? 3 : 0) + Math.min(5, Number(usage[bm.id] || bm.clicks || 0));
+            const entry = domainMap.get(host) || { host, count: 0, weight: 0, names: [], cats: new Set() };
+            entry.count += 1;
+            entry.weight += weight;
+            if (bm.name && entry.names.length < 2) entry.names.push(String(bm.name).slice(0, 48));
+            if (bm.category) entry.cats.add(bm.category);
+            if (bm.subfolder) {
+                entry.cats.add(bm.subfolder);
+                subfolderCounts.set(bm.subfolder, (subfolderCounts.get(bm.subfolder) || 0) + 1);
+            }
+            domainMap.set(host, entry);
+        });
+
+        const topDomains = Array.from(domainMap.values())
+            .sort((a, b) => (b.weight - a.weight) || (b.count - a.count))
+            .slice(0, 55);
+        const topSubfolders = Array.from(subfolderCounts.entries())
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 18)
+            .map(([sf, cnt]) => `${sf}(${cnt})`);
+
+        const lines = topDomains.map(d => `${d.host} [${d.names.join('; ')}]`);
+        return {
+            bookmarksParsed: allBms.length,
+            uniqueDomains: domainMap.size,
+            topDomainList: topDomains.map(d => d.host),
+            topSubfolders,
+            digestText: `Top Bookmark Folders: ${topSubfolders.join(', ')}\nKey Domains & Services (${allBms.length} bookmarks, ${domainMap.size} unique domains):\n${lines.join(' | ')}`,
+        };
+    }
+
     function collectWebsiteCorpusForProfile() {
         const db = window.__SITE_DATABASE || {};
         const rawPages = db.pages || [];
@@ -7291,35 +7340,49 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 const heading = (s.heading || '').trim();
                 const txt = String(s.content_text || '').replace(/\s+/g, ' ').trim();
                 if (!txt || txt.length < 25) return;
-                secTexts.push(`${heading ? heading + ': ' : ''}${txt.slice(0, 420)}`);
+                secTexts.push(`${heading ? heading + ': ' : ''}${txt.slice(0, 320)}`);
             });
             if (secTexts.length) {
                 pagesParsed++;
-                pageChunks.push(`[PAGE ${slug} | ${pageObj.title || slug}]\n${secTexts.slice(0, 6).join(' | ').slice(0, 1100)}`);
+                pageChunks.push(`[PAGE ${slug} | ${pageObj.title || slug}]\n${secTexts.slice(0, 5).join(' | ').slice(0, 800)}`);
             }
         });
 
         const projList = (portalProjectsState.unlocked && portalProjectsState.projects.length)
             ? portalProjectsState.projects
             : (Array.isArray(db.projects) ? db.projects : []);
-        const projectSummaryLines = projList.slice(0, 60).map(p =>
-            `${p.title} (${p.project_kind || p.category || 'project'}): ${(p.short_summary || p.tagline || '').slice(0, 140)}`
+        const projectSummaryLines = projList.slice(0, 45).map(p =>
+            `${p.title} (${p.project_kind || p.category || 'project'}): ${(p.short_summary || p.tagline || '').slice(0, 120)}`
         );
 
-        const pubLines = (Array.isArray(db.publications) ? db.publications : []).slice(0, 20).map(pub =>
+        const pubLines = (Array.isArray(db.publications) ? db.publications : []).slice(0, 15).map(pub =>
             `${pub.year || ''} ${pub.title || ''} (${pub.venue || ''})`.trim()
         );
-        const courseLines = (Array.isArray(db.courses) ? db.courses : []).slice(0, 20).map(c =>
+        const courseLines = (Array.isArray(db.courses) ? db.courses : []).slice(0, 15).map(c =>
             `${c.code || ''} ${c.title || ''}`.trim()
         );
 
+        const bmDigest = extractBookmarksProfileDigest();
+
+        const standingMandate = [
+            'PRIORITY DAILY INVESTIGATIVE INTERESTS (Explicit User Mandate):',
+            '- Human trafficking (anti-trafficking enforcement, modern slavery, survivor protection, supply-chain accountability, UNODC/NGO reports)',
+            '- United Nations initiatives (UN News, UN OCHA, UNHCR, UNICEF, UNODC, WHO, UN General Assembly & Security Council developments)',
+            '- Global humanitarian efforts & crisis relief (displacement, humanitarian corridors, aid funding, NGOs, global development)',
+            '- Companies, institutions, banks, cloud/AI vendors, universities, and service domains inferred directly from the user\'s bookmarks',
+            '- Ongoing investigative story arcs and long-term structural significance rather than surface repetition',
+        ].join('\n');
+
         const corpusText = [
+            standingMandate,
+            '=== BOOKMARKS: COMPANIES, INSTITUTIONS & DOMAINS ===',
+            bmDigest.digestText.slice(0, 3200),
             '=== WEBSITE PAGES ===',
-            pageChunks.join('\n').slice(0, 9500),
+            pageChunks.join('\n').slice(0, 4200),
             '=== PORTFOLIO PROJECTS ===',
-            projectSummaryLines.join('\n').slice(0, 4200),
-            pubLines.length ? '=== PUBLICATIONS ===\n' + pubLines.join('\n').slice(0, 1500) : '',
-            courseLines.length ? '=== COURSES ===\n' + courseLines.join('\n').slice(0, 1000) : '',
+            projectSummaryLines.join('\n').slice(0, 2200),
+            pubLines.length ? '=== PUBLICATIONS ===\n' + pubLines.join('\n').slice(0, 900) : '',
+            courseLines.length ? '=== COURSES ===\n' + courseLines.join('\n').slice(0, 600) : '',
         ].filter(Boolean).join('\n\n');
 
         return {
@@ -7327,6 +7390,8 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             corpusHash: hashString32(corpusText),
             pagesParsed,
             projectsParsed: projList.length,
+            bookmarksParsed: bmDigest.bookmarksParsed,
+            topDomainList: bmDigest.topDomainList,
         };
     }
 
@@ -7335,10 +7400,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const sumEl = document.getElementById('news-profile-summary');
         const metaEl = document.getElementById('news-profile-meta');
         const themesEl = document.getElementById('news-profile-themes');
+        const compEl = document.getElementById('news-profile-companies');
         if (sumEl) sumEl.textContent = stored.profile.semantic_summary || '';
         if (metaEl) {
             const dt = stored.generatedAt ? new Date(stored.generatedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-            metaEl.textContent = `Parsed ${stored.pagesParsed || 0} pages & ${stored.projectsParsed || 0} projects${dt ? ` • ${dt}` : ''}`;
+            metaEl.textContent = `Parsed ${stored.pagesParsed || 0} pages, ${stored.projectsParsed || 0} projects & ${stored.bookmarksParsed || 0} bookmarks${dt ? ` • ${dt}` : ''}`;
         }
         if (themesEl) {
             const themes = Array.isArray(stored.profile.core_themes) ? stored.profile.core_themes : [];
@@ -7347,35 +7413,38 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 return label ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/15 text-purple-200 border border-purple-500/30">${escapeHtml(label)}</span>` : '';
             }).join('');
         }
+        if (compEl) {
+            const comps = Array.isArray(stored.profile.companies_and_orgs) ? stored.profile.companies_and_orgs : [];
+            const doms = Array.isArray(stored.profile.bookmark_domains) ? stored.profile.bookmark_domains : [];
+            if (comps.length || doms.length) {
+                compEl.classList.remove('hidden');
+                compEl.innerHTML = `<span class="text-[10px] uppercase tracking-wider font-bold text-sky-300 mr-1">Inferred from Bookmarks:</span>` +
+                    comps.slice(0, 12).map(c => `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-sky-500/15 text-sky-200 border border-sky-500/30">${escapeHtml(c)}</span>`).join('') +
+                    doms.slice(0, 6).map(d => `<span class="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-emerald-300 border border-emerald-500/25">${escapeHtml(d)}</span>`).join('');
+            } else {
+                compEl.classList.add('hidden');
+            }
+        }
     }
 
     function buildLocalFallbackInterestProfile(corpus) {
-        const db = window.__SITE_DATABASE || {};
-        const projList = (portalProjectsState.unlocked && portalProjectsState.projects.length)
-            ? portalProjectsState.projects
-            : (Array.isArray(db.projects) ? db.projects : []);
-        const cats = new Map();
-        const tagCounts = new Map();
-        projList.forEach(p => {
-            const c = (p.category || p.project_kind || '').trim();
-            if (c) cats.set(c, (cats.get(c) || 0) + 1);
-            (p.tags || []).forEach(t => tagCounts.set(t, (tagCounts.get(t) || 0) + 1));
-            (p.keywords || []).slice(0, 4).forEach(k => tagCounts.set(k, (tagCounts.get(k) || 0) + 1));
-        });
-        const topCats = Array.from(cats.entries()).sort((a, b) => b[1] - a[1]).slice(0, 5).map(x => x[0]);
-        const topKw = Array.from(tagCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 14).map(x => x[0]);
-        const coreThemes = topCats.length
-            ? topCats.map(c => ({ topic: c, focus: `Latest research, breakthroughs, and industry developments in ${c}` }))
-            : [
-                { topic: 'AI for Life Sciences & Bioinformatics', focus: 'Protein GNNs, structural biology, biomedical foundation models' },
-                { topic: 'Knowledge Graphs & Entity Resolution', focus: 'Biomedical NLP, graph ML, LLMs, data curation' },
-                { topic: 'Scientific Visualization & HCI', focus: 'WebGL, VR, eye-tracking, interactive analytics' },
-                { topic: 'Higher-Ed CS & NSF Research', focus: 'Computer science education, NSF grants, academic computing' },
-            ];
+        const inferredCompanies = (corpus.topDomainList || [])
+            .filter(h => !/google\.com|youtube\.com|wikipedia\.org/.test(h))
+            .slice(0, 10)
+            .map(h => h.split('.')[0].toUpperCase().length <= 4 ? h.split('.')[0].toUpperCase() : h.split('.')[0].replace(/^\w/, c => c.toUpperCase()));
+        const coreThemes = [
+            { topic: 'Human Trafficking & Modern Slavery', focus: 'Anti-trafficking enforcement, UNODC, survivor advocacy, supply-chain accountability', search_query: 'human trafficking UNODC' },
+            { topic: 'United Nations & Humanitarian Work', focus: 'UN OCHA, UNHCR, UNICEF, global humanitarian aid, crisis diplomacy', search_query: 'United Nations humanitarian' },
+            { topic: 'Companies & Domains (Bookmarks)', focus: `News on organizations and sectors from bookmarks (${inferredCompanies.slice(0, 6).join(', ')})`, search_query: inferredCompanies.slice(0, 3).join(' ') || 'enterprise cloud tech' },
+            { topic: 'AI for Life Sciences & Bioinformatics', focus: 'Protein GNNs, structural biology, biomedical knowledge graphs & entity resolution', search_query: 'AI protein bioinformatics' },
+            { topic: 'Higher-Ed CS, NSF & Visualization', focus: 'NSF grants, academic AI, WebGL/VR scientific visualization & HCI', search_query: 'NSF AI computer science' },
+        ];
         return {
-            semantic_summary: `Parsed locally from ${corpus.pagesParsed} website pages and ${corpus.projectsParsed} portfolio projects spanning ${coreThemes.map(t => t.topic).join(', ')}. (Click "Rebuild" once Gemini API quota resets to regenerate the full LLM prose summary.)`,
+            semantic_summary: `Synthesized from ${corpus.pagesParsed} website pages, ${corpus.projectsParsed} projects, and ${corpus.bookmarksParsed} bookmarks with priority investigative tracking of human trafficking, United Nations initiatives, humanitarian work, inferred bookmark companies/domains, and AI for life sciences. (Click "Rebuild" once Gemini quota resets for full LLM prose synthesis.)`,
             core_themes: coreThemes,
-            keywords: topKw.length ? topKw : ['AI', 'Bioinformatics', 'Protein', 'Graph Neural Networks', 'Knowledge Graphs', 'Entity Resolution', 'LLM', 'Visualization', 'NSF'],
+            companies_and_orgs: inferredCompanies,
+            bookmark_domains: ['Cloud & AI Tech', 'Higher Education', 'Finance & Banking', 'Biotech & Healthcare', 'Humanitarian & Global Policy'],
+            keywords: ['human trafficking', 'United Nations', 'UNHCR', 'UNODC', 'humanitarian', 'modern slavery', 'refugees', 'AI', 'bioinformatics', 'protein', 'knowledge graph', 'NSF', ...inferredCompanies.slice(0, 6)],
             fallbackLocal: true,
         };
     }
@@ -7392,20 +7461,25 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             } catch (e) { }
         }
 
-        setNewsStatusBanner(`Stage 1/2: Parsing ${corpus.pagesParsed} website pages & ${corpus.projectsParsed} projects to build Gemini semantic interest profile...`);
-        const compactCorpus = corpus.corpusText.slice(0, 6800);
-        const prompt = `Analyze this parsed personal website corpus (pages, projects, publications, courses) for Dr. Islam Akef Ebeid and synthesize a rich semantic description of their research, engineering, academic, entrepreneurial, and cultural interests for curating daily top news.
+        setNewsStatusBanner(`Stage 1/2: Parsing ${corpus.pagesParsed} pages, ${corpus.projectsParsed} projects & ${corpus.bookmarksParsed} bookmarks to build Gemini semantic profile...`);
+        const compactCorpus = corpus.corpusText.slice(0, 9200);
+        const prompt = `Analyze ALL of the following parsed personal website content, 431 browser bookmarks, and explicit investigative priorities for Dr. Islam Akef Ebeid.
+1. Infer the key real-world companies, platforms, universities, banks, healthcare/biotech orgs, and industry domains the user deals with based on their bookmarks.
+2. Integrate their explicit high-priority investigative focus on human trafficking, United Nations initiatives, and global humanitarian efforts.
+3. Combine with their academic/scientific/software/cultural website identity (AI for life sciences, bioinformatics, knowledge graphs, entity resolution, NSF/higher-ed CS, visualization, poetry/scholarship).
 
 Return ONLY a JSON object:
 {
-  "semantic_summary": "3-4 rich sentences capturing the full breadth of their domains, tech stack, higher-ed/funding focus, and personal interests.",
+  "semantic_summary": "3-4 rich sentences capturing their humanitarian/UN investigative focus, companies/domains inferred from bookmarks, and scientific/academic/personal interests.",
   "core_themes": [
-    {"topic": "Short Theme Name (3-5 words)", "focus": "Specific angles to watch in today's news", "search_query": "2-4 crisp search terms"}
+    {"topic": "Short Theme Name (3-5 words)", "focus": "Specific angles to track for ongoing story arcs", "search_query": "2-4 crisp search terms"}
   ],
-  "keywords": ["10-14 high-signal domain keywords"]
+  "companies_and_orgs": ["8-12 specific companies, institutions, or organizations inferred from the bookmarks (e.g. AWS, Intel, AbbVie, Microsoft, Fidelity, TWU, etc.)"],
+  "bookmark_domains": ["5-7 industry/life domains inferred from bookmarks"],
+  "keywords": ["14-18 high-signal keywords covering human trafficking, United Nations, humanitarian work, inferred companies, and AI/bioinformatics"]
 }
 
-Website Corpus:
+Corpus:
 ${compactCorpus}`;
 
         let profileObj = null;
@@ -7415,8 +7489,10 @@ ${compactCorpus}`;
             });
             profileObj = {
                 semantic_summary: raw?.semantic_summary || '',
-                core_themes: Array.isArray(raw?.core_themes) ? raw.core_themes.slice(0, 6) : [],
-                keywords: Array.isArray(raw?.keywords) ? raw.keywords.slice(0, 14) : [],
+                core_themes: Array.isArray(raw?.core_themes) ? raw.core_themes.slice(0, 7) : [],
+                companies_and_orgs: Array.isArray(raw?.companies_and_orgs) ? raw.companies_and_orgs.slice(0, 14) : [],
+                bookmark_domains: Array.isArray(raw?.bookmark_domains) ? raw.bookmark_domains.slice(0, 8) : [],
+                keywords: Array.isArray(raw?.keywords) ? raw.keywords.slice(0, 20) : [],
                 fallbackLocal: false,
             };
         } catch (err) {
@@ -7432,6 +7508,7 @@ ${compactCorpus}`;
             generatedAt: new Date().toISOString(),
             pagesParsed: corpus.pagesParsed,
             projectsParsed: corpus.projectsParsed,
+            bookmarksParsed: corpus.bookmarksParsed,
             profile: profileObj,
         };
         try { localStorage.setItem(NEWS_PROFILE_KEY, JSON.stringify(stored)); } catch (e) { }
@@ -7440,9 +7517,11 @@ ${compactCorpus}`;
     }
 
     async function fetchLiveOpenNewsPool(prof) {
+        const comps = Array.isArray(prof?.companies_and_orgs) ? prof.companies_and_orgs : [];
+        const compQuery = comps.slice(0, 3).join(' ') || 'Microsoft AWS Intel Google';
         const themes = Array.isArray(prof?.core_themes) ? prof.core_themes : [];
-        const q1 = (themes[0]?.search_query || themes[0]?.topic || 'AI bioinformatics protein').split(/[^A-Za-z0-9]+/).filter(w => w.length > 2).slice(0, 3).join(' ');
-        const q2 = (themes[1]?.search_query || themes[1]?.topic || 'LLM knowledge graph').split(/[^A-Za-z0-9]+/).filter(w => w.length > 2).slice(0, 3).join(' ');
+        const sciTheme = themes.find(t => /ai|bio|protein|graph|science|tech/i.test(String(t?.topic || ''))) || themes[0];
+        const sciQuery = (sciTheme?.search_query || sciTheme?.topic || 'AI protein bioinformatics').split(/[^A-Za-z0-9]+/).filter(w => w.length > 2).slice(0, 3).join(' ');
 
         const safeJson = async (url, timeoutMs = 8000) => {
             const ctrl = new AbortController();
@@ -7466,17 +7545,25 @@ ${compactCorpus}`;
         };
 
         const rssFeeds = [
-            { source: 'Nature', url: 'https://www.nature.com/nature.rss' },
-            { source: 'ScienceDaily AI', url: 'https://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml' },
-            { source: 'Ars Technica', url: 'https://feeds.arstechnica.com/arstechnica/index' },
-            { source: 'BBC World', url: 'https://feeds.bbci.co.uk/news/world/rss.xml' },
+            // Priority Pillar 1: United Nations, Humanitarian Work & Human Trafficking
+            { source: 'UN News', pillar: 'humanitarian_un', url: 'https://news.un.org/feed/subscribe/en/news/all/rss.xml', take: 7 },
+            { source: 'ReliefWeb (UN OCHA)', pillar: 'humanitarian_un', url: 'https://reliefweb.int/updates/rss.xml', take: 6 },
+            { source: 'The New Humanitarian', pillar: 'humanitarian_un', url: 'https://www.thenewhumanitarian.org/rss/all.xml', take: 5 },
+            { source: 'The Guardian — Modern Slavery', pillar: 'human_trafficking', url: 'https://www.theguardian.com/global-development/series/modern-day-slavery-in-focus/rss', take: 5 },
+            { source: 'The Guardian — Global Dev', pillar: 'humanitarian_un', url: 'https://www.theguardian.com/global-development/rss', take: 5 },
+            // Priority Pillar 2: Companies & Business Domains (Bookmarks)
+            { source: 'CNBC Business', pillar: 'companies', url: 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114', take: 5 },
+            { source: 'TechCrunch', pillar: 'companies', url: 'https://techcrunch.com/feed/', take: 5 },
+            // Priority Pillar 3: AI, Life Sciences & Research (Website)
+            { source: 'Nature', pillar: 'science_ai', url: 'https://www.nature.com/nature.rss', take: 5 },
+            { source: 'ScienceDaily AI', pillar: 'science_ai', url: 'https://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml', take: 5 },
         ];
 
-        const [rssResults, hn1, hn2, oa] = await Promise.all([
-            Promise.all(rssFeeds.map(f => safeJson(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`).then(d => ({ source: f.source, data: d })))),
-            safeJson(`https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(q1 || 'AI')}&tags=story&hitsPerPage=8`),
-            safeJson(`https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(q2 || 'machine learning')}&tags=story&hitsPerPage=6`),
-            safeJson(`https://api.openalex.org/works?search=${encodeURIComponent(q1 || 'protein graph neural network')}&sort=publication_date:desc&per-page=5`),
+        const [rssResults, hnComp, hnSci, oa] = await Promise.all([
+            Promise.all(rssFeeds.map(f => safeJson(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`).then(d => ({ ...f, data: d })))),
+            safeJson(`https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(compQuery)}&tags=story&hitsPerPage=6`),
+            safeJson(`https://hn.algolia.com/api/v1/search_by_date?query=${encodeURIComponent(sciQuery || 'AI')}&tags=story&hitsPerPage=5`),
+            safeJson(`https://api.openalex.org/works?search=${encodeURIComponent(sciQuery || 'protein graph neural network')}&sort=publication_date:desc&per-page=4`),
         ]);
 
         const items = [];
@@ -7488,6 +7575,7 @@ ${compactCorpus}`;
             seenUrls.add(url);
             items.push({
                 id: items.length,
+                pillar: it.pillar || 'general',
                 headline: headline.slice(0, 180),
                 snippet: stripHtml(it.snippet).slice(0, 220),
                 source_name: it.source_name || 'News',
@@ -7496,9 +7584,10 @@ ${compactCorpus}`;
             });
         };
 
-        rssResults.forEach(({ source, data }) => {
-            ((data && data.items) || []).slice(0, 7).forEach(entry => {
+        rssResults.forEach(({ source, pillar, take, data }) => {
+            ((data && data.items) || []).slice(0, take || 5).forEach(entry => {
                 pushItem({
+                    pillar,
                     headline: entry.title,
                     snippet: entry.description || entry.content,
                     source_name: source,
@@ -7508,11 +7597,24 @@ ${compactCorpus}`;
             });
         });
 
-        [...(hn1?.hits || []), ...(hn2?.hits || [])].forEach(h => {
+        (hnComp?.hits || []).forEach(h => {
             if (!h.title) return;
             pushItem({
+                pillar: 'companies',
                 headline: h.title,
-                snippet: `Hacker News discussion (${h.points || 0} pts, ${h.num_comments || 0} comments).`,
+                snippet: `Hacker News tech/company discussion (${h.points || 0} pts, ${h.num_comments || 0} comments).`,
+                source_name: 'Hacker News',
+                published: h.created_at,
+                url: h.url || `https://news.ycombinator.com/item?id=${h.objectID}`,
+            });
+        });
+
+        (hnSci?.hits || []).forEach(h => {
+            if (!h.title) return;
+            pushItem({
+                pillar: 'science_ai',
+                headline: h.title,
+                snippet: `Hacker News AI/science discussion (${h.points || 0} pts).`,
                 source_name: 'Hacker News',
                 published: h.created_at,
                 url: h.url || `https://news.ycombinator.com/item?id=${h.objectID}`,
@@ -7522,8 +7624,9 @@ ${compactCorpus}`;
         ((oa && oa.results) || []).forEach(w => {
             const url = w.doi || w.primary_location?.landing_page_url || w.id;
             pushItem({
+                pillar: 'science_ai',
                 headline: w.display_name || w.title,
-                snippet: `New paper${w.primary_location?.source?.display_name ? ' in ' + w.primary_location.source.display_name : ''}.`,
+                snippet: `New peer-reviewed work${w.primary_location?.source?.display_name ? ' in ' + w.primary_location.source.display_name : ''}.`,
                 source_name: w.primary_location?.source?.display_name || 'OpenAlex Research',
                 published: w.publication_date,
                 url,
@@ -7533,17 +7636,71 @@ ${compactCorpus}`;
         return items;
     }
 
+    function getRecentNewsArcs() {
+        try {
+            const arr = JSON.parse(localStorage.getItem(NEWS_ARC_HISTORY_KEY) || '[]');
+            return Array.isArray(arr) ? arr.slice(-20) : [];
+        } catch (e) { return []; }
+    }
+
+    function recordNewsArcs(dateISO, stories) {
+        try {
+            const prev = getRecentNewsArcs().filter(x => x.date !== dateISO);
+            (stories || []).slice(0, 6).forEach(s => {
+                prev.push({ date: dateISO, topic: s.topic || '', headline: (s.headline || '').slice(0, 110) });
+            });
+            localStorage.setItem(NEWS_ARC_HISTORY_KEY, JSON.stringify(prev.slice(-30)));
+        } catch (e) { }
+    }
+
+    function buildStructuredFallbackBriefing(pool, prof) {
+        const ranked = rankLiveNewsLocally(pool, prof);
+        const humPool = ranked.filter(x => x.pillar === 'human_trafficking' || x.pillar === 'humanitarian_un');
+        const compPool = ranked.filter(x => x.pillar === 'companies');
+        const sciPool = ranked.filter(x => x.pillar === 'science_ai');
+
+        const used = new Set();
+        const takeOne = (arr) => {
+            const hit = arr.find(x => !used.has(x.url));
+            if (hit) used.add(hit.url);
+            return hit || null;
+        };
+
+        const lead = takeOne(humPool) || takeOne(ranked);
+        const deep = takeOne(humPool.filter(x => x.pillar === 'human_trafficking')) || takeOne(humPool) || takeOne(sciPool) || takeOne(ranked);
+        const quick = [
+            takeOne(humPool),
+            takeOne(compPool),
+            takeOne(sciPool),
+            takeOne(compPool),
+            takeOne(ranked),
+        ].filter(Boolean);
+
+        const enrich = (st, isDeep) => st ? ({
+            ...st,
+            long_term_impact: st.long_term_impact || (isDeep ? 'Signals ongoing structural shifts in policy, international funding, and institutional accountability.' : ''),
+            arc_evolution: st.arc_evolution || 'Tracked against live humanitarian, UN, and domain feeds.',
+        }) : null;
+
+        return {
+            lead_story: enrich(lead, true),
+            quick_hits: quick.map(q => enrich(q, false)),
+            deep_dive: enrich(deep, true),
+        };
+    }
+
     function rankLiveNewsLocally(pool, prof) {
         const kwList = [
+            'trafficking', 'slavery', 'unhcr', 'unodc', 'ocha', 'humanitarian', 'united nations', 'refugee', 'aid',
             ...(prof?.keywords || []),
+            ...(prof?.companies_and_orgs || []),
             ...(prof?.core_themes || []).map(t => typeof t === 'string' ? t : `${t.topic || ''} ${t.focus || ''}`),
-        ].join(' ').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 3);
+        ].join(' ').toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 2);
         const kwSet = new Set(kwList);
-        const themes = Array.isArray(prof?.core_themes) ? prof.core_themes : [];
 
         const scored = pool.map(it => {
             const txt = `${it.headline} ${it.snippet} ${it.source_name}`.toLowerCase();
-            let score = 0;
+            let score = it.pillar === 'human_trafficking' ? 4.5 : (it.pillar === 'humanitarian_un' ? 3.5 : 1.0);
             const matched = [];
             kwSet.forEach(w => {
                 if (txt.includes(w)) {
@@ -7551,33 +7708,83 @@ ${compactCorpus}`;
                     if (matched.length < 3) matched.push(w);
                 }
             });
-            if (/nature|sciencedaily|openalex/i.test(it.source_name)) score += 1.5;
-            const bestTheme = themes.find(t => {
-                const toks = `${t.topic || ''} ${t.focus || ''}`.toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 3);
-                return toks.some(tk => txt.includes(tk));
-            });
             return {
                 ...it,
                 _score: score,
-                topic: bestTheme?.topic || it.source_name,
-                summary: it.snippet || `Top update from ${it.source_name}.`,
-                why_relevant: matched.length ? `Matches website interests: ${matched.join(', ')}` : `Curated from ${it.source_name} live feed`,
+                topic: it.pillar === 'human_trafficking' ? 'Human Trafficking'
+                    : (it.pillar === 'humanitarian_un' ? 'UN & Humanitarian'
+                    : (it.pillar === 'companies' ? 'Bookmarks & Companies' : 'AI & Science')),
+                summary: it.snippet || `Update from ${it.source_name}.`,
+                why_relevant: matched.length ? `Matches profile: ${matched.join(', ')}` : `Live coverage via ${it.source_name}`,
             };
         });
 
         scored.sort((a, b) => b._score - a._score);
-        // Diversify across sources (max 2 per source in top 7)
-        const picked = [];
-        const srcCounts = {};
-        for (const s of scored) {
-            const c = srcCounts[s.source_name] || 0;
-            if (c >= 2) continue;
-            srcCounts[s.source_name] = c + 1;
-            picked.push(s);
-            if (picked.length >= 7) break;
-        }
-        return picked;
+        return scored;
     }
+
+    function formatBriefingAsMarkdown(bundle) {
+        const dt = bundle?.generatedAt ? new Date(bundle.generatedAt).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : 'Today';
+        const lines = [`# ${NEWS_DIGEST_SUBJECT} — ${dt}`, ''];
+        const b = bundle?.briefing;
+        if (b?.lead_story) {
+            const s = b.lead_story;
+            lines.push(`## LEAD STORY: ${s.headline}`);
+            lines.push(`- **Topic:** ${s.topic || 'Briefing'} | **Source:** [${s.source_name || 'Source'}](${s.url}) (${s.published || 'Recent'})`);
+            lines.push(`- **Summary:** ${s.summary || ''}`);
+            if (s.long_term_impact) lines.push(`- **Why It Matters Long-Term:** ${s.long_term_impact}`);
+            if (s.arc_evolution) lines.push(`- **Story Arc Evolution:** ${s.arc_evolution}`);
+            lines.push('');
+        }
+        if (Array.isArray(b?.quick_hits) && b.quick_hits.length) {
+            lines.push('## QUICK HITS');
+            b.quick_hits.forEach((q, idx) => {
+                lines.push(`${idx + 1}. **${q.headline}** — ${q.summary || ''} ([${q.source_name || 'Source'}](${q.url}))${q.why_relevant ? ` *— ${q.why_relevant}*` : ''}`);
+            });
+            lines.push('');
+        }
+        if (b?.deep_dive) {
+            const d = b.deep_dive;
+            lines.push(`## DEEP DIVE: ${d.headline}`);
+            lines.push(`- **Topic:** ${d.topic || 'Deep Dive'} | **Source:** [${d.source_name || 'Source'}](${d.url}) (${d.published || 'Recent'})`);
+            lines.push(`- **Analysis:** ${d.summary || ''}`);
+            if (d.long_term_impact) lines.push(`- **Long-Term Impact:** ${d.long_term_impact}`);
+            if (d.arc_evolution) lines.push(`- **Ongoing Arc:** ${d.arc_evolution}`);
+            lines.push('');
+        }
+        return lines.join('\n');
+    }
+
+    window.copyDashboardNewsMarkdown = async function () {
+        try {
+            const bundle = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY) || 'null');
+            if (!bundle || !bundle.briefing) {
+                showPortalToast('Generate today\'s briefing first before copying.', 'warn');
+                return;
+            }
+            const md = formatBriefingAsMarkdown(bundle);
+            await navigator.clipboard.writeText(md);
+            showPortalToast('Copied Daily Investigative News Digest (Markdown with citations)');
+        } catch (err) {
+            showPortalToast(`Copy failed: ${err.message}`, 'error');
+        }
+    };
+
+    window.emailDashboardNewsDigest = function () {
+        try {
+            const bundle = JSON.parse(localStorage.getItem(NEWS_CACHE_KEY) || 'null');
+            if (!bundle || !bundle.briefing) {
+                showPortalToast('Generate today\'s briefing first before drafting email.', 'warn');
+                return;
+            }
+            const md = formatBriefingAsMarkdown(bundle).slice(0, 1850);
+            const mailto = `mailto:${encodeURIComponent(NEWS_DIGEST_EMAIL)}?subject=${encodeURIComponent(NEWS_DIGEST_SUBJECT)}&body=${encodeURIComponent(md)}`;
+            window.location.href = mailto;
+            showPortalToast(`Opening email draft to ${NEWS_DIGEST_EMAIL}`);
+        } catch (err) {
+            showPortalToast(`Could not open email draft: ${err.message}`, 'error');
+        }
+    };
 
     function matchStoryToGroundedSource(story, groundingSources) {
         const directUrl = (story.url || '').trim();
@@ -7590,14 +7797,76 @@ ${compactCorpus}`;
         return `https://news.google.com/search?q=${encodeURIComponent(story.headline || story.topic || '')}`;
     }
 
+    function renderBriefingStoryCard(st, variant, sources) {
+        if (!st) return '';
+        const href = matchStoryToGroundedSource(st, sources);
+        const topic = st.topic || 'Briefing';
+        const srcName = st.source_name || 'News';
+        const pub = st.published || 'Recent';
+
+        if (variant === 'lead') {
+            return `
+                <article class="bg-gradient-to-br from-purple-950/50 via-slate-950 to-slate-950 border border-purple-500/40 rounded-xl p-4 space-y-2 shadow">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/40"><i class="fas fa-bolt mr-1"></i>Lead Story</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">${escapeHtml(topic)}</span>
+                            <span class="text-[10px] font-mono text-slate-400">${escapeHtml(srcName)} &bull; ${escapeHtml(pub)}</span>
+                        </div>
+                        <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 inline-flex items-center gap-1">Source <i class="fas fa-external-link-alt text-[9px]"></i></a>
+                    </div>
+                    <h3 class="text-sm font-bold text-white leading-snug"><a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition">${escapeHtml(st.headline || '')}</a></h3>
+                    <p class="text-[11px] text-slate-200 leading-relaxed">${escapeHtml(st.summary || '')}</p>
+                    ${st.long_term_impact ? `<div class="text-[11px] text-amber-200/90 bg-amber-500/10 border border-amber-500/20 rounded-lg px-2.5 py-1.5"><strong class="text-amber-300">Long-Term Impact:</strong> ${escapeHtml(st.long_term_impact)}</div>` : ''}
+                    ${st.arc_evolution ? `<div class="text-[10px] text-sky-300/90 flex items-start gap-1.5"><i class="fas fa-project-diagram mt-0.5 text-[9px]"></i><span><strong>Arc Evolution:</strong> ${escapeHtml(st.arc_evolution)}</span></div>` : ''}
+                </article>
+            `;
+        }
+
+        if (variant === 'deep') {
+            return `
+                <article class="bg-slate-950/90 border border-emerald-500/35 rounded-xl p-4 space-y-2">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"><i class="fas fa-microscope mr-1"></i>Deep Dive</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-200 border border-slate-700">${escapeHtml(topic)}</span>
+                            <span class="text-[10px] font-mono text-slate-400">${escapeHtml(srcName)} &bull; ${escapeHtml(pub)}</span>
+                        </div>
+                        <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1">Cite <i class="fas fa-external-link-alt text-[9px]"></i></a>
+                    </div>
+                    <h3 class="text-xs sm:text-sm font-bold text-white leading-snug"><a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-300 transition">${escapeHtml(st.headline || '')}</a></h3>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">${escapeHtml(st.summary || '')}</p>
+                    ${st.long_term_impact ? `<div class="text-[11px] text-emerald-200/90"><strong class="text-emerald-300">Why It Matters:</strong> ${escapeHtml(st.long_term_impact)}</div>` : ''}
+                    ${st.arc_evolution ? `<div class="text-[10px] text-slate-400"><strong class="text-slate-300">Ongoing Arc:</strong> ${escapeHtml(st.arc_evolution)}</div>` : ''}
+                </article>
+            `;
+        }
+
+        return `
+            <article class="bg-slate-950/70 hover:bg-slate-950 border border-slate-800/80 hover:border-sky-500/40 rounded-xl p-3 transition space-y-1">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30">${escapeHtml(topic)}</span>
+                        <span class="text-[10px] font-mono text-slate-400">${escapeHtml(srcName)} &bull; ${escapeHtml(pub)}</span>
+                    </div>
+                    <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="text-[10px] font-semibold text-sky-400 hover:text-sky-300 inline-flex items-center gap-1 flex-shrink-0">Read <i class="fas fa-external-link-alt text-[8px]"></i></a>
+                </div>
+                <h4 class="text-xs font-bold text-white leading-snug"><a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition">${escapeHtml(st.headline || '')}</a></h4>
+                <p class="text-[11px] text-slate-300 leading-relaxed">${escapeHtml(st.summary || '')}</p>
+                ${st.why_relevant ? `<div class="text-[10px] text-emerald-300/85">${escapeHtml(st.why_relevant)}</div>` : ''}
+            </article>
+        `;
+    }
+
     function renderDashboardCuratedNews(bundle) {
         const listEl = document.getElementById('dashboard-news-list');
         const badgeEl = document.getElementById('news-date-badge');
         const srcBar = document.getElementById('news-sources-bar');
         if (!listEl) return;
 
-        const stories = Array.isArray(bundle?.stories) ? bundle.stories : [];
         const sources = Array.isArray(bundle?.groundingSources) ? bundle.groundingSources : [];
+        const b = bundle?.briefing || null;
+        const legacyStories = Array.isArray(bundle?.stories) ? bundle.stories : [];
 
         if (badgeEl) {
             const dt = bundle?.generatedAt
@@ -7606,36 +7875,24 @@ ${compactCorpus}`;
             badgeEl.textContent = `${dt} • ${bundle?.modeLabel || bundle?.model || 'Gemini Semantic'}`;
         }
 
-        if (!stories.length) {
-            listEl.innerHTML = '<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center text-xs text-slate-400">No stories returned. Click <strong>Refresh News</strong> to try again.</div>';
+        if (!b && !legacyStories.length) {
+            listEl.innerHTML = '<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center text-xs text-slate-400">No stories returned. Click <strong>Refresh</strong> to try again.</div>';
             if (srcBar) srcBar.classList.add('hidden');
             return;
         }
 
-        listEl.innerHTML = stories.map(st => {
-            const href = matchStoryToGroundedSource(st, sources);
-            const topic = st.topic || 'Briefing';
-            const srcName = st.source_name || 'News';
-            const pub = st.published || 'Today';
-            return `
-                <article class="bg-slate-950/70 hover:bg-slate-950 border border-slate-800/80 hover:border-purple-500/40 rounded-xl p-3.5 transition space-y-1.5">
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <div class="flex flex-wrap items-center gap-1.5">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">${escapeHtml(topic)}</span>
-                            <span class="text-[10px] font-mono text-slate-400">${escapeHtml(srcName)} &bull; ${escapeHtml(pub)}</span>
-                        </div>
-                        <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-sky-400 hover:text-sky-300 inline-flex items-center gap-1 flex-shrink-0">
-                            Read <i class="fas fa-external-link-alt text-[9px]"></i>
-                        </a>
-                    </div>
-                    <h3 class="text-xs sm:text-sm font-bold text-white leading-snug">
-                        <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition">${escapeHtml(st.headline || '')}</a>
-                    </h3>
-                    <p class="text-[11px] text-slate-300 leading-relaxed">${escapeHtml(st.summary || '')}</p>
-                    ${st.why_relevant ? `<div class="text-[10px] text-emerald-300/90 flex items-center gap-1.5 pt-0.5"><i class="fas fa-sparkles text-[9px]"></i><span>${escapeHtml(st.why_relevant)}</span></div>` : ''}
-                </article>
-            `;
-        }).join('');
+        if (b) {
+            const quickHtml = (b.quick_hits || []).length
+                ? `<div class="space-y-2"><div class="text-[10px] uppercase tracking-wider font-bold text-slate-400 px-1 pt-1"><i class="fas fa-stream mr-1 text-sky-400"></i>Quick Hits (UN/Humanitarian &bull; Bookmark Companies &bull; AI/Science)</div>${b.quick_hits.map(q => renderBriefingStoryCard(q, 'quick', sources)).join('')}</div>`
+                : '';
+            listEl.innerHTML = [
+                renderBriefingStoryCard(b.lead_story, 'lead', sources),
+                quickHtml,
+                renderBriefingStoryCard(b.deep_dive, 'deep', sources),
+            ].filter(Boolean).join('');
+        } else {
+            listEl.innerHTML = legacyStories.map(st => renderBriefingStoryCard(st, 'quick', sources)).join('');
+        }
 
         if (srcBar) {
             if (sources.length) {
@@ -7645,7 +7902,7 @@ ${compactCorpus}`;
                 for (const s of sources) {
                     if (!seenUri.has(s.uri)) { seenUri.add(s.uri); dedup.push(s); }
                 }
-                srcBar.innerHTML = `<span class="font-bold uppercase tracking-wider text-slate-500 mr-1">Live Feeds:</span>` +
+                srcBar.innerHTML = `<span class="font-bold uppercase tracking-wider text-slate-500 mr-1">Cited Sources:</span>` +
                     dedup.slice(0, 8).map(s => `<a href="${escapeHtml(s.uri)}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-sky-300 truncate max-w-[180px]" title="${escapeHtml(s.title || s.uri)}">${escapeHtml(s.title || s.uri)}</a>`).join('');
             } else {
                 srcBar.classList.add('hidden');
@@ -7661,7 +7918,7 @@ ${compactCorpus}`;
             if (listEl) {
                 listEl.innerHTML = `
                     <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-5 text-center space-y-2.5">
-                        <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> to parse your website interests and curate today&apos;s top news.</p>
+                        <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> to parse your website + bookmarks and build your Daily Investigative News Digest.</p>
                         <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
                     </div>
                 `;
@@ -7681,97 +7938,124 @@ ${compactCorpus}`;
             const todayISO = new Date().toISOString().slice(0, 10);
             const todayHuman = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-            setNewsStatusBanner(`Stage 2/2: Fetching today's live headlines (Nature, ScienceDaily AI, Ars Technica, BBC, HN, OpenAlex)...`);
+            setNewsStatusBanner(`Stage 2/2: Fetching live feeds (UN News, ReliefWeb, New Humanitarian, Guardian Modern Slavery, CNBC, TechCrunch, Nature, ScienceDaily, HN, OpenAlex)...`);
             const livePool = await fetchLiveOpenNewsPool(prof);
             if (!livePool.length) {
                 throw new Error('Could not reach live news feeds right now. Check your internet connection.');
             }
 
-            let curatedStories = [];
-            let modeLabel = 'Gemini Semantic';
+            let briefing = null;
+            let modeLabel = 'Gemini Investigative';
             let quotaFallbackNote = '';
+            const recentArcs = getRecentNewsArcs();
 
-            setNewsStatusBanner(`Stage 2/2: Prompting Gemini to semantically curate top stories from ${livePool.length} live headlines...`);
-            const compactPool = livePool.slice(0, 34).map(it => ({
+            setNewsStatusBanner(`Stage 2/2: Prompting Gemini to curate Lead Story, Quick Hits & Deep Dive from ${livePool.length} live headlines...`);
+            const compactPool = livePool.slice(0, 48).map(it => ({
                 id: it.id,
+                pillar: it.pillar,
                 headline: it.headline,
-                snippet: it.snippet.slice(0, 140),
+                snippet: it.snippet.slice(0, 130),
                 source: it.source_name,
                 date: it.published,
             }));
 
-            const curatePrompt = `Today is ${todayHuman}. Using the SEMANTIC INTEREST PROFILE below (parsed from Dr. Islam Akef Ebeid's website), select and rank the 6 to 7 MOST RELEVANT stories from LIVE_NEWS_CANDIDATES.
+            const curatePrompt = `Today is ${todayHuman}. Curate a "Daily Investigative News Digest" for Dr. Islam Akef Ebeid strictly from LIVE_NEWS_CANDIDATES below.
 
-SEMANTIC INTEREST PROFILE:
-${prof.semantic_summary || ''}
-Themes: ${(prof.core_themes || []).map(t => typeof t === 'string' ? t : t.topic).join(' | ')}
-Keywords: ${(prof.keywords || []).join(', ')}
+USER SEMANTIC INTEREST PROFILE (Website + 431 Bookmarks + Investigative Mandate):
+Summary: ${prof.semantic_summary || ''}
+Priority Humanitarian/UN Focus: Human trafficking, modern slavery, United Nations initiatives (UN OCHA, UNHCR, UNODC, UNICEF), global humanitarian work.
+Inferred Companies & Orgs (from Bookmarks): ${(prof.companies_and_orgs || []).join(', ')}
+Bookmark Domains: ${(prof.bookmark_domains || []).join(', ')}
+Core Themes: ${(prof.core_themes || []).map(t => typeof t === 'string' ? t : t.topic).join(' | ')}
+
+RECENT STORY ARCS (track evolution rather than repeating past framing):
+${JSON.stringify(recentArcs.slice(-12))}
 
 LIVE_NEWS_CANDIDATES:
 ${JSON.stringify(compactPool)}
 
-Return ONLY a JSON array referencing real candidate ids:
-[{"id": number, "topic": "Short theme badge (2-4 words)", "summary": "1-2 crisp factual sentences based on headline/snippet", "why_relevant": "6-12 word tie-in to the user's interest profile"}]`;
+INSTRUCTIONS:
+1. Choose a high-impact LEAD STORY (strongly prioritizing human trafficking, United Nations initiatives, or major humanitarian developments from the past 24-48 hours). Analyze why it matters long-term and how the story arc is evolving.
+2. Choose 4 to 5 QUICK HITS covering a balanced mix of: (a) UN / humanitarian / human trafficking updates, (b) news about companies or domains inferred from the user's bookmarks, and (c) AI for life sciences / research / higher-ed computing.
+3. Choose 1 DEEP DIVE story (distinct from the Lead Story) analyzing structural long-term significance and ongoing story-arc evolution.
+4. Every item MUST reference a real candidate "id" from LIVE_NEWS_CANDIDATES so citations and URLs are 100% factual.
+
+Return ONLY a JSON object:
+{
+  "lead_story": {"id": number, "topic": "2-4 word tag", "summary": "2 concise factual sentences", "long_term_impact": "1-2 sentences on why it matters long-term", "arc_evolution": "1 sentence on how this ongoing arc is evolving"},
+  "quick_hits": [{"id": number, "topic": "2-4 word tag", "summary": "1-2 crisp factual sentences", "why_relevant": "6-12 word tie-in to profile/bookmarks/UN focus"}],
+  "deep_dive": {"id": number, "topic": "2-4 word tag", "summary": "2-3 analytical sentences", "long_term_impact": "1-2 sentences on structural impact", "arc_evolution": "1 sentence tracking ongoing evolution"}
+}`;
 
             try {
                 const raw = await callGeminiJson(apiKey, curatePrompt, 'gemini-3.8-flash', msg => {
-                    setNewsStatusBanner(`Stage 2/2 (Gemini Curation): ${msg}`);
+                    setNewsStatusBanner(`Stage 2/2 (Gemini Investigative Curation): ${msg}`);
                 });
-                const picks = Array.isArray(raw)
-                    ? raw
-                    : (raw && typeof raw === 'object' ? (raw.stories || raw.news || raw.items || Object.values(raw).find(Array.isArray) || []) : []);
                 const byId = new Map(livePool.map(it => [String(it.id), it]));
-                curatedStories = picks.map(pk => {
-                    const orig = byId.get(String(pk.id));
+                const hydrate = (obj) => {
+                    if (!obj || typeof obj !== 'object') return null;
+                    const orig = byId.get(String(obj.id));
                     if (!orig) return null;
                     return {
                         headline: orig.headline,
-                        summary: pk.summary || orig.snippet || orig.headline,
-                        why_relevant: pk.why_relevant || '',
-                        topic: pk.topic || orig.source_name,
+                        summary: obj.summary || orig.snippet || orig.headline,
+                        long_term_impact: obj.long_term_impact || '',
+                        arc_evolution: obj.arc_evolution || '',
+                        why_relevant: obj.why_relevant || '',
+                        topic: obj.topic || orig.source_name,
                         source_name: orig.source_name,
                         published: orig.published,
                         url: orig.url,
                     };
-                }).filter(Boolean);
-                modeLabel = `${_stickyWorkingFlashModel || 'Gemini'} Semantic`;
+                };
+                const lead = hydrate(raw?.lead_story);
+                const deep = hydrate(raw?.deep_dive);
+                const quicks = (Array.isArray(raw?.quick_hits) ? raw.quick_hits : []).map(hydrate).filter(Boolean);
+                if (lead || quicks.length || deep) {
+                    briefing = { lead_story: lead, quick_hits: quicks, deep_dive: deep };
+                    modeLabel = `${_stickyWorkingFlashModel || 'Gemini'} Investigative`;
+                }
             } catch (gemErr) {
                 if (/quota|429|rate.?limit|billing/i.test(String(gemErr?.message || ''))) {
-                    curatedStories = rankLiveNewsLocally(livePool, prof);
-                    modeLabel = 'Live Feeds (Local Semantic Rank)';
-                    quotaFallbackNote = 'Gemini API Free-Tier quota is currently reached on your key — showing live headlines ranked locally against your website profile. Click Refresh once quota resets.';
+                    briefing = buildStructuredFallbackBriefing(livePool, prof);
+                    modeLabel = 'Live Feeds (Local Rank)';
+                    quotaFallbackNote = 'Gemini API Free-Tier quota is currently reached on your key — showing live UN/humanitarian, bookmark-company & science feeds ranked locally. Click Refresh once quota resets.';
                 } else {
                     throw gemErr;
                 }
             }
 
-            if (!curatedStories.length) {
-                curatedStories = rankLiveNewsLocally(livePool, prof);
-                modeLabel = 'Live Feeds (Semantic Fallback)';
+            if (!briefing) {
+                briefing = buildStructuredFallbackBriefing(livePool, prof);
+                modeLabel = 'Live Feeds (Fallback)';
             }
 
-            const groundingSources = curatedStories.map(s => ({ title: `${s.source_name}: ${s.headline.slice(0, 32)}`, uri: s.url }));
+            const flatStories = [briefing.lead_story, ...(briefing.quick_hits || []), briefing.deep_dive].filter(Boolean);
+            recordNewsArcs(todayISO, flatStories);
+            const groundingSources = flatStories.map(s => ({ title: `${s.source_name}: ${s.headline.slice(0, 32)}`, uri: s.url }));
+
             const bundle = {
                 dateKey: todayISO,
                 profileHash: profileRecord.corpusHash,
                 generatedAt: new Date().toISOString(),
                 model: _stickyWorkingFlashModel || 'local',
                 modeLabel,
-                stories: curatedStories,
+                briefing,
+                stories: flatStories,
                 groundingSources,
             };
             try { localStorage.setItem(NEWS_CACHE_KEY, JSON.stringify(bundle)); } catch (e) { }
             renderDashboardCuratedNews(bundle);
             setNewsStatusBanner(quotaFallbackNote);
             showPortalToast(quotaFallbackNote
-                ? `Loaded ${curatedStories.length} live stories (local semantic fallback — Gemini quota limit reached)`
-                : `Curated ${curatedStories.length} news stories via ${modeLabel}`);
+                ? `Loaded ${flatStories.length} live stories (local rank — Gemini quota reached)`
+                : `Curated ${flatStories.length}-story Daily Investigative News Digest via ${modeLabel}`);
         } catch (err) {
             setNewsStatusBanner(`Curated news error: ${err.message}`);
             showPortalToast(`Curated news failed: ${err.message}`, 'error');
         } finally {
             _dashboardNewsBusy = false;
-            if (refreshBtn) { refreshBtn.disabled = false; refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Refresh News</span>'; }
+            if (refreshBtn) { refreshBtn.disabled = false; refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Refresh</span>'; }
             if (rebuildBtn) rebuildBtn.disabled = false;
         }
     };

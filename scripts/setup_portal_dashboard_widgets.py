@@ -92,33 +92,40 @@ DASHBOARD_WIDGETS_HTML = f"""{WIDGETS_START}
         </div>
         <div class="min-w-0">
           <h2 class="serif-heading text-base font-bold text-white flex flex-wrap items-center gap-2">
-            Curated Daily Briefing
-            <span id="news-date-badge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30">Gemini Grounded</span>
+            Daily Investigative News Digest
+            <span id="news-date-badge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-300 border border-purple-500/30">Gemini Semantic</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Parsed semantically from your full website corpus &amp; prompted via Gemini API for today&apos;s top stories.</p>
+          <p class="text-xs text-slate-400 mt-0.5">Website + 431 bookmarks (companies &amp; domains) + UN, humanitarian &amp; anti-trafficking focus.</p>
         </div>
       </div>
       <div class="flex flex-wrap items-center gap-1.5 flex-shrink-0">
-        <button type="button" onclick="toggleSemanticInterestDrawer()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/70 text-[11px] font-semibold transition flex items-center gap-1" title="Inspect Gemini's semantic description of your interests">
-          <i class="fas fa-brain text-purple-400"></i> <span>Interest Profile</span>
+        <button type="button" onclick="toggleSemanticInterestDrawer()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/70 text-[11px] font-semibold transition flex items-center gap-1" title="Inspect Gemini's semantic description of your interests & inferred companies">
+          <i class="fas fa-brain text-purple-400"></i> <span>Profile</span>
         </button>
-        <button type="button" id="news-rebuild-profile-btn" onclick="refreshDashboardCuratedNews(true)" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-purple-600/80 text-purple-300 hover:text-white border border-purple-500/30 text-[11px] font-semibold transition flex items-center gap-1" title="Re-parse all website content and rebuild Gemini interest profile + news">
+        <button type="button" onclick="copyDashboardNewsMarkdown()" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/70 text-[11px] font-semibold transition flex items-center gap-1" title="Copy formatted Markdown briefing with citations">
+          <i class="fas fa-copy text-sky-400"></i> <span>MD</span>
+        </button>
+        <button type="button" onclick="emailDashboardNewsDigest()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-emerald-600/80 text-emerald-300 hover:text-white border border-emerald-500/30 text-[11px] font-semibold transition flex items-center gap-1" title="Draft Daily Investigative News Digest email to islam.akef@gmail.com">
+          <i class="fas fa-envelope"></i> <span>Email</span>
+        </button>
+        <button type="button" id="news-rebuild-profile-btn" onclick="refreshDashboardCuratedNews(true)" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-purple-600/80 text-purple-300 hover:text-white border border-purple-500/30 text-[11px] font-semibold transition flex items-center gap-1" title="Re-parse website + bookmarks and rebuild Gemini interest profile + news">
           <i class="fas fa-magic"></i> <span>Rebuild</span>
         </button>
-        <button type="button" id="news-refresh-btn" onclick="refreshDashboardCuratedNews(false)" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold shadow transition flex items-center gap-1" title="Fetch today's top news using your semantic interest profile">
-          <i class="fas fa-sync-alt"></i> <span>Refresh News</span>
+        <button type="button" id="news-refresh-btn" onclick="refreshDashboardCuratedNews(false)" class="px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold shadow transition flex items-center gap-1" title="Fetch today's top curated investigative briefing">
+          <i class="fas fa-sync-alt"></i> <span>Refresh</span>
         </button>
       </div>
     </div>
 
     <!-- Collapsible Semantic Interest Profile Inspector -->
-    <div id="news-profile-drawer" class="hidden bg-slate-950/80 border border-purple-500/30 rounded-xl p-3.5 space-y-2 text-xs">
+    <div id="news-profile-drawer" class="hidden bg-slate-950/80 border border-purple-500/30 rounded-xl p-3.5 space-y-2.5 text-xs">
       <div class="flex items-center justify-between gap-2">
-        <span class="text-[10px] uppercase tracking-wider font-bold text-purple-300"><i class="fas fa-fingerprint mr-1"></i> Gemini Semantic Understanding of Your Website</span>
+        <span class="text-[10px] uppercase tracking-wider font-bold text-purple-300"><i class="fas fa-fingerprint mr-1"></i> Gemini Semantic Interest Profile (Website + Bookmarks + Humanitarian/UN)</span>
         <span id="news-profile-meta" class="text-[10px] font-mono text-slate-500"></span>
       </div>
-      <p id="news-profile-summary" class="text-slate-300 leading-relaxed text-[11px]">Click &quot;Refresh News&quot; or &quot;Rebuild&quot; to synthesize your semantic interest profile from all website pages, projects, and publications.</p>
-      <div id="news-profile-themes" class="flex flex-wrap gap-1.5 pt-1"></div>
+      <p id="news-profile-summary" class="text-slate-300 leading-relaxed text-[11px]">Click &quot;Refresh&quot; or &quot;Rebuild&quot; to synthesize your semantic interest profile from your website, bookmarks, and humanitarian/UN focus.</p>
+      <div id="news-profile-themes" class="flex flex-wrap gap-1.5 pt-0.5"></div>
+      <div id="news-profile-companies" class="hidden flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-800/80"></div>
     </div>
 
     <!-- Status Banner -->
