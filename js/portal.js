@@ -7142,8 +7142,21 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         refreshDashboardWeather(true);
     };
 
+    function toBothTempUnits(val, unit) {
+        if (val == null || Number.isNaN(Number(val))) return null;
+        const n = Number(val);
+        if (unit === 'celsius') {
+            const c = Math.round(n);
+            const f = Math.round((n * 9) / 5 + 32);
+            return { primary: `${c}°C`, secondary: `${f}°F`, pNum: c, sNum: f, pSym: '°C', sSym: '°F' };
+        }
+        const f = Math.round(n);
+        const c = Math.round(((n - 32) * 5) / 9);
+        return { primary: `${f}°F`, secondary: `${c}°C`, pNum: f, sNum: c, pSym: '°F', sSym: '°C' };
+    }
+
     function renderDashboardWeatherData(loc, data, unit) {
-        const unitSym = unit === 'fahrenheit' ? '°F' : '°C';
+        const unitSym = unit === 'fahrenheit' ? '°F / °C' : '°C / °F';
         const windUnit = unit === 'fahrenheit' ? 'mph' : 'km/h';
         const locEl = document.getElementById('weather-location-label');
         const srcEl = document.getElementById('weather-loc-source');
@@ -7154,16 +7167,22 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
 
         const cur = data.current || {};
         const wInfo = mapWmoWeather(cur.weather_code, cur.is_day ?? 1);
+        const curT = toBothTempUnits(cur.temperature_2m, unit);
+        const feelsT = toBothTempUnits(cur.apparent_temperature, unit);
         const iconEl = document.getElementById('weather-current-icon');
         const tempEl = document.getElementById('weather-current-temp');
         const descEl = document.getElementById('weather-current-desc');
         const metaEl = document.getElementById('weather-current-meta');
         if (iconEl) iconEl.innerHTML = `<i class="fas ${wInfo.icon}"></i>`;
-        if (tempEl) tempEl.textContent = cur.temperature_2m != null ? `${Math.round(cur.temperature_2m)}${unitSym}` : '--°';
+        if (tempEl) {
+            tempEl.innerHTML = curT
+                ? `${escapeHtml(curT.primary)} <span class="text-base font-semibold text-sky-300/80">/ ${escapeHtml(curT.secondary)}</span>`
+                : '--°';
+        }
         if (descEl) descEl.textContent = wInfo.label;
         if (metaEl) {
             metaEl.innerHTML = `
-                <div>Feels <strong class="text-slate-200">${cur.apparent_temperature != null ? Math.round(cur.apparent_temperature) + '°' : '--'}</strong></div>
+                <div>Feels <strong class="text-slate-200">${feelsT ? `${feelsT.primary} / ${feelsT.secondary}` : '--'}</strong></div>
                 <div>Humidity <strong class="text-slate-200">${cur.relative_humidity_2m != null ? Math.round(cur.relative_humidity_2m) + '%' : '--'}</strong></div>
                 <div>Wind <strong class="text-slate-200">${cur.wind_speed_10m != null ? Math.round(cur.wind_speed_10m) + ' ' + windUnit : '--'}</strong></div>
             `;
@@ -7177,15 +7196,18 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 const dt = new Date(`${iso}T12:00:00`);
                 const dayLbl = idx === 0 ? 'Today' : dt.toLocaleDateString('en-US', { weekday: 'short' });
                 const dInfo = mapWmoWeather(daily.weather_code?.[idx], 1);
-                const hi = daily.temperature_2m_max?.[idx] != null ? Math.round(daily.temperature_2m_max[idx]) : '--';
-                const lo = daily.temperature_2m_min?.[idx] != null ? Math.round(daily.temperature_2m_min[idx]) : '--';
+                const hi = toBothTempUnits(daily.temperature_2m_max?.[idx], unit);
+                const lo = toBothTempUnits(daily.temperature_2m_min?.[idx], unit);
                 const pop = daily.precipitation_probability_max?.[idx];
+                const pLine = (hi && lo) ? `${hi.pNum}°/${lo.pNum}${hi.pSym}` : '--';
+                const sLine = (hi && lo) ? `${hi.sNum}°/${lo.sNum}${hi.sSym}` : '--';
                 return `
-                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-2.5 text-center space-y-1">
+                    <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-2 text-center space-y-0.5">
                         <div class="text-[10px] font-bold uppercase text-slate-400">${escapeHtml(dayLbl)}</div>
                         <div class="text-base py-0.5"><i class="fas ${dInfo.icon}" title="${escapeHtml(dInfo.label)}"></i></div>
-                        <div class="text-[11px] font-mono text-white font-bold">${hi}° <span class="text-slate-500 font-normal">${lo}°</span></div>
-                        <div class="text-[9px] font-mono ${pop > 30 ? 'text-sky-300' : 'text-slate-500'}"><i class="fas fa-tint mr-0.5"></i>${pop != null ? pop : 0}%</div>
+                        <div class="text-[10px] font-mono text-white font-bold leading-tight">${escapeHtml(pLine)}</div>
+                        <div class="text-[9px] font-mono text-sky-300/80 leading-tight">${escapeHtml(sLine)}</div>
+                        <div class="text-[9px] font-mono ${pop > 30 ? 'text-sky-300' : 'text-slate-500'} pt-0.5"><i class="fas fa-tint mr-0.5"></i>${pop != null ? pop : 0}%</div>
                     </div>
                 `;
             }).join('');
