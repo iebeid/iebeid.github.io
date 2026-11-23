@@ -1,5 +1,5 @@
 {
-  "_generated_at": "2026-11-23T20:29:54.449462",
+  "_generated_at": "2026-11-23T20:31:29.182939",
   "_source": "data/content.db (SQLite Normalized Project Backbone Engine)",
   "meta": {
     "author_name": {
@@ -117,6 +117,30 @@
       "children": []
     },
     {
+      "nav_key": "business",
+      "parent_key": null,
+      "label": "Business",
+      "sublabel": "Unity Systems & Storefront",
+      "folder": "business",
+      "rel_path": "pages/business/business.html",
+      "icon_class": "fas fa-briefcase",
+      "badge_text": "",
+      "order": 4,
+      "children": [
+        {
+          "nav_key": "business_storefront",
+          "parent_key": "business",
+          "label": "Unity Systems Storefront",
+          "sublabel": "Commercial Software Catalog, SaaS & Licensing",
+          "folder": "business",
+          "rel_path": "pages/business/storefront.html",
+          "icon_class": "fas fa-store",
+          "badge_text": "Storefront",
+          "order": 2
+        }
+      ]
+    },
+    {
       "nav_key": "research",
       "parent_key": null,
       "label": "Research",
@@ -125,7 +149,7 @@
       "rel_path": "pages/research/research.html",
       "icon_class": "fas fa-microscope",
       "badge_text": "",
-      "order": 4,
+      "order": 5,
       "children": [
         {
           "nav_key": "research_lab",
@@ -149,7 +173,7 @@
       "rel_path": "pages/scholarship/scholarship.html",
       "icon_class": "fas fa-feather-alt",
       "badge_text": "",
-      "order": 5,
+      "order": 6,
       "children": []
     },
     {
@@ -161,7 +185,7 @@
       "rel_path": "pages/teaching/teaching.html",
       "icon_class": "fas fa-chalkboard-teacher",
       "badge_text": "",
-      "order": 6,
+      "order": 7,
       "children": []
     },
     {
@@ -173,32 +197,8 @@
       "rel_path": "pages/service/service.html",
       "icon_class": "fas fa-university",
       "badge_text": "",
-      "order": 7,
-      "children": []
-    },
-    {
-      "nav_key": "business",
-      "parent_key": null,
-      "label": "Business",
-      "sublabel": "Unity Systems & Storefront",
-      "folder": "business",
-      "rel_path": "pages/business/business.html",
-      "icon_class": "fas fa-briefcase",
-      "badge_text": "",
       "order": 8,
-      "children": [
-        {
-          "nav_key": "business_storefront",
-          "parent_key": "business",
-          "label": "Unity Systems Storefront",
-          "sublabel": "Commercial Software Catalog, SaaS & Licensing",
-          "folder": "business",
-          "rel_path": "pages/business/storefront.html",
-          "icon_class": "fas fa-store",
-          "badge_text": "Storefront",
-          "order": 2
-        }
-      ]
+      "children": []
     },
     {
       "nav_key": "hobbies",
