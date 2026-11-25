@@ -697,16 +697,12 @@ def export_public_content(conn: sqlite3.Connection):
     except Exception:
         pass
 
-    portal_projects_bundle_json = json.dumps(
-        {
-            "projects": portal_projects_all,
-            "placement_slots": site_placement_slots,
-            "drive_scan_roots": drive_roots,
-            "drive_scan_runs": drive_runs,
-        },
-        ensure_ascii=False,
-    )
-    portal_projects_encrypted = encrypt_secret(portal_projects_bundle_json, portal_master_passcode)
+    portal_projects_bundle = {
+        "projects": portal_projects_all,
+        "placement_slots": site_placement_slots,
+        "drive_scan_roots": drive_roots,
+        "drive_scan_runs": drive_runs,
+    }
 
     export_bundle = {
         "_generated_at": datetime.now().isoformat(),
@@ -735,7 +731,7 @@ def export_public_content(conn: sqlite3.Connection):
         "portal_messages": portal_messages,
         "portal_vault": portal_vault,
         "portal_passwords": portal_passwords,
-        "portal_projects_encrypted": portal_projects_encrypted,
+        "portal_projects_bundle": portal_projects_bundle,
         "site_placement_slots": site_placement_slots,
     }
 

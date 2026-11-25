@@ -70,17 +70,20 @@ def reconcile_live_to_db(conn: sqlite3.Connection, db_path: Path = DB_PATH, forc
     result = {"reconciled": False, "reason": "up_to_date", "projects_synced": 0, "projects_deleted": 0, "bookmarks": 0}
 
     pdata = _read_portal_data_js()
-    enc_proj = pdata.get("portal_projects_encrypted")
-    if not enc_proj:
-        result["reason"] = "no_encrypted_bundle"
-        return result
-
-    passcode = _get_vault_passcode(db_path)
-    try:
-        bundle = json.loads(decrypt_secret(enc_proj, passcode))
-    except Exception as exc:
-        result["reason"] = f"decrypt_skipped:{type(exc).__name__}"
-        return result
+    plain_bundle = pdata.get("portal_projects_bundle")
+    if isinstance(plain_bundle, dict) and plain_bundle.get("projects") is not None:
+        bundle = plain_bundle
+    else:
+        enc_proj = pdata.get("portal_projects_encrypted")
+        if not enc_proj:
+            result["reason"] = "no_projects_bundle"
+            return result
+        passcode = _get_vault_passcode(db_path)
+        try:
+            bundle = json.loads(decrypt_secret(enc_proj, passcode))
+        except Exception as exc:
+            result["reason"] = f"decrypt_skipped:{type(exc).__name__}"
+            return result
 
     published_from = bundle.get("_published_from", "")
     gen_at = bundle.get("_generated_at", "")

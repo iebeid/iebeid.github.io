@@ -93,6 +93,13 @@
         });
     }
 
+    function getPlaintextProjectsBundle() {
+        const b = (window.__PORTAL_DATABASE && window.__PORTAL_DATABASE.portal_projects_bundle)
+            || (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_bundle)
+            || null;
+        return (b && Array.isArray(b.projects)) ? b : null;
+    }
+
     function getCanonicalEncryptedProjectsBlob() {
         return (window.__PORTAL_DATABASE && window.__PORTAL_DATABASE.portal_projects_encrypted)
             || (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted)
@@ -254,9 +261,8 @@
         const hasToken = sessionStorage.getItem(AUTH_SESSION_KEY) === 'authenticated' ||
                          localStorage.getItem(AUTH_SESSION_KEY) === 'authenticated';
         if (!hasToken) return false;
-        // Require active tab session passcode whenever the encrypted master catalog is present,
-        // preventing half-unlocked logins where only the 21 public projects appear.
-        if (getEncryptedProjectsBlob() && !portalSessionPasscode) {
+        // Only require an active session passcode when projects are still encrypted (legacy bundle)
+        if (!getPlaintextProjectsBundle() && getEncryptedProjectsBlob() && !portalSessionPasscode) {
             return false;
         }
         return true;
@@ -3580,7 +3586,7 @@
             }
             // If an encrypted master catalog exists and the cached session passcode could not decrypt it,
             // force a clean re-login instead of stranding Projects Hub on the 21 public projects.
-            if (!portalProjectsState.liveMode && getEncryptedProjectsBlob() && !portalProjectsState.unlocked) {
+            if (!portalProjectsState.liveMode && !getPlaintextProjectsBundle() && getEncryptedProjectsBlob() && !portalProjectsState.unlocked) {
                 logout();
                 return;
             }
@@ -4908,21 +4914,25 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 }
             }
             if (!portalProjectsState.liveMode && !portalProjectsState.unlocked) {
-                const enc = getEncryptedProjectsBlob();
-                const decrypted = enc ? await decryptMasterProjectsWithCandidates() : null;
-                if (decrypted && decrypted.bundle) {
-                    portalSessionPasscode = decrypted.passcode;
-                    try { sessionStorage.setItem(SESSION_PASS_KEY, decrypted.passcode); } catch (e) { }
-                    hydrateBundleState(decrypted.bundle);
-                }
-                if (!portalProjectsState.unlocked && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
-                    // Show public projects immediately as a preview while keeping the full encrypted catalog locked
-                    portalProjectsState.projects = applyLocalPatchOpsToMemory(
-                        window.__SITE_DATABASE.projects.map(p => ({ ...p, is_public: true, discovery_status: p.discovery_status || 'canonical' }))
-                    );
-                    portalProjectsState.placementSlots = window.__SITE_DATABASE.site_placement_slots || [];
-                    if (!enc) portalProjectsState.unlocked = true;
-                    populatePlacementDropdown();
+                const plainBundle = getPlaintextProjectsBundle();
+                if (plainBundle) {
+                    hydrateBundleState(plainBundle);
+                } else {
+                    const enc = getEncryptedProjectsBlob();
+                    const decrypted = enc ? await decryptMasterProjectsWithCandidates() : null;
+                    if (decrypted && decrypted.bundle) {
+                        portalSessionPasscode = decrypted.passcode;
+                        try { sessionStorage.setItem(SESSION_PASS_KEY, decrypted.passcode); } catch (e) { }
+                        hydrateBundleState(decrypted.bundle);
+                    }
+                    if (!portalProjectsState.unlocked && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
+                        portalProjectsState.projects = applyLocalPatchOpsToMemory(
+                            window.__SITE_DATABASE.projects.map(p => ({ ...p, is_public: true, discovery_status: p.discovery_status || 'canonical' }))
+                        );
+                        portalProjectsState.placementSlots = window.__SITE_DATABASE.site_placement_slots || [];
+                        if (!enc) portalProjectsState.unlocked = true;
+                        populatePlacementDropdown();
+                    }
                 }
             }
             updateProjectsModeUI();
@@ -5753,23 +5763,9 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             return;
         }
 
-        let passcode = portalSessionPasscode || vaultMasterPassword;
-        if (!passcode) {
-            passcode = prompt('Enter your portal master passcode to re-encrypt the private project catalog:') || '';
-            if (!passcode) return;
-        }
-        if (!portalProjectsState.unlocked && window.__SITE_DATABASE?.portal_projects_encrypted) {
-            const plain = await decryptSqliteVaultEntry(window.__SITE_DATABASE.portal_projects_encrypted, passcode);
-            if (!plain) {
-                showPortalToast('Passcode could not verify encrypted project catalog.', 'error');
-                return;
-            }
-            hydrateBundleState(JSON.parse(plain));
-            portalSessionPasscode = passcode;
-        }
-        if (!portalProjectsState.unlocked && !portalProjectsState.liveMode && window.__SITE_DATABASE?.portal_projects_encrypted) {
-            showPortalToast('Unlock the encrypted master portfolio before publishing.', 'error');
-            return;
+        let passcode = portalSessionPasscode || vaultMasterPassword || '';
+        if (!portalProjectsState.unlocked && getPlaintextProjectsBundle()) {
+            hydrateBundleState(getPlaintextProjectsBundle());
         }
         if ((portalProjectsState.projects || []).length === 0) {
             showPortalToast('Refusing to publish an empty project catalog.', 'error');
@@ -5788,7 +5784,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             const publicJsonStr = JSON.stringify(publicPayload, null, 2);
             const publicJsStr = `window.__SITE_DATABASE = ${publicJsonStr};\n`;
 
-            // 2. Build AES-256-GCM encrypted portal_data.js
+            // 2. Build portal_data.js with direct master projects bundle (no separate passcode gate)
             const masterBundle = {
                 _published_from: 'portal_github_api',
                 _generated_at: nowIso,
@@ -5798,7 +5794,6 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 drive_scan_runs: portalProjectsState.driveRuns || [],
                 deleted_project_slugs: deletedSlugs,
             };
-            const encryptedProjBlob = await encryptSqliteVaultEntry(JSON.stringify(masterBundle), passcode);
             const baseSite = window.__SITE_DATABASE || {};
             const liveTasks = (typeof getStoredTasks === 'function' ? getStoredTasks() : (baseSite.portal_tasks || []))
                 .map((t, idx) => ({
@@ -5818,7 +5813,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 : (baseSite.portal_messages || []);
 
             const liveVault = { ...(baseSite.portal_vault || {}) };
-            if (unlockedVaultSecrets && Object.keys(unlockedVaultSecrets).length > 0) {
+            if (passcode && unlockedVaultSecrets && Object.keys(unlockedVaultSecrets).length > 0) {
                 liveVault.master_passcode = {
                     ...(await encryptSqliteVaultEntry(passcode, passcode)),
                     description: (liveVault.master_passcode && liveVault.master_passcode.description) || 'Portal Master Passcode',
@@ -5843,7 +5838,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 portal_messages: liveMessages,
                 portal_vault: liveVault,
                 portal_passwords: getEncryptedVaultBlobs ? getEncryptedVaultBlobs() : (baseSite.portal_passwords || []),
-                portal_projects_encrypted: encryptedProjBlob,
+                portal_projects_bundle: masterBundle,
                 site_placement_slots: portalProjectsState.placementSlots || baseSite.site_placement_slots || [],
             };
             const portalJsStr =
