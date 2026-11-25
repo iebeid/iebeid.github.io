@@ -58,54 +58,99 @@ def save_project_record(conn: sqlite3.Connection, data: Dict[str, Any]) -> int:
     slug = _slugify(raw_slug) if raw_slug != raw_slug.lower() or " " in raw_slug else raw_slug
     now_iso = datetime.now(timezone.utc).isoformat()
 
-    tech_list = _parse_list(data.get("tech_stack"))
-    kw_list = _parse_list(data.get("keywords"))
+    if not pid:
+        existing_id_row = cur.execute("SELECT id FROM projects WHERE slug = ?", (slug,)).fetchone()
+        if existing_id_row:
+            pid = existing_id_row[0]
+
+    existing_map: Dict[str, Any] = {}
+    if pid:
+        cur.execute("SELECT * FROM projects WHERE id = ?", (int(pid),))
+        row_vals = cur.fetchone()
+        if row_vals:
+            col_names = [desc[0] for desc in cur.description]
+            existing_map = dict(zip(col_names, row_vals))
+        else:
+            pid = None
+
+    def _pick_str(key: str, default: str = "") -> str:
+        if key in data and data[key] is not None:
+            return str(data[key])
+        if key in existing_map and existing_map[key] is not None:
+            return str(existing_map[key])
+        return default
+
+    def _pick_year(key: str) -> Optional[int]:
+        if key in data:
+            val = data.get(key)
+            return int(val) if str(val or "").strip().isdigit() else None
+        existing_val = existing_map.get(key)
+        return int(existing_val) if str(existing_val or "").strip().isdigit() else None
+
+    def _pick_flag(key: str, default: int = 0) -> int:
+        if key in data and data[key] is not None:
+            return 1 if data[key] else 0
+        if key in existing_map and existing_map[key] is not None:
+            return 1 if existing_map[key] else 0
+        return default
+
+    tech_json = (
+        json.dumps(_parse_list(data.get("tech_stack")))
+        if "tech_stack" in data
+        else (existing_map.get("tech_stack") or "[]")
+    )
+    kw_json = (
+        json.dumps(_parse_list(data.get("keywords")))
+        if "keywords" in data
+        else (existing_map.get("keywords") or "[]")
+    )
     tags_list = _parse_list(data.get("tags"))
 
-    year_start = data.get("year_start")
-    year_end = data.get("year_end")
-    year_start = int(year_start) if str(year_start or "").strip().isdigit() else None
-    year_end = int(year_end) if str(year_end or "").strip().isdigit() else None
+    year_start = _pick_year("year_start")
+    year_end = _pick_year("year_end")
+    is_public = _pick_flag("is_public", 0)
+    is_featured = _pick_flag("is_featured", 0)
+    is_storefront = _pick_flag("is_storefront", 0)
+    if "display_order" in data and data.get("display_order") is not None and str(data.get("display_order")).strip() != "":
+        display_order = int(data["display_order"])
+    elif existing_map.get("display_order") is not None:
+        display_order = int(existing_map["display_order"])
+    else:
+        display_order = 99
 
-    is_public = 1 if data.get("is_public") else 0
-    is_featured = 1 if data.get("is_featured") else 0
-    is_storefront = 1 if data.get("is_storefront") else 0
-    display_order = int(data.get("display_order") or 99)
-
-    if not pid:
-        existing = cur.execute("SELECT id FROM projects WHERE slug = ?", (slug,)).fetchone()
-        if existing:
-            pid = existing[0]
+    tagline_val = _pick_str("tagline", "")
+    short_summary_val = _pick_str("short_summary", title) or title
+    full_desc_val = _pick_str("full_description", short_summary_val) or short_summary_val
+    category_val = _pick_str("category", "General Portfolio") or "General Portfolio"
+    domain_stage_val = _pick_str("domain_stage", "02_ai_modeling") or "02_ai_modeling"
+    project_kind_val = _pick_str("project_kind", "research") or "research"
+    status_val = _pick_str("status", "Active") or "Active"
+    inst_val = _pick_str("institution_or_org", "")
+    grant_val = _pick_str("grant_award", "")
+    code_snippet_val = _pick_str("code_snippet", "")
+    license_val = _pick_str("license_model", "")
+    price_val = _pick_str("price_display", "")
+    sf_cat_val = _pick_str("storefront_category", "")
+    disc_val = _pick_str("discovery_status", "reviewed" if pid else "canonical") or ("reviewed" if pid else "canonical")
+    gdrive_url_val = _pick_str("gdrive_primary_url", "")
 
     if pid:
         cur.execute("""
             UPDATE projects SET
                 slug = ?, title = ?, tagline = ?, short_summary = ?, full_description = ?,
-                category = ?, project_kind = ?, status = ?, year_start = ?, year_end = ?,
-                institution_or_org = ?, grant_award = ?, tech_stack = ?, keywords = ?,
+                category = ?, domain_stage = ?, project_kind = ?, status = ?, year_start = ?, year_end = ?,
+                institution_or_org = ?, grant_award = ?, tech_stack = ?, keywords = ?, code_snippet = ?,
                 license_model = ?, price_display = ?, storefront_category = ?,
                 is_featured = ?, is_storefront = ?, is_public = ?, display_order = ?,
                 discovery_status = ?, gdrive_primary_url = ?, updated_at = ?
             WHERE id = ?
         """, (
-            slug, title, data.get("tagline") or "",
-            data.get("short_summary") or title,
-            data.get("full_description") or data.get("short_summary") or title,
-            data.get("category") or "General Portfolio",
-            data.get("project_kind") or "research",
-            data.get("status") or "Active",
-            year_start, year_end,
-            data.get("institution_or_org") or "",
-            data.get("grant_award") or "",
-            json.dumps(tech_list),
-            json.dumps(kw_list),
-            data.get("license_model") or "",
-            data.get("price_display") or "",
-            data.get("storefront_category") or "",
+            slug, title, tagline_val, short_summary_val, full_desc_val,
+            category_val, domain_stage_val, project_kind_val, status_val, year_start, year_end,
+            inst_val, grant_val, tech_json, kw_json, code_snippet_val,
+            license_val, price_val, sf_cat_val,
             is_featured, is_storefront, is_public, display_order,
-            data.get("discovery_status") or "reviewed",
-            data.get("gdrive_primary_url") or "",
-            now_iso,
+            disc_val, gdrive_url_val, now_iso,
             int(pid),
         ))
         project_id = int(pid)
@@ -121,32 +166,20 @@ def save_project_record(conn: sqlite3.Connection, data: Dict[str, Any]) -> int:
             INSERT INTO projects (
                 slug, title, tagline, short_summary, full_description,
                 category, domain_stage, status, year_start, year_end,
-                institution_or_org, grant_award, tech_stack, keywords,
+                institution_or_org, grant_award, tech_stack, keywords, code_snippet,
                 license_model, price_display, storefront_category,
                 is_featured, is_storefront, is_public, display_order,
                 project_kind, discovery_status, source_origin,
                 gdrive_primary_url, updated_at
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'portal', ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'portal', ?, ?)
         """, (
-            slug, title, data.get("tagline") or "",
-            data.get("short_summary") or title,
-            data.get("full_description") or data.get("short_summary") or title,
-            data.get("category") or "General Portfolio",
-            data.get("domain_stage") or "02_ai_modeling",
-            data.get("status") or "Active",
-            year_start, year_end,
-            data.get("institution_or_org") or "",
-            data.get("grant_award") or "",
-            json.dumps(tech_list),
-            json.dumps(kw_list),
-            data.get("license_model") or "",
-            data.get("price_display") or "",
-            data.get("storefront_category") or "",
+            slug, title, tagline_val, short_summary_val, full_desc_val,
+            category_val, domain_stage_val, status_val, year_start, year_end,
+            inst_val, grant_val, tech_json, kw_json, code_snippet_val,
+            license_val, price_val, sf_cat_val,
             is_featured, is_storefront, is_public, display_order,
-            data.get("project_kind") or "research",
-            data.get("discovery_status") or "canonical",
-            data.get("gdrive_primary_url") or "",
-            now_iso,
+            project_kind_val, disc_val,
+            gdrive_url_val, now_iso,
         ))
         project_id = cur.lastrowid
 

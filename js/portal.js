@@ -25,6 +25,7 @@
     // -------------------------------------------------------------------------
     const PASSCODE_STORAGE_KEY = 'portal_master_passcode'; // legacy key cleared on upgrade
     const PASSCODE_VERIFIER_KEY = 'portal_master_verifier_v2';
+    const PORTAL_LOCAL_REENC_PROJ_KEY = 'portal_reencrypted_projects_v1';
     const AUTH_SESSION_KEY = 'portal_auth_token';
     const SESSION_PASS_KEY = 'portal_session_pass_v1'; // Tab-scoped volatile sessionStorage only
     const PINNED_STORAGE_KEY = 'portal_pinned_bookmarks';
@@ -49,7 +50,9 @@
     let activeSubfolder = null;
     let activeDashFilter = 'all';
     let searchQuery = '';
+    let tabBookmarksSearchQuery = '';
     let aiSearchMode = false;
+    let aiSearchTarget = 'dashboard';
     let aiMatchedIds = [];
     let selectedMessageId = null;
     let activeTaskFilter = 'all';
@@ -58,11 +61,46 @@
     // 2. AUTHENTICATION & SECURITY (SQLite AES-256-GCM Vault + Local Override)
     // -------------------------------------------------------------------------
     let unlockedVaultSecrets = {};
+    let portalServerCsrfToken = '';
     let portalSessionPasscode = (() => {
         try { return sessionStorage.getItem(SESSION_PASS_KEY) || null; } catch (e) { return null; }
     })();
 
+    async function ensurePortalCsrfToken() {
+        if (portalServerCsrfToken) return portalServerCsrfToken;
+        const host = window.location.hostname;
+        if (host !== '127.0.0.1' && host !== 'localhost') return '';
+        try {
+            const resp = await fetch('/api/health', { cache: 'no-store' });
+            if (resp.ok) {
+                const data = await resp.json();
+                if (data && data.csrf_token) {
+                    portalServerCsrfToken = data.csrf_token;
+                }
+            }
+        } catch (e) { }
+        return portalServerCsrfToken;
+    }
+
+    async function portalServerPost(path, bodyObj) {
+        const token = await ensurePortalCsrfToken();
+        const headers = { 'Content-Type': 'application/json' };
+        if (token) headers['X-Portal-CSRF'] = token;
+        return fetch(path, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(bodyObj || {}),
+        });
+    }
+
     function getEncryptedProjectsBlob() {
+        try {
+            const localOverride = localStorage.getItem(PORTAL_LOCAL_REENC_PROJ_KEY);
+            if (localOverride) {
+                const parsed = JSON.parse(localOverride);
+                if (parsed && parsed.ciphertext && parsed.nonce && parsed.salt) return parsed;
+            }
+        } catch (e) { }
         return (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted)
             || (window.__PORTAL_DATABASE && window.__PORTAL_DATABASE.portal_projects_encrypted)
             || null;
@@ -303,21 +341,88 @@
         if (changePassForm) {
             changePassForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                if (newPass.value !== confirmPass.value) {
+                const nextPass = newPass.value;
+                if (nextPass !== confirmPass.value) {
                     changeMsg.className = 'text-xs text-rose-400 block';
                     changeMsg.textContent = 'Passcodes do not match.';
                     return;
                 }
-                if (newPass.value.length < 6) {
+                if (nextPass.length < 6) {
                     changeMsg.className = 'text-xs text-rose-400 block';
                     changeMsg.textContent = 'Passcode must be at least 6 characters.';
                     return;
                 }
-                const verifier = await createLocalPasscodeVerifier(newPass.value);
+
+                const prevPass = portalSessionPasscode || unlockedVaultSecrets.master_passcode || '';
+                let rotatedSqlite = false;
+
+                // 1. If connected to localhost portal_server.py, rotate SQLite portal_vault & portal_data.js atomically
+                if (prevPass && (window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost')) {
+                    try {
+                        const resp = await portalServerPost('/api/vault/rotate-passcode', {
+                            current_passcode: prevPass,
+                            new_passcode: nextPass,
+                        });
+                        if (resp.ok) {
+                            const resData = await resp.json();
+                            rotatedSqlite = Boolean(resData && resData.ok);
+                        }
+                    } catch (err) { /* fallback to browser re-encryption */ }
+                }
+
+                // 2. Re-encrypt private projects bundle & in-memory vault entries under the new passcode
+                try {
+                    let bundleObj = null;
+                    if (typeof portalProjectsState !== 'undefined' && portalProjectsState.unlocked && Array.isArray(portalProjectsState.projects) && portalProjectsState.projects.length > 0) {
+                        bundleObj = {
+                            projects: portalProjectsState.projects,
+                            placement_slots: portalProjectsState.placementSlots || [],
+                            drive_scan_roots: portalProjectsState.driveRoots || [],
+                            drive_scan_runs: portalProjectsState.driveRuns || [],
+                        };
+                    } else if (prevPass && getEncryptedProjectsBlob()) {
+                        const plainProj = await decryptSqliteVaultEntry(getEncryptedProjectsBlob(), prevPass);
+                        if (plainProj) bundleObj = JSON.parse(plainProj);
+                    }
+                    if (bundleObj && typeof encryptSqliteVaultEntry === 'function') {
+                        const reencBlob = await encryptSqliteVaultEntry(JSON.stringify(bundleObj), nextPass);
+                        if (window.__SITE_DATABASE) window.__SITE_DATABASE.portal_projects_encrypted = reencBlob;
+                        if (window.__PORTAL_DATABASE) window.__PORTAL_DATABASE.portal_projects_encrypted = reencBlob;
+                        if (!rotatedSqlite) {
+                            localStorage.setItem(PORTAL_LOCAL_REENC_PROJ_KEY, JSON.stringify(reencBlob));
+                        } else {
+                            localStorage.removeItem(PORTAL_LOCAL_REENC_PROJ_KEY);
+                        }
+                    }
+
+                    if (typeof encryptSqliteVaultEntry === 'function' && window.__SITE_DATABASE && window.__SITE_DATABASE.portal_vault) {
+                        unlockedVaultSecrets.master_passcode = nextPass;
+                        const nowIso = new Date().toISOString();
+                        for (const [vk, plainVal] of Object.entries(unlockedVaultSecrets)) {
+                            if (typeof plainVal !== 'string') continue;
+                            const encEntry = await encryptSqliteVaultEntry(plainVal, nextPass);
+                            const existingMeta = window.__SITE_DATABASE.portal_vault[vk] || {};
+                            window.__SITE_DATABASE.portal_vault[vk] = {
+                                ...encEntry,
+                                description: existingMeta.description || '',
+                                updated_at: nowIso,
+                            };
+                        }
+                    }
+                } catch (reencErr) {
+                    console.warn('[Portal] Re-encryption warning during passcode change:', reencErr);
+                }
+
+                const verifier = await createLocalPasscodeVerifier(nextPass);
                 localStorage.setItem(PASSCODE_VERIFIER_KEY, JSON.stringify(verifier));
                 localStorage.removeItem(PASSCODE_STORAGE_KEY);
+                portalSessionPasscode = nextPass;
+                try { sessionStorage.setItem(SESSION_PASS_KEY, nextPass); } catch (err) { }
+
                 changeMsg.className = 'text-xs text-emerald-400 block';
-                changeMsg.textContent = 'Master passcode encrypted & updated locally! Remember your new passcode.';
+                changeMsg.textContent = rotatedSqlite
+                    ? 'Master passcode rotated across SQLite content.db, portal_data.js, and active session!'
+                    : 'Master passcode & encrypted project bundle updated locally! Publish to GitHub to sync live.';
                 newPass.value = '';
                 confirmPass.value = '';
             });
@@ -1001,10 +1106,13 @@
                 ['stack-overflow', 'programming', 'code', 'debugging'].forEach(t => tokens.add(t));
             } else if (d.includes('linkedin')) {
                 ['linkedin', 'career', 'networking', 'professional'].forEach(t => tokens.add(t));
-            }
-            } else if (['chase', 'capitalone', 'bankofamerica', 'alahlynet', 'fidelity', 'robinhood', 'tiaa', 'upstart', 'earnin', 'moneymanagement', 'myretirementmanager', 'empower-retirement'].some(k => d.includes(k)) || ['bank', 'chase', 'capital one', 'fidelity', 'robinhood', 'earnin', 'upstart', 'retirement', 'tiaa', 'trs', 'tax'].some(k => rawName.includes(k))) {
+            } else if (['chase', 'capitalone', 'bankofamerica', 'alahlynet', 'fidelity', 'robinhood', 'tiaa', 'upstart', 'earnin', 'moneymanagement', 'myretirementmanager', 'empower-retirement'].some(k => d.includes(k))) {
                 ['finance', 'financial', 'bank', 'banking', 'money', 'accounts', 'statements', 'funds', 'investment'].forEach(t => tokens.add(t));
+            }
+        }
 
+        if (['bank', 'chase', 'capital one', 'fidelity', 'robinhood', 'earnin', 'upstart', 'retirement', 'tiaa', 'trs', 'tax'].some(k => rawName.includes(k))) {
+            ['finance', 'financial', 'bank', 'banking', 'money', 'accounts', 'statements', 'funds', 'investment'].forEach(t => tokens.add(t));
         }
 
         if (subfolder && subfolder !== 'General' && subfolder !== d) {
@@ -1985,18 +2093,65 @@
         }).join('');
     }
 
+    function renderCategoryPills() {
+        const container = document.getElementById('category-pills');
+        if (!container) return;
+
+        const allBms = getAllBookmarks();
+        const pinnedIds = getPinnedIds();
+        const catCounts = new Map();
+        allBms.forEach(bm => {
+            const cat = bm.category || 'Bookmarks';
+            catCounts.set(cat, (catCounts.get(cat) || 0) + 1);
+        });
+
+        const pills = [
+            { key: 'all', label: `All Bookmarks (${allBms.length})`, icon: 'fas fa-layer-group' },
+            { key: 'pinned', label: `Pinned (${pinnedIds.length})`, icon: 'fas fa-star text-amber-400' },
+        ];
+        Array.from(catCounts.entries())
+            .sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0]))
+            .forEach(([cat, cnt]) => {
+                pills.push({ key: cat, label: `${cat} (${cnt})`, icon: 'fas fa-folder' });
+            });
+
+        if (activeCategory !== 'all' && activeCategory !== 'pinned' && !catCounts.has(activeCategory)) {
+            activeCategory = 'all';
+        }
+
+        container.innerHTML = pills.map(p => {
+            const isActive = activeCategory === p.key;
+            const cls = isActive
+                ? 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition inline-flex items-center gap-1.5'
+                : 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition inline-flex items-center gap-1.5';
+            return `<button type="button" data-cat="${escapeHtml(p.key)}" class="${cls}"><i class="${p.icon} text-[10px]"></i><span>${escapeHtml(p.label)}</span></button>`;
+        }).join('');
+
+        container.querySelectorAll('.cat-pill').forEach(btn => {
+            btn.addEventListener('click', () => {
+                activeCategory = btn.getAttribute('data-cat') || 'all';
+                activeSubfolder = null;
+                renderCategoryPills();
+                renderSubfolderChips();
+                renderBookmarks();
+            });
+        });
+    }
+
     function renderBookmarks() {
         // Targets Tab 2 bookmarks directory
         const grid = document.getElementById('bookmarks-grid');
         const countLabel = document.getElementById('results-count-label');
-        const noResults = document.getElementById('no-results-msg');
+        const noResults = document.getElementById('no-results-msg') || document.getElementById('bookmarks-empty');
         if (!grid) return;
 
+        renderCategoryPills();
         const allBms = getAllBookmarks();
         const pinnedIds = getPinnedIds();
-        
-        // The directory filters by category and subfolder
-        const filtered = allBms.filter(bm => {
+        const rawDirQuery = (tabBookmarksSearchQuery || '').trim().toLowerCase();
+
+        // Filter by category, subfolder, and Tab 2 search / AI search
+        let filtered = allBms.filter(bm => {
             if (activeCategory === 'pinned') {
                 if (!pinnedIds.includes(bm.id)) return false;
             } else if (activeCategory !== 'all') {
@@ -2005,11 +2160,32 @@
             if (activeSubfolder) {
                 if (bm.subfolder !== activeSubfolder) return false;
             }
+            if (aiSearchMode && aiSearchTarget === 'bookmarks') {
+                return aiMatchedIds.includes(Number(bm.id));
+            }
+            if (rawDirQuery) {
+                const hay = `${bm.name || ''} ${bm.domain || ''} ${bm.url || ''} ${bm.subfolder || ''} ${bm.category || ''} ${bm.ai_tags || ''} ${bm.description || ''}`.toLowerCase();
+                const qTerms = rawDirQuery.split(/\s+/).filter(Boolean);
+                return qTerms.every(t => hay.includes(t));
+            }
             return true;
         });
 
+        if (rawDirQuery && !(aiSearchMode && aiSearchTarget === 'bookmarks')) {
+            filtered = filtered
+                .map(bm => {
+                    const usageCnt = getBookmarkUsageCount(bm.id);
+                    const isPin = pinnedIds.includes(bm.id);
+                    const sim = calculateSimilarityAndRelevance(bm, rawDirQuery, usageCnt, isPin);
+                    return { bm, score: sim ? sim.score : 1 };
+                })
+                .sort((a, b) => b.score - a.score)
+                .map(x => x.bm);
+        }
+
         if (countLabel) {
-            countLabel.textContent = `Showing ${filtered.length} of ${allBms.length} bookmarks`;
+            const suffix = (aiSearchMode && aiSearchTarget === 'bookmarks') ? ' (AI Semantic Match)' : (rawDirQuery ? ` matching "${tabBookmarksSearchQuery.trim()}"` : '');
+            countLabel.textContent = `Showing ${filtered.length} of ${allBms.length} bookmarks${suffix}`;
         }
 
         if (filtered.length === 0) {
@@ -2028,6 +2204,7 @@
 
             let badgeColor = 'bg-sky-500/10 text-sky-400 border-sky-500/20';
             if (bm.category === 'Bookmarks') badgeColor = 'bg-slate-700/50 text-sky-400 border-slate-700';
+            else if (bm.category === 'Dashboard') badgeColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25';
 
             return `
                 <div class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition group">
@@ -2047,19 +2224,19 @@
                                     </span>
                                 ` : ''}
                                 <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded border ${badgeColor}">
-                                    ${bm.category}
+                                    ${escapeHtml(bm.category)}
                                 </span>
                                 <button onclick="togglePin(${bm.id})" title="${isPinned ? 'Unpin' : 'Pin to Launchpad'}"
-                                    class="text-xs transition ml-1 ${isPinned ? 'text-amber-400' : 'text-slate-600 hover:text-amber-400'}">
+                                    class="text-xs transition ml-1 ${isPinned ? 'text-amber-400' : 'text-slate-500 hover:text-amber-400'}">
                                     <i class="${isPinned ? 'fas' : 'far'} fa-star"></i>
                                 </button>
                                 <button onclick="toggleRemember(${bm.id})" title="${getRememberedIds().includes(bm.id) ? 'Remove from Save for Later' : 'Save for Later'}"
                                     data-remember-btn="${bm.id}"
-                                    class="text-xs transition ml-1 ${getRememberedIds().includes(bm.id) ? 'text-emerald-400' : 'text-slate-600 hover:text-emerald-400'}">
+                                    class="text-xs transition ml-1 ${getRememberedIds().includes(bm.id) ? 'text-emerald-400' : 'text-slate-500 hover:text-emerald-400'}">
                                     <i class="${getRememberedIds().includes(bm.id) ? 'fas' : 'far'} fa-bookmark"></i>
                                 </button>
                                 <button onclick="deleteBookmark(${bm.id})" title="Delete Bookmark"
-                                    class="text-slate-600 hover:text-rose-400 text-xs transition opacity-0 group-hover:opacity-100 ml-0.5">
+                                    class="text-slate-500 hover:text-rose-400 text-xs transition opacity-0 group-hover:opacity-100 ml-0.5">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
@@ -2069,19 +2246,19 @@
                         <div onclick="trackLaunch(${bm.id}, '${escapeHtml(bm.url)}')"
                             class="font-semibold text-sm text-slate-200 group-hover:text-sky-300 transition line-clamp-2 leading-snug cursor-pointer" 
                             title="${escapeHtml(bm.name)}">
-                            ${escapeHtml(bm.name)}
+                            ${rawDirQuery ? highlightTokens(escapeHtml(bm.name), rawDirQuery) : escapeHtml(bm.name)}
                         </div>
 
                         <!-- Path Breadcrumbs -->
-                        <div class="mt-2 text-[10px] text-slate-500 truncate" title="${escapeHtml(bm.path || '')}">
-                            <i class="fas fa-folder-open text-[9px] text-slate-600 mr-1"></i> ${escapeHtml(bm.path || bm.category)}
+                        <div class="mt-2 text-[10px] text-slate-400 truncate" title="${escapeHtml(bm.path || '')}">
+                            <i class="fas fa-folder-open text-[9px] text-slate-500 mr-1"></i> ${escapeHtml(bm.path || bm.category)}
                         </div>
                     </div>
 
                     <!-- Footer Action Bar -->
                     <div class="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs">
                         <button onclick="copyToClipboard('${escapeHtml(bm.url)}', this)" title="Copy URL" 
-                            class="text-slate-500 hover:text-slate-300 transition text-[11px] flex items-center gap-1">
+                            class="text-slate-400 hover:text-slate-200 transition text-[11px] flex items-center gap-1">
                             <i class="far fa-copy"></i> <span>Copy</span>
                         </button>
 
@@ -2096,38 +2273,14 @@
     }
 
     function initCategoryPills() {
-        const container = document.getElementById('category-pills');
-        if (!container) return;
-
-        container.querySelectorAll('.cat-pill').forEach(btn => {
-            btn.addEventListener('click', () => {
-                container.querySelectorAll('.cat-pill').forEach(b => {
-                    b.className = 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
-                });
-                btn.className = 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition';
-                activeCategory = btn.getAttribute('data-cat');
-                activeSubfolder = null;
-                renderSubfolderChips();
-                renderBookmarks();
-            });
-        });
+        renderCategoryPills();
     }
 
     window.filterCategoryAndOpen = function (categoryName) {
         switchTab('tab-bookmarks');
         activeCategory = categoryName;
         activeSubfolder = null;
-        
-        const container = document.getElementById('category-pills');
-        if (container) {
-            container.querySelectorAll('.cat-pill').forEach(b => {
-                if (b.getAttribute('data-cat') === categoryName) {
-                    b.className = 'cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-600 text-white shadow-sm transition';
-                } else {
-                    b.className = 'cat-pill px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition';
-                }
-            });
-        }
+        renderCategoryPills();
         renderSubfolderChips();
         renderBookmarks();
     };
@@ -2136,38 +2289,31 @@
     // 9. SEARCH FUNCTIONALITY
     // -------------------------------------------------------------------------
     function initSearch() {
-        const globalSearch = document.getElementById('global-search-input');
-        const clearGlobal = document.getElementById('clear-search-btn');
         const bmSearch = document.getElementById('bm-search-input');
         const clearBm = document.getElementById('bm-clear-btn');
+        const tabBmSearch = document.getElementById('tab-bm-search-input');
+        const clearTabBm = document.getElementById('tab-bm-clear-btn');
 
         function onSearchInput(val) {
             searchQuery = val;
-            aiSearchMode = false;
-            aiMatchedIds = [];
-            if (globalSearch && globalSearch.value !== val) globalSearch.value = val;
+            if (aiSearchTarget === 'dashboard') {
+                aiSearchMode = false;
+                aiMatchedIds = [];
+            }
             if (bmSearch && bmSearch.value !== val) bmSearch.value = val;
-
-            if (clearGlobal) clearGlobal.classList.toggle('hidden', !val);
             if (clearBm) clearBm.classList.toggle('hidden', !val);
-
             renderDashboardSearchResults();
         }
 
-        if (globalSearch) {
-            globalSearch.addEventListener('input', (e) => {
-                onSearchInput(e.target.value);
-                if (e.target.value && document.getElementById('tab-dashboard').classList.contains('hidden')) {
-                    switchTab('tab-dashboard');
-                }
-            });
-        }
-
-        if (clearGlobal) {
-            clearGlobal.addEventListener('click', () => {
-                onSearchInput('');
-                if (globalSearch) globalSearch.focus();
-            });
+        function onTabBookmarksSearchInput(val) {
+            tabBookmarksSearchQuery = val;
+            if (aiSearchTarget === 'bookmarks') {
+                aiSearchMode = false;
+                aiMatchedIds = [];
+            }
+            if (tabBmSearch && tabBmSearch.value !== val) tabBmSearch.value = val;
+            if (clearTabBm) clearTabBm.classList.toggle('hidden', !val);
+            renderBookmarks();
         }
 
         if (bmSearch) {
@@ -2181,15 +2327,27 @@
             });
         }
 
+        if (tabBmSearch) {
+            tabBmSearch.addEventListener('input', (e) => onTabBookmarksSearchInput(e.target.value));
+        }
+
+        if (clearTabBm) {
+            clearTabBm.addEventListener('click', () => {
+                onTabBookmarksSearchInput('');
+                if (tabBmSearch) tabBmSearch.focus();
+            });
+        }
+
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey && e.key === 'k') || (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA')) {
                 e.preventDefault();
-                if (bmSearch) {
+                const tabBmPane = document.getElementById('tab-bookmarks');
+                if (tabBmPane && !tabBmPane.classList.contains('hidden') && tabBmSearch) {
+                    tabBmSearch.focus();
+                    tabBmSearch.select();
+                } else if (bmSearch) {
                     bmSearch.focus();
                     bmSearch.select();
-                } else if (globalSearch) {
-                    globalSearch.focus();
-                    globalSearch.select();
                 }
             }
         });
@@ -3248,13 +3406,9 @@
             // 2. If running via local portal_server.py, also persist permanently into content.db
             let dbNote = 'browser localStorage restored';
             try {
-                const health = await fetch('/api/health', { cache: 'no-store' });
-                if (health.ok) {
-                    const resp = await fetch('/api/portal-state/import', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload),
-                    });
+                const token = await ensurePortalCsrfToken();
+                if (token) {
+                    const resp = await portalServerPost('/api/portal-state/import', payload);
                     const resData = await resp.json();
                     if (resData.ok && resData.stats) {
                         dbNote = `saved ${resData.stats.total_bookmarks} bookmarks to content.db`;
@@ -3270,19 +3424,19 @@
     };
 
     window.resetPortalData = function () {
-        if (confirm('Warning: This will clear your custom passcode, custom added bookmarks, pinned favorites, tasks, scratches database, secret messages, and logout. Reset now?')) {
-            localStorage.removeItem(PASSCODE_STORAGE_KEY);
-            localStorage.removeItem(PASSCODE_VERIFIER_KEY);
-            localStorage.removeItem(PINNED_STORAGE_KEY);
-            localStorage.removeItem(SCRATCHPAD_KEY);
-            localStorage.removeItem(SCRATCHES_DB_KEY);
-            localStorage.removeItem(TASKS_KEY);
-            localStorage.removeItem(MESSAGES_KEY);
-            localStorage.removeItem(CUSTOM_BM_KEY);
-            localStorage.removeItem(DELETED_BM_KEY);
-            localStorage.removeItem(USAGE_STATS_KEY);
-            localStorage.removeItem(HANDSHAKE_CONFIG_KEY);
-            localStorage.removeItem('gemini_api_key');
+        if (confirm('Warning: This will clear your custom passcode, GitHub PAT, encrypted password vault, custom bookmarks, pinned favorites, tasks, scratches database, secret messages, and logout. Reset now?')) {
+            const explicitKeys = [
+                PASSCODE_STORAGE_KEY, PASSCODE_VERIFIER_KEY, PORTAL_LOCAL_REENC_PROJ_KEY,
+                PINNED_STORAGE_KEY, REMEMBER_STORAGE_KEY, SCRATCHPAD_KEY, SCRATCHES_DB_KEY,
+                TASKS_KEY, MESSAGES_KEY, CUSTOM_BM_KEY, DELETED_BM_KEY, USAGE_STATS_KEY,
+                HANDSHAKE_CONFIG_KEY, 'gemini_api_key', 'portal_ai_tags_cache'
+            ];
+            explicitKeys.forEach(k => localStorage.removeItem(k));
+            Object.keys(localStorage).forEach(k => {
+                if (k.startsWith('portal_') || k.startsWith('dr_islam_portal_')) {
+                    localStorage.removeItem(k);
+                }
+            });
             logout();
         }
     };
@@ -3477,9 +3631,15 @@
         }
     };
 
-    window.triggerAISearch = async function() {
-        const query = document.getElementById('bm-search-input').value.trim();
-        if (!query) return;
+    window.triggerAISearch = async function(targetScope = 'dashboard') {
+        const isDirectory = targetScope === 'bookmarks';
+        const inputEl = document.getElementById(isDirectory ? 'tab-bm-search-input' : 'bm-search-input');
+        const query = (inputEl ? inputEl.value : '').trim();
+        if (!query) {
+            showPortalToast('Enter a search query first to run AI Semantic Search.', 'warn');
+            if (inputEl) inputEl.focus();
+            return;
+        }
 
         const apiKey = localStorage.getItem('gemini_api_key');
         if (!apiKey) {
@@ -3490,25 +3650,25 @@
             return;
         }
 
-        const btn = document.getElementById('ai-search-btn');
+        const btn = document.getElementById(isDirectory ? 'tab-ai-search-btn' : 'ai-search-btn');
         const originalText = btn ? btn.innerHTML : '';
         if (btn) {
-            btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Searching...`;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin text-xs"></i> Searching...`;
             btn.disabled = true;
         }
-        
-        const grid = document.getElementById('dashboard-bookmarks-grid');
+
+        const grid = document.getElementById(isDirectory ? 'bookmarks-grid' : 'dashboard-bookmarks-grid');
         if (grid) {
-            grid.innerHTML = `<div class="col-span-full py-16 flex flex-col items-center justify-center text-sky-400">
-                <svg class="w-10 h-10 animate-spin mb-4" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                <p class="font-semibold animate-pulse">AI is reading your bookmarks...</p>
+            grid.innerHTML = `<div class="col-span-full py-12 flex flex-col items-center justify-center text-sky-400">
+                <i class="fas fa-spinner fa-spin text-2xl mb-3"></i>
+                <p class="font-semibold text-sm animate-pulse">AI is semantically ranking your bookmarks...</p>
             </div>`;
         }
 
         try {
             const allBms = typeof getAllBookmarks === 'function' ? getAllBookmarks() : window.PORTAL_BOOKMARKS.bookmarks;
-            const minimizedBms = allBms.map(bm => ({ id: bm.id, name: bm.name, domain: bm.domain }));
-            
+            const minimizedBms = allBms.map(bm => ({ id: bm.id, name: bm.name, domain: bm.domain, sub: bm.subfolder }));
+
             const prompt = `You are a semantic search assistant for my bookmarks. The user query is: "${query}"
 
 Here is the JSON list of my bookmarks:
@@ -3516,30 +3676,39 @@ ${JSON.stringify(minimizedBms)}
 
 Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantically match the query. Do not wrap in markdown blocks, just return the raw JSON array. If no matches, return [].`;
 
-            let matchedIds = await callGeminiJson(apiKey, prompt);
+            const matchedIds = await callGeminiJson(apiKey, prompt);
             if (!Array.isArray(matchedIds)) {
-                throw new Error("Response is not an array");
+                throw new Error('Response is not an array');
             }
 
             aiSearchMode = true;
+            aiSearchTarget = isDirectory ? 'bookmarks' : 'dashboard';
             aiMatchedIds = matchedIds.map(id => Number(id));
-            
-            activeCategory = 'all';
-            activeSubfolder = null;
-            
-            if (typeof renderDashboardSearchResults === 'function') {
+
+            if (isDirectory) {
+                activeCategory = 'all';
+                activeSubfolder = null;
+                const clearTabBm = document.getElementById('tab-bm-clear-btn');
+                if (clearTabBm) clearTabBm.classList.remove('hidden');
+                renderBookmarks();
+            } else if (typeof renderDashboardSearchResults === 'function') {
+                const emptyState = document.getElementById('dashboard-search-initial');
+                if (emptyState) emptyState.classList.add('hidden');
                 renderDashboardSearchResults();
                 const clearBm = document.getElementById('bm-clear-btn');
                 if (clearBm) clearBm.classList.remove('hidden');
             }
-            
-            if (aiMatchedIds.length === 0) {
-                alert("AI didn't find any bookmarks matching that query.");
-            }
 
+            if (aiMatchedIds.length === 0) {
+                showPortalToast("AI didn't find any bookmarks matching that query.", 'warn');
+            } else {
+                showPortalToast(`AI matched ${aiMatchedIds.length} bookmark(s)`);
+            }
         } catch (err) {
             console.error(err);
-            alert('AI Search failed: ' + err.message);
+            showPortalToast('AI Search failed: ' + err.message, 'error');
+            if (isDirectory) renderBookmarks();
+            else renderDashboardSearchResults();
         } finally {
             if (btn) {
                 btn.innerHTML = originalText;
@@ -4570,6 +4739,9 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             const resp = await fetch('/api/health', { cache: 'no-store' });
             if (!resp.ok) return false;
             const data = await resp.json();
+            if (data && data.csrf_token) {
+                portalServerCsrfToken = data.csrf_token;
+            }
             return Boolean(data && data.ok);
         } catch (e) {
             return false;
@@ -4837,13 +5009,13 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 <article class="bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-4 shadow transition">
                     <div class="flex flex-col md:flex-row md:items-start justify-between gap-3">
                         <div class="pt-1 flex-shrink-0">
-                            <input type="checkbox" ${isChecked} onchange='toggleHubProjectSelection(${safeId}, this.checked)' class="w-4 h-4 accent-purple-500 rounded cursor-pointer" title="Select for multi-project merge" />
+                            <input type="checkbox" ${isChecked} onchange='toggleHubProjectSelection(${safeId}, this.checked)' class="w-4 h-4 accent-teal-500 rounded cursor-pointer" title="Select for multi-project merge" />
                         </div>
                         <div class="space-y-1.5 min-w-0 flex-1">
                             <div class="flex flex-wrap items-center gap-2">
                                 ${pubBadge}
                                 ${statusBadge}
-                                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-purple-500/10 text-purple-300 border border-purple-500/30">${escapeHtml(p.project_kind || 'research')}</span>
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-teal-500/10 text-teal-300 border border-teal-500/30">${escapeHtml(p.project_kind || 'research')}</span>
                                 <span class="text-[11px] font-mono text-slate-500">${escapeHtml(p.slug)}</span>
                             </div>
                             <h3 class="text-base font-bold text-white truncate">${escapeHtml(p.title)}</h3>
@@ -4857,7 +5029,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                             <div class="flex items-center gap-1.5">
                                 ${driveLink ? `<a href="${escapeHtml(driveLink)}" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 text-xs font-semibold flex items-center gap-1"><i class="fab fa-google-drive"></i> Drive (${(p.artifacts || []).length})</a>` : `<span class="px-2.5 py-1.5 rounded-lg bg-slate-950 text-slate-500 text-xs">${(p.artifacts || []).length} artifacts</span>`}
                                 <button type="button" onclick='openProjectEditorModal(${safeId})' class="px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold flex items-center gap-1"><i class="fas fa-edit"></i> Edit / Place</button>
-                                <button type="button" onclick='openManualMergeModal(${safeId})' class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-purple-600/80 text-slate-300 hover:text-white text-xs font-semibold" title="Merge into another project"><i class="fas fa-code-branch"></i></button>
+                                <button type="button" onclick='openManualMergeModal(${safeId})' class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-teal-600/80 text-slate-300 hover:text-white text-xs font-semibold" title="Merge into another project"><i class="fas fa-code-branch"></i></button>
                                 <button type="button" onclick='deletePortalProject(${safeId})' class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-rose-600/80 text-slate-300 hover:text-white text-xs" title="Delete project"><i class="fas fa-trash"></i></button>
                             </div>
                         </div>
@@ -4980,17 +5152,52 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     window.submitProjectEditorForm = async function (event) {
         event.preventDefault();
         const idRaw = document.getElementById('pe-id').value;
+        const existingProj = idRaw
+            ? (portalProjectsState.projects || []).find(p => String(p.id) === String(idRaw))
+            : null;
+
         const placements = [];
         document.querySelectorAll('#pe-placements-grid .pe-placement-cb:checked').forEach((cb, idx) => {
+            const pg = cb.getAttribute('data-page');
+            const sl = cb.getAttribute('data-slot');
+            const prevPl = existingProj && Array.isArray(existingProj.placements)
+                ? existingProj.placements.find(x => x.page_slug === pg && x.section_slot === sl)
+                : null;
             placements.push({
-                page_slug: cb.getAttribute('data-page'),
-                section_slot: cb.getAttribute('data-slot'),
-                display_order: (idx + 1) * 10,
+                page_slug: pg,
+                section_slot: sl,
+                card_variant: prevPl ? prevPl.card_variant : undefined,
+                display_order: prevPl && prevPl.display_order != null ? prevPl.display_order : (idx + 1) * 10,
                 is_visible: true,
             });
         });
 
+        const orgInputVal = document.getElementById('pe-org').value.trim();
+        let instOrgVal = orgInputVal;
+        let grantAwardVal = existingProj ? (existingProj.grant_award || '') : '';
+        if (existingProj && existingProj.grant_award && orgInputVal === existingProj.grant_award) {
+            instOrgVal = existingProj.institution_or_org || '';
+            grantAwardVal = existingProj.grant_award;
+        } else if (!existingProj && /nsf|nih|grant|award|\$/i.test(orgInputVal)) {
+            grantAwardVal = orgInputVal;
+        }
+
+        const isHomeFeatured = placements.some(pl => pl.page_slug === 'home' && pl.section_slot === 'featured');
+        const isSfCatalog = placements.some(pl => pl.page_slug === 'storefront' && pl.section_slot === 'catalog');
+
         const payload = {
+            ...(existingProj ? {
+                domain_stage: existingProj.domain_stage,
+                keywords: existingProj.keywords,
+                code_snippet: existingProj.code_snippet,
+                license_model: existingProj.license_model,
+                price_display: existingProj.price_display,
+                storefront_category: existingProj.storefront_category,
+                gdrive_primary_folder_id: existingProj.gdrive_primary_folder_id,
+                gdrive_primary_url: existingProj.gdrive_primary_url,
+                source_origin: existingProj.source_origin,
+                confidence_score: existingProj.confidence_score,
+            } : {}),
             id: idRaw ? Number(idRaw) : null,
             title: document.getElementById('pe-title').value.trim(),
             slug: document.getElementById('pe-slug').value.trim(),
@@ -5002,22 +5209,21 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             year_end: document.getElementById('pe-year-end').value || null,
             display_order: Number(document.getElementById('pe-order').value || 50),
             is_public: document.getElementById('pe-public').checked || placements.length > 0,
+            is_featured: isHomeFeatured || Boolean(existingProj && existingProj.is_featured && placements.length === 0),
+            is_storefront: isSfCatalog || Boolean(existingProj && existingProj.is_storefront && placements.length === 0),
             tagline: document.getElementById('pe-tagline').value.trim(),
             short_summary: document.getElementById('pe-summary').value.trim(),
             full_description: document.getElementById('pe-description').value.trim(),
             tech_stack: document.getElementById('pe-tech').value.split(',').map(s => s.trim()).filter(Boolean),
             tags: document.getElementById('pe-tags').value.split(',').map(s => s.trim()).filter(Boolean),
-            institution_or_org: document.getElementById('pe-org').value.trim(),
+            institution_or_org: instOrgVal,
+            grant_award: grantAwardVal,
             placements,
             auto_public: true,
         };
 
         if (portalProjectsState.liveMode) {
-            const resp = await fetch('/api/projects/save', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
+            const resp = await portalServerPost('/api/projects/save', payload);
             const data = await resp.json();
             if (!data.ok) {
                 showPortalToast(data.error || 'Failed to save project', 'error');
@@ -5032,7 +5238,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             pushStagedPatchOp('set_placements', { project_id: payload.id, project_slug: payload.slug, placements, auto_public: true });
             portalProjectsState.projects = applyLocalPatchOpsToMemory(portalProjectsState.projects);
             renderPortalProjectsHub();
-            showPortalToast(`Staged "${payload.title}" locally (Export Patch JSON to apply to content.db)`);
+            showPortalToast(`Staged "${payload.title}" locally (Export Patch JSON or Publish to GitHub)`);
         }
         closeProjectEditorModal();
     };
@@ -5041,11 +5247,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const proj = portalProjectsState.projects.find(p => p.id === projectId);
         if (!proj || !confirm(`Delete "${proj.title}" from the master projects database?`)) return;
         if (portalProjectsState.liveMode) {
-            const resp = await fetch('/api/projects/delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: proj.id, slug: proj.slug }),
-            });
+            const resp = await portalServerPost('/api/projects/delete', { id: proj.id, slug: proj.slug });
             const data = await resp.json();
             if (data.ok) hydrateBundleState(data);
             showPortalToast(`Deleted "${proj.title}" from content.db`);
@@ -5083,11 +5285,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             is_public: Boolean(proj.is_public),
         };
         if (portalProjectsState.liveMode) {
-            const resp = await fetch('/api/artifacts/save', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
+            const resp = await portalServerPost('/api/artifacts/save', payload);
             const data = await resp.json();
             if (data.ok) {
                 hydrateBundleState(data);
@@ -5113,11 +5311,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         if (!art) return;
         const payload = { ...art, project_id: proj.id, project_slug: proj.slug, is_public: isPublic };
         if (portalProjectsState.liveMode) {
-            const resp = await fetch('/api/artifacts/save', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-            });
+            const resp = await portalServerPost('/api/artifacts/save', payload);
             const data = await resp.json();
             if (data.ok) hydrateBundleState(data);
         } else {
@@ -5131,11 +5325,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const proj = portalProjectsState.projects.find(p => p.id === portalProjectsState.editingProjectId);
         if (!proj) return;
         if (portalProjectsState.liveMode) {
-            const resp = await fetch('/api/artifacts/delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id: artifactId }),
-            });
+            const resp = await portalServerPost('/api/artifacts/delete', { id: artifactId });
             const data = await resp.json();
             if (data.ok) {
                 hydrateBundleState(data);
@@ -5175,11 +5365,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const btn = document.getElementById('projects-sync-btn');
         if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Syncing...'; }
         try {
-            const resp = await fetch('/api/sync', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ export_only: true }),
-            });
+            const resp = await portalServerPost('/api/sync', { export_only: true });
             const data = await resp.json();
             showPortalToast(data.ok ? 'Website bundles synced & verified!' : 'Sync reported errors (check terminal)', data.ok ? 'success' : 'error');
         } finally {
@@ -5192,11 +5378,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         const btn = document.getElementById('projects-watch-btn');
         if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Scanning Drive...'; }
         try {
-            const resp = await fetch('/api/discover', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mode: 'watch' }),
-            });
+            const resp = await portalServerPost('/api/discover', { mode: 'watch' });
             const data = await resp.json();
             if (data.ok) hydrateBundleState(data);
             showPortalToast(data.ok ? 'Drive watch scan complete & synced!' : 'Drive scan failed (check terminal)', data.ok ? 'success' : 'error');
@@ -5542,11 +5724,48 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             };
             const encryptedProjBlob = await encryptSqliteVaultEntry(JSON.stringify(masterBundle), passcode);
             const baseSite = window.__SITE_DATABASE || {};
+            const liveTasks = (typeof getStoredTasks === 'function' ? getStoredTasks() : (baseSite.portal_tasks || []))
+                .map((t, idx) => ({
+                    id: t.id || (idx + 1),
+                    task_id: t.task_id || `task-${t.id || (idx + 1)}`,
+                    text: t.text || t.title || '',
+                    priority: t.priority || 'normal',
+                    done: Boolean(t.done),
+                    created_at: t.created_at || nowIso,
+                }));
+            const liveActiveScratch = localStorage.getItem(SCRATCHPAD_KEY);
+            const liveScratchesArchive = typeof getScratchesDb === 'function'
+                ? getScratchesDb()
+                : ((baseSite.portal_scratches && baseSite.portal_scratches.archive) || []);
+            const liveMessages = typeof getStoredMessages === 'function'
+                ? getStoredMessages()
+                : (baseSite.portal_messages || []);
+
+            const liveVault = { ...(baseSite.portal_vault || {}) };
+            if (unlockedVaultSecrets && Object.keys(unlockedVaultSecrets).length > 0) {
+                liveVault.master_passcode = {
+                    ...(await encryptSqliteVaultEntry(passcode, passcode)),
+                    description: (liveVault.master_passcode && liveVault.master_passcode.description) || 'Portal Master Passcode',
+                    updated_at: nowIso,
+                };
+                for (const [vk, plainVal] of Object.entries(unlockedVaultSecrets)) {
+                    if (vk === 'master_passcode' || typeof plainVal !== 'string') continue;
+                    liveVault[vk] = {
+                        ...(await encryptSqliteVaultEntry(plainVal, passcode)),
+                        description: (liveVault[vk] && liveVault[vk].description) || '',
+                        updated_at: nowIso,
+                    };
+                }
+            }
+
             const portalBundle = {
-                portal_tasks: baseSite.portal_tasks || [],
-                portal_scratches: baseSite.portal_scratches || { active_buffer: '', archive: [] },
-                portal_messages: baseSite.portal_messages || [],
-                portal_vault: baseSite.portal_vault || {},
+                portal_tasks: liveTasks,
+                portal_scratches: {
+                    active_buffer: liveActiveScratch !== null ? liveActiveScratch : ((baseSite.portal_scratches && baseSite.portal_scratches.active_buffer) || ''),
+                    archive: liveScratchesArchive,
+                },
+                portal_messages: liveMessages,
+                portal_vault: liveVault,
                 portal_passwords: getEncryptedVaultBlobs ? getEncryptedVaultBlobs() : (baseSite.portal_passwords || []),
                 portal_projects_encrypted: encryptedProjBlob,
                 site_placement_slots: portalProjectsState.placementSlots || baseSite.site_placement_slots || [],
@@ -5603,6 +5822,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             Object.assign(window.__SITE_DATABASE, publicPayload, portalBundle);
             localStorage.removeItem(PROJECT_PATCH_OPS_KEY);
             localStorage.removeItem(DELETED_PROJ_SLUGS_KEY);
+            localStorage.removeItem(PORTAL_LOCAL_REENC_PROJ_KEY);
             localStorage.removeItem(CUSTOM_BM_KEY);
             localStorage.removeItem(DELETED_BM_KEY);
             updatePatchBadge();
@@ -5958,7 +6178,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 : cl.maxScore >= 0.55 ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
                 : 'bg-amber-500/20 text-amber-300 border-amber-500/40';
             const clusterBadge = cl.members.length > 2
-                ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">${cl.members.length}-Way Cluster</span>`
+                ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40">${cl.members.length}-Way Cluster</span>`
                 : `<span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-800 text-slate-300">2-Way Pair</span>`;
             const aiBadge = cl.aiNote
                 ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${cl.hasSameAi ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${escapeHtml(cl.aiNote)}</span>`
@@ -5999,7 +6219,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             }).join('');
 
             return `
-                <div class="bg-slate-950/80 border ${cl.members.length > 2 ? 'border-purple-500/40' : 'border-slate-800'} rounded-xl p-4 space-y-2.5">
+                <div class="bg-slate-950/80 border ${cl.members.length > 2 ? 'border-teal-500/40' : 'border-slate-800'} rounded-xl p-4 space-y-2.5">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex flex-wrap items-center gap-2">
                             ${clusterBadge}
@@ -6060,7 +6280,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 : cl.maxScore >= 0.55 ? 'bg-sky-500/20 text-sky-300 border-sky-500/40'
                 : 'bg-amber-500/20 text-amber-300 border-amber-500/40';
             const clusterBadge = cl.members.length > 2
-                ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">${cl.members.length}-Way Cluster</span>`
+                ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40">${cl.members.length}-Way Cluster</span>`
                 : `<span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-800 text-slate-300">2-Way Pair</span>`;
             const aiBadge = cl.aiNote
                 ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${cl.hasSameAi ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-slate-800 text-slate-300 border border-slate-700'}">${escapeHtml(cl.aiNote)}</span>`
@@ -6097,7 +6317,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 `;
             }).join('');
             return `
-                <div class="bg-slate-950/80 border ${cl.members.length > 2 ? 'border-purple-500/40' : 'border-slate-800'} rounded-xl p-4 space-y-2.5">
+                <div class="bg-slate-950/80 border ${cl.members.length > 2 ? 'border-teal-500/40' : 'border-slate-800'} rounded-xl p-4 space-y-2.5">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex flex-wrap items-center gap-2">
                             ${clusterBadge}
@@ -6444,11 +6664,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                     updated_at: new Date().toISOString(),
                 };
                 if (portalProjectsState.liveMode) {
-                    await fetch('/api/projects/save', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(updated),
-                    });
+                    await portalServerPost('/api/projects/save', updated);
                 } else {
                     const { artifacts: _a, placements: _pl, publications: _pb, ...compactPayload } = updated;
                     stagedBatch.push({ op: 'save_project', payload: compactPayload });
@@ -6941,15 +7157,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
         if (!src || !tgt || src.id === tgt.id) return false;
 
         if (portalProjectsState.liveMode) {
-            const resp = await fetch('/api/projects/merge', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    source_id: src.id,
-                    target_id: tgt.id,
-                    append_summary: Boolean(opts.appendSummary),
-                    add_alias: opts.addAlias !== false,
-                }),
+            const resp = await portalServerPost('/api/projects/merge', {
+                source_id: src.id,
+                target_id: tgt.id,
+                append_summary: Boolean(opts.appendSummary),
+                add_alias: opts.addAlias !== false,
             });
             const data = await resp.json();
             if (!data.ok) {
@@ -7289,7 +7501,11 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
                 host = String(bm.domain || '').replace(/^www\./i, '').toLowerCase();
             }
             if (!host || /^(localhost|127\.|192\.168\.|10\.|172\.)/.test(host)) return;
-            const weight = 1 + (bm.pinned ? 3 : 0) + Math.min(5, Number(usage[bm.id] || bm.clicks || 0));
+            const rawUse = usage[bm.id];
+            const clickCnt = (rawUse && typeof rawUse === 'object')
+                ? Number(rawUse.count || 0)
+                : Number(rawUse ?? bm.clicks ?? bm.click_count ?? 0);
+            const weight = 1 + (bm.pinned ? 3 : 0) + Math.min(5, Number.isFinite(clickCnt) ? clickCnt : 0);
             const entry = domainMap.get(host) || { host, count: 0, weight: 0, names: [], cats: new Set() };
             entry.count += 1;
             entry.weight += weight;
@@ -7410,7 +7626,7 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
             const themes = Array.isArray(stored.profile.core_themes) ? stored.profile.core_themes : [];
             themesEl.innerHTML = themes.map(t => {
                 const label = typeof t === 'string' ? t : (t.topic || '');
-                return label ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/15 text-purple-200 border border-purple-500/30">${escapeHtml(label)}</span>` : '';
+                return label ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-teal-500/15 text-teal-200 border border-teal-500/30">${escapeHtml(label)}</span>` : '';
             }).join('');
         }
         if (compEl) {
@@ -7806,11 +8022,11 @@ ${compactCorpus}`;
 
         if (variant === 'lead') {
             return `
-                <article class="bg-gradient-to-br from-purple-950/50 via-slate-950 to-slate-950 border border-purple-500/40 rounded-xl p-4 space-y-2 shadow">
+                <article class="bg-gradient-to-br from-teal-950/50 via-slate-950 to-slate-950 border border-teal-500/40 rounded-xl p-4 space-y-2 shadow">
                     <div class="flex flex-wrap items-center justify-between gap-2">
                         <div class="flex flex-wrap items-center gap-1.5">
                             <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/40"><i class="fas fa-bolt mr-1"></i>Lead Story</span>
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">${escapeHtml(topic)}</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-500/15 text-teal-300 border border-teal-500/30">${escapeHtml(topic)}</span>
                             <span class="text-[10px] font-mono text-slate-400">${escapeHtml(srcName)} &bull; ${escapeHtml(pub)}</span>
                         </div>
                         <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-bold text-sky-400 hover:text-sky-300 inline-flex items-center gap-1">Source <i class="fas fa-external-link-alt text-[9px]"></i></a>
@@ -7919,7 +8135,7 @@ ${compactCorpus}`;
                 listEl.innerHTML = `
                     <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-5 text-center space-y-2.5">
                         <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> to parse your website + bookmarks and build your Daily Investigative News Digest.</p>
-                        <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
+                        <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
                     </div>
                 `;
             }
@@ -8088,7 +8304,7 @@ Return ONLY a JSON object:
                 listEl.innerHTML = `
                     <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-5 text-center space-y-2.5">
                         <p class="text-xs text-slate-300">Add your <strong>Gemini API Key</strong> in Settings &amp; Security to parse your website content and generate today&apos;s semantic news briefing.</p>
-                        <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
+                        <button type="button" onclick="switchTab('tab-settings')" class="px-3.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold">Open Settings &amp; Security</button>
                     </div>
                 `;
             }

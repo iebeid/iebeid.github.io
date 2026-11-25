@@ -148,20 +148,34 @@ def reconcile_live_to_db(conn: sqlite3.Connection, db_path: Path = DB_PATH, forc
             )
         result["projects_synced"] += 1
 
-    # 3. Reconcile bookmarks.json (431+ bookmarks, pinned, remembered, click counts)
+    # 3. Reconcile bookmarks.json + portal_data.js tasks, scratches, messages, and passwords
+    state_payload: Dict[str, Any] = {}
     if BOOKMARKS_JSON.exists():
         bm_data = json.loads(BOOKMARKS_JSON.read_text(encoding="utf-8"))
         bm_list = bm_data.get("bookmarks") or []
-        pinned_ids = [str(b["id"]) for b in bm_list if b.get("pinned")]
-        remembered_ids = [str(b["id"]) for b in bm_list if b.get("remembered")]
-        usage_stats = {str(b["id"]): {"count": int(b.get("clicks") or 0)} for b in bm_list if b.get("clicks")}
-        bm_stats = apply_portal_state(conn, {
-            "all_bookmarks": bm_list,
-            "pinned_ids": pinned_ids,
-            "remembered_ids": remembered_ids,
-            "usage_stats": usage_stats,
-        })
+        state_payload["all_bookmarks"] = bm_list
+        state_payload["pinned_ids"] = [str(b["id"]) for b in bm_list if b.get("pinned")]
+        state_payload["remembered_ids"] = [str(b["id"]) for b in bm_list if b.get("remembered")]
+        state_payload["usage_stats"] = {str(b["id"]): {"count": int(b.get("clicks") or 0)} for b in bm_list if b.get("clicks")}
+
+    if isinstance(pdata.get("portal_tasks"), list):
+        state_payload["tasks"] = pdata["portal_tasks"]
+    if isinstance(pdata.get("portal_scratches"), dict):
+        sc_obj = pdata["portal_scratches"]
+        if isinstance(sc_obj.get("active_buffer"), str):
+            state_payload["active_scratch"] = sc_obj["active_buffer"]
+        if isinstance(sc_obj.get("archive"), list):
+            state_payload["scratches"] = sc_obj["archive"]
+    if isinstance(pdata.get("portal_messages"), list):
+        state_payload["messages"] = pdata["portal_messages"]
+    if isinstance(pdata.get("portal_passwords"), list):
+        state_payload["passwords"] = pdata["portal_passwords"]
+
+    if state_payload:
+        bm_stats = apply_portal_state(conn, state_payload)
         result["bookmarks"] = bm_stats.get("total_bookmarks", 0)
+        result["tasks_synced"] = bm_stats.get("tasks_synced", 0)
+        result["scratches_synced"] = bm_stats.get("scratches_synced", 0)
 
     if gen_at:
         cur.execute("""

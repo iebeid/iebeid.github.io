@@ -91,13 +91,13 @@
         fav.type = 'image/x-icon';
         fav.href = `${rootPrefix}images/favicon.ico`;
 
-        if (!document.getElementById('sqlite-global-base-style')) {
+        if (!document.getElementById('sqlite-global-base-style') && !document.getElementById('sqlite-style-global_base')) {
             const styleEl = document.createElement('style');
-            styleEl.id = 'sqlite-global-base-style';
+            styleEl.id = 'sqlite-style-global_base';
             const globalCss = (db && db.stylesheets && db.stylesheets.global_base && db.stylesheets.global_base.css_content)
                 ? db.stylesheets.global_base.css_content
                 : `
-                body, button, input, select, textarea {
+                body {
                     font-family: "Linux Libertine", "Linux Libertine O", Georgia, "Times New Roman", Times, serif;
                 }
                 .nav-dropdown-group:hover .nav-dropdown-menu {
@@ -127,11 +127,11 @@
             const href = `${rootPrefix}${item.rel_path}`;
 
             const activeClass = darkTheme
-                ? 'text-sky-400 font-semibold transition inline-flex items-center gap-1'
-                : 'text-sky-600 font-semibold transition inline-flex items-center gap-1';
+                ? 'text-sky-400 font-semibold transition inline-flex items-center gap-1 whitespace-nowrap text-xs'
+                : 'text-sky-600 font-semibold transition inline-flex items-center gap-1 whitespace-nowrap text-[13px] 2xl:text-sm';
             const inactiveClass = darkTheme
-                ? 'text-slate-300 hover:text-white transition inline-flex items-center gap-1'
-                : 'text-gray-600 hover:text-sky-600 transition inline-flex items-center gap-1';
+                ? 'text-slate-300 hover:text-white transition inline-flex items-center gap-1 whitespace-nowrap text-xs'
+                : 'text-gray-600 hover:text-sky-600 transition inline-flex items-center gap-1 whitespace-nowrap text-[13px] 2xl:text-sm';
 
             if (!children.length) {
                 return `<a href="${href}" class="${isActive ? activeClass : inactiveClass}">${item.label}</a>`;
@@ -258,6 +258,7 @@
         if (subpageNav && !subpageNav.dataset.rendered) {
             subpageNav.dataset.rendered = 'true';
             const quickLinksHTML = buildDesktopNavHTML(navTree, rootPrefix, activeSlug, true);
+            const mobileSubLinksHTML = buildMobileNavHTML(navTree, rootPrefix, activeSlug);
             const pageObj = (db && db.pages) ? db.pages.find(p => p.slug === activeSlug) : null;
             const pageTitle = pageObj ? (pageObj.subtitle || pageObj.title) : document.title;
 
@@ -268,7 +269,16 @@
             subpageNav.innerHTML = barTpl
                 .replace(/\{\{HOME_HREF\}\}/g, homeHref)
                 .replace(/\{\{PAGE_TITLE\}\}/g, pageTitle)
-                .replace(/\{\{SUBPAGE_QUICK_LINKS\}\}/g, quickLinksHTML);
+                .replace(/\{\{SUBPAGE_QUICK_LINKS\}\}/g, quickLinksHTML)
+                .replace(/\{\{SUBPAGE_MOBILE_LINKS\}\}/g, mobileSubLinksHTML);
+
+            const subMobileBtn = document.getElementById('subpage-mobile-menu-btn');
+            const subMobileMenu = document.getElementById('subpage-mobile-menu');
+            if (subMobileBtn && subMobileMenu) {
+                subMobileBtn.addEventListener('click', () => {
+                    subMobileMenu.classList.toggle('hidden');
+                });
+            }
         }
 
         // 3. Render Global Footer (#footer)

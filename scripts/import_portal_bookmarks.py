@@ -159,16 +159,188 @@ def apply_portal_state(conn: sqlite3.Connection, payload: Dict[str, Any]) -> Dic
                 )
 
     tasks = payload.get("tasks")
+    tasks_synced = 0
     if isinstance(tasks, list):
-        for t in tasks:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS portal_tasks (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                task_id TEXT UNIQUE,
+                title TEXT NOT NULL,
+                priority TEXT DEFAULT 'normal',
+                status TEXT DEFAULT 'active',
+                created_at TEXT
+            )
+        """)
+        seen_task_db_ids = set()
+        for idx, t in enumerate(tasks, 1):
+            if not isinstance(t, dict):
+                continue
             tid = t.get("id")
-            text = (t.get("text") or "").strip()
-            done = bool(t.get("done"))
+            task_key = str(t.get("task_id") or (f"task-{tid}" if tid is not None else f"task-imp-{idx}"))
+            text = (t.get("text") or t.get("title") or "").strip()
+            if not text:
+                continue
+            prio = (t.get("priority") or "normal").strip()
+            done = bool(t.get("done")) or (t.get("status") == "completed")
             status = "completed" if done else "active"
-            if tid is not None:
-                cur.execute("UPDATE portal_tasks SET status = ? WHERE id = ?", (status, tid))
-            elif text:
-                cur.execute("UPDATE portal_tasks SET status = ? WHERE title = ?", (status, text))
+            created_at = t.get("created_at") or ""
+
+            matched_row = None
+            if isinstance(tid, int) and tid > 0:
+                matched_row = cur.execute("SELECT id FROM portal_tasks WHERE id = ?", (tid,)).fetchone()
+            if not matched_row and task_key:
+                matched_row = cur.execute("SELECT id FROM portal_tasks WHERE task_id = ?", (task_key,)).fetchone()
+            if not matched_row:
+                matched_row = cur.execute("SELECT id FROM portal_tasks WHERE title = ?", (text,)).fetchone()
+
+            if matched_row:
+                db_tid = matched_row[0]
+                cur.execute(
+                    "UPDATE portal_tasks SET title = ?, priority = ?, status = ? WHERE id = ?",
+                    (text, prio, status, db_tid),
+                )
+            else:
+                cur.execute(
+                    "INSERT INTO portal_tasks (task_id, title, priority, status, created_at) VALUES (?, ?, ?, ?, ?)",
+                    (task_key, text, prio, status, created_at),
+                )
+                db_tid = cur.lastrowid
+            seen_task_db_ids.add(db_tid)
+            tasks_synced += 1
+
+        if payload.get("replace_tasks", True):
+            if seen_task_db_ids:
+                placeholders = ",".join("?" for _ in seen_task_db_ids)
+                cur.execute(f"DELETE FROM portal_tasks WHERE id NOT IN ({placeholders})", tuple(seen_task_db_ids))
+            else:
+                cur.execute("DELETE FROM portal_tasks")
+
+    scratches_synced = 0
+    has_active_scratch = "active_scratch" in payload and isinstance(payload.get("active_scratch"), str)
+    scratches_list = payload.get("scratches")
+    if has_active_scratch or isinstance(scratches_list, list):
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS portal_scratches (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scratch_id TEXT UNIQUE,
+                title TEXT,
+                content TEXT,
+                category TEXT DEFAULT 'archive',
+                created_at TEXT,
+                updated_at TEXT
+            )
+        """)
+        if has_active_scratch:
+            buf_text = payload.get("active_scratch") or ""
+            cur.execute("""
+                INSERT INTO portal_scratches (scratch_id, title, content, category, created_at, updated_at)
+                VALUES ('active_buffer', 'Active Working Scratchpad Buffer', ?, 'active_buffer', datetime('now'), datetime('now'))
+                ON CONFLICT(scratch_id) DO UPDATE SET
+                    content = excluded.content,
+                    updated_at = excluded.updated_at
+            """, (buf_text,))
+            scratches_synced += 1
+
+        if isinstance(scratches_list, list):
+            seen_scratch_ids = {"active_buffer"}
+            for idx, sc in enumerate(scratches_list, 1):
+                if not isinstance(sc, dict):
+                    continue
+                sid = str(sc.get("scratch_id") or sc.get("id") or f"scratch-{idx}")
+                if sid == "active_buffer":
+                    sid = f"scratch-archive-{idx}"
+                s_title = (sc.get("title") or "Scratchpad Snapshot").strip()
+                s_content = sc.get("content") or ""
+                s_cat = sc.get("category") or "archive"
+                if s_cat == "active_buffer":
+                    s_cat = "archive"
+                s_created = sc.get("timestamp") or sc.get("created_at") or ""
+                s_updated = sc.get("dateStr") or sc.get("updated_at") or s_created
+                cur.execute("""
+                    INSERT INTO portal_scratches (scratch_id, title, content, category, created_at, updated_at)
+                    VALUES (?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(scratch_id) DO UPDATE SET
+                        title = excluded.title,
+                        content = excluded.content,
+                        category = excluded.category,
+                        updated_at = excluded.updated_at
+                """, (sid, s_title, s_content, s_cat, s_created, s_updated))
+                seen_scratch_ids.add(sid)
+                scratches_synced += 1
+
+            if payload.get("replace_scratches", True):
+                placeholders = ",".join("?" for _ in seen_scratch_ids)
+                cur.execute(
+                    f"DELETE FROM portal_scratches WHERE category != 'active_buffer' AND scratch_id NOT IN ({placeholders})",
+                    tuple(seen_scratch_ids),
+                )
+
+    messages_list = payload.get("messages")
+    if isinstance(messages_list, list):
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS portal_messages (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                sender TEXT,
+                email TEXT,
+                subject TEXT,
+                classification TEXT,
+                body TEXT,
+                fingerprint TEXT,
+                date TEXT,
+                unread INTEGER DEFAULT 1
+            )
+        """)
+        existing_fps = {
+            r[0] for r in cur.execute("SELECT fingerprint FROM portal_messages WHERE fingerprint IS NOT NULL").fetchall()
+        }
+        for m in messages_list:
+            if not isinstance(m, dict) or not m.get("fingerprint"):
+                continue
+            fp = str(m["fingerprint"])
+            if fp in existing_fps:
+                cur.execute(
+                    "UPDATE portal_messages SET unread = ? WHERE fingerprint = ?",
+                    (1 if m.get("unread") else 0, fp),
+                )
+            else:
+                cur.execute("""
+                    INSERT INTO portal_messages (sender, email, subject, classification, body, fingerprint, date, unread)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    m.get("sender") or "Verified Sender",
+                    m.get("email") or "",
+                    m.get("subject") or "Confidential Dispatch",
+                    m.get("tag") or m.get("classification") or "Confidential",
+                    m.get("body") or "",
+                    fp,
+                    m.get("date") or "",
+                    1 if m.get("unread") else 0,
+                ))
+                existing_fps.add(fp)
+
+    passwords_list = payload.get("passwords")
+    if isinstance(passwords_list, list):
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS portal_passwords (
+                id TEXT PRIMARY KEY,
+                ciphertext TEXT NOT NULL,
+                nonce TEXT NOT NULL,
+                salt TEXT NOT NULL,
+                updated_at TEXT
+            )
+        """)
+        for pw in passwords_list:
+            if not isinstance(pw, dict) or not pw.get("id") or not pw.get("ciphertext"):
+                continue
+            cur.execute("""
+                INSERT INTO portal_passwords (id, ciphertext, nonce, salt, updated_at)
+                VALUES (?, ?, ?, ?, ?)
+                ON CONFLICT(id) DO UPDATE SET
+                    ciphertext = excluded.ciphertext,
+                    nonce = excluded.nonce,
+                    salt = excluded.salt,
+                    updated_at = excluded.updated_at
+            """, (str(pw["id"]), pw["ciphertext"], pw["nonce"], pw["salt"], pw.get("updated_at") or ""))
 
     conn.commit()
     total_count = cur.execute("SELECT COUNT(*) FROM portal_bookmarks").fetchone()[0]
@@ -178,6 +350,8 @@ def apply_portal_state(conn: sqlite3.Connection, payload: Dict[str, Any]) -> Dic
         "total_bookmarks": total_count,
         "pinned_count": cur.execute("SELECT COUNT(*) FROM portal_bookmarks WHERE pinned = 1").fetchone()[0],
         "remembered_count": cur.execute("SELECT COUNT(*) FROM portal_bookmarks WHERE remembered = 1").fetchone()[0],
+        "tasks_synced": tasks_synced,
+        "scratches_synced": scratches_synced,
     }
 
 

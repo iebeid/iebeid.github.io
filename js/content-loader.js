@@ -42,7 +42,9 @@
     function injectStylesheets(db, pageSlug) {
         if (!db || !db.stylesheets) return;
 
-        // 1. Global base stylesheet
+        // 1. Global base stylesheet (deduplicated with template.js)
+        const legacyGlobalStyle = document.getElementById('sqlite-global-base-style');
+        if (legacyGlobalStyle) legacyGlobalStyle.remove();
         if (db.stylesheets.global_base && !document.getElementById('sqlite-style-global_base')) {
             const globalStyle = document.createElement('style');
             globalStyle.id = 'sqlite-style-global_base';
@@ -322,30 +324,44 @@
         }).join('');
     }
 
-    function renderResearchCards(projects, rootPrefix, borderColorClass) {
+    function renderResearchCards(projects, rootPrefix, borderColorClass, spanLastOdd) {
         const bCls = borderColorClass || 'border-sky-600';
-        return projects.map(p => {
+        const activeSlug = getActivePageSlug();
+        const isDarkSurface = activeSlug.startsWith('talk-') || activeSlug === 'portal' || activeSlug === 'drop';
+        return projects.map((p, idx) => {
+            const isOddTrailing = Boolean(spanLastOdd && projects.length > 1 && projects.length % 2 === 1 && idx === projects.length - 1);
+            const spanCls = isOddTrailing ? ' md:col-span-2' : '';
             const pillList = (p.tech_stack && p.tech_stack.length > 0) ? p.tech_stack : (p.tags || []);
-            const techPills = pillList.slice(0, 4).map(t => `<span class="text-[10px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">${escapeProjectHtml(t)}</span>`).join('');
+            const techPills = pillList.slice(0, 4).map(t => isDarkSurface
+                ? `<span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">${escapeProjectHtml(t)}</span>`
+                : `<span class="text-[10px] font-mono bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">${escapeProjectHtml(t)}</span>`
+            ).join('');
             const yearRange = p.year_start ? (p.year_end && p.year_end !== p.year_start ? `${p.year_start}–${p.year_end}` : `${p.year_start}`) : (p.status || p.project_kind || 'Project');
             const badgeCls = (p.grant_award && p.grant_award.includes('NSF')) ? 'tag tag-emerald' : 'tag';
             const shots = (p.artifacts || []).filter(a => a.type === 'screenshot' || a.type === 'thumbnail').slice(0, 3);
             const shotsHTML = shots.length > 0
-                ? `<div class="grid grid-cols-${shots.length} gap-2 mb-3">${shots.map(s => `<img src="${escapeProjectHtml(resolveArtifactHref(s.url, rootPrefix))}" alt="${escapeProjectHtml(s.label)}" class="h-24 w-full object-contain rounded border border-slate-200 bg-slate-50 p-1">`).join('')}</div>`
+                ? `<div class="grid grid-cols-${shots.length} gap-2 mb-3">${shots.map(s => `<img src="${escapeProjectHtml(resolveArtifactHref(s.url, rootPrefix))}" alt="${escapeProjectHtml(s.label)}" class="h-24 w-full object-contain rounded border ${isDarkSurface ? 'border-slate-700 bg-slate-900' : 'border-slate-200 bg-slate-50'} p-1">`).join('')}</div>`
                 : '';
+            const cardBaseCls = isDarkSurface
+                ? `bg-slate-900/85 border border-slate-700/80 p-6 rounded-xl shadow-lg border-t-4 ${bCls} flex flex-col justify-between${spanCls}`
+                : `bg-white p-6 rounded-lg shadow-md border-t-4 ${bCls} flex flex-col justify-between${spanCls}`;
+            const titleCls = isDarkSurface ? 'text-xl font-bold text-slate-100' : 'text-xl font-bold text-gray-900';
+            const taglineCls = isDarkSurface ? 'text-xs font-semibold text-sky-400 mb-2' : 'text-xs font-semibold text-sky-700 mb-2';
+            const summaryCls = isDarkSurface ? 'text-slate-300 text-sm leading-relaxed mb-3' : 'text-gray-600 text-sm leading-relaxed mb-3';
+            const footerBorderCls = isDarkSurface ? 'border-slate-800' : 'border-gray-100';
             return `
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 ${bCls} flex flex-col justify-between">
+                <div class="${cardBaseCls}">
                     <div>
                         <div class="flex items-start justify-between gap-2 mb-2">
-                            <h3 class="text-xl font-bold text-gray-900">${escapeProjectHtml(p.title)}</h3>
+                            <h3 class="${titleCls}">${escapeProjectHtml(p.title)}</h3>
                             <span class="${badgeCls} flex-shrink-0">${escapeProjectHtml(yearRange)}</span>
                         </div>
-                        ${p.tagline ? `<p class="text-xs font-semibold text-sky-700 mb-2">${escapeProjectHtml(p.tagline)}</p>` : ''}
+                        ${p.tagline ? `<p class="${taglineCls}">${escapeProjectHtml(p.tagline)}</p>` : ''}
                         ${shotsHTML}
-                        <p class="text-gray-600 text-sm leading-relaxed mb-3">${escapeProjectHtml(p.short_summary)}</p>
+                        <p class="${summaryCls}">${escapeProjectHtml(p.short_summary)}</p>
                         ${techPills ? `<div class="flex flex-wrap gap-1.5 mb-4">${techPills}</div>` : ''}
                     </div>
-                    <div class="pt-3 border-t border-gray-100 flex flex-wrap items-center gap-2 text-sm">
+                    <div class="pt-3 border-t ${footerBorderCls} flex flex-wrap items-center gap-2 text-sm">
                         ${formatArtifactLinksHTML(p, rootPrefix, 6)}
                     </div>
                 </div>
@@ -458,6 +474,9 @@
 
     function renderProjectContainers(db, rootPrefix) {
         const projects = (db && Array.isArray(db.projects)) ? db.projects : [];
+        document.querySelectorAll('[data-db-projects-count]').forEach(el => {
+            el.textContent = String(projects.length);
+        });
 
         document.querySelectorAll('[data-db-projects]').forEach(container => {
             const mode = (container.getAttribute('data-db-projects') || 'all').trim();
@@ -527,7 +546,8 @@
             } else if (view === 'storefront-catalog') {
                 container.innerHTML = renderStorefrontCatalog(list, rootPrefix);
             } else {
-                container.innerHTML = renderResearchCards(list, rootPrefix, borderCls);
+                const isTwoColGrid = /\b(md|lg):grid-cols-2\b/.test(container.className || '') && !/\b(lg|xl):grid-cols-3\b/.test(container.className || '');
+                container.innerHTML = renderResearchCards(list, rootPrefix, borderCls, isTwoColGrid);
             }
         });
     }

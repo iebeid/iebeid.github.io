@@ -16,9 +16,11 @@ import argparse
 import functools
 import http.server
 import json
+import secrets
 import sqlite3
 import subprocess
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict
 from urllib.parse import urlparse
@@ -39,7 +41,10 @@ from apply_portal_patch import (  # noqa: E402
     set_project_placements,
 )
 from build_projects_backbone import ensure_schema  # noqa: E402
+from database_manager import decrypt_secret, encrypt_secret  # noqa: E402
 from import_portal_bookmarks import apply_portal_state  # noqa: E402
+
+SERVER_CSRF_TOKEN = secrets.token_hex(24)
 
 SITE_PLACEMENT_SLOTS = [
     {"page_slug": "home", "section_slot": "featured", "label": "Home — Current Research & Flagship Systems"},
@@ -228,8 +233,48 @@ class PortalRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
         self.end_headers()
         self.wfile.write(body)
+
+    def _is_loopback_request_allowed(self, require_csrf: bool = False) -> bool:
+        host_hdr = (self.headers.get("Host") or "").split(":")[0].strip().lower()
+        if host_hdr not in ("127.0.0.1", "localhost", "[::1]"):
+            self._send_json({"ok": False, "error": "Forbidden Host header (DNS rebinding guard)."}, 403)
+            return False
+
+        sec_site = (self.headers.get("Sec-Fetch-Site") or "").strip().lower()
+        if sec_site and sec_site not in ("same-origin", "none"):
+            self._send_json({"ok": False, "error": "Cross-site browser requests are forbidden."}, 403)
+            return False
+
+        origin = (self.headers.get("Origin") or "").strip().lower()
+        if origin:
+            parsed_origin = urlparse(origin)
+            if parsed_origin.hostname not in ("127.0.0.1", "localhost", "::1"):
+                self._send_json({"ok": False, "error": "Cross-origin requests are forbidden."}, 403)
+                return False
+
+        if require_csrf:
+            ctype = (self.headers.get("Content-Type") or "").lower()
+            if not ctype.startswith("application/json"):
+                self._send_json({"ok": False, "error": "Content-Type: application/json required."}, 415)
+                return False
+            token = (self.headers.get("X-Portal-CSRF") or "").strip()
+            if not token or not secrets.compare_digest(token, SERVER_CSRF_TOKEN):
+                self._send_json({"ok": False, "error": "Invalid or missing X-Portal-CSRF token. Refresh Portal tab."}, 403)
+                return False
+        return True
+
+    def _is_blocked_static_path(self, url_path: str) -> bool:
+        norm = "/" + url_path.lstrip("/").replace("\\", "/").lower()
+        blocked_prefixes = ("/.git", "/.idea", "/.junie", "/scripts/", "/data/content.db")
+        blocked_suffixes = (".db", ".sqlite", ".sqlite3", ".db-wal", ".db-shm", ".pyc", ".env")
+        if any(norm == p.rstrip("/") or norm.startswith(p) for p in blocked_prefixes):
+            return True
+        if norm.endswith(blocked_suffixes):
+            return True
+        return False
 
     def _read_json_body(self) -> Dict[str, Any]:
         length = int(self.headers.get("Content-Length") or 0)
@@ -239,9 +284,18 @@ class PortalRequestHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         path = urlparse(self.path).path
         if path == "/api/health":
-            self._send_json({"ok": True, "mode": "sqlite-live", "db_path": str(DB_PATH)})
+            if not self._is_loopback_request_allowed(require_csrf=False):
+                return
+            self._send_json({
+                "ok": True,
+                "mode": "sqlite-live",
+                "db_path": str(DB_PATH),
+                "csrf_token": SERVER_CSRF_TOKEN,
+            })
             return
         if path == "/api/projects":
+            if not self._is_loopback_request_allowed(require_csrf=False):
+                return
             conn = sqlite3.connect(DB_PATH)
             try:
                 bundle = fetch_master_bundle(conn)
@@ -249,14 +303,66 @@ class PortalRequestHandler(http.server.SimpleHTTPRequestHandler):
             finally:
                 conn.close()
             return
+        if self._is_blocked_static_path(path):
+            self._send_json({"ok": False, "error": "Forbidden static resource."}, 403)
+            return
         super().do_GET()
 
     def do_POST(self):
+        if not self._is_loopback_request_allowed(require_csrf=True):
+            return
         path = urlparse(self.path).path
         try:
             body = self._read_json_body()
         except Exception as exc:
             self._send_json({"ok": False, "error": f"Invalid JSON: {exc}"}, 400)
+            return
+
+        if path == "/api/vault/rotate-passcode":
+            cur_pass = str(body.get("current_passcode") or "")
+            new_pass = str(body.get("new_passcode") or "")
+            if len(new_pass) < 6:
+                self._send_json({"ok": False, "error": "New passcode must be at least 6 characters."}, 400)
+                return
+            conn = sqlite3.connect(DB_PATH)
+            try:
+                cur = conn.cursor()
+                rows = cur.execute("SELECT key, ciphertext, nonce, salt, description FROM portal_vault").fetchall()
+                decrypted_entries = {}
+                for k, ct, nc, slt, desc in rows:
+                    try:
+                        plain = decrypt_secret({"ciphertext": ct, "nonce": nc, "salt": slt}, cur_pass)
+                    except Exception:
+                        self._send_json({"ok": False, "error": "Current passcode did not match SQLite portal_vault."}, 403)
+                        return
+                    decrypted_entries[k] = (plain, desc or "")
+
+                decrypted_entries["master_passcode"] = (
+                    new_pass,
+                    decrypted_entries.get("master_passcode", ("", "Portal Master Passcode"))[1] or "Portal Master Passcode",
+                )
+                now_str = datetime.now().isoformat()
+                for k, (plain_val, desc) in decrypted_entries.items():
+                    enc = encrypt_secret(plain_val, new_pass)
+                    cur.execute("""
+                        INSERT INTO portal_vault (key, ciphertext, nonce, salt, description, updated_at)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(key) DO UPDATE SET
+                            ciphertext = excluded.ciphertext,
+                            nonce = excluded.nonce,
+                            salt = excluded.salt,
+                            description = excluded.description,
+                            updated_at = excluded.updated_at
+                    """, (k, enc["ciphertext"], enc["nonce"], enc["salt"], desc, now_str))
+                conn.commit()
+            finally:
+                conn.close()
+
+            subprocess.run(
+                [sys.executable, str(SCRIPTS_DIR / "sync_content.py"), "--export-only", "--skip-reconcile"],
+                capture_output=True, text=True, cwd=str(REPO_ROOT), check=True,
+            )
+            self._send_json({"ok": True, "rotated_keys": len(decrypted_entries)})
             return
 
         if path == "/api/projects/save":
