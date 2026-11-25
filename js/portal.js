@@ -93,6 +93,12 @@
         });
     }
 
+    function getCanonicalEncryptedProjectsBlob() {
+        return (window.__PORTAL_DATABASE && window.__PORTAL_DATABASE.portal_projects_encrypted)
+            || (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted)
+            || null;
+    }
+
     function getEncryptedProjectsBlob() {
         try {
             const localOverride = localStorage.getItem(PORTAL_LOCAL_REENC_PROJ_KEY);
@@ -101,9 +107,53 @@
                 if (parsed && parsed.ciphertext && parsed.nonce && parsed.salt) return parsed;
             }
         } catch (e) { }
-        return (window.__SITE_DATABASE && window.__SITE_DATABASE.portal_projects_encrypted)
-            || (window.__PORTAL_DATABASE && window.__PORTAL_DATABASE.portal_projects_encrypted)
-            || null;
+        return getCanonicalEncryptedProjectsBlob();
+    }
+
+    async function decryptMasterProjectsWithCandidates(extraPasscodes = []) {
+        const storedSessionPass = (() => {
+            try { return sessionStorage.getItem(SESSION_PASS_KEY) || ''; } catch (e) { return ''; }
+        })();
+        const passCandidates = Array.from(new Set([
+            ...extraPasscodes,
+            portalSessionPasscode,
+            storedSessionPass,
+            unlockedVaultSecrets && unlockedVaultSecrets.master_passcode,
+            typeof vaultMasterPassword !== 'undefined' ? vaultMasterPassword : null,
+        ].map(p => (typeof p === 'string' ? p.trim() : '')).filter(Boolean)));
+
+        if (!passCandidates.length) return null;
+
+        let localBlob = null;
+        try {
+            const raw = localStorage.getItem(PORTAL_LOCAL_REENC_PROJ_KEY);
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                if (parsed && parsed.ciphertext && parsed.nonce && parsed.salt) localBlob = parsed;
+            }
+        } catch (e) { }
+        const canonicalBlob = getCanonicalEncryptedProjectsBlob();
+
+        const blobs = [];
+        if (localBlob) blobs.push({ blob: localBlob, isLocal: true });
+        if (canonicalBlob && canonicalBlob !== localBlob) blobs.push({ blob: canonicalBlob, isLocal: false });
+
+        for (const pass of passCandidates) {
+            for (const entry of blobs) {
+                const plain = await decryptSqliteVaultEntry(entry.blob, pass);
+                if (plain) {
+                    try {
+                        const bundle = JSON.parse(plain);
+                        // If a stale local re-encrypted blob failed but canonical succeeded, purge stale local override
+                        if (!entry.isLocal && localBlob) {
+                            try { localStorage.removeItem(PORTAL_LOCAL_REENC_PROJ_KEY); } catch (e) { }
+                        }
+                        return { bundle, passcode: pass };
+                    } catch (e) { }
+                }
+            }
+        }
+        return null;
     }
 
     function base64ToUint8Array(b64) {
@@ -255,6 +305,10 @@
             } else {
                 sessionStorage.setItem(AUTH_SESSION_KEY, 'authenticated');
             }
+            // Pre-unlock all 189 master projects BEFORE revealing #portal-app so Projects Hub never falls back to 21
+            if (typeof window.__initPortalProjectsHub === 'function') {
+                await window.__initPortalProjectsHub();
+            }
             return true;
         }
         return false;
@@ -269,6 +323,9 @@
         if (typeof portalProjectsState !== 'undefined') {
             portalProjectsState.unlocked = false;
             portalProjectsState.projects = [];
+            portalProjectsState.backendChecked = false;
+            portalProjectsState.liveMode = false;
+            portalProjectsState._initPromise = null;
         }
         document.getElementById('portal-app').classList.add('hidden');
         document.getElementById('login-screen').classList.remove('hidden');
@@ -3504,7 +3561,7 @@
     // -------------------------------------------------------------------------
     // 14. INITIALIZATION
     // -------------------------------------------------------------------------
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         initAuth();
         startClock();
         initTabs();
@@ -3516,7 +3573,16 @@
         initPasswordVault();
         if (isAuthenticated()) {
             if (portalSessionPasscode && !unlockedVaultSecrets.master_passcode) {
-                unlockSqliteVault(portalSessionPasscode);
+                await unlockSqliteVault(portalSessionPasscode);
+            }
+            if (typeof window.__initPortalProjectsHub === 'function') {
+                await window.__initPortalProjectsHub();
+            }
+            // If an encrypted master catalog exists and the cached session passcode could not decrypt it,
+            // force a clean re-login instead of stranding Projects Hub on the 21 public projects.
+            if (!portalProjectsState.liveMode && getEncryptedProjectsBlob() && !portalProjectsState.unlocked) {
+                logout();
+                return;
             }
             renderAll();
         }
@@ -4821,45 +4887,55 @@ Return ONLY a JSON array of the "id"s of bookmarks that conceptually or semantic
     };
 
     window.__initPortalProjectsHub = async function () {
-        if (!portalProjectsState.backendChecked) {
-            portalProjectsState.backendChecked = true;
-            portalProjectsState.liveMode = await probeLiveProjectsServer();
+        if (portalProjectsState._initPromise) {
+            return portalProjectsState._initPromise;
         }
-        if (portalProjectsState.liveMode) {
-            try {
-                const resp = await fetch('/api/projects', { cache: 'no-store' });
-                const data = await resp.json();
-                if (data && data.ok) {
-                    hydrateBundleState(data);
-                }
-            } catch (e) {
-                portalProjectsState.liveMode = false;
+        const run = (async () => {
+            if (!portalProjectsState.backendChecked) {
+                const isLive = await probeLiveProjectsServer();
+                portalProjectsState.liveMode = isLive;
+                portalProjectsState.backendChecked = true;
             }
-        } else {
-            const enc = getEncryptedProjectsBlob();
-            const storedSessionPass = (() => {
-                try { return sessionStorage.getItem(SESSION_PASS_KEY) || ''; } catch (e) { return ''; }
-            })();
-            const autoPass = portalSessionPasscode || storedSessionPass || vaultMasterPassword;
-            if (enc && autoPass) {
-                const plain = await decryptSqliteVaultEntry(enc, autoPass);
-                if (plain) {
-                    portalSessionPasscode = autoPass;
-                    hydrateBundleState(JSON.parse(plain));
+            if (portalProjectsState.liveMode) {
+                try {
+                    const resp = await fetch('/api/projects', { cache: 'no-store' });
+                    const data = await resp.json();
+                    if (data && data.ok) {
+                        hydrateBundleState(data);
+                    }
+                } catch (e) {
+                    portalProjectsState.liveMode = false;
                 }
             }
-            if (!portalProjectsState.unlocked && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
-                // Show public projects immediately as a preview while keeping the full encrypted catalog locked
-                portalProjectsState.projects = applyLocalPatchOpsToMemory(
-                    window.__SITE_DATABASE.projects.map(p => ({ ...p, is_public: true, discovery_status: p.discovery_status || 'canonical' }))
-                );
-                portalProjectsState.placementSlots = window.__SITE_DATABASE.site_placement_slots || [];
-                if (!enc) portalProjectsState.unlocked = true;
-                populatePlacementDropdown();
+            if (!portalProjectsState.liveMode && !portalProjectsState.unlocked) {
+                const enc = getEncryptedProjectsBlob();
+                const decrypted = enc ? await decryptMasterProjectsWithCandidates() : null;
+                if (decrypted && decrypted.bundle) {
+                    portalSessionPasscode = decrypted.passcode;
+                    try { sessionStorage.setItem(SESSION_PASS_KEY, decrypted.passcode); } catch (e) { }
+                    hydrateBundleState(decrypted.bundle);
+                }
+                if (!portalProjectsState.unlocked && window.__SITE_DATABASE && Array.isArray(window.__SITE_DATABASE.projects)) {
+                    // Show public projects immediately as a preview while keeping the full encrypted catalog locked
+                    portalProjectsState.projects = applyLocalPatchOpsToMemory(
+                        window.__SITE_DATABASE.projects.map(p => ({ ...p, is_public: true, discovery_status: p.discovery_status || 'canonical' }))
+                    );
+                    portalProjectsState.placementSlots = window.__SITE_DATABASE.site_placement_slots || [];
+                    if (!enc) portalProjectsState.unlocked = true;
+                    populatePlacementDropdown();
+                }
+            }
+            updateProjectsModeUI();
+            renderPortalProjectsHub();
+        })();
+        portalProjectsState._initPromise = run;
+        try {
+            return await run;
+        } finally {
+            if (portalProjectsState._initPromise === run) {
+                portalProjectsState._initPromise = null;
             }
         }
-        updateProjectsModeUI();
-        renderPortalProjectsHub();
     };
 
     window.setPortalProjectsStatusFilter = function (statusKey) {
