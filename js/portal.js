@@ -8352,11 +8352,452 @@ Return ONLY a JSON object:
         }
     };
 
+    // =========================================================================
+    // 20. GMAIL INBOX INTERNAL NEWS BRIEFING WIDGET (APPS SCRIPT + GEMINI)
+    // =========================================================================
+    const INBOX_BRIDGE_URL_KEY = 'portal_gmail_bridge_url_v1';
+    const INBOX_BRIDGE_TOKEN_KEY = 'portal_gmail_bridge_token_v1';
+    const INBOX_BRIDGE_DAYS_KEY = 'portal_gmail_bridge_days_v1';
+    const INBOX_BRIDGE_LIMIT_KEY = 'portal_gmail_bridge_limit_v1';
+    const INBOX_BRIDGE_UNREAD_KEY = 'portal_gmail_bridge_unread_v1';
+    const INBOX_NEWS_CACHE_KEY = 'portal_inbox_internal_news_cache_v1';
+
+    let _inboxNewsBusy = false;
+    let _inboxNewsFilter = 'all';
+
+    const GMAIL_BRIDGE_APPS_SCRIPT_TEMPLATE = `const BRIDGE_SECRET = 'CHANGE_ME_TO_A_STRONG_SECRET_TOKEN';
+
+function doGet(e) {
+  try {
+    const params = (e && e.parameter) || {};
+    const token = String(params.token || '').trim();
+    const expected = PropertiesService.getScriptProperties().getProperty('BRIDGE_SECRET') || BRIDGE_SECRET;
+    if (!expected || expected === 'CHANGE_ME_TO_A_STRONG_SECRET_TOKEN') {
+      return jsonOut({ ok: false, error: 'Set BRIDGE_SECRET in your Google Apps Script before deploying.' });
+    }
+    if (!token || token !== expected) {
+      return jsonOut({ ok: false, error: 'Unauthorized: invalid bridge token.' });
+    }
+    const days = Math.max(1, Math.min(30, parseInt(params.days || '7', 10) || 7));
+    const limit = Math.max(1, Math.min(50, parseInt(params.limit || '25', 10) || 25));
+    const unreadOnly = String(params.unread || 'false').toLowerCase() === 'true';
+    const queryParts = ['in:inbox', 'newer_than:' + days + 'd', '-category:promotions', '-category:social'];
+    if (unreadOnly) queryParts.push('is:unread');
+    const threads = GmailApp.search(queryParts.join(' '), 0, limit);
+    const items = [];
+    let unreadCount = 0;
+    for (let i = 0; i < threads.length; i++) {
+      const th = threads[i];
+      const msgs = th.getMessages();
+      if (!msgs || !msgs.length) continue;
+      const latest = msgs[msgs.length - 1];
+      const isUnread = th.isUnread();
+      if (isUnread) unreadCount++;
+      const plainBody = (latest.getPlainBody() || '').replace(/\\r/g, '').replace(/\\n{3,}/g, '\\n\\n').replace(/https?:\\/\\/\\S{80,}/g, '[link]').trim();
+      const threadId = th.getId();
+      items.push({
+        id: latest.getId(),
+        threadId: threadId,
+        subject: th.getFirstMessageSubject() || '(No Subject)',
+        from: latest.getFrom() || '',
+        date: latest.getDate() ? latest.getDate().toISOString() : '',
+        isUnread: isUnread,
+        isStarred: th.hasStarredMessages(),
+        messageCount: msgs.length,
+        labels: th.getLabels().map(function (lb) { return lb.getName(); }),
+        snippet: plainBody.slice(0, 220).replace(/\\s+/g, ' ').trim(),
+        bodyExcerpt: plainBody.slice(0, 900),
+        permalink: 'https://mail.google.com/mail/u/0/#inbox/' + threadId
+      });
+    }
+    return jsonOut({
+      ok: true,
+      account: Session.getActiveUser().getEmail() || 'Gmail Inbox',
+      fetchedAt: new Date().toISOString(),
+      days: days,
+      totalReturned: items.length,
+      unreadCount: unreadCount,
+      emails: items
+    });
+  } catch (err) {
+    return jsonOut({ ok: false, error: String(err && err.message ? err.message : err) });
+  }
+}
+
+function jsonOut(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}`;
+
+    function getInboxBridgeConfig() {
+        return {
+            url: (localStorage.getItem(INBOX_BRIDGE_URL_KEY) || '').trim(),
+            token: (localStorage.getItem(INBOX_BRIDGE_TOKEN_KEY) || '').trim(),
+            days: parseInt(localStorage.getItem(INBOX_BRIDGE_DAYS_KEY) || '7', 10) || 7,
+            limit: parseInt(localStorage.getItem(INBOX_BRIDGE_LIMIT_KEY) || '25', 10) || 25,
+            unreadOnly: localStorage.getItem(INBOX_BRIDGE_UNREAD_KEY) === 'true',
+        };
+    }
+
+    function hydrateInboxBridgeForm() {
+        const cfg = getInboxBridgeConfig();
+        const urlEl = document.getElementById('inbox-bridge-url-input');
+        const tokEl = document.getElementById('inbox-bridge-token-input');
+        const daysEl = document.getElementById('inbox-bridge-days-select');
+        const limEl = document.getElementById('inbox-bridge-limit-select');
+        const unreadEl = document.getElementById('inbox-bridge-unread-check');
+        if (urlEl) urlEl.value = cfg.url;
+        if (tokEl) tokEl.value = cfg.token;
+        if (daysEl) daysEl.value = String(cfg.days);
+        if (limEl) limEl.value = String(cfg.limit);
+        if (unreadEl) unreadEl.checked = cfg.unreadOnly;
+    }
+
+    function setInboxNewsStatus(msg) {
+        const el = document.getElementById('inbox-news-status-banner');
+        if (!el) return;
+        if (!msg) {
+            el.classList.add('hidden');
+            el.textContent = '';
+        } else {
+            el.classList.remove('hidden');
+            el.textContent = msg;
+        }
+    }
+
+    window.toggleInboxBridgeConfigDrawer = function (forceOpen) {
+        const drawer = document.getElementById('inbox-bridge-config-drawer');
+        if (!drawer) return;
+        hydrateInboxBridgeForm();
+        if (forceOpen === true) drawer.classList.remove('hidden');
+        else if (forceOpen === false) drawer.classList.add('hidden');
+        else drawer.classList.toggle('hidden');
+    };
+
+    window.copyGmailAppsScriptCode = async function () {
+        try {
+            await navigator.clipboard.writeText(GMAIL_BRIDGE_APPS_SCRIPT_TEMPLATE);
+            showPortalToast('Copied Gmail Apps Script bridge code to clipboard!');
+        } catch (e) {
+            showPortalToast('See scripts/gmail_inbox_bridge.gs in your repo.', 'warn');
+        }
+    };
+
+    window.saveInboxBridgeConfig = async function (event) {
+        if (event) event.preventDefault();
+        const url = (document.getElementById('inbox-bridge-url-input')?.value || '').trim();
+        const token = (document.getElementById('inbox-bridge-token-input')?.value || '').trim();
+        const days = document.getElementById('inbox-bridge-days-select')?.value || '7';
+        const limit = document.getElementById('inbox-bridge-limit-select')?.value || '25';
+        const unreadOnly = Boolean(document.getElementById('inbox-bridge-unread-check')?.checked);
+        if (!url || !token) {
+            showPortalToast('Enter both the Apps Script Web App URL and secret token.', 'error');
+            return;
+        }
+        localStorage.setItem(INBOX_BRIDGE_URL_KEY, url);
+        localStorage.setItem(INBOX_BRIDGE_TOKEN_KEY, token);
+        localStorage.setItem(INBOX_BRIDGE_DAYS_KEY, days);
+        localStorage.setItem(INBOX_BRIDGE_LIMIT_KEY, limit);
+        localStorage.setItem(INBOX_BRIDGE_UNREAD_KEY, String(unreadOnly));
+        toggleInboxBridgeConfigDrawer(false);
+        showPortalToast('Gmail Bridge saved — scanning your inbox...');
+        await refreshDashboardInboxNews(true);
+    };
+
+    window.clearInboxBridgeConfig = function () {
+        localStorage.removeItem(INBOX_BRIDGE_URL_KEY);
+        localStorage.removeItem(INBOX_BRIDGE_TOKEN_KEY);
+        localStorage.removeItem(INBOX_NEWS_CACHE_KEY);
+        hydrateInboxBridgeForm();
+        setInboxNewsStatus('');
+        const filters = document.getElementById('inbox-news-filters');
+        if (filters) filters.classList.add('hidden');
+        const bodyEl = document.getElementById('dashboard-inbox-news-body');
+        if (bodyEl) {
+            bodyEl.innerHTML = `
+                <div class="bg-slate-950/60 border border-slate-800/80 rounded-xl p-5 text-center space-y-2.5">
+                    <p class="text-xs text-slate-300">Gmail Bridge disconnected. Connect your read-only <strong>Gmail Apps Script Bridge</strong> to generate your Inbox Internal News Briefing.</p>
+                    <button type="button" onclick="toggleInboxBridgeConfigDrawer(true)" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold">Connect Gmail Bridge</button>
+                </div>`;
+        }
+        showPortalToast('Disconnected Gmail Bridge');
+    };
+
+    window.setInboxNewsFilter = function (filterKey) {
+        _inboxNewsFilter = filterKey || 'all';
+        document.querySelectorAll('#inbox-news-filters .inbox-news-pill').forEach(btn => {
+            const active = btn.getAttribute('data-inbox-filter') === _inboxNewsFilter;
+            btn.className = active
+                ? 'inbox-news-pill px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-600 text-white'
+                : 'inbox-news-pill px-2.5 py-1 rounded-full text-[11px] font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700';
+        });
+        try {
+            const cached = JSON.parse(localStorage.getItem(INBOX_NEWS_CACHE_KEY) || 'null');
+            if (cached) renderDashboardInboxNews(cached);
+        } catch (e) { }
+    };
+
+    function buildLocalInboxInternalNewsFallback(emails) {
+        const actionRe = /\b(urgent|asap|action required|deadline|due|please reply|confirm|approval|signature|review|submit|reminder|invoice|payment|rsvp)\b/i;
+        const oppRe = /\b(invitation|invite|cfp|call for papers|keynote|seminar|workshop|conference|grant|fellowship|collaboration|meeting|calendar|webinar|opportunity)\b/i;
+        const workRe = /\b(twu|university|department|faculty|student|course|canvas|lab|research|paper|manuscript|journal|nsf|nih|committee|dean|chair|github|project)\b/i;
+
+        const action_items = [];
+        const work_updates = [];
+        const opportunities = [];
+        const fyi_digest = [];
+
+        emails.forEach(em => {
+            const hay = `${em.subject} ${em.from} ${em.snippet}`;
+            const sender = (em.from || '').replace(/<.*?>/g, '').replace(/"/g, '').trim() || em.from;
+            const entry = {
+                headline: em.subject || '(No Subject)',
+                sender,
+                summary: em.snippet || 'No preview available.',
+                urgency: em.isUnread ? 'high' : 'normal',
+                date: em.date || '',
+                permalink: em.permalink || '',
+            };
+            if (actionRe.test(hay) && action_items.length < 6) {
+                action_items.push(entry);
+            } else if (oppRe.test(hay) && opportunities.length < 6) {
+                opportunities.push(entry);
+            } else if (workRe.test(hay) && work_updates.length < 6) {
+                work_updates.push(entry);
+            } else if (fyi_digest.length < 6) {
+                fyi_digest.push(entry);
+            }
+        });
+
+        const unreadCnt = emails.filter(e => e.isUnread).length;
+        return {
+            executive_headline: `${emails.length} recent inbox threads scanned (${unreadCnt} unread) — ${action_items.length} action items, ${work_updates.length} work/research updates, ${opportunities.length} opportunities.`,
+            action_items,
+            work_updates,
+            opportunities,
+            fyi_digest,
+        };
+    }
+
+    function renderInboxNewsCard(item, accentCls, badgeLabel) {
+        const dt = item.date ? new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+        const linkBtn = item.permalink
+            ? `<a href="${escapeHtml(item.permalink)}" target="_blank" rel="noopener noreferrer" class="text-[11px] font-semibold text-sky-400 hover:text-sky-300 flex items-center gap-1 flex-shrink-0"><i class="fas fa-external-link-alt text-[10px]"></i> Gmail</a>`
+            : '';
+        return `
+            <article class="bg-slate-950/75 border border-slate-800 hover:border-slate-700 rounded-xl p-3.5 space-y-1.5 transition">
+                <div class="flex items-start justify-between gap-2">
+                    <div class="flex flex-wrap items-center gap-1.5 min-w-0">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${accentCls}">${escapeHtml(badgeLabel)}</span>
+                        ${item.sender ? `<span class="text-[11px] text-slate-400 truncate max-w-[220px]">${escapeHtml(item.sender)}</span>` : ''}
+                        ${dt ? `<span class="text-[10px] font-mono text-slate-500">&bull; ${escapeHtml(dt)}</span>` : ''}
+                    </div>
+                    ${linkBtn}
+                </div>
+                <h4 class="text-xs font-bold text-white leading-snug">${escapeHtml(item.headline || '')}</h4>
+                <p class="text-[11px] text-slate-300 leading-relaxed">${escapeHtml(item.summary || '')}</p>
+            </article>`;
+    }
+
+    function renderDashboardInboxNews(bundle) {
+        const bodyEl = document.getElementById('dashboard-inbox-news-body');
+        const filtersEl = document.getElementById('inbox-news-filters');
+        const metaEl = document.getElementById('inbox-news-meta');
+        const badgeEl = document.getElementById('inbox-news-badge');
+        if (!bodyEl || !bundle || !bundle.briefing) return;
+
+        if (filtersEl) filtersEl.classList.remove('hidden');
+        if (badgeEl) {
+            badgeEl.textContent = `${bundle.modeLabel || 'Gmail Bridge'} • ${bundle.unreadCount || 0} unread`;
+        }
+        if (metaEl) {
+            const ts = bundle.generatedAt ? new Date(bundle.generatedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : '';
+            metaEl.textContent = `${bundle.totalReturned || 0} threads (${bundle.days || 7}d) • Updated ${ts}`;
+        }
+
+        const br = bundle.briefing;
+        const f = _inboxNewsFilter;
+
+        if (f === 'raw') {
+            const rawEmails = Array.isArray(bundle.emails) ? bundle.emails : [];
+            bodyEl.innerHTML = rawEmails.length
+                ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-h-[380px] overflow-y-auto pr-1">` + rawEmails.map(em =>
+                    renderInboxNewsCard({
+                        headline: em.subject,
+                        sender: (em.from || '').replace(/<.*?>/g, '').replace(/"/g, '').trim(),
+                        summary: em.snippet,
+                        date: em.date,
+                        permalink: em.permalink,
+                    }, em.isUnread ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/30' : 'bg-slate-800 text-slate-300 border border-slate-700', em.isUnread ? 'UNREAD' : 'READ')
+                ).join('') + `</div>`
+                : `<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center text-xs text-slate-400">No recent inbox threads found in this window.</div>`;
+            return;
+        }
+
+        const sections = [];
+        if (f === 'all' || f === 'action') {
+            (br.action_items || []).forEach(it => sections.push(renderInboxNewsCard(it, 'bg-rose-500/15 text-rose-300 border border-rose-500/30', 'Action')));
+        }
+        if (f === 'all' || f === 'updates') {
+            (br.work_updates || []).forEach(it => sections.push(renderInboxNewsCard(it, 'bg-sky-500/15 text-sky-300 border border-sky-500/30', 'Work & Research')));
+        }
+        if (f === 'all' || f === 'opportunities') {
+            (br.opportunities || []).forEach(it => sections.push(renderInboxNewsCard(it, 'bg-amber-500/15 text-amber-300 border border-amber-500/30', 'Opportunity')));
+        }
+        if (f === 'all') {
+            (br.fyi_digest || []).forEach(it => sections.push(renderInboxNewsCard(it, 'bg-slate-800 text-slate-300 border border-slate-700', 'FYI')));
+        }
+
+        const pulseBanner = br.executive_headline
+            ? `<div class="bg-gradient-to-r from-emerald-950/60 via-slate-950/80 to-sky-950/50 border border-emerald-500/25 rounded-xl px-4 py-3 text-xs text-slate-200 leading-relaxed flex items-start gap-2.5">
+                   <i class="fas fa-bolt text-emerald-400 mt-0.5 flex-shrink-0"></i>
+                   <div><span class="font-bold text-emerald-300 uppercase tracking-wider text-[10px] mr-1.5">Inbox Pulse</span>${escapeHtml(br.executive_headline)}</div>
+               </div>`
+            : '';
+
+        bodyEl.innerHTML = pulseBanner + (sections.length
+            ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-h-[380px] overflow-y-auto pr-1">${sections.join('')}</div>`
+            : `<div class="bg-slate-950/60 border border-slate-800 rounded-xl p-5 text-center text-xs text-slate-400">No items in this category for the current inbox scan.</div>`);
+    }
+
+    window.copyInboxNewsMarkdown = async function () {
+        try {
+            const bundle = JSON.parse(localStorage.getItem(INBOX_NEWS_CACHE_KEY) || 'null');
+            if (!bundle || !bundle.briefing) {
+                showPortalToast('Scan your inbox first to generate a briefing.', 'warn');
+                return;
+            }
+            const br = bundle.briefing;
+            const lines = [`# Inbox Internal News Briefing (${(bundle.generatedAt || '').slice(0, 10)})`, '', `> ${br.executive_headline || ''}`, ''];
+            const emit = (title, arr) => {
+                if (!arr || !arr.length) return;
+                lines.push(`## ${title}`);
+                arr.forEach(it => lines.push(`- **${it.headline}** (${it.sender || 'Inbox'}) — ${it.summary}${it.permalink ? ` ([Open](${it.permalink}))` : ''}`));
+                lines.push('');
+            };
+            emit('Action Required', br.action_items);
+            emit('Work & Research Updates', br.work_updates);
+            emit('Opportunities & Events', br.opportunities);
+            emit('FYI Digest', br.fyi_digest);
+            await navigator.clipboard.writeText(lines.join('\n'));
+            showPortalToast('Copied Inbox Internal News Markdown to clipboard!');
+        } catch (e) {
+            showPortalToast('Could not copy briefing.', 'error');
+        }
+    };
+
+    window.refreshDashboardInboxNews = async function (forceRefresh = false) {
+        if (_inboxNewsBusy) return;
+        const cfg = getInboxBridgeConfig();
+        if (!cfg.url || !cfg.token) {
+            if (forceRefresh) {
+                toggleInboxBridgeConfigDrawer(true);
+                showPortalToast('Configure your Gmail Apps Script Bridge URL & token first.', 'warn');
+            }
+            return;
+        }
+
+        _inboxNewsBusy = true;
+        const btn = document.getElementById('inbox-news-refresh-btn');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Scanning...</span>';
+        }
+        setInboxNewsStatus('Fetching recent Gmail threads via read-only Apps Script bridge...');
+
+        try {
+            const sep = cfg.url.includes('?') ? '&' : '?';
+            const fetchUrl = `${cfg.url}${sep}token=${encodeURIComponent(cfg.token)}&days=${cfg.days}&limit=${cfg.limit}&unread=${cfg.unreadOnly}`;
+            const resp = await fetch(fetchUrl, { method: 'GET', cache: 'no-store' });
+            const data = await resp.json();
+            if (!data || !data.ok) {
+                throw new Error((data && data.error) || `Bridge returned HTTP ${resp.status}`);
+            }
+
+            const emails = Array.isArray(data.emails) ? data.emails : [];
+            let briefing = null;
+            let modeLabel = 'Local Digest';
+            const apiKey = (localStorage.getItem('gemini_api_key') || '').trim();
+
+            if (apiKey && emails.length > 0 && typeof callGeminiJson === 'function') {
+                setInboxNewsStatus(`Fetched ${emails.length} threads — synthesizing Internal News Briefing with Gemini...`);
+                const compactThreads = emails.slice(0, 30).map((em, idx) => ({
+                    idx,
+                    subject: em.subject,
+                    from: (em.from || '').slice(0, 80),
+                    date: (em.date || '').slice(0, 10),
+                    unread: Boolean(em.isUnread),
+                    excerpt: (em.bodyExcerpt || em.snippet || '').slice(0, 380),
+                    permalink: em.permalink || '',
+                }));
+                const prompt = `You are Dr. Islam Akef Ebeid's Chief of Staff. Distill the following recent Gmail inbox threads into a crisp executive "Internal News Briefing".
+Group them cleanly into:
+- executive_headline: 1-2 sentence synthesis of the most important internal developments across the inbox right now.
+- action_items: emails requiring a reply, decision, approval, or upcoming deadline (max 6).
+- work_updates: university (TWU), lab/research, students, grants, manuscripts, or engineering/company updates (max 6).
+- opportunities: invitations, speaking requests, CFPs, meetings, collaborations, or events (max 6).
+- fyi_digest: notable informational items worth knowing without immediate action (max 6).
+
+Each item MUST have: { "headline": string, "sender": string, "summary": string (1-2 crisp sentences), "date": "YYYY-MM-DD", "permalink": string (preserve exact permalink from input) }.
+Return ONLY valid JSON matching: { "executive_headline": string, "action_items": [], "work_updates": [], "opportunities": [], "fyi_digest": [] }.
+
+INBOX THREADS:
+${JSON.stringify(compactThreads)}`;
+                try {
+                    const parsed = await callGeminiJson(apiKey, prompt, _stickyWorkingFlashModel || 'gemini-2.5-flash', (st) => setInboxNewsStatus(st));
+                    if (parsed && typeof parsed === 'object' && (parsed.executive_headline || Array.isArray(parsed.action_items))) {
+                        briefing = parsed;
+                        modeLabel = `Gemini (${_stickyWorkingFlashModel || 'Flash'})`;
+                    }
+                } catch (gemErr) {
+                    console.warn('[Portal Inbox News] Gemini fallback:', gemErr);
+                }
+            }
+
+            if (!briefing) {
+                briefing = buildLocalInboxInternalNewsFallback(emails);
+                modeLabel = apiKey ? 'Local Digest (Gemini Fallback)' : 'Local Digest';
+            }
+
+            const bundle = {
+                generatedAt: new Date().toISOString(),
+                account: data.account || 'Gmail Inbox',
+                days: cfg.days,
+                totalReturned: emails.length,
+                unreadCount: data.unreadCount || emails.filter(e => e.isUnread).length,
+                modeLabel,
+                briefing,
+                emails,
+            };
+            try { localStorage.setItem(INBOX_NEWS_CACHE_KEY, JSON.stringify(bundle)); } catch (e) { }
+            renderDashboardInboxNews(bundle);
+            setInboxNewsStatus('');
+            showPortalToast(`Inbox Internal News updated (${emails.length} threads via ${modeLabel})`);
+        } catch (err) {
+            setInboxNewsStatus(`Inbox Bridge error: ${err.message}`);
+            showPortalToast(`Inbox scan failed: ${err.message}`, 'error');
+        } finally {
+            _inboxNewsBusy = false;
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sync-alt"></i> <span>Scan Inbox</span>';
+            }
+        }
+    };
+
     window.__initDashboardIntelWidgets = function () {
         // 1. Weather, Forecast & Location
         detectDashboardWeatherLocation(false);
 
-        // 2. Semantic Curated News
+        // 2. Gmail Inbox Internal News Briefing
+        hydrateInboxBridgeForm();
+        try {
+            const cachedInbox = JSON.parse(localStorage.getItem(INBOX_NEWS_CACHE_KEY) || 'null');
+            if (cachedInbox && cachedInbox.briefing) {
+                renderDashboardInboxNews(cachedInbox);
+            }
+        } catch (e) { }
+
+        // 3. Semantic Curated News
         try {
             const prof = JSON.parse(localStorage.getItem(NEWS_PROFILE_KEY) || 'null');
             if (prof) renderSemanticInterestProfileUI(prof);
